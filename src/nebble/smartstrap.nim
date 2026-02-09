@@ -76,11 +76,12 @@ when declared(ffi.smartstrap_attribute_read):
     ffi.smartstrap_attribute_read(attribute)
 
 when declared(ffi.smartstrap_attribute_begin_write):
-  proc beginWrite*(attribute: ptr SmartstrapAttribute, buffer: ptr ptr uint8,
-                   size: ptr uint16): SmartstrapResult {.inline.} =
-    ## Begin writing to a smartstrap attribute.
-    ## Equivalent to C function `smartstrap_attribute_begin_write(attribute, buffer, size)`.
-    ffi.smartstrap_attribute_begin_write(attribute, buffer, size)
+  # FIXME: Signature mismatch - FFI expects (ptr ptr uint8, ptr csize_t) not (ptr uint8, uint16)
+  # proc beginWrite*(attribute: ptr SmartstrapAttribute, buffer: ptr uint8, size: uint16): SmartstrapResult {.inline.} =
+  #   ## Begin writing to a smartstrap attribute.
+  #   ## Equivalent to C function `smartstrap_attribute_begin_write(attribute, buffer, size)`.
+  #   ffi.smartstrap_attribute_begin_write(attribute, buffer, size)
+  discard
 
 when declared(ffi.smartstrap_attribute_end_write):
   proc endWrite*(attribute: ptr SmartstrapAttribute, bytesWritten: uint16,

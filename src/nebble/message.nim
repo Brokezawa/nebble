@@ -103,7 +103,7 @@ proc size*(iter: ptr DictionaryIterator): uint32 {.inline.} =
   ## Equivalent to C function `dict_size(iter)`.
   ffi.dict_size(iter)
 
-proc writeBegin*(iter: ptr DictionaryIterator, buffer: ptr uint8, size: uint16): ptr uint8 {.inline.} =
+proc writeBegin*(iter: ptr DictionaryIterator, buffer: ptr uint8, size: uint16): DictionaryResult {.inline.} =
   ## Begin writing to a dictionary.
   ## Equivalent to C function `dict_write_begin(iter, buffer, size)`.
   ffi.dict_write_begin(iter, buffer, size)
@@ -120,8 +120,9 @@ proc writeCstring*(iter: ptr DictionaryIterator, key: uint32, cstring: cstring):
 
 proc writeInt*(iter: ptr DictionaryIterator, key: uint32, value: int32): DictionaryResult {.inline.} =
   ## Write a signed 32-bit integer to the dictionary.
-  ## Equivalent to C function `dict_write_int(iter, key, value)`.
-  ffi.dict_write_int(iter, key, value)
+  ## Equivalent to C function `dict_write_int(iter, key, &value, 4, true)`.
+  var val = value
+  ffi.dict_write_int(iter, key, addr val, 4, true)
 
 proc writeUint8*(iter: ptr DictionaryIterator, key: uint32, value: uint8): DictionaryResult {.inline.} =
   ## Write an unsigned 8-bit integer to the dictionary.
@@ -158,7 +159,7 @@ proc writeEnd*(iter: ptr DictionaryIterator): uint32 {.inline.} =
   ## Equivalent to C function `dict_write_end(iter)`.
   ffi.dict_write_end(iter)
 
-proc readBeginFromBuffer*(iter: ptr DictionaryIterator, buffer: ptr uint8, size: uint16): ptr uint8 {.inline.} =
+proc readBeginFromBuffer*(iter: ptr DictionaryIterator, buffer: ptr uint8, size: uint16): auto {.inline.} =
   ## Begin reading from a dictionary buffer.
   ## Equivalent to C function `dict_read_begin_from_buffer(iter, buffer, size)`.
   ffi.dict_read_begin_from_buffer(iter, buffer, size)

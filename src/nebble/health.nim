@@ -25,6 +25,7 @@ when declared(ffi.health_service_sum):
     ## Equivalent to C function `health_service_sum_today(metric)`.
     ffi.health_service_sum_today(metric)
 
+when declared(ffi.health_service_peek_current_value):
   proc peekCurrentValue*(metric: HealthMetric): HealthValue {.inline.} =
     ## Get the current value of a health metric.
     ## Equivalent to C function `health_service_peek_current_value(metric)`.
@@ -61,11 +62,13 @@ when declared(ffi.health_service_peek_current_activities):
 
 when declared(ffi.health_service_activities_iterate):
   proc activitiesIterate*(activityMask: HealthActivityMask,
+                          timeStart, timeEnd: time_t,
+                          direction: HealthIterationDirection,
                           callback: HealthActivityIteratorCB,
-                          context: pointer): bool {.inline.} =
+                          context: pointer) {.inline.} =
     ## Iterate over activities in the activity mask.
-    ## Equivalent to C function `health_service_activities_iterate(activity_mask, callback, context)`.
-    ffi.health_service_activities_iterate(activityMask, callback, context)
+    ## Equivalent to C function `health_service_activities_iterate(...)`.
+    ffi.health_service_activities_iterate(activityMask, timeStart, timeEnd, direction, callback, context)
 
 # ============================================================================
 # Metric Accessibility

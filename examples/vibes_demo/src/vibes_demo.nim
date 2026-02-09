@@ -27,9 +27,9 @@ proc downClickHandler(recognizer: ClickRecognizerRef; context: pointer) {.cdecl.
 
 proc clickConfigProvider(context: pointer) {.cdecl.} =
   ## Configure click handlers
-  singleClickSubscribe(BUTTON_ID_SELECT, selectClickHandler)
-  singleClickSubscribe(BUTTON_ID_UP, upClickHandler)
-  singleClickSubscribe(BUTTON_ID_DOWN, downClickHandler)
+  onClick(BUTTON_ID_SELECT, selectClickHandler)
+  onClick(BUTTON_ID_UP, upClickHandler)
+  onClick(BUTTON_ID_DOWN, downClickHandler)
 
 proc windowLoad(win: ptr Window) {.cdecl.} =
   ## Window load handler - create UI
@@ -62,7 +62,7 @@ proc windowUnload(win: ptr Window) {.cdecl.} =
 proc init() =
   ## Initialize the app
   window = newWindow()
-  window.clickConfigProvider = clickConfigProvider
+  ffi.window_set_click_config_provider(window, clickConfigProvider)
   window.setHandlers(
     load = windowLoad,
     unload = windowUnload
