@@ -1100,6 +1100,72 @@ Update all docs to reflect current API:
 
 ---
 
+## Phase 7.11-7.12: Remaining API Coverage (Phase B & C)
+
+**Goal:** Achieve ~99-100% API coverage by wrapping remaining FFI functions.
+
+### Phase 7.11: Phase B - High Impact, Medium Complexity (32 functions)
+
+| API Category | Functions | Usage | Complexity |
+|-------------|-----------|-------|------------|
+| **Advanced GBitmap** | 15 functions | Blank bitmaps, palette manipulation, raw data access | **MEDIUM** |
+| **Extended Health Service** | 17 functions | Step history, heart rate alerts, metric iteration | **MEDIUM** |
+
+#### Advanced GBitmap (15 functions)
+- `createBlank()`, `createBlankWithPalette()` - Offscreen rendering
+- `createAsSubBitmap()` - Sub-bitmap views
+- `createWithData()` - From raw data
+- `getData()`, `setData()` - Raw pixel access
+- `getBytesPerRow()`, `getFormat()` - Format info
+- `getPalette()`, `setPalette()` - Color palette manipulation
+- `setBounds()` - Modify bounds
+
+#### Extended Health Service (17 functions)
+- `getMinuteHistory()` - Step history for graphs
+- `peekCurrentValue()` - Latest sensor reading
+- `peekCurrentActivities()` - Current activity type
+- `metricAccessible()` - Check metric availability
+- `registerMetricAlert()` - Heart rate threshold alerts
+- `cancelMetricAlert()` - Remove threshold alerts
+- `sum()`, `sumAveraged()` - Aggregated data
+- Activities iteration callbacks
+
+### Phase 7.12: Phase C - Nice to Have (22 functions)
+
+| API Category | Functions | Usage | Complexity |
+|-------------|-----------|-------|------------|
+| **Framebuffer Access** | 6 functions | Raw pixel buffer access | **HARD** |
+| **Low-level Draw Commands** | 16 functions | Edit PDC images programmatically | **MEDIUM** |
+
+#### Framebuffer Access (6 functions) - Advanced Use Only
+- `captureFrameBuffer()`, `captureFrameBufferFormat()` - Lock framebuffer
+- `releaseFrameBuffer()` - Unlock framebuffer
+- `frameBufferIsCaptured()` - Check lock state
+- `drawArc()`, `fillRadial()` - Arc and pie chart drawing
+
+⚠️ **Warning:** Framebuffer functions require careful memory management and can crash if misused.
+
+#### Low-level Draw Commands (16 functions)
+- `getCommandType()`, `getNumPoints()`, `getPoint()` - Command inspection
+- `setFillColor()`, `setStrokeColor()` - Modify colors
+- `setPoint()`, `setRadius()` - Modify geometry
+- `setHidden()` - Toggle visibility
+- `listIterate()` - Iterate command lists
+
+### Implementation Roadmap
+
+**Phase B (32 funcs, ~7 hours):**
+- Advanced GBitmap: 3 hours
+- Extended Health Service: 4 hours
+
+**Phase C (22 funcs, ~6 hours):**
+- Framebuffer access: 3 hours
+- Low-level Draw Commands: 3 hours
+
+**Total effort: ~13 hours for 100% coverage**
+
+---
+
 ## Phase 8: Advanced Features (Future)
 
 - Declarative UI macros (`nebbleWatchface:` DSL)
@@ -1141,7 +1207,9 @@ Update all docs to reflect current API:
 | Phase 7.8: API Expansion | ✅ COMPLETE | 11 new modules (action_menu, draw_command, gpath, math, etc.) |
 | Phase 7.9: Geometry Utils | ✅ COMPLETE | Rectangle utilities, text measurement in graphics.nim |
 | Phase 7.10: Phase A APIs | ✅ COMPLETE | 4 new modules (bitmap_sequence, rot_bitmap_layer, text_attributes, content_indicator) |
-| Phase 8: Advanced Features | 🟡 NEXT | Declarative UI, PebbleKit JS bridge, CI, ecosystem packages |
+| Phase 7.11: Phase B APIs | 🟡 IN PROGRESS | Advanced GBitmap + Extended Health Service (32 funcs) |
+| Phase 7.12: Phase C APIs | ⏳ PLANNED | Framebuffer access + Low-level Draw Commands (22 funcs) |
+| Phase 8: Advanced Features | ⏳ PLANNED | Declarative UI, PebbleKit JS bridge, CI, ecosystem packages |
 
 **Status Notes:**
 - Phase 7 delivered full API consistency, comprehensive documentation updates, and initialized the git repository.
