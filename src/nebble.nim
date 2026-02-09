@@ -58,6 +58,12 @@ export clicks
 import nebble/graphics
 export graphics
 
+import nebble/gpath
+export gpath
+
+import nebble/draw_command
+export draw_command
+
 import nebble/timer
 export timer
 
@@ -69,6 +75,12 @@ export bitmap_layer
 
 import nebble/menu_layer
 export menu_layer
+
+import nebble/simple_menu_layer
+export simple_menu_layer
+
+import nebble/number_window
+export number_window
 
 import nebble/scroll_layer
 export scroll_layer
@@ -84,6 +96,21 @@ export fonts
 
 import nebble/resources
 export resources
+
+import nebble/math
+export math
+
+import nebble/system
+export system
+
+import nebble/uuid
+export uuid
+
+import nebble/unobstructed_area
+export unobstructed_area
+
+import nebble/action_menu
+export action_menu
 
 # Batch 3: Animation
 import nebble/animation
@@ -117,6 +144,12 @@ export health
 # Batch 5: Communication & Storage
 import nebble/message
 export message
+
+import nebble/app_sync
+export app_sync
+
+import nebble/app_comm
+export app_comm
 
 import nebble/storage
 export storage

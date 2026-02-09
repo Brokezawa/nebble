@@ -35,6 +35,16 @@ proc clockIs24hStyle*(): bool {.inline.} =
   ## Equivalent to C function `clock_is_24h_style()`.
   ffi.clock_is_24h_style()
 
+proc clockIsTimezoneSet*(): bool {.inline.} =
+  ## Check if the user has set a timezone.
+  ## Equivalent to C function `clock_is_timezone_set()`.
+  ffi.clock_is_timezone_set()
+
+proc clockToTimestamp*(day: ffi.WeekDay, hour: int32, minute: int32): time_t {.inline.} =
+  ## Calculate a timestamp for the given day/time in the current week.
+  ## Equivalent to C function `clock_to_timestamp(day, hour, minute)`.
+  ffi.clock_to_timestamp(day, hour.cint, minute.cint)
+
 # Note: strftime is a standard C library function, but often used in Pebble apps.
 # We expose it here for convenience if it's in the FFI, otherwise users import it from C.
 # Usually it's available via POSIX headers, but Futhark might have wrapped it.
