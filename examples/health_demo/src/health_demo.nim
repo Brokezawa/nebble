@@ -124,17 +124,13 @@ proc windowUnload(win: ptr Window) {.cdecl.} =
 proc initApp() =
   ## Initialize the app
   # Subscribe to health events (if available)
-  when declared(ffi.health_service_events_subscribe) and declared(HealthEventType):
-    # Note: health_service_events_subscribe is part of FFI, not yet in health.nim high level?
-    # Checking health.nim... it wasn't there. We might need to use ffi for this or add it.
-    # The prompt didn't ask to add it, but we can add it to health.nim or use ffi.
-    # I'll use ffi for now as it wasn't in the explicit list of missing features to add.
-    discard ffi.health_service_events_subscribe(healthEventHandler, nil)
+  when declared(health.eventsSubscribe) and declared(HealthEventType):
+    discard health.eventsSubscribe(healthEventHandler, nil)
 
 proc deinitApp() =
   ## Deinitialize the app
-  when declared(ffi.health_service_events_unsubscribe):
-    discard ffi.health_service_events_unsubscribe()
+  when declared(health.eventsUnsubscribe):
+    discard health.eventsUnsubscribe()
 
 pebbleApp(
   load = windowLoad,

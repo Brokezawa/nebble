@@ -1125,7 +1125,7 @@ Update all docs to reflect current API:
 
 ## Overall Project Status
 
-**Current Status:** Phase 7 - API Polish & Documentation (In Progress)
+**Current Status:** Phase 8 - Advanced Features (Next)
 
 | Phase | Status | Deliverables |
 |-------|--------|--------------|
@@ -1136,13 +1136,13 @@ Update all docs to reflect current API:
 | Phase 4: Testing | ✅ COMPLETE | 41 unit tests, compile tests, example builds, size gates |
 | Phase 5: Documentation | ✅ COMPLETE | HTML docs, 10 examples, migration guide, tutorials |
 | Phase 6: API Redesign | ✅ COMPLETE | UFCS collisions eliminated, `pebbleApp` macro, `staticText` template |
-| Phase 7: API Polish & Docs | 🟢 IN PROGRESS | Full naming consistency, doc updates, git init, color palette |
-| Phase 8: Advanced Features | 🟡 PLANNED | Declarative UI, PebbleKit JS bridge, CI, ecosystem packages |
+| Phase 7: API Polish & Docs | ✅ COMPLETE | Full naming consistency, doc updates, git init, color palette |
+| Phase 8: Advanced Features | 🟡 NEXT | Declarative UI, PebbleKit JS bridge, CI, ecosystem packages |
 
 **Status Notes:**
-- Phase 6 delivered core UFCS collision fixes and boilerplate-reducing macros
-- Phase 7 will achieve full API consistency across all 33 modules and update all documentation
-- All 33 modules compile successfully; 11/11 examples compile on basalt platform
+- Phase 7 delivered full API consistency, comprehensive documentation updates, and initialized the git repository.
+- All 33 modules compile successfully; 10/10 examples compile on all platforms.
+- Examples now strictly follow the high-level idiomatic API.
 
 ## Timeline
 
@@ -1154,6 +1154,7 @@ Week  6-12:  Phase 2  High-level API (all modules)                     ✅ COMPL
 Week  8-14:  Phase 4  Testing, CI, platform matrix                     ✅ COMPLETE
 Week 12-15:  Phase 5  Docs, examples, tutorial                         ✅ COMPLETE
 Week 15-16:  Phase 6  API redesign, UFCS collision fixes               ✅ COMPLETE
+Week 16-17:  Phase 7  API polish, docs rewrite, examples update        ✅ COMPLETE
 Week 16-18:  Phase 7  API polish, full consistency, documentation      🟢 IN PROGRESS
 Week 18+:    Phase 8  Advanced features, ecosystem                     🟡 PLANNED
 
