@@ -3,10 +3,10 @@
 ## Shows property animations (position, size) with different curves.
 
 import nebble
-import nebble/ffi  # For BUTTON_ID_*, ANIMATION_* constants
+import nebble/animation
+import nebble/ffi # For BUTTON_ID constants and AnimationCurve enum
 
 var
-  window: ptr Window
   textLayer: ptr TextLayer
   propAnim: ptr PropertyAnimation
   animDirection = 0  # 0 = down, 1 = up
@@ -21,31 +21,33 @@ proc selectClickHandler(recognizer: ClickRecognizerRef; context: pointer) {.cdec
   let bounds = layer.frame
   
   # Toggle direction
+  var toFrame: GRect
   if animDirection == 0:
     # Animate down to bottom
-    let toFrame = makeGRect(bounds.origin.x, 120, bounds.size.w, bounds.size.h)
-    propAnim = property_animation_create_layer_frame(layer, nil, addr toFrame)
+    toFrame = makeGRect(bounds.origin.x, 120, bounds.size.w, bounds.size.h)
     animDirection = 1
   else:
     # Animate back to top
-    let toFrame = makeGRect(bounds.origin.x, 20, bounds.size.w, bounds.size.h)
-    propAnim = property_animation_create_layer_frame(layer, nil, addr toFrame)
+    toFrame = makeGRect(bounds.origin.x, 20, bounds.size.w, bounds.size.h)
     animDirection = 0
   
+  # Create property animation
+  propAnim = newLayerFrameAnimation(layer, nil, addr toFrame)
+  
   # Get the base Animation pointer
-  let anim = property_animation_get_animation(propAnim)
+  let anim = propAnim.getAnimation()
   
   # Set animation curve and duration
-  discard animation_set_duration(anim, 500)
-  discard animation_set_curve(anim, AnimationCurveEaseInOut)
+  discard `duration=`(anim, 500)
+  discard `curve=`(anim, AnimationCurveEaseInOut)
   
   # Set animation handlers
   var handlers: AnimationHandlers
   handlers.stopped = animationStopped
-  discard animation_set_handlers(anim, handlers, nil)
+  anim.setHandlers(handlers, nil)
   
   # Start animation
-  discard animation_schedule(anim)
+  discard anim.schedule()
 
 proc upClickHandler(recognizer: ClickRecognizerRef; context: pointer) {.cdecl.} =
   ## Animate size with linear curve
@@ -53,18 +55,18 @@ proc upClickHandler(recognizer: ClickRecognizerRef; context: pointer) {.cdecl.} 
   let bounds = layer.frame
   
   # Grow width
-  let toFrame = makeGRect(bounds.origin.x - 20, bounds.origin.y, 
+  var toFrame = makeGRect(bounds.origin.x - 20, bounds.origin.y, 
                           bounds.size.w + 40, bounds.size.h)
-  propAnim = property_animation_create_layer_frame(layer, nil, addr toFrame)
+  propAnim = newLayerFrameAnimation(layer, nil, addr toFrame)
   
-  let anim = property_animation_get_animation(propAnim)
-  discard animation_set_duration(anim, 300)
-  discard animation_set_curve(anim, AnimationCurveLinear)
+  let anim = propAnim.getAnimation()
+  discard `duration=`(anim, 300)
+  discard `curve=`(anim, AnimationCurveLinear)
   
   var handlers: AnimationHandlers
   handlers.stopped = animationStopped
-  discard animation_set_handlers(anim, handlers, nil)
-  discard animation_schedule(anim)
+  anim.setHandlers(handlers, nil)
+  discard anim.schedule()
 
 proc downClickHandler(recognizer: ClickRecognizerRef; context: pointer) {.cdecl.} =
   ## Shrink width back to normal
@@ -72,18 +74,18 @@ proc downClickHandler(recognizer: ClickRecognizerRef; context: pointer) {.cdecl.
   let bounds = layer.frame
   
   # Shrink width
-  let toFrame = makeGRect(bounds.origin.x + 20, bounds.origin.y, 
+  var toFrame = makeGRect(bounds.origin.x + 20, bounds.origin.y, 
                           bounds.size.w - 40, bounds.size.h)
-  propAnim = property_animation_create_layer_frame(layer, nil, addr toFrame)
+  propAnim = newLayerFrameAnimation(layer, nil, addr toFrame)
   
-  let anim = property_animation_get_animation(propAnim)
-  discard animation_set_duration(anim, 300)
-  discard animation_set_curve(anim, AnimationCurveEaseOut)
+  let anim = propAnim.getAnimation()
+  discard `duration=`(anim, 300)
+  discard `curve=`(anim, AnimationCurveEaseOut)
   
   var handlers: AnimationHandlers
   handlers.stopped = animationStopped
-  discard animation_set_handlers(anim, handlers, nil)
-  discard animation_schedule(anim)
+  anim.setHandlers(handlers, nil)
+  discard anim.schedule()
 
 proc clickConfigProvider(context: pointer) {.cdecl.} =
   ## Configure click handlers
@@ -116,26 +118,11 @@ proc windowLoad(win: ptr Window) {.cdecl.} =
 proc windowUnload(win: ptr Window) {.cdecl.} =
   ## Window unload handler - destroy UI
   if propAnim != nil:
-    property_animation_destroy(propAnim)
+    propAnim.destroy()
   textLayer.destroy()
 
-proc init() =
-  ## Initialize the app
-  window = newWindow()
-  window.setHandlers(
-    load = windowLoad,
-    unload = windowUnload
-  )
-  ffi.window_set_click_config_provider(window, clickConfigProvider)
-  window.push(animated = true)
-
-proc deinit() =
-  ## Deinitialize the app
-  window.destroy()
-
-proc main(): cint {.exportc, cdecl.} =
-  ## App entry point
-  init()
-  eventLoop()
-  deinit()
-  return 0
+pebbleApp(
+  load = windowLoad,
+  unload = windowUnload,
+  clickConfig = clickConfigProvider
+)

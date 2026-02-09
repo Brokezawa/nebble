@@ -1019,11 +1019,11 @@ A comprehensive audit revealed remaining inconsistencies:
 
 ---
 
-## Phase 7: API Polish, Documentation & Project Setup (PLANNED)
+## Phase 7: API Polish, Documentation & Project Setup (IN PROGRESS)
 
 **Goal:** Achieve full API naming consistency across all 33 modules, update all documentation and examples to reflect the current API, add full color palette, and initialize the git repository.
 
-### Phase 7.1: Module API Rename & `ffi.` Qualification
+### Phase 7.1: Module API Rename & `ffi.` Qualification ✅ COMPLETE
 
 **Problem:** Audit found a sharp split — 21 modules use idiomatic short names with `ffi.` qualified calls (core + UI layers), while 12 modules still use verbose camelCase-of-C-name with unqualified FFI calls.
 
@@ -1048,13 +1048,13 @@ A comprehensive audit revealed remaining inconsistencies:
 
 All modules that call FFI functions without the `ffi.` prefix need it added to prevent potential UFCS collisions. This includes both the 12 verbose modules above and 7 already-idiomatic modules (menu_layer, scroll_layer, action_bar, status_bar, fonts, resources, animation).
 
-### Phase 7.2: CLI Template Fix
+### Phase 7.2: CLI Template Fix ✅ COMPLETE
 
 Update `cli/src/nebble_cli/templates.nim`:
 - App template: `window_single_click_subscribe(...)` → `onClick(...)`, `clickConfigProvider =` → `clickConfig =`
 - Watchface template: `tickTimerServiceSubscribe(...)` → `subscribe(...)`
 
-### Phase 7.3: Example Rewrite (10 examples)
+### Phase 7.3: Example Rewrite (10 examples) ✅ COMPLETE
 
 Rewrite all 10 examples to consistently use the high-level API:
 - All use `import nebble` (not `import nebble/ffi`)
@@ -1063,7 +1063,7 @@ Rewrite all 10 examples to consistently use the high-level API:
 - 4 FFI-only examples (battery_status, health_demo, accelerometer_demo, action_bar_demo) fully converted to high-level API
 - Adopt `staticText` template to replace manual buffer copy patterns (~20 instances)
 
-### Phase 7.4: Full Color Palette
+### Phase 7.4: Full Color Palette ✅ COMPLETE
 
 Add all 64 Pebble SDK named colors to `src/nebble/ffi/macros.nim`:
 - All colors from `GColorOxfordBlue` through `GColorWhite`
@@ -1071,7 +1071,7 @@ Add all 64 Pebble SDK named colors to `src/nebble/ffi/macros.nim`:
 - Organized by hue family with section comments
 - Expands current 3 colors (Clear, Black, White) to full 64
 
-### Phase 7.5: Documentation Rewrite
+### Phase 7.5: Documentation Rewrite ✅ COMPLETE
 
 Update all docs to reflect current API:
 

@@ -99,57 +99,32 @@ my_first_app/
 Open `src/my_first_app.nim` and replace with:
 
 ```nim
-import nebble/ffi as ffi
-from nebble/app import eventLoop
-from nebble/window import nil
+import nebble
+import nebble/ffi # For constants
 
-# Global state
-var
-  window: ptr ffi.Window
-  textLayer: ptr ffi.TextLayer
+var textLayer: ptr TextLayer
 
-# Window load callback
-proc windowLoad(win: ptr ffi.Window) {.cdecl.} =
-  let bounds = ffi.layer_get_bounds(ffi.window_get_root_layer(win))
+# Window load handler
+proc windowLoad(win: ptr Window) {.cdecl.} =
+  let bounds = win.rootLayer.bounds
   
   # Create text layer
-  textLayer = ffi.text_layer_create(bounds)
-  ffi.text_layer_set_text(textLayer, "Hello, Pebble!")
-  ffi.text_layer_set_text_alignment(textLayer, ffi.GTextAlignmentCenter)
+  textLayer = newTextLayer(makeGRect(0, 60, bounds.size.w, 40))
+  textLayer.text = "Hello, Pebble!"
+  textLayer.textAlignment = GTextAlignmentCenter
   
   # Add to window
-  ffi.layer_add_child(
-    ffi.window_get_root_layer(win),
-    ffi.text_layer_get_layer(textLayer)
-  )
+  win.rootLayer.addChild(textLayer.getLayer())
 
-# Window unload callback
-proc windowUnload(win: ptr ffi.Window) {.cdecl.} =
-  ffi.text_layer_destroy(textLayer)
+# Window unload handler
+proc windowUnload(win: ptr Window) {.cdecl.} =
+  textLayer.destroy()
 
-# App initialization
-proc init() {.cdecl.} =
-  # Create window
-  window = ffi.window_create()
-  
-  # Set window handlers
-  ffi.window_set_window_handlers(window, ffi.WindowHandlers(
-    load: windowLoad,
-    unload: windowUnload
-  ))
-  
-  # Push window to stack
-  ffi.window_stack_push(window, true)
-
-# App deinitialization
-proc deinit() {.cdecl.} =
-  ffi.window_destroy(window)
-
-# Entry point
-proc main() {.exportc, cdecl.} =
-  init()
-  eventLoop()
-  deinit()
+# Use the pebbleApp macro to generate main entry point and init/deinit logic
+pebbleApp(
+  load = windowLoad,
+  unload = windowUnload
+)
 ```
 
 ### Step 3: Build the App
@@ -214,26 +189,24 @@ Nebble has a **two-layer architecture**:
 
 - **Purpose:** Nim-friendly wrappers with object-oriented patterns
 - **Naming:** `camelCase` with type-safe wrappers
-- **Usage:** `import nebble/window`, `import nebble/layer`
+- **Usage:** `import nebble` (imports all high-level modules)
 - **Examples:**
   - `newWindow()` → wraps `window_create()`
   - `layer.addChild()` → wraps `layer_add_child()`
-  - Constructor templates like `makeGRect(x, y, w, h)`
+  - `staticText` → template for safe string copying
 
 **When to use:**
 - More idiomatic Nim code
 - Type safety and convenience
 - Reduced boilerplate
 
-**Note:** Currently, the high-level API is under development. Most examples use the FFI layer directly.
-
 ### Mixing Both Layers
 
 You can mix both layers in the same file:
 
 ```nim
+import nebble
 import nebble/ffi as ffi
-from nebble/geometry import makeGRect, makeGPoint
 
 # High-level constructor
 let frame = makeGRect(0, 0, 144, 168)
@@ -249,164 +222,121 @@ let layer = ffi.text_layer_create(frame)
 ### Pattern 1: Window Lifecycle
 
 ```nim
-var window: ptr ffi.Window
+var window: ptr Window
 
-proc windowLoad(win: ptr ffi.Window) {.cdecl.} =
+proc windowLoad(win: ptr Window) {.cdecl.} =
   # Create and configure UI elements
   discard
 
-proc windowUnload(win: ptr ffi.Window) {.cdecl.} =
+proc windowUnload(win: ptr Window) {.cdecl.} =
   # Destroy UI elements
   discard
 
-proc init() {.cdecl.} =
-  window = ffi.window_create()
-  ffi.window_set_window_handlers(window, ffi.WindowHandlers(
-    load: windowLoad,
-    unload: windowUnload
-  ))
-  ffi.window_stack_push(window, true)
+# Manual init (without pebbleApp macro):
+proc init() =
+  window = newWindow()
+  window.setHandlers(load = windowLoad, unload = windowUnload)
+  window.push(animated = true)
 
-proc deinit() {.cdecl.} =
-  ffi.window_destroy(window)
+proc deinit() =
+  window.destroy()
 ```
-
-**Key points:**
-- All callbacks MUST have `{.cdecl.}` pragma
-- Create UI in `windowLoad`, destroy in `windowUnload`
-- Window is pushed to stack in `init`, destroyed in `deinit`
 
 ### Pattern 2: Text Layers with Dynamic Content
 
 ```nim
 var
-  textLayer: ptr ffi.TextLayer
+  textLayer: ptr TextLayer
   textBuffer: array[32, char]  # Module-scope buffer required!
 
 proc updateText(value: int) =
-  let text = "Count: " & $value
-  
-  # Copy to static buffer (TextLayer doesn't copy strings)
-  for i in 0..<min(text.len, 31):
-    textBuffer[i] = text[i]
-  textBuffer[min(text.len, 31)] = '\0'
-  
-  ffi.text_layer_set_text(textLayer, cast[cstring](addr textBuffer[0]))
+  # Use staticText template to format and copy string safely
+  textLayer.staticText(textBuffer, "Count: " & $value)
 ```
 
 **Key points:**
 - TextLayer does NOT copy strings, it stores the pointer
 - Use module-scope `array[N, char]` buffer, not local variables
-- Manually copy string contents and null-terminate
+- `staticText` handles the copying and null-termination
 
 ### Pattern 3: Click Handlers
 
 ```nim
-proc selectClick(recognizer: ffi.ClickRecognizerRef; context: pointer) {.cdecl.} =
+import nebble/ffi # For ButtonId
+
+proc selectClick(rec: ClickRecognizerRef; ctx: pointer) {.cdecl.} =
   # Handle SELECT button click
   discard
 
-proc clickConfigProvider(context: pointer) {.cdecl.} =
-  ffi.window_single_click_subscribe(ffi.BUTTON_ID_SELECT, selectClick)
+proc clickConfig(ctx: pointer) {.cdecl.} =
+  onClick(BUTTON_ID_SELECT, selectClick)
 
-proc init() {.cdecl.} =
-  window = ffi.window_create()
-  ffi.window_set_click_config_provider(window, clickConfigProvider)
-  ffi.window_stack_push(window, true)
+# In init or pebbleApp:
+pebbleApp(
+  # ... other handlers ...
+  clickConfig = clickConfig
+)
 ```
-
-**Key points:**
-- Click handlers must be `{.cdecl.}` procs
-- Register handlers in `clickConfigProvider` callback
-- Set provider with `window_set_click_config_provider`
 
 ### Pattern 4: Animations
 
 ```nim
-var propAnim: ptr ffi.PropertyAnimation
+import nebble/ffi # For property_animation creation
 
-proc animateMoveLayer(layer: ptr ffi.Layer) =
+var propAnim: ptr PropertyAnimation
+
+proc animateMoveLayer(layer: ptr Layer) =
   let
-    fromFrame = ffi.layer_get_frame(layer)
-    toFrame = ffi.GRect(x: 50, y: 50, w: fromFrame.size.w, h: fromFrame.size.h)
+    fromFrame = layer.frame
+    toFrame = makeGRect(50, 50, fromFrame.size.w, fromFrame.size.h)
   
-  # Create property animation
+  # Create property animation (low-level)
   propAnim = ffi.property_animation_create_layer_frame(layer, nil, unsafeAddr toFrame)
   
-  # Get Animation pointer
+  # Get Animation pointer (low-level)
   let anim = ffi.property_animation_get_animation(propAnim)
   
-  # Configure animation
-  discard ffi.animation_set_duration(anim, 500)  # 500ms
-  discard ffi.animation_set_curve(anim, ffi.AnimationCurveEaseInOut)
+  # Configure animation (high-level)
+  anim.duration = 500
+  anim.curve = AnimationCurveEaseInOut
   
   # Start animation
-  discard ffi.animation_schedule(anim)
+  discard anim.schedule()
 
 proc cleanup() =
   if propAnim != nil:
     ffi.property_animation_destroy(propAnim)
 ```
 
-**Key points:**
-- Use `property_animation_create_layer_frame` for frame animations
-- Get `ptr Animation` via `property_animation_get_animation()`
-- Schedule with `animation_schedule()`, destroy when done
-
 ### Pattern 5: Services (Battery, Time, etc.)
 
 ```nim
-import nebble/ffi as ffi
-
-proc batteryHandler(charge: ffi.BatteryChargeState) {.cdecl.} =
-  # charge.charge_percent is 0-100
+proc batteryHandler(charge: BatteryChargeState) {.cdecl.} =
   echo "Battery: ", charge.charge_percent, "%"
 
-proc init() {.cdecl.} =
+proc init() =
   # Subscribe to battery updates
-  ffi.battery_state_service_subscribe(batteryHandler)
+  battery.subscribe(batteryHandler)
   
   # Get initial state
-  let state = ffi.battery_state_service_peek()
+  let state = battery.peek()
   batteryHandler(state)
-
-proc deinit() {.cdecl.} =
-  ffi.battery_state_service_unsubscribe()
 ```
-
-**Key points:**
-- Subscribe to service in `init`, unsubscribe in `deinit`
-- Use `_peek()` to get current state immediately
-- Handler receives state struct as parameter
 
 ### Pattern 6: Persistent Storage
 
 ```nim
-import nebble/ffi as ffi
-
 const KEY_COUNT = 1  # Storage key
 
 proc saveCount(count: int32) =
-  discard ffi.persist_write_int(KEY_COUNT, count)
+  discard storage.writeInt(KEY_COUNT, count)
 
 proc loadCount(): int32 =
-  if ffi.persist_exists(KEY_COUNT):
-    return ffi.persist_read_int(KEY_COUNT)
+  if storage.exists(KEY_COUNT):
+    return storage.readInt(KEY_COUNT)
   else:
     return 0  # Default value
-
-proc init() {.cdecl.} =
-  var count = loadCount()
-  # Use count...
-  
-  count += 1
-  saveCount(count)
 ```
-
-**Key points:**
-- Always check `persist_exists()` before reading
-- Use type-specific functions: `persist_write_int`, `persist_write_bool`, `persist_write_data`
-- Keys are integers (typically use const for readability)
 
 ## Platform-Specific Features
 
@@ -418,7 +348,6 @@ Pebble has 6 hardware platforms with different capabilities:
 | Round       | No     | No     | Yes   | No      | No    | No    |
 | Health      | Stub   | Yes    | Yes   | Yes     | Yes   | Yes   |
 | Microphone  | No     | Yes    | Yes   | Yes     | Yes   | Yes   |
-| Display     | 144×168| 144×168| 180×180| 144×168| 200×228| 144×168|
 
 ### Compile-Time Platform Checks
 
@@ -427,13 +356,13 @@ Use `when declared()` to check if a type/function exists:
 ```nim
 # Color support
 when declared(GColorClear):
-  ffi.text_layer_set_background_color(layer, ffi.GColorClear)
+  textLayer.backgroundColor = GColorClear
 else:
-  ffi.text_layer_set_background_color(layer, ffi.GColorWhite)
+  textLayer.backgroundColor = GColorWhite
 
 # Health service
-when declared(ffi.health_service_sum_today) and declared(ffi.HealthMetricStepCount):
-  let steps = ffi.health_service_sum_today(ffi.HealthMetricStepCount)
+when declared(health.sumToday) and declared(HealthMetricStepCount):
+  let steps = health.sumToday(HealthMetricStepCount)
 else:
   let steps = 0  # Not available on Aplite
 ```
@@ -482,76 +411,17 @@ nebble build -d:pebbleChalk    # Build for Chalk (color, round)
 }
 ```
 
-**Key fields:**
-- `uuid` - Unique identifier (generate with `uuidgen`)
-- `shortName` - App name shown on watch
-- `watchface` - Set to `true` for watchface apps
-- `targetPlatforms` - List of supported platforms
-
 ### nim.cfg
 
-Already configured by `nebble new`. Contains cross-compilation flags:
-
-```nim
---os:any
---cpu:arm
---mm:arc
--d:useMalloc
---noMain
---compileOnly
--d:noSignalHandler
---threads:off
--d:danger
-```
-
-**Do not modify** unless you know what you're doing.
-
-## Build Process Explained
-
-When you run `nebble build`, the following happens:
-
-1. **Nim Compilation** (`nim c --compileOnly`)
-   - Compiles `.nim` files to C
-   - Output: `nimcache/*.c` and `nimbase.h`
-
-2. **File Organization**
-   - Copies generated C files to `src/c/`
-   - Preserves existing Pebble project structure
-
-3. **Pebble Build** (`pebble build`)
-   - Uses Waf build system
-   - Compiles C code with ARM GCC
-   - Links Pebble SDK libraries
-   - Creates `.pbw` bundle in `build/`
-
-4. **Output**
-   - `build/<app_name>.pbw` - Installable Pebble app bundle
+Already configured by `nebble new`. Contains cross-compilation flags. **Do not modify** unless you know what you're doing.
 
 ## Common Issues & Troubleshooting
 
 ### Issue 1: Emulator Crashes Persist After Code Fix
 
-**Symptom:** App continues to crash even after fixing the code.
-
-**Cause:** Emulator enters corrupted state after crashes.
-
-**Solution:**
-```bash
-# Kill emulator completely
-pkill -f pebble
-
-# Rebuild and restart fresh emulator
-nebble build && nebble clean
-nebble install --emulator basalt
-```
-
-**Prevention:** Always kill and restart emulator after any crash.
+**Solution:** Kill emulator completely (`pkill -f pebble`), then clean rebuild and reinstall.
 
 ### Issue 2: Ambiguous Function Call
-
-**Error:** `Error: ambiguous call; multiple overloads match`
-
-**Cause:** Both FFI and high-level API export the same symbol.
 
 **Solution:** Import FFI with alias:
 ```nim
@@ -560,62 +430,15 @@ import nebble/ffi as ffi  # Use ffi.window_create()
 
 ### Issue 3: Text Disappears or Corrupts
 
-**Symptom:** `text_layer_set_text()` shows garbage or empty string.
-
-**Cause:** Passing pointer to local variable that goes out of scope.
-
-**Solution:** Use module-scope buffer:
-```nim
-var textBuffer: array[32, char]  # Module scope, not local!
-
-proc updateText(value: int) =
-  let text = "Value: " & $value
-  for i in 0..<min(text.len, 31):
-    textBuffer[i] = text[i]
-  textBuffer[min(text.len, 31)] = '\0'
-  ffi.text_layer_set_text(layer, cast[cstring](addr textBuffer[0]))
-```
+**Solution:** Use module-scope buffer and `staticText` template.
 
 ### Issue 4: Callback Not Called
 
-**Symptom:** Handler/callback never executes.
-
-**Cause:** Missing `{.cdecl.}` pragma.
-
-**Solution:** Add `{.cdecl.}` to ALL callbacks:
-```nim
-proc windowLoad(win: ptr ffi.Window) {.cdecl.} = ...
-proc clickHandler(rec: ffi.ClickRecognizerRef; ctx: pointer) {.cdecl.} = ...
-proc tickHandler(tm: ptr ffi.tm; units: ffi.TimeUnits) {.cdecl.} = ...
-```
+**Solution:** Add `{.cdecl.}` to ALL callbacks.
 
 ### Issue 5: Type Not Found (e.g., `GColorClear`)
 
-**Symptom:** `Error: undeclared identifier: 'GColorClear'`
-
-**Cause:** Type only exists on color platforms (not Aplite).
-
-**Solution:** Guard with `when declared()`:
-```nim
-when declared(GColorClear):
-  let color = ffi.GColorClear
-else:
-  let color = ffi.GColorWhite
-```
-
-### Issue 6: Build Fails with "undefined reference"
-
-**Symptom:** Linker error during `pebble build`
-
-**Cause:** Missing Pebble SDK function or incorrect `wscript` configuration.
-
-**Solution:**
-1. Ensure `wscript` includes `-w` flag:
-   ```python
-   ctx.env.CFLAGS = ['-w']  # Suppress warnings from Nim-generated C
-   ```
-2. Check that function exists in Pebble SDK version
-3. Verify `nimbase.h` was copied to `src/c/`
+**Solution:** Guard with `when declared()`.
 
 ## Next Steps
 
@@ -653,36 +476,6 @@ cd nebble/examples/hello_world
 - **Issues:** https://github.com/zawa-t/nebble/issues
 - **Discussions:** https://github.com/zawa-t/nebble/discussions
 
-### Advanced Topics (Coming Soon)
-
-- App messaging (phone ↔ watch communication)
-- Custom fonts and images
-- Advanced UI patterns (custom layers, graphics contexts)
-- Performance optimization for Aplite (24 KB RAM)
-- Watchface development patterns
-
-## Additional Resources
-
-### Pebble SDK Documentation
-
-- **Official Docs:** https://developer.rebble.io/developer.pebble.com/docs/index.html
-- **API Reference:** https://developer.rebble.io/developer.pebble.com/docs/c/index.html
-- **Forums:** https://reddit.com/r/pebble
-
-### Nim Language
-
-- **Official Docs:** https://nim-lang.org/docs/manual.html
-- **Tutorial:** https://nim-lang.org/docs/tut1.html
-- **Forum:** https://forum.nim-lang.org
-
-### Tools
-
-- **Pebble Tool:** https://github.com/pebble/pebble-tool
-- **Emulator:** https://github.com/pebble/pebble-tool/releases
-- **Rebble Services:** https://rebble.io (for app store, voice, weather)
-
 ---
 
 **Happy Pebble hacking with Nim!** 🎉
-
-If you have questions or run into issues, please open an issue on GitHub.

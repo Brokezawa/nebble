@@ -196,3 +196,24 @@ proc getImplementation*(animation: ptr Animation): ptr AnimationImplementation {
   ## Get the animation implementation (advanced).
   ## Equivalent to C function `ffi.animation_get_implementation(animation)`.
   ffi.animation_get_implementation(animation)
+
+# ============================================================================
+# Property Animation
+# ============================================================================
+
+proc newLayerFrameAnimation*(layer: ptr Layer, fromFrame: ptr GRect,
+                             toFrame: ptr GRect): ptr PropertyAnimation {.inline.} =
+  ## Create a property animation to animate a layer's frame.
+  ## `fromFrame` can be nil to use the current frame.
+  ## Equivalent to C function `property_animation_create_layer_frame(layer, from_frame, to_frame)`.
+  ffi.property_animation_create_layer_frame(layer, fromFrame, toFrame)
+
+proc destroy*(propAnim: ptr PropertyAnimation) {.inline.} =
+  ## Destroy a property animation.
+  ## Equivalent to C function `property_animation_destroy(prop_animation)`.
+  ffi.property_animation_destroy(propAnim)
+
+proc getAnimation*(propAnim: ptr PropertyAnimation): ptr Animation {.inline.} =
+  ## Get the underlying Animation from a PropertyAnimation.
+  ## Equivalent to C function `property_animation_get_animation(prop_animation)`.
+  ffi.property_animation_get_animation(propAnim)

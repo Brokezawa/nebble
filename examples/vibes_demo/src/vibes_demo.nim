@@ -3,26 +3,26 @@
 ## Shows different vibration patterns available on Pebble.
 
 import nebble
-import nebble/ffi as ffi  # For BUTTON_ID_* constants
+import nebble/vibes
+import nebble/ffi # For BUTTON_ID constants
 
 var
-  window: ptr Window
   titleLayer: ptr TextLayer
   instructionsLayer: ptr TextLayer
 
 proc selectClickHandler(recognizer: ClickRecognizerRef; context: pointer) {.cdecl.} =
   ## Short single pulse
-  ffi.vibes_short_pulse()
+  vibes.shortPulse()
   titleLayer.text = "Short Pulse"
 
 proc upClickHandler(recognizer: ClickRecognizerRef; context: pointer) {.cdecl.} =
   ## Long pulse
-  ffi.vibes_long_pulse()
+  vibes.longPulse()
   titleLayer.text = "Long Pulse"
 
 proc downClickHandler(recognizer: ClickRecognizerRef; context: pointer) {.cdecl.} =
   ## Double pulse
-  ffi.vibes_double_pulse()
+  vibes.doublePulse()
   titleLayer.text = "Double Pulse"
 
 proc clickConfigProvider(context: pointer) {.cdecl.} =
@@ -59,23 +59,8 @@ proc windowUnload(win: ptr Window) {.cdecl.} =
   titleLayer.destroy()
   instructionsLayer.destroy()
 
-proc init() =
-  ## Initialize the app
-  window = newWindow()
-  ffi.window_set_click_config_provider(window, clickConfigProvider)
-  window.setHandlers(
-    load = windowLoad,
-    unload = windowUnload
-  )
-  window.push(animated = true)
-
-proc deinit() =
-  ## Deinitialize the app
-  window.destroy()
-
-proc main(): cint {.exportc, cdecl.} =
-  ## App entry point
-  init()
-  eventLoop()
-  deinit()
-  return 0
+pebbleApp(
+  load = windowLoad,
+  unload = windowUnload,
+  clickConfig = clickConfigProvider
+)

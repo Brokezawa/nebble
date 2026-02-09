@@ -6,6 +6,9 @@
 
 import nebble/ffi
 
+export ffi.MenuLayer, ffi.MenuLayerCallbacks, ffi.MenuIndex, ffi.MenuRowAlign
+export ffi.MenuCellSpan, ffi.MenuRowAlign
+
 # ============================================================================
 # Constructor & Destructor
 # ============================================================================

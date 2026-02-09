@@ -11,6 +11,6 @@
     "emery",
     "flint"
   ],
-  "capabilities": [],
+  "capabilities": ["health"],
   "appKeys": {}
 }

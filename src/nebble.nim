@@ -36,8 +36,7 @@ export BatteryChargeState
 export BluetoothConnectionHandler
 export time, localtime, gmtime, strftime, clock_is_24h_style
 export makeGRect, makeGPoint, makeGSize, makeUuid
-# Color constants (GColorClear, GColorBlack, GColorWhite, makeGColor8) 
-# are available via ffi/macros.nim include
+export GColorClear, GColorBlack, GColorWhite, makeGColor8
 
 # Re-export all high-level modules
 import nebble/app

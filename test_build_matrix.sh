@@ -45,7 +45,7 @@ for example in "${EXAMPLES[@]}"; do
         printf "  %-20s %-10s ... " "$example" "$platform"
         
         # Build for this platform (suppress most output)
-        if ../../cli/src/nebble build --platform "$platform" > /dev/null 2>&1; then
+        if ../../cli/bin/nebble build --platform "$platform" > /dev/null 2>&1; then
             # Check if binary exists
             if [ -f "build/$platform/pebble-app.elf" ]; then
                 # Get size information

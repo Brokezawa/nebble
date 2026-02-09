@@ -6,7 +6,7 @@
 ## - Improved text layer API
 
 import nebble
-import nebble/ffi  # For ButtonId enum values
+import nebble/ffi # For ButtonId enum values
 
 var
   textLayer: ptr TextLayer
@@ -16,11 +16,7 @@ var
 proc selectClickHandler(recognizer: ClickRecognizerRef; context: pointer) {.cdecl.} =
   ## Handle SELECT button clicks - count clicks
   inc clickCount
-  let text = "Clicks: " & $clickCount
-  for i in 0..<min(text.len, 31):
-    textBuffer[i] = text[i]
-  textBuffer[min(text.len, 31)] = '\0'
-  textLayer.text = cast[cstring](addr textBuffer[0])
+  textLayer.staticText(textBuffer, "Clicks: " & $clickCount)
 
 proc upClickHandler(recognizer: ClickRecognizerRef; context: pointer) {.cdecl.} =
   ## Handle UP button clicks
@@ -45,7 +41,7 @@ proc windowLoad(win: ptr Window) {.cdecl.} =
   textLayer = newTextLayer(
     frame = makeGRect(0, 60, bounds.size.w, 40),
     text = "Press SELECT",
-    align = GTextAlignmentCenter
+    align = GTextAlignment.GTextAlignmentCenter
   )
   
   # Add to window

@@ -7,18 +7,20 @@ proc getAppTemplate*(name: string): string =
   result = "## " & name & """ - Pebble app written in Nim
 ##
 ## This is a basic Pebble app that demonstrates the Nebble API.
+## Uses the pebbleApp macro for boilerplate reduction and type-safe helpers.
 
 import nebble
+import nebble/ffi # For ButtonId enum values
 
 var
-  window: ptr Window
   textLayer: ptr TextLayer
   clickCount = 0
+  textBuffer: array[32, char] # Buffer for dynamic text
 
 proc selectClickHandler(recognizer: ClickRecognizerRef; context: pointer) {.cdecl.} =
   ## Handle SELECT button clicks
   inc clickCount
-  textLayer.text = "Clicks: " & $clickCount
+  textLayer.staticText(textBuffer, "Clicks: " & $clickCount)
 
 proc upClickHandler(recognizer: ClickRecognizerRef; context: pointer) {.cdecl.} =
   ## Handle UP button clicks
@@ -51,26 +53,12 @@ proc windowUnload(win: ptr Window) {.cdecl.} =
   ## Window unload handler - destroy UI
   textLayer.destroy()
 
-proc init() =
-  ## Initialize the app
-  window = newWindow()
-  window.clickConfig = clickConfigProvider
-  window.setHandlers(
-    load = windowLoad,
-    unload = windowUnload
-  )
-  window.push(animated = true)
-
-proc deinit() =
-  ## Deinitialize the app
-  window.destroy()
-
-proc main(): cint {.exportc, cdecl.} =
-  ## App entry point
-  init()
-  eventLoop()
-  deinit()
-  return 0
+# Use the pebbleApp macro to generate main(), init(), deinit() and window lifecycle
+pebbleApp(
+  load = windowLoad,
+  unload = windowUnload,
+  clickConfig = clickConfigProvider
+)
 """
 
 proc getWatchfaceTemplate*(name: string): string =
@@ -78,11 +66,12 @@ proc getWatchfaceTemplate*(name: string): string =
   result = "## " & name & """ - Pebble watchface written in Nim
 ##
 ## This is a basic watchface that demonstrates the Nebble API.
+## Shows how to use the tick timer service and system fonts.
 
 import nebble
+import nebble/ffi # For TimeUnits enum
 
 var
-  window: ptr Window
   timeLayer: ptr TextLayer
   dateLayer: ptr TextLayer
   timeBuffer: array[16, char]  # Must be module-scope to persist
@@ -118,19 +107,19 @@ proc windowLoad(win: ptr Window) {.cdecl.} =
   
   # Create time layer (large)
   timeLayer = newTextLayer(makeGRect(0, 50, bounds.size.w, 60))
-  timeLayer.textAlignment = GTextAlignment.GTextAlignmentCenter
+  timeLayer.textAlignment = GTextAlignmentCenter
   timeLayer.font = getSystemFont("RESOURCE_ID_BITHAM_42_BOLD")
   
   # Create date layer (small)
   dateLayer = newTextLayer(makeGRect(0, 115, bounds.size.w, 30))
-  dateLayer.textAlignment = GTextAlignment.GTextAlignmentCenter
+  dateLayer.textAlignment = GTextAlignmentCenter
   dateLayer.font = getSystemFont("RESOURCE_ID_GOTHIC_24")
   
   # Add to window
   rootLayer.addChild(timeLayer.getLayer())
   rootLayer.addChild(dateLayer.getLayer())
   
-  # Initial time update (called here after layers are created)
+  # Initial time update
   updateTime()
 
 proc windowUnload(win: ptr Window) {.cdecl.} =
@@ -140,26 +129,15 @@ proc windowUnload(win: ptr Window) {.cdecl.} =
 
 proc init() =
   ## Initialize the watchface
-  window = newWindow()
-  window.setHandlers(
-    load = windowLoad,
-    unload = windowUnload
-  )
-  window.push(animated = true)
-  
   # Subscribe to tick timer (update every minute)
-  tick.subscribe(TimeUnits.MINUTE_UNIT, tickHandler)
+  subscribe(MINUTE_UNIT, tickHandler)
 
-proc deinit() =
-  ## Deinitialize the watchface
-  window.destroy()
-
-proc main(): cint {.exportc, cdecl.} =
-  ## Watchface entry point
-  init()
-  eventLoop()
-  deinit()
-  return 0
+# Use pebbleApp macro with custom init
+pebbleApp(
+  load = windowLoad,
+  unload = windowUnload,
+  init = init
+)
 """
 
 proc getNimCfg*(): string =

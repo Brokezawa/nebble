@@ -3,15 +3,15 @@
 ## Demonstrates the Nebble MenuLayer API with a scrollable menu.
 
 import nebble
-import nebble/ffi  # For MenuLayerCallbacks and other FFI types
+import nebble/menu_layer
+import nebble/graphics # For GContext and drawing
 
 const
   NUM_MENU_SECTIONS = 1
   NUM_FIRST_MENU_ITEMS = 5
 
 var
-  window: ptr Window
-  menuLayer: ptr MenuLayer
+  sMenuLayer: ptr MenuLayer
 
 # Menu item titles
 const menuTitles = [
@@ -73,7 +73,7 @@ proc windowLoad(win: ptr Window) {.cdecl.} =
   let bounds = rootLayer.bounds
   
   # Create menu layer with full screen bounds
-  menuLayer = newMenuLayer(bounds)
+  sMenuLayer = newMenuLayer(bounds)
   
   # Set up menu callbacks
   var callbacks: MenuLayerCallbacks
@@ -83,34 +83,19 @@ proc windowLoad(win: ptr Window) {.cdecl.} =
   callbacks.draw_row = menuDrawRow
   callbacks.select_click = menuSelectClick
   
-  menuLayer.setCallbacks(nil, callbacks)
+  sMenuLayer.setCallbacks(nil, callbacks)
   
   # Configure click handlers for the menu
-  menuLayer.setClickConfigOntoWindow(win)
+  sMenuLayer.setClickConfigOntoWindow(win)
   
   # Add menu layer to window
-  rootLayer.addChild(menuLayer.getLayer())
+  rootLayer.addChild(sMenuLayer.getLayer())
 
 proc windowUnload(win: ptr Window) {.cdecl.} =
   ## Window unload handler - destroy menu layer
-  menuLayer.destroy()
+  sMenuLayer.destroy()
 
-proc init() =
-  ## Initialize the app
-  window = newWindow()
-  window.setHandlers(
-    load = windowLoad,
-    unload = windowUnload
-  )
-  window.push(animated = true)
-
-proc deinit() =
-  ## Deinitialize the app
-  window.destroy()
-
-proc main(): cint {.exportc, cdecl.} =
-  ## App entry point
-  init()
-  eventLoop()
-  deinit()
-  return 0
+pebbleApp(
+  load = windowLoad,
+  unload = windowUnload
+)

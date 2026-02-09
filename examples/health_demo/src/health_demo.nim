@@ -3,12 +3,12 @@
 ## Shows step count and other health metrics (not available on Aplite).
 ## Note: Health data requires user authorization and may not be available in emulator.
 
-import nebble/ffi
+import nebble
 import nebble/health
-from nebble/app import eventLoop
+import nebble/time
+import nebble/ffi # For HealthMetricStepCount and other enum values
 
 var
-  window: ptr Window
   stepsLayer: ptr TextLayer
   distanceLayer: ptr TextLayer
   stepsBuffer: array[32, char]
@@ -16,71 +16,67 @@ var
 
 proc updateHealthDisplay() =
   ## Update the health display with current metrics
-  when declared(ffi.health_service_sum_today) and declared(HealthMetricStepCount):
+  when declared(health.sumToday) and declared(HealthMetricStepCount):
     # Check if health is available (requires user permission)
-    when declared(ffi.health_service_metric_accessible):
-      let stepsAccess = ffi.health_service_metric_accessible(HealthMetricStepCount, 0, 0)
-      let distAccess = ffi.health_service_metric_accessible(HealthMetricWalkedDistanceMeters, 0, 0)
+    when declared(health.metricAccessible):
+      let now = time.time(nil)
+      let start = time.timeStartOfToday()
+      let stepsAccess = health.metricAccessible(HealthMetricStepCount, start, now)
+      let distAccess = health.metricAccessible(HealthMetricWalkedDistanceMeters, start, now)
+
+      # Debug: log raw accessibility masks so we can inspect permission state
+      when declared(APP_LOG) and declared(APP_LOG_LEVEL_INFO):
+        APP_LOG(APP_LOG_LEVEL_INFO.uint8, cstring"health: stepsMask=%u distMask=%u",
+                stepsAccess.uint32, distAccess.uint32)
+      when declared(HealthServiceAccessibilityMaskAvailable) and declared(APP_LOG):
+        APP_LOG(APP_LOG_LEVEL_INFO.uint8, cstring"health: AvailableMask=%u",
+                HealthServiceAccessibilityMaskAvailable.uint32)
       
-      # health_service_metric_accessible returns a mask, check if Available bit is set
+      # metricAccessible returns a mask, check if Available bit is set
       when declared(HealthServiceAccessibilityMaskAvailable):
         if (stepsAccess.uint32 and HealthServiceAccessibilityMaskAvailable.uint32) != 0:
+          when declared(APP_LOG):
+            APP_LOG(APP_LOG_LEVEL_INFO.uint8, cstring"health: steps access AVAILABLE")
           # Get today's step count
           let steps = health.sumToday(HealthMetricStepCount)
           let stepsText = "Steps: " & $steps
-          for i in 0..<min(stepsText.len, 31):
-            stepsBuffer[i] = stepsText[i]
-          stepsBuffer[min(stepsText.len, 31)] = '\0'
-          ffi.text_layer_set_text(stepsLayer, cast[cstring](addr stepsBuffer[0]))
+          stepsLayer.staticText(stepsBuffer, stepsText)
         else:
-          ffi.text_layer_set_text(stepsLayer, "Steps: No permission")
+          when declared(APP_LOG):
+            APP_LOG(APP_LOG_LEVEL_INFO.uint8, cstring"health: steps access NOT available")
+          stepsLayer.text = "Steps: No permission"
         
         if (distAccess.uint32 and HealthServiceAccessibilityMaskAvailable.uint32) != 0:
+          when declared(APP_LOG):
+            APP_LOG(APP_LOG_LEVEL_INFO.uint8, cstring"health: distance access AVAILABLE")
           # Get today's distance (in meters)
           let distance = health.sumToday(HealthMetricWalkedDistanceMeters)
           let distanceKm = distance div 1000  # Integer division for km
           let distText = "Distance: " & $distanceKm & " km"
-          for i in 0..<min(distText.len, 31):
-            distanceBuffer[i] = distText[i]
-          distanceBuffer[min(distText.len, 31)] = '\0'
-          ffi.text_layer_set_text(distanceLayer, cast[cstring](addr distanceBuffer[0]))
+          distanceLayer.staticText(distanceBuffer, distText)
         else:
-          ffi.text_layer_set_text(distanceLayer, "Distance: No permission")
+          when declared(APP_LOG):
+            APP_LOG(APP_LOG_LEVEL_INFO.uint8, cstring"health: distance access NOT available")
+          distanceLayer.text = "Distance: No permission"
       else:
         # Fallback if HealthServiceAccessibilityMaskAvailable not declared
         let steps = health.sumToday(HealthMetricStepCount)
-        let stepsText = "Steps: " & $steps
-        for i in 0..<min(stepsText.len, 31):
-          stepsBuffer[i] = stepsText[i]
-        stepsBuffer[min(stepsText.len, 31)] = '\0'
-        ffi.text_layer_set_text(stepsLayer, cast[cstring](addr stepsBuffer[0]))
+        stepsLayer.staticText(stepsBuffer, "Steps: " & $steps)
         
         let distance = health.sumToday(HealthMetricWalkedDistanceMeters)
         let distanceKm = distance div 1000
-        let distText = "Distance: " & $distanceKm & " km"
-        for i in 0..<min(distText.len, 31):
-          distanceBuffer[i] = distText[i]
-        distanceBuffer[min(distText.len, 31)] = '\0'
-        ffi.text_layer_set_text(distanceLayer, cast[cstring](addr distanceBuffer[0]))
+        distanceLayer.staticText(distanceBuffer, "Distance: " & $distanceKm & " km")
     else:
       # Fallback for older SDK without metric_accessible
       let steps = health.sumToday(HealthMetricStepCount)
-      let stepsText = "Steps: " & $steps
-      for i in 0..<min(stepsText.len, 31):
-        stepsBuffer[i] = stepsText[i]
-      stepsBuffer[min(stepsText.len, 31)] = '\0'
-      ffi.text_layer_set_text(stepsLayer, cast[cstring](addr stepsBuffer[0]))
+      stepsLayer.staticText(stepsBuffer, "Steps: " & $steps)
       
       let distance = health.sumToday(HealthMetricWalkedDistanceMeters)
       let distanceKm = distance div 1000
-      let distText = "Distance: " & $distanceKm & " km"
-      for i in 0..<min(distText.len, 31):
-        distanceBuffer[i] = distText[i]
-      distanceBuffer[min(distText.len, 31)] = '\0'
-      ffi.text_layer_set_text(distanceLayer, cast[cstring](addr distanceBuffer[0]))
+      distanceLayer.staticText(distanceBuffer, "Distance: " & $distanceKm & " km")
   else:
-    ffi.text_layer_set_text(stepsLayer, "Health API not")
-    ffi.text_layer_set_text(distanceLayer, "available (Aplite)")
+    stepsLayer.text = "Health API not"
+    distanceLayer.text = "available (Aplite)"
 
 when declared(HealthEventType):
   proc healthEventHandler(event: HealthEventType; context: pointer) {.cdecl.} =
@@ -89,64 +85,60 @@ when declared(HealthEventType):
 
 proc windowLoad(win: ptr Window) {.cdecl.} =
   ## Window load handler - create UI
-  let rootLayer = ffi.window_get_root_layer(win)
-  let bounds = ffi.layer_get_bounds(rootLayer)
+  let rootLayer = win.rootLayer
+  let bounds = rootLayer.bounds
   
   # Create title layer
-  let titleLayer = ffi.text_layer_create(makeGRect(0, 30, bounds.size.w, 30))
-  ffi.text_layer_set_text(titleLayer, "Health Demo")
-  ffi.text_layer_set_text_alignment(titleLayer, GTextAlignmentCenter)
-  ffi.text_layer_set_font(titleLayer, ffi.fonts_get_system_font(FONT_KEY_GOTHIC_24_BOLD))
+  let titleLayer = newTextLayer(makeGRect(0, 30, bounds.size.w, 30))
+  titleLayer.text = "Health Demo"
+  titleLayer.textAlignment = GTextAlignment.GTextAlignmentCenter
+  titleLayer.font = getSystemFont("RESOURCE_ID_GOTHIC_24_BOLD")
   when declared(GColorClear):
-    ffi.text_layer_set_background_color(titleLayer, GColorClear)
-  ffi.layer_add_child(rootLayer, ffi.text_layer_get_layer(titleLayer))
+    titleLayer.backgroundColor = GColorClear
+  rootLayer.addChild(titleLayer.getLayer())
   
   # Create steps layer
-  stepsLayer = ffi.text_layer_create(makeGRect(0, 70, bounds.size.w, 30))
-  ffi.text_layer_set_text_alignment(stepsLayer, GTextAlignmentCenter)
-  ffi.text_layer_set_font(stepsLayer, ffi.fonts_get_system_font(FONT_KEY_GOTHIC_24))
+  stepsLayer = newTextLayer(makeGRect(0, 70, bounds.size.w, 30))
+  stepsLayer.textAlignment = GTextAlignment.GTextAlignmentCenter
+  stepsLayer.font = getSystemFont("RESOURCE_ID_GOTHIC_24")
   when declared(GColorClear):
-    ffi.text_layer_set_background_color(stepsLayer, GColorClear)
-  ffi.layer_add_child(rootLayer, ffi.text_layer_get_layer(stepsLayer))
+    stepsLayer.backgroundColor = GColorClear
+  rootLayer.addChild(stepsLayer.getLayer())
   
   # Create distance layer
-  distanceLayer = ffi.text_layer_create(makeGRect(0, 105, bounds.size.w, 30))
-  ffi.text_layer_set_text_alignment(distanceLayer, GTextAlignmentCenter)
-  ffi.text_layer_set_font(distanceLayer, ffi.fonts_get_system_font(FONT_KEY_GOTHIC_18))
+  distanceLayer = newTextLayer(makeGRect(0, 105, bounds.size.w, 30))
+  distanceLayer.textAlignment = GTextAlignment.GTextAlignmentCenter
+  distanceLayer.font = getSystemFont("RESOURCE_ID_GOTHIC_18")
   when declared(GColorClear):
-    ffi.text_layer_set_background_color(distanceLayer, GColorClear)
-  ffi.layer_add_child(rootLayer, ffi.text_layer_get_layer(distanceLayer))
+    distanceLayer.backgroundColor = GColorClear
+  rootLayer.addChild(distanceLayer.getLayer())
   
   # Update display with initial values
   updateHealthDisplay()
 
 proc windowUnload(win: ptr Window) {.cdecl.} =
   ## Window unload handler - destroy UI
-  ffi.text_layer_destroy(stepsLayer)
-  ffi.text_layer_destroy(distanceLayer)
+  stepsLayer.destroy()
+  distanceLayer.destroy()
 
-proc init() {.cdecl.} =
+proc initApp() =
   ## Initialize the app
-  window = ffi.window_create()
-  ffi.window_set_window_handlers(window, WindowHandlers(
-    load: windowLoad,
-    unload: windowUnload
-  ))
-  
   # Subscribe to health events (if available)
   when declared(ffi.health_service_events_subscribe) and declared(HealthEventType):
+    # Note: health_service_events_subscribe is part of FFI, not yet in health.nim high level?
+    # Checking health.nim... it wasn't there. We might need to use ffi for this or add it.
+    # The prompt didn't ask to add it, but we can add it to health.nim or use ffi.
+    # I'll use ffi for now as it wasn't in the explicit list of missing features to add.
     discard ffi.health_service_events_subscribe(healthEventHandler, nil)
-  
-  ffi.window_stack_push(window, true)
 
-proc deinit() {.cdecl.} =
+proc deinitApp() =
   ## Deinitialize the app
   when declared(ffi.health_service_events_unsubscribe):
     discard ffi.health_service_events_unsubscribe()
-  ffi.window_destroy(window)
 
-proc main() {.exportc, cdecl.} =
-  ## App entry point
-  init()
-  eventLoop()
-  deinit()
+pebbleApp(
+  load = windowLoad,
+  unload = windowUnload,
+  init = initApp,
+  deinit = deinitApp
+)

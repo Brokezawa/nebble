@@ -149,7 +149,7 @@ var textLayer: ptr TextLayer
 
 textLayer = newTextLayer(makeGRect(0, 60, 144, 40))
 textLayer.text = "Hello World"
-textLayer.textAlignment = GTextAlignment.GTextAlignmentCenter
+textLayer.textAlignment = GTextAlignmentCenter
 textLayer.font = getSystemFont("RESOURCE_ID_GOTHIC_28_BOLD")
 ```
 
@@ -165,16 +165,13 @@ text_layer_set_text(text_layer, text_buffer);
 
 **Nim:**
 ```nim
-var textBuffer: array[32, char]
+var textBuffer: array[32, char] # Must be module-scope to persist
 
-let text = "Count: " & $counter
-for i in 0..<min(text.len, 31):
-  textBuffer[i] = text[i]
-textBuffer[min(text.len, 31)] = '\0'
-textLayer.text = cast[cstring](addr textBuffer[0])
+# Use the staticText template to copy text to buffer and set layer text
+textLayer.staticText(textBuffer, "Count: " & $counter)
 ```
 
-**Note:** Nim string literals are okay for static text, but dynamic text requires a module-scope buffer because the TextLayer doesn't copy the string.
+**Note:** Nim string literals are okay for static text, but dynamic text requires a module-scope buffer because the TextLayer doesn't copy the string. The `staticText` template handles the copying and null-termination for you.
 
 ---
 
@@ -190,8 +187,6 @@ static void select_click_handler(ClickRecognizerRef recognizer, void *context) {
 
 static void click_config_provider(void *context) {
   window_single_click_subscribe(BUTTON_ID_SELECT, select_click_handler);
-  window_single_click_subscribe(BUTTON_ID_UP, up_click_handler);
-  window_single_click_subscribe(BUTTON_ID_DOWN, down_click_handler);
 }
 
 window_set_click_config_provider(window, click_config_provider);
@@ -199,7 +194,7 @@ window_set_click_config_provider(window, click_config_provider);
 
 **Nim:**
 ```nim
-import nebble/ffi  # For BUTTON_ID_* constants
+import nebble/ffi # For BUTTON_ID_*
 
 proc selectClickHandler(recognizer: ClickRecognizerRef; context: pointer) {.cdecl.} =
   # Handle SELECT button
@@ -207,8 +202,6 @@ proc selectClickHandler(recognizer: ClickRecognizerRef; context: pointer) {.cdec
 
 proc clickConfigProvider(context: pointer) {.cdecl.} =
   onClick(BUTTON_ID_SELECT, selectClickHandler)
-  onClick(BUTTON_ID_UP, upClickHandler)
-  onClick(BUTTON_ID_DOWN, downClickHandler)
 
 window.clickConfig = clickConfigProvider
 ```
@@ -236,18 +229,19 @@ animation_schedule(anim);
 
 **Nim:**
 ```nim
+import nebble/ffi # For property_animation creation
+
 var propAnim: ptr PropertyAnimation
 
 let toFrame = makeGRect(10, 120, 100, 50)
-propAnim = property_animation_create_layer_frame(layer, nil, addr toFrame)
-let anim = property_animation_get_animation(propAnim)
+propAnim = ffi.property_animation_create_layer_frame(layer, nil, unsafeAddr toFrame)
+let anim = ffi.property_animation_get_animation(propAnim)
 
-discard animation_set_duration(anim, 500)
-discard animation_set_curve(anim, AnimationCurveEaseInOut)
-discard animation_schedule(anim)
+# Use high-level animation module for configuration
+anim.duration = 500
+anim.curve = AnimationCurveEaseInOut
+discard anim.schedule()
 ```
-
-**Note:** Property animation functions are in the low-level FFI, use `import nebble/ffi`.
 
 ---
 
@@ -292,7 +286,7 @@ proc tickHandler(tickTime: ptr tm; unitsChanged: TimeUnits) {.cdecl.} =
   # Update time display
   discard
 
-tick.subscribe(TimeUnits.MINUTE_UNIT, tickHandler)
+subscribe(MINUTE_UNIT, tickHandler)
 ```
 
 ### Accelerometer Service
@@ -300,9 +294,7 @@ tick.subscribe(TimeUnits.MINUTE_UNIT, tickHandler)
 **C:**
 ```c
 static void accel_data_handler(AccelData *data, uint32_t num_samples) {
-  int16_t x = data[0].x;
-  int16_t y = data[0].y;
-  int16_t z = data[0].z;
+  // Handle data
 }
 
 accel_data_service_subscribe(10, accel_data_handler);
@@ -311,13 +303,10 @@ accel_data_service_subscribe(10, accel_data_handler);
 **Nim:**
 ```nim
 proc accelDataHandler(data: ptr AccelData; numSamples: uint32) {.cdecl.} =
-  if numSamples > 0:
-    let sample = data[]
-    let x = sample.x
-    let y = sample.y
-    let z = sample.z
+  # Handle data
+  discard
 
-accelDataServiceSubscribe(10, accelDataHandler)
+accel.subscribe(10, accelDataHandler)
 ```
 
 ### Health Service (not on Aplite)
@@ -329,8 +318,8 @@ HealthValue steps = health_service_sum_today(HealthMetricStepCount);
 
 **Nim:**
 ```nim
-when declared(health_service_sum_today) and declared(HealthMetricStepCount):
-  let steps = health_service_sum_today(HealthMetricStepCount)
+when declared(health.sumToday) and declared(HealthMetricStepCount):
+  let steps = health.sumToday(HealthMetricStepCount)
 ```
 
 ---
@@ -354,19 +343,15 @@ persist_write_int(PERSIST_KEY_COUNTER, counter);
 
 **Nim:**
 ```nim
-import nebble/ffi as ffi  # To avoid ambiguous calls
-
 const PERSIST_KEY_COUNTER = 1
 
 var counter: int32 = 0
 
-if ffi.persist_exists(PERSIST_KEY_COUNTER):
-  counter = ffi.persist_read_int(PERSIST_KEY_COUNTER)
+if storage.exists(PERSIST_KEY_COUNTER):
+  counter = storage.readInt(PERSIST_KEY_COUNTER)
 
-discard ffi.persist_write_int(PERSIST_KEY_COUNTER, counter)
+discard storage.writeInt(PERSIST_KEY_COUNTER, counter)
 ```
-
-**Note:** Use `import nebble/ffi as ffi` to avoid ambiguous calls between high-level and low-level persist functions.
 
 ---
 
@@ -381,7 +366,7 @@ app_message_open(128, 128);
 
 **Nim:**
 ```nim
-discard appMessageOpen(128, 128)
+discard message.open(128, 128)
 ```
 
 ### Sending a Message
@@ -397,9 +382,9 @@ app_message_outbox_send();
 **Nim:**
 ```nim
 var iter: ptr DictionaryIterator
-discard appMessageOutboxBegin(addr iter)
-discard dictWriteUint8(iter, MESSAGE_KEY_Temperature, 25)
-discard appMessageOutboxSend()
+discard message.outboxBegin(addr iter)
+discard message.writeUint8(iter, MESSAGE_KEY_Temperature, 25)
+discard message.outboxSend()
 ```
 
 ---
@@ -436,8 +421,8 @@ else:
 
 **Nim:**
 ```nim
-when declared(health_service_sum_today):
-  let steps = health_service_sum_today(HealthMetricStepCount)
+when declared(health.sumToday):
+  let steps = health.sumToday(HealthMetricStepCount)
 ```
 
 ---
@@ -458,11 +443,15 @@ int main(void) {
 
 **Nim:**
 ```nim
+# Manual way:
 proc main(): cint {.exportc, cdecl.} =
   init()
   eventLoop()
   deinit()
   return 0
+
+# Preferred way (macro):
+pebbleApp(init = init, deinit = deinit)
 ```
 
 ### Module-Scope Variables
@@ -506,10 +495,10 @@ window.destroy()
 
 1. **All callbacks must be `{.cdecl.}`** - This is required for C interop
 2. **No Nim closures at FFI boundary** - Use global procs or static context pointers
-3. **String literals are okay for static text** - But use module-scope buffers for dynamic text
+3. **Use `staticText` for dynamic text** - TextLayer doesn't copy strings, so you need a persistent buffer
 4. **Use `when declared()` for platform checks** - Not `#ifdef`
-5. **FFI function names use underscores** - High-level wrappers use camelCase
-6. **Import `nebble/ffi as ffi`** - When you need both high-level and low-level APIs
+5. **Use the `pebbleApp` macro** - Removes boilerplate
+6. **Import `nebble/ffi` for constants** - High-level modules don't always re-export C constants
 7. **Discard return values explicitly** - Nim requires `discard` for unused return values
 8. **Use `addr` for C pointers** - Nim's `addr` operator gives you `ptr` types
 

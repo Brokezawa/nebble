@@ -48,41 +48,36 @@ nebble install --emulator basalt
 ### Hello World Example
 
 ```nim
-import nebble/ffi as ffi
-from nebble/app import eventLoop
+import nebble
+import nebble/ffi # For ButtonId
 
-var
-  window: ptr ffi.Window
-  textLayer: ptr ffi.TextLayer
+var textLayer: ptr TextLayer
+var clickCount = 0
+var textBuffer: array[32, char]
 
-proc windowLoad(win: ptr ffi.Window) {.cdecl.} =
-  let bounds = ffi.layer_get_bounds(ffi.window_get_root_layer(win))
-  textLayer = ffi.text_layer_create(bounds)
-  ffi.text_layer_set_text(textLayer, "Hello, Pebble!")
-  ffi.text_layer_set_text_alignment(textLayer, ffi.GTextAlignmentCenter)
-  ffi.layer_add_child(
-    ffi.window_get_root_layer(win),
-    ffi.text_layer_get_layer(textLayer)
-  )
+proc selectClick(rec: ClickRecognizerRef; ctx: pointer) {.cdecl.} =
+  inc clickCount
+  textLayer.staticText(textBuffer, "Clicks: " & $clickCount)
 
-proc windowUnload(win: ptr ffi.Window) {.cdecl.} =
-  ffi.text_layer_destroy(textLayer)
+proc clickConfig(ctx: pointer) {.cdecl.} =
+  onClick(BUTTON_ID_SELECT, selectClick)
 
-proc init() {.cdecl.} =
-  window = ffi.window_create()
-  ffi.window_set_window_handlers(window, ffi.WindowHandlers(
-    load: windowLoad,
-    unload: windowUnload
-  ))
-  ffi.window_stack_push(window, true)
+proc windowLoad(win: ptr Window) {.cdecl.} =
+  let bounds = win.rootLayer.bounds
+  textLayer = newTextLayer(makeGRect(0, 60, bounds.size.w, 40))
+  textLayer.text = "Press SELECT"
+  textLayer.textAlignment = GTextAlignmentCenter
+  win.rootLayer.addChild(textLayer.getLayer())
 
-proc deinit() {.cdecl.} =
-  ffi.window_destroy(window)
+proc windowUnload(win: ptr Window) {.cdecl.} =
+  textLayer.destroy()
 
-proc main() {.exportc, cdecl.} =
-  init()
-  eventLoop()
-  deinit()
+# Use the pebbleApp macro to generate boilerplate
+pebbleApp(
+  load = windowLoad,
+  unload = windowUnload,
+  clickConfig = clickConfig
+)
 ```
 
 ## Architecture
@@ -111,11 +106,9 @@ ffi.window_stack_push(window, true)
 - Currently under active development
 
 ```nim
-from nebble/geometry import makeGRect
-from nebble/window import create, push
+import nebble
 
-let bounds = makeGRect(0, 0, 144, 168)
-let window = create()
+let window = newWindow()
 window.push(animated = true)
 ```
 
@@ -359,7 +352,7 @@ MIT License - See LICENSE file
 ### Pebble Development
 
 - **Rebble Developer Portal** - https://developer.rebble.io
-- **Pebble SDK Docs** - https://developer.rebble.io/developer.pebble.com/docs/c/
+- **Pebble SDK Docs** - https://developer.rebble.io/developer.pebble.com/docs/c/index.html
 - **Rebble Services** - https://rebble.io (app store, weather, voice)
 - **/r/pebble** - https://reddit.com/r/pebble
 

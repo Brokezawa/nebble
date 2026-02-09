@@ -28,7 +28,9 @@ macro pebbleApp*(load: untyped = nil,
                 unload: untyped = nil,
                 appear: untyped = nil,
                 disappear: untyped = nil,
-                clickConfig: untyped = nil): untyped =
+                clickConfig: untyped = nil,
+                init: untyped = nil,
+                deinit: untyped = nil): untyped =
   ## Generate the complete app scaffold (window, init, deinit, main).
   ##
   ## This macro eliminates ~15 lines of boilerplate by generating:
@@ -39,17 +41,14 @@ macro pebbleApp*(load: untyped = nil,
   ##
   ## Usage:
   ## ```nim
-  ## proc windowLoad(win: ptr Window) {.cdecl.} =
-  ##   # ... create layers
+  ## proc windowLoad(win: ptr Window) {.cdecl.} = ...
+  ## proc myInit() = ...
   ##
-  ## proc windowUnload(win: ptr Window) {.cdecl.} =
-  ##   # ... destroy layers
-  ##
-  ## pebbleApp(load = windowLoad, unload = windowUnload)
+  ## pebbleApp(load = windowLoad, init = myInit)
   ## ```
   ##
-  ## All parameters are optional. If no handlers are provided, generates
-  ## a minimal app with an empty window.
+  ## All parameters are optional. `init` and `deinit` accept a proc identifier
+  ## to be called for custom initialization/cleanup (e.g. subscribing to services).
 
   result = newStmtList()
 
@@ -88,15 +87,30 @@ macro pebbleApp*(load: untyped = nil,
   
   initBody.add quote do:
     ffi.window_stack_push(`windowVar`, true)
+  
+  # Call custom init if provided
+  if not init.isNil and init.kind != nnkNilLit:
+    initBody.add quote do:
+      `init`()
 
   result.add quote do:
     proc init() {.cdecl.} =
       `initBody`
 
   # Generate deinit() proc
+  var deinitBody = newStmtList()
+  
+  # Call custom deinit if provided
+  if not deinit.isNil and deinit.kind != nnkNilLit:
+    deinitBody.add quote do:
+      `deinit`()
+      
+  deinitBody.add quote do:
+    ffi.window_destroy(`windowVar`)
+
   result.add quote do:
     proc deinit() {.cdecl.} =
-      ffi.window_destroy(`windowVar`)
+      `deinitBody`
 
   # Generate main() entry point
   result.add quote do:

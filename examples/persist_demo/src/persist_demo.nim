@@ -3,14 +3,15 @@
 ## Shows how to save and restore data across app sessions.
 
 import nebble
-import nebble/ffi as ffi  # For BUTTON_ID_* constants
+import nebble/storage
+import nebble/vibes
+import nebble/ffi # For BUTTON_ID constants
 
 const
   PERSIST_KEY_COUNTER = 1
   PERSIST_KEY_NAME = 2
 
 var
-  window: ptr Window
   counterLayer: ptr TextLayer
   nameLayer: ptr TextLayer
   counterBuffer: array[32, char]
@@ -19,25 +20,21 @@ var
 
 proc updateDisplay() =
   ## Update the display with current counter value
-  let counterText = "Counter: " & $counter
-  for i in 0..<min(counterText.len, 31):
-    counterBuffer[i] = counterText[i]
-  counterBuffer[min(counterText.len, 31)] = '\0'
-  counterLayer.text = cast[cstring](addr counterBuffer[0])
+  counterLayer.staticText(counterBuffer, "Counter: " & $counter)
 
 proc saveData() =
   ## Save data to persistent storage
-  discard ffi.persist_write_int(PERSIST_KEY_COUNTER, counter)
+  discard storage.writeInt(PERSIST_KEY_COUNTER, counter)
 
 proc loadData() =
   ## Load data from persistent storage
-  if ffi.persist_exists(PERSIST_KEY_COUNTER):
-    counter = ffi.persist_read_int(PERSIST_KEY_COUNTER)
+  if storage.exists(PERSIST_KEY_COUNTER):
+    counter = storage.readInt(PERSIST_KEY_COUNTER)
   else:
     counter = 0
   
-  if ffi.persist_exists(PERSIST_KEY_NAME):
-    discard ffi.persist_read_string(PERSIST_KEY_NAME, addr nameBuffer[0], 64)
+  if storage.exists(PERSIST_KEY_NAME):
+    discard storage.readString(PERSIST_KEY_NAME, addr nameBuffer[0], 64)
   else:
     let defaultName = "Nebble User"
     for i in 0..<defaultName.len:
@@ -52,7 +49,7 @@ proc selectClickHandler(recognizer: ClickRecognizerRef; context: pointer) {.cdec
   
   # Vibrate on milestone
   if counter mod 10 == 0:
-    ffi.vibes_short_pulse()
+    vibes.shortPulse()
 
 proc upClickHandler(recognizer: ClickRecognizerRef; context: pointer) {.cdecl.} =
   ## Add 10 to counter
@@ -65,7 +62,7 @@ proc downClickHandler(recognizer: ClickRecognizerRef; context: pointer) {.cdecl.
   counter = 0
   saveData()
   updateDisplay()
-  ffi.vibes_double_pulse()
+  vibes.doublePulse()
 
 proc clickConfigProvider(context: pointer) {.cdecl.} =
   ## Configure click handlers
@@ -122,24 +119,13 @@ proc windowUnload(win: ptr Window) {.cdecl.} =
   counterLayer.destroy()
   nameLayer.destroy()
 
-proc init() =
-  ## Initialize the app
-  window = newWindow()
-  ffi.window_set_click_config_provider(window, clickConfigProvider)
-  window.setHandlers(
-    load = windowLoad,
-    unload = windowUnload
-  )
-  window.push(animated = true)
-
-proc deinit() =
+proc deinitApp() =
   ## Deinitialize the app
   saveData()  # Save one last time before exiting
-  window.destroy()
 
-proc main(): cint {.exportc, cdecl.} =
-  ## App entry point
-  init()
-  eventLoop()
-  deinit()
-  return 0
+pebbleApp(
+  load = windowLoad,
+  unload = windowUnload,
+  deinit = deinitApp,
+  clickConfig = clickConfigProvider
+)
