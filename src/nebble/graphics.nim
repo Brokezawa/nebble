@@ -173,3 +173,38 @@ proc alignRect*(rect: var GRect; insideRect: GRect; alignment: GAlign;
   ## Align a rectangle inside another rectangle (modifies rect in place).
   ## Equivalent to C function `grect_align(&rect, &inside_rect, alignment, clip)`.
   ffi.grect_align(addr rect, addr insideRect, alignment, clip)
+
+proc centerPoint*(rect: GRect): GPoint {.inline.} =
+  ## Get the center point of a rectangle.
+  ## Equivalent to C function `grect_center_point(&rect)`.
+  result = ffi.grect_center_point(addr rect)
+
+proc clip*(rect: var GRect; clipRect: GRect) {.inline.} =
+  ## Clip a rectangle to another rectangle (modifies rect in place).
+  ## The resulting rectangle is the intersection of the two rectangles.
+  ## Equivalent to C function `grect_clip(&rect, &clip_rect)`.
+  ffi.grect_clip(addr rect, addr clipRect)
+
+proc crop*(rect: GRect; cropSizePx: int32): GRect {.inline.} =
+  ## Return a new rectangle cropped by the specified number of pixels on each side.
+  ## Equivalent to C function `grect_crop(rect, crop_size_px)`.
+  result = ffi.grect_crop(rect, cropSizePx)
+
+proc standardize*(rect: var GRect) {.inline.} =
+  ## Standardize a rectangle in place (ensures size.w and size.h are non-negative).
+  ## Equivalent to C function `grect_standardize(&rect)`.
+  ffi.grect_standardize(addr rect)
+
+proc fromPolar*(rect: GRect; scaleMode: GOvalScaleMode; angle: int32): GPoint {.inline.} =
+  ## Calculate a point from polar coordinates within a rectangle.
+  ## The point is on an ellipse fitted to the rectangle.
+  ## Angle is in Pebble angle units (0 to TRIG_MAX_ANGLE).
+  ## `scaleMode` determines how the ellipse is fitted to the rectangle.
+  ## Equivalent to C function `gpoint_from_polar(&rect, scale_mode, angle)`.
+  result = ffi.gpoint_from_polar(rect, scaleMode, angle)
+
+proc centeredFromPolar*(rect: GRect; scaleMode: GOvalScaleMode; angle: int32; size: GSize): GRect {.inline.} =
+  ## Create a rectangle centered at a polar coordinate within another rectangle.
+  ## Useful for placing items in a circle or ellipse.
+  ## Equivalent to C function `grect_centered_from_polar(&rect, scale_mode, angle, size)`.
+  result = ffi.grect_centered_from_polar(rect, scaleMode, angle, size)

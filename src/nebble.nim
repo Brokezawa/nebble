@@ -21,11 +21,14 @@
 # Import FFI and export commonly used types/constants (not functions to avoid ambiguity)
 import nebble/ffi
 export Window, WindowHandlers, ClickConfigProvider, ClickRecognizerRef
-export Layer, GRect, GPoint, GSize, GColor, GContext
+export Layer, GRect, GPoint, GSize, GColor, GContext, GOvalScaleMode
 export TextLayer, GFont, GTextAlignment
-export BitmapLayer, GBitmap
+export BitmapLayer, GBitmap, GBitmapSequence
+export RotBitmapLayer
 export ActionBarLayer
 export ScrollLayer
+export ContentIndicator, ContentIndicatorDirection
+export GTextAttributes
 export MenuLayer, SimpleMenuLayer, MenuIndex
 export StatusBarLayer
 export TimeUnits, TickHandler, tm, time_t
@@ -52,6 +55,9 @@ export layer
 import nebble/text_layer
 export text_layer
 
+import nebble/text_attributes
+export text_attributes
+
 import nebble/clicks
 export clicks
 
@@ -73,6 +79,12 @@ export tick
 import nebble/bitmap_layer
 export bitmap_layer
 
+import nebble/bitmap_sequence
+export bitmap_sequence
+
+import nebble/rot_bitmap_layer
+export rot_bitmap_layer
+
 import nebble/menu_layer
 export menu_layer
 
@@ -84,6 +96,9 @@ export number_window
 
 import nebble/scroll_layer
 export scroll_layer
+
+import nebble/content_indicator
+export content_indicator
 
 import nebble/action_bar
 export action_bar
