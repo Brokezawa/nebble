@@ -17,6 +17,21 @@ proc drawText*(ctx: ptr GContext, text: cstring, font: GFont, box: GRect,
   ## Equivalent to C function `graphics_draw_text(...)`.
   ffi.graphics_draw_text(ctx, text, font, box, overflow, alignment, textAttributes)
 
+proc textContentSize*(text: cstring, font: GFont, box: GRect,
+                      overflow: GTextOverflowMode, alignment: GTextAlignment): GSize {.inline.} =
+  ## Calculate the content size of text layout.
+  ## Useful for dynamically sizing text layers.
+  ## Equivalent to C function `graphics_text_layout_get_content_size(...)`.
+  result = ffi.graphics_text_layout_get_content_size(text, font, box, overflow, alignment)
+
+proc textContentSize*(text: cstring, font: GFont, box: GRect,
+                      overflow: GTextOverflowMode, alignment: GTextAlignment,
+                      textAttributes: ptr GTextAttributes): GSize {.inline.} =
+  ## Calculate the content size of text layout with attributes.
+  ## Useful for dynamically sizing text layers.
+  ## Equivalent to C function `graphics_text_layout_get_content_size_with_attributes(...)`.
+  result = ffi.graphics_text_layout_get_content_size_with_attributes(text, font, box, overflow, alignment, textAttributes)
+
 # ============================================================================
 # Drawing: Lines and Shapes
 # ============================================================================
@@ -137,4 +152,24 @@ proc destroy*(bitmap: ptr GBitmap) {.inline.} =
 proc bounds*(bitmap: ptr GBitmap): GRect {.inline.} =
   ## Get the bounds of a GBitmap.
   ## Equivalent to C function `gbitmap_get_bounds(bitmap)`.
-  ffi.gbitmap_get_bounds(bitmap)
+  result = ffi.gbitmap_get_bounds(bitmap)
+
+# ============================================================================
+# Geometry Utilities
+# ============================================================================
+
+proc inset*(rect: GRect; insets: GEdgeInsets): GRect {.inline.} =
+  ## Returns a GRect inset by the given edge insets.
+  ## Equivalent to C function `grect_inset(rect, insets)`.
+  result = ffi.grect_inset(rect, insets)
+
+proc containsPoint*(rect: GRect; point: GPoint): bool {.inline.} =
+  ## Check if a point is inside a rectangle.
+  ## Equivalent to C function `grect_contains_point(&rect, &point)`.
+  result = ffi.grect_contains_point(addr rect, addr point)
+
+proc alignRect*(rect: var GRect; insideRect: GRect; alignment: GAlign;
+                  clip: bool = true) {.inline.} =
+  ## Align a rectangle inside another rectangle (modifies rect in place).
+  ## Equivalent to C function `grect_align(&rect, &inside_rect, alignment, clip)`.
+  ffi.grect_align(addr rect, addr insideRect, alignment, clip)
