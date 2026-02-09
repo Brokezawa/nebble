@@ -1,0 +1,23 @@
+{
+  "uuid": "df975e99-6d20-443a-898f-9585bf71204a",
+  "shortName": "action_bar_demo",
+  "longName": "action_bar_demo",
+  "companyName": "Nebble",
+  "versionLabel": "1.0",
+  "versionCode": 1,
+  "sdkVersion": "3",
+  "targetPlatforms": [
+    "aplite",
+    "basalt",
+    "chalk",
+    "diorite",
+    "emery",
+    "flint"
+  ],
+  "watchapp": {
+    "watchface": false
+  },
+  "resources": {
+    "media": []
+  }
+}

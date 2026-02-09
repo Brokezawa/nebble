@@ -1,0 +1,23 @@
+{
+  "uuid": "a405b207-0999-443e-90c3-0f5bea58b73c",
+  "shortName": "animation_demo",
+  "longName": "animation_demo",
+  "companyName": "Nebble",
+  "versionLabel": "1.0",
+  "versionCode": 1,
+  "sdkVersion": "3",
+  "targetPlatforms": [
+    "aplite",
+    "basalt",
+    "chalk",
+    "diorite",
+    "emery",
+    "flint"
+  ],
+  "watchapp": {
+    "watchface": false
+  },
+  "resources": {
+    "media": []
+  }
+}

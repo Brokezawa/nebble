@@ -1,0 +1,21 @@
+nimTitle	graphics	nebble/graphics.html	module src/nebble/graphics		0
+nim	drawText	nebble/graphics.html#drawText,ptr.struct_GContext,cstring,GFont,GRect,GTextOverflowMode,GTextAlignment,ptr.struct_GTextAttributes	proc drawText(ctx: ptr GContext; text: cstring; font: GFont; box: GRect;\n         overflow: GTextOverflowMode; alignment: GTextAlignment;\n         textAttributes: ptr GTextAttributes)		13
+nim	drawLine	nebble/graphics.html#drawLine,ptr.struct_GContext,GPoint,GPoint	proc drawLine(ctx: ptr GContext; p0, p1: GPoint)		24
+nim	drawRect	nebble/graphics.html#drawRect,ptr.struct_GContext,GRect	proc drawRect(ctx: ptr GContext; rect: GRect)		29
+nim	fillRect	nebble/graphics.html#fillRect,ptr.struct_GContext,GRect	proc fillRect(ctx: ptr GContext; rect: GRect)		34
+nim	fillRectRounded	nebble/graphics.html#fillRectRounded,ptr.struct_GContext,GRect,uint16,GCornerMask	proc fillRectRounded(ctx: ptr GContext; rect: GRect; radius: uint16;\n                corners: GCornerMask)		39
+nim	drawCircle	nebble/graphics.html#drawCircle,ptr.struct_GContext,GPoint,uint16	proc drawCircle(ctx: ptr GContext; center: GPoint; radius: uint16)		45
+nim	fillCircle	nebble/graphics.html#fillCircle,ptr.struct_GContext,GPoint,uint16	proc fillCircle(ctx: ptr GContext; center: GPoint; radius: uint16)		50
+nim	drawRoundRect	nebble/graphics.html#drawRoundRect,ptr.struct_GContext,GRect,uint16	proc drawRoundRect(ctx: ptr GContext; rect: GRect; radius: uint16)		55
+nim	drawPixel	nebble/graphics.html#drawPixel,ptr.struct_GContext,GPoint	proc drawPixel(ctx: ptr GContext; point: GPoint)		64
+nim	drawBitmap	nebble/graphics.html#drawBitmap,ptr.struct_GContext,ptr.struct_GBitmap,GRect	proc drawBitmap(ctx: ptr GContext; bitmap: ptr GBitmap; box: GRect)		73
+nim	drawRotatedBitmap	nebble/graphics.html#drawRotatedBitmap,ptr.struct_GContext,ptr.struct_GBitmap,GPoint,int32,GPoint	proc drawRotatedBitmap(ctx: ptr GContext; bitmap: ptr GBitmap;\n                  srcImageCenter: GPoint; rotation: int32;\n                  destImageCenter: GPoint)		78
+nim	strokeColor=	nebble/graphics.html#strokeColor=,ptr.struct_GContext,GColor8	proc strokeColor=(ctx: ptr GContext; color: GColor8)		92
+nim	fillColor=	nebble/graphics.html#fillColor=,ptr.struct_GContext,GColor8	proc fillColor=(ctx: ptr GContext; color: GColor8)		97
+nim	textColor=	nebble/graphics.html#textColor=,ptr.struct_GContext,GColor8	proc textColor=(ctx: ptr GContext; color: GColor8)		102
+nim	strokeWidth=	nebble/graphics.html#strokeWidth=,ptr.struct_GContext,uint8	proc strokeWidth=(ctx: ptr GContext; width: uint8)		107
+nim	antialiased=	nebble/graphics.html#antialiased=,ptr.struct_GContext,bool	proc antialiased=(ctx: ptr GContext; enable: bool)		112
+nim	newBitmap	nebble/graphics.html#newBitmap,uint32	proc newBitmap(resourceId: uint32): ptr GBitmap		121
+nim	newBitmapFromData	nebble/graphics.html#newBitmapFromData,ptr.uint8	proc newBitmapFromData(data: ptr uint8): ptr GBitmap		127
+nim	destroy	nebble/graphics.html#destroy,ptr.struct_GBitmap	proc destroy(bitmap: ptr GBitmap)		132
+nim	bounds	nebble/graphics.html#bounds,ptr.struct_GBitmap	proc bounds(bitmap: ptr GBitmap): GRect		137

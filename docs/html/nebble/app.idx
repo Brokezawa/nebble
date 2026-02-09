@@ -1,0 +1,5 @@
+nimTitle	app	nebble/app.html	module src/nebble/app		0
+nim	eventLoop	nebble/app.html#eventLoop	proc eventLoop()		12
+nim	appFocusServiceSubscribe	nebble/app.html#appFocusServiceSubscribe,AppFocusHandler	proc appFocusServiceSubscribe(handler: AppFocusHandler)		36
+nim	appFocusServiceUnsubscribe	nebble/app.html#appFocusServiceUnsubscribe	proc appFocusServiceUnsubscribe()		41
+nim	appFocusServiceIsActive	nebble/app.html#appFocusServiceIsActive	proc appFocusServiceIsActive(): bool		46

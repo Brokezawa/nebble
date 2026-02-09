@@ -1,0 +1,17 @@
+nimTitle	menu_layer	nebble/menu_layer.html	module src/nebble/menu_layer		0
+nim	newMenuLayer	nebble/menu_layer.html#newMenuLayer,GRect	proc newMenuLayer(frame: GRect): ptr MenuLayer		13
+nim	destroy	nebble/menu_layer.html#destroy,ptr.struct_MenuLayer	proc destroy(menuLayer: ptr MenuLayer)		18
+nim	getLayer	nebble/menu_layer.html#getLayer,ptr.struct_MenuLayer	proc getLayer(menuLayer: ptr MenuLayer): ptr Layer		27
+nim	getScrollLayer	nebble/menu_layer.html#getScrollLayer,ptr.struct_MenuLayer	proc getScrollLayer(menuLayer: ptr MenuLayer): ptr ScrollLayer		32
+nim	setCallbacks	nebble/menu_layer.html#setCallbacks,ptr.struct_MenuLayer,pointer,MenuLayerCallbacks	proc setCallbacks(menuLayer: ptr MenuLayer; callbackContext: pointer;\n             callbacks: MenuLayerCallbacks)		41
+nim	setClickConfigOntoWindow	nebble/menu_layer.html#setClickConfigOntoWindow,ptr.struct_MenuLayer,ptr.struct_Window	proc setClickConfigOntoWindow(menuLayer: ptr MenuLayer; window: ptr Window)		48
+nim	setSelectedNext	nebble/menu_layer.html#setSelectedNext,ptr.struct_MenuLayer,bool,MenuRowAlign,bool	proc setSelectedNext(menuLayer: ptr MenuLayer; up: bool; reason: MenuRowAlign;\n                animated: bool)		57
+nim	selectedIndex=	nebble/menu_layer.html#selectedIndex=,ptr.struct_MenuLayer,MenuIndex,MenuRowAlign,bool	proc selectedIndex=(menuLayer: ptr MenuLayer; index: MenuIndex; reason: MenuRowAlign;\n               animated: bool)		63
+nim	selectedIndex	nebble/menu_layer.html#selectedIndex,ptr.struct_MenuLayer	proc selectedIndex(menuLayer: ptr MenuLayer): MenuIndex		69
+nim	isIndexSelected	nebble/menu_layer.html#isIndexSelected,ptr.struct_MenuLayer,ptr.MenuIndex	proc isIndexSelected(menuLayer: ptr MenuLayer; index: ptr MenuIndex): bool		74
+nim	reloadData	nebble/menu_layer.html#reloadData,ptr.struct_MenuLayer	proc reloadData(menuLayer: ptr MenuLayer)		83
+nim	setNormalColors	nebble/menu_layer.html#setNormalColors,ptr.struct_MenuLayer,GColor,GColor	proc setNormalColors(menuLayer: ptr MenuLayer; background: GColor; foreground: GColor)		93
+nim	setHighlightColors	nebble/menu_layer.html#setHighlightColors,ptr.struct_MenuLayer,GColor,GColor	proc setHighlightColors(menuLayer: ptr MenuLayer; background: GColor;\n                   foreground: GColor)		101
+nim	padBottomEnable	nebble/menu_layer.html#padBottomEnable,ptr.struct_MenuLayer,bool	proc padBottomEnable(menuLayer: ptr MenuLayer; enable: bool)		108
+nim	centerFocused=	nebble/menu_layer.html#centerFocused=,ptr.struct_MenuLayer,bool	proc centerFocused=(menuLayer: ptr MenuLayer; centerFocused: bool)		117
+nim	centerFocused	nebble/menu_layer.html#centerFocused,ptr.struct_MenuLayer	proc centerFocused(menuLayer: ptr MenuLayer): bool		122

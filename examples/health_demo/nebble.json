@@ -1,0 +1,16 @@
+{
+  "name": "health_demo",
+  "type": "app",
+  "version": "1.0.0",
+  "uuid": "e7a16da1-32bd-4305-8323-6702f6af980a",
+  "platforms": [
+    "aplite",
+    "basalt",
+    "chalk",
+    "diorite",
+    "emery",
+    "flint"
+  ],
+  "capabilities": [],
+  "appKeys": {}
+}

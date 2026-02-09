@@ -1,0 +1,3 @@
+nimTitle	tick	nebble/tick.html	module src/nebble/tick		0
+nim	tickTimerServiceSubscribe	nebble/tick.html#tickTimerServiceSubscribe,TimeUnits,TickHandler	proc tickTimerServiceSubscribe(units: TimeUnits; handler: TickHandler)		21
+nim	tickTimerServiceUnsubscribe	nebble/tick.html#tickTimerServiceUnsubscribe	proc tickTimerServiceUnsubscribe()		28

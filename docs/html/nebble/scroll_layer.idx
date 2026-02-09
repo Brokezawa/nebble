@@ -1,0 +1,20 @@
+nimTitle	scroll_layer	nebble/scroll_layer.html	module src/nebble/scroll_layer		0
+nim	newScrollLayer	nebble/scroll_layer.html#newScrollLayer,GRect	proc newScrollLayer(frame: GRect): ptr ScrollLayer		12
+nim	destroy	nebble/scroll_layer.html#destroy,ptr.struct_ScrollLayer	proc destroy(scrollLayer: ptr ScrollLayer)		17
+nim	getLayer	nebble/scroll_layer.html#getLayer,ptr.struct_ScrollLayer	proc getLayer(scrollLayer: ptr ScrollLayer): ptr Layer		26
+nim	addChild	nebble/scroll_layer.html#addChild,ptr.struct_ScrollLayer,ptr.struct_Layer	proc addChild(scrollLayer: ptr ScrollLayer; child: ptr Layer)		35
+nim	contentSize=	nebble/scroll_layer.html#contentSize=,ptr.struct_ScrollLayer,GSize	proc contentSize=(scrollLayer: ptr ScrollLayer; size: GSize)		40
+nim	contentSize	nebble/scroll_layer.html#contentSize,ptr.struct_ScrollLayer	proc contentSize(scrollLayer: ptr ScrollLayer): GSize		45
+nim	contentOffset=	nebble/scroll_layer.html#contentOffset=,ptr.struct_ScrollLayer,GPoint,bool	proc contentOffset=(scrollLayer: ptr ScrollLayer; offset: GPoint; animated: bool)		54
+nim	contentOffset	nebble/scroll_layer.html#contentOffset,ptr.struct_ScrollLayer	proc contentOffset(scrollLayer: ptr ScrollLayer): GPoint		60
+nim	frame=	nebble/scroll_layer.html#frame=,ptr.struct_ScrollLayer,GRect	proc frame=(scrollLayer: ptr ScrollLayer; frame: GRect)		69
+nim	setCallbacks	nebble/scroll_layer.html#setCallbacks,ptr.struct_ScrollLayer,ScrollLayerCallbacks	proc setCallbacks(scrollLayer: ptr ScrollLayer; callbacks: ScrollLayerCallbacks)		78
+nim	context=	nebble/scroll_layer.html#context=,ptr.struct_ScrollLayer,pointer	proc context=(scrollLayer: ptr ScrollLayer; context: pointer)		83
+nim	setClickConfigOntoWindow	nebble/scroll_layer.html#setClickConfigOntoWindow,ptr.struct_ScrollLayer,ptr.struct_Window	proc setClickConfigOntoWindow(scrollLayer: ptr ScrollLayer; window: ptr Window)		88
+nim	scrollUpClickHandler	nebble/scroll_layer.html#scrollUpClickHandler,ClickRecognizerRef,pointer	proc scrollUpClickHandler(recognizer: ClickRecognizerRef; context: pointer)		97
+nim	scrollDownClickHandler	nebble/scroll_layer.html#scrollDownClickHandler,ClickRecognizerRef,pointer	proc scrollDownClickHandler(recognizer: ClickRecognizerRef; context: pointer)		102
+nim	shadowHidden=	nebble/scroll_layer.html#shadowHidden=,ptr.struct_ScrollLayer,bool	proc shadowHidden=(scrollLayer: ptr ScrollLayer; hidden: bool)		111
+nim	shadowHidden	nebble/scroll_layer.html#shadowHidden,ptr.struct_ScrollLayer	proc shadowHidden(scrollLayer: ptr ScrollLayer): bool		116
+nim	paging=	nebble/scroll_layer.html#paging=,ptr.struct_ScrollLayer,bool	proc paging=(scrollLayer: ptr ScrollLayer; pagingEnabled: bool)		125
+nim	paging	nebble/scroll_layer.html#paging,ptr.struct_ScrollLayer	proc paging(scrollLayer: ptr ScrollLayer): bool		130
+nim	contentIndicator	nebble/scroll_layer.html#contentIndicator,ptr.struct_ScrollLayer	proc contentIndicator(scrollLayer: ptr ScrollLayer): ptr ContentIndicator		140

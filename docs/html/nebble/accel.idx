@@ -1,0 +1,9 @@
+nimTitle	accel	nebble/accel.html	module src/nebble/accel		0
+nim	accelDataServiceSubscribe	nebble/accel.html#accelDataServiceSubscribe,uint32,AccelDataHandler	proc accelDataServiceSubscribe(samplesPerUpdate: uint32; handler: AccelDataHandler)		11
+nim	accelDataServiceUnsubscribe	nebble/accel.html#accelDataServiceUnsubscribe	proc accelDataServiceUnsubscribe()		17
+nim	accelTapServiceSubscribe	nebble/accel.html#accelTapServiceSubscribe,AccelTapHandler	proc accelTapServiceSubscribe(handler: AccelTapHandler)		26
+nim	accelTapServiceUnsubscribe	nebble/accel.html#accelTapServiceUnsubscribe	proc accelTapServiceUnsubscribe()		31
+nim	accelServicePeek	nebble/accel.html#accelServicePeek,ptr.AccelData	proc accelServicePeek(data: ptr AccelData): cint		40
+nim	accelServiceSetSamplingRate	nebble/accel.html#accelServiceSetSamplingRate,AccelSamplingRate	proc accelServiceSetSamplingRate(rate: AccelSamplingRate): cint		46
+nim	accelServiceSetSamplesPerUpdate	nebble/accel.html#accelServiceSetSamplesPerUpdate,uint32	proc accelServiceSetSamplesPerUpdate(numSamples: uint32): cint		52
+nim	accelRawDataServiceSubscribe	nebble/accel.html#accelRawDataServiceSubscribe,uint32,AccelRawDataHandler	proc accelRawDataServiceSubscribe(samplesPerUpdate: uint32;\n                             handler: AccelRawDataHandler)		63

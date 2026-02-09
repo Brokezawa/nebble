@@ -1,0 +1,7 @@
+nimTitle	wakeup	nebble/wakeup.html	module src/nebble/wakeup		0
+nim	wakeupServiceSubscribe	nebble/wakeup.html#wakeupServiceSubscribe,WakeupHandler	proc wakeupServiceSubscribe(handler: WakeupHandler)		15
+nim	wakeupSchedule	nebble/wakeup.html#wakeupSchedule,compiler_darwin_time_t_570426439,int32,bool	proc wakeupSchedule(timestamp: time_t; cookie: int32; notifyIfMissed: bool): WakeupId		21
+nim	wakeupCancel	nebble/wakeup.html#wakeupCancel,WakeupId	proc wakeupCancel(wakeupId: WakeupId)		28
+nim	wakeupCancelAll	nebble/wakeup.html#wakeupCancelAll	proc wakeupCancelAll()		34
+nim	wakeupGetLaunchEvent	nebble/wakeup.html#wakeupGetLaunchEvent,ptr.WakeupId,ptr.int32	proc wakeupGetLaunchEvent(wakeupId: ptr WakeupId; cookie: ptr int32): bool		40
+nim	wakeupQuery	nebble/wakeup.html#wakeupQuery,WakeupId,ptr.compiler_darwin_time_t_570426439	proc wakeupQuery(wakeupId: WakeupId; timestamp: ptr time_t): bool		47

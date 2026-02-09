@@ -1,0 +1,32 @@
+# Nim
+nimcache/
+nimblecache/
+htmldocs/
+*.exe
+*.so
+*.dylib
+*.dll
+*.a
+*.lib
+*.o
+*.obj
+
+# Pebble SDK
+build/
+.lock-waf*
+.pebble-sdk/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Test artifacts
+/tmp/
+*.pbw

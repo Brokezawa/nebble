@@ -1,0 +1,16 @@
+{
+  "name": "animation_demo",
+  "type": "app",
+  "version": "1.0.0",
+  "uuid": "a405b207-0999-443e-90c3-0f5bea58b73c",
+  "platforms": [
+    "aplite",
+    "basalt",
+    "chalk",
+    "diorite",
+    "emery",
+    "flint"
+  ],
+  "capabilities": [],
+  "appKeys": {}
+}

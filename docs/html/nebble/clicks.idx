@@ -1,0 +1,10 @@
+nimTitle	clicks	nebble/clicks.html	module src/nebble/clicks		0
+nim	singleClickSubscribe	nebble/clicks.html#singleClickSubscribe,ButtonId,ClickHandler	proc singleClickSubscribe(buttonId: ButtonId; handler: ClickHandler)		12
+nim	singleRepeatingClickSubscribe	nebble/clicks.html#singleRepeatingClickSubscribe,ButtonId,uint16,ClickHandler	proc singleRepeatingClickSubscribe(buttonId: ButtonId; repeatIntervalMs: uint16;\n                              handler: ClickHandler)		17
+nim	multiClickSubscribe	nebble/clicks.html#multiClickSubscribe,ButtonId,uint8,uint8,uint16,bool,ClickHandler	proc multiClickSubscribe(buttonId: ButtonId; minClicks, maxClicks: uint8;\n                    timeout: uint16; lastClickOnly: bool; handler: ClickHandler)		28
+nim	longClickSubscribe	nebble/clicks.html#longClickSubscribe,ButtonId,uint16,ClickHandler,ClickHandler	proc longClickSubscribe(buttonId: ButtonId; delayMs: uint16;\n                   downHandler, upHandler: ClickHandler)		42
+nim	rawClickSubscribe	nebble/clicks.html#rawClickSubscribe,ButtonId,ClickHandler,ClickHandler,pointer	proc rawClickSubscribe(buttonId: ButtonId; downHandler, upHandler: ClickHandler;\n                  context: pointer)		55
+nim	clickContext=	nebble/clicks.html#clickContext=,ButtonId,pointer	proc clickContext=(buttonId: ButtonId; context: pointer)		65
+nim	getButtonId	nebble/clicks.html#getButtonId,ClickRecognizerRef	proc getButtonId(recognizer: ClickRecognizerRef): ButtonId		74
+nim	numberOfClicksIncludingThisOne	nebble/clicks.html#numberOfClicksIncludingThisOne,ClickRecognizerRef	proc numberOfClicksIncludingThisOne(recognizer: ClickRecognizerRef): uint8		79
+nim	isRepeating	nebble/clicks.html#isRepeating,ClickRecognizerRef	proc isRepeating(recognizer: ClickRecognizerRef): bool		84

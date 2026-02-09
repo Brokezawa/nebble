@@ -1,0 +1,4 @@
+nimTitle	watch_info	nebble/watch_info.html	module src/nebble/watch_info		0
+nim	watchInfoGetModel	nebble/watch_info.html#watchInfoGetModel	proc watchInfoGetModel(): WatchInfoModel		11
+nim	watchInfoGetFirmwareVersion	nebble/watch_info.html#watchInfoGetFirmwareVersion	proc watchInfoGetFirmwareVersion(): WatchInfoVersion		16
+nim	watchInfoGetColor	nebble/watch_info.html#watchInfoGetColor	proc watchInfoGetColor(): WatchInfoColor		21

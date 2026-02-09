@@ -1,0 +1,13 @@
+nimTitle	action_bar	nebble/action_bar.html	module src/nebble/action_bar		0
+nim	newActionBarLayer	nebble/action_bar.html#newActionBarLayer	proc newActionBarLayer(): ptr ActionBarLayer		12
+nim	destroy	nebble/action_bar.html#destroy,ptr.struct_ActionBarLayer	proc destroy(actionBar: ptr ActionBarLayer)		17
+nim	getLayer	nebble/action_bar.html#getLayer,ptr.struct_ActionBarLayer	proc getLayer(actionBar: ptr ActionBarLayer): ptr Layer		26
+nim	addToWindow	nebble/action_bar.html#addToWindow,ptr.struct_ActionBarLayer,ptr.struct_Window	proc addToWindow(actionBar: ptr ActionBarLayer; window: ptr Window)		35
+nim	removeFromWindow	nebble/action_bar.html#removeFromWindow,ptr.struct_ActionBarLayer	proc removeFromWindow(actionBar: ptr ActionBarLayer)		40
+nim	context=	nebble/action_bar.html#context=,ptr.struct_ActionBarLayer,pointer	proc context=(actionBar: ptr ActionBarLayer; context: pointer)		49
+nim	clickConfigProvider=	nebble/action_bar.html#clickConfigProvider=,ptr.struct_ActionBarLayer,ClickConfigProvider	proc clickConfigProvider=(actionBar: ptr ActionBarLayer;\n                     provider: ClickConfigProvider)		54
+nim	setIcon	nebble/action_bar.html#setIcon,ptr.struct_ActionBarLayer,ButtonId,ptr.struct_GBitmap	proc setIcon(actionBar: ptr ActionBarLayer; buttonId: ButtonId; icon: ptr GBitmap)		64
+nim	setIconAnimated	nebble/action_bar.html#setIconAnimated,ptr.struct_ActionBarLayer,ButtonId,ptr.struct_GBitmap,bool	proc setIconAnimated(actionBar: ptr ActionBarLayer; buttonId: ButtonId;\n                icon: ptr GBitmap; animated: bool)		70
+nim	clearIcon	nebble/action_bar.html#clearIcon,ptr.struct_ActionBarLayer,ButtonId	proc clearIcon(actionBar: ptr ActionBarLayer; buttonId: ButtonId)		76
+nim	backgroundColor=	nebble/action_bar.html#backgroundColor=,ptr.struct_ActionBarLayer,GColor	proc backgroundColor=(actionBar: ptr ActionBarLayer; color: GColor)		86
+nim	setIconPressAnimation	nebble/action_bar.html#setIconPressAnimation,ptr.struct_ActionBarLayer,ButtonId,ActionBarLayerIconPressAnimation	proc setIconPressAnimation(actionBar: ptr ActionBarLayer; buttonId: ButtonId;\n                      animation: ActionBarLayerIconPressAnimation)		97

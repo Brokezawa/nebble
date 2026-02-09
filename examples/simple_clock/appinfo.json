@@ -1,0 +1,23 @@
+{
+  "uuid": "d59adb31-4a7a-4833-8a4b-850dc8ff4631",
+  "shortName": "simple_clock",
+  "longName": "simple_clock",
+  "companyName": "Nebble",
+  "versionLabel": "1.0",
+  "versionCode": 1,
+  "sdkVersion": "3",
+  "targetPlatforms": [
+    "aplite",
+    "basalt",
+    "chalk",
+    "diorite",
+    "emery",
+    "flint"
+  ],
+  "watchapp": {
+    "watchface": true
+  },
+  "resources": {
+    "media": []
+  }
+}

@@ -1,0 +1,15 @@
+nimTitle	text_layer	nebble/text_layer.html	module src/nebble/text_layer		0
+nim	newTextLayer	nebble/text_layer.html#newTextLayer,GRect	proc newTextLayer(frame: GRect): ptr TextLayer		13
+nim	destroy	nebble/text_layer.html#destroy,ptr.struct_TextLayer	proc destroy(textLayer: ptr TextLayer)		19
+nim	getLayer	nebble/text_layer.html#getLayer,ptr.struct_TextLayer	proc getLayer(textLayer: ptr TextLayer): ptr Layer		28
+nim	text=	nebble/text_layer.html#text=,ptr.struct_TextLayer,cstring	proc text=(textLayer: ptr TextLayer; text: cstring)		37
+nim	text	nebble/text_layer.html#text,ptr.struct_TextLayer	proc text(textLayer: ptr TextLayer): cstring		44
+nim	font=	nebble/text_layer.html#font=,ptr.struct_TextLayer,GFont	proc font=(textLayer: ptr TextLayer; font: GFont)		49
+nim	textAlignment=	nebble/text_layer.html#textAlignment=,ptr.struct_TextLayer,GTextAlignment	proc textAlignment=(textLayer: ptr TextLayer; alignment: GTextAlignment)		54
+nim	backgroundColor=	nebble/text_layer.html#backgroundColor=,ptr.struct_TextLayer,GColor8	proc backgroundColor=(textLayer: ptr TextLayer; color: GColor8)		59
+nim	textColor=	nebble/text_layer.html#textColor=,ptr.struct_TextLayer,GColor8	proc textColor=(textLayer: ptr TextLayer; color: GColor8)		64
+nim	overflowMode=	nebble/text_layer.html#overflowMode=,ptr.struct_TextLayer,GTextOverflowMode	proc overflowMode=(textLayer: ptr TextLayer; mode: GTextOverflowMode)		69
+nim	contentSize	nebble/text_layer.html#contentSize,ptr.struct_TextLayer	proc contentSize(textLayer: ptr TextLayer): GSize		78
+nim	size=	nebble/text_layer.html#size=,ptr.struct_TextLayer,GSize	proc size=(textLayer: ptr TextLayer; maxSize: GSize)		83
+nim	enableScreenTextFlowAndPaging	nebble/text_layer.html#enableScreenTextFlowAndPaging,ptr.struct_TextLayer,uint8	proc enableScreenTextFlowAndPaging(textLayer: ptr TextLayer; inset: uint8)		92
+nim	restoreDefaultTextFlowAndPaging	nebble/text_layer.html#restoreDefaultTextFlowAndPaging,ptr.struct_TextLayer	proc restoreDefaultTextFlowAndPaging(textLayer: ptr TextLayer)		97

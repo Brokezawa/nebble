@@ -1,0 +1,9 @@
+nimTitle	bitmap_layer	nebble/bitmap_layer.html	module src/nebble/bitmap_layer		0
+nim	newBitmapLayer	nebble/bitmap_layer.html#newBitmapLayer,GRect	proc newBitmapLayer(frame: GRect): ptr BitmapLayer		12
+nim	destroy	nebble/bitmap_layer.html#destroy,ptr.struct_BitmapLayer	proc destroy(bitmapLayer: ptr BitmapLayer)		17
+nim	getLayer	nebble/bitmap_layer.html#getLayer,ptr.struct_BitmapLayer	proc getLayer(bitmapLayer: ptr BitmapLayer): ptr Layer		26
+nim	bitmap=	nebble/bitmap_layer.html#bitmap=,ptr.struct_BitmapLayer,ptr.struct_GBitmap	proc bitmap=(bitmapLayer: ptr BitmapLayer; bitmap: ptr GBitmap)		35
+nim	bitmap	nebble/bitmap_layer.html#bitmap,ptr.struct_BitmapLayer	proc bitmap(bitmapLayer: ptr BitmapLayer): ptr GBitmap		40
+nim	alignment=	nebble/bitmap_layer.html#alignment=,ptr.struct_BitmapLayer,GAlign	proc alignment=(bitmapLayer: ptr BitmapLayer; alignment: GAlign)		45
+nim	backgroundColor=	nebble/bitmap_layer.html#backgroundColor=,ptr.struct_BitmapLayer,GColor	proc backgroundColor=(bitmapLayer: ptr BitmapLayer; color: GColor)		50
+nim	compositingMode=	nebble/bitmap_layer.html#compositingMode=,ptr.struct_BitmapLayer,GCompOp	proc compositingMode=(bitmapLayer: ptr BitmapLayer; mode: GCompOp)		55

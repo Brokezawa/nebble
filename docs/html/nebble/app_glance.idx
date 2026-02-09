@@ -1,0 +1,3 @@
+nimTitle	app_glance	nebble/app_glance.html	module src/nebble/app_glance		0
+nim	appGlanceAddSlice	nebble/app_glance.html#appGlanceAddSlice,ptr.struct_AppGlanceReloadSession,AppGlanceSlice	proc appGlanceAddSlice(session: ptr AppGlanceReloadSession; slice: AppGlanceSlice): AppGlanceResult		15
+nim	appGlanceReload	nebble/app_glance.html#appGlanceReload,AppGlanceReloadCallback,pointer	proc appGlanceReload(callback: AppGlanceReloadCallback; context: pointer): AppGlanceResult		21

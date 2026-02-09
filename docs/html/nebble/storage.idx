@@ -1,0 +1,12 @@
+nimTitle	storage	nebble/storage.html	module src/nebble/storage		0
+nim	persistExists	nebble/storage.html#persistExists,uint32	proc persistExists(key: uint32): bool		14
+nim	persistGetSize	nebble/storage.html#persistGetSize,uint32	proc persistGetSize(key: uint32): cint		19
+nim	persistReadBool	nebble/storage.html#persistReadBool,uint32	proc persistReadBool(key: uint32): bool		29
+nim	persistReadInt	nebble/storage.html#persistReadInt,uint32	proc persistReadInt(key: uint32): int32		34
+nim	persistReadData	nebble/storage.html#persistReadData,uint32,pointer,csize_t	proc persistReadData(key: uint32; buffer: pointer; bufferSize: csize_t): cint		39
+nim	persistReadString	nebble/storage.html#persistReadString,uint32,cstring,csize_t	proc persistReadString(key: uint32; buffer: cstring; bufferSize: csize_t): cint		45
+nim	persistWriteBool	nebble/storage.html#persistWriteBool,uint32,bool	proc persistWriteBool(key: uint32; value: bool): status_t		55
+nim	persistWriteInt	nebble/storage.html#persistWriteInt,uint32,int32	proc persistWriteInt(key: uint32; value: int32): status_t		60
+nim	persistWriteData	nebble/storage.html#persistWriteData,uint32,pointer,csize_t	proc persistWriteData(key: uint32; data: pointer; size: csize_t): cint		65
+nim	persistWriteString	nebble/storage.html#persistWriteString,uint32,cstring	proc persistWriteString(key: uint32; cstring: cstring): cint		71
+nim	persistDelete	nebble/storage.html#persistDelete,uint32	proc persistDelete(key: uint32): status_t		81

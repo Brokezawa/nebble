@@ -1,0 +1,5 @@
+nimTitle	compass	nebble/compass.html	module src/nebble/compass		0
+nim	compassServiceSubscribe	nebble/compass.html#compassServiceSubscribe,CompassHeadingHandler	proc compassServiceSubscribe(handler: CompassHeadingHandler)		12
+nim	compassServiceUnsubscribe	nebble/compass.html#compassServiceUnsubscribe	proc compassServiceUnsubscribe()		18
+nim	compassServicePeek	nebble/compass.html#compassServicePeek,ptr.CompassHeadingData	proc compassServicePeek(data: ptr CompassHeadingData): cint		23
+nim	compassServiceSetHeadingFilter	nebble/compass.html#compassServiceSetHeadingFilter,CompassHeading	proc compassServiceSetHeadingFilter(filter: CompassHeading): cint		29

@@ -1,0 +1,23 @@
+{
+  "uuid": "e7a16da1-32bd-4305-8323-6702f6af980a",
+  "shortName": "health_demo",
+  "longName": "health_demo",
+  "companyName": "Nebble",
+  "versionLabel": "1.0",
+  "versionCode": 1,
+  "sdkVersion": "3",
+  "targetPlatforms": [
+    "aplite",
+    "basalt",
+    "chalk",
+    "diorite",
+    "emery",
+    "flint"
+  ],
+  "watchapp": {
+    "watchface": false
+  },
+  "resources": {
+    "media": []
+  }
+}

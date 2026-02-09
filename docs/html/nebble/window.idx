@@ -1,0 +1,19 @@
+nimTitle	window	nebble/window.html	module src/nebble/window		0
+nim	newWindow	nebble/window.html#newWindow	proc newWindow(): ptr Window		13
+nim	destroy	nebble/window.html#destroy,ptr.struct_Window	proc destroy(window: ptr Window)		19
+nim	push	nebble/window.html#push,ptr.struct_Window,bool	proc push(window: ptr Window; animated: bool = true)		28
+nim	pop	nebble/window.html#pop,bool	proc pop(animated: bool = true): ptr Window		34
+nim	popAll	nebble/window.html#popAll,bool	proc popAll(animated: bool = true)		39
+nim	getTopWindow	nebble/window.html#getTopWindow	proc getTopWindow(): ptr Window		44
+nim	contains	nebble/window.html#contains,ptr.struct_Window	proc contains(window: ptr Window): bool		49
+nim	removeWindow	nebble/window.html#removeWindow,ptr.struct_Window,bool	proc removeWindow(window: ptr Window; animated: bool): bool		54
+nim	rootLayer	nebble/window.html#rootLayer,ptr.struct_Window	proc rootLayer(window: ptr Window): ptr Layer		64
+nim	backgroundColor=	nebble/window.html#backgroundColor=,ptr.struct_Window,GColor8	proc backgroundColor=(window: ptr Window; color: GColor8)		69
+nim	isLoaded	nebble/window.html#isLoaded,ptr.struct_Window	proc isLoaded(window: ptr Window): bool		74
+nim	userData=	nebble/window.html#userData=,ptr.struct_Window,pointer	proc userData=(window: ptr Window; data: pointer)		79
+nim	userData	nebble/window.html#userData,ptr.struct_Window	proc userData(window: ptr Window): pointer		84
+nim	setHandlers	nebble/window.html#setHandlers,ptr.struct_Window,WindowHandler,WindowHandler,WindowHandler,WindowHandler	proc setHandlers(window: ptr Window; load: WindowHandler = nil;\n            unload: WindowHandler = nil; appear: WindowHandler = nil;\n            disappear: WindowHandler = nil)		93
+nim	clickConfigProvider=	nebble/window.html#clickConfigProvider=,ptr.struct_Window,ClickConfigProvider	proc clickConfigProvider=(window: ptr Window; provider: ClickConfigProvider)		112
+nim	setClickConfigProviderWithContext	nebble/window.html#setClickConfigProviderWithContext,ptr.struct_Window,ClickConfigProvider,pointer	proc setClickConfigProviderWithContext(window: ptr Window;\n                                  provider: ClickConfigProvider;\n                                  context: pointer)		118
+nim	clickConfigProvider	nebble/window.html#clickConfigProvider,ptr.struct_Window	proc clickConfigProvider(window: ptr Window): ClickConfigProvider		125
+nim	clickConfigContext	nebble/window.html#clickConfigContext,ptr.struct_Window	proc clickConfigContext(window: ptr Window): pointer		130

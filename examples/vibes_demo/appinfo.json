@@ -1,0 +1,23 @@
+{
+  "uuid": "61f50ff4-ffea-4c08-8ff5-0f2f148eb683",
+  "shortName": "vibes_demo",
+  "longName": "vibes_demo",
+  "companyName": "Nebble",
+  "versionLabel": "1.0",
+  "versionCode": 1,
+  "sdkVersion": "3",
+  "targetPlatforms": [
+    "aplite",
+    "basalt",
+    "chalk",
+    "diorite",
+    "emery",
+    "flint"
+  ],
+  "watchapp": {
+    "watchface": false
+  },
+  "resources": {
+    "media": []
+  }
+}
