@@ -173,3 +173,19 @@ proc readFirst*(iter: ptr DictionaryIterator): ptr Tuple_f {.inline.} =
   ## Read the first tuple from the dictionary.
   ## Equivalent to C function `dict_read_first(iter)`.
   ffi.dict_read_first(iter)
+
+# ============================================================================
+# Dictionary Buffer Helpers
+# ============================================================================
+
+proc calcBufferSize*(tupleCount: uint8): uint32 {.inline.} =
+  ## Calculate the required buffer size for a dictionary with the given tuple count.
+  ## Equivalent to C function `dict_calc_buffer_size(tuple_count)`.
+  ffi.dict_calc_buffer_size(tupleCount)
+
+proc find*(iter: ptr DictionaryIterator; key: uint32): ptr Tuple_f {.inline.} =
+  ## Find a tuple by key in the dictionary.
+  ## Returns nil if not found.
+  ## Equivalent to C function `dict_find(iter, key)`.
+  ffi.dict_find(iter, key)
+

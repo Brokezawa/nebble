@@ -34,7 +34,7 @@ export StatusBarLayer
 export TimeUnits, TickHandler, tm, time_t
 export HealthMetric, HealthValue, HealthActivity, HealthEventType
 export HealthMinuteData, HealthServiceTimeScope, HealthServiceAccessibilityMask
-export HealthActivityMask, HealthIterationDirection
+export HealthActivityMask, HealthIterationDirection, MeasurementSystem
 export AccelData, AccelRawData
 export PreferredContentSize
 export WatchInfoModel, WatchInfoColor, WatchInfoVersion

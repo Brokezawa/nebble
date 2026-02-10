@@ -318,3 +318,29 @@ proc fillRadial*(ctx: ptr GContext; rect: GRect; scaleMode: GOvalScaleMode; inse
   ## Useful for pie charts, circular progress, or gauge fills.
   ## Equivalent to C function `graphics_fill_radial(ctx, rect, scale_mode, inset_thickness, angle_start, angle_end)`.
   ffi.graphics_fill_radial(ctx, rect, scaleMode, insetThick, angleStart, angleEnd)
+
+# ============================================================================
+# Color Utilities
+# ============================================================================
+
+proc `==`*(a, b: GColor): bool {.inline.} =
+  ## Compare two colors for equality.
+  ## Equivalent to C macro `gcolor_equal(a, b)`.
+  result = (a.argb == b.argb)
+
+proc legibleOver*(color: GColor): GColor {.inline.} =
+  ## Get a legible text color (black or white) for the given background color.
+  ## Returns GColorBlack or GColorWhite depending on background luminance.
+  ## Equivalent to C function `gcolor_legible_over(color)`.
+  result = ffi.gcolor_legible_over(color)
+
+# ============================================================================
+# Context Properties
+# ============================================================================
+
+proc `compositingMode=`*(ctx: ptr GContext; mode: GCompOp) {.inline.} =
+  ## Set the compositing mode for bitmap blending operations.
+  ## Modes: GCompOpAssign, GCompOpAssignInverted, GCompOpOr, GCompOpAnd,
+  ##        GCompOpClear, GCompOpSet, GCompOpAndNot, GCompOpOrNot
+  ## Equivalent to C function `graphics_context_set_compositing_mode(ctx, mode)`.
+  ffi.graphics_context_set_compositing_mode(ctx, mode)

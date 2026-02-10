@@ -6,7 +6,7 @@
 
 import nebble/ffi
 
-export ffi.HealthMetric, ffi.HealthValue, ffi.HealthActivity, ffi.HealthEventType, ffi.HealthMinuteData, ffi.HealthServiceTimeScope, ffi.HealthServiceAccessibilityMask, ffi.HealthActivityMask, ffi.HealthIterationDirection
+export ffi.HealthMetric, ffi.HealthValue, ffi.HealthActivity, ffi.HealthEventType, ffi.HealthMinuteData, ffi.HealthServiceTimeScope, ffi.HealthServiceAccessibilityMask, ffi.HealthActivityMask, ffi.HealthIterationDirection, ffi.MeasurementSystem
 
 # ============================================================================
 # Events
@@ -117,6 +117,35 @@ when declared(ffi.health_service_activities_iterate):
     ##
     ## Equivalent to C function `health_service_activities_iterate(...)`.
     ffi.health_service_activities_iterate(mask, timeStart, timeEnd, direction, callback, context)
+
+# ============================================================================
+# Heart Rate Configuration (Basalt+ with HR sensor)
+# ============================================================================
+
+when declared(ffi.health_service_set_heart_rate_sample_period):
+  proc setHeartRateSamplePeriod*(seconds: uint16): bool {.inline.} =
+    ## Set how frequently to sample heart rate (in seconds).
+    ## Shorter periods provide more data but use more battery.
+    ## Returns true on success.
+    ## Equivalent to C function `health_service_set_heart_rate_sample_period(seconds)`.
+    result = ffi.health_service_set_heart_rate_sample_period(seconds)
+
+when declared(ffi.health_service_get_heart_rate_sample_period_expiration_sec):
+  proc getHeartRateSamplePeriodExpirationSec*(): uint32 {.inline.} =
+    ## Get the number of seconds until the heart rate sample period expires.
+    ## Equivalent to C function `health_service_get_heart_rate_sample_period_expiration_sec()`.
+    result = ffi.health_service_get_heart_rate_sample_period_expiration_sec()
+
+# ============================================================================
+# Measurement System
+# ============================================================================
+
+when declared(ffi.health_service_get_measurement_system_for_display):
+  proc getMeasurementSystemForDisplay*(metric: HealthMetric): MeasurementSystem {.inline.} =
+    ## Get the measurement system for displaying a specific health metric (metric/imperial).
+    ## Returns the measurement system (e.g., for steps, distance, weight).
+    ## Equivalent to C function `health_service_get_measurement_system_for_display(metric)`.
+    result = ffi.health_service_get_measurement_system_for_display(metric)
 
 # ============================================================================
 # Nim-idiomatic Helpers
