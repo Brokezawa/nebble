@@ -154,6 +154,61 @@ proc bounds*(bitmap: ptr GBitmap): GRect {.inline.} =
   ## Equivalent to C function `gbitmap_get_bounds(bitmap)`.
   result = ffi.gbitmap_get_bounds(bitmap)
 
+proc `bounds=`*(bitmap: ptr GBitmap; newBounds: GRect) {.inline.} =
+  ## Set the bounds of a GBitmap.
+  ## Equivalent to C function `gbitmap_set_bounds(bitmap, new_bounds)`.
+  ffi.gbitmap_set_bounds(bitmap, newBounds)
+
+proc bytesPerRow*(bitmap: ptr GBitmap): uint16 {.inline.} =
+  ## Get the number of bytes per row in the bitmap data.
+  ## Equivalent to C function `gbitmap_get_bytes_per_row(bitmap)`.
+  result = ffi.gbitmap_get_bytes_per_row(bitmap)
+
+proc format*(bitmap: ptr GBitmap): GBitmapFormat {.inline.} =
+  ## Get the pixel format of the bitmap.
+  ## Equivalent to C function `gbitmap_get_format(bitmap)`.
+  result = ffi.gbitmap_get_format(bitmap)
+
+proc data*(bitmap: ptr GBitmap): pointer {.inline.} =
+  ## Get a pointer to the raw bitmap data.
+  ## Equivalent to C function `gbitmap_get_data(bitmap)`.
+  result = ffi.gbitmap_get_data(bitmap)
+
+proc palette*(bitmap: ptr GBitmap): ptr GColor {.inline.} =
+  ## Get the color palette for palette-based bitmaps.
+  ## Equivalent to C function `gbitmap_get_palette(bitmap)`.
+  result = ffi.gbitmap_get_palette(bitmap)
+
+# ============================================================================
+# Advanced GBitmap Constructors
+# ============================================================================
+
+proc createBlank*(size: GSize; format: GBitmapFormat): ptr GBitmap {.inline.} =
+  ## Create a blank bitmap with the specified size and format.
+  ## Used for offscreen rendering or as a frame buffer for animations.
+  ## Returns nil if allocation fails.
+  ## Equivalent to C function `gbitmap_create_blank(size, format)`.
+  result = ffi.gbitmap_create_blank(size, format)
+
+proc createBlankWithPalette*(size: GSize; format: GBitmapFormat;
+                             palette: ptr GColor; freeOnDestroy: bool): ptr GBitmap {.inline.} =
+  ## Create a blank bitmap with a custom color palette.
+  ## `palette` must remain valid for the bitmap's lifetime unless freeOnDestroy is true.
+  ## Equivalent to C function `gbitmap_create_blank_with_palette(size, format, palette, free_on_destroy)`.
+  result = ffi.gbitmap_create_blank_with_palette(size, format, palette, freeOnDestroy)
+
+proc createAsSubBitmap*(baseBitmap: ptr GBitmap; subRect: GRect): ptr GBitmap {.inline.} =
+  ## Create a sub-bitmap that references a portion of another bitmap.
+  ## The sub-bitmap does not own the data; baseBitmap must remain valid.
+  ## Equivalent to C function `gbitmap_create_as_sub_bitmap(base_bitmap, sub_rect)`.
+  result = ffi.gbitmap_create_as_sub_bitmap(baseBitmap, subRect)
+
+proc createWithData*(data: ptr uint8): ptr GBitmap {.inline.} =
+  ## Create a bitmap from existing raw pixel data.
+  ## `data` must remain valid for the bitmap's lifetime.
+  ## Equivalent to C function `gbitmap_create_with_data(data)`.
+  result = ffi.gbitmap_create_with_data(data)
+
 # ============================================================================
 # Geometry Utilities
 # ============================================================================

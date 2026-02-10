@@ -23,7 +23,7 @@ import nebble/ffi
 export Window, WindowHandlers, ClickConfigProvider, ClickRecognizerRef
 export Layer, GRect, GPoint, GSize, GColor, GContext, GOvalScaleMode
 export TextLayer, GFont, GTextAlignment
-export BitmapLayer, GBitmap, GBitmapSequence
+export BitmapLayer, GBitmap, GBitmapSequence, GBitmapFormat
 export RotBitmapLayer
 export ActionBarLayer
 export ScrollLayer
@@ -32,7 +32,7 @@ export GTextAttributes
 export MenuLayer, SimpleMenuLayer, MenuIndex
 export StatusBarLayer
 export TimeUnits, TickHandler, tm, time_t
-export HealthMetric, HealthValue
+export HealthMetric, HealthValue, HealthActivity, HealthEventType, HealthMinuteData, HealthServiceTimeScope
 export AccelData, AccelRawData
 export CompassHeadingData
 export BatteryChargeState
