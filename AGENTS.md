@@ -1,122 +1,146 @@
 # AGENTS.md — Nebble (Nim + Pebble SDK)
 
-Nim wrapper for the Pebble smartwatch SDK. Two-layer architecture: low-level
-FFI bindings (Futhark-generated, committed to VCS) + future high-level
-idiomatic Nim API on top.
+Nim wrapper for the Pebble smartwatch SDK. Two-layer architecture: low-level FFI bindings (Futhark-generated) + high-level idiomatic Nim API.
 
 ## Project Layout
 
 ```
-nebble.nimble                     # Package metadata & tasks
+nebble.nimble                     # Package metadata & nimble tasks
 cli/                              # Nebble CLI tool source
-src/nebble/ffi.nim                # Platform selector — includes correct generated/*.nim + macros.nim
-src/nebble/ffi/generate.nim       # Futhark generator (run on HOST, not cross-compiled)
-src/nebble/ffi/macros.nim         # Manual Nim replacements for C macros Futhark cannot wrap
-src/nebble/ffi/generated/*.nim    # ~10k-line generated bindings per platform (DO NOT hand-edit)
-tests/test_ffi.nim                # Compile-only verification test (Low-level FFI)
-tests/test_highlevel.nim          # Compile-only verification test (High-level API)
-tests/test_macros.nim             # Host-side unit tests (Runtime)
-tests/nim.cfg                     # Cross-compilation flags for tests
+src/nebble/
+  core/                           # App, window, layer, clicks, animation
+  ui/                             # TextLayer, MenuLayer, ScrollLayer, etc.
+  graphics/                       # Graphics, draw_command, gpath, bitmap ops
+  system/                         # System services (merged: battery, vibes, etc.)
+  health/                         # Health Service API
+  comms/                          # AppMessage, AppSync, DataLogging
+  input/                          # Accel, dictation, unobstructed_area
+  storage/                        # Persistent storage, resources, fonts
+  advanced/                       # Math, UUID utilities
+  ffi.nim                         # Platform selector + FFI exports
+  ffi/generated/*.nim             # ~10k-line bindings per platform
+  ffi/macros.nim                  # Manual C macro replacements
+
+tests/
+  test_ffi.nim                    # Compile-only FFI verification
+  test_highlevel.nim              # Compile-only API verification
+  test_macros.nim                 # Host-side unit tests (runtime)
+  nim.cfg                         # ARM cross-compilation flags
+
 examples/                         # Sample apps
 ```
 
 ## Build & Test Commands
 
-### 1. Library Development (Testing Nebble itself)
+### Library Development
 
-Use `nimble` to run tests for the Nebble library/bindings:
-
-- `nimble test` - Run ALL tests (unit, compile, examples, size checks).
-- `nimble testUnit` - Run host-side unit tests (runtime on macOS).
-- `nimble testCompile` - Run compile-only checks for all 6 platforms.
-
-### 2. App Development (Using Nebble CLI)
-
-**Prerequisite:** Ensure the `nebble` CLI is installed (`cd cli && nimble build`).
-Agents should use the `nebble` CLI for all app creation, building, and deployment tasks.
-
-**Create New App:**
 ```bash
-nebble new my_app              # Create a new app
-nebble new my_clock --watchface # Create a watchface
+# Run all tests (unit + compile + examples)
+nimble test
+
+# Run only host-side unit tests (fast, macOS native)
+nimble testUnit
+
+# Compile-only verification for all 6 platforms
+nimble testCompile
+
+# Run a single test file
+nim c --skipProjCfg -d:pebbleBasalt -r tests/test_macros.nim
+
+# Compile specific test for one platform
+nim c -d:pebbleBasalt tests/test_ffi.nim
+nim c -d:pebbleAplite tests/test_highlevel.nim
 ```
 
-**Build App:**
-```bash
-cd my_app
-nebble build                   # Build for all platforms
-nebble build --platform basalt # Build for specific platform
-```
+### App Development (via CLI)
 
-**Install/Run:**
 ```bash
+# Build CLI first
+cd cli && nimble build
+
+# Create new app
+nebble new my_app
+nebble new my_clock --watchface
+
+# Build
+nebble build
+nebble build --platform basalt
+
+# Install
 nebble install --emulator basalt
-nebble install --phone         # Install to connected phone
-```
+nebble install --phone
 
-**Check Size (Aplite 24KB limit):**
-```bash
+# Size check (Aplite 24KB limit)
 nebble size --platform aplite
-```
 
-**Clean:**
-```bash
+# Clean
 nebble clean
 ```
 
-### Debugging Crashes on Emulator
+## Code Style Guidelines
 
-**IMPORTANT:** The Pebble emulator can enter a corrupted state after a crash.
-**Symptoms:** Persistent crashes even after fixing code, or successful installs that still crash.
-
-**Solution:**
-1. Make code change.
-2. `nebble clean && nebble build`
-3. **KILL AND RESTART** the emulator completely (do not reuse running instance).
-4. `nebble install --emulator basalt`
-
-## Code Style
-
-### General
-- **Linting:** No automated linter. Strictly follow these conventions.
-- **Imports:** Use `import` for modules (e.g., `import nebble`). Use `include` ONLY for generated platform files.
-- **Cross-Compile:** **NEVER** import modules requiring syscalls (`os`, `times`, `streams`) in device code.
+### Imports
+- Use `import nebble/ffi` for FFI layer access
+- Use `include` ONLY for generated platform files in `ffi.nim`
+- **NEVER** import `os`, `times`, `streams` in device code (no syscalls on Pebble)
+- Standard library modules only from `std/` prefix (e.g., `import std/macros`)
 
 ### Naming Conventions
+
 | Layer | Convention | Examples |
 |-------|-----------|----------|
 | FFI (generated) | C `snake_case` preserved | `window_create`, `text_layer_set_text` |
-| High-Level | Nim `camelCase` | `makeGPoint`, `newWindow`, `sTextLayer` |
+| High-Level | Nim `camelCase` | `newWindow`, `makeGPoint`, `sTextLayer` |
 | Constants | `UPPER_SNAKE_CASE` | `BUTTON_ID_SELECT`, `TRIG_MAX_ANGLE` |
-| Platform flags | `camelCase` + `pebble` | `-d:pebbleBasalt`, `-d:pebbleAplite` |
+| Platform defines | `camelCase` + `pebble` | `-d:pebbleBasalt`, `-d:pebbleAplite` |
 | Types | Nim C-types | `cint`, `int16`, `uint32`, `ptr T` |
 
 ### Exports and Visibility
-- **Public:** Use `*` export marker (e.g., `proc init*()`).
-- **Internal:** Omit `*`.
+- **Public:** Use `*` export marker: `proc init*()`
+- **Internal:** Omit `*`: `proc helper()`
+- Export types needed by callbacks or public procs
 
-### Pragmas & Callbacks
-- **Callbacks:** **MUST** use `{.cdecl.}`. **NEVER** use Nim closures or capture environment at FFI boundary.
-- **Export:** `{.exportc, cdecl.}` for `main()`.
-- **Inline:** `{.inline.}` for wrappers.
-- **Warning:** `{.warning.}` for features expensive on Aplite (24KB RAM).
-
-### Templates vs Macros
-- **Template:** Simple inline expansions/constants.
-- **Macro:** `varargs[untyped]` wrappers (e.g., `APP_LOG`).
-
-### Documentation
-- Use `##` doc comments.
-- Reference equivalent C macro/function names where applicable.
+### Pragmas
+- **Callbacks:** MUST use `{.cdecl.}`. NEVER use Nim closures at FFI boundary
+- **Main:** `{.exportc, cdecl.}` for `main()`
+- **Inline:** `{.inline.}` for wrapper procs (zero overhead)
+- **Warnings:** Use `{.warning: "message".}` for Aplite-expensive features
 
 ### Types & Error Handling
-- **Types:** Use `ptr T` for C pointers. **NEVER** use `ref` or GC-managed types.
-- **Errors:** Check return values (NULL pointers, status codes). **DO NOT** raise exceptions (disabled with `--os:any`).
+- **Pointers:** Use `ptr T` for C pointers. NEVER use `ref` or GC types
+- **Strings:** Use `cstring` for C strings. Avoid Nim `string` in device code
+- **Errors:** Check return values (NULL pointers, status codes)
+- **No Exceptions:** Disabled with `--os:any`. Do not use `try/except/raise`
 
 ### Memory Management
-- **ARC:** Compiled with `--mm:arc` and `-d:useMalloc`.
-- **No GC:** No cycle collector. No hidden heap allocations.
-- **Lifecycle:** Use Pebble's `*_create` / `*_destroy` pairs manually.
+- **ARC:** Compiled with `--mm:arc -d:useMalloc`
+- **No GC:** No cycle collector, no hidden heap allocations
+- **Lifecycle:** Manual `*_create` / `*_destroy` pairs
+
+### Platform Guards
+```nim
+when defined(pebbleAplite):
+  # Aplite-specific code (no color, limited RAM)
+elif defined(pebbleColor):
+  # Color platform code
+when declared(ffi.some_function):
+  # Guard for APIs not on all platforms
+```
+
+### Documentation
+- Use `##` doc comments for all public procs
+- Reference equivalent C function/macro name
+- Include usage examples for complex procs
+
+### Formatting
+- 2-space indentation
+- Max line length: 100 characters
+- Separate sections with `# ===` banners
+- Group related procs together
+
+## Debugging
+
+**Emulator crashes:** Kill and restart emulator completely after fixing code. Do not reuse running instance.
 
 ## Platform Differences
 
@@ -126,7 +150,16 @@ nebble clean
 | Round | No | No | Yes | No | No | No |
 | Health | Stub | Real | Real | Real | Real | Real |
 | Mic | No | Yes | Yes | Yes | Yes | Yes |
-| Smartstrap | No | Yes | Yes | Yes | Yes | No |
-| Display | 144x168 | 144x168 | 180x180 | 144x168 | 200x228 | 144x168 |
+| RAM | 24KB | 64KB | 64KB | 64KB | 128KB | 256KB |
 
-Use `when defined(pebbleAplite):` to guard platform-specific code.
+## Module Organization (Post-Restructure)
+
+- **core/**: app, window, layer, clicks, animation
+- **ui/**: text_layer, bitmap_layer, menu_layer, scroll_layer, action_bar, status_bar, action_menu, number_window, simple_menu_layer, content_indicator
+- **graphics/**: graphics, draw_command, draw_command_detail, gpath, rot_bitmap_layer, bitmap_sequence, text_attributes
+- **system/**: system (consolidated 9 modules), time
+- **health/**: health
+- **comms/**: message, app_sync, app_comm, data_logging, worker, wakeup
+- **input/**: accel, dictation, unobstructed_area
+- **storage/**: storage, resources, fonts
+- **advanced/**: math, uuid
