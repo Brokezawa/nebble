@@ -241,10 +241,10 @@ src/nebble/
 **Overall Progress: ALL BATCHES COMPLETED ✅**
 
 - **Total Modules Implemented:** 39+ modules
-- **Total Lines of Code:** ~3,000+ LOC
+- **Total Lines of Code:** ~3,200+ LOC
 - **Platform Compatibility:** All 6 platforms compile successfully (Aplite, Basalt, Chalk, Diorite, Emery, Flint)
 - **Umbrella Module:** `src/nebble.nim` re-exports FFI + all 39+ high-level modules
-- **API Coverage:** ~95% of Pebble SDK surface covered
+- **API Coverage:** ~98% of Pebble SDK surface covered
 
 **Batches Completed:**
 1. ✅ Batch 1: Core UI & Event Loop (8 modules, 709 LOC)
@@ -1207,7 +1207,7 @@ Update all docs to reflect current API:
 | Phase 7.8: API Expansion | ✅ COMPLETE | 11 new modules (action_menu, draw_command, gpath, math, etc.) |
 | Phase 7.9: Geometry Utils | ✅ COMPLETE | Rectangle utilities, text measurement in graphics.nim |
 | Phase 7.10: Phase A APIs | ✅ COMPLETE | 4 new modules (bitmap_sequence, rot_bitmap_layer, text_attributes, content_indicator) |
-| Phase 7.11: Phase B APIs | 🟡 IN PROGRESS | Advanced GBitmap + Extended Health Service (32 funcs) |
+| Phase 7.11: Phase B APIs | ✅ COMPLETE | Advanced GBitmap + Extended Health Service (32 funcs) |
 | Phase 7.12: Phase C APIs | ⏳ PLANNED | Framebuffer access + Low-level Draw Commands (22 funcs) |
 | Phase 8: Advanced Features | ⏳ PLANNED | Declarative UI, PebbleKit JS bridge, CI, ecosystem packages |
 
