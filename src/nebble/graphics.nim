@@ -263,3 +263,58 @@ proc centeredFromPolar*(rect: GRect; scaleMode: GOvalScaleMode; angle: int32; si
   ## Useful for placing items in a circle or ellipse.
   ## Equivalent to C function `grect_centered_from_polar(&rect, scale_mode, angle, size)`.
   result = ffi.grect_centered_from_polar(rect, scaleMode, angle, size)
+
+# ============================================================================
+# Framebuffer Access (Advanced - Use with caution)
+# ============================================================================
+
+proc captureFrameBuffer*(ctx: ptr GContext): ptr GBitmap {.inline.} =
+  ## Capture the framebuffer for direct pixel access.
+  ## Returns a GBitmap pointing to the framebuffer memory.
+  ## Must call releaseFrameBuffer() when done.
+  ## ⚠️ Advanced use only - improper use can crash the app.
+  ## Equivalent to C function `graphics_capture_frame_buffer(ctx)`.
+  result = ffi.graphics_capture_frame_buffer(ctx)
+
+proc captureFrameBufferFormat*(ctx: ptr GContext; format: GBitmapFormat): ptr GBitmap {.inline.} =
+  ## Capture the framebuffer with a specific format.
+  ## Returns a GBitmap pointing to the framebuffer memory.
+  ## Must call releaseFrameBuffer() when done.
+  ## ⚠️ Advanced use only - improper use can crash the app.
+  ## Equivalent to C function `graphics_capture_frame_buffer_format(ctx, format)`.
+  result = ffi.graphics_capture_frame_buffer_format(ctx, format)
+
+proc releaseFrameBuffer*(ctx: ptr GContext; bitmap: ptr GBitmap): bool {.inline.} =
+  ## Release the captured framebuffer.
+  ## Must be called after captureFrameBuffer() to prevent display corruption.
+  ## Returns true on success.
+  ## ⚠️ Advanced use only.
+  ## Equivalent to C function `graphics_release_frame_buffer(ctx, bitmap)`.
+  result = ffi.graphics_release_frame_buffer(ctx, bitmap)
+
+proc isFrameBufferCaptured*(ctx: ptr GContext): bool {.inline.} =
+  ## Check if the framebuffer is currently captured.
+  ## Useful for verifying state before drawing operations.
+  ## Equivalent to C function `graphics_frame_buffer_is_captured(ctx)`.
+  result = ffi.graphics_frame_buffer_is_captured(ctx)
+
+# ============================================================================
+# Advanced Drawing: Arcs and Radial Fills
+# ============================================================================
+
+proc drawArc*(ctx: ptr GContext; rect: GRect; scaleMode: GOvalScaleMode; angleStart: int32; angleEnd: int32) {.inline.} =
+  ## Draw an arc (outline) within a rectangle.
+  ## `angleStart` and `angleEnd` are in Pebble angle units (0 to TRIG_MAX_ANGLE).
+  ## `scaleMode` determines how the arc is fitted to the rectangle.
+  ## Useful for circular progress indicators or gauges.
+  ## Equivalent to C function `graphics_draw_arc(ctx, rect, scale_mode, angle_start, angle_end)`.
+  ffi.graphics_draw_arc(ctx, rect, scaleMode, angleStart, angleEnd)
+
+proc fillRadial*(ctx: ptr GContext; rect: GRect; scaleMode: GOvalScaleMode; insetThick: uint16; angleStart: int32; angleEnd: int32) {.inline.} =
+  ## Fill a radial section (pie slice) within a rectangle.
+  ## `angleStart` and `angleEnd` are in Pebble angle units (0 to TRIG_MAX_ANGLE).
+  ## `scaleMode` determines how the arc is fitted to the rectangle.
+  ## `insetThick` creates a hollow effect (0 for filled, >0 for ring thickness).
+  ## Useful for pie charts, circular progress, or gauge fills.
+  ## Equivalent to C function `graphics_fill_radial(ctx, rect, scale_mode, inset_thickness, angle_start, angle_end)`.
+  ffi.graphics_fill_radial(ctx, rect, scaleMode, insetThick, angleStart, angleEnd)

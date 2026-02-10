@@ -70,6 +70,9 @@ export gpath
 import nebble/draw_command
 export draw_command
 
+import nebble/draw_command_detail
+export draw_command_detail
+
 import nebble/timer
 export timer
 
