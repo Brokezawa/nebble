@@ -32,161 +32,172 @@ export GTextAttributes
 export MenuLayer, SimpleMenuLayer, MenuIndex
 export StatusBarLayer
 export TimeUnits, TickHandler, tm, time_t
-export HealthMetric, HealthValue, HealthActivity, HealthEventType, HealthMinuteData, HealthServiceTimeScope
+export HealthMetric, HealthValue, HealthActivity, HealthEventType
+export HealthMinuteData, HealthServiceTimeScope, HealthServiceAccessibilityMask
+export HealthActivityMask, HealthIterationDirection
 export AccelData, AccelRawData
-export CompassHeadingData
-export BatteryChargeState
+export PreferredContentSize
+export WatchInfoModel, WatchInfoColor, WatchInfoVersion
+export BatteryChargeState, BatteryStateHandler
 export BluetoothConnectionHandler
+export VibePattern
+export CompassHeadingData, CompassHeadingHandler, CompassHeading
 export time, localtime, gmtime, strftime, clock_is_24h_style
 export makeGRect, makeGPoint, makeGSize, makeUuid
 export GColorClear, GColorBlack, GColorWhite, makeGColor8
+export GDrawCommandImage, GDrawCommandSequence, GDrawCommandFrame
+export GDrawCommandType, GDrawCommand, GDrawCommandList
 
-# Re-export all high-level modules
-import nebble/app
+# ============================================================================
+# Core Framework
+# ============================================================================
+
+import nebble/core/app
 export app
-export app.pebbleApp  # Export the macro explicitly for easier use
+export app.pebbleApp
 
-import nebble/window
+import nebble/core/window
 export window
 
-import nebble/layer
+import nebble/core/layer
 export layer
 
-import nebble/text_layer
-export text_layer
-
-import nebble/text_attributes
-export text_attributes
-
-import nebble/clicks
+import nebble/core/clicks
 export clicks
 
-import nebble/graphics
-export graphics
-
-import nebble/gpath
-export gpath
-
-import nebble/draw_command
-export draw_command
-
-import nebble/draw_command_detail
-export draw_command_detail
-
-import nebble/timer
-export timer
-
-import nebble/tick
-export tick
-
-import nebble/bitmap_layer
-export bitmap_layer
-
-import nebble/bitmap_sequence
-export bitmap_sequence
-
-import nebble/rot_bitmap_layer
-export rot_bitmap_layer
-
-import nebble/menu_layer
-export menu_layer
-
-import nebble/simple_menu_layer
-export simple_menu_layer
-
-import nebble/number_window
-export number_window
-
-import nebble/scroll_layer
-export scroll_layer
-
-import nebble/content_indicator
-export content_indicator
-
-import nebble/action_bar
-export action_bar
-
-import nebble/status_bar
-export status_bar
-
-import nebble/fonts
-export fonts
-
-import nebble/resources
-export resources
-
-import nebble/math
-export math
-
-import nebble/system
-export system
-
-import nebble/uuid
-export uuid
-
-import nebble/unobstructed_area
-export unobstructed_area
-
-import nebble/action_menu
-export action_menu
-
-# Batch 3: Animation
-import nebble/animation
+import nebble/core/animation
 export animation
 
-# Batch 4: System Services
-import nebble/battery
-export battery
+# ============================================================================
+# UI Components
+# ============================================================================
 
-import nebble/bluetooth
-export bluetooth
+import nebble/ui/text_layer
+export text_layer
 
-import nebble/vibes
-export vibes
+import nebble/ui/bitmap_layer
+export bitmap_layer
 
-import nebble/light
-export light
+import nebble/ui/menu_layer
+export menu_layer
 
-import nebble/watch_info
-export watch_info
+import nebble/ui/simple_menu_layer
+export simple_menu_layer
 
-import nebble/accel
-export accel
+import nebble/ui/number_window
+export number_window
 
-import nebble/compass
-export compass
+import nebble/ui/scroll_layer
+export scroll_layer
 
-import nebble/health
+import nebble/ui/content_indicator
+export content_indicator
+
+import nebble/ui/action_bar
+export action_bar
+
+import nebble/ui/status_bar
+export status_bar
+
+import nebble/ui/action_menu
+export action_menu
+
+# ============================================================================
+# Graphics
+# ============================================================================
+
+import nebble/graphics/graphics
+export graphics
+
+import nebble/graphics/bitmap_sequence
+export bitmap_sequence
+
+import nebble/graphics/rot_bitmap_layer
+export rot_bitmap_layer
+
+import nebble/graphics/draw_command
+export draw_command
+
+import nebble/graphics/draw_command_detail
+export draw_command_detail
+
+import nebble/graphics/gpath
+export gpath
+
+import nebble/graphics/text_attributes
+export text_attributes
+
+# ============================================================================
+# System Services
+# ============================================================================
+
+import nebble/system/system
+export system
+
+import nebble/system/time
+export time
+
+# ============================================================================
+# Health
+# ============================================================================
+
+import nebble/health/health
 export health
 
-# Batch 5: Communication & Storage
-import nebble/message
+# ============================================================================
+# Communication
+# ============================================================================
+
+import nebble/comms/message
 export message
 
-import nebble/app_sync
+import nebble/comms/app_sync
 export app_sync
 
-import nebble/app_comm
+import nebble/comms/app_comm
 export app_comm
 
-import nebble/storage
-export storage
-
-import nebble/data_logging
+import nebble/comms/data_logging
 export data_logging
 
-import nebble/worker
+import nebble/comms/worker
 export worker
 
-# Batch 6: Advanced
-import nebble/wakeup
+import nebble/comms/wakeup
 export wakeup
 
-import nebble/app_glance
-export app_glance
+# ============================================================================
+# Input
+# ============================================================================
 
-import nebble/dictation
+import nebble/input/accel
+export accel
+
+import nebble/input/dictation
 export dictation
 
-import nebble/smartstrap
-export smartstrap
+import nebble/input/unobstructed_area
+export unobstructed_area
+
+# ============================================================================
+# Storage
+# ============================================================================
+
+import nebble/storage/storage
+export storage
+
+import nebble/storage/resources
+export resources
+
+import nebble/storage/fonts
+export fonts
+
+# ============================================================================
+# Advanced
+# ============================================================================
+
+import nebble/advanced/math
+export math
+
+import nebble/advanced/uuid
+export uuid

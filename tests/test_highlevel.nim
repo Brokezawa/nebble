@@ -2,6 +2,7 @@
 # This is a rewrite of test_ffi.nim using the idiomatic Nim API from `import nebble`.
 
 import nebble
+import nebble/ffi # For constants
 
 # --- App state ---
 var sWindow: ptr Window
@@ -20,9 +21,9 @@ proc downClickHandler(recognizer: ClickRecognizerRef, context: pointer) {.cdecl.
   sTextLayer.text = "Down"
 
 proc clickConfigProvider(context: pointer) {.cdecl.} =
-  singleClickSubscribe(BUTTON_ID_SELECT, selectClickHandler)
-  singleClickSubscribe(BUTTON_ID_UP, upClickHandler)
-  singleClickSubscribe(BUTTON_ID_DOWN, downClickHandler)
+  onClick(BUTTON_ID_SELECT, selectClickHandler)
+  onClick(BUTTON_ID_UP, upClickHandler)
+  onClick(BUTTON_ID_DOWN, downClickHandler)
 
 # --- Window handlers ---
 proc windowLoad(window: ptr Window) {.cdecl.} =
@@ -57,7 +58,7 @@ proc windowUnload(window: ptr Window) {.cdecl.} =
 # --- Init / Deinit ---
 proc init() =
   sWindow = newWindow()
-  sWindow.clickConfigProvider = clickConfigProvider
+  sWindow.clickConfig = clickConfigProvider
   sWindow.setHandlers(load = windowLoad, unload = windowUnload)
   sWindow.push(animated = true)
 
