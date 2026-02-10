@@ -1218,6 +1218,7 @@ Update all docs to reflect current API:
 - Phase 7.10 implemented Phase A API expansion: animated bitmaps, rotating layers, text attributes, scroll indicators.
 - Phase 7.11 implemented Phase B: advanced GBitmap functions and extended Health Service APIs.
 - Phase 7.12 implemented Phase C: framebuffer access (advanced) and low-level draw command manipulation.
+- **Module Restructure Complete:** Organized into 9 feature directories (core, ui, graphics, system, health, comms, input, storage, advanced). Consolidated 9 small modules into system.nim. Added remaining missing APIs (quiet time, preferred content, watch info, connection helpers, color utilities).
 - All 40+ modules compile successfully; 10/10 examples compile on all platforms.
 - API coverage: ~99-100% of Pebble SDK surface (all commonly used APIs wrapped).
 
