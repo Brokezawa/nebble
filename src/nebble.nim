@@ -31,7 +31,6 @@ export ContentIndicator, ContentIndicatorDirection
 export GTextAttributes
 export MenuLayer, SimpleMenuLayer, MenuIndex
 export StatusBarLayer
-export TimeUnits, TickHandler, tm, time_t
 export HealthMetric, HealthValue, HealthActivity, HealthEventType
 export HealthMinuteData, HealthServiceTimeScope, HealthServiceAccessibilityMask
 export HealthActivityMask, HealthIterationDirection, MeasurementSystem
@@ -47,30 +46,113 @@ export makeGRect, makeGPoint, makeGSize, makeUuid
 export GColorClear, GColorBlack, GColorWhite, makeGColor8
 export GDrawCommandImage, GDrawCommandSequence, GDrawCommandFrame
 export GDrawCommandType, GDrawCommand, GDrawCommandList
+export TimeUnits, ButtonId, AnimationCurve
 
 # ============================================================================
-# Core Framework
+# Constants (Enum Values)
+# ============================================================================
+## Re-export enum values and font keys for convenience.
+## These are defined as const values since Futhark-generated enum aliases
+## don't auto-export with their types.
+
+import nebble/constants
+export constants
+
+# Export types (values come from constants module above)
+export GTextAlignment, GTextOverflowMode, GAlign, GColor8, TimeUnits, ButtonId, AnimationCurve
+
+# Keep font types
+export GFont
+
+# Export additional color constants from macros (ffi already includes macros.nim)
+# All 64 GColor* constants are available via ffi/macros.nim
+
+# Export font keys (these work directly from FFI via 'let' bindings)
+export FONT_KEY_GOTHIC_14, FONT_KEY_GOTHIC_14_BOLD
+export FONT_KEY_GOTHIC_18, FONT_KEY_GOTHIC_18_BOLD
+export FONT_KEY_GOTHIC_24, FONT_KEY_GOTHIC_24_BOLD
+export FONT_KEY_GOTHIC_28, FONT_KEY_GOTHIC_28_BOLD
+export FONT_KEY_BITHAM_30_BLACK
+export FONT_KEY_BITHAM_42_BOLD, FONT_KEY_BITHAM_42_LIGHT
+export FONT_KEY_ROBOTO_CONDENSED_21
+export FONT_KEY_ROBOTO_BOLD_SUBSET_49
+export FONT_KEY_DROID_SERIF_28_BOLD
+
+# ============================================================================
+# Foundation
 # ============================================================================
 
-import nebble/core/app
+import nebble/foundation/app
 export app
 export app.pebbleApp
 
-import nebble/core/window
-export window
+import nebble/foundation/time
+export time
 
-import nebble/core/layer
-export layer
+import nebble/foundation/timer
+export timer
 
-import nebble/core/clicks
-export clicks
+import nebble/foundation/storage
+export storage
 
-import nebble/core/animation
-export animation
+import nebble/foundation/wakeup
+export wakeup
+
+import nebble/foundation/watch_info
+export watch_info
+
+import nebble/foundation/logging
+export logging
+
+import nebble/foundation/i18n
+export i18n
+
+import nebble/foundation/memory
+export memory
+
+import nebble/foundation/platform
+export platform
+
+# ============================================================================
+# Foundation Events (Event Services)
+# ============================================================================
+
+import nebble/foundation/events/accel
+export accel
+
+import nebble/foundation/events/battery
+export battery
+
+import nebble/foundation/events/compass
+export compass
+
+import nebble/foundation/events/connection
+export connection
+
+import nebble/foundation/events/focus
+export focus
+
+import nebble/foundation/events/health
+export health
+
+import nebble/foundation/events/tick
+export tick
 
 # ============================================================================
 # UI Components
 # ============================================================================
+
+import nebble/ui/window
+export window
+
+import nebble/ui/layer
+export layer
+
+import nebble/ui/animation
+export animation
+
+import nebble/ui/clicks
+export clicks
 
 import nebble/ui/text_layer
 export text_layer
@@ -102,6 +184,72 @@ export status_bar
 import nebble/ui/action_menu
 export action_menu
 
+import nebble/ui/rot_bitmap_layer
+export rot_bitmap_layer
+
+import nebble/ui/light
+export light
+
+import nebble/ui/vibes
+export vibes
+
+import nebble/ui/preferences
+export preferences
+
+import nebble/ui/unobstructed_area
+export unobstructed_area
+
+import nebble/ui/window_stack
+export window_stack
+
+import nebble/ui/declarative
+export declarative
+
+# ============================================================================
+# Managed Types (ARC Memory Management)
+# ============================================================================
+
+import nebble/ffi/managed
+export managed except DefineUniqueHandle  # Template not needed by users
+
+import nebble/ui/text_layer_managed
+export text_layer_managed
+
+import nebble/ui/bitmap_layer_managed
+export bitmap_layer_managed
+
+import nebble/ui/layer_managed
+export layer_managed
+
+import nebble/ui/window_managed
+export window_managed
+
+import nebble/ui/rot_bitmap_layer_managed
+export rot_bitmap_layer_managed
+
+import nebble/ui/menu_layer_managed
+export menu_layer_managed
+
+# Tier-2 managed components (hierarchy/window-aware)
+import nebble/ui/action_bar_managed
+export action_bar_managed
+import nebble/ui/status_bar_managed
+export status_bar_managed
+import nebble/ui/scroll_layer_managed
+export scroll_layer_managed
+
+import nebble/ui/number_window_managed
+export number_window_managed
+
+import nebble/input/dictation_managed
+export dictation_managed
+
+import nebble/comms/smartstrap_managed
+export smartstrap_managed
+
+import nebble/ui/property_animation_managed
+export property_animation_managed
+
 # ============================================================================
 # Graphics
 # ============================================================================
@@ -112,11 +260,17 @@ export graphics
 import nebble/graphics/bitmap_sequence
 export bitmap_sequence
 
-import nebble/graphics/rot_bitmap_layer
-export rot_bitmap_layer
-
 import nebble/graphics/draw_command
 export draw_command
+
+import nebble/graphics/draw_command_image_managed
+export draw_command_image_managed
+
+import nebble/graphics/draw_command_sequence_managed
+export draw_command_sequence_managed
+
+import nebble/graphics/text_attributes_managed
+export text_attributes_managed
 
 import nebble/graphics/draw_command_detail
 export draw_command_detail
@@ -124,25 +278,20 @@ export draw_command_detail
 import nebble/graphics/gpath
 export gpath
 
+import nebble/graphics/gpath_managed
+export gpath_managed
+
 import nebble/graphics/text_attributes
 export text_attributes
 
-# ============================================================================
-# System Services
-# ============================================================================
+import nebble/graphics/fonts
+export fonts
 
-import nebble/system/system
-export system
+import nebble/graphics/bitmap_ref
+export bitmap_ref
 
-import nebble/system/time
-export time
-
-# ============================================================================
-# Health
-# ============================================================================
-
-import nebble/health/health
-export health
+import nebble/graphics/font_ref
+export font_ref
 
 # ============================================================================
 # Communication
@@ -150,6 +299,9 @@ export health
 
 import nebble/comms/message
 export message
+
+import nebble/comms/typed_message
+export typed_message
 
 import nebble/comms/app_sync
 export app_sync
@@ -163,41 +315,29 @@ export data_logging
 import nebble/comms/worker
 export worker
 
-import nebble/comms/wakeup
-export wakeup
+import nebble/comms/smartstrap
+export smartstrap
+
+# ============================================================================
+# Resources
+# ============================================================================
+
+import nebble/resources
+export resources
 
 # ============================================================================
 # Input
 # ============================================================================
 
-import nebble/input/accel
-export accel
-
 import nebble/input/dictation
 export dictation
 
-import nebble/input/unobstructed_area
-export unobstructed_area
-
 # ============================================================================
-# Storage
+# Utilities
 # ============================================================================
 
-import nebble/storage/storage
-export storage
-
-import nebble/storage/resources
-export resources
-
-import nebble/storage/fonts
-export fonts
-
-# ============================================================================
-# Advanced
-# ============================================================================
-
-import nebble/advanced/math
+import nebble/util/math
 export math
 
-import nebble/advanced/uuid
+import nebble/util/uuid
 export uuid

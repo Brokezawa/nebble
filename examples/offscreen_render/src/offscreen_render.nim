@@ -26,7 +26,8 @@ proc drawCheckerboard(bmp: GBitmapRef) =
     for x in 0..<int(size.w):
       let idx = y * int(bytesPerRow) + x
       # 8-bit palette index: 0 or 1
-      data[idx] = byte((x div 8 + y div 8) and 1)
+      let p = cast[ptr uint8](cast[intptr](data) + idx)
+      p[] = byte((x div 8 + y div 8) and 1)
 
 proc windowLoad(w: ptr Window) {.cdecl.} =
   let bounds = w.rootLayer.bounds

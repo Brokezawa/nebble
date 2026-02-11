@@ -11,7 +11,7 @@ import std/[os, strutils, tables, parseopt]
 import nebble_cli/[commands, config, templates, builder]
 
 const
-  version = "0.1.0"
+  version = "0.2.0"
   helpText = """
 Nebble - Pebble smartwatch app development in Nim
 
@@ -20,6 +20,8 @@ Usage:
   nebble build [--platform <p>]       Build the project (default: all platforms)
   nebble install --emulator <p>       Install to emulator
   nebble install --phone [<IP>]       Install to connected phone (optionally specify IP)
+  nebble gen-keys                     Generate type-safe message keys from nebble.json
+  nebble regen-ffi                    Regenerate Futhark FFI bindings (requires Futhark)
   nebble clean                        Remove build artifacts
   nebble size [--platform <p>]        Show binary size breakdown
   nebble help                         Show this help
@@ -33,6 +35,7 @@ Examples:
   nebble build --platform basalt
   nebble install --emulator basalt
   nebble size --platform aplite
+  nebble gen-keys
 """
 
 proc showHelp() =
@@ -122,6 +125,22 @@ proc main() =
         break
     
     cmdSize(platform)
+  
+  of "resources":
+    var action = "list"
+    if args.len > 1: action = args[1]
+    var arg = ""
+    if args.len > 2: arg = args[2]
+    cmdResources(action, arg)
+  
+  of "doctor":
+    cmdDoctor()
+  
+  of "gen-keys":
+    cmdGenKeys()
+  
+  of "regen-ffi":
+    cmdRegenFfi()
   
   else:
     echo "Error: Unknown command '", command, "'"

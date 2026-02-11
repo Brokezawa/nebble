@@ -1,7 +1,8 @@
 ## Nebble CLI Commands Implementation
 
-import std/[os, strutils, osproc, json, times]
+import std/[os, strutils, osproc, json]
 import config, templates, builder
+import resources
 
 const validPlatforms* = ["aplite", "basalt", "chalk", "diorite", "emery", "flint"]
 
@@ -82,7 +83,6 @@ proc cmdBuild*(platform: string) =
   
   # Load config
   let cfg = loadConfig()
-  
   # Determine platforms to build
   let platforms = if platform != "":
     if not validatePlatform(platform):
@@ -144,10 +144,12 @@ proc cmdInstall*(platform: string, toPhone: bool, phoneIp: string) =
   
   if toPhone:
     # Install to phone
-    let ipPart = if phoneIp != "": " " & phoneIp else: ""
-    echo "Installing to phone", ipPart, "..."
-    let cmd = "pebble install --phone" & ipPart
-    let (output, exitCode) = execCmdEx(cmd)
+    echo "Installing to phone", (if phoneIp != "": " " & phoneIp else: ""), "..."
+    # Build command with proper escaping to prevent injection
+    var args = @["install", "--phone"]
+    if phoneIp != "":
+      args.add(phoneIp)
+    let (output, exitCode) = execCmdEx("pebble " & args.join(" "))
     if exitCode != 0:
       echo "✗ Install failed"
       echo output
@@ -255,3 +257,125 @@ proc cmdSize*(platform: string) =
             echo "⚠ WARNING: Binary exceeds Aplite's 24KB RAM budget!"
         except ValueError:
           discard
+
+proc cmdGenKeys*() =
+  ## Generate type-safe message keys from nebble.json
+  if not fileExists("nebble.json"):
+    echo "Error: nebble.json not found. Run 'nebble new' to create a project."
+    quit(1)
+  
+  let cfg = loadConfig()
+  
+  echo "Generating message keys from nebble.json..."
+  
+  if not generateMessageKeys(cfg):
+    echo "✗ Failed to generate message keys"
+    quit(1)
+  
+  echo ""
+  echo "✓ Message keys generated successfully"
+  echo ""
+  echo "Usage:"
+  echo "  import gen/app_keys"
+  echo "  import nebble/comms/typed_message"
+  echo ""
+  echo "  # Send with type safety"
+  echo "  send(amkCommand, 42'i32)"
+  echo "  send(amkData, \"Hello\")"
+  echo ""
+  echo "  # Read with type safety"
+  echo "  let cmd = readInt32(iter, amkCommand)"
+
+proc cmdRegenFfi*() =
+  ## Regenerate Futhark FFI bindings for all platforms
+  echo "Regenerating FFI bindings..."
+  echo ""
+  
+  let platforms = ["aplite", "basalt", "chalk", "diorite", "emery", "flint"]
+  let futharkPath = "src/nebble/ffi/generate.nim"
+  
+  var successCount = 0
+  var failCount = 0
+  
+  for platform in platforms:
+    echo "═══ Generating bindings for ", platform, " ═══"
+    let cmd = "nim r -d:futharkRebuild -d:platform=" & platform & " " & futharkPath
+    echo "  Running: ", cmd
+    
+    let (output, exitCode) = execCmdEx(cmd)
+    
+    if exitCode == 0:
+      echo "✓ Generated ", platform, ".nim"
+      inc successCount
+    else:
+      echo "✗ Failed to generate ", platform
+      echo output
+      inc failCount
+    echo ""
+  
+  echo "═══════════════════════════════"
+  if failCount == 0:
+    echo "✓ FFI regeneration complete!"
+    echo "  Generated ", successCount, " platform bindings"
+  else:
+    echo "⚠ FFI regeneration completed with errors"
+    echo "  Success: ", successCount
+    echo "  Failed:  ", failCount
+    quit(1)
+
+proc cmdResources*(action: string, arg: string = "") =
+  ## Manage project resources
+  case action
+  of "list":
+    listResources()
+  of "add":
+    if arg.len == 0:
+      echo "Usage: nebble resources add <path>"
+      quit(1)
+    if not addResource(arg): quit(1)
+  of "validate":
+    if validateResources(): echo "✓ Resources look good" else: echo "⚠ Resource validation failed"
+  else:
+    echo "Unknown resources action: ", action
+    echo "Available: list, add, validate"
+
+proc cmdDoctor*() =
+  ## Diagnose development environment
+  echo "Nebble Doctor - Environment checks"
+  var issues = 0
+
+  # Nim
+  let (nimOut, nimCode) = execCmdEx("nim --version")
+  if nimCode == 0:
+    echo "✓ Nim: ", (if nimOut.splitLines().len > 0: nimOut.splitLines()[0].strip() else: nimOut.strip())
+  else:
+    echo "✗ Nim not found in PATH"
+    inc issues
+
+  # Pebble
+  let (pebOut, pebCode) = execCmdEx("pebble --version")
+  if pebCode == 0:
+    echo "✓ Pebble SDK: ", (if pebOut.splitLines().len > 0: pebOut.splitLines()[0].strip() else: pebOut.strip())
+  else:
+    echo "✗ Pebble SDK not found (pebble CLI)"
+    inc issues
+
+  # ARM toolchain
+  let (armOut, armCode) = execCmdEx("arm-none-eabi-gcc --version") 
+  if armCode == 0:
+    echo "✓ ARM toolchain: ", (if armOut.splitLines().len > 0: armOut.splitLines()[0].strip() else: armOut.strip())
+  else:
+    echo "✗ ARM GCC not found (arm-none-eabi-gcc)"
+    inc issues
+
+  # Project checks
+  if fileExists("nebble.json"):
+    echo "✓ nebble.json present"
+  else:
+    echo "⚠ nebble.json missing in current directory"
+    inc issues
+
+  if issues == 0:
+    echo "\n✓ All checks passed"
+  else:
+    echo "\n⚠ Found ", issues, " issue(s)."

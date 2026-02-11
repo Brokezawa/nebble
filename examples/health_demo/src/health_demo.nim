@@ -4,8 +4,8 @@
 ## Note: Health data requires user authorization and may not be available in emulator.
 
 import nebble
-import nebble/health
-import nebble/time
+import nebble/foundation/events/health
+import nebble/foundation/time
 import nebble/ffi # For HealthMetricStepCount and other enum values
 
 var

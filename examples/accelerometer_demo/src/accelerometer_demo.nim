@@ -3,7 +3,7 @@
 ## Shows accelerometer data (X, Y, Z) and tap/shake detection.
 
 import nebble
-import nebble/accel
+import nebble/foundation/events/accel
 import nebble/ffi # For AccelAxisType enum values
 
 var

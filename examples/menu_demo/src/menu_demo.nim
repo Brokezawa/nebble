@@ -3,8 +3,8 @@
 ## Demonstrates the Nebble MenuLayer API with a scrollable menu.
 
 import nebble
-import nebble/menu_layer
-import nebble/graphics # For GContext and drawing
+import nebble/ui/menu_layer
+import nebble/graphics/graphics # For GContext and drawing
 
 const
   NUM_MENU_SECTIONS = 1

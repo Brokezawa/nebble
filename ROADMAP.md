@@ -48,7 +48,7 @@ platforms (Aplite through Flint). It provides:
 | Phase 6 | ✅ COMPLETE | 100% | API redesign finished |
 | Phase 7 | ✅ COMPLETE | 100% | Full consistency achieved |
 | Phase 8 | ✅ COMPLETE | 100% | CLI commands implemented (resources, doctor) |
-| Phase 9 | 🟡 IN PROGRESS | 80% | Draw-command managed types implemented; remaining advanced features pending |
+| Phase 9 | 🟡 IN PROGRESS | 90% | Draw-command and advanced GBitmap implemented; Health service pending |
 
 **Current Blockers:** None critical. Minor gaps in Phase 8 CLI commands.
 
@@ -535,7 +535,7 @@ Implementation notes:
 
 ---
 
-## Phase 9: Advanced Managed Types & Graphics 🟡 IN PROGRESS (65%)
+## Phase 9: Advanced Managed Types & Graphics 🟡 IN PROGRESS (90%)
 
 **Goal:** ARC-managed types for memory-safe Pebble development.
 
@@ -616,20 +616,37 @@ proc bounds*(h: DrawCommandImageHandle): GRect
 **Estimated Effort:** 10 hours  
 **Example to Create:** `examples/draw_command_demo/`
 
-### Phase 9.3: Advanced GBitmap Extensions ❌ NOT STARTED
 
-**Goal:** Extend `bitmap_ref.nim` with advanced features
+### Phase 9.3: Advanced GBitmap Extensions ✅ COMPLETE
 
-**New Functions:**
-```nim
-proc newBlankBitmapRef*(size: GSize; format: GBitmapFormat): GBitmapRef
-proc createSubBitmapRef*(parent: GBitmapRef; subRect: GRect): GBitmapRef
-proc setPalette*(bmp: GBitmapRef; palette: ptr GColor; freeOnDestroy: bool)
-proc data*(bmp: GBitmapRef): ptr uint8
-```
+**Goal:** Extend `bitmap_ref.nim` with advanced features and make offscreen
+rendering host-runnable for smoke tests.
 
-**Estimated Effort:** 6 hours  
-**Example:** `examples/offscreen_render/`
+**Completed Features:**
+
+- Parent-child reference tracking for sub-bitmaps: sub-bitmaps keep a strong
+  reference to their parent to prevent use-after-free when the parent is
+  dropped elsewhere.
+- Constructors and helpers:
+  - `newBlankBitmapRef*(size: GSize; format: GBitmapFormat)`
+  - `newBlankBitmapRef*(size: GSize; format: GBitmapFormat, palette: ptr GColor, freeOnDestroy: bool)`
+  - `createSubBitmapRef*(parent: GBitmapRef; subRect: GRect): GBitmapRef` (and overload with x,y,w,h)
+  - Palette helpers: `palette*(bmp): ptr GColor` and `palette=(bmp, palette)`
+  - Data accessors: `data*(bmp): ptr uint8` and `data=(bmp, data, format, rowSizeBytes, freeOnDestroy)`
+- Offscreen rendering example: `examples/offscreen_render/src/offscreen_render.nim` demonstrates blank bitmap creation and direct pixel writes.
+- Host-friendly test support: `tests/pebble_stubs.c` was extended with a minimal
+  in-process FakeGBitmap implementation so host-side smoke tests can run
+  without the full Pebble SDK; added `tests/test_bitmap_ref.nim` as a smoke test.
+
+**Files changed/added:** `src/nebble/graphics/bitmap_ref.nim`,
+`examples/offscreen_render/src/offscreen_render.nim`, `tests/test_bitmap_ref.nim`,
+`tests/pebble_stubs.c`.
+
+**Notes:** Sub-bitmaps are intentionally non-owning views of parent pixel
+memory; to avoid dangling pointers we store a strong `parent` reference on the
+sub-bitmap object. The ARC destructor clears the parent reference and destroys
+owned bitmaps when appropriate. The test stubs are for host smoke testing and
+should not be used in production builds.
 
 ### Phase 9.4: Extended Health Service ❌ NOT STARTED
 

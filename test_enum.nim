@@ -1,0 +1,2 @@
+import nebble
+echo GTextAlignmentCenter

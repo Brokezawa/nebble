@@ -311,21 +311,25 @@ proc cleanup() =
 ### Pattern 5: Services (Battery, Time, etc.)
 
 ```nim
+import nebble/foundation/events/battery
+
 proc batteryHandler(charge: BatteryChargeState) {.cdecl.} =
   echo "Battery: ", charge.charge_percent, "%"
 
 proc init() =
   # Subscribe to battery updates
   battery.subscribe(batteryHandler)
-  
+
   # Get initial state
-  let state = battery.peek()
+  let state = battery.state()
   batteryHandler(state)
 ```
 
 ### Pattern 6: Persistent Storage
 
 ```nim
+import nebble/foundation/storage
+
 const KEY_COUNT = 1  # Storage key
 
 proc saveCount(count: int32) =

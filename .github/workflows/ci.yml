@@ -1,0 +1,90 @@
+name: CI
+
+on:
+  push:
+    branches: [main, master]
+  pull_request:
+    branches: [main, master]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+      
+      - name: Setup Nim
+        uses: jiro4989/setup-nim@v1
+        with:
+          nim-version: '2.2.6'
+          repo-token: ${{ secrets.GITHUB_TOKEN }}
+      
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.13'
+      
+      - name: Cache Pebble SDK
+        uses: actions/cache@v4
+        with:
+          path: ~/.pebble-sdk
+          key: pebble-sdk-${{ runner.os }}-${{ hashFiles('**/sdk_version.nim') }}
+          restore-keys: |
+            pebble-sdk-${{ runner.os }}-
+      
+      - name: Install Pebble SDK
+        run: |
+          pip install pebble-tool
+          pebble sdk install latest
+          echo "$HOME/.local/bin" >> $GITHUB_PATH
+      
+      - name: Verify Pebble SDK
+        run: |
+          pebble --version
+          pebble sdk list
+      
+      - name: Run Unit Tests
+        run: nimble testUnit
+      
+      - name: Run Compile Tests (All Platforms)
+        run: nimble testCompile
+        timeout-minutes: 10
+      
+      - name: Build Examples (All Platforms)
+        run: nimble testExamples
+        timeout-minutes: 15
+      
+      - name: Size Gate Check
+        run: nimble testSize
+      
+      - name: Upload Test Results
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: test-results
+          path: |
+            test-results/
+            *.log
+          retention-days: 7
+
+  lint:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+      
+      - name: Setup Nim
+        uses: jiro4989/setup-nim@v1
+        with:
+          nim-version: '2.2.6'
+          repo-token: ${{ secrets.GITHUB_TOKEN }}
+      
+      - name: Check nimble file syntax
+        run: nimble check
+      
+      - name: Check CLI compiles
+        run: |
+          cd cli
+          nimble check

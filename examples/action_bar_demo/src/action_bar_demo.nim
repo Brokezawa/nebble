@@ -4,7 +4,7 @@
 ## Note: Icons would require resources - this demo shows the bar with default icons.
 
 import nebble
-import nebble/action_bar
+import nebble/ui/action_bar
 import nebble/ffi # For BUTTON_ID constants
 
 var

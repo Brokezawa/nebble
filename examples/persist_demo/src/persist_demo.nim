@@ -3,8 +3,8 @@
 ## Shows how to save and restore data across app sessions.
 
 import nebble
-import nebble/storage
-import nebble/vibes
+import nebble/foundation/storage
+import nebble/ui/vibes
 import nebble/ffi # For BUTTON_ID constants
 
 const

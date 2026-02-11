@@ -1,5 +1,7 @@
 # Nebble
 
+[![CI](https://github.com/zawa-t/nebble/actions/workflows/ci.yml/badge.svg)](https://github.com/zawa-t/nebble/actions/workflows/ci.yml)
+
 **Nim wrapper library for Pebble smartwatch development**
 
 Nebble (Nim + Pebble) provides comprehensive, type-safe Nim bindings for the Pebble SDK, enabling you to write Pebble apps in idiomatic Nim while maintaining full access to the C SDK.
@@ -208,10 +210,21 @@ nebble/
 │   │   │   ├── macros.nim     # Manual macro replacements
 │   │   │   ├── generated/     # Auto-generated FFI bindings (6 platforms)
 │   │   │   └── stubs/         # Stub headers for build-generated files
-│   │   ├── window.nim         # High-level window API
-│   │   ├── layer.nim          # High-level layer API
-│   │   ├── geometry.nim       # Geometry types and constructors
-│   │   └── ...                # 28 more high-level modules
+│   │   ├── foundation/        # Core Foundation APIs
+│   │   │   ├── app.nim        # App lifecycle
+│   │   │   ├── events/        # Event services (accel, battery, health, etc.)
+│   │   │   ├── time.nim       # Time functions
+│   │   │   ├── storage.nim    # Persistent storage
+│   │   │   └── ...
+│   │   ├── ui/                # User Interface
+│   │   │   ├── window.nim     # Window management
+│   │   │   ├── layer.nim      # Base layer
+│   │   │   ├── animation.nim  # Animations
+│   │   │   └── ...
+│   │   ├── graphics/          # Low-level drawing
+│   │   ├── comms/             # Communication
+│   │   ├── input/             # Input methods
+│   │   └── util/              # Utilities
 ├── cli/                       # nebble CLI build tool
 ├── tests/                     # Test suite (41 tests)
 ├── examples/                  # Example apps (10 apps)

@@ -3,7 +3,7 @@
 ## Shows property animations (position, size) with different curves.
 
 import nebble
-import nebble/animation
+import nebble/ui/animation
 import nebble/ffi # For BUTTON_ID constants and AnimationCurve enum
 
 var

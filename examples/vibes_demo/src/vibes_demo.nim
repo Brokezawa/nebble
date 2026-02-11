@@ -3,7 +3,7 @@
 ## Shows different vibration patterns available on Pebble.
 
 import nebble
-import nebble/vibes
+import nebble/ui/vibes
 import nebble/ffi # For BUTTON_ID constants
 
 var

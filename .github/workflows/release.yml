@@ -1,0 +1,77 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - 'v*'
+
+permissions:
+  contents: write
+
+jobs:
+  create-release:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+      
+      - name: Setup Nim
+        uses: jiro4989/setup-nim@v1
+        with:
+          nim-version: '2.2.6'
+          repo-token: ${{ secrets.GITHUB_TOKEN }}
+      
+      - name: Build CLI Binary
+        run: |
+          cd cli
+          nimble build -d:release
+          mv bin/nebble bin/nebble-linux-x64
+      
+      - name: Create Release Notes
+        run: |
+          VERSION=${GITHUB_REF#refs/tags/}
+          echo "# Nebble $VERSION" > RELEASE_NOTES.md
+          echo "" >> RELEASE_NOTES.md
+          echo "## What's New" >> RELEASE_NOTES.md
+          echo "See [CHANGELOG.md](CHANGELOG.md) for detailed changes." >> RELEASE_NOTES.md
+          echo "" >> RELEASE_NOTES.md
+          echo "## Installation" >> RELEASE_NOTES.md
+          echo '```bash' >> RELEASE_NOTES.md
+          echo 'nimble install nebble' >> RELEASE_NOTES.md
+          echo '```' >> RELEASE_NOTES.md
+      
+      - name: Create GitHub Release
+        uses: softprops/action-gh-release@v1
+        with:
+          body_path: RELEASE_NOTES.md
+          files: |
+            cli/bin/nebble-linux-x64
+          draft: false
+          prerelease: ${{ contains(github.ref, 'alpha') || contains(github.ref, 'beta') || contains(github.ref, 'rc') }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+  publish-nimble:
+    runs-on: ubuntu-latest
+    needs: create-release
+    
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+      
+      - name: Setup Nim
+        uses: jiro4989/setup-nim@v1
+        with:
+          nim-version: '2.2.6'
+          repo-token: ${{ secrets.GITHUB_TOKEN }}
+      
+      - name: Verify Package
+        run: nimble check
+      
+      # Note: Publishing to nimble.directory requires manual approval
+      # This step verifies the package is ready for publishing
+      - name: Ready for Nimble Publishing
+        run: |
+          echo "Package verified for publishing"
+          echo "To publish, run: nimble publish"

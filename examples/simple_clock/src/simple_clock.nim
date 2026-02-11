@@ -3,7 +3,7 @@
 ## This is a basic watchface that demonstrates the Nebble API.
 
 import nebble
-import nebble/time
+import nebble/foundation/time
 import nebble/ffi # For TimeUnits
 
 var

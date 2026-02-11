@@ -3,8 +3,8 @@
 ## Shows battery level, charging state, and updates on battery changes.
 
 import nebble
-import nebble/battery
-import nebble/status_bar
+import nebble/foundation/events/battery
+import nebble/ui/status_bar
 
 var
   sStatusBar: ptr StatusBarLayer
@@ -66,7 +66,7 @@ proc windowLoad(win: ptr Window) {.cdecl.} =
   rootLayer.addChild(chargingLayer.getLayer())
   
   # Get initial battery state
-  let initialState = battery.peek()
+  let initialState = battery.state()
   updateBatteryDisplay(initialState)
 
 proc windowUnload(win: ptr Window) {.cdecl.} =

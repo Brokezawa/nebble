@@ -49,7 +49,7 @@ type GBitmapRefObj = object
   bitmap: ptr GBitmap
   isSubBitmap: bool        ## true if this is a sub-bitmap (doesn't own data)
   isSystemResource: bool   ## true if loaded from system resources
-  parent: GBitmapRef       ## strong reference to parent for sub-bitmaps
+  parent: ref GBitmapRefObj       ## strong reference to parent for sub-bitmaps
 
 # ============================================================================
 # ARC Destructor (must be defined immediately after object type)
