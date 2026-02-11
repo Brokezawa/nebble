@@ -21,9 +21,9 @@ proc downClickHandler(recognizer: ClickRecognizerRef, context: pointer) {.cdecl.
   sTextLayer.text = "Down"
 
 proc clickConfigProvider(context: pointer) {.cdecl.} =
-  onClick(BUTTON_ID_SELECT, selectClickHandler)
-  onClick(BUTTON_ID_UP, upClickHandler)
-  onClick(BUTTON_ID_DOWN, downClickHandler)
+  onClick(nebble.BUTTON_ID_SELECT, selectClickHandler)
+  onClick(nebble.BUTTON_ID_UP, upClickHandler)
+  onClick(nebble.BUTTON_ID_DOWN, downClickHandler)
 
 # --- Window handlers ---
 proc windowLoad(window: ptr Window) {.cdecl.} =
@@ -33,7 +33,8 @@ proc windowLoad(window: ptr Window) {.cdecl.} =
   # Text layer
   sTextLayer = newTextLayer(makeGRect(0, 72, bounds.size.w, 20))
   sTextLayer.text = "Nim on Pebble!"
-  sTextLayer.textAlignment = GTextAlignmentCenter
+  # Use explicit FFI setter to avoid property/field visibility issues in some compile contexts
+  text_layer_set_text_alignment(sTextLayer, GTextAlignmentCenter)
   
   # Batch 2: Use a custom font
   let customFont = getSystemFont(FONT_KEY_GOTHIC_24_BOLD)
