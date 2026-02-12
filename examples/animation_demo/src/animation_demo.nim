@@ -39,7 +39,7 @@ proc selectClickHandler(recognizer: ClickRecognizerRef; context: pointer) {.cdec
   
   # Set animation curve and duration
   discard `duration=`(anim, 500)
-  discard `curve=`(anim, AnimationCurveEaseInOut)
+  discard `curve=`(anim, constants.AnimationCurveEaseInOut)
   
   # Set animation handlers
   var handlers: AnimationHandlers
@@ -61,7 +61,7 @@ proc upClickHandler(recognizer: ClickRecognizerRef; context: pointer) {.cdecl.} 
   
   let anim = propAnim.getAnimation()
   discard `duration=`(anim, 300)
-  discard `curve=`(anim, AnimationCurveLinear)
+  discard `curve=`(anim, constants.AnimationCurveLinear)
   
   var handlers: AnimationHandlers
   handlers.stopped = animationStopped
@@ -80,7 +80,7 @@ proc downClickHandler(recognizer: ClickRecognizerRef; context: pointer) {.cdecl.
   
   let anim = propAnim.getAnimation()
   discard `duration=`(anim, 300)
-  discard `curve=`(anim, AnimationCurveEaseOut)
+  discard `curve=`(anim, constants.AnimationCurveEaseOut)
   
   var handlers: AnimationHandlers
   handlers.stopped = animationStopped
@@ -105,7 +105,7 @@ proc windowLoad(win: ptr Window) {.cdecl.} =
   # Create text layer starting at top
   textLayer = newTextLayer(makeGRect(10, 20, bounds.size.w - 20, 60))
   textLayer.text = "Animate!"
-  textLayer.textAlignment = GTextAlignment.GTextAlignmentCenter
+  textLayer.textAlignment = constants.GTextAlignmentCenter
   textLayer.font = getSystemFont("RESOURCE_ID_GOTHIC_28_BOLD")
   
   when declared(GColorWhite):

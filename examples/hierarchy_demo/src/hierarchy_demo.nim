@@ -47,7 +47,7 @@ proc windowLoad(win: ptr Window) {.cdecl.} =
     makeGRect(0, bounds.size.h - 40, bounds.size.w, 30),
     "Parent owns children".cstring,
     fonts_get_system_font(FONT_KEY_GOTHIC_18.cstring),
-    GTextAlignmentCenter
+    constants.GTextAlignmentCenter
   )
   infoText.textColor = GColorWhite
   layer_add_child(win.rootLayer, text_layer_get_layer(infoText.toPtr))

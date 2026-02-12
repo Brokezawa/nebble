@@ -49,7 +49,7 @@ proc drawCustomGraphics(ctx: ptr GContext, windowBounds: GRect) {.cdecl.} =
            getSystemFont(FONT_KEY_GOTHIC_14.cstring),
            makeGRect(20, 155, 104, 20),
            GTextOverflowModeWordWrap,
-           GTextAlignmentCenter,
+           constants.GTextAlignmentCenter,
            nil)
 
 proc windowLoad(win: ptr Window) {.cdecl.} =
@@ -62,7 +62,7 @@ proc windowLoad(win: ptr Window) {.cdecl.} =
     makeGRect(0'i16, 5'i16, windowBounds.size.w, 24'i16),
     "Graphics Demo".cstring,
     getSystemFont(FONT_KEY_GOTHIC_18_BOLD.cstring),
-    GTextAlignmentCenter
+    constants.GTextAlignmentCenter
   )
   titleLayer.textColor = GColorWhite
   win.rootLayer.addChild(titleLayer.getLayer())
@@ -72,7 +72,7 @@ proc windowLoad(win: ptr Window) {.cdecl.} =
     makeGRect(5'i16, 30'i16, windowBounds.size.w - 10'i16, 20'i16),
     "Custom drawing with paths".cstring,
     getSystemFont(FONT_KEY_GOTHIC_14.cstring),
-    GTextAlignmentCenter
+    constants.GTextAlignmentCenter
   )
   infoLayer.textColor = GColorLightGray
   win.rootLayer.addChild(infoLayer.getLayer())

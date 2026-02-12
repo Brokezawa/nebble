@@ -44,7 +44,7 @@ proc windowLoad(win: ptr Window) {.cdecl.} =
     makeGRect(0'i16, 5'i16, windowBounds.size.w, 24'i16),
     "Scroll Demo".cstring,
     getSystemFont(FONT_KEY_GOTHIC_18_BOLD.cstring),
-    GTextAlignmentCenter
+    constants.GTextAlignmentCenter
   )
   titleLayer.textColor = GColorWhite
   win.rootLayer.addChild(titleLayer.getLayer())
@@ -54,7 +54,7 @@ proc windowLoad(win: ptr Window) {.cdecl.} =
     makeGRect(5'i16, 35'i16, windowBounds.size.w - 10'i16, windowBounds.size.h - 40'i16),
     scrollContent.cstring,
     getSystemFont(FONT_KEY_GOTHIC_14.cstring),
-    GTextAlignmentLeft
+    constants.GTextAlignmentLeft
   )
   contentLayer.textColor = GColorWhite
   contentLayer.overflowMode = GTextOverflowModeWordWrap

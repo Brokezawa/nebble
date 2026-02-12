@@ -41,7 +41,7 @@ proc windowLoad(win: ptr Window) {.cdecl.} =
   textLayer = newTextLayer(
     frame = makeGRect(0, 60, bounds.size.w, 40),
     text = "Press SELECT",
-    align = GTextAlignment.GTextAlignmentCenter
+    align = constants.GTextAlignmentCenter
   )
   
   # Add to window

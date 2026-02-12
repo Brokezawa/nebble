@@ -47,7 +47,7 @@ proc windowLoad(win: ptr Window) {.cdecl.} =
   
   # Create battery percentage layer
   batteryLayer = newTextLayer(makeGRect(0, 60, bounds.size.w, 30))
-  batteryLayer.textAlignment = GTextAlignment.GTextAlignmentCenter
+  batteryLayer.textAlignment = constants.GTextAlignmentCenter
   batteryLayer.font = getSystemFont("RESOURCE_ID_GOTHIC_24_BOLD")
   
   when declared(GColorClear):
@@ -55,7 +55,7 @@ proc windowLoad(win: ptr Window) {.cdecl.} =
   
   # Create charging status layer
   chargingLayer = newTextLayer(makeGRect(0, 95, bounds.size.w, 30))
-  chargingLayer.textAlignment = GTextAlignment.GTextAlignmentCenter
+  chargingLayer.textAlignment = constants.GTextAlignmentCenter
   chargingLayer.font = getSystemFont("RESOURCE_ID_GOTHIC_18")
   
   when declared(GColorClear):

@@ -30,7 +30,7 @@ proc windowLoad(win: ptr Window) {.cdecl.} =
     makeGRect(0, 30, bounds.size.w, 80),
     "WindowHandle Demo\nCheck console output\nfor state transitions".cstring,
     getSystemFont(ffi.FONT_KEY_GOTHIC_18.cstring),
-    GTextAlignmentCenter
+    constants.GTextAlignmentCenter
   )
   infoLayer.textColor = GColorWhite
   win.rootLayer.addChild(infoLayer.getLayer())

@@ -112,7 +112,7 @@ proc windowLoad(win: ptr Window) {.cdecl.} =
     makeGRect(0, 50, bounds.size.w, 40),
     "Animation Demo".cstring,
     getSystemFont(FONT_KEY_GOTHIC_24_BOLD.cstring),
-    GTextAlignmentCenter
+    constants.GTextAlignmentCenter
   )
   titleLayer.textColor = GColorWhite
   win.rootLayer.addChild(titleLayer.getLayer())
@@ -122,7 +122,7 @@ proc windowLoad(win: ptr Window) {.cdecl.} =
     makeGRect(52, 120, 40, 40),
     "".cstring,
     getSystemFont(FONT_KEY_GOTHIC_14.cstring),
-    GTextAlignmentCenter
+    constants.GTextAlignmentCenter
   )
   boxLayer.backgroundColor = GColorVividCerulean
   win.rootLayer.addChild(boxLayer.getLayer())

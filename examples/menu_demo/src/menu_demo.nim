@@ -55,7 +55,7 @@ proc menuDrawRow(ctx: ptr GContext; cellLayer: ptr Layer; cellIndex: ptr MenuInd
       font,
       textBox,
       GTextOverflowMode.GTextOverflowModeTrailingEllipsis,
-      GTextAlignment.GTextAlignmentLeft,
+      constants.GTextAlignmentLeft,
       nil
     )
 

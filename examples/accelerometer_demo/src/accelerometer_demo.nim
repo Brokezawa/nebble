@@ -51,7 +51,7 @@ proc windowLoad(win: ptr Window) {.cdecl.} =
   # Create title layer
   let titleLayer = newTextLayer(makeGRect(0, 20, bounds.size.w, 30))
   titleLayer.text = "Accelerometer"
-  titleLayer.textAlignment = GTextAlignment.GTextAlignmentCenter
+  titleLayer.textAlignment = constants.GTextAlignmentCenter
   titleLayer.font = getSystemFont("RESOURCE_ID_GOTHIC_24_BOLD")
   when declared(GColorClear):
     titleLayer.backgroundColor = GColorClear
@@ -79,7 +79,7 @@ proc windowLoad(win: ptr Window) {.cdecl.} =
   # Create tap counter layer
   tapLayer = newTextLayer(makeGRect(0, 125, bounds.size.w, 25))
   tapLayer.text = "Tap the watch!"
-  tapLayer.textAlignment = GTextAlignment.GTextAlignmentCenter
+  tapLayer.textAlignment = constants.GTextAlignmentCenter
   tapLayer.font = getSystemFont("RESOURCE_ID_GOTHIC_18_BOLD")
   when declared(GColorClear):
     tapLayer.backgroundColor = GColorClear

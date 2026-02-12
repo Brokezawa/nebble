@@ -91,7 +91,7 @@ proc windowLoad(win: ptr Window) {.cdecl.} =
   # Create title layer
   let titleLayer = newTextLayer(makeGRect(0, 30, bounds.size.w, 30))
   titleLayer.text = "Health Demo"
-  titleLayer.textAlignment = GTextAlignment.GTextAlignmentCenter
+  titleLayer.textAlignment = constants.GTextAlignmentCenter
   titleLayer.font = getSystemFont("RESOURCE_ID_GOTHIC_24_BOLD")
   when declared(GColorClear):
     titleLayer.backgroundColor = GColorClear
@@ -99,7 +99,7 @@ proc windowLoad(win: ptr Window) {.cdecl.} =
   
   # Create steps layer
   stepsLayer = newTextLayer(makeGRect(0, 70, bounds.size.w, 30))
-  stepsLayer.textAlignment = GTextAlignment.GTextAlignmentCenter
+  stepsLayer.textAlignment = constants.GTextAlignmentCenter
   stepsLayer.font = getSystemFont("RESOURCE_ID_GOTHIC_24")
   when declared(GColorClear):
     stepsLayer.backgroundColor = GColorClear
@@ -107,7 +107,7 @@ proc windowLoad(win: ptr Window) {.cdecl.} =
   
   # Create distance layer
   distanceLayer = newTextLayer(makeGRect(0, 105, bounds.size.w, 30))
-  distanceLayer.textAlignment = GTextAlignment.GTextAlignmentCenter
+  distanceLayer.textAlignment = constants.GTextAlignmentCenter
   distanceLayer.font = getSystemFont("RESOURCE_ID_GOTHIC_18")
   when declared(GColorClear):
     distanceLayer.backgroundColor = GColorClear

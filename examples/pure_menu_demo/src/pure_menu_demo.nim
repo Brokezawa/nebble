@@ -33,7 +33,7 @@ proc windowLoad(win: ptr Window) {.cdecl.} =
     makeGRect(0, 10, bounds.size.w, 30),
     "Menu Demo\nUse UP/DOWN/SELECT".cstring,
     getSystemFont(FONT_KEY_GOTHIC_18.cstring),
-    GTextAlignmentCenter
+    constants.GTextAlignmentCenter
   )
   infoLayer.textColor = GColorWhite
   win.rootLayer.addChild(infoLayer.getLayer())
@@ -45,7 +45,7 @@ proc windowLoad(win: ptr Window) {.cdecl.} =
       makeGRect(10'i16, (50 + i * 25).int16, bounds.size.w - 20'i16, 24'i16),
       item.cstring,
       getSystemFont(FONT_KEY_GOTHIC_18.cstring),
-      GTextAlignmentLeft
+      constants.GTextAlignmentLeft
     )
     
     # Highlight selected item

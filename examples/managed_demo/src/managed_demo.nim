@@ -44,7 +44,7 @@ proc windowLoad(win: ptr Window) {.cdecl.} =
     makeGRect(0, 52, bounds.size.w, 48),
     "--:--".cstring,
     fonts_get_system_font(FONT_KEY_BITHAM_42_BOLD.cstring),
-    GTextAlignmentCenter
+    constants.GTextAlignmentCenter
   )
   timeLayer.textColor = GColorWhite
   win.rootLayer.addChild(timeLayer.getLayer())
@@ -54,7 +54,7 @@ proc windowLoad(win: ptr Window) {.cdecl.} =
     makeGRect(0, 100, bounds.size.w, 24),
     "Loading...".cstring,
     fonts_get_system_font(FONT_KEY_GOTHIC_24.cstring),
-    GTextAlignmentCenter
+    constants.GTextAlignmentCenter
   )
   dateLayer.textColor = GColorWhite
   win.rootLayer.addChild(dateLayer.getLayer())
@@ -64,7 +64,7 @@ proc windowLoad(win: ptr Window) {.cdecl.} =
     makeGRect(0, bounds.size.h - 20, bounds.size.w, 20),
     "ARC Managed Demo".cstring,
     fonts_get_system_font(FONT_KEY_GOTHIC_14.cstring),
-    GTextAlignmentCenter
+    constants.GTextAlignmentCenter
   )
   statusLayer.textColor = GColorLightGray
   win.rootLayer.addChild(statusLayer.getLayer())

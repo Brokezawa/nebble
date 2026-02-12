@@ -44,12 +44,12 @@ proc windowLoad(win: ptr Window) {.cdecl.} =
   
   # Create time layer (large)
   timeLayer = newTextLayer(makeGRect(0, 50, bounds.size.w, 60))
-  timeLayer.textAlignment = GTextAlignment.GTextAlignmentCenter
+  timeLayer.textAlignment = constants.GTextAlignmentCenter
   timeLayer.font = getSystemFont("RESOURCE_ID_BITHAM_42_BOLD")
   
   # Create date layer (small)
   dateLayer = newTextLayer(makeGRect(0, 115, bounds.size.w, 30))
-  dateLayer.textAlignment = GTextAlignment.GTextAlignmentCenter
+  dateLayer.textAlignment = constants.GTextAlignmentCenter
   dateLayer.font = getSystemFont("RESOURCE_ID_GOTHIC_24")
   
   # Add to window

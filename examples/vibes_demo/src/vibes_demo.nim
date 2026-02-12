@@ -39,7 +39,7 @@ proc windowLoad(win: ptr Window) {.cdecl.} =
   # Create title layer
   titleLayer = newTextLayer(makeGRect(0, 50, bounds.size.w, 40))
   titleLayer.text = "Vibes Demo"
-  titleLayer.textAlignment = GTextAlignment.GTextAlignmentCenter
+  titleLayer.textAlignment = constants.GTextAlignmentCenter
   titleLayer.font = getSystemFont("RESOURCE_ID_GOTHIC_28_BOLD")
   when declared(GColorClear):
     titleLayer.backgroundColor = GColorClear
@@ -48,7 +48,7 @@ proc windowLoad(win: ptr Window) {.cdecl.} =
   # Create instructions layer
   instructionsLayer = newTextLayer(makeGRect(0, 95, bounds.size.w, 60))
   instructionsLayer.text = "SELECT: Short\nUP: Long\nDOWN: Double"
-  instructionsLayer.textAlignment = GTextAlignment.GTextAlignmentCenter
+  instructionsLayer.textAlignment = constants.GTextAlignmentCenter
   instructionsLayer.font = getSystemFont("RESOURCE_ID_GOTHIC_18")
   when declared(GColorClear):
     instructionsLayer.backgroundColor = GColorClear

@@ -78,7 +78,7 @@ proc windowLoad(win: ptr Window) {.cdecl.} =
   # Create title layer
   let titleLayer = newTextLayer(makeGRect(0, 20, bounds.size.w, 30))
   titleLayer.text = "Persist Demo"
-  titleLayer.textAlignment = GTextAlignment.GTextAlignmentCenter
+  titleLayer.textAlignment = constants.GTextAlignmentCenter
   titleLayer.font = getSystemFont("RESOURCE_ID_GOTHIC_24_BOLD")
   when declared(GColorClear):
     titleLayer.backgroundColor = GColorClear
@@ -87,7 +87,7 @@ proc windowLoad(win: ptr Window) {.cdecl.} =
   # Create name layer
   nameLayer = newTextLayer(makeGRect(0, 55, bounds.size.w, 25))
   nameLayer.text = cast[cstring](addr nameBuffer[0])
-  nameLayer.textAlignment = GTextAlignment.GTextAlignmentCenter
+  nameLayer.textAlignment = constants.GTextAlignmentCenter
   nameLayer.font = getSystemFont("RESOURCE_ID_GOTHIC_18")
   when declared(GColorClear):
     nameLayer.backgroundColor = GColorClear
@@ -95,7 +95,7 @@ proc windowLoad(win: ptr Window) {.cdecl.} =
   
   # Create counter layer
   counterLayer = newTextLayer(makeGRect(0, 85, bounds.size.w, 35))
-  counterLayer.textAlignment = GTextAlignment.GTextAlignmentCenter
+  counterLayer.textAlignment = constants.GTextAlignmentCenter
   counterLayer.font = getSystemFont("RESOURCE_ID_GOTHIC_28_BOLD")
   when declared(GColorClear):
     counterLayer.backgroundColor = GColorClear
@@ -104,7 +104,7 @@ proc windowLoad(win: ptr Window) {.cdecl.} =
   # Create instructions layer
   let instrLayer = newTextLayer(makeGRect(0, 125, bounds.size.w, 40))
   instrLayer.text = "SELECT: +1\nUP: +10\nDOWN: Reset"
-  instrLayer.textAlignment = GTextAlignment.GTextAlignmentCenter
+  instrLayer.textAlignment = constants.GTextAlignmentCenter
   instrLayer.font = getSystemFont("RESOURCE_ID_GOTHIC_14")
   when declared(GColorClear):
     instrLayer.backgroundColor = GColorClear

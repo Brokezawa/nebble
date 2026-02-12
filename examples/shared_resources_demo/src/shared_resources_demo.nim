@@ -65,7 +65,7 @@ proc windowLoad(win: ptr Window) {.cdecl.} =
     makeGRect(0, 10, bounds.size.w, 24),
     "Shared Resources".cstring,
     customFont.font,
-    GTextAlignmentCenter
+    constants.GTextAlignmentCenter
   )
   titleLayer.textColor = GColorWhite
   win.rootLayer.addChild(titleLayer.getLayer())

@@ -29,7 +29,7 @@ proc windowLoad(win: ptr Window) {.cdecl.} =
     makeGRect(0'i16, 5'i16, bounds.size.w - 20'i16, 24'i16),  # Leave room for action bar
     "Action Bar Demo".cstring,
     getSystemFont(FONT_KEY_GOTHIC_18_BOLD.cstring),
-    GTextAlignmentCenter
+    constants.GTextAlignmentCenter
   )
   titleLayer.textColor = GColorWhite
   win.rootLayer.addChild(titleLayer.getLayer())
@@ -39,7 +39,7 @@ proc windowLoad(win: ptr Window) {.cdecl.} =
     makeGRect(5'i16, 40'i16, bounds.size.w - 25'i16, 80'i16),
     "UP: Previous\nSELECT: Play/Pause\nDOWN: Next".cstring,
     getSystemFont(FONT_KEY_GOTHIC_14.cstring),
-    GTextAlignmentLeft
+    constants.GTextAlignmentLeft
   )
   infoLayer.textColor = GColorWhite
   win.rootLayer.addChild(infoLayer.getLayer())
@@ -49,7 +49,7 @@ proc windowLoad(win: ptr Window) {.cdecl.} =
     makeGRect(5'i16, 130'i16, bounds.size.w - 25'i16, 24'i16),
     "Ready".cstring,
     getSystemFont(FONT_KEY_GOTHIC_18.cstring),
-    GTextAlignmentCenter
+    constants.GTextAlignmentCenter
   )
   statusLayer.textColor = GColorVividCerulean
   win.rootLayer.addChild(statusLayer.getLayer())

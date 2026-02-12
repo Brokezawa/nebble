@@ -61,7 +61,7 @@ proc windowLoad(win: ptr Window) {.cdecl.} =
   let textWidth = bounds.size.w - 30
   textLayer = newTextLayer(makeGRect(0, 60, textWidth, 50))
   textLayer.text = "Use buttons!"
-  textLayer.textAlignment = GTextAlignment.GTextAlignmentCenter
+  textLayer.textAlignment = constants.GTextAlignmentCenter
   textLayer.font = getSystemFont("RESOURCE_ID_GOTHIC_24_BOLD")
   
   when declared(GColorClear):

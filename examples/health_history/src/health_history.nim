@@ -36,7 +36,7 @@ proc updateDisplay() =
     var t0: time_t = t1 - cast[time_t](60*60)
     let got = health.getMinuteHistory(addr buf[0], uint32(buf.len), addr t0, addr t1)
     var s = "Minutes: " & $got & " | "
-    let displayCount = if got > 10'u32: 10 else int(got)
+    let displayCount = if got > 10'u32: 10 else: int(got)
     for i in 0..<displayCount:
       s = s & $(int(buf[i].steps))
       if i < displayCount - 1: s = s & ","
@@ -54,17 +54,17 @@ proc windowLoad(win: ptr Window) {.cdecl.} =
 
   let title = newTextLayer(makeGRect(0, 6, b.size.w, 30))
   title.text = "Health History"
-  title.textAlignment = GTextAlignment.GTextAlignmentCenter
+  title.textAlignment = constants.GTextAlignmentCenter
   title.font = getSystemFont("RESOURCE_ID_GOTHIC_24")
   root.addChild(title.getLayer())
 
   stepsLayer = newTextLayer(makeGRect(0, 44, b.size.w, 28))
-  stepsLayer.textAlignment = GTextAlignment.GTextAlignmentCenter
+  stepsLayer.textAlignment = constants.GTextAlignmentCenter
   stepsLayer.font = getSystemFont("RESOURCE_ID_GOTHIC_18")
   root.addChild(stepsLayer.getLayer())
 
   minutesLayer = newTextLayer(makeGRect(0, 76, b.size.w, 40))
-  minutesLayer.textAlignment = GTextAlignment.GTextAlignmentCenter
+  minutesLayer.textAlignment = constants.GTextAlignmentCenter
   minutesLayer.font = getSystemFont("RESOURCE_ID_GOTHIC_14")
   root.addChild(minutesLayer.getLayer())
 
