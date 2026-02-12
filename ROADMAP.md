@@ -1,7 +1,7 @@
 # Nebble: Nim Wrapper for the Pebble SDK -- Development Roadmap
 
-**Last Updated:** February 11, 2026  
-**Status:** Development phase - Phase 8 ✅ COMPLETE; Phase 9 🟡 IN PROGRESS
+**Last Updated:** February 12, 2026  
+**Status:** Development phase - Phase 8 ✅ COMPLETE; Phase 9 ✅ COMPLETE
 
 **Note (update):** Resources & Doctor CLI commands implemented; draw-command managed wrappers and a smoke test were added (see Phase 8.5 and Phase 9.2 for details).
 
@@ -48,7 +48,7 @@ platforms (Aplite through Flint). It provides:
 | Phase 6 | ✅ COMPLETE | 100% | API redesign finished |
 | Phase 7 | ✅ COMPLETE | 100% | Full consistency achieved |
 | Phase 8 | ✅ COMPLETE | 100% | CLI commands implemented (resources, doctor) |
-| Phase 9 | 🟡 IN PROGRESS | 90% | Draw-command and advanced GBitmap implemented; Health service pending |
+| Phase 9 | ✅ COMPLETE | 100% | Draw-command, advanced GBitmap and Extended Health service implemented |
 
 **Current Blockers:** None critical. Minor gaps in Phase 8 CLI commands.
 
@@ -535,7 +535,7 @@ Implementation notes:
 
 ---
 
-## Phase 9: Advanced Managed Types & Graphics 🟡 IN PROGRESS (90%)
+## Phase 9: Advanced Managed Types & Graphics ✅ COMPLETE (100%)
 
 **Goal:** ARC-managed types for memory-safe Pebble development.
 
@@ -648,26 +648,18 @@ sub-bitmap object. The ARC destructor clears the parent reference and destroys
 owned bitmaps when appropriate. The test stubs are for host smoke testing and
 should not be used in production builds.
 
-### Phase 9.4: Extended Health Service ❌ NOT STARTED
+### Phase 9.4: Extended Health Service ✅ COMPLETE
 
-**Goal:** Complete health service coverage
+**Goal:** Complete health service coverage and provide host-friendly smoke tests.
 
-**Functions to Wrap:**
-```nim
-proc getMinuteHistory*(metric: HealthMetric; history: ptr HealthMinuteData;
-                      numRecords: uint32): uint32
-proc peekCurrentValue*(metric: HealthMetric): HealthValue
-proc peekCurrentActivities*(): HealthActivityMask
-proc metricAccessible*(metric: HealthMetric): bool
-proc registerMetricAlert*(metric: HealthMetric; threshold: HealthValue;
-                         handler: MetricAlertHandler)
-proc cancelMetricAlert*(metric: HealthMetric)
-proc anyActivitiesActive*(activityMask: HealthActivityMask): bool
-proc sumAveraged*(metric: HealthMetric; timeScope: HealthServiceTimeScope): HealthValue
-```
+**Status:** Extended wrappers added and validated (minute history API preserved as caller-allocated), host stubs and `examples/health_history` added for smoke testing.
+
+**Covered Functions / Features:** getMinuteHistory, peekCurrentValue, peekCurrentActivities,
+metric accessibility checks, registerMetricAlert, cancelMetricAlert, events subscribe/unsubscribe,
+measurement system query, and basic aggregation helpers.
 
 **Estimated Effort:** 6 hours  
-**Example:** `examples/health_history/`
+**Example:** `examples/health_history/` (host-friendly smoke example)
 
 ### Phase 9 Implementation Schedule
 
