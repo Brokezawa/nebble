@@ -184,3 +184,83 @@ void gbitmap_set_data(void* bitmap, uint8_t* data, int format, uint16_t row_size
   b->bytes_per_row = row_size_bytes;
   (void)free_on_destroy; // not tracked for now
 }
+
+// Minimal Health Service stubs for host-side smoke tests.
+// These return sensible defaults so Nim compile-time/host smoke tests link.
+
+// Simple fake alert object
+typedef struct {
+  int id;
+} FakeHealthMetricAlert;
+
+int32_t health_service_sum(int32_t metric, long time_start, long time_end) {
+  (void)metric; (void)time_start; (void)time_end;
+  return 0; // default zero sum
+}
+
+int32_t health_service_sum_today(int32_t metric) {
+  (void)metric;
+  return 0;
+}
+
+int32_t health_service_peek_current_value(int32_t metric) {
+  (void)metric;
+  return 0;
+}
+
+int32_t health_service_sum_averaged(int32_t metric, long time_start, long time_end, int scope) {
+  (void)metric; (void)time_start; (void)time_end; (void)scope;
+  return 0;
+}
+
+int32_t health_service_aggregate_averaged(int32_t metric, long time_start, long time_end, int aggregation, int scope) {
+  (void)metric; (void)time_start; (void)time_end; (void)aggregation; (void)scope;
+  return 0;
+}
+
+uint32_t health_service_metric_accessible(int32_t metric, long time_start, long time_end) {
+  (void)metric; (void)time_start; (void)time_end;
+  return (uint32_t)0xFFFFFFFFu; // report fully accessible
+}
+
+uint32_t health_service_metric_averaged_accessible(int32_t metric, long time_start, long time_end, int scope) {
+  (void)metric; (void)time_start; (void)time_end; (void)scope;
+  return (uint32_t)0xFFFFFFFFu;
+}
+
+uint32_t health_service_metric_aggregate_averaged_accessible(int32_t metric, long time_start, long time_end, int aggregation, int scope) {
+  (void)metric; (void)time_start; (void)time_end; (void)aggregation; (void)scope;
+  return (uint32_t)0xFFFFFFFFu;
+}
+
+int health_service_events_subscribe(void* handler, void* context) {
+  (void)handler; (void)context;
+  return 1; // success
+}
+
+int health_service_events_unsubscribe(void) {
+  return 1;
+}
+
+void* health_service_register_metric_alert(int32_t metric, int32_t threshold) {
+  (void)metric; (void)threshold;
+  FakeHealthMetricAlert* a = (FakeHealthMetricAlert*)malloc(sizeof(FakeHealthMetricAlert));
+  if (a) a->id = 1;
+  return a;
+}
+
+int health_service_cancel_metric_alert(void* alert) {
+  if (alert == NULL) return 0;
+  free(alert);
+  return 1;
+}
+
+uint32_t health_service_get_minute_history(void* minute_data, uint32_t max_records, long* time_start, long* time_end) {
+  (void)minute_data; (void)max_records; (void)time_start; (void)time_end;
+  return 0;
+}
+
+int health_service_get_measurement_system_for_display(int32_t metric) {
+  (void)metric;
+  return 0; // default measurement system
+}
