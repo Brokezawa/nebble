@@ -8,11 +8,27 @@ import nebble/ffi
 
 # Re-export commonly used FFI types for high-level consumers and callbacks
 export ffi.HealthMetric, ffi.HealthValue, ffi.HealthActivity, ffi.HealthEventType,
-       ffi.HealthMinuteData, ffi.HealthServiceTimeScope,
-       ffi.HealthServiceAccessibilityMask, ffi.HealthActivityMask,
-       ffi.HealthIterationDirection, ffi.MeasurementSystem,
-       ffi.HealthMetricAlert, ffi.HealthActivityIteratorCB, ffi.HealthEventHandler,
-       ffi.HealthAggregation
+        ffi.HealthMinuteData, ffi.HealthServiceTimeScope,
+        ffi.HealthServiceAccessibilityMask, ffi.HealthActivityMask,
+        ffi.HealthIterationDirection, ffi.MeasurementSystem,
+        ffi.HealthMetricAlert, ffi.HealthActivityIteratorCB, ffi.HealthEventHandler,
+        ffi.HealthAggregation
+
+## Example usage (device or host smoke tests):
+##
+## 1) Check availability and sum a metric over 7 days:
+##    let now = epochTime()
+##    let start = now - 7*24*60*60
+##    if metricAveragedAccessible(HealthMetricStepCount, start, now, HealthServiceTimeScopeDaily) != 0:
+##      let total = sum(HealthMetricStepCount, start, now)
+##
+## 2) Read minute history into a caller-provided array (no heap allocation):
+##    var buf: array[60, HealthMinuteData]
+##    let count = getMinuteHistory(addr buf[0], uint32(buf.len), addr start, addr now)
+##
+## 3) Register + cancel metric alert:
+##    let alert = registerMetricAlert(HealthMetricStepCount, 1000)
+##    if alert != nil: discard cancelMetricAlert(alert)
 
 # ============================================================================
 # Events
