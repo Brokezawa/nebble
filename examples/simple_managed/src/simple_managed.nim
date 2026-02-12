@@ -62,12 +62,12 @@ proc windowLoad(win: ptr Window) {.cdecl.} =
   win.rootLayer.addChild(dateLayer.getLayer())
   
   # Subscribe to tick timer for time updates
-  subscribe(MINUTE_UNIT, updateTime)
+  subscribe(constants.MINUTE_UNIT, updateTime)
   
   # Update immediately
   var now = time()
   let tmNow = ffi.localtime(addr now)
-  updateTime(tmNow, MINUTE_UNIT)
+  updateTime(tmNow, constants.MINUTE_UNIT)
 
 proc windowUnload(win: ptr Window) {.cdecl.} =
   ## Resources are automatically destroyed when handles are reassigned.
