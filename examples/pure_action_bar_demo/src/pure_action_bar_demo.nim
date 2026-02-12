@@ -80,9 +80,9 @@ proc windowLoad(win: ptr Window) {.cdecl.} =
     # In full implementation:
     # actionBar.icon(BUTTON_ID_DOWN) = RESOURCE_ID_ICON_NEXT
   
-  onClick(BUTTON_ID_UP, upClickHandler)
-  onClick(BUTTON_ID_SELECT, selectClickHandler)
-  onClick(BUTTON_ID_DOWN, downClickHandler)
+  onClick(constants.BUTTON_ID_UP, upClickHandler)
+  onClick(constants.BUTTON_ID_SELECT, selectClickHandler)
+  onClick(constants.BUTTON_ID_DOWN, downClickHandler)
   
   echo "Action Bar Demo Ready!"
   echo "This shows what ActionBarLayerHandle would provide:"

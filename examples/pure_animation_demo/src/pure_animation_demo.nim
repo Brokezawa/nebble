@@ -137,9 +137,9 @@ proc windowLoad(win: ptr Window) {.cdecl.} =
   proc downClickHandler(recognizer: ClickRecognizerRef, context: pointer) {.cdecl.} =
     startSequenceDemo()
   
-  onClick(BUTTON_ID_UP, upClickHandler)
-  onClick(BUTTON_ID_SELECT, selectClickHandler)
-  onClick(BUTTON_ID_DOWN, downClickHandler)
+  onClick(constants.BUTTON_ID_UP, upClickHandler)
+  onClick(constants.BUTTON_ID_SELECT, selectClickHandler)
+  onClick(constants.BUTTON_ID_DOWN, downClickHandler)
   
   echo "Animation Demo Ready!"
   echo "UP: Main animation"

@@ -103,7 +103,7 @@ struct tyObject_struct_FontInfo__OThMgPKJgGYHGdVfrJ27ng {
 typedef NI32 tyEnum_enum_GTextOverflowMode570426195__8mqPn2lLbkIOiwGS9bdJ38Q;
 typedef NI32 tyEnum_enum_GTextAlignment570426199__GoX9aZdlRH7BVghtSOwHTqA;
 N_LIB_PRIVATE N_CDECL(int, main)(void);
-N_LIB_PRIVATE N_CDECL(void, init__menu95demo_u169)(void);
+N_LIB_PRIVATE N_CDECL(void, init__menu95demo_u61)(void);
 N_CDECL(tyObject_struct_Window__x0oI0MSh79clnNFs7R9bwHcA*, window_create)(void);
 N_CDECL(void, window_set_window_handlers)(tyObject_struct_Window__x0oI0MSh79clnNFs7R9bwHcA* window_p0, tyObject_struct_WindowHandlers570426241__LjZh1APfxAVIL556StHLrQ handlers_p1);
 static N_INLINE(void, nimZeroMem)(void* p_p0, NI size_p1);
@@ -135,13 +135,13 @@ static N_INLINE(void, addChild__OOZOOZOOZsrcZnebbleZuiZlayer_u11)(tyObject_struc
 N_CDECL(void, layer_add_child)(tyObject_struct_Layer__KCpfpF2jwj5coKARWsuAMQ* parent_p0, tyObject_struct_Layer__KCpfpF2jwj5coKARWsuAMQ* child_p1);
 static N_INLINE(tyObject_struct_Layer__KCpfpF2jwj5coKARWsuAMQ*, getLayer__OOZOOZOOZsrcZnebbleZuiZmenu95layer_u23)(tyObject_struct_MenuLayer__Go9cdNI1dmXmH0aVFC1MzqQ* menuLayer_p0);
 N_CDECL(tyObject_struct_Layer__KCpfpF2jwj5coKARWsuAMQ*, menu_layer_get_layer)(tyObject_struct_MenuLayer__Go9cdNI1dmXmH0aVFC1MzqQ* menu_layer_p0);
-N_LIB_PRIVATE N_CDECL(void, windowUnload__menu95demo_u166)(tyObject_struct_Window__x0oI0MSh79clnNFs7R9bwHcA* win_p0);
+N_LIB_PRIVATE N_CDECL(void, windowUnload__menu95demo_u58)(tyObject_struct_Window__x0oI0MSh79clnNFs7R9bwHcA* win_p0);
 static N_INLINE(void, destroy__OOZOOZOOZsrcZnebbleZuiZmenu95layer_u21)(tyObject_struct_MenuLayer__Go9cdNI1dmXmH0aVFC1MzqQ* menuLayer_p0);
 N_CDECL(void, menu_layer_destroy)(tyObject_struct_MenuLayer__Go9cdNI1dmXmH0aVFC1MzqQ* menu_layer_p0);
 N_CDECL(void, window_stack_push)(tyObject_struct_Window__x0oI0MSh79clnNFs7R9bwHcA* window_p0, NIM_BOOL animated_p1);
 static N_INLINE(void, eventLoop__OOZOOZOOZsrcZnebbleZfoundationZapp_u3)(void);
 N_CDECL(void, app_event_loop)(void);
-N_LIB_PRIVATE N_CDECL(void, deinit__menu95demo_u170)(void);
+N_LIB_PRIVATE N_CDECL(void, deinit__menu95demo_u62)(void);
 N_CDECL(void, window_destroy)(tyObject_struct_Window__x0oI0MSh79clnNFs7R9bwHcA* window_p0);
 N_LIB_PRIVATE N_NIMCALL(void, nimTestErrorFlag)(void);
 N_LIB_PRIVATE N_NIMCALL(void, atpsystemdotnim_Init000)(void);
@@ -168,7 +168,7 @@ N_LIB_PRIVATE NIM_CONST tyArray__haiLFy0nBviVTKFGuwztzQ menuTitles__menu95demo_u
 {10, (NimStrPayload*)&TM__LiUfzZKR3TCj1ckxipHXFg_6}}
 ;
 N_LIB_PRIVATE tyObject_struct_MenuLayer__Go9cdNI1dmXmH0aVFC1MzqQ* sMenuLayer__menu95demo_u6;
-N_LIB_PRIVATE tyObject_struct_Window__x0oI0MSh79clnNFs7R9bwHcA* pebbleWindow__menu95demo_u168;
+N_LIB_PRIVATE tyObject_struct_Window__x0oI0MSh79clnNFs7R9bwHcA* pebbleWindow__menu95demo_u60;
 extern NIM_BOOL nimInErrorMode__system_u3510;
 static N_INLINE(void, nimSetMem__systemZmemory_u7)(void* a_p0, int v_p1, NI size_p2) {
 	void* T1_;
@@ -349,38 +349,38 @@ NIM_BOOL* nimErr_;
 static N_INLINE(void, destroy__OOZOOZOOZsrcZnebbleZuiZmenu95layer_u21)(tyObject_struct_MenuLayer__Go9cdNI1dmXmH0aVFC1MzqQ* menuLayer_p0) {
 	menu_layer_destroy(menuLayer_p0);
 }
-N_LIB_PRIVATE N_CDECL(void, windowUnload__menu95demo_u166)(tyObject_struct_Window__x0oI0MSh79clnNFs7R9bwHcA* win_p0) {
+N_LIB_PRIVATE N_CDECL(void, windowUnload__menu95demo_u58)(tyObject_struct_Window__x0oI0MSh79clnNFs7R9bwHcA* win_p0) {
 NIM_BOOL* nimErr_;
 {nimErr_ = nimErrorFlag();
 	destroy__OOZOOZOOZsrcZnebbleZuiZmenu95layer_u21(sMenuLayer__menu95demo_u6);
 	if (NIM_UNLIKELY(*nimErr_)) goto BeforeRet_;
 	}BeforeRet_: ;
 }
-N_LIB_PRIVATE N_CDECL(void, init__menu95demo_u169)(void) {
+N_LIB_PRIVATE N_CDECL(void, init__menu95demo_u61)(void) {
 	tyObject_struct_WindowHandlers570426241__LjZh1APfxAVIL556StHLrQ T1_;
-	pebbleWindow__menu95demo_u168 = window_create();
+	pebbleWindow__menu95demo_u60 = window_create();
 	nimZeroMem((void*)(&T1_), sizeof(tyObject_struct_WindowHandlers570426241__LjZh1APfxAVIL556StHLrQ));
 	T1_.load = windowLoad__menu95demo_u53;
-	T1_.unload = windowUnload__menu95demo_u166;
-	window_set_window_handlers(pebbleWindow__menu95demo_u168, T1_);
-	window_stack_push(pebbleWindow__menu95demo_u168, NIM_TRUE);
+	T1_.unload = windowUnload__menu95demo_u58;
+	window_set_window_handlers(pebbleWindow__menu95demo_u60, T1_);
+	window_stack_push(pebbleWindow__menu95demo_u60, NIM_TRUE);
 }
 static N_INLINE(void, eventLoop__OOZOOZOOZsrcZnebbleZfoundationZapp_u3)(void) {
 	app_event_loop();
 }
-N_LIB_PRIVATE N_CDECL(void, deinit__menu95demo_u170)(void) {
-	window_destroy(pebbleWindow__menu95demo_u168);
+N_LIB_PRIVATE N_CDECL(void, deinit__menu95demo_u62)(void) {
+	window_destroy(pebbleWindow__menu95demo_u60);
 }
 N_LIB_PRIVATE N_CDECL(int, main)(void) {
 	int result;
 NIM_BOOL* nimErr_;
 {nimErr_ = nimErrorFlag();
 	result = (int)0;
-	init__menu95demo_u169();
+	init__menu95demo_u61();
 	if (NIM_UNLIKELY(*nimErr_)) goto BeforeRet_;
 	eventLoop__OOZOOZOOZsrcZnebbleZfoundationZapp_u3();
 	if (NIM_UNLIKELY(*nimErr_)) goto BeforeRet_;
-	deinit__menu95demo_u170();
+	deinit__menu95demo_u62();
 	if (NIM_UNLIKELY(*nimErr_)) goto BeforeRet_;
 	result = ((int)0);
 	goto BeforeRet_;

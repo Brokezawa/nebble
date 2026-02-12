@@ -120,7 +120,7 @@ static N_INLINE(long, time__OOZOOZOOZsrcZnebbleZfoundationZtime_u2)(long* tloc_p
 N_CDECL(long, time)(long* tloc_p0);
 static N_INLINE(long, timeStartOfToday__OOZOOZOOZsrcZnebbleZfoundationZtime_u21)(void);
 N_CDECL(long, time_start_of_today)(void);
-static N_INLINE(tyEnum_enum_HealthServiceAccessibilityMask570425969__IAznb6lj2ocdhbs5ZvSf4w, metricAccessible__OOZOOZOOZsrcZnebbleZfoundationZeventsZhealth_u28)(tyEnum_enum_HealthMetric570425941__f9bW1fVpdoHYOZZ28cRpUEw metric_p0, long timeStart_p1, long timeEnd_p2);
+static N_INLINE(tyEnum_enum_HealthServiceAccessibilityMask570425969__IAznb6lj2ocdhbs5ZvSf4w, metricAccessible__OOZOOZOOZsrcZnebbleZfoundationZeventsZhealth_u40)(tyEnum_enum_HealthMetric570425941__f9bW1fVpdoHYOZZ28cRpUEw metric_p0, long timeStart_p1, long timeEnd_p2);
 N_CDECL(tyEnum_enum_HealthServiceAccessibilityMask570425969__IAznb6lj2ocdhbs5ZvSf4w, health_service_metric_accessible)(tyEnum_enum_HealthMetric570425941__f9bW1fVpdoHYOZZ28cRpUEw metric_p0, long time_start_p1, long time_end_p2);
 N_CDECL(void, app_log)(NU8 log_level_p0, NCSTRING src_filename_p1, int src_line_number_p2, NCSTRING fmt_p3, ...);
 static N_INLINE(NI32, sumToday__OOZOOZOOZsrcZnebbleZfoundationZeventsZhealth_u13)(tyEnum_enum_HealthMetric570425941__f9bW1fVpdoHYOZZ28cRpUEw metric_p0);
@@ -290,7 +290,7 @@ static N_INLINE(long, timeStartOfToday__OOZOOZOOZsrcZnebbleZfoundationZtime_u21)
 	result = time_start_of_today();
 	return result;
 }
-static N_INLINE(tyEnum_enum_HealthServiceAccessibilityMask570425969__IAznb6lj2ocdhbs5ZvSf4w, metricAccessible__OOZOOZOOZsrcZnebbleZfoundationZeventsZhealth_u28)(tyEnum_enum_HealthMetric570425941__f9bW1fVpdoHYOZZ28cRpUEw metric_p0, long timeStart_p1, long timeEnd_p2) {
+static N_INLINE(tyEnum_enum_HealthServiceAccessibilityMask570425969__IAznb6lj2ocdhbs5ZvSf4w, metricAccessible__OOZOOZOOZsrcZnebbleZfoundationZeventsZhealth_u40)(tyEnum_enum_HealthMetric570425941__f9bW1fVpdoHYOZZ28cRpUEw metric_p0, long timeStart_p1, long timeEnd_p2) {
 	tyEnum_enum_HealthServiceAccessibilityMask570425969__IAznb6lj2ocdhbs5ZvSf4w result;
 	result = health_service_metric_accessible(metric_p0, timeStart_p1, timeEnd_p2);
 	return result;
@@ -328,9 +328,9 @@ NIM_BOOL* nimErr_;
 	if (NIM_UNLIKELY(*nimErr_)) goto BeforeRet_;
 	start_1 = timeStartOfToday__OOZOOZOOZsrcZnebbleZfoundationZtime_u21();
 	if (NIM_UNLIKELY(*nimErr_)) goto BeforeRet_;
-	stepsAccess_1 = metricAccessible__OOZOOZOOZsrcZnebbleZfoundationZeventsZhealth_u28(((tyEnum_enum_HealthMetric570425941__f9bW1fVpdoHYOZZ28cRpUEw)0), start_1, now_1);
+	stepsAccess_1 = metricAccessible__OOZOOZOOZsrcZnebbleZfoundationZeventsZhealth_u40(((tyEnum_enum_HealthMetric570425941__f9bW1fVpdoHYOZZ28cRpUEw)0), start_1, now_1);
 	if (NIM_UNLIKELY(*nimErr_)) goto BeforeRet_;
-	distAccess_1 = metricAccessible__OOZOOZOOZsrcZnebbleZfoundationZeventsZhealth_u28(((tyEnum_enum_HealthMetric570425941__f9bW1fVpdoHYOZZ28cRpUEw)2), start_1, now_1);
+	distAccess_1 = metricAccessible__OOZOOZOOZsrcZnebbleZfoundationZeventsZhealth_u40(((tyEnum_enum_HealthMetric570425941__f9bW1fVpdoHYOZZ28cRpUEw)2), start_1, now_1);
 	if (NIM_UNLIKELY(*nimErr_)) goto BeforeRet_;
 	app_log(((NU8)100), "/Users/zawa/Projects/pebble/nebble/examples/health_demo/src/health_demo.nim", ((int)30), "health: stepsMask=%u distMask=%u", ((NU32) (stepsAccess_1)), ((NU32) (distAccess_1)));
 	app_log(((NU8)100), "/Users/zawa/Projects/pebble/nebble/examples/health_demo/src/health_demo.nim", ((int)33), "health: AvailableMask=%u", ((NU32)1));

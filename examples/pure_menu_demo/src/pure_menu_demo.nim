@@ -74,9 +74,9 @@ proc windowLoad(win: ptr Window) {.cdecl.} =
     echo "Selected item: ", menuItems[selectedIndex]
     # In real implementation: onSelect callback
   
-  onClick(BUTTON_ID_UP, upClickHandler)
-  onClick(BUTTON_ID_DOWN, downClickHandler)
-  onClick(BUTTON_ID_SELECT, selectClickHandler)
+  onClick(constants.BUTTON_ID_UP, upClickHandler)
+  onClick(constants.BUTTON_ID_DOWN, downClickHandler)
+  onClick(constants.BUTTON_ID_SELECT, selectClickHandler)
   
   echo "Menu Demo Ready!"
   echo "This demonstrates what the simplified MenuLayer API would look like"

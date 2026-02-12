@@ -27,9 +27,9 @@ proc downClickHandler(recognizer: ClickRecognizerRef; context: pointer) {.cdecl.
 
 proc clickConfigProvider(context: pointer) {.cdecl.} =
   ## Configure click handlers
-  onClick(BUTTON_ID_SELECT, selectClickHandler)
-  onClick(BUTTON_ID_UP, upClickHandler)
-  onClick(BUTTON_ID_DOWN, downClickHandler)
+  onClick(constants.BUTTON_ID_SELECT, selectClickHandler)
+  onClick(constants.BUTTON_ID_UP, upClickHandler)
+  onClick(constants.BUTTON_ID_DOWN, downClickHandler)
 
 proc windowLoad(win: ptr Window) {.cdecl.} =
   ## Window load handler - create UI

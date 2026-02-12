@@ -74,8 +74,8 @@ proc windowLoad(win: ptr Window) {.cdecl.} =
     contentLayer.frame = makeGRect(5'i16, (35 - scrollOffset).int16, windowBounds.size.w - 10'i16, windowBounds.size.h - 40'i16)
     echo "Scrolled down, offset: ", scrollOffset
   
-  onClick(BUTTON_ID_UP, upClickHandler)
-  onClick(BUTTON_ID_DOWN, downClickHandler)
+  onClick(constants.BUTTON_ID_UP, upClickHandler)
+  onClick(constants.BUTTON_ID_DOWN, downClickHandler)
   
   echo "Scroll Demo Ready!"
   echo "Use UP/DOWN to scroll"

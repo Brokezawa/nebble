@@ -1,61 +1,85 @@
 import nebble/ffi
+import nebble
 import nebble/foundation/events/health
-import nebble/foundation/app
-import times
+import nebble/foundation/time
 
-## Minimal example demonstrating Health Service usage without heap allocation.
-## Shows: sum(), getMinuteHistory() with caller-provided buffer, availability checks,
-## and register/cancel metric alerts. This is intentionally small and runnable
-## against the host stubs (tests/pebble_stubs.c).
+## Device example: display today's steps and a small minute-history summary.
 
-proc onHealthEvent(event: HealthEventType; context: pointer) {.cdecl.} =
-  # For simplicity print a message on host; on device you'd update UI.
-  discard context
-  when defined(pebbleBasalt) or defined(pebbleEmery) or defined(pebbleFlint):
-    # device-specific behavior would go here
-    discard
+var
+  stepsLayer: ptr TextLayer
+  minutesLayer: ptr TextLayer
+  stepsBuffer: array[32, char]
+  minutesBuffer: array[128, char]
+
+proc updateDisplay() =
+  # Steps (today)
+  when declared(health.metricAccessible):
+    let now = time.time(nil)
+    let start = time.timeStartOfToday()
+    let stepsAccess = health.metricAccessible(HealthMetricStepCount, start, now)
+    when declared(HealthServiceAccessibilityMaskAvailable):
+      if (stepsAccess.uint32 and HealthServiceAccessibilityMaskAvailable.uint32) != 0:
+        let steps = health.sumToday(HealthMetricStepCount)
+        stepsLayer.staticText(stepsBuffer, "Steps: " & $steps)
+      else:
+        stepsLayer.text = "Steps: No permission"
+    else:
+      let steps = health.sumToday(HealthMetricStepCount)
+      stepsLayer.staticText(stepsBuffer, "Steps: " & $steps)
   else:
-    echo "Health event: ", $int(event)
+    stepsLayer.text = "Health API not"
 
-proc runDemo() =
-  # 1) Availability check for step counts over last 7 days
-  var now: time_t = cast[time_t](int(epochTime()))
-  let oneDay = cast[time_t](24*60*60)
-  let start: time_t = now - cast[time_t](7*oneDay)
-  when declared(metricAveragedAccessible):
-    let mask = metricAveragedAccessible(HealthMetricStepCount, start, now, HealthServiceTimeScopeDaily)
-    if mask == HealthServiceAccessibilityMaskNotAvailable:
-      echo "Step data not available for last 7 days"
-    else:
-      echo "Step data available"
+  # Minute history (last hour) - caller-provided buffer, no heap allocation
+  when declared(health.getMinuteHistory):
+    var buf: array[60, HealthMinuteData]
+    var t1: time_t = time.time(nil)
+    var t0: time_t = t1 - cast[time_t](60*60)
+    let got = health.getMinuteHistory(addr buf[0], uint32(buf.len), addr t0, addr t1)
+    var s = "Minutes: " & $got & " | "
+    let displayCount = if got > 10'u32: 10 else int(got)
+    for i in 0..<displayCount:
+      s = s & $(int(buf[i].steps))
+      if i < displayCount - 1: s = s & ","
+    minutesLayer.staticText(minutesBuffer, s)
+  else:
+    minutesLayer.text = "Minute history unavailable"
 
-  # 2) Sum the steps over the last 7 days using sum()
-  when declared(sum):
-    let total = sum(HealthMetricStepCount, start, now)
-    echo "Total steps (7d): ", total
+when declared(HealthEventType):
+  proc onHealthEvent(event: HealthEventType; context: pointer) {.cdecl.} =
+    updateDisplay()
 
-  # 3) Get minute history into a caller-provided fixed array (no heap)
-  when declared(getMinuteHistory):
-    var buffer: array[60, HealthMinuteData]
-    var t0: time_t = now - cast[time_t](60*60) # last hour
-    var t1: time_t = now
-    let got = getMinuteHistory(addr buffer[0], uint32(buffer.len), addr t0, addr t1)
-    echo "Minute records retrieved: ", got
+proc windowLoad(win: ptr Window) {.cdecl.} =
+  let root = win.rootLayer
+  let b = root.bounds
 
-  # 4) Register a simple metric alert and cancel it
-  when declared(registerMetricAlert) and declared(cancelMetricAlert):
-    let alert = registerMetricAlert(HealthMetricStepCount, 1000)
-    if alert == nil:
-      echo "Failed to register alert"
-    else:
-      echo "Registered metric alert"
-      discard cancelMetricAlert(alert)
-      echo "Cancelled metric alert"
+  let title = newTextLayer(makeGRect(0, 6, b.size.w, 30))
+  title.text = "Health History"
+  title.textAlignment = GTextAlignment.GTextAlignmentCenter
+  title.font = getSystemFont("RESOURCE_ID_GOTHIC_24")
+  root.addChild(title.getLayer())
 
-  # 5) Subscribe to events (no-op on host stubs but demonstrates API)
-  when declared(eventsSubscribe) and declared(eventsUnsubscribe):
-    discard eventsSubscribe(onHealthEvent, nil)
-    discard eventsUnsubscribe()
+  stepsLayer = newTextLayer(makeGRect(0, 44, b.size.w, 28))
+  stepsLayer.textAlignment = GTextAlignment.GTextAlignmentCenter
+  stepsLayer.font = getSystemFont("RESOURCE_ID_GOTHIC_18")
+  root.addChild(stepsLayer.getLayer())
 
-when isMainModule:
-  runDemo()
+  minutesLayer = newTextLayer(makeGRect(0, 76, b.size.w, 40))
+  minutesLayer.textAlignment = GTextAlignment.GTextAlignmentCenter
+  minutesLayer.font = getSystemFont("RESOURCE_ID_GOTHIC_14")
+  root.addChild(minutesLayer.getLayer())
+
+  updateDisplay()
+
+proc windowUnload(win: ptr Window) {.cdecl.} =
+  stepsLayer.destroy()
+  minutesLayer.destroy()
+
+proc initApp() =
+  when declared(health.eventsSubscribe):
+    discard health.eventsSubscribe(onHealthEvent, nil)
+
+proc deinitApp() =
+  when declared(health.eventsUnsubscribe):
+    discard health.eventsUnsubscribe()
+
+pebbleApp(load = windowLoad, unload = windowUnload, init = initApp, deinit = deinitApp)
