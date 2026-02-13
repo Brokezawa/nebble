@@ -17,158 +17,172 @@
 #undef far
 #undef powerpc
 #undef unix
-typedef struct tyObject_struct_TextLayer__nw9b2AOGA5VlSCdX45JcJqQ tyObject_struct_TextLayer__nw9b2AOGA5VlSCdX45JcJqQ;
-typedef struct tyObject_struct_Window__x0oI0MSh79clnNFs7R9bwHcA tyObject_struct_Window__x0oI0MSh79clnNFs7R9bwHcA;
-typedef struct tyObject_struct_WindowHandlers570426241__LjZh1APfxAVIL556StHLrQ tyObject_struct_WindowHandlers570426241__LjZh1APfxAVIL556StHLrQ;
-typedef struct tyObject_struct_Layer__KCpfpF2jwj5coKARWsuAMQ tyObject_struct_Layer__KCpfpF2jwj5coKARWsuAMQ;
-typedef struct tyObject_struct_GRect570426129__ba9bjUwtvD4v9a2AKX0gWCcg tyObject_struct_GRect570426129__ba9bjUwtvD4v9a2AKX0gWCcg;
-typedef struct tyObject_struct_GPoint570426121__3IzUVdS3RabK9beblMHZu3w tyObject_struct_GPoint570426121__3IzUVdS3RabK9beblMHZu3w;
-typedef struct tyObject_struct_GSize570426125__qlPUtl57k7rFH3URuNaRBg tyObject_struct_GSize570426125__qlPUtl57k7rFH3URuNaRBg;
-typedef struct tyObject_struct_FontInfo__OThMgPKJgGYHGdVfrJ27ng tyObject_struct_FontInfo__OThMgPKJgGYHGdVfrJ27ng;
-typedef union tyObject_union_GColor8570426115__5r6qkn4jWQz1dbWRrH9aefw tyObject_union_GColor8570426115__5r6qkn4jWQz1dbWRrH9aefw;
-typedef struct tyObject_union_GColor8_anon0_t__CMihq5cObL5TRHT7QyD9bEA tyObject_union_GColor8_anon0_t__CMihq5cObL5TRHT7QyD9bEA;
-typedef struct NimStrPayload NimStrPayload;
-typedef struct NimStringV2 NimStringV2;
+typedef struct tyObject_WindowHandle__QyOpsx5EVgiof5UakzQL7A tyObject_WindowHandle__QyOpsx5EVgiof5UakzQL7A;
+typedef struct tyObject_struct_Window__esLx3vYHW9aoDk9a25tQZ3QQ tyObject_struct_Window__esLx3vYHW9aoDk9a25tQZ3QQ;
+typedef struct tyObject_TextLayerHandle__t9bAY9a7d2BLJR3FU4TDoSGA tyObject_TextLayerHandle__t9bAY9a7d2BLJR3FU4TDoSGA;
+typedef struct tyObject_struct_TextLayer__W2RZgVo7iB0lIlJ4pj15Iw tyObject_struct_TextLayer__W2RZgVo7iB0lIlJ4pj15Iw;
+typedef struct tyObject_struct_Layer__ArRLSoHcgGa9cBzSS1Rec1A tyObject_struct_Layer__ArRLSoHcgGa9cBzSS1Rec1A;
+typedef struct tyObject_FixedString__xa1xApmG6K4Owp23GMXv3w tyObject_FixedString__xa1xApmG6K4Owp23GMXv3w;
+typedef struct tyObject_FixedString__FEvMMAl6BfSkYl1B6N5cOw tyObject_FixedString__FEvMMAl6BfSkYl1B6N5cOw;
+typedef struct tyObject_struct_WindowHandlers570426229__02qYYCHBEISZffJIuzUt4Q tyObject_struct_WindowHandlers570426229__02qYYCHBEISZffJIuzUt4Q;
+typedef struct tyObject_struct_GRect570426117__1cvu9aouLOT7LTuhbj2kIUw tyObject_struct_GRect570426117__1cvu9aouLOT7LTuhbj2kIUw;
+typedef struct tyObject_struct_GPoint570426109__MkjwgUVSXEPVhj24Lk6PGg tyObject_struct_GPoint570426109__MkjwgUVSXEPVhj24Lk6PGg;
+typedef struct tyObject_struct_GSize570426113__IEdlJiAdTjfJvV1HDnqF3Q tyObject_struct_GSize570426113__IEdlJiAdTjfJvV1HDnqF3Q;
+typedef union tyObject_union_GColor8570426103__z6bg1Y39bpd9cp1dPIdYmWhw tyObject_union_GColor8570426103__z6bg1Y39bpd9cp1dPIdYmWhw;
+typedef struct tyObject_union_GColor8_anon0_t__MvnUTQiGHBgaJKzoQ9aJo5w tyObject_union_GColor8_anon0_t__MvnUTQiGHBgaJKzoQ9aJo5w;
+typedef struct tyObject_struct_FontInfo__nTqpQAiJJxk8kM9bFrHFwHA tyObject_struct_FontInfo__nTqpQAiJJxk8kM9bFrHFwHA;
+typedef NU8 tyEnum_ResourceState__zuZLKhn7SRnYvk4iCTdAkw;
+struct tyObject_WindowHandle__QyOpsx5EVgiof5UakzQL7A {
+	tyObject_struct_Window__esLx3vYHW9aoDk9a25tQZ3QQ* raw;
+	tyEnum_ResourceState__zuZLKhn7SRnYvk4iCTdAkw state;
+};
+struct tyObject_TextLayerHandle__t9bAY9a7d2BLJR3FU4TDoSGA {
+	tyObject_struct_TextLayer__W2RZgVo7iB0lIlJ4pj15Iw* pRaw;
+	tyObject_struct_Layer__ArRLSoHcgGa9cBzSS1Rec1A* pParent;
+};
 typedef NIM_CHAR tyArray__x9aRkN8DVcTBDUl3hEPJutg[32];
+struct tyObject_FixedString__xa1xApmG6K4Owp23GMXv3w {
+	NI len;
+	tyArray__x9aRkN8DVcTBDUl3hEPJutg data;
+};
 typedef NIM_CHAR tyArray__2cWMSJoP9cqN4yIK0ILkQaQ[64];
-struct tyObject_struct_Window__x0oI0MSh79clnNFs7R9bwHcA {
+struct tyObject_FixedString__FEvMMAl6BfSkYl1B6N5cOw {
+	NI len;
+	tyArray__2cWMSJoP9cqN4yIK0ILkQaQ data;
+};
+struct tyObject_struct_Window__esLx3vYHW9aoDk9a25tQZ3QQ {
 	char dummy;
 };
-typedef N_CDECL_PTR(void, tyProc__AL9bRLkzEO68chD0gurqcTA) (tyObject_struct_Window__x0oI0MSh79clnNFs7R9bwHcA* a0_p0);
-struct tyObject_struct_WindowHandlers570426241__LjZh1APfxAVIL556StHLrQ {
-	tyProc__AL9bRLkzEO68chD0gurqcTA load;
-	tyProc__AL9bRLkzEO68chD0gurqcTA appear;
-	tyProc__AL9bRLkzEO68chD0gurqcTA disappear;
-	tyProc__AL9bRLkzEO68chD0gurqcTA unload;
+typedef N_CDECL_PTR(void, tyProc__YKpbB7RnAWujFAITf8zLgw) (tyObject_struct_Window__esLx3vYHW9aoDk9a25tQZ3QQ* a0_p0);
+struct tyObject_struct_WindowHandlers570426229__02qYYCHBEISZffJIuzUt4Q {
+	tyProc__YKpbB7RnAWujFAITf8zLgw load;
+	tyProc__YKpbB7RnAWujFAITf8zLgw appear;
+	tyProc__YKpbB7RnAWujFAITf8zLgw disappear;
+	tyProc__YKpbB7RnAWujFAITf8zLgw unload;
 };
-struct tyObject_struct_Layer__KCpfpF2jwj5coKARWsuAMQ {
-	char dummy;
-};
-struct tyObject_struct_GPoint570426121__3IzUVdS3RabK9beblMHZu3w {
+struct tyObject_struct_GPoint570426109__MkjwgUVSXEPVhj24Lk6PGg {
 	NI16 x;
 	NI16 y;
 };
-struct tyObject_struct_GSize570426125__qlPUtl57k7rFH3URuNaRBg {
+struct tyObject_struct_GSize570426113__IEdlJiAdTjfJvV1HDnqF3Q {
 	NI16 w;
 	NI16 h;
 };
-struct tyObject_struct_GRect570426129__ba9bjUwtvD4v9a2AKX0gWCcg {
-	tyObject_struct_GPoint570426121__3IzUVdS3RabK9beblMHZu3w origin;
-	tyObject_struct_GSize570426125__qlPUtl57k7rFH3URuNaRBg size;
+struct tyObject_struct_GRect570426117__1cvu9aouLOT7LTuhbj2kIUw {
+	tyObject_struct_GPoint570426109__MkjwgUVSXEPVhj24Lk6PGg origin;
+	tyObject_struct_GSize570426113__IEdlJiAdTjfJvV1HDnqF3Q size;
 };
-typedef NI32 tyEnum_enum_GTextAlignment570426199__GoX9aZdlRH7BVghtSOwHTqA;
-struct tyObject_struct_TextLayer__nw9b2AOGA5VlSCdX45JcJqQ {
+struct tyObject_struct_TextLayer__W2RZgVo7iB0lIlJ4pj15Iw {
 	char dummy;
 };
-struct tyObject_struct_FontInfo__OThMgPKJgGYHGdVfrJ27ng {
-	char dummy;
-};
-struct tyObject_union_GColor8_anon0_t__CMihq5cObL5TRHT7QyD9bEA {
+struct tyObject_union_GColor8_anon0_t__MvnUTQiGHBgaJKzoQ9aJo5w {
 	NU8 b:2;
 	NU8 g:2;
 	NU8 r:2;
 	NU8 a:2;
 };
-union tyObject_union_GColor8570426115__5r6qkn4jWQz1dbWRrH9aefw {
+union tyObject_union_GColor8570426103__z6bg1Y39bpd9cp1dPIdYmWhw {
 	NU8 argb;
-	tyObject_union_GColor8_anon0_t__CMihq5cObL5TRHT7QyD9bEA anon0;
+	tyObject_union_GColor8_anon0_t__MvnUTQiGHBgaJKzoQ9aJo5w anon0;
 };
-struct NimStrPayload {
-	NI cap;
-	NIM_CHAR data[SEQ_DECL_SIZE];
-};
-struct NimStringV2 {
-	NI len;
-	NimStrPayload* p;
+typedef NI32 tyEnum_enum_GTextAlignment570426187__738WkvryWkSwnjJJREpJEA;
+struct tyObject_struct_Layer__ArRLSoHcgGa9cBzSS1Rec1A {
+	char dummy;
 };
 typedef N_CDECL_PTR(void, tyProc__32w2ZypAyMWuajvi2Jt79cg) (void* a0_p0);
-typedef NI32 tyEnum_enum_ButtonId570425848__Rzy1M9a2qUvvKVCZfJa2Ciw;
+typedef NI32 tyEnum_enum_ButtonId570425836__WRdsyN5X54A09bBtIGHbj1Q;
 typedef N_CDECL_PTR(void, tyProc__LCJy9bQFEE8ObaRc29a4n3LA) (void* a0_p0, void* a1_p1);
+typedef NIM_CHAR tyArray__0j8sSXZOeBGmu6W0H2n0Uw[10];
 N_LIB_PRIVATE N_CDECL(int, main)(void);
-N_LIB_PRIVATE N_CDECL(void, init__persist95demo_u103)(void);
-N_CDECL(tyObject_struct_Window__x0oI0MSh79clnNFs7R9bwHcA*, window_create)(void);
-N_CDECL(void, window_set_window_handlers)(tyObject_struct_Window__x0oI0MSh79clnNFs7R9bwHcA* window_p0, tyObject_struct_WindowHandlers570426241__LjZh1APfxAVIL556StHLrQ handlers_p1);
+N_NIMCALL(void, NimMain)(void);
+N_LIB_PRIVATE N_CDECL(void, init__persist95demo_u169)(void);
+N_LIB_PRIVATE N_NIMCALL(void, eqsink___OOZOOZOOZsrcZnebbleZuiZwindow_u50)(tyObject_WindowHandle__QyOpsx5EVgiof5UakzQL7A* dest_p0, tyObject_WindowHandle__QyOpsx5EVgiof5UakzQL7A src_p1);
+static N_INLINE(tyObject_WindowHandle__QyOpsx5EVgiof5UakzQL7A, newWindow__OOZOOZOOZsrcZnebbleZuiZwindow_u191)(void);
 static N_INLINE(void, nimZeroMem)(void* p_p0, NI size_p1);
 static N_INLINE(void, nimSetMem__systemZmemory_u7)(void* a_p0, int v_p1, NI size_p2);
 static N_INLINE(NIM_BOOL*, nimErrorFlag)(void);
-N_LIB_PRIVATE N_CDECL(void, windowLoad__persist95demo_u93)(tyObject_struct_Window__x0oI0MSh79clnNFs7R9bwHcA* win_p0);
-static N_INLINE(tyObject_struct_Layer__KCpfpF2jwj5coKARWsuAMQ*, rootLayer__OOZOOZOOZsrcZnebbleZuiZwindow_u39)(tyObject_struct_Window__x0oI0MSh79clnNFs7R9bwHcA* window_p0);
-N_CDECL(tyObject_struct_Layer__KCpfpF2jwj5coKARWsuAMQ*, window_get_root_layer)(tyObject_struct_Window__x0oI0MSh79clnNFs7R9bwHcA* window_p0);
-static N_INLINE(tyObject_struct_GRect570426129__ba9bjUwtvD4v9a2AKX0gWCcg, bounds__OOZOOZOOZsrcZnebbleZuiZlayer_u52)(tyObject_struct_Layer__KCpfpF2jwj5coKARWsuAMQ* layer_p0);
-N_CDECL(tyObject_struct_GRect570426129__ba9bjUwtvD4v9a2AKX0gWCcg, layer_get_bounds)(tyObject_struct_Layer__KCpfpF2jwj5coKARWsuAMQ* layer_p0);
-static N_INLINE(tyObject_struct_TextLayer__nw9b2AOGA5VlSCdX45JcJqQ*, newTextLayer__OOZOOZOOZsrcZnebbleZuiZtext95layer_u2)(tyObject_struct_GRect570426129__ba9bjUwtvD4v9a2AKX0gWCcg frame_p0, NCSTRING text_p1, tyObject_struct_FontInfo__OThMgPKJgGYHGdVfrJ27ng* font_p2, tyEnum_enum_GTextAlignment570426199__GoX9aZdlRH7BVghtSOwHTqA align_p3);
-N_CDECL(tyObject_struct_TextLayer__nw9b2AOGA5VlSCdX45JcJqQ*, text_layer_create)(tyObject_struct_GRect570426129__ba9bjUwtvD4v9a2AKX0gWCcg frame_p0);
+static N_INLINE(tyObject_WindowHandle__QyOpsx5EVgiof5UakzQL7A, newWindowHandle__OOZOOZOOZsrcZnebbleZuiZwindow_u189)(void);
+N_CDECL(tyObject_struct_Window__esLx3vYHW9aoDk9a25tQZ3QQ*, window_create)(void);
+N_LIB_PRIVATE N_NIMCALL(void, eqdestroy___OOZOOZOOZsrcZnebbleZuiZwindow_u7)(tyObject_WindowHandle__QyOpsx5EVgiof5UakzQL7A* h_p0);
+static N_INLINE(void, setHandlers__OOZOOZOOZsrcZnebbleZuiZwindow_u264)(tyObject_WindowHandle__QyOpsx5EVgiof5UakzQL7A* h_p0, tyProc__YKpbB7RnAWujFAITf8zLgw load_p1, tyProc__YKpbB7RnAWujFAITf8zLgw unload_p2, tyProc__YKpbB7RnAWujFAITf8zLgw appear_p3, tyProc__YKpbB7RnAWujFAITf8zLgw disappear_p4);
+N_CDECL(void, window_set_window_handlers)(tyObject_struct_Window__esLx3vYHW9aoDk9a25tQZ3QQ* window_p0, tyObject_struct_WindowHandlers570426229__02qYYCHBEISZffJIuzUt4Q handlers_p1);
+N_LIB_PRIVATE N_CDECL(void, windowLoad__persist95demo_u105)(tyObject_struct_Window__esLx3vYHW9aoDk9a25tQZ3QQ* winX60gensym63__p0);
+N_LIB_PRIVATE N_NIMCALL(void, eqsink___OOZOOZOOZsrcZnebbleZuiZtext95layer_u53)(tyObject_TextLayerHandle__t9bAY9a7d2BLJR3FU4TDoSGA* destX60gensym0__p0, tyObject_TextLayerHandle__t9bAY9a7d2BLJR3FU4TDoSGA srcX60gensym0__p1);
+static N_INLINE(tyObject_TextLayerHandle__t9bAY9a7d2BLJR3FU4TDoSGA, newTextLayer__OOZOOZOOZsrcZnebbleZuiZtext95layer_u110)(tyObject_struct_GRect570426117__1cvu9aouLOT7LTuhbj2kIUw frame_p0);
+static N_INLINE(tyObject_TextLayerHandle__t9bAY9a7d2BLJR3FU4TDoSGA, newTextLayerHandle__OOZOOZOOZsrcZnebbleZuiZtext95layer_u107)(tyObject_struct_GRect570426117__1cvu9aouLOT7LTuhbj2kIUw frame_p0);
+static N_INLINE(tyObject_TextLayerHandle__t9bAY9a7d2BLJR3FU4TDoSGA, toHandle__OOZOOZOOZsrcZnebbleZuiZtext95layer_u79)(tyObject_struct_TextLayer__W2RZgVo7iB0lIlJ4pj15Iw* pX60gensym0__p0);
+N_CDECL(tyObject_struct_TextLayer__W2RZgVo7iB0lIlJ4pj15Iw*, text_layer_create)(tyObject_struct_GRect570426117__1cvu9aouLOT7LTuhbj2kIUw frame_p0);
+static N_INLINE(tyObject_struct_GRect570426117__1cvu9aouLOT7LTuhbj2kIUw, makeGRect__OOZOOZOOZsrcZnebbleZffi_u3487)(NI16 x_p0, NI16 y_p1, NI16 w_p2, NI16 h_p3);
+N_LIB_PRIVATE N_NIMCALL(void, eqdestroy___OOZOOZOOZsrcZnebbleZuiZtext95layer_u22)(tyObject_TextLayerHandle__t9bAY9a7d2BLJR3FU4TDoSGA* hX60gensym0__p0);
+static N_INLINE(void, backgroundColoreq___OOZOOZOOZsrcZnebbleZuiZtext95layer_u147)(tyObject_TextLayerHandle__t9bAY9a7d2BLJR3FU4TDoSGA* h_p0, tyObject_union_GColor8570426103__z6bg1Y39bpd9cp1dPIdYmWhw value_p1);
+N_CDECL(void, text_layer_set_background_color)(tyObject_struct_TextLayer__W2RZgVo7iB0lIlJ4pj15Iw* text_layer_p0, tyObject_union_GColor8570426103__z6bg1Y39bpd9cp1dPIdYmWhw color_p1);
+N_LIB_PRIVATE N_NIMCALL(tyObject_struct_TextLayer__W2RZgVo7iB0lIlJ4pj15Iw*, toPtr__OOZOOZOOZsrcZnebbleZuiZtext95layer_u73)(tyObject_TextLayerHandle__t9bAY9a7d2BLJR3FU4TDoSGA hX60gensym0__p0);
+static N_INLINE(void, makeGColor8__OOZOOZOOZsrcZnebbleZffi_u3515)(NU8 argb_p0, tyObject_union_GColor8570426103__z6bg1Y39bpd9cp1dPIdYmWhw* Result);
+static N_INLINE(void, fonteq___OOZOOZOOZsrcZnebbleZuiZtext95layer_u138)(tyObject_TextLayerHandle__t9bAY9a7d2BLJR3FU4TDoSGA* h_p0, tyObject_struct_FontInfo__nTqpQAiJJxk8kM9bFrHFwHA* value_p1);
+N_CDECL(void, text_layer_set_font)(tyObject_struct_TextLayer__W2RZgVo7iB0lIlJ4pj15Iw* text_layer_p0, tyObject_struct_FontInfo__nTqpQAiJJxk8kM9bFrHFwHA* font_p1);
+N_CDECL(tyObject_struct_FontInfo__nTqpQAiJJxk8kM9bFrHFwHA*, fonts_get_system_font)(NCSTRING font_key_p0);
+static N_INLINE(void, texteq___OOZOOZOOZsrcZnebbleZuiZtext95layer_u132)(tyObject_TextLayerHandle__t9bAY9a7d2BLJR3FU4TDoSGA* h_p0, NCSTRING value_p1);
+N_CDECL(void, text_layer_set_text)(tyObject_struct_TextLayer__W2RZgVo7iB0lIlJ4pj15Iw* text_layer_p0, NCSTRING text_p1);
+static N_INLINE(void, textAlignmenteq___OOZOOZOOZsrcZnebbleZuiZtext95layer_u141)(tyObject_TextLayerHandle__t9bAY9a7d2BLJR3FU4TDoSGA* h_p0, tyEnum_enum_GTextAlignment570426187__738WkvryWkSwnjJJREpJEA value_p1);
+N_CDECL(void, text_layer_set_text_alignment)(tyObject_struct_TextLayer__W2RZgVo7iB0lIlJ4pj15Iw* text_layer_p0, tyEnum_enum_GTextAlignment570426187__738WkvryWkSwnjJJREpJEA text_alignment_p1);
+static N_INLINE(NCSTRING, toCstring__persist95demo_u107)(tyObject_FixedString__FEvMMAl6BfSkYl1B6N5cOw* s_p0);
+static N_INLINE(void, addChild__persist95demo_u134)(tyObject_struct_Layer__ArRLSoHcgGa9cBzSS1Rec1A* parent_p0, tyObject_TextLayerHandle__t9bAY9a7d2BLJR3FU4TDoSGA* child_p1);
+N_CDECL(void, layer_add_child)(tyObject_struct_Layer__ArRLSoHcgGa9cBzSS1Rec1A* parent_p0, tyObject_struct_Layer__ArRLSoHcgGa9cBzSS1Rec1A* child_p1);
+N_LIB_PRIVATE N_NIMCALL(tyObject_struct_Layer__ArRLSoHcgGa9cBzSS1Rec1A*, toLayer__OOZOOZOOZsrcZnebbleZuiZtext95layer_u76)(tyObject_TextLayerHandle__t9bAY9a7d2BLJR3FU4TDoSGA hX60gensym0__p0);
+static N_INLINE(tyObject_struct_Layer__ArRLSoHcgGa9cBzSS1Rec1A*, rootLayer__OOZOOZOOZsrcZnebbleZuiZwindow_u230)(tyObject_WindowHandle__QyOpsx5EVgiof5UakzQL7A h_p0);
+N_CDECL(tyObject_struct_Layer__ArRLSoHcgGa9cBzSS1Rec1A*, window_get_root_layer)(tyObject_struct_Window__esLx3vYHW9aoDk9a25tQZ3QQ* window_p0);
+static N_INLINE(void, clickConfigeq___OOZOOZOOZsrcZnebbleZuiZwindow_u325)(tyObject_WindowHandle__QyOpsx5EVgiof5UakzQL7A* h_p0, tyProc__32w2ZypAyMWuajvi2Jt79cg provider_p1);
+N_CDECL(void, window_set_click_config_provider)(tyObject_struct_Window__esLx3vYHW9aoDk9a25tQZ3QQ* window_p0, tyProc__32w2ZypAyMWuajvi2Jt79cg click_config_provider_p1);
+N_LIB_PRIVATE N_CDECL(void, generatedClickConfigProvider__persist95demo_u98)(void* ctxX60gensym60__p0);
+static N_INLINE(void, onClick__OOZOOZOOZsrcZnebbleZuiZclicks_u2)(tyEnum_enum_ButtonId570425836__WRdsyN5X54A09bBtIGHbj1Q buttonId_p0, tyProc__LCJy9bQFEE8ObaRc29a4n3LA handler_p1);
+N_CDECL(void, window_single_click_subscribe)(tyEnum_enum_ButtonId570425836__WRdsyN5X54A09bBtIGHbj1Q button_id_p0, tyProc__LCJy9bQFEE8ObaRc29a4n3LA handler_p1);
+N_LIB_PRIVATE N_CDECL(void, selectClickHandler__persist95demo_u6)(void* recognizer_p0, void* context_p1);
+N_LIB_PRIVATE N_NIMCALL(void, saveData__persist95demo_u17)(void);
+static N_INLINE(int, writeInt__OOZOOZOOZsrcZnebbleZfoundationZstorage_u8)(NU32 key_p0, NI32 value_p1);
+N_CDECL(NI32, persist_write_int)(NU32 key_p0, NI32 value_p1);
+N_LIB_PRIVATE N_NIMCALL(void, updateDisplay__persist95demo_u16)(void);
+static N_INLINE(void, clear__persist95demo_u181)(tyObject_FixedString__xa1xApmG6K4Owp23GMXv3w* s_p0);
+static N_INLINE(void, add__persist95demo_u220)(tyObject_FixedString__xa1xApmG6K4Owp23GMXv3w* s_p0, NCSTRING str_p1);
 static N_INLINE(NIM_BOOL, eqeq___system_u6018)(NCSTRING x_p0, NCSTRING y_p1);
-N_CDECL(void, text_layer_set_text)(tyObject_struct_TextLayer__nw9b2AOGA5VlSCdX45JcJqQ* text_layer_p0, NCSTRING text_p1);
-N_CDECL(void, text_layer_set_font)(tyObject_struct_TextLayer__nw9b2AOGA5VlSCdX45JcJqQ* text_layer_p0, tyObject_struct_FontInfo__OThMgPKJgGYHGdVfrJ27ng* font_p1);
-N_CDECL(void, text_layer_set_text_alignment)(tyObject_struct_TextLayer__nw9b2AOGA5VlSCdX45JcJqQ* text_layer_p0, tyEnum_enum_GTextAlignment570426199__GoX9aZdlRH7BVghtSOwHTqA text_alignment_p1);
-static N_INLINE(tyObject_struct_GRect570426129__ba9bjUwtvD4v9a2AKX0gWCcg, makeGRect__OOZOOZOOZsrcZnebbleZffi_u3487)(NI16 x_p0, NI16 y_p1, NI16 w_p2, NI16 h_p3);
-static N_INLINE(void, texteq___OOZOOZOOZsrcZnebbleZuiZtext95layer_u33)(tyObject_struct_TextLayer__nw9b2AOGA5VlSCdX45JcJqQ* textLayer_p0, NCSTRING text_p1);
-static N_INLINE(void, textAlignmenteq___OOZOOZOOZsrcZnebbleZuiZtext95layer_u42)(tyObject_struct_TextLayer__nw9b2AOGA5VlSCdX45JcJqQ* textLayer_p0, tyEnum_enum_GTextAlignment570426199__GoX9aZdlRH7BVghtSOwHTqA alignment_p1);
-static N_INLINE(void, fonteq___OOZOOZOOZsrcZnebbleZuiZtext95layer_u39)(tyObject_struct_TextLayer__nw9b2AOGA5VlSCdX45JcJqQ* textLayer_p0, tyObject_struct_FontInfo__OThMgPKJgGYHGdVfrJ27ng* font_p1);
-static N_INLINE(tyObject_struct_FontInfo__OThMgPKJgGYHGdVfrJ27ng*, getSystemFont__OOZOOZOOZsrcZnebbleZgraphicsZfonts_u2)(NCSTRING fontKey_p0);
-N_CDECL(tyObject_struct_FontInfo__OThMgPKJgGYHGdVfrJ27ng*, fonts_get_system_font)(NCSTRING font_key_p0);
-static N_INLINE(void, backgroundColoreq___OOZOOZOOZsrcZnebbleZuiZtext95layer_u45)(tyObject_struct_TextLayer__nw9b2AOGA5VlSCdX45JcJqQ* textLayer_p0, tyObject_union_GColor8570426115__5r6qkn4jWQz1dbWRrH9aefw color_p1);
-N_CDECL(void, text_layer_set_background_color)(tyObject_struct_TextLayer__nw9b2AOGA5VlSCdX45JcJqQ* text_layer_p0, tyObject_union_GColor8570426115__5r6qkn4jWQz1dbWRrH9aefw color_p1);
-static N_INLINE(void, makeGColor8__OOZOOZOOZsrcZnebbleZffi_u3515)(NU8 argb_p0, tyObject_union_GColor8570426115__5r6qkn4jWQz1dbWRrH9aefw* Result);
-static N_INLINE(void, addChild__OOZOOZOOZsrcZnebbleZuiZlayer_u11)(tyObject_struct_Layer__KCpfpF2jwj5coKARWsuAMQ* parent_p0, tyObject_struct_Layer__KCpfpF2jwj5coKARWsuAMQ* child_p1);
-N_CDECL(void, layer_add_child)(tyObject_struct_Layer__KCpfpF2jwj5coKARWsuAMQ* parent_p0, tyObject_struct_Layer__KCpfpF2jwj5coKARWsuAMQ* child_p1);
-static N_INLINE(tyObject_struct_Layer__KCpfpF2jwj5coKARWsuAMQ*, getLayer__OOZOOZOOZsrcZnebbleZuiZtext95layer_u30)(tyObject_struct_TextLayer__nw9b2AOGA5VlSCdX45JcJqQ* textLayer_p0);
-N_CDECL(tyObject_struct_Layer__KCpfpF2jwj5coKARWsuAMQ*, text_layer_get_layer)(tyObject_struct_TextLayer__nw9b2AOGA5VlSCdX45JcJqQ* text_layer_p0);
-N_LIB_PRIVATE N_NIMCALL(void, loadData__persist95demo_u50)(void);
+static N_INLINE(void, addInt__persist95demo_u247)(tyObject_FixedString__xa1xApmG6K4Owp23GMXv3w* s_p0, NI32 val_p1);
+static N_INLINE(void, add__persist95demo_u264)(tyObject_FixedString__xa1xApmG6K4Owp23GMXv3w* s_p0, NIM_CHAR c_p1);
+static N_INLINE(NCSTRING, toCstring__persist95demo_u363)(tyObject_FixedString__xa1xApmG6K4Owp23GMXv3w* s_p0);
+static N_INLINE(void, shortPulse__OOZOOZOOZsrcZnebbleZuiZvibes_u2)(void);
+N_CDECL(void, vibes_short_pulse)(void);
+N_LIB_PRIVATE N_CDECL(void, upClickHandler__persist95demo_u9)(void* recognizer_p0, void* context_p1);
+N_LIB_PRIVATE N_CDECL(void, downClickHandler__persist95demo_u12)(void* recognizer_p0, void* context_p1);
+static N_INLINE(void, doublePulse__OOZOOZOOZsrcZnebbleZuiZvibes_u4)(void);
+N_CDECL(void, vibes_double_pulse)(void);
+N_LIB_PRIVATE N_CDECL(void, windowUnload__persist95demo_u150)(tyObject_struct_Window__esLx3vYHW9aoDk9a25tQZ3QQ* winX60gensym63__p0);
+N_LIB_PRIVATE N_NIMCALL(void, loadData__persist95demo_u15)(void);
 static N_INLINE(NIM_BOOL, exists__OOZOOZOOZsrcZnebbleZfoundationZstorage_u2)(NU32 key_p0);
 N_CDECL(NIM_BOOL, persist_exists)(NU32 key_p0);
 static N_INLINE(NI32, readInt__OOZOOZOOZsrcZnebbleZfoundationZstorage_u5)(NU32 key_p0);
 N_CDECL(NI32, persist_read_int)(NU32 key_p0);
 static N_INLINE(int, readString__OOZOOZOOZsrcZnebbleZfoundationZstorage_u12)(NU32 key_p0, NCSTRING buffer_p1, size_t bufferSize_p2);
 N_CDECL(int, persist_read_string)(NU32 key_p0, NCSTRING buffer_p1, size_t buffer_size_p2);
-N_LIB_PRIVATE N_NIMCALL(void, updateDisplay__persist95demo_u12)(void);
-static N_INLINE(void, appendString)(NimStringV2* dest_p0, NimStringV2 src_p1);
-static N_INLINE(void, copyMem__system_u1741)(void* dest_p0, void* source_p1, NI size_p2);
-static N_INLINE(void, nimCopyMem)(void* dest_p0, void* source_p1, NI size_p2);
-N_LIB_PRIVATE N_NIMCALL(NimStringV2, dollar___systemZdollars_u29)(NI32 xX60gensym3__p0);
-N_LIB_PRIVATE N_NIMCALL(NimStringV2, rawNewString)(NI space_p0);
-N_LIB_PRIVATE N_NOCONV(void, dealloc)(void* p_p0);
-N_LIB_PRIVATE N_CDECL(void, windowUnload__persist95demo_u99)(tyObject_struct_Window__x0oI0MSh79clnNFs7R9bwHcA* win_p0);
-static N_INLINE(void, destroy__OOZOOZOOZsrcZnebbleZuiZtext95layer_u28)(tyObject_struct_TextLayer__nw9b2AOGA5VlSCdX45JcJqQ* textLayer_p0);
-N_CDECL(void, text_layer_destroy)(tyObject_struct_TextLayer__nw9b2AOGA5VlSCdX45JcJqQ* text_layer_p0);
-N_CDECL(void, window_set_click_config_provider)(tyObject_struct_Window__x0oI0MSh79clnNFs7R9bwHcA* window_p0, tyProc__32w2ZypAyMWuajvi2Jt79cg click_config_provider_p1);
-N_LIB_PRIVATE N_CDECL(void, clickConfigProvider__persist95demo_u91)(void* context_p0);
-static N_INLINE(void, onClick__OOZOOZOOZsrcZnebbleZuiZclicks_u2)(tyEnum_enum_ButtonId570425848__Rzy1M9a2qUvvKVCZfJa2Ciw buttonId_p0, tyProc__LCJy9bQFEE8ObaRc29a4n3LA handler_p1);
-N_CDECL(void, window_single_click_subscribe)(tyEnum_enum_ButtonId570425848__Rzy1M9a2qUvvKVCZfJa2Ciw button_id_p0, tyProc__LCJy9bQFEE8ObaRc29a4n3LA handler_p1);
-N_LIB_PRIVATE N_CDECL(void, selectClickHandler__persist95demo_u73)(void* recognizer_p0, void* context_p1);
-N_LIB_PRIVATE N_NIMCALL(void, saveData__persist95demo_u49)(void);
-static N_INLINE(int, writeInt__OOZOOZOOZsrcZnebbleZfoundationZstorage_u8)(NU32 key_p0, NI32 value_p1);
-N_CDECL(NI32, persist_write_int)(NU32 key_p0, NI32 value_p1);
-static N_INLINE(void, shortPulse__OOZOOZOOZsrcZnebbleZuiZvibes_u2)(void);
-N_CDECL(void, vibes_short_pulse)(void);
-N_LIB_PRIVATE N_CDECL(void, upClickHandler__persist95demo_u81)(void* recognizer_p0, void* context_p1);
-N_LIB_PRIVATE N_CDECL(void, downClickHandler__persist95demo_u88)(void* recognizer_p0, void* context_p1);
-static N_INLINE(void, doublePulse__OOZOOZOOZsrcZnebbleZuiZvibes_u4)(void);
-N_CDECL(void, vibes_double_pulse)(void);
-N_CDECL(void, window_stack_push)(tyObject_struct_Window__x0oI0MSh79clnNFs7R9bwHcA* window_p0, NIM_BOOL animated_p1);
-static N_INLINE(void, eventLoop__OOZOOZOOZsrcZnebbleZfoundationZapp_u3)(void);
+static N_INLINE(void, clear__persist95demo_u380)(tyObject_FixedString__FEvMMAl6BfSkYl1B6N5cOw* s_p0);
+static N_INLINE(void, add__persist95demo_u397)(tyObject_FixedString__FEvMMAl6BfSkYl1B6N5cOw* s_p0, NCSTRING str_p1);
+static N_INLINE(void, push__OOZOOZOOZsrcZnebbleZuiZwindow_u199)(tyObject_WindowHandle__QyOpsx5EVgiof5UakzQL7A* h_p0, NIM_BOOL animated_p1);
+N_CDECL(void, window_stack_push)(tyObject_struct_Window__esLx3vYHW9aoDk9a25tQZ3QQ* window_p0, NIM_BOOL animated_p1);
 N_CDECL(void, app_event_loop)(void);
-N_LIB_PRIVATE N_CDECL(void, deinit__persist95demo_u104)(void);
-N_LIB_PRIVATE N_NIMCALL(void, deinitApp__persist95demo_u101)(void);
-N_CDECL(void, window_destroy)(tyObject_struct_Window__x0oI0MSh79clnNFs7R9bwHcA* window_p0);
+N_LIB_PRIVATE N_CDECL(void, deinit__persist95demo_u170)(void);
+static N_INLINE(NIM_BOOL, pop__OOZOOZOOZsrcZnebbleZuiZwindow_u202)(tyObject_WindowHandle__QyOpsx5EVgiof5UakzQL7A* h_p0);
+N_CDECL(tyObject_struct_Window__esLx3vYHW9aoDk9a25tQZ3QQ*, window_stack_get_top_window)(void);
+N_CDECL(tyObject_struct_Window__esLx3vYHW9aoDk9a25tQZ3QQ*, window_stack_pop)(NIM_BOOL animated_p0);
+N_LIB_PRIVATE N_NIMCALL(tyObject_WindowHandle__QyOpsx5EVgiof5UakzQL7A, toHandle__OOZOOZOOZsrcZnebbleZuiZwindow_u73)(tyObject_struct_Window__esLx3vYHW9aoDk9a25tQZ3QQ* p_p0);
+N_LIB_PRIVATE N_CDECL(void, _exit)(int codeX60gensym63__p0);
 N_LIB_PRIVATE N_NIMCALL(void, nimTestErrorFlag)(void);
 N_LIB_PRIVATE N_NIMCALL(void, atpsystemdotnim_Init000)(void);
 N_LIB_PRIVATE N_NIMCALL(void, NimMainModule)(void);
-static const struct {
-  NI cap; NIM_CHAR data[11+1];
-} TM__lqeHtcRlDduU9aPt9aAEw6Dw_2 = { 11 | NIM_STRLIT_FLAG, "Nebble User" };
-static const NimStringV2 TM__lqeHtcRlDduU9aPt9aAEw6Dw_3 = {11, (NimStrPayload*)&TM__lqeHtcRlDduU9aPt9aAEw6Dw_2};
-static const struct {
-  NI cap; NIM_CHAR data[9+1];
-} TM__lqeHtcRlDduU9aPt9aAEw6Dw_4 = { 9 | NIM_STRLIT_FLAG, "Counter: " };
-static const NimStringV2 TM__lqeHtcRlDduU9aPt9aAEw6Dw_5 = {9, (NimStrPayload*)&TM__lqeHtcRlDduU9aPt9aAEw6Dw_4};
-N_LIB_PRIVATE tyObject_struct_TextLayer__nw9b2AOGA5VlSCdX45JcJqQ* counterLayer__persist95demo_u7;
-N_LIB_PRIVATE tyObject_struct_TextLayer__nw9b2AOGA5VlSCdX45JcJqQ* nameLayer__persist95demo_u8;
-N_LIB_PRIVATE tyArray__x9aRkN8DVcTBDUl3hEPJutg counterBuffer__persist95demo_u9;
-N_LIB_PRIVATE tyArray__2cWMSJoP9cqN4yIK0ILkQaQ nameBuffer__persist95demo_u10;
-N_LIB_PRIVATE NI32 counter__persist95demo_u11 = ((NI32)0);
-N_LIB_PRIVATE tyObject_struct_Window__x0oI0MSh79clnNFs7R9bwHcA* pebbleWindow__persist95demo_u102;
+N_LIB_PRIVATE tyObject_WindowHandle__QyOpsx5EVgiof5UakzQL7A pebbleWindow__persist95demo_u100;
+N_LIB_PRIVATE tyObject_TextLayerHandle__t9bAY9a7d2BLJR3FU4TDoSGA titleLayer__persist95demo_u101;
+N_LIB_PRIVATE tyObject_TextLayerHandle__t9bAY9a7d2BLJR3FU4TDoSGA nameLayer__persist95demo_u102;
+N_LIB_PRIVATE tyObject_TextLayerHandle__t9bAY9a7d2BLJR3FU4TDoSGA counterLayer__persist95demo_u103;
+N_LIB_PRIVATE tyObject_TextLayerHandle__t9bAY9a7d2BLJR3FU4TDoSGA instrLayer__persist95demo_u104;
+N_LIB_PRIVATE NI32 counter__persist95demo_u18 = ((NI32)0);
+N_LIB_PRIVATE tyObject_FixedString__xa1xApmG6K4Owp23GMXv3w counterStr__persist95demo_u28;
+N_LIB_PRIVATE tyObject_FixedString__FEvMMAl6BfSkYl1B6N5cOw nameStr__persist95demo_u37;
 extern NIM_BOOL nimInErrorMode__system_u3510;
 static N_INLINE(void, nimSetMem__systemZmemory_u7)(void* a_p0, int v_p1, NI size_p2) {
 	void* T1_;
@@ -187,15 +201,177 @@ NIM_BOOL* nimErr_;
 	if (NIM_UNLIKELY(*nimErr_)) goto BeforeRet_;
 	}BeforeRet_: ;
 }
-static N_INLINE(tyObject_struct_Layer__KCpfpF2jwj5coKARWsuAMQ*, rootLayer__OOZOOZOOZsrcZnebbleZuiZwindow_u39)(tyObject_struct_Window__x0oI0MSh79clnNFs7R9bwHcA* window_p0) {
-	tyObject_struct_Layer__KCpfpF2jwj5coKARWsuAMQ* result;
-	result = window_get_root_layer(window_p0);
+static N_INLINE(tyObject_WindowHandle__QyOpsx5EVgiof5UakzQL7A, newWindowHandle__OOZOOZOOZsrcZnebbleZuiZwindow_u189)(void) {
+	tyObject_WindowHandle__QyOpsx5EVgiof5UakzQL7A result;
+	nimZeroMem((void*)(&result), sizeof(tyObject_WindowHandle__QyOpsx5EVgiof5UakzQL7A));
+	result.raw = window_create();
+	result.state = ((tyEnum_ResourceState__zuZLKhn7SRnYvk4iCTdAkw)0);
 	return result;
 }
-static N_INLINE(tyObject_struct_GRect570426129__ba9bjUwtvD4v9a2AKX0gWCcg, bounds__OOZOOZOOZsrcZnebbleZuiZlayer_u52)(tyObject_struct_Layer__KCpfpF2jwj5coKARWsuAMQ* layer_p0) {
-	tyObject_struct_GRect570426129__ba9bjUwtvD4v9a2AKX0gWCcg result;
-	result = layer_get_bounds(layer_p0);
+static N_INLINE(tyObject_WindowHandle__QyOpsx5EVgiof5UakzQL7A, newWindow__OOZOOZOOZsrcZnebbleZuiZwindow_u191)(void) {
+	tyObject_WindowHandle__QyOpsx5EVgiof5UakzQL7A result;
+NIM_BOOL* nimErr_;
+{nimErr_ = nimErrorFlag();
+	nimZeroMem((void*)(&result), sizeof(tyObject_WindowHandle__QyOpsx5EVgiof5UakzQL7A));
+	result = newWindowHandle__OOZOOZOOZsrcZnebbleZuiZwindow_u189();
+	if (NIM_UNLIKELY(*nimErr_)) goto BeforeRet_;
+	}BeforeRet_: ;
 	return result;
+}
+static N_INLINE(void, setHandlers__OOZOOZOOZsrcZnebbleZuiZwindow_u264)(tyObject_WindowHandle__QyOpsx5EVgiof5UakzQL7A* h_p0, tyProc__YKpbB7RnAWujFAITf8zLgw load_p1, tyProc__YKpbB7RnAWujFAITf8zLgw unload_p2, tyProc__YKpbB7RnAWujFAITf8zLgw appear_p3, tyProc__YKpbB7RnAWujFAITf8zLgw disappear_p4) {
+	tyObject_struct_WindowHandlers570426229__02qYYCHBEISZffJIuzUt4Q handlers_1;
+	nimZeroMem((void*)(&handlers_1), sizeof(tyObject_struct_WindowHandlers570426229__02qYYCHBEISZffJIuzUt4Q));
+	{
+		if (!!((load_p1 == NIM_NIL))) goto LA3_;
+		handlers_1.load = load_p1;
+	}
+LA3_: ;
+	{
+		if (!!((unload_p2 == NIM_NIL))) goto LA7_;
+		handlers_1.unload = unload_p2;
+	}
+LA7_: ;
+	{
+		if (!!((appear_p3 == NIM_NIL))) goto LA11_;
+		handlers_1.appear = appear_p3;
+	}
+LA11_: ;
+	{
+		if (!!((disappear_p4 == NIM_NIL))) goto LA15_;
+		handlers_1.disappear = disappear_p4;
+	}
+LA15_: ;
+	window_set_window_handlers((*h_p0).raw, handlers_1);
+}
+static N_INLINE(tyObject_TextLayerHandle__t9bAY9a7d2BLJR3FU4TDoSGA, toHandle__OOZOOZOOZsrcZnebbleZuiZtext95layer_u79)(tyObject_struct_TextLayer__W2RZgVo7iB0lIlJ4pj15Iw* pX60gensym0__p0) {
+	tyObject_TextLayerHandle__t9bAY9a7d2BLJR3FU4TDoSGA result;
+	tyObject_struct_TextLayer__W2RZgVo7iB0lIlJ4pj15Iw* colontmpD_;
+	colontmpD_ = (tyObject_struct_TextLayer__W2RZgVo7iB0lIlJ4pj15Iw*)0;
+	colontmpD_ = pX60gensym0__p0;
+	result.pRaw = colontmpD_;
+	result.pParent = ((tyObject_struct_Layer__ArRLSoHcgGa9cBzSS1Rec1A*) NIM_NIL);
+	return result;
+}
+static N_INLINE(tyObject_TextLayerHandle__t9bAY9a7d2BLJR3FU4TDoSGA, newTextLayerHandle__OOZOOZOOZsrcZnebbleZuiZtext95layer_u107)(tyObject_struct_GRect570426117__1cvu9aouLOT7LTuhbj2kIUw frame_p0) {
+	tyObject_TextLayerHandle__t9bAY9a7d2BLJR3FU4TDoSGA result;
+	tyObject_struct_TextLayer__W2RZgVo7iB0lIlJ4pj15Iw* T1_;
+NIM_BOOL* nimErr_;
+{nimErr_ = nimErrorFlag();
+	nimZeroMem((void*)(&result), sizeof(tyObject_TextLayerHandle__t9bAY9a7d2BLJR3FU4TDoSGA));
+	T1_ = (tyObject_struct_TextLayer__W2RZgVo7iB0lIlJ4pj15Iw*)0;
+	T1_ = text_layer_create(frame_p0);
+	result = toHandle__OOZOOZOOZsrcZnebbleZuiZtext95layer_u79(T1_);
+	if (NIM_UNLIKELY(*nimErr_)) goto BeforeRet_;
+	}BeforeRet_: ;
+	return result;
+}
+static N_INLINE(tyObject_TextLayerHandle__t9bAY9a7d2BLJR3FU4TDoSGA, newTextLayer__OOZOOZOOZsrcZnebbleZuiZtext95layer_u110)(tyObject_struct_GRect570426117__1cvu9aouLOT7LTuhbj2kIUw frame_p0) {
+	tyObject_TextLayerHandle__t9bAY9a7d2BLJR3FU4TDoSGA result;
+NIM_BOOL* nimErr_;
+{nimErr_ = nimErrorFlag();
+	nimZeroMem((void*)(&result), sizeof(tyObject_TextLayerHandle__t9bAY9a7d2BLJR3FU4TDoSGA));
+	result = newTextLayerHandle__OOZOOZOOZsrcZnebbleZuiZtext95layer_u107(frame_p0);
+	if (NIM_UNLIKELY(*nimErr_)) goto BeforeRet_;
+	}BeforeRet_: ;
+	return result;
+}
+static N_INLINE(tyObject_struct_GRect570426117__1cvu9aouLOT7LTuhbj2kIUw, makeGRect__OOZOOZOOZsrcZnebbleZffi_u3487)(NI16 x_p0, NI16 y_p1, NI16 w_p2, NI16 h_p3) {
+	tyObject_struct_GRect570426117__1cvu9aouLOT7LTuhbj2kIUw result;
+	nimZeroMem((void*)(&result), sizeof(tyObject_struct_GRect570426117__1cvu9aouLOT7LTuhbj2kIUw));
+	result.origin.x = x_p0;
+	result.origin.y = y_p1;
+	result.size.w = w_p2;
+	result.size.h = h_p3;
+	return result;
+}
+static N_INLINE(void, backgroundColoreq___OOZOOZOOZsrcZnebbleZuiZtext95layer_u147)(tyObject_TextLayerHandle__t9bAY9a7d2BLJR3FU4TDoSGA* h_p0, tyObject_union_GColor8570426103__z6bg1Y39bpd9cp1dPIdYmWhw value_p1) {
+	tyObject_struct_TextLayer__W2RZgVo7iB0lIlJ4pj15Iw* T1_;
+NIM_BOOL* nimErr_;
+{nimErr_ = nimErrorFlag();
+	T1_ = (tyObject_struct_TextLayer__W2RZgVo7iB0lIlJ4pj15Iw*)0;
+	T1_ = toPtr__OOZOOZOOZsrcZnebbleZuiZtext95layer_u73((*h_p0));
+	if (NIM_UNLIKELY(*nimErr_)) goto BeforeRet_;
+	text_layer_set_background_color(T1_, value_p1);
+	}BeforeRet_: ;
+}
+static N_INLINE(void, makeGColor8__OOZOOZOOZsrcZnebbleZffi_u3515)(NU8 argb_p0, tyObject_union_GColor8570426103__z6bg1Y39bpd9cp1dPIdYmWhw* Result) {
+	nimZeroMem((void*)Result, sizeof(tyObject_union_GColor8570426103__z6bg1Y39bpd9cp1dPIdYmWhw));
+	(*Result).argb = argb_p0;
+}
+static N_INLINE(void, fonteq___OOZOOZOOZsrcZnebbleZuiZtext95layer_u138)(tyObject_TextLayerHandle__t9bAY9a7d2BLJR3FU4TDoSGA* h_p0, tyObject_struct_FontInfo__nTqpQAiJJxk8kM9bFrHFwHA* value_p1) {
+	tyObject_struct_TextLayer__W2RZgVo7iB0lIlJ4pj15Iw* T1_;
+NIM_BOOL* nimErr_;
+{nimErr_ = nimErrorFlag();
+	T1_ = (tyObject_struct_TextLayer__W2RZgVo7iB0lIlJ4pj15Iw*)0;
+	T1_ = toPtr__OOZOOZOOZsrcZnebbleZuiZtext95layer_u73((*h_p0));
+	if (NIM_UNLIKELY(*nimErr_)) goto BeforeRet_;
+	text_layer_set_font(T1_, value_p1);
+	}BeforeRet_: ;
+}
+static N_INLINE(void, texteq___OOZOOZOOZsrcZnebbleZuiZtext95layer_u132)(tyObject_TextLayerHandle__t9bAY9a7d2BLJR3FU4TDoSGA* h_p0, NCSTRING value_p1) {
+	tyObject_struct_TextLayer__W2RZgVo7iB0lIlJ4pj15Iw* T1_;
+NIM_BOOL* nimErr_;
+{nimErr_ = nimErrorFlag();
+	T1_ = (tyObject_struct_TextLayer__W2RZgVo7iB0lIlJ4pj15Iw*)0;
+	T1_ = toPtr__OOZOOZOOZsrcZnebbleZuiZtext95layer_u73((*h_p0));
+	if (NIM_UNLIKELY(*nimErr_)) goto BeforeRet_;
+	text_layer_set_text(T1_, value_p1);
+	}BeforeRet_: ;
+}
+static N_INLINE(void, textAlignmenteq___OOZOOZOOZsrcZnebbleZuiZtext95layer_u141)(tyObject_TextLayerHandle__t9bAY9a7d2BLJR3FU4TDoSGA* h_p0, tyEnum_enum_GTextAlignment570426187__738WkvryWkSwnjJJREpJEA value_p1) {
+	tyObject_struct_TextLayer__W2RZgVo7iB0lIlJ4pj15Iw* T1_;
+NIM_BOOL* nimErr_;
+{nimErr_ = nimErrorFlag();
+	T1_ = (tyObject_struct_TextLayer__W2RZgVo7iB0lIlJ4pj15Iw*)0;
+	T1_ = toPtr__OOZOOZOOZsrcZnebbleZuiZtext95layer_u73((*h_p0));
+	if (NIM_UNLIKELY(*nimErr_)) goto BeforeRet_;
+	text_layer_set_text_alignment(T1_, value_p1);
+	}BeforeRet_: ;
+}
+static N_INLINE(NCSTRING, toCstring__persist95demo_u107)(tyObject_FixedString__FEvMMAl6BfSkYl1B6N5cOw* s_p0) {
+	NCSTRING result;
+	result = ((NCSTRING) ((&(*s_p0).data[(((NI)0))- 0])));
+	return result;
+}
+static N_INLINE(void, addChild__persist95demo_u134)(tyObject_struct_Layer__ArRLSoHcgGa9cBzSS1Rec1A* parent_p0, tyObject_TextLayerHandle__t9bAY9a7d2BLJR3FU4TDoSGA* child_p1) {
+	tyObject_struct_Layer__ArRLSoHcgGa9cBzSS1Rec1A* T1_;
+NIM_BOOL* nimErr_;
+{nimErr_ = nimErrorFlag();
+	T1_ = (tyObject_struct_Layer__ArRLSoHcgGa9cBzSS1Rec1A*)0;
+	T1_ = toLayer__OOZOOZOOZsrcZnebbleZuiZtext95layer_u76((*child_p1));
+	if (NIM_UNLIKELY(*nimErr_)) goto BeforeRet_;
+	layer_add_child(parent_p0, T1_);
+	}BeforeRet_: ;
+}
+static N_INLINE(tyObject_struct_Layer__ArRLSoHcgGa9cBzSS1Rec1A*, rootLayer__OOZOOZOOZsrcZnebbleZuiZwindow_u230)(tyObject_WindowHandle__QyOpsx5EVgiof5UakzQL7A h_p0) {
+	tyObject_struct_Layer__ArRLSoHcgGa9cBzSS1Rec1A* result;
+	result = window_get_root_layer(h_p0.raw);
+	return result;
+}
+static N_INLINE(void, clickConfigeq___OOZOOZOOZsrcZnebbleZuiZwindow_u325)(tyObject_WindowHandle__QyOpsx5EVgiof5UakzQL7A* h_p0, tyProc__32w2ZypAyMWuajvi2Jt79cg provider_p1) {
+	window_set_click_config_provider((*h_p0).raw, provider_p1);
+}
+static N_INLINE(void, onClick__OOZOOZOOZsrcZnebbleZuiZclicks_u2)(tyEnum_enum_ButtonId570425836__WRdsyN5X54A09bBtIGHbj1Q buttonId_p0, tyProc__LCJy9bQFEE8ObaRc29a4n3LA handler_p1) {
+	window_single_click_subscribe(buttonId_p0, handler_p1);
+}
+static N_INLINE(int, writeInt__OOZOOZOOZsrcZnebbleZfoundationZstorage_u8)(NU32 key_p0, NI32 value_p1) {
+	int result;
+	result = persist_write_int(key_p0, value_p1);
+	return result;
+}
+N_LIB_PRIVATE N_NIMCALL(void, saveData__persist95demo_u17)(void) {
+	int T1_;
+NIM_BOOL* nimErr_;
+{nimErr_ = nimErrorFlag();
+	T1_ = (int)0;
+	T1_ = writeInt__OOZOOZOOZsrcZnebbleZfoundationZstorage_u8(((NU32)1), counter__persist95demo_u18);
+	if (NIM_UNLIKELY(*nimErr_)) goto BeforeRet_;
+	(void)(T1_);
+	}BeforeRet_: ;
+}
+static N_INLINE(void, clear__persist95demo_u181)(tyObject_FixedString__xa1xApmG6K4Owp23GMXv3w* s_p0) {
+	(*s_p0).len = ((NI)0);
+	(*s_p0).data[(((NI)0))- 0] = 0;
 }
 static N_INLINE(NIM_BOOL, eqeq___system_u6018)(NCSTRING x_p0, NCSTRING y_p1) {
 	NIM_BOOL result;
@@ -226,62 +402,327 @@ LA8_: ;
 LA1_: ;
 	return result;
 }
-static N_INLINE(tyObject_struct_TextLayer__nw9b2AOGA5VlSCdX45JcJqQ*, newTextLayer__OOZOOZOOZsrcZnebbleZuiZtext95layer_u2)(tyObject_struct_GRect570426129__ba9bjUwtvD4v9a2AKX0gWCcg frame_p0, NCSTRING text_p1, tyObject_struct_FontInfo__OThMgPKJgGYHGdVfrJ27ng* font_p2, tyEnum_enum_GTextAlignment570426199__GoX9aZdlRH7BVghtSOwHTqA align_p3) {
-	tyObject_struct_TextLayer__nw9b2AOGA5VlSCdX45JcJqQ* result;
-	result = text_layer_create(frame_p0);
-	{
+static N_INLINE(void, add__persist95demo_u220)(tyObject_FixedString__xa1xApmG6K4Owp23GMXv3w* s_p0, NCSTRING str_p1) {
+	NI i_1;
+{	{
 		NIM_BOOL T3_;
 		T3_ = (NIM_BOOL)0;
-		T3_ = eqeq___system_u6018(text_p1, ((NCSTRING) NIM_NIL));
-		if (!!(T3_)) goto LA4_;
-		text_layer_set_text(result, text_p1);
+		T3_ = eqeq___system_u6018(str_p1, ((NCSTRING) NIM_NIL));
+		if (!T3_) goto LA4_;
+		goto BeforeRet_;
 	}
 LA4_: ;
+	i_1 = ((NI)0);
 	{
-		if (!!((font_p2 == ((tyObject_struct_FontInfo__OThMgPKJgGYHGdVfrJ27ng*) NIM_NIL)))) goto LA8_;
-		text_layer_set_font(result, font_p2);
+		while (1) {
+			NIM_BOOL T8_;
+			T8_ = (NIM_BOOL)0;
+			T8_ = !(((NU8)(str_p1[i_1]) == (NU8)(0)));
+			if (!(T8_)) goto LA9_;
+			T8_ = ((*s_p0).len < ((NI)31));
+LA9_: ;
+			if (!T8_) goto LA7;
+			(*s_p0).data[((*s_p0).len)- 0] = str_p1[i_1];
+			(*s_p0).len += ((NI)1);
+			i_1 += ((NI)1);
+		} LA7: ;
 	}
-LA8_: ;
-	text_layer_set_text_alignment(result, align_p3);
+	(*s_p0).data[((*s_p0).len)- 0] = 0;
+	}BeforeRet_: ;
+}
+static N_INLINE(void, add__persist95demo_u264)(tyObject_FixedString__xa1xApmG6K4Owp23GMXv3w* s_p0, NIM_CHAR c_p1) {
+	{
+		if (!((*s_p0).len < ((NI)31))) goto LA3_;
+		(*s_p0).data[((*s_p0).len)- 0] = c_p1;
+		(*s_p0).len += ((NI)1);
+		(*s_p0).data[((*s_p0).len)- 0] = 0;
+	}
+LA3_: ;
+}
+static N_INLINE(void, addInt__persist95demo_u247)(tyObject_FixedString__xa1xApmG6K4Owp23GMXv3w* s_p0, NI32 val_p1) {
+	NI32 v_1;
+	tyArray__0j8sSXZOeBGmu6W0H2n0Uw digits_1;
+	NI count_1;
+NIM_BOOL* nimErr_;
+{nimErr_ = nimErrorFlag();
+	{
+		if (!(((NI)31) <= (*s_p0).len)) goto LA3_;
+		goto BeforeRet_;
+	}
+LA3_: ;
+	{
+		if (!(val_p1 == ((NI32)0))) goto LA7_;
+		add__persist95demo_u264(s_p0, 48);
+		if (NIM_UNLIKELY(*nimErr_)) goto BeforeRet_;
+		goto BeforeRet_;
+	}
+LA7_: ;
+	v_1 = val_p1;
+	{
+		if (!(v_1 < ((NI32)0))) goto LA11_;
+		add__persist95demo_u264(s_p0, 45);
+		if (NIM_UNLIKELY(*nimErr_)) goto BeforeRet_;
+		v_1 = ((NI32)-(v_1));
+	}
+LA11_: ;
+	nimZeroMem((void*)digits_1, sizeof(tyArray__0j8sSXZOeBGmu6W0H2n0Uw));
+	count_1 = ((NI)0);
+	{
+		while (1) {
+			NIM_BOOL T15_;
+			T15_ = (NIM_BOOL)0;
+			T15_ = (((NI32)0) < v_1);
+			if (!(T15_)) goto LA16_;
+			T15_ = (count_1 < ((NI)10));
+LA16_: ;
+			if (!T15_) goto LA14;
+			digits_1[(count_1)- 0] = ((NIM_CHAR) ((NI32)(((NI32)48) + (NI32)(v_1 % ((NI32)10)))));
+			v_1 = (NI32)(v_1 / ((NI32)10));
+			count_1 += ((NI)1);
+		} LA14: ;
+	}
+	{
+		NI i_1;
+		NI colontmp_;
+		NI res_1;
+		i_1 = (NI)0;
+		colontmp_ = (NI)0;
+		colontmp_ = (NI)(count_1 - ((NI)1));
+		res_1 = colontmp_;
+		{
+			while (1) {
+				if (!(((NI)0) <= res_1)) goto LA19;
+				i_1 = ((NI) (res_1));
+				add__persist95demo_u264(s_p0, digits_1[(i_1)- 0]);
+				if (NIM_UNLIKELY(*nimErr_)) goto BeforeRet_;
+				res_1 -= ((NI)1);
+			} LA19: ;
+		}
+	}
+	}BeforeRet_: ;
+}
+static N_INLINE(NCSTRING, toCstring__persist95demo_u363)(tyObject_FixedString__xa1xApmG6K4Owp23GMXv3w* s_p0) {
+	NCSTRING result;
+	result = ((NCSTRING) ((&(*s_p0).data[(((NI)0))- 0])));
 	return result;
 }
-static N_INLINE(tyObject_struct_GRect570426129__ba9bjUwtvD4v9a2AKX0gWCcg, makeGRect__OOZOOZOOZsrcZnebbleZffi_u3487)(NI16 x_p0, NI16 y_p1, NI16 w_p2, NI16 h_p3) {
-	tyObject_struct_GRect570426129__ba9bjUwtvD4v9a2AKX0gWCcg result;
-	nimZeroMem((void*)(&result), sizeof(tyObject_struct_GRect570426129__ba9bjUwtvD4v9a2AKX0gWCcg));
-	result.origin.x = x_p0;
-	result.origin.y = y_p1;
-	result.size.w = w_p2;
-	result.size.h = h_p3;
-	return result;
+N_LIB_PRIVATE N_NIMCALL(void, updateDisplay__persist95demo_u16)(void) {
+	NCSTRING T1_;
+NIM_BOOL* nimErr_;
+{nimErr_ = nimErrorFlag();
+	clear__persist95demo_u181((&counterStr__persist95demo_u28));
+	if (NIM_UNLIKELY(*nimErr_)) goto BeforeRet_;
+	add__persist95demo_u220((&counterStr__persist95demo_u28), "Counter: ");
+	if (NIM_UNLIKELY(*nimErr_)) goto BeforeRet_;
+	addInt__persist95demo_u247((&counterStr__persist95demo_u28), counter__persist95demo_u18);
+	if (NIM_UNLIKELY(*nimErr_)) goto BeforeRet_;
+	T1_ = (NCSTRING)0;
+	T1_ = toCstring__persist95demo_u363((&counterStr__persist95demo_u28));
+	if (NIM_UNLIKELY(*nimErr_)) goto BeforeRet_;
+	texteq___OOZOOZOOZsrcZnebbleZuiZtext95layer_u132((&counterLayer__persist95demo_u103), T1_);
+	if (NIM_UNLIKELY(*nimErr_)) goto BeforeRet_;
+	}BeforeRet_: ;
 }
-static N_INLINE(void, texteq___OOZOOZOOZsrcZnebbleZuiZtext95layer_u33)(tyObject_struct_TextLayer__nw9b2AOGA5VlSCdX45JcJqQ* textLayer_p0, NCSTRING text_p1) {
-	text_layer_set_text(textLayer_p0, text_p1);
+static N_INLINE(void, shortPulse__OOZOOZOOZsrcZnebbleZuiZvibes_u2)(void) {
+	vibes_short_pulse();
 }
-static N_INLINE(void, textAlignmenteq___OOZOOZOOZsrcZnebbleZuiZtext95layer_u42)(tyObject_struct_TextLayer__nw9b2AOGA5VlSCdX45JcJqQ* textLayer_p0, tyEnum_enum_GTextAlignment570426199__GoX9aZdlRH7BVghtSOwHTqA alignment_p1) {
-	text_layer_set_text_alignment(textLayer_p0, alignment_p1);
+N_LIB_PRIVATE N_CDECL(void, selectClickHandler__persist95demo_u6)(void* recognizer_p0, void* context_p1) {
+NIM_BOOL* nimErr_;
+{nimErr_ = nimErrorFlag();
+	counter__persist95demo_u18 += ((NI)1);
+	saveData__persist95demo_u17();
+	if (NIM_UNLIKELY(*nimErr_)) goto BeforeRet_;
+	updateDisplay__persist95demo_u16();
+	if (NIM_UNLIKELY(*nimErr_)) goto BeforeRet_;
+	{
+		if (!((NI32)(counter__persist95demo_u18 % ((NI32)10)) == ((NI32)0))) goto LA3_;
+		shortPulse__OOZOOZOOZsrcZnebbleZuiZvibes_u2();
+		if (NIM_UNLIKELY(*nimErr_)) goto BeforeRet_;
+	}
+LA3_: ;
+	}BeforeRet_: ;
 }
-static N_INLINE(void, fonteq___OOZOOZOOZsrcZnebbleZuiZtext95layer_u39)(tyObject_struct_TextLayer__nw9b2AOGA5VlSCdX45JcJqQ* textLayer_p0, tyObject_struct_FontInfo__OThMgPKJgGYHGdVfrJ27ng* font_p1) {
-	text_layer_set_font(textLayer_p0, font_p1);
+N_LIB_PRIVATE N_CDECL(void, upClickHandler__persist95demo_u9)(void* recognizer_p0, void* context_p1) {
+NIM_BOOL* nimErr_;
+{nimErr_ = nimErrorFlag();
+	counter__persist95demo_u18 += ((NI32)10);
+	saveData__persist95demo_u17();
+	if (NIM_UNLIKELY(*nimErr_)) goto BeforeRet_;
+	updateDisplay__persist95demo_u16();
+	if (NIM_UNLIKELY(*nimErr_)) goto BeforeRet_;
+	}BeforeRet_: ;
 }
-static N_INLINE(tyObject_struct_FontInfo__OThMgPKJgGYHGdVfrJ27ng*, getSystemFont__OOZOOZOOZsrcZnebbleZgraphicsZfonts_u2)(NCSTRING fontKey_p0) {
-	tyObject_struct_FontInfo__OThMgPKJgGYHGdVfrJ27ng* result;
-	result = fonts_get_system_font(fontKey_p0);
-	return result;
+static N_INLINE(void, doublePulse__OOZOOZOOZsrcZnebbleZuiZvibes_u4)(void) {
+	vibes_double_pulse();
 }
-static N_INLINE(void, backgroundColoreq___OOZOOZOOZsrcZnebbleZuiZtext95layer_u45)(tyObject_struct_TextLayer__nw9b2AOGA5VlSCdX45JcJqQ* textLayer_p0, tyObject_union_GColor8570426115__5r6qkn4jWQz1dbWRrH9aefw color_p1) {
-	text_layer_set_background_color(textLayer_p0, color_p1);
+N_LIB_PRIVATE N_CDECL(void, downClickHandler__persist95demo_u12)(void* recognizer_p0, void* context_p1) {
+NIM_BOOL* nimErr_;
+{nimErr_ = nimErrorFlag();
+	counter__persist95demo_u18 = ((NI32)0);
+	saveData__persist95demo_u17();
+	if (NIM_UNLIKELY(*nimErr_)) goto BeforeRet_;
+	updateDisplay__persist95demo_u16();
+	if (NIM_UNLIKELY(*nimErr_)) goto BeforeRet_;
+	doublePulse__OOZOOZOOZsrcZnebbleZuiZvibes_u4();
+	if (NIM_UNLIKELY(*nimErr_)) goto BeforeRet_;
+	}BeforeRet_: ;
 }
-static N_INLINE(void, makeGColor8__OOZOOZOOZsrcZnebbleZffi_u3515)(NU8 argb_p0, tyObject_union_GColor8570426115__5r6qkn4jWQz1dbWRrH9aefw* Result) {
-	nimZeroMem((void*)Result, sizeof(tyObject_union_GColor8570426115__5r6qkn4jWQz1dbWRrH9aefw));
-	(*Result).argb = argb_p0;
+N_LIB_PRIVATE N_CDECL(void, generatedClickConfigProvider__persist95demo_u98)(void* ctxX60gensym60__p0) {
+NIM_BOOL* nimErr_;
+{nimErr_ = nimErrorFlag();
+	onClick__OOZOOZOOZsrcZnebbleZuiZclicks_u2(((tyEnum_enum_ButtonId570425836__WRdsyN5X54A09bBtIGHbj1Q)2), selectClickHandler__persist95demo_u6);
+	if (NIM_UNLIKELY(*nimErr_)) goto BeforeRet_;
+	onClick__OOZOOZOOZsrcZnebbleZuiZclicks_u2(((tyEnum_enum_ButtonId570425836__WRdsyN5X54A09bBtIGHbj1Q)1), upClickHandler__persist95demo_u9);
+	if (NIM_UNLIKELY(*nimErr_)) goto BeforeRet_;
+	onClick__OOZOOZOOZsrcZnebbleZuiZclicks_u2(((tyEnum_enum_ButtonId570425836__WRdsyN5X54A09bBtIGHbj1Q)3), downClickHandler__persist95demo_u12);
+	if (NIM_UNLIKELY(*nimErr_)) goto BeforeRet_;
+	}BeforeRet_: ;
 }
-static N_INLINE(void, addChild__OOZOOZOOZsrcZnebbleZuiZlayer_u11)(tyObject_struct_Layer__KCpfpF2jwj5coKARWsuAMQ* parent_p0, tyObject_struct_Layer__KCpfpF2jwj5coKARWsuAMQ* child_p1) {
-	layer_add_child(parent_p0, child_p1);
+N_LIB_PRIVATE N_CDECL(void, windowLoad__persist95demo_u105)(tyObject_struct_Window__esLx3vYHW9aoDk9a25tQZ3QQ* winX60gensym63__p0) {
+	tyObject_struct_GRect570426117__1cvu9aouLOT7LTuhbj2kIUw T1_;
+	tyObject_TextLayerHandle__t9bAY9a7d2BLJR3FU4TDoSGA T2_;
+	tyObject_union_GColor8570426103__z6bg1Y39bpd9cp1dPIdYmWhw T3_;
+	tyObject_struct_FontInfo__nTqpQAiJJxk8kM9bFrHFwHA* T4_;
+	tyObject_struct_GRect570426117__1cvu9aouLOT7LTuhbj2kIUw T5_;
+	tyObject_TextLayerHandle__t9bAY9a7d2BLJR3FU4TDoSGA T6_;
+	tyObject_union_GColor8570426103__z6bg1Y39bpd9cp1dPIdYmWhw T7_;
+	tyObject_struct_FontInfo__nTqpQAiJJxk8kM9bFrHFwHA* T8_;
+	NCSTRING T9_;
+	tyObject_struct_GRect570426117__1cvu9aouLOT7LTuhbj2kIUw T10_;
+	tyObject_TextLayerHandle__t9bAY9a7d2BLJR3FU4TDoSGA T11_;
+	tyObject_union_GColor8570426103__z6bg1Y39bpd9cp1dPIdYmWhw T12_;
+	tyObject_struct_FontInfo__nTqpQAiJJxk8kM9bFrHFwHA* T13_;
+	tyObject_struct_GRect570426117__1cvu9aouLOT7LTuhbj2kIUw T14_;
+	tyObject_TextLayerHandle__t9bAY9a7d2BLJR3FU4TDoSGA T15_;
+	tyObject_union_GColor8570426103__z6bg1Y39bpd9cp1dPIdYmWhw T16_;
+	tyObject_struct_FontInfo__nTqpQAiJJxk8kM9bFrHFwHA* T17_;
+	tyObject_struct_Layer__ArRLSoHcgGa9cBzSS1Rec1A* T18_;
+	tyObject_struct_Layer__ArRLSoHcgGa9cBzSS1Rec1A* T19_;
+	tyObject_struct_Layer__ArRLSoHcgGa9cBzSS1Rec1A* T20_;
+	tyObject_struct_Layer__ArRLSoHcgGa9cBzSS1Rec1A* T21_;
+NIM_BOOL* nimErr_;
+{nimErr_ = nimErrorFlag();
+	T1_ = makeGRect__OOZOOZOOZsrcZnebbleZffi_u3487(((NI16)0), ((NI16)20), ((NI16)144), ((NI16)30));
+	if (NIM_UNLIKELY(*nimErr_)) goto BeforeRet_;
+	T2_ = newTextLayer__OOZOOZOOZsrcZnebbleZuiZtext95layer_u110(T1_);
+	if (NIM_UNLIKELY(*nimErr_)) {eqdestroy___OOZOOZOOZsrcZnebbleZuiZtext95layer_u22(&T2_); goto BeforeRet_;}
+	eqsink___OOZOOZOOZsrcZnebbleZuiZtext95layer_u53((&titleLayer__persist95demo_u101), T2_);
+	if (NIM_UNLIKELY(*nimErr_)) goto BeforeRet_;
+	nimZeroMem((void*)(&T3_), sizeof(tyObject_union_GColor8570426103__z6bg1Y39bpd9cp1dPIdYmWhw));
+	makeGColor8__OOZOOZOOZsrcZnebbleZffi_u3515(((NU8)0), (&T3_));
+	if (NIM_UNLIKELY(*nimErr_)) goto BeforeRet_;
+	backgroundColoreq___OOZOOZOOZsrcZnebbleZuiZtext95layer_u147((&titleLayer__persist95demo_u101), T3_);
+	if (NIM_UNLIKELY(*nimErr_)) goto BeforeRet_;
+	T4_ = (tyObject_struct_FontInfo__nTqpQAiJJxk8kM9bFrHFwHA*)0;
+	T4_ = fonts_get_system_font("RESOURCE_ID_GOTHIC_24_BOLD");
+	fonteq___OOZOOZOOZsrcZnebbleZuiZtext95layer_u138((&titleLayer__persist95demo_u101), T4_);
+	if (NIM_UNLIKELY(*nimErr_)) goto BeforeRet_;
+	texteq___OOZOOZOOZsrcZnebbleZuiZtext95layer_u132((&titleLayer__persist95demo_u101), "Persist Demo");
+	if (NIM_UNLIKELY(*nimErr_)) goto BeforeRet_;
+	textAlignmenteq___OOZOOZOOZsrcZnebbleZuiZtext95layer_u141((&titleLayer__persist95demo_u101), ((tyEnum_enum_GTextAlignment570426187__738WkvryWkSwnjJJREpJEA)1));
+	if (NIM_UNLIKELY(*nimErr_)) goto BeforeRet_;
+	T5_ = makeGRect__OOZOOZOOZsrcZnebbleZffi_u3487(((NI16)0), ((NI16)55), ((NI16)144), ((NI16)25));
+	if (NIM_UNLIKELY(*nimErr_)) goto BeforeRet_;
+	T6_ = newTextLayer__OOZOOZOOZsrcZnebbleZuiZtext95layer_u110(T5_);
+	if (NIM_UNLIKELY(*nimErr_)) {eqdestroy___OOZOOZOOZsrcZnebbleZuiZtext95layer_u22(&T6_); goto BeforeRet_;}
+	eqsink___OOZOOZOOZsrcZnebbleZuiZtext95layer_u53((&nameLayer__persist95demo_u102), T6_);
+	if (NIM_UNLIKELY(*nimErr_)) goto BeforeRet_;
+	nimZeroMem((void*)(&T7_), sizeof(tyObject_union_GColor8570426103__z6bg1Y39bpd9cp1dPIdYmWhw));
+	makeGColor8__OOZOOZOOZsrcZnebbleZffi_u3515(((NU8)0), (&T7_));
+	if (NIM_UNLIKELY(*nimErr_)) goto BeforeRet_;
+	backgroundColoreq___OOZOOZOOZsrcZnebbleZuiZtext95layer_u147((&nameLayer__persist95demo_u102), T7_);
+	if (NIM_UNLIKELY(*nimErr_)) goto BeforeRet_;
+	T8_ = (tyObject_struct_FontInfo__nTqpQAiJJxk8kM9bFrHFwHA*)0;
+	T8_ = fonts_get_system_font("RESOURCE_ID_GOTHIC_18");
+	fonteq___OOZOOZOOZsrcZnebbleZuiZtext95layer_u138((&nameLayer__persist95demo_u102), T8_);
+	if (NIM_UNLIKELY(*nimErr_)) goto BeforeRet_;
+	T9_ = (NCSTRING)0;
+	T9_ = toCstring__persist95demo_u107((&nameStr__persist95demo_u37));
+	if (NIM_UNLIKELY(*nimErr_)) goto BeforeRet_;
+	texteq___OOZOOZOOZsrcZnebbleZuiZtext95layer_u132((&nameLayer__persist95demo_u102), T9_);
+	if (NIM_UNLIKELY(*nimErr_)) goto BeforeRet_;
+	textAlignmenteq___OOZOOZOOZsrcZnebbleZuiZtext95layer_u141((&nameLayer__persist95demo_u102), ((tyEnum_enum_GTextAlignment570426187__738WkvryWkSwnjJJREpJEA)1));
+	if (NIM_UNLIKELY(*nimErr_)) goto BeforeRet_;
+	T10_ = makeGRect__OOZOOZOOZsrcZnebbleZffi_u3487(((NI16)0), ((NI16)85), ((NI16)144), ((NI16)35));
+	if (NIM_UNLIKELY(*nimErr_)) goto BeforeRet_;
+	T11_ = newTextLayer__OOZOOZOOZsrcZnebbleZuiZtext95layer_u110(T10_);
+	if (NIM_UNLIKELY(*nimErr_)) {eqdestroy___OOZOOZOOZsrcZnebbleZuiZtext95layer_u22(&T11_); goto BeforeRet_;}
+	eqsink___OOZOOZOOZsrcZnebbleZuiZtext95layer_u53((&counterLayer__persist95demo_u103), T11_);
+	if (NIM_UNLIKELY(*nimErr_)) goto BeforeRet_;
+	nimZeroMem((void*)(&T12_), sizeof(tyObject_union_GColor8570426103__z6bg1Y39bpd9cp1dPIdYmWhw));
+	makeGColor8__OOZOOZOOZsrcZnebbleZffi_u3515(((NU8)0), (&T12_));
+	if (NIM_UNLIKELY(*nimErr_)) goto BeforeRet_;
+	backgroundColoreq___OOZOOZOOZsrcZnebbleZuiZtext95layer_u147((&counterLayer__persist95demo_u103), T12_);
+	if (NIM_UNLIKELY(*nimErr_)) goto BeforeRet_;
+	T13_ = (tyObject_struct_FontInfo__nTqpQAiJJxk8kM9bFrHFwHA*)0;
+	T13_ = fonts_get_system_font("RESOURCE_ID_GOTHIC_28_BOLD");
+	fonteq___OOZOOZOOZsrcZnebbleZuiZtext95layer_u138((&counterLayer__persist95demo_u103), T13_);
+	if (NIM_UNLIKELY(*nimErr_)) goto BeforeRet_;
+	textAlignmenteq___OOZOOZOOZsrcZnebbleZuiZtext95layer_u141((&counterLayer__persist95demo_u103), ((tyEnum_enum_GTextAlignment570426187__738WkvryWkSwnjJJREpJEA)1));
+	if (NIM_UNLIKELY(*nimErr_)) goto BeforeRet_;
+	T14_ = makeGRect__OOZOOZOOZsrcZnebbleZffi_u3487(((NI16)0), ((NI16)125), ((NI16)144), ((NI16)40));
+	if (NIM_UNLIKELY(*nimErr_)) goto BeforeRet_;
+	T15_ = newTextLayer__OOZOOZOOZsrcZnebbleZuiZtext95layer_u110(T14_);
+	if (NIM_UNLIKELY(*nimErr_)) {eqdestroy___OOZOOZOOZsrcZnebbleZuiZtext95layer_u22(&T15_); goto BeforeRet_;}
+	eqsink___OOZOOZOOZsrcZnebbleZuiZtext95layer_u53((&instrLayer__persist95demo_u104), T15_);
+	if (NIM_UNLIKELY(*nimErr_)) goto BeforeRet_;
+	nimZeroMem((void*)(&T16_), sizeof(tyObject_union_GColor8570426103__z6bg1Y39bpd9cp1dPIdYmWhw));
+	makeGColor8__OOZOOZOOZsrcZnebbleZffi_u3515(((NU8)0), (&T16_));
+	if (NIM_UNLIKELY(*nimErr_)) goto BeforeRet_;
+	backgroundColoreq___OOZOOZOOZsrcZnebbleZuiZtext95layer_u147((&instrLayer__persist95demo_u104), T16_);
+	if (NIM_UNLIKELY(*nimErr_)) goto BeforeRet_;
+	T17_ = (tyObject_struct_FontInfo__nTqpQAiJJxk8kM9bFrHFwHA*)0;
+	T17_ = fonts_get_system_font("RESOURCE_ID_GOTHIC_14");
+	fonteq___OOZOOZOOZsrcZnebbleZuiZtext95layer_u138((&instrLayer__persist95demo_u104), T17_);
+	if (NIM_UNLIKELY(*nimErr_)) goto BeforeRet_;
+	texteq___OOZOOZOOZsrcZnebbleZuiZtext95layer_u132((&instrLayer__persist95demo_u104), "SELECT: +1\012UP: +10\012DOWN: Reset");
+	if (NIM_UNLIKELY(*nimErr_)) goto BeforeRet_;
+	textAlignmenteq___OOZOOZOOZsrcZnebbleZuiZtext95layer_u141((&instrLayer__persist95demo_u104), ((tyEnum_enum_GTextAlignment570426187__738WkvryWkSwnjJJREpJEA)1));
+	if (NIM_UNLIKELY(*nimErr_)) goto BeforeRet_;
+	T18_ = (tyObject_struct_Layer__ArRLSoHcgGa9cBzSS1Rec1A*)0;
+	T18_ = rootLayer__OOZOOZOOZsrcZnebbleZuiZwindow_u230(pebbleWindow__persist95demo_u100);
+	if (NIM_UNLIKELY(*nimErr_)) goto BeforeRet_;
+	addChild__persist95demo_u134(T18_, (&titleLayer__persist95demo_u101));
+	if (NIM_UNLIKELY(*nimErr_)) goto BeforeRet_;
+	T19_ = (tyObject_struct_Layer__ArRLSoHcgGa9cBzSS1Rec1A*)0;
+	T19_ = rootLayer__OOZOOZOOZsrcZnebbleZuiZwindow_u230(pebbleWindow__persist95demo_u100);
+	if (NIM_UNLIKELY(*nimErr_)) goto BeforeRet_;
+	addChild__persist95demo_u134(T19_, (&nameLayer__persist95demo_u102));
+	if (NIM_UNLIKELY(*nimErr_)) goto BeforeRet_;
+	T20_ = (tyObject_struct_Layer__ArRLSoHcgGa9cBzSS1Rec1A*)0;
+	T20_ = rootLayer__OOZOOZOOZsrcZnebbleZuiZwindow_u230(pebbleWindow__persist95demo_u100);
+	if (NIM_UNLIKELY(*nimErr_)) goto BeforeRet_;
+	addChild__persist95demo_u134(T20_, (&counterLayer__persist95demo_u103));
+	if (NIM_UNLIKELY(*nimErr_)) goto BeforeRet_;
+	T21_ = (tyObject_struct_Layer__ArRLSoHcgGa9cBzSS1Rec1A*)0;
+	T21_ = rootLayer__OOZOOZOOZsrcZnebbleZuiZwindow_u230(pebbleWindow__persist95demo_u100);
+	if (NIM_UNLIKELY(*nimErr_)) goto BeforeRet_;
+	addChild__persist95demo_u134(T21_, (&instrLayer__persist95demo_u104));
+	if (NIM_UNLIKELY(*nimErr_)) goto BeforeRet_;
+	clickConfigeq___OOZOOZOOZsrcZnebbleZuiZwindow_u325((&pebbleWindow__persist95demo_u100), generatedClickConfigProvider__persist95demo_u98);
+	if (NIM_UNLIKELY(*nimErr_)) goto BeforeRet_;
+	}BeforeRet_: ;
 }
-static N_INLINE(tyObject_struct_Layer__KCpfpF2jwj5coKARWsuAMQ*, getLayer__OOZOOZOOZsrcZnebbleZuiZtext95layer_u30)(tyObject_struct_TextLayer__nw9b2AOGA5VlSCdX45JcJqQ* textLayer_p0) {
-	tyObject_struct_Layer__KCpfpF2jwj5coKARWsuAMQ* result;
-	result = text_layer_get_layer(textLayer_p0);
-	return result;
+N_LIB_PRIVATE N_CDECL(void, windowUnload__persist95demo_u150)(tyObject_struct_Window__esLx3vYHW9aoDk9a25tQZ3QQ* winX60gensym63__p0) {
+	tyObject_TextLayerHandle__t9bAY9a7d2BLJR3FU4TDoSGA T1_;
+	tyObject_TextLayerHandle__t9bAY9a7d2BLJR3FU4TDoSGA T2_;
+	tyObject_TextLayerHandle__t9bAY9a7d2BLJR3FU4TDoSGA T3_;
+	tyObject_TextLayerHandle__t9bAY9a7d2BLJR3FU4TDoSGA T4_;
+NIM_BOOL* nimErr_;
+{nimErr_ = nimErrorFlag();
+	nimZeroMem((void*)(&T1_), sizeof(tyObject_TextLayerHandle__t9bAY9a7d2BLJR3FU4TDoSGA));
+	eqsink___OOZOOZOOZsrcZnebbleZuiZtext95layer_u53((&titleLayer__persist95demo_u101), T1_);
+	if (NIM_UNLIKELY(*nimErr_)) goto BeforeRet_;
+	nimZeroMem((void*)(&T2_), sizeof(tyObject_TextLayerHandle__t9bAY9a7d2BLJR3FU4TDoSGA));
+	eqsink___OOZOOZOOZsrcZnebbleZuiZtext95layer_u53((&nameLayer__persist95demo_u102), T2_);
+	if (NIM_UNLIKELY(*nimErr_)) goto BeforeRet_;
+	nimZeroMem((void*)(&T3_), sizeof(tyObject_TextLayerHandle__t9bAY9a7d2BLJR3FU4TDoSGA));
+	eqsink___OOZOOZOOZsrcZnebbleZuiZtext95layer_u53((&counterLayer__persist95demo_u103), T3_);
+	if (NIM_UNLIKELY(*nimErr_)) goto BeforeRet_;
+	nimZeroMem((void*)(&T4_), sizeof(tyObject_TextLayerHandle__t9bAY9a7d2BLJR3FU4TDoSGA));
+	eqsink___OOZOOZOOZsrcZnebbleZuiZtext95layer_u53((&instrLayer__persist95demo_u104), T4_);
+	if (NIM_UNLIKELY(*nimErr_)) goto BeforeRet_;
+	}BeforeRet_: ;
 }
 static N_INLINE(NIM_BOOL, exists__OOZOOZOOZsrcZnebbleZfoundationZstorage_u2)(NU32 key_p0) {
 	NIM_BOOL result;
@@ -298,7 +739,39 @@ static N_INLINE(int, readString__OOZOOZOOZsrcZnebbleZfoundationZstorage_u12)(NU3
 	result = persist_read_string(key_p0, buffer_p1, bufferSize_p2);
 	return result;
 }
-N_LIB_PRIVATE N_NIMCALL(void, loadData__persist95demo_u50)(void) {
+static N_INLINE(void, clear__persist95demo_u380)(tyObject_FixedString__FEvMMAl6BfSkYl1B6N5cOw* s_p0) {
+	(*s_p0).len = ((NI)0);
+	(*s_p0).data[(((NI)0))- 0] = 0;
+}
+static N_INLINE(void, add__persist95demo_u397)(tyObject_FixedString__FEvMMAl6BfSkYl1B6N5cOw* s_p0, NCSTRING str_p1) {
+	NI i_1;
+{	{
+		NIM_BOOL T3_;
+		T3_ = (NIM_BOOL)0;
+		T3_ = eqeq___system_u6018(str_p1, ((NCSTRING) NIM_NIL));
+		if (!T3_) goto LA4_;
+		goto BeforeRet_;
+	}
+LA4_: ;
+	i_1 = ((NI)0);
+	{
+		while (1) {
+			NIM_BOOL T8_;
+			T8_ = (NIM_BOOL)0;
+			T8_ = !(((NU8)(str_p1[i_1]) == (NU8)(0)));
+			if (!(T8_)) goto LA9_;
+			T8_ = ((*s_p0).len < ((NI)63));
+LA9_: ;
+			if (!T8_) goto LA7;
+			(*s_p0).data[((*s_p0).len)- 0] = str_p1[i_1];
+			(*s_p0).len += ((NI)1);
+			i_1 += ((NI)1);
+		} LA7: ;
+	}
+	(*s_p0).data[((*s_p0).len)- 0] = 0;
+	}BeforeRet_: ;
+}
+N_LIB_PRIVATE N_NIMCALL(void, loadData__persist95demo_u15)(void) {
 NIM_BOOL* nimErr_;
 {nimErr_ = nimErrorFlag();
 	{
@@ -311,12 +784,12 @@ NIM_BOOL* nimErr_;
 		T6_ = (NI32)0;
 		T6_ = readInt__OOZOOZOOZsrcZnebbleZfoundationZstorage_u5(((NU32)1));
 		if (NIM_UNLIKELY(*nimErr_)) goto BeforeRet_;
-		counter__persist95demo_u11 = T6_;
+		counter__persist95demo_u18 = T6_;
 	}
 	goto LA1_;
 LA4_: ;
 	{
-		counter__persist95demo_u11 = ((NI32)0);
+		counter__persist95demo_u18 = ((NI32)0);
 	}
 LA1_: ;
 	{
@@ -327,338 +800,91 @@ LA1_: ;
 		if (NIM_UNLIKELY(*nimErr_)) goto BeforeRet_;
 		if (!T10_) goto LA11_;
 		T13_ = (int)0;
-		T13_ = readString__OOZOOZOOZsrcZnebbleZfoundationZstorage_u12(((NU32)2), ((NCSTRING) ((&nameBuffer__persist95demo_u10[(((NI)0))- 0]))), ((size_t)64));
+		T13_ = readString__OOZOOZOOZsrcZnebbleZfoundationZstorage_u12(((NU32)2), ((NCSTRING) ((&nameStr__persist95demo_u37.data[(((NI)0))- 0]))), ((size_t)64));
 		if (NIM_UNLIKELY(*nimErr_)) goto BeforeRet_;
 		(void)(T13_);
 	}
 	goto LA8_;
 LA11_: ;
 	{
-		NimStringV2 defaultName_1;
-		defaultName_1.len = 0; defaultName_1.p = NIM_NIL;
-		defaultName_1 = TM__lqeHtcRlDduU9aPt9aAEw6Dw_3;
-		{
-			NI i_1;
-			NI colontmp_;
-			NI i_2;
-			i_1 = (NI)0;
-			colontmp_ = (NI)0;
-			colontmp_ = defaultName_1.len;
-			i_2 = ((NI)0);
-			{
-				while (1) {
-					if (!(i_2 < colontmp_)) goto LA17;
-					i_1 = i_2;
-					nameBuffer__persist95demo_u10[(i_1)- 0] = defaultName_1.p->data[i_1];
-					i_2 += ((NI)1);
-				} LA17: ;
-			}
-		}
-		nameBuffer__persist95demo_u10[(defaultName_1.len)- 0] = 0;
+		clear__persist95demo_u380((&nameStr__persist95demo_u37));
+		if (NIM_UNLIKELY(*nimErr_)) goto BeforeRet_;
+		add__persist95demo_u397((&nameStr__persist95demo_u37), "Nebble User");
+		if (NIM_UNLIKELY(*nimErr_)) goto BeforeRet_;
 	}
 LA8_: ;
 	}BeforeRet_: ;
 }
-static N_INLINE(void, nimCopyMem)(void* dest_p0, void* source_p1, NI size_p2) {
-	void* T1_;
-	T1_ = (void*)0;
-	T1_ = memcpy(dest_p0, source_p1, ((size_t) (size_p2)));
+static N_INLINE(void, push__OOZOOZOOZsrcZnebbleZuiZwindow_u199)(tyObject_WindowHandle__QyOpsx5EVgiof5UakzQL7A* h_p0, NIM_BOOL animated_p1) {
+	window_stack_push((*h_p0).raw, animated_p1);
+	(*h_p0).state = ((tyEnum_ResourceState__zuZLKhn7SRnYvk4iCTdAkw)1);
 }
-static N_INLINE(void, copyMem__system_u1741)(void* dest_p0, void* source_p1, NI size_p2) {
-	nimCopyMem(dest_p0, source_p1, size_p2);
+N_LIB_PRIVATE N_CDECL(void, init__persist95demo_u169)(void) {
+	tyObject_WindowHandle__QyOpsx5EVgiof5UakzQL7A T1_;
+NIM_BOOL* nimErr_;
+{nimErr_ = nimErrorFlag();
+	T1_ = newWindow__OOZOOZOOZsrcZnebbleZuiZwindow_u191();
+	if (NIM_UNLIKELY(*nimErr_)) {eqdestroy___OOZOOZOOZsrcZnebbleZuiZwindow_u7(&T1_); goto BeforeRet_;}
+	eqsink___OOZOOZOOZsrcZnebbleZuiZwindow_u50((&pebbleWindow__persist95demo_u100), T1_);
+	if (NIM_UNLIKELY(*nimErr_)) goto BeforeRet_;
+	setHandlers__OOZOOZOOZsrcZnebbleZuiZwindow_u264((&pebbleWindow__persist95demo_u100), windowLoad__persist95demo_u105, windowUnload__persist95demo_u150, NIM_NIL, NIM_NIL);
+	if (NIM_UNLIKELY(*nimErr_)) goto BeforeRet_;
+	loadData__persist95demo_u15();
+	if (NIM_UNLIKELY(*nimErr_)) goto BeforeRet_;
+	updateDisplay__persist95demo_u16();
+	if (NIM_UNLIKELY(*nimErr_)) goto BeforeRet_;
+	push__OOZOOZOOZsrcZnebbleZuiZwindow_u199((&pebbleWindow__persist95demo_u100), NIM_TRUE);
+	if (NIM_UNLIKELY(*nimErr_)) goto BeforeRet_;
+	}BeforeRet_: ;
 }
-static N_INLINE(void, appendString)(NimStringV2* dest_p0, NimStringV2 src_p1) {
-	{
-		if (!(((NI)0) < src_p1.len)) goto LA3_;
-		copyMem__system_u1741(((void*) ((&(*(*dest_p0).p).data[(*dest_p0).len]))), ((void*) ((&(*src_p1.p).data[((NI)0)]))), (src_p1.len));
-		(*dest_p0).len += src_p1.len;
-		(*(*dest_p0).p).data[(*dest_p0).len] = 0;
+static N_INLINE(NIM_BOOL, pop__OOZOOZOOZsrcZnebbleZuiZwindow_u202)(tyObject_WindowHandle__QyOpsx5EVgiof5UakzQL7A* h_p0) {
+	NIM_BOOL result;
+{	{
+		tyObject_struct_Window__esLx3vYHW9aoDk9a25tQZ3QQ* topWindow_1;
+		if (!((*h_p0).state == ((tyEnum_ResourceState__zuZLKhn7SRnYvk4iCTdAkw)1))) goto LA3_;
+		topWindow_1 = window_stack_get_top_window();
+		{
+			tyObject_struct_Window__esLx3vYHW9aoDk9a25tQZ3QQ* popped_1;
+			if (!(topWindow_1 == (*h_p0).raw)) goto LA7_;
+			popped_1 = window_stack_pop(NIM_TRUE);
+			{
+				if (!(popped_1 == (*h_p0).raw)) goto LA11_;
+				(*h_p0).state = ((tyEnum_ResourceState__zuZLKhn7SRnYvk4iCTdAkw)2);
+				result = NIM_TRUE;
+				goto BeforeRet_;
+			}
+LA11_: ;
+		}
+		goto LA5_;
+LA7_: ;
+		{
+		}
+LA5_: ;
 	}
 LA3_: ;
-}
-N_LIB_PRIVATE N_NIMCALL(void, updateDisplay__persist95demo_u12)(void) {
-	NimStringV2 srcX60gensym0__1;
-	NimStringV2 colontmpD_;
-	NimStringV2 T1_;
-	NI maxLenX60gensym0__1;
-	NI copyLenX60gensym0__1;
-NIM_BOOL* nimErr_;
-{nimErr_ = nimErrorFlag();
-	srcX60gensym0__1.len = 0; srcX60gensym0__1.p = NIM_NIL;
-	colontmpD_.len = 0; colontmpD_.p = NIM_NIL;
-	T1_.len = 0; T1_.p = NIM_NIL;
-	colontmpD_ = dollar___systemZdollars_u29(counter__persist95demo_u11);
-	if (NIM_UNLIKELY(*nimErr_)) goto BeforeRet_;
-	T1_ = rawNewString(colontmpD_.len + 9);
-appendString((&T1_), TM__lqeHtcRlDduU9aPt9aAEw6Dw_5);
-appendString((&T1_), colontmpD_);
-	srcX60gensym0__1 = T1_;
-	maxLenX60gensym0__1 = ((NI)31);
-	copyLenX60gensym0__1 = ((srcX60gensym0__1.len <= maxLenX60gensym0__1) ? srcX60gensym0__1.len : maxLenX60gensym0__1);
-	{
-		NI iX60gensym0__1;
-		NI i_1;
-		iX60gensym0__1 = (NI)0;
-		i_1 = ((NI)0);
-		{
-			while (1) {
-				if (!(i_1 < copyLenX60gensym0__1)) goto LA4;
-				iX60gensym0__1 = i_1;
-				counterBuffer__persist95demo_u9[(iX60gensym0__1)- 0] = srcX60gensym0__1.p->data[iX60gensym0__1];
-				i_1 += ((NI)1);
-			} LA4: ;
-		}
-	}
-	counterBuffer__persist95demo_u9[(copyLenX60gensym0__1)- 0] = 0;
-	text_layer_set_text(counterLayer__persist95demo_u7, ((NCSTRING) ((&counterBuffer__persist95demo_u9[(((NI)0))- 0]))));
-	if (colontmpD_.p && !(colontmpD_.p->cap & NIM_STRLIT_FLAG)) {
- dealloc(colontmpD_.p);
-}
-	if (srcX60gensym0__1.p && !(srcX60gensym0__1.p->cap & NIM_STRLIT_FLAG)) {
- dealloc(srcX60gensym0__1.p);
-}
+	result = NIM_FALSE;
+	goto BeforeRet_;
 	}BeforeRet_: ;
-}
-N_LIB_PRIVATE N_CDECL(void, windowLoad__persist95demo_u93)(tyObject_struct_Window__x0oI0MSh79clnNFs7R9bwHcA* win_p0) {
-	tyObject_struct_Layer__KCpfpF2jwj5coKARWsuAMQ* rootLayer_1;
-	tyObject_struct_GRect570426129__ba9bjUwtvD4v9a2AKX0gWCcg bounds_1;
-	tyObject_struct_TextLayer__nw9b2AOGA5VlSCdX45JcJqQ* titleLayer_1;
-	tyObject_struct_GRect570426129__ba9bjUwtvD4v9a2AKX0gWCcg T1_;
-	tyObject_struct_FontInfo__OThMgPKJgGYHGdVfrJ27ng* T2_;
-	tyObject_union_GColor8570426115__5r6qkn4jWQz1dbWRrH9aefw T3_;
-	tyObject_struct_Layer__KCpfpF2jwj5coKARWsuAMQ* T4_;
-	tyObject_struct_GRect570426129__ba9bjUwtvD4v9a2AKX0gWCcg T5_;
-	tyObject_struct_TextLayer__nw9b2AOGA5VlSCdX45JcJqQ* T6_;
-	tyObject_struct_FontInfo__OThMgPKJgGYHGdVfrJ27ng* T7_;
-	tyObject_union_GColor8570426115__5r6qkn4jWQz1dbWRrH9aefw T8_;
-	tyObject_struct_Layer__KCpfpF2jwj5coKARWsuAMQ* T9_;
-	tyObject_struct_GRect570426129__ba9bjUwtvD4v9a2AKX0gWCcg T10_;
-	tyObject_struct_TextLayer__nw9b2AOGA5VlSCdX45JcJqQ* T11_;
-	tyObject_struct_FontInfo__OThMgPKJgGYHGdVfrJ27ng* T12_;
-	tyObject_union_GColor8570426115__5r6qkn4jWQz1dbWRrH9aefw T13_;
-	tyObject_struct_Layer__KCpfpF2jwj5coKARWsuAMQ* T14_;
-	tyObject_struct_TextLayer__nw9b2AOGA5VlSCdX45JcJqQ* instrLayer_1;
-	tyObject_struct_GRect570426129__ba9bjUwtvD4v9a2AKX0gWCcg T15_;
-	tyObject_struct_FontInfo__OThMgPKJgGYHGdVfrJ27ng* T16_;
-	tyObject_union_GColor8570426115__5r6qkn4jWQz1dbWRrH9aefw T17_;
-	tyObject_struct_Layer__KCpfpF2jwj5coKARWsuAMQ* T18_;
-NIM_BOOL* nimErr_;
-{nimErr_ = nimErrorFlag();
-	rootLayer_1 = rootLayer__OOZOOZOOZsrcZnebbleZuiZwindow_u39(win_p0);
-	if (NIM_UNLIKELY(*nimErr_)) goto BeforeRet_;
-	bounds_1 = bounds__OOZOOZOOZsrcZnebbleZuiZlayer_u52(rootLayer_1);
-	if (NIM_UNLIKELY(*nimErr_)) goto BeforeRet_;
-	T1_ = makeGRect__OOZOOZOOZsrcZnebbleZffi_u3487(((NI16)0), ((NI16)20), bounds_1.size.w, ((NI16)30));
-	if (NIM_UNLIKELY(*nimErr_)) goto BeforeRet_;
-	titleLayer_1 = newTextLayer__OOZOOZOOZsrcZnebbleZuiZtext95layer_u2(T1_, ((NCSTRING) NIM_NIL), ((tyObject_struct_FontInfo__OThMgPKJgGYHGdVfrJ27ng*) NIM_NIL), ((tyEnum_enum_GTextAlignment570426199__GoX9aZdlRH7BVghtSOwHTqA)0));
-	if (NIM_UNLIKELY(*nimErr_)) goto BeforeRet_;
-	texteq___OOZOOZOOZsrcZnebbleZuiZtext95layer_u33(titleLayer_1, "Persist Demo");
-	if (NIM_UNLIKELY(*nimErr_)) goto BeforeRet_;
-	textAlignmenteq___OOZOOZOOZsrcZnebbleZuiZtext95layer_u42(titleLayer_1, ((tyEnum_enum_GTextAlignment570426199__GoX9aZdlRH7BVghtSOwHTqA)1));
-	if (NIM_UNLIKELY(*nimErr_)) goto BeforeRet_;
-	T2_ = (tyObject_struct_FontInfo__OThMgPKJgGYHGdVfrJ27ng*)0;
-	T2_ = getSystemFont__OOZOOZOOZsrcZnebbleZgraphicsZfonts_u2("RESOURCE_ID_GOTHIC_24_BOLD");
-	if (NIM_UNLIKELY(*nimErr_)) goto BeforeRet_;
-	fonteq___OOZOOZOOZsrcZnebbleZuiZtext95layer_u39(titleLayer_1, T2_);
-	if (NIM_UNLIKELY(*nimErr_)) goto BeforeRet_;
-	nimZeroMem((void*)(&T3_), sizeof(tyObject_union_GColor8570426115__5r6qkn4jWQz1dbWRrH9aefw));
-	makeGColor8__OOZOOZOOZsrcZnebbleZffi_u3515(((NU8)0), (&T3_));
-	if (NIM_UNLIKELY(*nimErr_)) goto BeforeRet_;
-	backgroundColoreq___OOZOOZOOZsrcZnebbleZuiZtext95layer_u45(titleLayer_1, T3_);
-	if (NIM_UNLIKELY(*nimErr_)) goto BeforeRet_;
-	T4_ = (tyObject_struct_Layer__KCpfpF2jwj5coKARWsuAMQ*)0;
-	T4_ = getLayer__OOZOOZOOZsrcZnebbleZuiZtext95layer_u30(titleLayer_1);
-	if (NIM_UNLIKELY(*nimErr_)) goto BeforeRet_;
-	addChild__OOZOOZOOZsrcZnebbleZuiZlayer_u11(rootLayer_1, T4_);
-	if (NIM_UNLIKELY(*nimErr_)) goto BeforeRet_;
-	T5_ = makeGRect__OOZOOZOOZsrcZnebbleZffi_u3487(((NI16)0), ((NI16)55), bounds_1.size.w, ((NI16)25));
-	if (NIM_UNLIKELY(*nimErr_)) goto BeforeRet_;
-	T6_ = (tyObject_struct_TextLayer__nw9b2AOGA5VlSCdX45JcJqQ*)0;
-	T6_ = newTextLayer__OOZOOZOOZsrcZnebbleZuiZtext95layer_u2(T5_, ((NCSTRING) NIM_NIL), ((tyObject_struct_FontInfo__OThMgPKJgGYHGdVfrJ27ng*) NIM_NIL), ((tyEnum_enum_GTextAlignment570426199__GoX9aZdlRH7BVghtSOwHTqA)0));
-	if (NIM_UNLIKELY(*nimErr_)) goto BeforeRet_;
-	nameLayer__persist95demo_u8 = T6_;
-	texteq___OOZOOZOOZsrcZnebbleZuiZtext95layer_u33(nameLayer__persist95demo_u8, ((NCSTRING) ((&nameBuffer__persist95demo_u10[(((NI)0))- 0]))));
-	if (NIM_UNLIKELY(*nimErr_)) goto BeforeRet_;
-	textAlignmenteq___OOZOOZOOZsrcZnebbleZuiZtext95layer_u42(nameLayer__persist95demo_u8, ((tyEnum_enum_GTextAlignment570426199__GoX9aZdlRH7BVghtSOwHTqA)1));
-	if (NIM_UNLIKELY(*nimErr_)) goto BeforeRet_;
-	T7_ = (tyObject_struct_FontInfo__OThMgPKJgGYHGdVfrJ27ng*)0;
-	T7_ = getSystemFont__OOZOOZOOZsrcZnebbleZgraphicsZfonts_u2("RESOURCE_ID_GOTHIC_18");
-	if (NIM_UNLIKELY(*nimErr_)) goto BeforeRet_;
-	fonteq___OOZOOZOOZsrcZnebbleZuiZtext95layer_u39(nameLayer__persist95demo_u8, T7_);
-	if (NIM_UNLIKELY(*nimErr_)) goto BeforeRet_;
-	nimZeroMem((void*)(&T8_), sizeof(tyObject_union_GColor8570426115__5r6qkn4jWQz1dbWRrH9aefw));
-	makeGColor8__OOZOOZOOZsrcZnebbleZffi_u3515(((NU8)0), (&T8_));
-	if (NIM_UNLIKELY(*nimErr_)) goto BeforeRet_;
-	backgroundColoreq___OOZOOZOOZsrcZnebbleZuiZtext95layer_u45(nameLayer__persist95demo_u8, T8_);
-	if (NIM_UNLIKELY(*nimErr_)) goto BeforeRet_;
-	T9_ = (tyObject_struct_Layer__KCpfpF2jwj5coKARWsuAMQ*)0;
-	T9_ = getLayer__OOZOOZOOZsrcZnebbleZuiZtext95layer_u30(nameLayer__persist95demo_u8);
-	if (NIM_UNLIKELY(*nimErr_)) goto BeforeRet_;
-	addChild__OOZOOZOOZsrcZnebbleZuiZlayer_u11(rootLayer_1, T9_);
-	if (NIM_UNLIKELY(*nimErr_)) goto BeforeRet_;
-	T10_ = makeGRect__OOZOOZOOZsrcZnebbleZffi_u3487(((NI16)0), ((NI16)85), bounds_1.size.w, ((NI16)35));
-	if (NIM_UNLIKELY(*nimErr_)) goto BeforeRet_;
-	T11_ = (tyObject_struct_TextLayer__nw9b2AOGA5VlSCdX45JcJqQ*)0;
-	T11_ = newTextLayer__OOZOOZOOZsrcZnebbleZuiZtext95layer_u2(T10_, ((NCSTRING) NIM_NIL), ((tyObject_struct_FontInfo__OThMgPKJgGYHGdVfrJ27ng*) NIM_NIL), ((tyEnum_enum_GTextAlignment570426199__GoX9aZdlRH7BVghtSOwHTqA)0));
-	if (NIM_UNLIKELY(*nimErr_)) goto BeforeRet_;
-	counterLayer__persist95demo_u7 = T11_;
-	textAlignmenteq___OOZOOZOOZsrcZnebbleZuiZtext95layer_u42(counterLayer__persist95demo_u7, ((tyEnum_enum_GTextAlignment570426199__GoX9aZdlRH7BVghtSOwHTqA)1));
-	if (NIM_UNLIKELY(*nimErr_)) goto BeforeRet_;
-	T12_ = (tyObject_struct_FontInfo__OThMgPKJgGYHGdVfrJ27ng*)0;
-	T12_ = getSystemFont__OOZOOZOOZsrcZnebbleZgraphicsZfonts_u2("RESOURCE_ID_GOTHIC_28_BOLD");
-	if (NIM_UNLIKELY(*nimErr_)) goto BeforeRet_;
-	fonteq___OOZOOZOOZsrcZnebbleZuiZtext95layer_u39(counterLayer__persist95demo_u7, T12_);
-	if (NIM_UNLIKELY(*nimErr_)) goto BeforeRet_;
-	nimZeroMem((void*)(&T13_), sizeof(tyObject_union_GColor8570426115__5r6qkn4jWQz1dbWRrH9aefw));
-	makeGColor8__OOZOOZOOZsrcZnebbleZffi_u3515(((NU8)0), (&T13_));
-	if (NIM_UNLIKELY(*nimErr_)) goto BeforeRet_;
-	backgroundColoreq___OOZOOZOOZsrcZnebbleZuiZtext95layer_u45(counterLayer__persist95demo_u7, T13_);
-	if (NIM_UNLIKELY(*nimErr_)) goto BeforeRet_;
-	T14_ = (tyObject_struct_Layer__KCpfpF2jwj5coKARWsuAMQ*)0;
-	T14_ = getLayer__OOZOOZOOZsrcZnebbleZuiZtext95layer_u30(counterLayer__persist95demo_u7);
-	if (NIM_UNLIKELY(*nimErr_)) goto BeforeRet_;
-	addChild__OOZOOZOOZsrcZnebbleZuiZlayer_u11(rootLayer_1, T14_);
-	if (NIM_UNLIKELY(*nimErr_)) goto BeforeRet_;
-	T15_ = makeGRect__OOZOOZOOZsrcZnebbleZffi_u3487(((NI16)0), ((NI16)125), bounds_1.size.w, ((NI16)40));
-	if (NIM_UNLIKELY(*nimErr_)) goto BeforeRet_;
-	instrLayer_1 = newTextLayer__OOZOOZOOZsrcZnebbleZuiZtext95layer_u2(T15_, ((NCSTRING) NIM_NIL), ((tyObject_struct_FontInfo__OThMgPKJgGYHGdVfrJ27ng*) NIM_NIL), ((tyEnum_enum_GTextAlignment570426199__GoX9aZdlRH7BVghtSOwHTqA)0));
-	if (NIM_UNLIKELY(*nimErr_)) goto BeforeRet_;
-	texteq___OOZOOZOOZsrcZnebbleZuiZtext95layer_u33(instrLayer_1, "SELECT: +1\012UP: +10\012DOWN: Reset");
-	if (NIM_UNLIKELY(*nimErr_)) goto BeforeRet_;
-	textAlignmenteq___OOZOOZOOZsrcZnebbleZuiZtext95layer_u42(instrLayer_1, ((tyEnum_enum_GTextAlignment570426199__GoX9aZdlRH7BVghtSOwHTqA)1));
-	if (NIM_UNLIKELY(*nimErr_)) goto BeforeRet_;
-	T16_ = (tyObject_struct_FontInfo__OThMgPKJgGYHGdVfrJ27ng*)0;
-	T16_ = getSystemFont__OOZOOZOOZsrcZnebbleZgraphicsZfonts_u2("RESOURCE_ID_GOTHIC_14");
-	if (NIM_UNLIKELY(*nimErr_)) goto BeforeRet_;
-	fonteq___OOZOOZOOZsrcZnebbleZuiZtext95layer_u39(instrLayer_1, T16_);
-	if (NIM_UNLIKELY(*nimErr_)) goto BeforeRet_;
-	nimZeroMem((void*)(&T17_), sizeof(tyObject_union_GColor8570426115__5r6qkn4jWQz1dbWRrH9aefw));
-	makeGColor8__OOZOOZOOZsrcZnebbleZffi_u3515(((NU8)0), (&T17_));
-	if (NIM_UNLIKELY(*nimErr_)) goto BeforeRet_;
-	backgroundColoreq___OOZOOZOOZsrcZnebbleZuiZtext95layer_u45(instrLayer_1, T17_);
-	if (NIM_UNLIKELY(*nimErr_)) goto BeforeRet_;
-	T18_ = (tyObject_struct_Layer__KCpfpF2jwj5coKARWsuAMQ*)0;
-	T18_ = getLayer__OOZOOZOOZsrcZnebbleZuiZtext95layer_u30(instrLayer_1);
-	if (NIM_UNLIKELY(*nimErr_)) goto BeforeRet_;
-	addChild__OOZOOZOOZsrcZnebbleZuiZlayer_u11(rootLayer_1, T18_);
-	if (NIM_UNLIKELY(*nimErr_)) goto BeforeRet_;
-	loadData__persist95demo_u50();
-	if (NIM_UNLIKELY(*nimErr_)) goto BeforeRet_;
-	updateDisplay__persist95demo_u12();
-	if (NIM_UNLIKELY(*nimErr_)) goto BeforeRet_;
-	}BeforeRet_: ;
-}
-static N_INLINE(void, destroy__OOZOOZOOZsrcZnebbleZuiZtext95layer_u28)(tyObject_struct_TextLayer__nw9b2AOGA5VlSCdX45JcJqQ* textLayer_p0) {
-	text_layer_destroy(textLayer_p0);
-}
-N_LIB_PRIVATE N_CDECL(void, windowUnload__persist95demo_u99)(tyObject_struct_Window__x0oI0MSh79clnNFs7R9bwHcA* win_p0) {
-NIM_BOOL* nimErr_;
-{nimErr_ = nimErrorFlag();
-	destroy__OOZOOZOOZsrcZnebbleZuiZtext95layer_u28(counterLayer__persist95demo_u7);
-	if (NIM_UNLIKELY(*nimErr_)) goto BeforeRet_;
-	destroy__OOZOOZOOZsrcZnebbleZuiZtext95layer_u28(nameLayer__persist95demo_u8);
-	if (NIM_UNLIKELY(*nimErr_)) goto BeforeRet_;
-	}BeforeRet_: ;
-}
-static N_INLINE(void, onClick__OOZOOZOOZsrcZnebbleZuiZclicks_u2)(tyEnum_enum_ButtonId570425848__Rzy1M9a2qUvvKVCZfJa2Ciw buttonId_p0, tyProc__LCJy9bQFEE8ObaRc29a4n3LA handler_p1) {
-	window_single_click_subscribe(buttonId_p0, handler_p1);
-}
-static N_INLINE(int, writeInt__OOZOOZOOZsrcZnebbleZfoundationZstorage_u8)(NU32 key_p0, NI32 value_p1) {
-	int result;
-	result = persist_write_int(key_p0, value_p1);
 	return result;
 }
-N_LIB_PRIVATE N_NIMCALL(void, saveData__persist95demo_u49)(void) {
-	int T1_;
+N_LIB_PRIVATE N_CDECL(void, deinit__persist95demo_u170)(void) {
 NIM_BOOL* nimErr_;
 {nimErr_ = nimErrorFlag();
-	T1_ = (int)0;
-	T1_ = writeInt__OOZOOZOOZsrcZnebbleZfoundationZstorage_u8(((NU32)1), counter__persist95demo_u11);
-	if (NIM_UNLIKELY(*nimErr_)) goto BeforeRet_;
-	(void)(T1_);
-	}BeforeRet_: ;
-}
-static N_INLINE(void, shortPulse__OOZOOZOOZsrcZnebbleZuiZvibes_u2)(void) {
-	vibes_short_pulse();
-}
-N_LIB_PRIVATE N_CDECL(void, selectClickHandler__persist95demo_u73)(void* recognizer_p0, void* context_p1) {
-NIM_BOOL* nimErr_;
-{nimErr_ = nimErrorFlag();
-	counter__persist95demo_u11 += ((NI)1);
-	saveData__persist95demo_u49();
-	if (NIM_UNLIKELY(*nimErr_)) goto BeforeRet_;
-	updateDisplay__persist95demo_u12();
+	saveData__persist95demo_u17();
 	if (NIM_UNLIKELY(*nimErr_)) goto BeforeRet_;
 	{
-		if (!((NI32)(counter__persist95demo_u11 % ((NI32)10)) == ((NI32)0))) goto LA3_;
-		shortPulse__OOZOOZOOZsrcZnebbleZuiZvibes_u2();
+		NIM_BOOL T3_;
+		tyObject_WindowHandle__QyOpsx5EVgiof5UakzQL7A T6_;
+		T3_ = (NIM_BOOL)0;
+		T3_ = pop__OOZOOZOOZsrcZnebbleZuiZwindow_u202((&pebbleWindow__persist95demo_u100));
+		if (NIM_UNLIKELY(*nimErr_)) goto BeforeRet_;
+		if (!T3_) goto LA4_;
+		T6_ = toHandle__OOZOOZOOZsrcZnebbleZuiZwindow_u73(((tyObject_struct_Window__esLx3vYHW9aoDk9a25tQZ3QQ*) NIM_NIL));
+		if (NIM_UNLIKELY(*nimErr_)) {eqdestroy___OOZOOZOOZsrcZnebbleZuiZwindow_u7(&T6_); goto BeforeRet_;}
+		eqsink___OOZOOZOOZsrcZnebbleZuiZwindow_u50((&pebbleWindow__persist95demo_u100), T6_);
 		if (NIM_UNLIKELY(*nimErr_)) goto BeforeRet_;
 	}
-LA3_: ;
-	}BeforeRet_: ;
-}
-N_LIB_PRIVATE N_CDECL(void, upClickHandler__persist95demo_u81)(void* recognizer_p0, void* context_p1) {
-NIM_BOOL* nimErr_;
-{nimErr_ = nimErrorFlag();
-	counter__persist95demo_u11 += ((NI32)10);
-	saveData__persist95demo_u49();
-	if (NIM_UNLIKELY(*nimErr_)) goto BeforeRet_;
-	updateDisplay__persist95demo_u12();
-	if (NIM_UNLIKELY(*nimErr_)) goto BeforeRet_;
-	}BeforeRet_: ;
-}
-static N_INLINE(void, doublePulse__OOZOOZOOZsrcZnebbleZuiZvibes_u4)(void) {
-	vibes_double_pulse();
-}
-N_LIB_PRIVATE N_CDECL(void, downClickHandler__persist95demo_u88)(void* recognizer_p0, void* context_p1) {
-NIM_BOOL* nimErr_;
-{nimErr_ = nimErrorFlag();
-	counter__persist95demo_u11 = ((NI32)0);
-	saveData__persist95demo_u49();
-	if (NIM_UNLIKELY(*nimErr_)) goto BeforeRet_;
-	updateDisplay__persist95demo_u12();
-	if (NIM_UNLIKELY(*nimErr_)) goto BeforeRet_;
-	doublePulse__OOZOOZOOZsrcZnebbleZuiZvibes_u4();
-	if (NIM_UNLIKELY(*nimErr_)) goto BeforeRet_;
-	}BeforeRet_: ;
-}
-N_LIB_PRIVATE N_CDECL(void, clickConfigProvider__persist95demo_u91)(void* context_p0) {
-NIM_BOOL* nimErr_;
-{nimErr_ = nimErrorFlag();
-	onClick__OOZOOZOOZsrcZnebbleZuiZclicks_u2(((tyEnum_enum_ButtonId570425848__Rzy1M9a2qUvvKVCZfJa2Ciw)2), selectClickHandler__persist95demo_u73);
-	if (NIM_UNLIKELY(*nimErr_)) goto BeforeRet_;
-	onClick__OOZOOZOOZsrcZnebbleZuiZclicks_u2(((tyEnum_enum_ButtonId570425848__Rzy1M9a2qUvvKVCZfJa2Ciw)1), upClickHandler__persist95demo_u81);
-	if (NIM_UNLIKELY(*nimErr_)) goto BeforeRet_;
-	onClick__OOZOOZOOZsrcZnebbleZuiZclicks_u2(((tyEnum_enum_ButtonId570425848__Rzy1M9a2qUvvKVCZfJa2Ciw)3), downClickHandler__persist95demo_u88);
-	if (NIM_UNLIKELY(*nimErr_)) goto BeforeRet_;
-	}BeforeRet_: ;
-}
-N_LIB_PRIVATE N_CDECL(void, init__persist95demo_u103)(void) {
-	tyObject_struct_WindowHandlers570426241__LjZh1APfxAVIL556StHLrQ T1_;
-	pebbleWindow__persist95demo_u102 = window_create();
-	nimZeroMem((void*)(&T1_), sizeof(tyObject_struct_WindowHandlers570426241__LjZh1APfxAVIL556StHLrQ));
-	T1_.load = windowLoad__persist95demo_u93;
-	T1_.unload = windowUnload__persist95demo_u99;
-	window_set_window_handlers(pebbleWindow__persist95demo_u102, T1_);
-	window_set_click_config_provider(pebbleWindow__persist95demo_u102, clickConfigProvider__persist95demo_u91);
-	window_stack_push(pebbleWindow__persist95demo_u102, NIM_TRUE);
-}
-static N_INLINE(void, eventLoop__OOZOOZOOZsrcZnebbleZfoundationZapp_u3)(void) {
-	app_event_loop();
-}
-N_LIB_PRIVATE N_NIMCALL(void, deinitApp__persist95demo_u101)(void) {
-NIM_BOOL* nimErr_;
-{nimErr_ = nimErrorFlag();
-	saveData__persist95demo_u49();
-	if (NIM_UNLIKELY(*nimErr_)) goto BeforeRet_;
-	}BeforeRet_: ;
-}
-N_LIB_PRIVATE N_CDECL(void, deinit__persist95demo_u104)(void) {
-NIM_BOOL* nimErr_;
-{nimErr_ = nimErrorFlag();
-	deinitApp__persist95demo_u101();
-	if (NIM_UNLIKELY(*nimErr_)) goto BeforeRet_;
-	window_destroy(pebbleWindow__persist95demo_u102);
+LA4_: ;
 	}BeforeRet_: ;
 }
 N_LIB_PRIVATE N_CDECL(int, main)(void) {
@@ -666,18 +892,33 @@ N_LIB_PRIVATE N_CDECL(int, main)(void) {
 NIM_BOOL* nimErr_;
 {nimErr_ = nimErrorFlag();
 	result = (int)0;
-	init__persist95demo_u103();
+	NimMain();
+	init__persist95demo_u169();
 	if (NIM_UNLIKELY(*nimErr_)) goto BeforeRet_;
-	eventLoop__OOZOOZOOZsrcZnebbleZfoundationZapp_u3();
-	if (NIM_UNLIKELY(*nimErr_)) goto BeforeRet_;
-	deinit__persist95demo_u104();
+	app_event_loop();
+	deinit__persist95demo_u170();
 	if (NIM_UNLIKELY(*nimErr_)) goto BeforeRet_;
 	result = ((int)0);
 	goto BeforeRet_;
 	}BeforeRet_: ;
 	return result;
 }
+N_LIB_PRIVATE N_CDECL(void, _exit)(int codeX60gensym63__p0) {
+}
 N_LIB_PRIVATE N_CDECL(void, NimDestroyGlobals)(void) {
+NIM_BOOL* nimErr_;
+{nimErr_ = nimErrorFlag();
+	eqdestroy___OOZOOZOOZsrcZnebbleZuiZtext95layer_u22((&instrLayer__persist95demo_u104));
+	if (NIM_UNLIKELY(*nimErr_)) goto BeforeRet_;
+	eqdestroy___OOZOOZOOZsrcZnebbleZuiZtext95layer_u22((&counterLayer__persist95demo_u103));
+	if (NIM_UNLIKELY(*nimErr_)) goto BeforeRet_;
+	eqdestroy___OOZOOZOOZsrcZnebbleZuiZtext95layer_u22((&nameLayer__persist95demo_u102));
+	if (NIM_UNLIKELY(*nimErr_)) goto BeforeRet_;
+	eqdestroy___OOZOOZOOZsrcZnebbleZuiZtext95layer_u22((&titleLayer__persist95demo_u101));
+	if (NIM_UNLIKELY(*nimErr_)) goto BeforeRet_;
+	eqdestroy___OOZOOZOOZsrcZnebbleZuiZwindow_u7((&pebbleWindow__persist95demo_u100));
+	if (NIM_UNLIKELY(*nimErr_)) goto BeforeRet_;
+	}BeforeRet_: ;
 }
 
 N_LIB_PRIVATE void PreMainInner(void) {

@@ -1,143 +1,226 @@
-## High-level idiomatic Nim API for Pebble text layers.
+## ARC-Managed TextLayer Handle
 ##
-## TextLayer provides simple text rendering on screen with customizable
-## font, color, alignment, and overflow modes.
+## Provides automatic memory management for TextLayer objects using Nim's ARC
+## (Automatic Reference Counting) system.
+##
+## **Key Features:**
+## - Automatic destruction when handle goes out of scope
+## - Move semantics (no copying)
+## - Property-style accessors for common operations
+## - Compatible with manual `ptr TextLayer` API via converters
+##
+## **Usage Example:**
+##   ```nim
+##   import nebble/ui/text_layer
+##   
+##   var textLayer: TextLayerHandle  # Module-level persistence
+##   
+##   proc windowLoad(win: ptr Window) {.cdecl.} =
+##     textLayer = newTextLayer(makeGRect(0, 50, 144, 40))
+##     textLayer.text = "Hello World"
+##     textLayer.font = BITHAM_42_BOLD
+##     win.rootLayer.addChild(textLayer.getLayer())
+##   
+##   proc windowUnload(win: ptr Window) {.cdecl.} =
+##     textLayer = TextLayerHandle(nil)  # Explicit destroy
+##   ```
+##
+## **Memory Safety:**
+## The handle has unique ownership of the TextLayer. When the handle is
+## reassigned or goes out of scope, `text_layer_destroy` is called automatically.
+## Copying is disabled to prevent double-free errors.
 
 import nebble/ffi
+import nebble/ffi/managed
 
+# Re-export FFI types for compatibility/completeness
 export ffi.TextLayer, ffi.GFont, ffi.GTextAlignment, ffi.GTextOverflowMode
 
 # ============================================================================
-# TextLayer Constructor / Destructor
+# Define the Managed Handle
 # ============================================================================
 
-proc newTextLayer*(frame: GRect; text: cstring = nil;
+DefineUniqueHandle(TextLayer, TextLayer,
+                  text_layer_create, text_layer_destroy)
+
+# ============================================================================
+# Constructors
+# ============================================================================
+
+proc newTextLayerHandle*(frame: GRect): TextLayerHandle {.inline.} =
+  wrapOwned(ffi.text_layer_create(frame))
+
+proc newTextLayer*(frame: GRect): TextLayerHandle {.inline.} =
+  ## Alias for `newTextLayerHandle`.
+  result = newTextLayerHandle(frame)
+
+proc newTextLayerHandle*(frame: GRect; text: cstring;
+                        font: GFont = nil;
+                        align: GTextAlignment = GTextAlignmentLeft): TextLayerHandle {.inline.} =
+  ## Create a new managed TextLayer with initial properties.
+  ##
+  ## **Parameters:**
+  ## - `frame`: The frame rectangle
+  ## - `text`: Initial text content (cstring, must remain valid)
+  ## - `font`: Initial font (optional)
+  ## - `align`: Text alignment (default: Left)
+  ##
+  ## **Example:**
+  ##   var layer = newTextLayer(
+  ##     makeGRect(0, 50, 144, 40),
+  ##     "Hello World",
+  ##     BITHAM_42_BOLD,
+  ##     GTextAlignmentCenter
+  ##   )
+  result = wrapOwned(ffi.text_layer_create(frame))
+  if text != nil: text_layer_set_text(result.toPtr, text)
+  if font != nil: text_layer_set_font(result.toPtr, font)
+  text_layer_set_text_alignment(result.toPtr, align)
+
+proc newTextLayer*(frame: GRect; text: cstring;
                    font: GFont = nil;
-                   align: GTextAlignment = GTextAlignmentLeft): ptr TextLayer {.inline.} =
-  ## Create a new TextLayer with optional common properties.
-  ## The caller is responsible for calling `destroy()` when done.
-  ## Equivalent to C function `text_layer_create(frame)` with optional property setters.
+                   align: GTextAlignment = GTextAlignmentLeft): TextLayerHandle {.inline.} =
+  ## Alias for `newTextLayerHandle`.
+  result = newTextLayerHandle(frame, text, font, align)
+
+# ============================================================================
+# Layer Access
+# ============================================================================
+
+proc getLayer*(h: TextLayerHandle): ptr Layer {.inline.} =
+  ## Get the underlying Layer pointer for adding to parent.
   ##
-  ## Example:
-  ##   newTextLayer(makeGRect(0, 0, 144, 40))  # Basic usage
-  ##   newTextLayer(frame, "Hello", myFont, GTextAlignmentCenter)  # With properties
-  result = ffi.text_layer_create(frame)
-  if text != nil: ffi.text_layer_set_text(result, text)
-  if font != nil: ffi.text_layer_set_font(result, font)
-  ffi.text_layer_set_text_alignment(result, align)
-
-proc destroy*(textLayer: ptr TextLayer) {.inline.} =
-  ## Destroy a TextLayer and free its memory.
-  ## Equivalent to C function `text_layer_destroy(text_layer)`.
-  ffi.text_layer_destroy(textLayer)
+  ## **Example:**
+  ##   win.rootLayer.addChild(textLayer.getLayer())
+  ##
+  ## **Note:** The returned pointer is valid as long as the handle exists.
+  ## Do not destroy the layer via the returned pointer.
+  when ManagedDebug or ManagedStrict:
+    h.checkValid()
+  text_layer_get_layer(h.toPtr)
 
 # ============================================================================
-# TextLayer <-> Layer Conversion
+# Property Accessors
 # ============================================================================
 
-proc getLayer*(textLayer: ptr TextLayer): ptr Layer {.inline.} =
-  ## Get the underlying Layer for adding to a parent.
-  ## Equivalent to C function `text_layer_get_layer(text_layer)`.
-  ffi.text_layer_get_layer(textLayer)
+proc `text=`*(h: var TextLayerHandle, value: cstring) {.inline.} =
+  when ManagedDebug or ManagedStrict: h.checkValid()
+  text_layer_set_text(h.pRaw, value)
 
-# ============================================================================
-# TextLayer Properties
-# ============================================================================
+proc `text=`*(p: ptr TextLayer, value: cstring) {.inline.} =
+  text_layer_set_text(p, value)
 
-proc `text=`*(textLayer: ptr TextLayer, text: cstring) {.inline.} =
-  ## Set the text content.
-  ## The string must remain valid for the lifetime of the TextLayer
-  ## (use a string literal or static buffer, not a temporary).
-  ## Equivalent to C function `text_layer_set_text(text_layer, text)`.
-  ffi.text_layer_set_text(textLayer, text)
-
-proc text*(textLayer: ptr TextLayer): cstring {.inline.} =
+proc text*(h: TextLayerHandle): cstring {.inline.} =
   ## Get the current text content.
-  ## Equivalent to C function `text_layer_get_text(text_layer)`.
-  ffi.text_layer_get_text(textLayer)
+  when ManagedDebug or ManagedStrict:
+    h.checkValid()
+  text_layer_get_text(h.toPtr)
 
-proc `font=`*(textLayer: ptr TextLayer, font: GFont) {.inline.} =
-  ## Set the font.
-  ## Equivalent to C function `text_layer_set_font(text_layer, font)`.
-  ffi.text_layer_set_font(textLayer, font)
+proc `font=`*(h: var TextLayerHandle, value: GFont) {.inline.} =
+  when ManagedDebug or ManagedStrict: h.checkValid()
+  text_layer_set_font(h.pRaw, value)
 
-proc `textAlignment=`*(textLayer: ptr TextLayer, alignment: GTextAlignment) {.inline.} =
-  ## Set the text alignment (left, center, right).
-  ## Equivalent to C function `text_layer_set_text_alignment(text_layer, alignment)`.
-  ffi.text_layer_set_text_alignment(textLayer, alignment)
+proc `font=`*(p: ptr TextLayer, value: GFont) {.inline.} =
+  text_layer_set_font(p, value)
 
-proc `backgroundColor=`*(textLayer: ptr TextLayer, color: GColor8) {.inline.} =
-  ## Set the background color.
-  ## Equivalent to C function `text_layer_set_background_color(text_layer, color)`.
-  ffi.text_layer_set_background_color(textLayer, color)
+proc `textAlignment=`*(h: var TextLayerHandle, value: GTextAlignment) {.inline.} =
+  when ManagedDebug or ManagedStrict: h.checkValid()
+  text_layer_set_text_alignment(h.pRaw, value)
 
-proc `textColor=`*(textLayer: ptr TextLayer, color: GColor8) {.inline.} =
-  ## Set the text color.
-  ## Equivalent to C function `text_layer_set_text_color(text_layer, color)`.
-  ffi.text_layer_set_text_color(textLayer, color)
+proc `textAlignment=`*(p: ptr TextLayer, value: GTextAlignment) {.inline.} =
+  text_layer_set_text_alignment(p, value)
 
-proc `overflowMode=`*(textLayer: ptr TextLayer, mode: GTextOverflowMode) {.inline.} =
+proc `textColor=`*(h: var TextLayerHandle, value: GColor8) {.inline.} =
+  when ManagedDebug or ManagedStrict: h.checkValid()
+  text_layer_set_text_color(h.pRaw, value)
+
+proc `textColor=`*(p: ptr TextLayer, value: GColor8) {.inline.} =
+  text_layer_set_text_color(p, value)
+
+proc `backgroundColor=`*(h: var TextLayerHandle, value: GColor8) {.inline.} =
+  when ManagedDebug or ManagedStrict: h.checkValid()
+  text_layer_set_background_color(h.pRaw, value)
+
+proc `backgroundColor=`*(p: ptr TextLayer, value: GColor8) {.inline.} =
+  text_layer_set_background_color(p, value)
+
+proc `overflowMode=`*(h: var TextLayerHandle, value: GTextOverflowMode) {.inline.} =
   ## Set the overflow mode (wordWrap, trailing ellipsis, fill).
-  ## Equivalent to C function `text_layer_set_overflow_mode(text_layer, mode)`.
-  ffi.text_layer_set_overflow_mode(textLayer, mode)
+  when ManagedDebug or ManagedStrict:
+    h.checkValid()
+  text_layer_set_overflow_mode(h.toPtr, value)
 
 # ============================================================================
-# TextLayer Size
+# Size and Content
 # ============================================================================
 
-proc contentSize*(textLayer: ptr TextLayer): GSize {.inline.} =
+proc contentSize*(h: TextLayerHandle): GSize {.inline.} =
   ## Get the size of the rendered text content.
-  ## Equivalent to C function `text_layer_get_content_size(text_layer)`.
-  ffi.text_layer_get_content_size(textLayer)
+  when ManagedDebug or ManagedStrict:
+    h.checkValid()
+  text_layer_get_content_size(h.toPtr)
 
-proc `size=`*(textLayer: ptr TextLayer, maxSize: GSize) {.inline.} =
+proc `size=`*(h: var TextLayerHandle, value: GSize) {.inline.} =
   ## Set the maximum size for text rendering.
-  ## Equivalent to C function `text_layer_set_size(text_layer, max_size)`.
-  ffi.text_layer_set_size(textLayer, maxSize)
+  when ManagedDebug or ManagedStrict:
+    h.checkValid()
+  text_layer_set_size(h.toPtr, value)
+
+proc `frame=`*(h: var TextLayerHandle, value: GRect) {.inline.} =
+  ## Set the layer frame (position and size).
+  when ManagedDebug or ManagedStrict:
+    h.checkValid()
+  let layer = text_layer_get_layer(h.toPtr)
+  layer_set_frame(layer, value)
+
+proc frame*(h: TextLayerHandle): GRect {.inline.} =
+  ## Get the layer frame.
+  when ManagedDebug or ManagedStrict:
+    h.checkValid()
+  let layer = text_layer_get_layer(h.toPtr)
+  layer_get_frame(layer)
 
 # ============================================================================
-# Static Text Buffer Management
+# Static Text Helper
 # ============================================================================
 
-template staticText*(layer: ptr TextLayer; bufVar: untyped; text: string) =
-  ## Copy text into a static buffer and set it on the layer.
-  ## Handles null-termination and length clamping automatically.
+template staticText*(h: var TextLayerHandle, bufVar: untyped, text: string) =
+  ## Copy text into a static buffer and set it on the managed layer.
   ##
-  ## **Before (5 lines, repeated ~20 times across examples):**
-  ## ```nim
-  ## let stepsText = "Steps: " & $steps
-  ## for i in 0..<min(stepsText.len, 31):
-  ##   stepsBuffer[i] = stepsText[i]
-  ## stepsBuffer[min(stepsText.len, 31)] = '\0'
-  ## text_layer_set_text(stepsLayer, cast[cstring](addr stepsBuffer[0]))
-  ## ```
+  ## **Usage:**
+  ##   var buffer: array[32, char]
+  ##   textLayer.staticText(buffer, "Steps: " & $stepCount)
   ##
-  ## **After (1 line):**
-  ## ```nim
-  ## stepsLayer.staticText(stepsBuffer, "Steps: " & $steps)
-  ## ```
-  ##
-  ## The buffer variable must be a module-level `var array[N, char]`.
-  ## Local buffers are not supported (they have stack lifetime).
+  ## **Note:** `bufVar` must be a module-level `var array[N, char]`.
+  ## Local buffers are not supported due to stack lifetime.
+  static:
+    # Compile-time check that bufVar is an array type
+    when not (bufVar is array):
+      {.error: "bufVar must be an array type (e.g., array[32, char])".}
+  when ManagedDebug or ManagedStrict:
+    h.checkValid()
   let src = text
   let maxLen = bufVar.len - 1
   let copyLen = min(src.len, maxLen)
   for i in 0..<copyLen:
     bufVar[i] = src[i]
   bufVar[copyLen] = '\0'
-  ffi.text_layer_set_text(layer, cast[cstring](addr bufVar[0]))
+  text_layer_set_text(h.toPtr, cast[cstring](addr bufVar[0]))
 
 # ============================================================================
-# TextLayer Text Flow (for Pebble Time 2 platforms with larger displays)
+# Platform-Specific Features
 # ============================================================================
 
 when declared(text_layer_enable_screen_text_flow_and_paging):
-  proc enableScreenTextFlowAndPaging*(textLayer: ptr TextLayer, inset: uint8) {.inline.} =
+  proc enableScreenTextFlowAndPaging*(h: var TextLayerHandle, inset: uint8) {.inline.} =
     ## Enable screen text flow and paging for long text.
-    ## Equivalent to C function `text_layer_enable_screen_text_flow_and_paging(...)`.
-    ffi.text_layer_enable_screen_text_flow_and_paging(textLayer, inset)
-
-  proc restoreDefaultTextFlowAndPaging*(textLayer: ptr TextLayer) {.inline.} =
+    ## **Note:** Only available on Pebble Time 2 platforms.
+    when ManagedDebug or ManagedStrict:
+      h.checkValid()
+    text_layer_enable_screen_text_flow_and_paging(h.toPtr, inset)
+  
+  proc restoreDefaultTextFlowAndPaging*(h: var TextLayerHandle) {.inline.} =
     ## Restore the default text flow and paging behavior.
-    ## Equivalent to C function `text_layer_restore_default_text_flow_and_paging(...)`.
-    ffi.text_layer_restore_default_text_flow_and_paging(textLayer)
+    when ManagedDebug or ManagedStrict:
+      h.checkValid()
+    text_layer_restore_default_text_flow_and_paging(h.toPtr)

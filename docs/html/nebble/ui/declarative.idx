@@ -1,0 +1,8 @@
+nimTitle	declarative	nebble/ui/declarative.html	module nebble/ui/declarative		0
+nim	nebbleWatchface	nebble/ui/declarative.html#nebbleWatchface.m,untyped	macro nebbleWatchface(body: untyped): untyped		34
+nim	layer	nebble/ui/declarative.html#layer.t,untyped,untyped	template layer(id: untyped; body: untyped): untyped		239
+nim	withFont	nebble/ui/declarative.html#withFont.t,ptr.struct_TextLayer,cstring	template withFont(layer: ptr TextLayer; font: cstring): untyped		244
+nim	withText	nebble/ui/declarative.html#withText.t,ptr.struct_TextLayer,cstring	template withText(layer: ptr TextLayer; txt: cstring): untyped		248
+nim	withColor	nebble/ui/declarative.html#withColor.t,ptr.struct_TextLayer,GColor	template withColor(layer: ptr TextLayer; col: GColor): untyped		252
+nim	withBackgroundColor	nebble/ui/declarative.html#withBackgroundColor.t,ptr.struct_TextLayer,GColor	template withBackgroundColor(layer: ptr TextLayer; col: GColor): untyped		256
+nim	withAlignment	nebble/ui/declarative.html#withAlignment.t,ptr.struct_TextLayer,GTextAlignment	template withAlignment(layer: ptr TextLayer; align: GTextAlignment): untyped		260

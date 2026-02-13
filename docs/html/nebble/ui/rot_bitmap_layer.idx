@@ -1,0 +1,22 @@
+nimTitle	rot_bitmap_layer	nebble/ui/rot_bitmap_layer.html	module nebble/ui/rot_bitmap_layer		0
+nim	newRotBitmapLayer	nebble/ui/rot_bitmap_layer.html#newRotBitmapLayer,ptr.struct_GBitmap	proc newRotBitmapLayer(bitmap: ptr GBitmap): ptr RotBitmapLayer		14
+nim	destroy	nebble/ui/rot_bitmap_layer.html#destroy,ptr.struct_RotBitmapLayer	proc destroy(layer: ptr RotBitmapLayer)		20
+nim	getLayer	nebble/ui/rot_bitmap_layer.html#getLayer,ptr.struct_RotBitmapLayer	proc getLayer(layer: ptr RotBitmapLayer): ptr Layer		29
+nim	setAngle	nebble/ui/rot_bitmap_layer.html#setAngle,ptr.struct_RotBitmapLayer,int32	proc setAngle(layer: ptr RotBitmapLayer; angle: int32)		38
+nim	incrementAngle	nebble/ui/rot_bitmap_layer.html#incrementAngle,ptr.struct_RotBitmapLayer,int32	proc incrementAngle(layer: ptr RotBitmapLayer; angle: int32)		44
+nim	setCornerClipColor	nebble/ui/rot_bitmap_layer.html#setCornerClipColor,ptr.struct_RotBitmapLayer,GColor	proc setCornerClipColor(layer: ptr RotBitmapLayer; color: GColor)		54
+nim	setCompositingMode	nebble/ui/rot_bitmap_layer.html#setCompositingMode,ptr.struct_RotBitmapLayer,GCompOp	proc setCompositingMode(layer: ptr RotBitmapLayer; mode: GCompOp)		60
+nim	setSrcIc	nebble/ui/rot_bitmap_layer.html#setSrcIc,ptr.struct_RotBitmapLayer,GPoint	proc setSrcIc(layer: ptr RotBitmapLayer; ic: GPoint)		65
+nim	raCenter	nebble/ui/rot_bitmap_layer.html#raCenter	RotationAnchor.raCenter		76
+nim	raTop	nebble/ui/rot_bitmap_layer.html#raTop	RotationAnchor.raTop		76
+nim	raBottom	nebble/ui/rot_bitmap_layer.html#raBottom	RotationAnchor.raBottom		76
+nim	raLeft	nebble/ui/rot_bitmap_layer.html#raLeft	RotationAnchor.raLeft		76
+nim	raRight	nebble/ui/rot_bitmap_layer.html#raRight	RotationAnchor.raRight		76
+nim	raTopLeft	nebble/ui/rot_bitmap_layer.html#raTopLeft	RotationAnchor.raTopLeft		76
+nim	raTopRight	nebble/ui/rot_bitmap_layer.html#raTopRight	RotationAnchor.raTopRight		76
+nim	raBottomLeft	nebble/ui/rot_bitmap_layer.html#raBottomLeft	RotationAnchor.raBottomLeft		76
+nim	raBottomRight	nebble/ui/rot_bitmap_layer.html#raBottomRight	RotationAnchor.raBottomRight		76
+nim	RotationAnchor	nebble/ui/rot_bitmap_layer.html#RotationAnchor	enum RotationAnchor		76
+nim	setAnchor	nebble/ui/rot_bitmap_layer.html#setAnchor,ptr.struct_RotBitmapLayer,ptr.struct_GBitmap,RotationAnchor	proc setAnchor(layer: ptr RotBitmapLayer; bitmap: ptr GBitmap; anchor: RotationAnchor)		88
+nim	setAngleDeg	nebble/ui/rot_bitmap_layer.html#setAngleDeg,ptr.struct_RotBitmapLayer,float32	proc setAngleDeg(layer: ptr RotBitmapLayer; degrees: float32)		108
+nim	incrementAngleDeg	nebble/ui/rot_bitmap_layer.html#incrementAngleDeg,ptr.struct_RotBitmapLayer,float32	proc incrementAngleDeg(layer: ptr RotBitmapLayer; degrees: float32)		114

@@ -1,0 +1,30 @@
+nimTitle	message	nebble/comms/message.html	module nebble/comms/message		0
+nim	open	nebble/comms/message.html#open,uint32,uint32	proc open(sizeInbound: uint32; sizeOutbound: uint32): AppMessageResult		16
+nim	deregisterCallbacks	nebble/comms/message.html#deregisterCallbacks	proc deregisterCallbacks()		21
+nim	context	nebble/comms/message.html#context	proc context(): pointer		30
+nim	context=	nebble/comms/message.html#context=,pointer	proc context=(context: pointer): pointer		35
+nim	registerInboxReceived	nebble/comms/message.html#registerInboxReceived,AppMessageInboxReceived	proc registerInboxReceived(callback: AppMessageInboxReceived): AppMessageInboxReceived		45
+nim	registerInboxDropped	nebble/comms/message.html#registerInboxDropped,AppMessageInboxDropped	proc registerInboxDropped(callback: AppMessageInboxDropped): AppMessageInboxDropped		51
+nim	registerOutboxSent	nebble/comms/message.html#registerOutboxSent,AppMessageOutboxSent	proc registerOutboxSent(callback: AppMessageOutboxSent): AppMessageOutboxSent		57
+nim	registerOutboxFailed	nebble/comms/message.html#registerOutboxFailed,AppMessageOutboxFailed	proc registerOutboxFailed(callback: AppMessageOutboxFailed): AppMessageOutboxFailed		63
+nim	inboxSizeMaximum	nebble/comms/message.html#inboxSizeMaximum	proc inboxSizeMaximum(): uint32		73
+nim	outboxSizeMaximum	nebble/comms/message.html#outboxSizeMaximum	proc outboxSizeMaximum(): uint32		78
+nim	outboxBegin	nebble/comms/message.html#outboxBegin,ptr.ptr.DictionaryIterator	proc outboxBegin(iter: ptr ptr DictionaryIterator): AppMessageResult		87
+nim	outboxSend	nebble/comms/message.html#outboxSend	proc outboxSend(): AppMessageResult		92
+nim	size	nebble/comms/message.html#size,ptr.DictionaryIterator	proc size(iter: ptr DictionaryIterator): uint32		101
+nim	writeBegin	nebble/comms/message.html#writeBegin,ptr.DictionaryIterator,ptr.uint8,uint16	proc writeBegin(iter: ptr DictionaryIterator; buffer: ptr uint8; size: uint16): DictionaryResult		106
+nim	writeData	nebble/comms/message.html#writeData,ptr.DictionaryIterator,uint32,ptr.uint8,uint16	proc writeData(iter: ptr DictionaryIterator; key: uint32; data: ptr uint8;\n          size: uint16): DictionaryResult		111
+nim	writeCstring	nebble/comms/message.html#writeCstring,ptr.DictionaryIterator,uint32,cstring	proc writeCstring(iter: ptr DictionaryIterator; key: uint32; cstring: cstring): DictionaryResult		116
+nim	writeInt	nebble/comms/message.html#writeInt,ptr.DictionaryIterator,uint32,int32	proc writeInt(iter: ptr DictionaryIterator; key: uint32; value: int32): DictionaryResult		121
+nim	writeUint8	nebble/comms/message.html#writeUint8,ptr.DictionaryIterator,uint32,uint8	proc writeUint8(iter: ptr DictionaryIterator; key: uint32; value: uint8): DictionaryResult		127
+nim	writeUint16	nebble/comms/message.html#writeUint16,ptr.DictionaryIterator,uint32,uint16	proc writeUint16(iter: ptr DictionaryIterator; key: uint32; value: uint16): DictionaryResult		132
+nim	writeUint32	nebble/comms/message.html#writeUint32,ptr.DictionaryIterator,uint32,uint32	proc writeUint32(iter: ptr DictionaryIterator; key: uint32; value: uint32): DictionaryResult		137
+nim	writeInt8	nebble/comms/message.html#writeInt8,ptr.DictionaryIterator,uint32,int8	proc writeInt8(iter: ptr DictionaryIterator; key: uint32; value: int8): DictionaryResult		142
+nim	writeInt16	nebble/comms/message.html#writeInt16,ptr.DictionaryIterator,uint32,int16	proc writeInt16(iter: ptr DictionaryIterator; key: uint32; value: int16): DictionaryResult		147
+nim	writeInt32	nebble/comms/message.html#writeInt32,ptr.DictionaryIterator,uint32,int32	proc writeInt32(iter: ptr DictionaryIterator; key: uint32; value: int32): DictionaryResult		152
+nim	writeEnd	nebble/comms/message.html#writeEnd,ptr.DictionaryIterator	proc writeEnd(iter: ptr DictionaryIterator): uint32		157
+nim	readBeginFromBuffer	nebble/comms/message.html#readBeginFromBuffer,ptr.DictionaryIterator,ptr.uint8,uint16	proc readBeginFromBuffer(iter: ptr DictionaryIterator; buffer: ptr uint8;\n                    size: uint16): auto		162
+nim	readNext	nebble/comms/message.html#readNext,ptr.DictionaryIterator	proc readNext(iter: ptr DictionaryIterator): ptr Tuple_f		167
+nim	readFirst	nebble/comms/message.html#readFirst,ptr.DictionaryIterator	proc readFirst(iter: ptr DictionaryIterator): ptr Tuple_f		172
+nim	calcBufferSize	nebble/comms/message.html#calcBufferSize,uint8	proc calcBufferSize(tupleCount: uint8): uint32		181
+nim	find	nebble/comms/message.html#find,ptr.DictionaryIterator,uint32	proc find(iter: ptr DictionaryIterator; key: uint32): ptr Tuple_f		186

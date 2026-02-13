@@ -4,74 +4,79 @@
 
 import nebble/ffi
 
+# Platform Capability Detection
+const
+  isColor* = defined(pebbleBasalt) or defined(pebbleChalk) or defined(pebbleEmery) or defined(pebbleColor)
+  isRound* = defined(pebbleChalk) or defined(pebbleRound)
+  isEmery* = defined(pebbleEmery)
+
 # ============================================================================
 # Platform Conditional Macros
 # ============================================================================
 
 template pblIfRectElse*[T](rectExpr, roundExpr: T): T =
-  ## Platform conditional: returns rectExpr on rectangular watches,
-  ## roundExpr on round watches.
-  ## Equivalent to C macro `PBL_IF_RECT_ELSE(rect_expr, round_expr)`.
-  when defined(pebbleRound):
+  when isRound:
     roundExpr
   else:
     rectExpr
 
-template pblIfColorElse*[T](colorExpr, bwExpr: T): T =
-  ## Platform conditional: returns colorExpr on color watches,
-  ## bwExpr on black and white watches.
-  ## Equivalent to C macro `PBL_IF_COLOR_ELSE(color_expr, bw_expr)`.
-  when defined(pebbleColor):
+template pblIfColorElse*[T](colorExpr, bwExpr: T): T {.redefine.} =
+  when isColor:
     colorExpr
   else:
     bwExpr
 
-template pblIfBwElse*[T](bwExpr, colorExpr: T): T =
-  ## Platform conditional: returns bwExpr on black and white watches,
-  ## colorExpr on color watches.
-  ## Equivalent to C macro `PBL_IF_BW_ELSE(bw_expr, color_expr)`.
-  when defined(pebbleColor):
+template pblIfBwElse*[T](bwExpr, colorExpr: T): T {.redefine.} =
+  when isColor:
     colorExpr
   else:
     bwExpr
 
-template pblIfRoundElse*[T](roundExpr, rectExpr: T): T =
-  ## Platform conditional: returns roundExpr on round watches,
-  ## rectExpr on rectangular watches.
-  ## Equivalent to C macro `PBL_IF_ROUND_ELSE(round_expr, rect_expr)`.
-  when defined(pebbleRound):
+template pblIfRoundElse*[T](roundExpr, rectExpr: T): T {.redefine.} =
+  when isRound:
     roundExpr
   else:
     rectExpr
+
+template pblIfHealthElse*[T](healthExpr, elseExpr: T): T =
+  when defined(pebbleAplite):
+    elseExpr
+  else:
+    healthExpr
+
+template pblIfMicrophoneElse*[T](micExpr, elseExpr: T): T =
+  when defined(pebbleAplite):
+    elseExpr
+  else:
+    micExpr
+
+template pblIfSmartstrapElse*[T](smartstrapExpr, elseExpr: T): T =
+  when defined(pebbleAplite) or defined(pebbleFlint):
+    elseExpr
+  else:
+    smartstrapExpr
 
 # ============================================================================
 # Display Constants
 # ============================================================================
 
 const
-  PBLDisplayWidth* = when defined(pebbleRound): 180
-                     elif defined(pebbleEmery): 200
+  PBLDisplayWidth* = when isRound: 180
+                     elif isEmery: 200
                      else: 144
-    ## Display width in pixels. 144 for Aplite/Basalt/Diorite/Flint,
-    ## 180 for Chalk (round), 200 for Emery.
 
-  PBLDisplayHeight* = when defined(pebbleRound): 180
-                      elif defined(pebbleEmery): 228
+  PBLDisplayHeight* = when isRound: 180
+                      elif isEmery: 228
                       else: 168
-    ## Display height in pixels. 168 for Aplite/Basalt/Diorite/Flint,
-    ## 180 for Chalk (round), 228 for Emery.
-
-  ActionBarWidth* = 30
-    ## Width of the action bar in pixels.
-
-  StatusBarLayerHeight* = 16
-    ## Height of the status bar layer in pixels.
-
-# ============================================================================
-# Color Fallback Helper
-# ============================================================================
 
 template colorFallback*(color, fallback: GColor): GColor =
-  ## Returns `color` on color platforms, `fallback` on black and white.
-  ## Equivalent to C macro pattern for platform-aware color selection.
   pblIfColorElse(color, fallback)
+
+const
+  ActionBarWidth* = when isRound: 40
+                    elif isEmery: 34
+                    else: 30
+
+  StatusBarLayerHeight* = when isRound: 24
+                          elif isEmery: 20
+                          else: 16

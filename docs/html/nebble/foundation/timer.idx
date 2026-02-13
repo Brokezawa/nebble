@@ -1,0 +1,4 @@
+nimTitle	timer	nebble/foundation/timer.html	module nebble/foundation/timer		0
+nim	after	nebble/foundation/timer.html#after,uint32,,pointer	proc after(timeoutMs: uint32; callback: ffi.AppTimerCallback; context: pointer = nil): ptr AppTimer		13
+nim	reschedule	nebble/foundation/timer.html#reschedule,ptr.struct_AppTimer,uint32	proc reschedule(timer: ptr AppTimer; timeoutMs: uint32): bool		19
+nim	cancel	nebble/foundation/timer.html#cancel,ptr.struct_AppTimer	proc cancel(timer: ptr AppTimer)		25

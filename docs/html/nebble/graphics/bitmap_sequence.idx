@@ -1,0 +1,13 @@
+nimTitle	bitmap_sequence	nebble/graphics/bitmap_sequence.html	module nebble/graphics/bitmap_sequence		0
+nim	newBitmapSequence	nebble/graphics/bitmap_sequence.html#newBitmapSequence,uint32	proc newBitmapSequence(resourceId: uint32): ptr GBitmapSequence		14
+nim	destroy	nebble/graphics/bitmap_sequence.html#destroy,ptr.struct_GBitmapSequence	proc destroy(sequence: ptr GBitmapSequence)		20
+nim	updateNextFrame	nebble/graphics/bitmap_sequence.html#updateNextFrame,ptr.struct_GBitmapSequence,ptr.struct_GBitmap,uint32	proc updateNextFrame(sequence: ptr GBitmapSequence; bitmap: ptr GBitmap;\n                delayMs: var uint32): bool		29
+nim	updateByElapsed	nebble/graphics/bitmap_sequence.html#updateByElapsed,ptr.struct_GBitmapSequence,ptr.struct_GBitmap,uint32	proc updateByElapsed(sequence: ptr GBitmapSequence; bitmap: ptr GBitmap;\n                elapsedMs: uint32): bool		37
+nim	restart	nebble/graphics/bitmap_sequence.html#restart,ptr.struct_GBitmapSequence	proc restart(sequence: ptr GBitmapSequence): bool		44
+nim	bitmapSize	nebble/graphics/bitmap_sequence.html#bitmapSize,ptr.struct_GBitmapSequence	proc bitmapSize(sequence: ptr GBitmapSequence): GSize		54
+nim	currentFrameIndex	nebble/graphics/bitmap_sequence.html#currentFrameIndex,ptr.struct_GBitmapSequence	proc currentFrameIndex(sequence: ptr GBitmapSequence): int32		60
+nim	totalFrames	nebble/graphics/bitmap_sequence.html#totalFrames,ptr.struct_GBitmapSequence	proc totalFrames(sequence: ptr GBitmapSequence): uint32		66
+nim	playCount	nebble/graphics/bitmap_sequence.html#playCount,ptr.struct_GBitmapSequence	proc playCount(sequence: ptr GBitmapSequence): uint32		71
+nim	playCount=	nebble/graphics/bitmap_sequence.html#playCount=,ptr.struct_GBitmapSequence,uint32	proc playCount=(sequence: ptr GBitmapSequence; count: uint32)		76
+nim	AnimationHandler	nebble/graphics/bitmap_sequence.html#AnimationHandler	type AnimationHandler		86
+nim	scheduleNextFrame	nebble/graphics/bitmap_sequence.html#scheduleNextFrame,ptr.struct_GBitmapSequence,ptr.struct_GBitmap,AnimationHandler,pointer	proc scheduleNextFrame(sequence: ptr GBitmapSequence; bitmap: ptr GBitmap;\n                  handler: AnimationHandler; context: pointer = nil): bool		90

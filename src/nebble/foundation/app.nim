@@ -4,6 +4,7 @@
 ## macro for generating app scaffold boilerplate.
 
 import nebble/ffi
+import nebble/ui/window
 import std/macros
 
 export ffi.AppLaunchReason, ffi.AppExitReason
@@ -23,12 +24,13 @@ proc eventLoop*() {.inline.} =
 # ============================================================================
 
 macro pebbleApp*(load: untyped = nil,
-                unload: untyped = nil,
-                appear: untyped = nil,
-                disappear: untyped = nil,
-                clickConfig: untyped = nil,
-                init: untyped = nil,
-                deinit: untyped = nil): untyped =
+                 unload: untyped = nil,
+                 appear: untyped = nil,
+                 disappear: untyped = nil,
+                 clickConfig: untyped = nil,
+                 init: untyped = nil,
+                 deinit: untyped = nil,
+                 verbose: static[bool] = false): untyped =
   ## Generate the complete app scaffold (window, init, deinit, main).
   ##
   ## This macro eliminates ~15 lines of boilerplate by generating:
@@ -43,17 +45,22 @@ macro pebbleApp*(load: untyped = nil,
   ## proc myInit() = ...
   ##
   ## pebbleApp(load = windowLoad, init = myInit)
+  ## 
+  ## # Debug mode - prints generated code:
+  ## pebbleApp(load = windowLoad, verbose = true)
   ## ```
   ##
   ## All parameters are optional. `init` and `deinit` accept a proc identifier
   ## to be called for custom initialization/cleanup (e.g. subscribing to services).
+  ##
+  ## Set `verbose = true` to print the generated code for debugging purposes.
 
   result = newStmtList()
 
-  # Generate: var pebbleWindow: ptr Window
+  # Generate: var pebbleWindow: WindowHandle
   let windowVar = ident("pebbleWindow")
   result.add quote do:
-    var `windowVar`: ptr Window
+    var `windowVar`: WindowHandle
 
   # Build WindowHandlers struct initialization
   var handlersFields = nnkObjConstr.newTree(ident"WindowHandlers")
@@ -72,19 +79,20 @@ macro pebbleApp*(load: untyped = nil,
 
   # Generate init() proc
   var initBody = newStmtList()
-  initBody.add quote do:
-    `windowVar` = ffi.window_create()
   
   if handlersFields.len > 1:  # More than just the type ident
     initBody.add quote do:
-      ffi.window_set_window_handlers(`windowVar`, `handlersFields`)
+      `windowVar` = newWindow(`handlersFields`)
+  else:
+    initBody.add quote do:
+      `windowVar` = newWindow()
   
   if not clickConfig.isNil and clickConfig.kind != nnkNilLit:
     initBody.add quote do:
-      ffi.window_set_click_config_provider(`windowVar`, `clickConfig`)
+      `windowVar`.clickConfig = `clickConfig`
   
   initBody.add quote do:
-    ffi.window_stack_push(`windowVar`, true)
+    `windowVar`.push()
   
   # Call custom init if provided
   if not init.isNil and init.kind != nnkNilLit:
@@ -104,7 +112,8 @@ macro pebbleApp*(load: untyped = nil,
       `deinit`()
       
   deinitBody.add quote do:
-    ffi.window_destroy(`windowVar`)
+    if `windowVar`.pop():
+      `windowVar` = WindowHandle(nil)
 
   result.add quote do:
     proc deinit() {.cdecl.} =
@@ -113,10 +122,20 @@ macro pebbleApp*(load: untyped = nil,
   # Generate main() entry point
   result.add quote do:
     proc main(): cint {.exportc, cdecl.} =
+      # Initialize Nim runtime (required because of --noMain)
+      proc NimMain() {.importc.}
+      NimMain()
+      
       init()
       eventLoop()
       deinit()
       return 0
+
+  # Debug: Print generated code if verbose mode enabled
+  if verbose:
+    echo "=== Generated pebbleApp Code ==="
+    echo result.repr
+    echo "=== End Generated Code ==="
 
 # ============================================================================
 # Launch & Exit

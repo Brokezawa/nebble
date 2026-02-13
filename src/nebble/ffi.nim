@@ -15,6 +15,17 @@
 ##   -d:pebbleEmery
 ##   -d:pebbleFlint
 
+# Platform capabilities
+when defined(pebbleBasalt) or defined(pebbleChalk) or defined(pebbleEmery):
+  {.define: pebbleColor.}
+else:
+  discard
+
+when defined(pebbleChalk):
+  {.define: pebbleRound.}
+else:
+  discard
+
 when defined(pebbleAplite):
   include nebble/ffi/generated/aplite
 elif defined(pebbleBasalt):

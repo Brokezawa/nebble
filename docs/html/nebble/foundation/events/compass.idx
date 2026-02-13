@@ -1,0 +1,5 @@
+nimTitle	compass	nebble/foundation/events/compass.html	module nebble/foundation/events/compass		0
+nim	subscribe	nebble/foundation/events/compass.html#subscribe,CompassHeadingHandler	proc subscribe(handler: CompassHeadingHandler)		14
+nim	unsubscribe	nebble/foundation/events/compass.html#unsubscribe	proc unsubscribe()		20
+nim	setHeadingFilter	nebble/foundation/events/compass.html#setHeadingFilter,CompassHeading	proc setHeadingFilter(filter: CompassHeading)		26
+nim	peek	nebble/foundation/events/compass.html#peek,ptr.CompassHeadingData	proc peek(data: ptr CompassHeadingData): bool		33

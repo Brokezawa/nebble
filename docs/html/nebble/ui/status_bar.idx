@@ -1,0 +1,8 @@
+nimTitle	status_bar	nebble/ui/status_bar.html	module nebble/ui/status_bar		0
+nim	newStatusBarLayer	nebble/ui/status_bar.html#newStatusBarLayer	proc newStatusBarLayer(): ptr StatusBarLayer		14
+nim	destroy	nebble/ui/status_bar.html#destroy,ptr.struct_StatusBarLayer	proc destroy(statusBar: ptr StatusBarLayer)		20
+nim	getLayer	nebble/ui/status_bar.html#getLayer,ptr.struct_StatusBarLayer	proc getLayer(statusBar: ptr StatusBarLayer): ptr Layer		30
+nim	setColors	nebble/ui/status_bar.html#setColors,ptr.struct_StatusBarLayer,GColor,GColor	proc setColors(statusBar: ptr StatusBarLayer; background: GColor; foreground: GColor)		40
+nim	backgroundColor	nebble/ui/status_bar.html#backgroundColor,ptr.struct_StatusBarLayer	proc backgroundColor(statusBar: ptr StatusBarLayer): GColor		47
+nim	foregroundColor	nebble/ui/status_bar.html#foregroundColor,ptr.struct_StatusBarLayer	proc foregroundColor(statusBar: ptr StatusBarLayer): GColor		53
+nim	separatorMode=	nebble/ui/status_bar.html#separatorMode=,ptr.struct_StatusBarLayer,StatusBarLayerSeparatorMode	proc separatorMode=(statusBar: ptr StatusBarLayer; mode: StatusBarLayerSeparatorMode)		63

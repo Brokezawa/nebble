@@ -1,0 +1,24 @@
+nimTitle	layer	nebble/ui/layer.html	module nebble/ui/layer		0
+nim	newLayer	nebble/ui/layer.html#newLayer,GRect	proc newLayer(frame: GRect): ptr Layer		14
+nim	newLayerWithData	nebble/ui/layer.html#newLayerWithData,GRect,int	proc newLayerWithData(frame: GRect; dataSize: int): ptr Layer		20
+nim	destroy	nebble/ui/layer.html#destroy,ptr.struct_Layer	proc destroy(layer: ptr Layer)		26
+nim	addChild	nebble/ui/layer.html#addChild,ptr.struct_Layer,ptr.struct_Layer	proc addChild(parent: ptr Layer; child: ptr Layer)		35
+nim	removeFromParent	nebble/ui/layer.html#removeFromParent,ptr.struct_Layer	proc removeFromParent(child: ptr Layer)		41
+nim	removeChildLayers	nebble/ui/layer.html#removeChildLayers,ptr.struct_Layer	proc removeChildLayers(parent: ptr Layer)		46
+nim	insertBelowSibling	nebble/ui/layer.html#insertBelowSibling,ptr.struct_Layer,ptr.struct_Layer	proc insertBelowSibling(layerToInsert, sibling: ptr Layer)		51
+nim	insertAboveSibling	nebble/ui/layer.html#insertAboveSibling,ptr.struct_Layer,ptr.struct_Layer	proc insertAboveSibling(layerToInsert, sibling: ptr Layer)		56
+nim	frame=	nebble/ui/layer.html#frame=,ptr.struct_Layer,GRect	proc frame=(layer: ptr Layer; frame: GRect)		65
+nim	frame	nebble/ui/layer.html#frame,ptr.struct_Layer	proc frame(layer: ptr Layer): GRect		70
+nim	bounds=	nebble/ui/layer.html#bounds=,ptr.struct_Layer,GRect	proc bounds=(layer: ptr Layer; bounds: GRect)		75
+nim	bounds	nebble/ui/layer.html#bounds,ptr.struct_Layer	proc bounds(layer: ptr Layer): GRect		80
+nim	unobstructedBounds	nebble/ui/layer.html#unobstructedBounds,ptr.struct_Layer	proc unobstructedBounds(layer: ptr Layer): GRect		86
+nim	hidden=	nebble/ui/layer.html#hidden=,ptr.struct_Layer,bool	proc hidden=(layer: ptr Layer; hidden: bool)		92
+nim	hidden	nebble/ui/layer.html#hidden,ptr.struct_Layer	proc hidden(layer: ptr Layer): bool		97
+nim	clips=	nebble/ui/layer.html#clips=,ptr.struct_Layer,bool	proc clips=(layer: ptr Layer; clips: bool)		102
+nim	clips	nebble/ui/layer.html#clips,ptr.struct_Layer	proc clips(layer: ptr Layer): bool		107
+nim	updateProc=	nebble/ui/layer.html#updateProc=,ptr.struct_Layer,LayerUpdateProc	proc updateProc=(layer: ptr Layer; updateProc: LayerUpdateProc)		116
+nim	markDirty	nebble/ui/layer.html#markDirty,ptr.struct_Layer	proc markDirty(layer: ptr Layer)		121
+nim	getData	nebble/ui/layer.html#getData,ptr.struct_Layer	proc getData(layer: ptr Layer): pointer		130
+nim	convertPointToScreen	nebble/ui/layer.html#convertPointToScreen,ptr.struct_Layer,GPoint	proc convertPointToScreen(layer: ptr Layer; point: GPoint): GPoint		139
+nim	convertRectToScreen	nebble/ui/layer.html#convertRectToScreen,ptr.struct_Layer,GRect	proc convertRectToScreen(layer: ptr Layer; rect: GRect): GRect		144
+nim	getWindow	nebble/ui/layer.html#getWindow,ptr.struct_Layer	proc getWindow(layer: ptr Layer): ptr Window		153

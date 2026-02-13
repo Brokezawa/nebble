@@ -1,0 +1,16 @@
+nimTitle	text_attributes	nebble/graphics/text_attributes.html	module nebble/graphics/text_attributes		0
+nim	newTextAttributes	nebble/graphics/text_attributes.html#newTextAttributes	proc newTextAttributes(): ptr GTextAttributes		14
+nim	destroy	nebble/graphics/text_attributes.html#destroy,ptr.struct_GTextAttributes	proc destroy(attrs: ptr GTextAttributes)		20
+nim	enableScreenTextFlow	nebble/graphics/text_attributes.html#enableScreenTextFlow,ptr.struct_GTextAttributes,uint8	proc enableScreenTextFlow(attrs: ptr GTextAttributes; inset: uint8)		29
+nim	restoreDefaultTextFlow	nebble/graphics/text_attributes.html#restoreDefaultTextFlow,ptr.struct_GTextAttributes	proc restoreDefaultTextFlow(attrs: ptr GTextAttributes)		40
+nim	enablePaging	nebble/graphics/text_attributes.html#enablePaging,ptr.struct_GTextAttributes,GPoint,GRect	proc enablePaging(attrs: ptr GTextAttributes; origin: GPoint; pageRect: GRect)		49
+nim	restoreDefaultPaging	nebble/graphics/text_attributes.html#restoreDefaultPaging,ptr.struct_GTextAttributes	proc restoreDefaultPaging(attrs: ptr GTextAttributes)		59
+nim	TextFlowConfig	nebble/graphics/text_attributes.html#TextFlowConfig	object TextFlowConfig		69
+nim	PagingConfig	nebble/graphics/text_attributes.html#PagingConfig	object PagingConfig		73
+nim	apply	nebble/graphics/text_attributes.html#apply,ptr.struct_GTextAttributes,TextFlowConfig	proc apply(attrs: ptr GTextAttributes; config: TextFlowConfig)		79
+nim	apply	nebble/graphics/text_attributes.html#apply,ptr.struct_GTextAttributes,PagingConfig	proc apply(attrs: ptr GTextAttributes; config: PagingConfig)		87
+nim	withTextFlow	nebble/graphics/text_attributes.html#withTextFlow,ptr.struct_GTextAttributes,uint8	proc withTextFlow(attrs: ptr GTextAttributes; inset: uint8): ptr GTextAttributes		95
+nim	withPaging	nebble/graphics/text_attributes.html#withPaging,ptr.struct_GTextAttributes,GPoint,GRect	proc withPaging(attrs: ptr GTextAttributes; origin: GPoint; pageRect: GRect): ptr GTextAttributes		101
+nim	enableScreenTextFlowAndPaging	nebble/graphics/text_attributes.html#enableScreenTextFlowAndPaging,ptr.struct_TextLayer,uint8	proc enableScreenTextFlowAndPaging(textLayer: ptr TextLayer; inset: uint8)		111
+nim	restoreDefaultTextFlowAndPaging	nebble/graphics/text_attributes.html#restoreDefaultTextFlowAndPaging,ptr.struct_TextLayer	proc restoreDefaultTextFlowAndPaging(textLayer: ptr TextLayer)		120
+nimgrp	apply	nebble/graphics/text_attributes.html#apply-procs-all	proc		79

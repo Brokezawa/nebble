@@ -1,56 +1,52 @@
-## High-level Nim wrapper for Pebble NumberWindow API.
+## ARC-Managed NumberWindow Handle
 ##
-## A window that allows the user to select a number from a range.
+## Simple unique-ownership wrapper around NumberWindow objects.
 
 import nebble/ffi
+import nebble/ffi/managed
 
 export ffi.NumberWindow, ffi.NumberWindowCallbacks
 
-# ============================================================================
-# Constructor & Destructor
-# ============================================================================
+# Define the managed handle
+DefineUniqueHandle(NumberWindow, NumberWindow,
+                  number_window_create, number_window_destroy)
 
-proc newNumberWindow*(label: cstring, callbacks: NumberWindowCallbacks,
-                      callbackContext: pointer): ptr NumberWindow {.inline.} =
-  ## Create a new NumberWindow.
-  ## Equivalent to C function `number_window_create(...)`.
-  ffi.number_window_create(label, callbacks, callbackContext)
+# Constructors
+proc newNumberWindowHandle*(label: cstring; callbacks: NumberWindowCallbacks; context: pointer): NumberWindowHandle {.inline.} =
+  ## Create a managed NumberWindow.
+  result = wrapOwned(ffi.number_window_create(label, callbacks, context))
 
-proc destroy*(numberWindow: ptr NumberWindow) {.inline.} =
-  ## Destroy the number window.
-  ## Equivalent to C function `number_window_destroy(number_window)`.
-  ffi.number_window_destroy(numberWindow)
+proc newNumberWindow*(label: cstring; callbacks: NumberWindowCallbacks; context: pointer): NumberWindowHandle {.inline.} =
+  ## Alias for `newNumberWindowHandle`.
+  result = newNumberWindowHandle(label, callbacks, context)
 
-# ============================================================================
-# Configuration
-# ============================================================================
+# Property accessors
+proc `label=`*(h: var NumberWindowHandle, lbl: cstring) {.inline.} =
+  when ManagedDebug or ManagedStrict:
+    h.checkValid()
+  number_window_set_label(h.toPtr, lbl)
 
-proc `label=`*(numberWindow: ptr NumberWindow, label: cstring) {.inline.} =
-  ## Set the label text.
-  ## Equivalent to C function `number_window_set_label(number_window, label)`.
-  ffi.number_window_set_label(numberWindow, label)
+proc `max=`*(h: var NumberWindowHandle, mx: int32) {.inline.} =
+  when ManagedDebug or ManagedStrict:
+    h.checkValid()
+  number_window_set_max(h.toPtr, mx)
 
-proc `max=`*(numberWindow: ptr NumberWindow, max: int32) {.inline.} =
-  ## Set the maximum value.
-  ## Equivalent to C function `number_window_set_max(number_window, max)`.
-  ffi.number_window_set_max(numberWindow, max)
+proc `min=`*(h: var NumberWindowHandle, mn: int32) {.inline.} =
+  when ManagedDebug or ManagedStrict:
+    h.checkValid()
+  number_window_set_min(h.toPtr, mn)
 
-proc `min=`*(numberWindow: ptr NumberWindow, min: int32) {.inline.} =
-  ## Set the minimum value.
-  ## Equivalent to C function `number_window_set_min(number_window, min)`.
-  ffi.number_window_set_min(numberWindow, min)
+proc `value=`*(h: var NumberWindowHandle, v: int32) {.inline.} =
+  when ManagedDebug or ManagedStrict:
+    h.checkValid()
+  number_window_set_value(h.toPtr, v)
 
-proc `value=`*(numberWindow: ptr NumberWindow, value: int32) {.inline.} =
-  ## Set the current value.
-  ## Equivalent to C function `number_window_set_value(number_window, value)`.
-  ffi.number_window_set_value(numberWindow, value)
+proc value*(h: NumberWindowHandle): int32 {.inline.} =
+  when ManagedDebug or ManagedStrict:
+    h.checkValid()
+  number_window_get_value(h.toPtr)
 
-proc value*(numberWindow: ptr NumberWindow): int32 {.inline.} =
-  ## Get the current value.
-  ## Equivalent to C function `number_window_get_value(number_window)`.
-  ffi.number_window_get_value(numberWindow)
-
-proc `stepSize=`*(numberWindow: ptr NumberWindow, step: int32) {.inline.} =
-  ## Set the step increment size.
-  ## Equivalent to C function `number_window_set_step_size(number_window, step)`.
-  ffi.number_window_set_step_size(numberWindow, step)
+proc `stepSize=`*(h: var NumberWindowHandle, step: int32) {.inline.} =
+  when ManagedDebug or ManagedStrict:
+    h.checkValid()
+  number_window_set_step_size(h.toPtr, step)

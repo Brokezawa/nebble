@@ -1,0 +1,16 @@
+nimTitle	draw_command_image_managed	nebble/graphics/draw_command_image_managed.html	module nebble/graphics/draw_command_image_managed		0
+nim	DrawCommandImageHandle	nebble/graphics/draw_command_image_managed.html#DrawCommandImageHandle	type DrawCommandImageHandle		84
+nim	`=destroy`	nebble/graphics/draw_command_image_managed.html#=destroy,DrawCommandImageHandle	proc `=destroy`(h`gensym0: var DrawCommandImageHandle)		96
+nim	`=wasMoved`	nebble/graphics/draw_command_image_managed.html#=wasMoved,DrawCommandImageHandle	proc `=wasMoved`(h`gensym0: var DrawCommandImageHandle)		107
+nim	`=copy`	nebble/graphics/draw_command_image_managed.html#=copy,DrawCommandImageHandle,DrawCommandImageHandle	proc `=copy`(dest`gensym0: var DrawCommandImageHandle;\n        src`gensym0: DrawCommandImageHandle)		112
+nim	`=sink`	nebble/graphics/draw_command_image_managed.html#=sink,DrawCommandImageHandle,DrawCommandImageHandle	proc `=sink`(dest`gensym0: var DrawCommandImageHandle;\n        src`gensym0: DrawCommandImageHandle)		116
+nim	toPtr	nebble/graphics/draw_command_image_managed.html#toPtr.c,DrawCommandImageHandle	converter toPtr(h`gensym0: DrawCommandImageHandle): ptr GDrawCommandImage		131
+nim	isValid	nebble/graphics/draw_command_image_managed.html#isValid,DrawCommandImageHandle	proc isValid(h`gensym0: DrawCommandImageHandle): bool		136
+nim	isNil	nebble/graphics/draw_command_image_managed.html#isNil,DrawCommandImageHandle	proc isNil(h`gensym0: DrawCommandImageHandle): bool		140
+nim	reset	nebble/graphics/draw_command_image_managed.html#reset,DrawCommandImageHandle	proc reset(h`gensym0: var DrawCommandImageHandle)		10
+nim	newDrawCommandImageHandle	nebble/graphics/draw_command_image_managed.html#newDrawCommandImageHandle,uint32	proc newDrawCommandImageHandle(resourceId: uint32): DrawCommandImageHandle		14
+nim	clone	nebble/graphics/draw_command_image_managed.html#clone,DrawCommandImageHandle	proc clone(h: DrawCommandImageHandle): DrawCommandImageHandle		18
+nim	draw	nebble/graphics/draw_command_image_managed.html#draw,DrawCommandImageHandle,ptr.struct_GContext,GPoint	proc draw(h: DrawCommandImageHandle; ctx: ptr GContext; offset: GPoint)		24
+nim	getCommandList	nebble/graphics/draw_command_image_managed.html#getCommandList,DrawCommandImageHandle	proc getCommandList(h: DrawCommandImageHandle): ptr GDrawCommandList		30
+nim	setBoundsSize	nebble/graphics/draw_command_image_managed.html#setBoundsSize,DrawCommandImageHandle,GSize	proc setBoundsSize(h: DrawCommandImageHandle; size: GSize)		35
+nim	getBoundsSize	nebble/graphics/draw_command_image_managed.html#getBoundsSize,DrawCommandImageHandle	proc getBoundsSize(h: DrawCommandImageHandle): GSize		40

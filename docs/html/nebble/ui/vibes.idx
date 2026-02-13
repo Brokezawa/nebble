@@ -1,0 +1,6 @@
+nimTitle	vibes	nebble/ui/vibes.html	module nebble/ui/vibes		0
+nim	shortPulse	nebble/ui/vibes.html#shortPulse	proc shortPulse()		13
+nim	longPulse	nebble/ui/vibes.html#longPulse	proc longPulse()		18
+nim	doublePulse	nebble/ui/vibes.html#doublePulse	proc doublePulse()		23
+nim	enqueueCustomPattern	nebble/ui/vibes.html#enqueueCustomPattern,ptr.uint32,uint32	proc enqueueCustomPattern(durations: ptr uint32; numSegments: uint32)		28
+nim	cancel	nebble/ui/vibes.html#cancel	proc cancel()		40

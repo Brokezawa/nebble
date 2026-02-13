@@ -1,0 +1,4 @@
+nimTitle	connection	nebble/foundation/events/connection.html	module nebble/foundation/events/connection		0
+nim	isConnected	nebble/foundation/events/connection.html#isConnected	proc isConnected(): bool		13
+nim	subscribe	nebble/foundation/events/connection.html#subscribe,ConnectionHandler_570425863	proc subscribe(handler: BluetoothConnectionHandler)		23
+nim	unsubscribe	nebble/foundation/events/connection.html#unsubscribe	proc unsubscribe()		29

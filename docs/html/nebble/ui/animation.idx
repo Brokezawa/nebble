@@ -1,0 +1,34 @@
+nimTitle	animation	nebble/ui/animation.html	module nebble/ui/animation		0
+nim	newAnimation	nebble/ui/animation.html#newAnimation	proc newAnimation(): ptr Animation		12
+nim	destroy	nebble/ui/animation.html#destroy,ptr.struct_Animation	proc destroy(animation: ptr Animation): bool		17
+nim	clone	nebble/ui/animation.html#clone,ptr.struct_Animation	proc clone(animation: ptr Animation): ptr Animation		23
+nim	createSequence	nebble/ui/animation.html#createSequence,ptr.struct_Animation,ptr.struct_Animation,ptr.struct_Animation	proc createSequence(animationA: ptr Animation; animationB: ptr Animation;\n               animationC: ptr Animation = nil): ptr Animation		32
+nim	createSequenceFromArray	nebble/ui/animation.html#createSequenceFromArray,ptr.ptr.struct_Animation,uint32	proc createSequenceFromArray(animationArray: ptr ptr Animation; arrayLen: uint32): ptr Animation		38
+nim	createSpawn	nebble/ui/animation.html#createSpawn,ptr.struct_Animation,ptr.struct_Animation,ptr.struct_Animation	proc createSpawn(animationA: ptr Animation; animationB: ptr Animation;\n            animationC: ptr Animation = nil): ptr Animation		44
+nim	createSpawnFromArray	nebble/ui/animation.html#createSpawnFromArray,ptr.ptr.struct_Animation,uint32	proc createSpawnFromArray(animationArray: ptr ptr Animation; arrayLen: uint32): ptr Animation		50
+nim	elapsed=	nebble/ui/animation.html#elapsed=,ptr.struct_Animation,uint32	proc elapsed=(animation: ptr Animation; elapsedMs: uint32): bool		60
+nim	elapsed	nebble/ui/animation.html#elapsed,ptr.struct_Animation	proc elapsed(animation: ptr Animation): int32		66
+nim	reverse=	nebble/ui/animation.html#reverse=,ptr.struct_Animation,bool	proc reverse=(animation: ptr Animation; reverse: bool): bool		73
+nim	reverse	nebble/ui/animation.html#reverse,ptr.struct_Animation	proc reverse(animation: ptr Animation): bool		79
+nim	playCount=	nebble/ui/animation.html#playCount=,ptr.struct_Animation,uint32	proc playCount=(animation: ptr Animation; playCount: uint32): bool		84
+nim	playCount	nebble/ui/animation.html#playCount,ptr.struct_Animation	proc playCount(animation: ptr Animation): uint32		90
+nim	duration=	nebble/ui/animation.html#duration=,ptr.struct_Animation,uint32	proc duration=(animation: ptr Animation; durationMs: uint32): bool		95
+nim	duration	nebble/ui/animation.html#duration,ptr.struct_Animation,bool,bool	proc duration(animation: ptr Animation; includeDelay: bool = true;\n         includePlayCount: bool = true): uint32		101
+nim	delay=	nebble/ui/animation.html#delay=,ptr.struct_Animation,uint32	proc delay=(animation: ptr Animation; delayMs: uint32): bool		106
+nim	delay	nebble/ui/animation.html#delay,ptr.struct_Animation	proc delay(animation: ptr Animation): uint32		112
+nim	curve=	nebble/ui/animation.html#curve=,ptr.struct_Animation,AnimationCurve	proc curve=(animation: ptr Animation; curve: AnimationCurve): bool		121
+nim	curve	nebble/ui/animation.html#curve,ptr.struct_Animation	proc curve(animation: ptr Animation): AnimationCurve		127
+nim	setCustomCurve	nebble/ui/animation.html#setCustomCurve,ptr.struct_Animation,AnimationCurveFunction	proc setCustomCurve(animation: ptr Animation; curveFunction: AnimationCurveFunction): bool		132
+nim	customCurve	nebble/ui/animation.html#customCurve,ptr.struct_Animation	proc customCurve(animation: ptr Animation): AnimationCurveFunction		139
+nim	setHandlers	nebble/ui/animation.html#setHandlers,ptr.struct_Animation,AnimationHandlers,pointer	proc setHandlers(animation: ptr Animation; handlers: AnimationHandlers;\n            context: pointer)		148
+nim	context	nebble/ui/animation.html#context,ptr.struct_Animation	proc context(animation: ptr Animation): pointer		154
+nim	schedule	nebble/ui/animation.html#schedule,ptr.struct_Animation	proc schedule(animation: ptr Animation): bool		163
+nim	unschedule	nebble/ui/animation.html#unschedule,ptr.struct_Animation	proc unschedule(animation: ptr Animation): bool		169
+nim	unscheduleAll	nebble/ui/animation.html#unscheduleAll	proc unscheduleAll()		175
+nim	isScheduled	nebble/ui/animation.html#isScheduled,ptr.struct_Animation	proc isScheduled(animation: ptr Animation): bool		180
+nim	setImplementation	nebble/ui/animation.html#setImplementation,ptr.struct_Animation,ptr.AnimationImplementation	proc setImplementation(animation: ptr Animation;\n                  implementation: ptr AnimationImplementation)		189
+nim	getImplementation	nebble/ui/animation.html#getImplementation,ptr.struct_Animation	proc getImplementation(animation: ptr Animation): ptr AnimationImplementation		195
+nim	newLayerFrameAnimation	nebble/ui/animation.html#newLayerFrameAnimation,ptr.struct_Layer,ptr.GRect,ptr.GRect	proc newLayerFrameAnimation(layer: ptr Layer; fromFrame: ptr GRect;\n                       toFrame: ptr GRect): ptr PropertyAnimation		204
+nim	destroy	nebble/ui/animation.html#destroy,ptr.struct_PropertyAnimation	proc destroy(propAnim: ptr PropertyAnimation)		211
+nim	getAnimation	nebble/ui/animation.html#getAnimation,ptr.struct_PropertyAnimation	proc getAnimation(propAnim: ptr PropertyAnimation): ptr Animation		216
+nimgrp	destroy	nebble/ui/animation.html#destroy-procs-all	proc		17

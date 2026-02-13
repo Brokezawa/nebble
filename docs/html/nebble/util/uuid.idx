@@ -1,0 +1,4 @@
+nimTitle	uuid	nebble/util/uuid.html	module nebble/util/uuid		0
+nim	makeUuid	nebble/util/uuid.html#makeUuid,array[,uint8]	proc makeUuid(bytes: array[16, uint8]): Uuid		13
+nim	makeUuidFromBEBytes	nebble/util/uuid.html#makeUuidFromBEBytes,array[,uint8]	proc makeUuidFromBEBytes(bytes: array[16, uint8]): Uuid		34
+nim	makeUuidFromLEBytes	nebble/util/uuid.html#makeUuidFromLEBytes,array[,uint8]	proc makeUuidFromLEBytes(bytes: array[16, uint8]): Uuid		39

@@ -7,58 +7,45 @@ proc getAppTemplate*(name: string): string =
   result = "## " & name & """ - Pebble app written in Nim
 ##
 ## This is a basic Pebble app that demonstrates the Nebble API.
-## Uses the pebbleApp macro for boilerplate reduction and type-safe helpers.
+## Uses the nebbleWatchface macro for declarative UI and interaction.
 
 import nebble
-import nebble/ffi # For ButtonId enum values
+
+# Forward declarations of handlers used in DSL
+proc selectClickHandler(recognizer: ClickRecognizerRef; context: pointer) {.cdecl.}
+proc upClickHandler(recognizer: ClickRecognizerRef; context: pointer) {.cdecl.}
+proc downClickHandler(recognizer: ClickRecognizerRef; context: pointer) {.cdecl.}
 
 var
-  textLayer: ptr TextLayer
   clickCount = 0
   textBuffer: array[32, char] # Buffer for dynamic text
 
+# Declarative UI and interaction
+nebbleWatchface:
+  textLayer:
+    id = myTextLayer
+    frame = (0, 60, 144, 40)
+    text = "Press SELECT"
+    alignment = GTextAlignmentCenter
+    
+  clicks:
+    BUTTON_ID_SELECT = selectClickHandler
+    BUTTON_ID_UP = upClickHandler
+    BUTTON_ID_DOWN = downClickHandler
+
+# Event Handlers
 proc selectClickHandler(recognizer: ClickRecognizerRef; context: pointer) {.cdecl.} =
   ## Handle SELECT button clicks
   inc clickCount
-  textLayer.staticText(textBuffer, "Clicks: " & $clickCount)
+  myTextLayer.staticText(textBuffer, "Clicks: " & $clickCount)
 
 proc upClickHandler(recognizer: ClickRecognizerRef; context: pointer) {.cdecl.} =
   ## Handle UP button clicks
-  textLayer.text = "UP pressed!"
+  myTextLayer.text = "UP pressed!"
 
 proc downClickHandler(recognizer: ClickRecognizerRef; context: pointer) {.cdecl.} =
   ## Handle DOWN button clicks
-  textLayer.text = "DOWN pressed!"
-
-proc clickConfigProvider(context: pointer) {.cdecl.} =
-  ## Configure click handlers
-  onClick(BUTTON_ID_SELECT, selectClickHandler)
-  onClick(BUTTON_ID_UP, upClickHandler)
-  onClick(BUTTON_ID_DOWN, downClickHandler)
-
-proc windowLoad(win: ptr Window) {.cdecl.} =
-  ## Window load handler - create UI
-  let rootLayer = win.rootLayer
-  let bounds = rootLayer.bounds
-  
-  # Create text layer
-  textLayer = newTextLayer(makeGRect(0, 60, bounds.size.w, 40))
-  textLayer.text = "Press SELECT"
-  textLayer.textAlignment = GTextAlignmentCenter
-  
-  # Add to window
-  rootLayer.addChild(textLayer.getLayer())
-
-proc windowUnload(win: ptr Window) {.cdecl.} =
-  ## Window unload handler - destroy UI
-  textLayer.destroy()
-
-# Use the pebbleApp macro to generate main(), init(), deinit() and window lifecycle
-pebbleApp(
-  load = windowLoad,
-  unload = windowUnload,
-  clickConfig = clickConfigProvider
-)
+  myTextLayer.text = "DOWN pressed!"
 """
 
 proc getWatchfaceTemplate*(name: string): string =
@@ -66,26 +53,50 @@ proc getWatchfaceTemplate*(name: string): string =
   result = "## " & name & """ - Pebble watchface written in Nim
 ##
 ## This is a basic watchface that demonstrates the Nebble API.
-## Shows how to use the tick timer service and system fonts.
+## Uses the nebbleWatchface DSL for minimal boilerplate.
 
 import nebble
-import nebble/ffi # For TimeUnits enum
+
+# Forward declaration of handlers used in DSL
+proc updateTime(tickTime: ptr tm; unitsChanged: TimeUnits) {.cdecl.}
 
 var
-  timeLayer: ptr TextLayer
-  dateLayer: ptr TextLayer
-  timeBuffer: array[16, char]  # Must be module-scope to persist
-  dateBuffer: array[32, char]  # Must be module-scope to persist
+  timeBuffer: array[16, char]
+  dateBuffer: array[32, char]
 
-proc updateTime() =
+# Declarative Watchface
+nebbleWatchface:
+
+  window:
+    backgroundColor = GColorBlack
+
+  textLayer:
+    id = timeLayer
+    frame = (0, 50, 144, 60)
+    text = "00:00"
+    font = FONT_KEY_BITHAM_42_BOLD
+    color = GColorWhite
+    alignment = GTextAlignmentCenter
+    
+  textLayer:
+    id = dateLayer
+    frame = (0, 115, 144, 30)
+    text = "Jan 1"
+    font = FONT_KEY_GOTHIC_24
+    color = GColorWhite
+    alignment = GTextAlignmentCenter
+
+  tickTimer:
+    unit = MINUTE_UNIT
+    handler = updateTime
+
+# Event Handlers
+proc updateTime(tickTime: ptr tm; unitsChanged: TimeUnits) {.cdecl.} =
   ## Update the time display
-  var tickTime: time_t
-  discard time(addr tickTime)
-  
-  var localTime = localtime(addr tickTime)
+  let localTime = tickTime
   
   # Update time
-  if clock_is_24h_style():
+  if clockIs24hStyle():
     discard strftime(addr timeBuffer[0], 16, "%H:%M", localTime)
   else:
     discard strftime(addr timeBuffer[0], 16, "%I:%M", localTime)
@@ -95,49 +106,6 @@ proc updateTime() =
   # Update date
   discard strftime(addr dateBuffer[0], 32, "%a, %b %e", localTime)
   dateLayer.text = cast[cstring](addr dateBuffer[0])
-
-proc tickHandler(tickTime: ptr tm; unitsChanged: TimeUnits) {.cdecl.} =
-  ## Handle tick timer events
-  updateTime()
-
-proc windowLoad(win: ptr Window) {.cdecl.} =
-  ## Window load handler - create UI
-  let rootLayer = win.rootLayer
-  let bounds = rootLayer.bounds
-  
-  # Create time layer (large)
-  timeLayer = newTextLayer(makeGRect(0, 50, bounds.size.w, 60))
-  timeLayer.textAlignment = GTextAlignmentCenter
-  timeLayer.font = getSystemFont("RESOURCE_ID_BITHAM_42_BOLD")
-  
-  # Create date layer (small)
-  dateLayer = newTextLayer(makeGRect(0, 115, bounds.size.w, 30))
-  dateLayer.textAlignment = GTextAlignmentCenter
-  dateLayer.font = getSystemFont("RESOURCE_ID_GOTHIC_24")
-  
-  # Add to window
-  rootLayer.addChild(timeLayer.getLayer())
-  rootLayer.addChild(dateLayer.getLayer())
-  
-  # Initial time update
-  updateTime()
-
-proc windowUnload(win: ptr Window) {.cdecl.} =
-  ## Window unload handler - destroy UI
-  timeLayer.destroy()
-  dateLayer.destroy()
-
-proc init() =
-  ## Initialize the watchface
-  # Subscribe to tick timer (update every minute)
-  subscribe(MINUTE_UNIT, tickHandler)
-
-# Use pebbleApp macro with custom init
-pebbleApp(
-  load = windowLoad,
-  unload = windowUnload,
-  init = init
-)
 """
 
 proc getNimCfg*(): string =

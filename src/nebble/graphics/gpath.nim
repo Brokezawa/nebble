@@ -1,54 +1,132 @@
-## High-level Nim wrapper for Pebble GPath API.
+## ARC-Managed GPath Handle
 ##
-## Provides vector graphics path drawing and manipulation.
+## Provides automatic memory management for GPath objects using Nim's ARC
+## (Automatic Reference Counting) system.
+##
+## **Key Features:**
+## - Automatic destruction when handle goes out of scope
+## - Move semantics (no copying)
+## - Property-style accessors for stroke/fill colors and stroke width
+## - Drawing methods that work with graphics context
+##
+## **Usage Example:**
+##   ```nim
+##   import nebble/graphics/gpath
+##   
+##   # Define triangle path
+##   var trianglePoints = [
+##     makeGPoint(72, 40),   # Top
+##     makeGPoint(40, 100),  # Bottom left
+##     makeGPoint(104, 100)  # Bottom right
+##   ]
+##   
+##   var path = newGPath(
+##     GPathInfo(numPoints: 3, points: addr trianglePoints[0])
+##   )
+##   
+##   # In layer update proc:
+##   path.drawFilled(ctx)
+##   path.drawOutline(ctx)
+##   ```
 
 import nebble/ffi
+import nebble/ffi/managed
 
 export ffi.GPath, ffi.GPathInfo
 
 # ============================================================================
-# Constructor & Destructor
+# Define the Managed Handle
 # ============================================================================
 
-proc newGPath*(pathInfo: ptr GPathInfo): ptr GPath {.inline.} =
-  ## Create a new GPath from path info.
-  ## Equivalent to C function `gpath_create(init)`.
-  ffi.gpath_create(pathInfo)
-
-proc destroy*(path: ptr GPath) {.inline.} =
-  ## Destroy a GPath and free its memory.
-  ## Equivalent to C function `gpath_destroy(gpath)`.
-  ffi.gpath_destroy(path)
+DefineUniqueHandle(GPath, GPath, gpath_create, gpath_destroy)
 
 # ============================================================================
-# Drawing
+# Constructors
 # ============================================================================
 
-proc drawFilled*(ctx: ptr GContext, path: ptr GPath) {.inline.} =
-  ## Draw the filled interior of a GPath.
-  ## Equivalent to C function `gpath_draw_filled(ctx, path)`.
-  ffi.gpath_draw_filled(ctx, path)
+proc newGPathHandle*(pathInfo: ptr GPathInfo): GPathHandle {.inline.} =
+  result = wrapOwned(ffi.gpath_create(pathInfo))
 
-proc drawOutline*(ctx: ptr GContext, path: ptr GPath) {.inline.} =
-  ## Draw the outline of a GPath (closed).
-  ## Equivalent to C function `gpath_draw_outline(ctx, path)`.
-  ffi.gpath_draw_outline(ctx, path)
+proc newGPath*(pathInfo: ptr GPathInfo): GPathHandle {.inline.} =
+  result = newGPathHandle(pathInfo)
 
-proc drawOutlineOpen*(ctx: ptr GContext, path: ptr GPath) {.inline.} =
-  ## Draw the outline of a GPath (open).
-  ## Equivalent to C function `gpath_draw_outline_open(ctx, path)`.
-  ffi.gpath_draw_outline_open(ctx, path)
+proc newGPathHandle*(points: openArray[GPoint]): GPathHandle {.inline.} =
+  let info = GPathInfo(num_points: points.len.uint32, points: unsafeAddr points[0])
+  result = wrapOwned(ffi.gpath_create(addr info))
+
+proc newGPath*(points: openArray[GPoint]): GPathHandle {.inline.} =
+  ## Alias for `newGPathHandle`.
+  result = newGPathHandle(points)
 
 # ============================================================================
-# Transformation
+# Drawing Operations
 # ============================================================================
 
-proc rotateTo*(path: ptr GPath, angle: int32) {.inline.} =
-  ## Set the rotation of a GPath.
-  ## Equivalent to C function `gpath_rotate_to(path, angle)`.
-  ffi.gpath_rotate_to(path, angle)
+proc drawFilled*(h: GPathHandle, ctx: ptr GContext) {.inline.} =
+  ## Draw the filled interior of the path.
+  when ManagedDebug or ManagedStrict:
+    h.checkValid()
+  gpath_draw_filled(ctx, h.toPtr)
 
-proc moveTo*(path: ptr GPath, point: GPoint) {.inline.} =
-  ## Move the origin of a GPath.
-  ## Equivalent to C function `gpath_move_to(path, point)`.
-  ffi.gpath_move_to(path, point)
+proc drawOutline*(h: GPathHandle, ctx: ptr GContext) {.inline.} =
+  ## Draw the outline of the path (closed).
+  when ManagedDebug or ManagedStrict:
+    h.checkValid()
+  gpath_draw_outline(ctx, h.toPtr)
+
+proc drawOutlineOpen*(h: GPathHandle, ctx: ptr GContext) {.inline.} =
+  ## Draw the outline of the path (open, doesn't close the path).
+  when ManagedDebug or ManagedStrict:
+    h.checkValid()
+  gpath_draw_outline_open(ctx, h.toPtr)
+
+# ============================================================================
+# Transformations
+# ============================================================================
+
+proc rotateTo*(h: GPathHandle, angle: int32) {.inline.} =
+  ## Set the rotation of the path.
+  ##
+  ## **Parameters:**
+  ## - `angle`: Rotation angle in normalized units (0 to TRIG_MAX_ANGLE)
+  ##
+  ## **Example:**
+  ##   path.rotateTo(TRIG_MAX_ANGLE div 4)  # Rotate 90 degrees
+  when ManagedDebug or ManagedStrict:
+    h.checkValid()
+  gpath_rotate_to(h.toPtr, angle)
+
+proc moveTo*(h: GPathHandle, point: GPoint) {.inline.} =
+  ## Move the origin of the path to a new position.
+  when ManagedDebug or ManagedStrict:
+    h.checkValid()
+  gpath_move_to(h.toPtr, point)
+
+# ============================================================================
+# Utility Helpers
+# ============================================================================
+
+proc draw*(h: GPathHandle, ctx: ptr GContext, filled: bool = true) {.inline.} =
+  ## Draw the path with optional fill.
+  ##
+  ## **Parameters:**
+  ## - `filled`: If true, draws filled interior; if false, draws outline only
+  when ManagedDebug or ManagedStrict:
+    h.checkValid()
+  if filled:
+    gpath_draw_filled(ctx, h.toPtr)
+  else:
+    gpath_draw_outline(ctx, h.toPtr)
+
+proc rotate*(h: GPathHandle, degrees: int32) {.inline.} =
+  ## Rotate the path by degrees (convenience wrapper).
+  ##
+  ## Converts degrees to Pebble's normalized angle units automatically.
+  ## 360 degrees = TRIG_MAX_ANGLE (65536)
+  ##
+  ## **Example:**
+  ##   path.rotate(90)  # Rotate 90 degrees clockwise
+  when ManagedDebug or ManagedStrict:
+    h.checkValid()
+  let angle = (degrees.int64 * TRIG_MAX_ANGLE.int64 div 360).int32
+  gpath_rotate_to(h.toPtr, angle)

@@ -1,0 +1,15 @@
+nimTitle	action_menu	nebble/ui/action_menu.html	module nebble/ui/action_menu		0
+nim	newActionMenuLevel	nebble/ui/action_menu.html#newActionMenuLevel,uint16	proc newActionMenuLevel(maxItems: uint16): ptr ActionMenuLevel		14
+nim	addAction	nebble/ui/action_menu.html#addAction,ptr.struct_ActionMenuLevel,cstring,ActionMenuPerformActionCb,pointer	proc addAction(level: ptr ActionMenuLevel; label: cstring;\n          action: ActionMenuPerformActionCb; actionData: pointer): ptr ActionMenuItem		19
+nim	addChild	nebble/ui/action_menu.html#addChild,ptr.struct_ActionMenuLevel,ptr.struct_ActionMenuLevel,cstring	proc addChild(level: ptr ActionMenuLevel; childLevel: ptr ActionMenuLevel;\n         label: cstring): ptr ActionMenuItem		25
+nim	setDisplayMode	nebble/ui/action_menu.html#setDisplayMode,ptr.struct_ActionMenuLevel,ActionMenuLevelDisplayMode	proc setDisplayMode(level: ptr ActionMenuLevel;\n               displayMode: ActionMenuLevelDisplayMode)		31
+nim	openActionMenu	nebble/ui/action_menu.html#openActionMenu,ptr.ActionMenuConfig	proc openActionMenu(config: ptr ActionMenuConfig): ptr ActionMenu		41
+nim	close	nebble/ui/action_menu.html#close,ptr.struct_ActionMenu,bool	proc close(menu: ptr ActionMenu; animated: bool = true)		46
+nim	freeze	nebble/ui/action_menu.html#freeze,ptr.struct_ActionMenu	proc freeze(menu: ptr ActionMenu)		51
+nim	unfreeze	nebble/ui/action_menu.html#unfreeze,ptr.struct_ActionMenu	proc unfreeze(menu: ptr ActionMenu)		56
+nim	destroyHierarchy	nebble/ui/action_menu.html#destroyHierarchy,ptr.struct_ActionMenuLevel,ActionMenuEachItemCb,pointer	proc destroyHierarchy(rootLevel: ptr ActionMenuLevel;\n                 eachCb: ActionMenuEachItemCb = nil; context: pointer = nil)		65
+nim	getContext	nebble/ui/action_menu.html#getContext,ptr.struct_ActionMenu	proc getContext(menu: ptr ActionMenu): pointer		74
+nim	getRootLevel	nebble/ui/action_menu.html#getRootLevel,ptr.struct_ActionMenu	proc getRootLevel(menu: ptr ActionMenu): ptr ActionMenuLevel		79
+nim	setResultWindow	nebble/ui/action_menu.html#setResultWindow,ptr.struct_ActionMenu,ptr.struct_Window	proc setResultWindow(menu: ptr ActionMenu; window: ptr Window)		84
+nim	getLabel	nebble/ui/action_menu.html#getLabel,ptr.struct_ActionMenuItem	proc getLabel(item: ptr ActionMenuItem): cstring		93
+nim	getActionData	nebble/ui/action_menu.html#getActionData,ptr.struct_ActionMenuItem	proc getActionData(item: ptr ActionMenuItem): pointer		98

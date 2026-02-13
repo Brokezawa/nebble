@@ -1,0 +1,51 @@
+nimTitle	graphics	nebble/graphics/graphics.html	module nebble/graphics/graphics		0
+nim	drawText	nebble/graphics/graphics.html#drawText,ptr.struct_GContext,cstring,GFont,GRect,GTextOverflowMode,GTextAlignment,ptr.struct_GTextAttributes	proc drawText(ctx: ptr GContext; text: cstring; font: GFont; box: GRect;\n         overflow: GTextOverflowMode; alignment: GTextAlignment;\n         textAttributes: ptr GTextAttributes = nil)		13
+nim	textContentSize	nebble/graphics/graphics.html#textContentSize,cstring,GFont,GRect,GTextOverflowMode,GTextAlignment	proc textContentSize(text: cstring; font: GFont; box: GRect;\n                overflow: GTextOverflowMode; alignment: GTextAlignment): GSize		25
+nim	textContentSize	nebble/graphics/graphics.html#textContentSize,cstring,GFont,GRect,GTextOverflowMode,GTextAlignment,ptr.struct_GTextAttributes	proc textContentSize(text: cstring; font: GFont; box: GRect;\n                overflow: GTextOverflowMode; alignment: GTextAlignment;\n                textAttributes: ptr GTextAttributes): GSize		32
+nim	drawLine	nebble/graphics/graphics.html#drawLine,ptr.struct_GContext,GPoint,GPoint	proc drawLine(ctx: ptr GContext; p0, p1: GPoint)		44
+nim	drawRect	nebble/graphics/graphics.html#drawRect,ptr.struct_GContext,GRect	proc drawRect(ctx: ptr GContext; rect: GRect)		49
+nim	fillRect	nebble/graphics/graphics.html#fillRect,ptr.struct_GContext,GRect	proc fillRect(ctx: ptr GContext; rect: GRect)		54
+nim	fillRectRounded	nebble/graphics/graphics.html#fillRectRounded,ptr.struct_GContext,GRect,uint16,GCornerMask	proc fillRectRounded(ctx: ptr GContext; rect: GRect; radius: uint16;\n                corners: GCornerMask)		59
+nim	drawCircle	nebble/graphics/graphics.html#drawCircle,ptr.struct_GContext,GPoint,uint16	proc drawCircle(ctx: ptr GContext; center: GPoint; radius: uint16)		65
+nim	fillCircle	nebble/graphics/graphics.html#fillCircle,ptr.struct_GContext,GPoint,uint16	proc fillCircle(ctx: ptr GContext; center: GPoint; radius: uint16)		70
+nim	drawRoundRect	nebble/graphics/graphics.html#drawRoundRect,ptr.struct_GContext,GRect,uint16	proc drawRoundRect(ctx: ptr GContext; rect: GRect; radius: uint16)		75
+nim	drawPixel	nebble/graphics/graphics.html#drawPixel,ptr.struct_GContext,GPoint	proc drawPixel(ctx: ptr GContext; point: GPoint)		84
+nim	drawBitmap	nebble/graphics/graphics.html#drawBitmap,ptr.struct_GContext,ptr.struct_GBitmap,GRect	proc drawBitmap(ctx: ptr GContext; bitmap: ptr GBitmap; box: GRect)		93
+nim	drawRotatedBitmap	nebble/graphics/graphics.html#drawRotatedBitmap,ptr.struct_GContext,ptr.struct_GBitmap,GPoint,int32,GPoint	proc drawRotatedBitmap(ctx: ptr GContext; bitmap: ptr GBitmap;\n                  srcImageCenter: GPoint; rotation: int32;\n                  destImageCenter: GPoint)		98
+nim	strokeColor=	nebble/graphics/graphics.html#strokeColor=,ptr.struct_GContext,GColor8	proc strokeColor=(ctx: ptr GContext; color: GColor8)		112
+nim	fillColor=	nebble/graphics/graphics.html#fillColor=,ptr.struct_GContext,GColor8	proc fillColor=(ctx: ptr GContext; color: GColor8)		117
+nim	textColor=	nebble/graphics/graphics.html#textColor=,ptr.struct_GContext,GColor8	proc textColor=(ctx: ptr GContext; color: GColor8)		122
+nim	strokeWidth=	nebble/graphics/graphics.html#strokeWidth=,ptr.struct_GContext,uint8	proc strokeWidth=(ctx: ptr GContext; width: uint8)		127
+nim	antialiased=	nebble/graphics/graphics.html#antialiased=,ptr.struct_GContext,bool	proc antialiased=(ctx: ptr GContext; enable: bool)		132
+nim	newBitmap	nebble/graphics/graphics.html#newBitmap,uint32	proc newBitmap(resourceId: uint32): ptr GBitmap		141
+nim	newBitmapFromData	nebble/graphics/graphics.html#newBitmapFromData,ptr.uint8	proc newBitmapFromData(data: ptr uint8): ptr GBitmap		147
+nim	destroy	nebble/graphics/graphics.html#destroy,ptr.struct_GBitmap	proc destroy(bitmap: ptr GBitmap)		152
+nim	bounds	nebble/graphics/graphics.html#bounds,ptr.struct_GBitmap	proc bounds(bitmap: ptr GBitmap): GRect		157
+nim	bounds=	nebble/graphics/graphics.html#bounds=,ptr.struct_GBitmap,GRect	proc bounds=(bitmap: ptr GBitmap; newBounds: GRect)		162
+nim	bytesPerRow	nebble/graphics/graphics.html#bytesPerRow,ptr.struct_GBitmap	proc bytesPerRow(bitmap: ptr GBitmap): uint16		167
+nim	format	nebble/graphics/graphics.html#format,ptr.struct_GBitmap	proc format(bitmap: ptr GBitmap): GBitmapFormat		172
+nim	data	nebble/graphics/graphics.html#data,ptr.struct_GBitmap	proc data(bitmap: ptr GBitmap): pointer		177
+nim	palette	nebble/graphics/graphics.html#palette,ptr.struct_GBitmap	proc palette(bitmap: ptr GBitmap): ptr GColor		182
+nim	createBlank	nebble/graphics/graphics.html#createBlank,GSize,GBitmapFormat	proc createBlank(size: GSize; format: GBitmapFormat): ptr GBitmap		191
+nim	createBlankWithPalette	nebble/graphics/graphics.html#createBlankWithPalette,GSize,GBitmapFormat,ptr.GColor,bool	proc createBlankWithPalette(size: GSize; format: GBitmapFormat; palette: ptr GColor;\n                       freeOnDestroy: bool): ptr GBitmap		198
+nim	createAsSubBitmap	nebble/graphics/graphics.html#createAsSubBitmap,ptr.struct_GBitmap,GRect	proc createAsSubBitmap(baseBitmap: ptr GBitmap; subRect: GRect): ptr GBitmap		205
+nim	createWithData	nebble/graphics/graphics.html#createWithData,ptr.uint8	proc createWithData(data: ptr uint8): ptr GBitmap		211
+nim	inset	nebble/graphics/graphics.html#inset,GRect,GEdgeInsets	proc inset(rect: GRect; insets: GEdgeInsets): GRect		221
+nim	containsPoint	nebble/graphics/graphics.html#containsPoint,GRect,GPoint	proc containsPoint(rect: GRect; point: GPoint): bool		226
+nim	alignRect	nebble/graphics/graphics.html#alignRect,GRect,GRect,GAlign,bool	proc alignRect(rect: var GRect; insideRect: GRect; alignment: GAlign;\n          clip: bool = true)		231
+nim	centerPoint	nebble/graphics/graphics.html#centerPoint,GRect	proc centerPoint(rect: GRect): GPoint		237
+nim	clip	nebble/graphics/graphics.html#clip,GRect,GRect	proc clip(rect: var GRect; clipRect: GRect)		242
+nim	crop	nebble/graphics/graphics.html#crop,GRect,int32	proc crop(rect: GRect; cropSizePx: int32): GRect		248
+nim	standardize	nebble/graphics/graphics.html#standardize,GRect	proc standardize(rect: var GRect)		253
+nim	fromPolar	nebble/graphics/graphics.html#fromPolar,GRect,GOvalScaleMode,int32	proc fromPolar(rect: GRect; scaleMode: GOvalScaleMode; angle: int32): GPoint		258
+nim	centeredFromPolar	nebble/graphics/graphics.html#centeredFromPolar,GRect,GOvalScaleMode,int32,GSize	proc centeredFromPolar(rect: GRect; scaleMode: GOvalScaleMode; angle: int32;\n                  size: GSize): GRect		266
+nim	captureFrameBuffer	nebble/graphics/graphics.html#captureFrameBuffer,ptr.struct_GContext	proc captureFrameBuffer(ctx: ptr GContext): ptr GBitmap		276
+nim	captureFrameBufferFormat	nebble/graphics/graphics.html#captureFrameBufferFormat,ptr.struct_GContext,GBitmapFormat	proc captureFrameBufferFormat(ctx: ptr GContext; format: GBitmapFormat): ptr GBitmap		284
+nim	releaseFrameBuffer	nebble/graphics/graphics.html#releaseFrameBuffer,ptr.struct_GContext,ptr.struct_GBitmap	proc releaseFrameBuffer(ctx: ptr GContext; bitmap: ptr GBitmap): bool		292
+nim	isFrameBufferCaptured	nebble/graphics/graphics.html#isFrameBufferCaptured,ptr.struct_GContext	proc isFrameBufferCaptured(ctx: ptr GContext): bool		300
+nim	drawArc	nebble/graphics/graphics.html#drawArc,ptr.struct_GContext,GRect,GOvalScaleMode,int32,int32	proc drawArc(ctx: ptr GContext; rect: GRect; scaleMode: GOvalScaleMode;\n        angleStart: int32; angleEnd: int32)		310
+nim	fillRadial	nebble/graphics/graphics.html#fillRadial,ptr.struct_GContext,GRect,GOvalScaleMode,uint16,int32,int32	proc fillRadial(ctx: ptr GContext; rect: GRect; scaleMode: GOvalScaleMode;\n           insetThick: uint16; angleStart: int32; angleEnd: int32)		318
+nim	`==`	nebble/graphics/graphics.html#==,GColor,GColor	proc `==`(a, b: GColor): bool		331
+nim	legibleOver	nebble/graphics/graphics.html#legibleOver,GColor	proc legibleOver(color: GColor): GColor		336
+nim	compositingMode=	nebble/graphics/graphics.html#compositingMode=,ptr.struct_GContext,GCompOp	proc compositingMode=(ctx: ptr GContext; mode: GCompOp)		346
+nimgrp	textcontentsize	nebble/graphics/graphics.html#textContentSize-procs-all	proc		25

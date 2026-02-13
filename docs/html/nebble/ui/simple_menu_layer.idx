@@ -1,0 +1,6 @@
+nimTitle	simple_menu_layer	nebble/ui/simple_menu_layer.html	module nebble/ui/simple_menu_layer		0
+nim	newSimpleMenuLayer	nebble/ui/simple_menu_layer.html#newSimpleMenuLayer,GRect,ptr.struct_Window,ptr.SimpleMenuSection,int32,pointer	proc newSimpleMenuLayer(frame: GRect; window: ptr Window;\n                   sections: ptr SimpleMenuSection; numSections: int32;\n                   context: pointer): ptr SimpleMenuLayer		13
+nim	destroy	nebble/ui/simple_menu_layer.html#destroy,ptr.struct_SimpleMenuLayer	proc destroy(menuLayer: ptr SimpleMenuLayer)		20
+nim	getLayer	nebble/ui/simple_menu_layer.html#getLayer,ptr.struct_SimpleMenuLayer	proc getLayer(menuLayer: ptr SimpleMenuLayer): ptr Layer		29
+nim	selectedIndex	nebble/ui/simple_menu_layer.html#selectedIndex,ptr.struct_SimpleMenuLayer	proc selectedIndex(menuLayer: ptr SimpleMenuLayer): int32		38
+nim	selectedIndex=	nebble/ui/simple_menu_layer.html#selectedIndex=,ptr.struct_SimpleMenuLayer,int32,bool	proc selectedIndex=(menuLayer: ptr SimpleMenuLayer; index: int32; animated: bool)		43

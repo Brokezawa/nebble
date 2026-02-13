@@ -27,6 +27,4 @@ const
 proc sdkVersionMatches*(version: string): bool =
   version == PebbleSdkVersion
 
-## Get generation info as formatted string
-proc generationInfo*(): string =
-  result = "Pebble SDK " & PebbleSdkVersion & " (generated " & FutharkGenerationDate & ")"
+const generationInfo* = "Pebble SDK " & PebbleSdkVersion & " (generated " & FutharkGenerationDate & ")"

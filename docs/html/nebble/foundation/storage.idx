@@ -1,0 +1,10 @@
+nimTitle	storage	nebble/foundation/storage.html	module nebble/foundation/storage		0
+nim	exists	nebble/foundation/storage.html#exists,uint32	proc exists(key: uint32): bool		11
+nim	readInt	nebble/foundation/storage.html#readInt,uint32	proc readInt(key: uint32): int32		20
+nim	writeInt	nebble/foundation/storage.html#writeInt,uint32,int32	proc writeInt(key: uint32; value: int32): cint		26
+nim	readString	nebble/foundation/storage.html#readString,uint32,cstring,csize_t	proc readString(key: uint32; buffer: cstring; bufferSize: csize_t): cint		36
+nim	writeString	nebble/foundation/storage.html#writeString,uint32,cstring	proc writeString(key: uint32; value: cstring): cint		42
+nim	readData	nebble/foundation/storage.html#readData,uint32,pointer,csize_t	proc readData(key: uint32; buffer: pointer; bufferSize: csize_t): cint		52
+nim	writeData	nebble/foundation/storage.html#writeData,uint32,pointer,csize_t	proc writeData(key: uint32; data: pointer; size: csize_t): cint		58
+nim	delete	nebble/foundation/storage.html#delete,uint32	proc delete(key: uint32): cint		68
+nim	getDataSize	nebble/foundation/storage.html#getDataSize,uint32	proc getDataSize(key: uint32): cint		78

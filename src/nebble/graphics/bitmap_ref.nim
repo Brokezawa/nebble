@@ -34,6 +34,7 @@
 ##   ```
 
 import nebble/ffi
+import nebble/ffi/managed
 import nebble/graphics/graphics
 
 # ============================================================================
@@ -241,9 +242,39 @@ proc palette*(bitmapRef: GBitmapRef): ptr GColor {.inline.} =
   else:
     nil
 
+proc paletteSizeForFormat*(format: GBitmapFormat): int {.inline.} =
+  ## Get expected palette size (number of colors) for a bitmap format.
+  ## Returns 0 for non-palettized formats.
+  case format
+  of GBitmapFormat1BitPalette: result = 2
+  of GBitmapFormat2BitPalette: result = 4
+  of GBitmapFormat4BitPalette: result = 16
+  of GBitmapFormat8Bit, GBitmapFormat8BitCircular: result = 0  # Direct color, no palette
+  of GBitmapFormat1Bit: result = 0  # Monochrome, no palette
+  else: result = 0
+
 proc `palette=`*(bitmapRef: GBitmapRef, palette: ptr GColor) {.inline.} =
   ## Set palette for palettized bitmaps.
+  ##
+  ## **Palette Requirements:**
+  ## - 1BitPalette: 2 colors (black and white)
+  ## - 2BitPalette: 4 colors
+  ## - 4BitPalette: 16 colors
+  ## - 8Bit: Direct color, no palette (will trigger debug warning)
+  ##
+  ## **⚠️ Safety:** The palette pointer must remain valid for the lifetime
+  ## of the bitmap. The palette is NOT copied. Use static arrays or ensure
+  ## the palette outlives the bitmap.
   if bitmapRef != nil and bitmapRef.bitmap != nil:
+    when ManagedDebug or ManagedStrict:
+      let format = gbitmap_get_format(bitmapRef.bitmap)
+      let expectedSize = paletteSizeForFormat(format)
+      if expectedSize > 0 and palette == nil:
+        when ManagedStrict:
+          raise newException(AssertionDefect, "Palette required for this format")
+      elif expectedSize == 0:
+        when ManagedStrict:
+          raise newException(AssertionDefect, "Palette not expected for this format")
     # By default do not free the palette on destroy; user may manage lifetime
     gbitmap_set_palette(bitmapRef.bitmap, palette, false)
 

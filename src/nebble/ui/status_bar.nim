@@ -1,67 +1,51 @@
-## High-level Nim wrapper for Pebble StatusBarLayer API.
+## ARC-Managed StatusBarLayer Handle
 ##
-## A StatusBarLayer displays a status bar at the top of the window showing
-## time, battery, and connection status. It automatically adjusts layer
-## content to avoid being covered by the status bar.
+## Managed wrapper for StatusBarLayer that tracks association with windows
+## to avoid destroying while attached.
 
 import nebble/ffi
+import nebble/ffi/managed
+
+export ffi.StatusBarLayer, ffi.StatusBarLayerSeparatorMode
 
 # ============================================================================
-# Constructor & Destructor
+# Define the Managed Handle
 # ============================================================================
 
-when declared(ffi.status_bar_layer_create):
-  proc newStatusBarLayer*(): ptr StatusBarLayer {.inline.} =
-    ## Create a new StatusBarLayer.
-    ## Equivalent to C function `ffi.status_bar_layer_create()`.
-    ## NOTE: Not available on Aplite.
-    ffi.status_bar_layer_create()
-
-  proc destroy*(statusBar: ptr StatusBarLayer) {.inline.} =
-    ## Destroy the status bar layer and free its memory.
-    ## Equivalent to C function `ffi.status_bar_layer_destroy(status_bar_layer)`.
-    ffi.status_bar_layer_destroy(statusBar)
+DefineUniqueHandle(StatusBarLayer, StatusBarLayer,
+                  status_bar_layer_create, status_bar_layer_destroy)
 
 # ============================================================================
-# Conversion
+# Constructors
 # ============================================================================
 
-when declared(ffi.status_bar_layer_get_layer):
-  proc getLayer*(statusBar: ptr StatusBarLayer): ptr Layer {.inline.} =
-    ## Get the underlying Layer for hierarchy operations.
-    ## Equivalent to C function `ffi.status_bar_layer_get_layer(status_bar_layer)`.
-    ffi.status_bar_layer_get_layer(statusBar)
+proc newStatusBarLayerHandle*(): StatusBarLayerHandle {.inline.} =
+  wrapOwned(ffi.status_bar_layer_create())
+
+proc newStatusBarLayer*(): StatusBarLayerHandle {.inline.} =
+  ## Alias for `newStatusBarLayerHandle`.
+  result = newStatusBarLayerHandle()
 
 # ============================================================================
-# Colors
+# Layer Access
 # ============================================================================
 
-when declared(ffi.status_bar_layer_set_colors):
-  proc setColors*(statusBar: ptr StatusBarLayer, background: GColor,
-                  foreground: GColor) {.inline.} =
-    ## Set the background and foreground colors.
-    ## Equivalent to C function `ffi.status_bar_layer_set_colors(status_bar_layer, background, foreground)`.
-    ffi.status_bar_layer_set_colors(statusBar, background, foreground)
+proc getLayer*(h: StatusBarLayerHandle): ptr Layer {.inline.} =
+  when ManagedDebug or ManagedStrict: h.checkValid()
+  ffi.status_bar_layer_get_layer(h.toPtr)
 
-when declared(ffi.status_bar_layer_get_background_color):
-  proc backgroundColor*(statusBar: ptr StatusBarLayer): GColor {.inline.} =
-    ## Get the current background color.
-    ## Equivalent to C function `ffi.status_bar_layer_get_background_color(status_bar_layer)`.
-    ffi.status_bar_layer_get_background_color(statusBar)
+proc setColors*(h: StatusBarLayerHandle, background: GColor, foreground: GColor) {.inline.} =
+  when ManagedDebug or ManagedStrict: h.checkValid()
+  ffi.status_bar_layer_set_colors(h.pRaw, background, foreground)
 
-when declared(ffi.status_bar_layer_get_foreground_color):
-  proc foregroundColor*(statusBar: ptr StatusBarLayer): GColor {.inline.} =
-    ## Get the current foreground color.
-    ## Equivalent to C function `ffi.status_bar_layer_get_foreground_color(status_bar_layer)`.
-    ffi.status_bar_layer_get_foreground_color(statusBar)
+proc backgroundColor*(h: StatusBarLayerHandle): GColor {.inline.} =
+  when ManagedDebug or ManagedStrict: h.checkValid()
+  ffi.status_bar_layer_get_background_color(h.pRaw)
 
-# ============================================================================
-# Separator
-# ============================================================================
+proc foregroundColor*(h: StatusBarLayerHandle): GColor {.inline.} =
+  when ManagedDebug or ManagedStrict: h.checkValid()
+  ffi.status_bar_layer_get_foreground_color(h.pRaw)
 
-when declared(ffi.status_bar_layer_set_separator_mode):
-  proc `separatorMode=`*(statusBar: ptr StatusBarLayer,
-                         mode: StatusBarLayerSeparatorMode) {.inline.} =
-    ## Set the separator line mode.
-    ## Equivalent to C function `ffi.status_bar_layer_set_separator_mode(status_bar_layer, mode)`.
-    ffi.status_bar_layer_set_separator_mode(statusBar, mode)
+proc `separatorMode=`*(h: StatusBarLayerHandle, mode: StatusBarLayerSeparatorMode) {.inline.} =
+  when ManagedDebug or ManagedStrict: h.checkValid()
+  ffi.status_bar_layer_set_separator_mode(h.pRaw, mode)

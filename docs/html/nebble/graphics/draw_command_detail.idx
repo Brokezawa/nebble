@@ -1,0 +1,27 @@
+nimTitle	draw_command_detail	nebble/graphics/draw_command_detail.html	module nebble/graphics/draw_command_detail		0
+nim	commandType	nebble/graphics/draw_command_detail.html#commandType,ptr.struct_GDrawCommand	proc commandType(command: ptr GDrawCommand): GDrawCommandType		14
+nim	fillColor=	nebble/graphics/draw_command_detail.html#fillColor=,ptr.struct_GDrawCommand,GColor	proc fillColor=(command: ptr GDrawCommand; color: GColor)		19
+nim	fillColor	nebble/graphics/draw_command_detail.html#fillColor,ptr.struct_GDrawCommand	proc fillColor(command: ptr GDrawCommand): GColor		24
+nim	strokeColor=	nebble/graphics/draw_command_detail.html#strokeColor=,ptr.struct_GDrawCommand,GColor	proc strokeColor=(command: ptr GDrawCommand; color: GColor)		29
+nim	strokeColor	nebble/graphics/draw_command_detail.html#strokeColor,ptr.struct_GDrawCommand	proc strokeColor(command: ptr GDrawCommand): GColor		34
+nim	strokeWidth=	nebble/graphics/draw_command_detail.html#strokeWidth=,ptr.struct_GDrawCommand,uint8	proc strokeWidth=(command: ptr GDrawCommand; width: uint8)		39
+nim	strokeWidth	nebble/graphics/draw_command_detail.html#strokeWidth,ptr.struct_GDrawCommand	proc strokeWidth(command: ptr GDrawCommand): uint8		44
+nim	hidden=	nebble/graphics/draw_command_detail.html#hidden=,ptr.struct_GDrawCommand,bool	proc hidden=(command: ptr GDrawCommand; hidden: bool)		49
+nim	hidden	nebble/graphics/draw_command_detail.html#hidden,ptr.struct_GDrawCommand	proc hidden(command: ptr GDrawCommand): bool		54
+nim	numPoints	nebble/graphics/draw_command_detail.html#numPoints,ptr.struct_GDrawCommand	proc numPoints(command: ptr GDrawCommand): uint16		63
+nim	setPoint	nebble/graphics/draw_command_detail.html#setPoint,ptr.struct_GDrawCommand,uint16,GPoint	proc setPoint(command: ptr GDrawCommand; index: uint16; point: GPoint)		68
+nim	getPoint	nebble/graphics/draw_command_detail.html#getPoint,ptr.struct_GDrawCommand,uint16	proc getPoint(command: ptr GDrawCommand; index: uint16): GPoint		73
+nim	pathOpen=	nebble/graphics/draw_command_detail.html#pathOpen=,ptr.struct_GDrawCommand,bool	proc pathOpen=(command: ptr GDrawCommand; open: bool)		78
+nim	pathOpen	nebble/graphics/draw_command_detail.html#pathOpen,ptr.struct_GDrawCommand	proc pathOpen(command: ptr GDrawCommand): bool		83
+nim	radius=	nebble/graphics/draw_command_detail.html#radius=,ptr.struct_GDrawCommand,uint16	proc radius=(command: ptr GDrawCommand; radius: uint16)		92
+nim	radius	nebble/graphics/draw_command_detail.html#radius,ptr.struct_GDrawCommand	proc radius(command: ptr GDrawCommand): uint16		97
+nim	numCommands	nebble/graphics/draw_command_detail.html#numCommands,ptr.struct_GDrawCommandList	proc numCommands(list: ptr GDrawCommandList): uint32		106
+nim	getCommand	nebble/graphics/draw_command_detail.html#getCommand,ptr.struct_GDrawCommandList,uint16	proc getCommand(list: ptr GDrawCommandList; index: uint16): ptr GDrawCommand		111
+nim	drawList	nebble/graphics/draw_command_detail.html#drawList,ptr.struct_GContext,ptr.struct_GDrawCommandList	proc drawList(ctx: ptr GContext; list: ptr GDrawCommandList)		116
+nim	CommandIterator	nebble/graphics/draw_command_detail.html#CommandIterator	type CommandIterator		126
+nim	iterate	nebble/graphics/draw_command_detail.html#iterate,ptr.struct_GDrawCommandList,CommandIterator,pointer	proc iterate(list: ptr GDrawCommandList; cb: CommandIterator; context: pointer)		130
+nim	`[]`	nebble/graphics/draw_command_detail.html#[],ptr.struct_GDrawCommandList,uint16	proc `[]`(list: ptr GDrawCommandList; index: uint16): ptr GDrawCommand		147
+nim	items	nebble/graphics/draw_command_detail.html#items.i,ptr.struct_GDrawCommandList	iterator items(list: ptr GDrawCommandList): ptr GDrawCommand		152
+nim	setAllStrokeWidths	nebble/graphics/draw_command_detail.html#setAllStrokeWidths,ptr.struct_GDrawCommandList,uint8	proc setAllStrokeWidths(list: ptr GDrawCommandList; width: uint8)		163
+nim	hideAll	nebble/graphics/draw_command_detail.html#hideAll,ptr.struct_GDrawCommandList	proc hideAll(list: ptr GDrawCommandList)		169
+nim	showAll	nebble/graphics/draw_command_detail.html#showAll,ptr.struct_GDrawCommandList	proc showAll(list: ptr GDrawCommandList)		175

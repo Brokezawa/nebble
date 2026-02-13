@@ -1,0 +1,40 @@
+nimTitle	typed_message	nebble/comms/typed_message.html	module nebble/comms/typed_message		0
+nim	AppMessageResult	nebble/comms/typed_message.html#AppMessageResult	type AppMessageResult		23
+nim	DictionaryIterator	nebble/comms/typed_message.html#DictionaryIterator	type DictionaryIterator		24
+nim	Tuplet	nebble/comms/typed_message.html#Tuplet	type Tuplet		25
+nim	DictionaryResult	nebble/comms/typed_message.html#DictionaryResult	type DictionaryResult		26
+nim	InboxReceivedCallback	nebble/comms/typed_message.html#InboxReceivedCallback	type InboxReceivedCallback		27
+nim	InboxDroppedCallback	nebble/comms/typed_message.html#InboxDroppedCallback	type InboxDroppedCallback		28
+nim	OutboxSentCallback	nebble/comms/typed_message.html#OutboxSentCallback	type OutboxSentCallback		29
+nim	OutboxFailedCallback	nebble/comms/typed_message.html#OutboxFailedCallback	type OutboxFailedCallback		30
+nim	send	nebble/comms/typed_message.html#send.t,ptr.DictionaryIterator,typed,int8	template send(iter: ptr DictionaryIterator; key: typed; value: int8)		40
+nim	send	nebble/comms/typed_message.html#send.t,ptr.DictionaryIterator,typed,int16	template send(iter: ptr DictionaryIterator; key: typed; value: int16)		44
+nim	send	nebble/comms/typed_message.html#send.t,ptr.DictionaryIterator,typed,int32	template send(iter: ptr DictionaryIterator; key: typed; value: int32)		48
+nim	send	nebble/comms/typed_message.html#send.t,ptr.DictionaryIterator,typed,uint8	template send(iter: ptr DictionaryIterator; key: typed; value: uint8)		52
+nim	send	nebble/comms/typed_message.html#send.t,ptr.DictionaryIterator,typed,uint16	template send(iter: ptr DictionaryIterator; key: typed; value: uint16)		56
+nim	send	nebble/comms/typed_message.html#send.t,ptr.DictionaryIterator,typed,uint32	template send(iter: ptr DictionaryIterator; key: typed; value: uint32)		60
+nim	send	nebble/comms/typed_message.html#send.t,ptr.DictionaryIterator,typed,cstring	template send(iter: ptr DictionaryIterator; key: typed; value: cstring)		64
+nim	send	nebble/comms/typed_message.html#send.t,ptr.DictionaryIterator,typed,string	template send(iter: ptr DictionaryIterator; key: typed; value: string)		68
+nim	readInt8	nebble/comms/typed_message.html#readInt8.t,ptr.DictionaryIterator,typed	template readInt8(iter: ptr DictionaryIterator; key: typed): int8		73
+nim	readInt16	nebble/comms/typed_message.html#readInt16.t,ptr.DictionaryIterator,typed	template readInt16(iter: ptr DictionaryIterator; key: typed): int16		77
+nim	readInt32	nebble/comms/typed_message.html#readInt32.t,ptr.DictionaryIterator,typed	template readInt32(iter: ptr DictionaryIterator; key: typed): int32		81
+nim	readUint8	nebble/comms/typed_message.html#readUint8.t,ptr.DictionaryIterator,typed	template readUint8(iter: ptr DictionaryIterator; key: typed): uint8		85
+nim	readUint16	nebble/comms/typed_message.html#readUint16.t,ptr.DictionaryIterator,typed	template readUint16(iter: ptr DictionaryIterator; key: typed): uint16		89
+nim	readUint32	nebble/comms/typed_message.html#readUint32.t,ptr.DictionaryIterator,typed	template readUint32(iter: ptr DictionaryIterator; key: typed): uint32		93
+nim	readCstring	nebble/comms/typed_message.html#readCstring.t,ptr.DictionaryIterator,typed	template readCstring(iter: ptr DictionaryIterator; key: typed): cstring		97
+nim	key	nebble/comms/typed_message.html#key.t,typed	template key(k: typed): int		102
+nim	size	nebble/comms/typed_message.html#size.t,ptr.DictionaryIterator	template size(iter: ptr DictionaryIterator): uint32		106
+nim	rewind	nebble/comms/typed_message.html#rewind.t,ptr.DictionaryIterator	template rewind(iter: ptr DictionaryIterator)		110
+nim	open	nebble/comms/typed_message.html#open,uint32,uint32	proc open(inboxSize: uint32; outboxSize: uint32): AppMessageResult		115
+nim	close	nebble/comms/typed_message.html#close	proc close()		119
+nim	onInboxReceived	nebble/comms/typed_message.html#onInboxReceived.t,InboxReceivedCallback	template onInboxReceived(handler: InboxReceivedCallback)		124
+nim	onInboxDropped	nebble/comms/typed_message.html#onInboxDropped.t,InboxDroppedCallback	template onInboxDropped(handler: InboxDroppedCallback)		128
+nim	onOutboxSent	nebble/comms/typed_message.html#onOutboxSent.t,OutboxSentCallback	template onOutboxSent(handler: OutboxSentCallback)		132
+nim	onOutboxFailed	nebble/comms/typed_message.html#onOutboxFailed.t,OutboxFailedCallback	template onOutboxFailed(handler: OutboxFailedCallback)		136
+nim	inboxSizeMaximum	nebble/comms/typed_message.html#inboxSizeMaximum	const inboxSizeMaximum		142
+nim	outboxSizeMaximum	nebble/comms/typed_message.html#outboxSizeMaximum	const outboxSizeMaximum		143
+nimgrp	send	nebble/comms/typed_message.html#send-templates-all	template		40
+heading	With generated keys:	nebble/comms/typed_message.html#with-generated-keyscolon	 With generated keys:		0
+heading	type AppMessageKey = enum amkCommand = 0, amkData = 1	nebble/comms/typed_message.html#type-appmessagekey-eq-enum-amkcommand-eq-0-amkdata-eq-1	 type AppMessageKey = enum amkCommand = 0, amkData = 1		0
+heading	Send data with type safety	nebble/comms/typed_message.html#send-data-with-type-safety	 Send data with type safety		0
+heading	Read with type safety	nebble/comms/typed_message.html#read-with-type-safety	 Read with type safety		0

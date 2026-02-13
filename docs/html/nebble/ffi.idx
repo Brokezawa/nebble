@@ -1,4 +1,4 @@
-nimTitle	ffi	nebble/ffi.html	module src/nebble/ffi		0
+nimTitle	ffi	nebble/ffi.html	module nebble/ffi		0
 nim	enum_ButtonId_570425836	nebble/ffi.html#enum_ButtonId_570425836	enum enum_ButtonId_570425836		12
 nim	enum_WatchInfoModel_570425840	nebble/ffi.html#enum_WatchInfoModel_570425840	enum enum_WatchInfoModel_570425840		16
 nim	enum_WatchInfoColor_570425844	nebble/ffi.html#enum_WatchInfoColor_570425844	enum enum_WatchInfoColor_570425844		26
@@ -968,40 +968,106 @@ nim	makeGEdgeInsets	nebble/ffi.html#makeGEdgeInsets,int16,int16,int16	proc makeG
 nim	makeGEdgeInsets	nebble/ffi.html#makeGEdgeInsets,int16,int16	proc makeGEdgeInsets(topBottom, rightLeft: int16): GEdgeInsets		43
 nim	makeGEdgeInsets	nebble/ffi.html#makeGEdgeInsets,int16	proc makeGEdgeInsets(all: int16): GEdgeInsets		50
 nim	makeMenuIndex	nebble/ffi.html#makeMenuIndex,uint16,uint16	proc makeMenuIndex(section, row: uint16): MenuIndex		57
-nim	makeUuid	nebble/ffi.html#makeUuid,uint8,uint8,uint8,uint8,uint8,uint8,uint8,uint8,uint8,uint8,uint8,uint8,uint8,uint8,uint8,uint8	proc makeUuid(p0, p1, p2, p3, p4, p5, p6, p7, p8, p9, p10, p11, p12, p13, p14, p15: uint8): Uuid		66
-nim	makeUuidFromBEBytes	nebble/ffi.html#makeUuidFromBEBytes,array[,uint8]	proc makeUuidFromBEBytes(b: array[16, uint8]): Uuid		87
-nim	makeUuidFromLEBytes	nebble/ffi.html#makeUuidFromLEBytes,array[,uint8]	proc makeUuidFromLEBytes(b: array[16, uint8]): Uuid		92
-nim	trigAngleToDeg	nebble/ffi.html#trigAngleToDeg.t,untyped	template trigAngleToDeg(trigAngle: untyped): untyped		105
-nim	degToTrigAngle	nebble/ffi.html#degToTrigAngle.t,untyped	template degToTrigAngle(angle: untyped): untyped		110
-nim	APP_LOG	nebble/ffi.html#APP_LOG.m,uint8,cstring,varargs[untyped]	macro APP_LOG(level: uint8; fmt: cstring; args: varargs[untyped]): untyped		121
-nim	colorFallback	nebble/ffi.html#colorFallback.t,untyped,untyped	template colorFallback(color, bw: untyped): untyped		149
-nim	pblIfBwElse	nebble/ffi.html#pblIfBwElse.t,untyped,untyped	template pblIfBwElse(ifTrue, ifFalse: untyped): untyped		151
-nim	pblIfColorElse	nebble/ffi.html#pblIfColorElse.t,untyped,untyped	template pblIfColorElse(ifTrue, ifFalse: untyped): untyped		152
-nim	pblIfRectElse	nebble/ffi.html#pblIfRectElse.t,untyped,untyped	template pblIfRectElse(ifTrue, ifFalse: untyped): untyped		158
-nim	pblIfRoundElse	nebble/ffi.html#pblIfRoundElse.t,untyped,untyped	template pblIfRoundElse(ifTrue, ifFalse: untyped): untyped		159
-nim	pblIfHealthElse	nebble/ffi.html#pblIfHealthElse.t,untyped,untyped	template pblIfHealthElse(ifTrue, ifFalse: untyped): untyped		170
-nim	pblIfMicrophoneElse	nebble/ffi.html#pblIfMicrophoneElse.t,untyped,untyped	template pblIfMicrophoneElse(ifTrue, ifFalse: untyped): untyped		171
-nim	pblIfSmartstrapElse	nebble/ffi.html#pblIfSmartstrapElse.t,untyped,untyped	template pblIfSmartstrapElse(ifTrue, ifFalse: untyped): untyped		172
-nim	arrayLength	nebble/ffi.html#arrayLength.t,array[I,T]	template arrayLength[I, T](arr: array[I, T]): int		178
-nim	propertyAnimationClone	nebble/ffi.html#propertyAnimationClone,ptr.struct_PropertyAnimation	proc propertyAnimationClone(anim: ptr PropertyAnimation): ptr PropertyAnimation		190
-nim	propertyAnimationGetFromGRect	nebble/ffi.html#propertyAnimationGetFromGRect,ptr.struct_PropertyAnimation,ptr.GRect	proc propertyAnimationGetFromGRect(anim: ptr PropertyAnimation; value: ptr GRect): bool		194
-nim	propertyAnimationSetFromGRect	nebble/ffi.html#propertyAnimationSetFromGRect,ptr.struct_PropertyAnimation,ptr.GRect	proc propertyAnimationSetFromGRect(anim: ptr PropertyAnimation; value: ptr GRect): bool		197
-nim	propertyAnimationGetFromGPoint	nebble/ffi.html#propertyAnimationGetFromGPoint,ptr.struct_PropertyAnimation,ptr.GPoint	proc propertyAnimationGetFromGPoint(anim: ptr PropertyAnimation; value: ptr GPoint): bool		200
-nim	propertyAnimationSetFromGPoint	nebble/ffi.html#propertyAnimationSetFromGPoint,ptr.struct_PropertyAnimation,ptr.GPoint	proc propertyAnimationSetFromGPoint(anim: ptr PropertyAnimation; value: ptr GPoint): bool		203
-nim	propertyAnimationGetFromInt16	nebble/ffi.html#propertyAnimationGetFromInt16,ptr.struct_PropertyAnimation,ptr.int16	proc propertyAnimationGetFromInt16(anim: ptr PropertyAnimation; value: ptr int16): bool		206
-nim	propertyAnimationSetFromInt16	nebble/ffi.html#propertyAnimationSetFromInt16,ptr.struct_PropertyAnimation,ptr.int16	proc propertyAnimationSetFromInt16(anim: ptr PropertyAnimation; value: ptr int16): bool		209
-nim	propertyAnimationGetToGRect	nebble/ffi.html#propertyAnimationGetToGRect,ptr.struct_PropertyAnimation,ptr.GRect	proc propertyAnimationGetToGRect(anim: ptr PropertyAnimation; value: ptr GRect): bool		212
-nim	propertyAnimationSetToGRect	nebble/ffi.html#propertyAnimationSetToGRect,ptr.struct_PropertyAnimation,ptr.GRect	proc propertyAnimationSetToGRect(anim: ptr PropertyAnimation; value: ptr GRect): bool		215
-nim	propertyAnimationGetToGPoint	nebble/ffi.html#propertyAnimationGetToGPoint,ptr.struct_PropertyAnimation,ptr.GPoint	proc propertyAnimationGetToGPoint(anim: ptr PropertyAnimation; value: ptr GPoint): bool		218
-nim	propertyAnimationSetToGPoint	nebble/ffi.html#propertyAnimationSetToGPoint,ptr.struct_PropertyAnimation,ptr.GPoint	proc propertyAnimationSetToGPoint(anim: ptr PropertyAnimation; value: ptr GPoint): bool		221
-nim	propertyAnimationGetToInt16	nebble/ffi.html#propertyAnimationGetToInt16,ptr.struct_PropertyAnimation,ptr.int16	proc propertyAnimationGetToInt16(anim: ptr PropertyAnimation; value: ptr int16): bool		224
-nim	propertyAnimationSetToInt16	nebble/ffi.html#propertyAnimationSetToInt16,ptr.struct_PropertyAnimation,ptr.int16	proc propertyAnimationSetToInt16(anim: ptr PropertyAnimation; value: ptr int16): bool		227
-nim	propertyAnimationGetSubject	nebble/ffi.html#propertyAnimationGetSubject,ptr.struct_PropertyAnimation,ptr.pointer	proc propertyAnimationGetSubject(anim: ptr PropertyAnimation; subject: ptr pointer): bool		230
-nim	propertyAnimationSetSubject	nebble/ffi.html#propertyAnimationSetSubject,ptr.struct_PropertyAnimation,ptr.pointer	proc propertyAnimationSetSubject(anim: ptr PropertyAnimation; subject: ptr pointer): bool		233
-nim	makeTupletBytes	nebble/ffi.html#makeTupletBytes,uint32,pointer,uint16	proc makeTupletBytes(key: uint32; data: pointer; length: uint16): Tuplet		240
-nim	makeTupletCString	nebble/ffi.html#makeTupletCString,uint32,cstring	proc makeTupletCString(key: uint32; str: cstring): Tuplet		247
-nim	makeTupletInteger	nebble/ffi.html#makeTupletInteger,uint32,uint32	proc makeTupletInteger(key: uint32; value: uint32): Tuplet		254
-nim	makeTupletUInteger	nebble/ffi.html#makeTupletUInteger,uint32,uint32	proc makeTupletUInteger(key: uint32; value: uint32): Tuplet		261
-nim	ACTION_BAR_WIDTH	nebble/ffi.html#ACTION_BAR_WIDTH	const ACTION_BAR_WIDTH		319
-nim	STATUS_BAR_LAYER_HEIGHT	nebble/ffi.html#STATUS_BAR_LAYER_HEIGHT	const STATUS_BAR_LAYER_HEIGHT		320
+nim	makeGColor8	nebble/ffi.html#makeGColor8,uint8	proc makeGColor8(argb: uint8): GColor8		66
+nim	GColorClear	nebble/ffi.html#GColorClear.t	template GColorClear(): GColor8		71
+nim	GColorBlack	nebble/ffi.html#GColorBlack.t	template GColorBlack(): GColor8		75
+nim	GColorWhite	nebble/ffi.html#GColorWhite.t	template GColorWhite(): GColor8		79
+nim	GColorOxfordBlue	nebble/ffi.html#GColorOxfordBlue.t	template GColorOxfordBlue(): GColor8		84
+nim	GColorDukeBlue	nebble/ffi.html#GColorDukeBlue.t	template GColorDukeBlue(): GColor8		85
+nim	GColorBlue	nebble/ffi.html#GColorBlue.t	template GColorBlue(): GColor8		86
+nim	GColorDarkGreen	nebble/ffi.html#GColorDarkGreen.t	template GColorDarkGreen(): GColor8		87
+nim	GColorMidnightGreen	nebble/ffi.html#GColorMidnightGreen.t	template GColorMidnightGreen(): GColor8		88
+nim	GColorCobaltBlue	nebble/ffi.html#GColorCobaltBlue.t	template GColorCobaltBlue(): GColor8		89
+nim	GColorBlueMoon	nebble/ffi.html#GColorBlueMoon.t	template GColorBlueMoon(): GColor8		90
+nim	GColorIslamicGreen	nebble/ffi.html#GColorIslamicGreen.t	template GColorIslamicGreen(): GColor8		91
+nim	GColorJaegerGreen	nebble/ffi.html#GColorJaegerGreen.t	template GColorJaegerGreen(): GColor8		92
+nim	GColorTiffanyBlue	nebble/ffi.html#GColorTiffanyBlue.t	template GColorTiffanyBlue(): GColor8		93
+nim	GColorVividCerulean	nebble/ffi.html#GColorVividCerulean.t	template GColorVividCerulean(): GColor8		94
+nim	GColorGreen	nebble/ffi.html#GColorGreen.t	template GColorGreen(): GColor8		95
+nim	GColorMalachite	nebble/ffi.html#GColorMalachite.t	template GColorMalachite(): GColor8		96
+nim	GColorMediumSpringGreen	nebble/ffi.html#GColorMediumSpringGreen.t	template GColorMediumSpringGreen(): GColor8		97
+nim	GColorCyan	nebble/ffi.html#GColorCyan.t	template GColorCyan(): GColor8		98
+nim	GColorBulgarianRose	nebble/ffi.html#GColorBulgarianRose.t	template GColorBulgarianRose(): GColor8		99
+nim	GColorImperialPurple	nebble/ffi.html#GColorImperialPurple.t	template GColorImperialPurple(): GColor8		100
+nim	GColorIndigo	nebble/ffi.html#GColorIndigo.t	template GColorIndigo(): GColor8		101
+nim	GColorElectricUltramarine	nebble/ffi.html#GColorElectricUltramarine.t	template GColorElectricUltramarine(): GColor8		102
+nim	GColorArmyGreen	nebble/ffi.html#GColorArmyGreen.t	template GColorArmyGreen(): GColor8		103
+nim	GColorDarkGray	nebble/ffi.html#GColorDarkGray.t	template GColorDarkGray(): GColor8		104
+nim	GColorLiberty	nebble/ffi.html#GColorLiberty.t	template GColorLiberty(): GColor8		105
+nim	GColorVeryLightBlue	nebble/ffi.html#GColorVeryLightBlue.t	template GColorVeryLightBlue(): GColor8		106
+nim	GColorKellyGreen	nebble/ffi.html#GColorKellyGreen.t	template GColorKellyGreen(): GColor8		107
+nim	GColorMayGreen	nebble/ffi.html#GColorMayGreen.t	template GColorMayGreen(): GColor8		108
+nim	GColorCadetBlue	nebble/ffi.html#GColorCadetBlue.t	template GColorCadetBlue(): GColor8		109
+nim	GColorPictonBlue	nebble/ffi.html#GColorPictonBlue.t	template GColorPictonBlue(): GColor8		110
+nim	GColorBrightGreen	nebble/ffi.html#GColorBrightGreen.t	template GColorBrightGreen(): GColor8		111
+nim	GColorScreaminGreen	nebble/ffi.html#GColorScreaminGreen.t	template GColorScreaminGreen(): GColor8		112
+nim	GColorMediumAquamarine	nebble/ffi.html#GColorMediumAquamarine.t	template GColorMediumAquamarine(): GColor8		113
+nim	GColorElectricBlue	nebble/ffi.html#GColorElectricBlue.t	template GColorElectricBlue(): GColor8		114
+nim	GColorDarkCandyAppleRed	nebble/ffi.html#GColorDarkCandyAppleRed.t	template GColorDarkCandyAppleRed(): GColor8		115
+nim	GColorJazzberryJam	nebble/ffi.html#GColorJazzberryJam.t	template GColorJazzberryJam(): GColor8		116
+nim	GColorPurple	nebble/ffi.html#GColorPurple.t	template GColorPurple(): GColor8		117
+nim	GColorVividViolet	nebble/ffi.html#GColorVividViolet.t	template GColorVividViolet(): GColor8		118
+nim	GColorWindsorTan	nebble/ffi.html#GColorWindsorTan.t	template GColorWindsorTan(): GColor8		119
+nim	GColorRoseVale	nebble/ffi.html#GColorRoseVale.t	template GColorRoseVale(): GColor8		120
+nim	GColorPurpureus	nebble/ffi.html#GColorPurpureus.t	template GColorPurpureus(): GColor8		121
+nim	GColorLavenderIndigo	nebble/ffi.html#GColorLavenderIndigo.t	template GColorLavenderIndigo(): GColor8		122
+nim	GColorLimerick	nebble/ffi.html#GColorLimerick.t	template GColorLimerick(): GColor8		123
+nim	GColorBrass	nebble/ffi.html#GColorBrass.t	template GColorBrass(): GColor8		124
+nim	GColorLightGray	nebble/ffi.html#GColorLightGray.t	template GColorLightGray(): GColor8		125
+nim	GColorBabyBlueEyes	nebble/ffi.html#GColorBabyBlueEyes.t	template GColorBabyBlueEyes(): GColor8		126
+nim	GColorSpringBud	nebble/ffi.html#GColorSpringBud.t	template GColorSpringBud(): GColor8		127
+nim	GColorInchworm	nebble/ffi.html#GColorInchworm.t	template GColorInchworm(): GColor8		128
+nim	GColorMintGreen	nebble/ffi.html#GColorMintGreen.t	template GColorMintGreen(): GColor8		129
+nim	GColorCeleste	nebble/ffi.html#GColorCeleste.t	template GColorCeleste(): GColor8		130
+nim	GColorRed	nebble/ffi.html#GColorRed.t	template GColorRed(): GColor8		131
+nim	GColorFolly	nebble/ffi.html#GColorFolly.t	template GColorFolly(): GColor8		132
+nim	GColorFashionMagenta	nebble/ffi.html#GColorFashionMagenta.t	template GColorFashionMagenta(): GColor8		133
+nim	GColorMagenta	nebble/ffi.html#GColorMagenta.t	template GColorMagenta(): GColor8		134
+nim	GColorOrange	nebble/ffi.html#GColorOrange.t	template GColorOrange(): GColor8		135
+nim	GColorSunsetOrange	nebble/ffi.html#GColorSunsetOrange.t	template GColorSunsetOrange(): GColor8		136
+nim	GColorBrilliantRose	nebble/ffi.html#GColorBrilliantRose.t	template GColorBrilliantRose(): GColor8		137
+nim	GColorShockingPink	nebble/ffi.html#GColorShockingPink.t	template GColorShockingPink(): GColor8		138
+nim	GColorChromeYellow	nebble/ffi.html#GColorChromeYellow.t	template GColorChromeYellow(): GColor8		139
+nim	GColorRajah	nebble/ffi.html#GColorRajah.t	template GColorRajah(): GColor8		140
+nim	GColorMelon	nebble/ffi.html#GColorMelon.t	template GColorMelon(): GColor8		141
+nim	GColorRichBrilliantLavender	nebble/ffi.html#GColorRichBrilliantLavender.t	template GColorRichBrilliantLavender(): GColor8		142
+nim	GColorYellow	nebble/ffi.html#GColorYellow.t	template GColorYellow(): GColor8		143
+nim	GColorIcterine	nebble/ffi.html#GColorIcterine.t	template GColorIcterine(): GColor8		144
+nim	GColorPastelYellow	nebble/ffi.html#GColorPastelYellow.t	template GColorPastelYellow(): GColor8		145
+nim	makeUuid	nebble/ffi.html#makeUuid,uint8,uint8,uint8,uint8,uint8,uint8,uint8,uint8,uint8,uint8,uint8,uint8,uint8,uint8,uint8,uint8	proc makeUuid(p0, p1, p2, p3, p4, p5, p6, p7, p8, p9, p10, p11, p12, p13, p14, p15: uint8): Uuid		151
+nim	makeUuidFromBEBytes	nebble/ffi.html#makeUuidFromBEBytes,array[,uint8]	proc makeUuidFromBEBytes(b: array[16, uint8]): Uuid		172
+nim	makeUuidFromLEBytes	nebble/ffi.html#makeUuidFromLEBytes,array[,uint8]	proc makeUuidFromLEBytes(b: array[16, uint8]): Uuid		177
+nim	trigAngleToDeg	nebble/ffi.html#trigAngleToDeg.t,untyped	template trigAngleToDeg(trigAngle: untyped): untyped		190
+nim	degToTrigAngle	nebble/ffi.html#degToTrigAngle.t,untyped	template degToTrigAngle(angle: untyped): untyped		195
+nim	APP_LOG	nebble/ffi.html#APP_LOG.m,uint8,cstring,varargs[untyped]	macro APP_LOG(level: uint8; fmt: cstring; args: varargs[untyped]): untyped		206
+nim	colorFallback	nebble/ffi.html#colorFallback.t,untyped,untyped	template colorFallback(color, bw: untyped): untyped		234
+nim	pblIfBwElse	nebble/ffi.html#pblIfBwElse.t,untyped,untyped	template pblIfBwElse(ifTrue, ifFalse: untyped): untyped		236
+nim	pblIfColorElse	nebble/ffi.html#pblIfColorElse.t,untyped,untyped	template pblIfColorElse(ifTrue, ifFalse: untyped): untyped		237
+nim	pblIfRectElse	nebble/ffi.html#pblIfRectElse.t,untyped,untyped	template pblIfRectElse(ifTrue, ifFalse: untyped): untyped		243
+nim	pblIfRoundElse	nebble/ffi.html#pblIfRoundElse.t,untyped,untyped	template pblIfRoundElse(ifTrue, ifFalse: untyped): untyped		244
+nim	pblIfHealthElse	nebble/ffi.html#pblIfHealthElse.t,untyped,untyped	template pblIfHealthElse(ifTrue, ifFalse: untyped): untyped		255
+nim	pblIfMicrophoneElse	nebble/ffi.html#pblIfMicrophoneElse.t,untyped,untyped	template pblIfMicrophoneElse(ifTrue, ifFalse: untyped): untyped		256
+nim	pblIfSmartstrapElse	nebble/ffi.html#pblIfSmartstrapElse.t,untyped,untyped	template pblIfSmartstrapElse(ifTrue, ifFalse: untyped): untyped		257
+nim	arrayLength	nebble/ffi.html#arrayLength.t,array[I,T]	template arrayLength[I, T](arr: array[I, T]): int		263
+nim	propertyAnimationClone	nebble/ffi.html#propertyAnimationClone,ptr.struct_PropertyAnimation	proc propertyAnimationClone(anim: ptr PropertyAnimation): ptr PropertyAnimation		275
+nim	propertyAnimationGetFromGRect	nebble/ffi.html#propertyAnimationGetFromGRect,ptr.struct_PropertyAnimation,ptr.GRect	proc propertyAnimationGetFromGRect(anim: ptr PropertyAnimation; value: ptr GRect): bool		279
+nim	propertyAnimationSetFromGRect	nebble/ffi.html#propertyAnimationSetFromGRect,ptr.struct_PropertyAnimation,ptr.GRect	proc propertyAnimationSetFromGRect(anim: ptr PropertyAnimation; value: ptr GRect): bool		282
+nim	propertyAnimationGetFromGPoint	nebble/ffi.html#propertyAnimationGetFromGPoint,ptr.struct_PropertyAnimation,ptr.GPoint	proc propertyAnimationGetFromGPoint(anim: ptr PropertyAnimation; value: ptr GPoint): bool		285
+nim	propertyAnimationSetFromGPoint	nebble/ffi.html#propertyAnimationSetFromGPoint,ptr.struct_PropertyAnimation,ptr.GPoint	proc propertyAnimationSetFromGPoint(anim: ptr PropertyAnimation; value: ptr GPoint): bool		288
+nim	propertyAnimationGetFromInt16	nebble/ffi.html#propertyAnimationGetFromInt16,ptr.struct_PropertyAnimation,ptr.int16	proc propertyAnimationGetFromInt16(anim: ptr PropertyAnimation; value: ptr int16): bool		291
+nim	propertyAnimationSetFromInt16	nebble/ffi.html#propertyAnimationSetFromInt16,ptr.struct_PropertyAnimation,ptr.int16	proc propertyAnimationSetFromInt16(anim: ptr PropertyAnimation; value: ptr int16): bool		294
+nim	propertyAnimationGetToGRect	nebble/ffi.html#propertyAnimationGetToGRect,ptr.struct_PropertyAnimation,ptr.GRect	proc propertyAnimationGetToGRect(anim: ptr PropertyAnimation; value: ptr GRect): bool		297
+nim	propertyAnimationSetToGRect	nebble/ffi.html#propertyAnimationSetToGRect,ptr.struct_PropertyAnimation,ptr.GRect	proc propertyAnimationSetToGRect(anim: ptr PropertyAnimation; value: ptr GRect): bool		300
+nim	propertyAnimationGetToGPoint	nebble/ffi.html#propertyAnimationGetToGPoint,ptr.struct_PropertyAnimation,ptr.GPoint	proc propertyAnimationGetToGPoint(anim: ptr PropertyAnimation; value: ptr GPoint): bool		303
+nim	propertyAnimationSetToGPoint	nebble/ffi.html#propertyAnimationSetToGPoint,ptr.struct_PropertyAnimation,ptr.GPoint	proc propertyAnimationSetToGPoint(anim: ptr PropertyAnimation; value: ptr GPoint): bool		306
+nim	propertyAnimationGetToInt16	nebble/ffi.html#propertyAnimationGetToInt16,ptr.struct_PropertyAnimation,ptr.int16	proc propertyAnimationGetToInt16(anim: ptr PropertyAnimation; value: ptr int16): bool		309
+nim	propertyAnimationSetToInt16	nebble/ffi.html#propertyAnimationSetToInt16,ptr.struct_PropertyAnimation,ptr.int16	proc propertyAnimationSetToInt16(anim: ptr PropertyAnimation; value: ptr int16): bool		312
+nim	propertyAnimationGetSubject	nebble/ffi.html#propertyAnimationGetSubject,ptr.struct_PropertyAnimation,ptr.pointer	proc propertyAnimationGetSubject(anim: ptr PropertyAnimation; subject: ptr pointer): bool		315
+nim	propertyAnimationSetSubject	nebble/ffi.html#propertyAnimationSetSubject,ptr.struct_PropertyAnimation,ptr.pointer	proc propertyAnimationSetSubject(anim: ptr PropertyAnimation; subject: ptr pointer): bool		318
+nim	makeTupletBytes	nebble/ffi.html#makeTupletBytes,uint32,pointer,uint16	proc makeTupletBytes(key: uint32; data: pointer; length: uint16): Tuplet		325
+nim	makeTupletCString	nebble/ffi.html#makeTupletCString,uint32,cstring	proc makeTupletCString(key: uint32; str: cstring): Tuplet		332
+nim	makeTupletInteger	nebble/ffi.html#makeTupletInteger,uint32,uint32	proc makeTupletInteger(key: uint32; value: uint32): Tuplet		339
+nim	makeTupletUInteger	nebble/ffi.html#makeTupletUInteger,uint32,uint32	proc makeTupletUInteger(key: uint32; value: uint32): Tuplet		346
+nim	ACTION_BAR_WIDTH	nebble/ffi.html#ACTION_BAR_WIDTH	const ACTION_BAR_WIDTH		404
+nim	STATUS_BAR_LAYER_HEIGHT	nebble/ffi.html#STATUS_BAR_LAYER_HEIGHT	const STATUS_BAR_LAYER_HEIGHT		405
 nimgrp	makegedgeinsets	nebble/ffi.html#makeGEdgeInsets-procs-all	proc		29

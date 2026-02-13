@@ -1,0 +1,8 @@
+nimTitle	math	nebble/util/math.html	module nebble/util/math		0
+nim	TRIG_MAX_ANGLE	nebble/util/math.html#TRIG_MAX_ANGLE	const TRIG_MAX_ANGLE		11
+nim	trigAngleToDeg	nebble/util/math.html#trigAngleToDeg,int32	proc trigAngleToDeg(angle: int32): float32		15
+nim	degToTrigAngle	nebble/util/math.html#degToTrigAngle,float32	proc degToTrigAngle(degrees: float32): int32		20
+nim	abs	nebble/util/math.html#abs,int32	proc abs(x: int32): int32		29
+nim	min	nebble/util/math.html#min,T,T	proc min[T](a, b: T): T		34
+nim	max	nebble/util/math.html#max,T,T	proc max[T](a, b: T): T		38
+nim	clamp	nebble/util/math.html#clamp,T,T,T	proc clamp[T](value, minVal, maxVal: T): T		42

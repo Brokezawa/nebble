@@ -1,75 +1,43 @@
-## High-level Nim wrapper for Pebble RotBitmapLayer API.
+## ARC-Managed RotBitmapLayer Handle
 ##
-## A layer that displays a bitmap that can be rotated around a pivot point.
-## Perfect for analog watch hands, compass needles, gauges, and indicators.
+## Provides automatic memory management for rotating bitmap layers.
+## Perfect for watch hands, compass needles, gauges, and animated indicators.
+##
+## **Key Features:**
+## - Automatic destruction when handle goes out of scope
+## - Move semantics (no copying)
+## - Property accessors for angle, pivot point, colors
+## - Degree-based rotation helpers
+##
+## **Usage Example:**
+##   ```nim
+##   import nebble/ui/rot_bitmap_layer
+##   
+##   var handLayer: RotBitmapLayerHandle
+##   
+##   proc windowLoad(win: ptr Window) {.cdecl.} =
+##     let handBitmap = newBitmap(RESOURCE_ID_HAND)
+##     handLayer = newRotBitmapLayer(handBitmap)
+##     
+##     # Set rotation anchor to bottom center (like a watch hand)
+##     handLayer.setAnchor(handBitmap, raBottom)
+##     
+##     # Position at screen center
+##     handLayer.getLayer().frame = makeGRect(72, 84, 20, 60)
+##     
+##     win.rootLayer.addChild(handLayer.getLayer())
+##     
+##     # Rotate to 90 degrees
+##     handLayer.angleDeg = 90.0
+##   ```
 
 import nebble/ffi
+import nebble/ffi/managed
 
 export ffi.RotBitmapLayer
 
 # ============================================================================
-# Constructor & Destructor
-# ============================================================================
-
-proc newRotBitmapLayer*(bitmap: ptr GBitmap): ptr RotBitmapLayer {.inline.} =
-  ## Create a new RotBitmapLayer with the specified bitmap.
-  ## The bitmap is not copied; it must remain valid for the layer's lifetime.
-  ## Equivalent to C function `rot_bitmap_layer_create(bitmap)`.
-  ffi.rot_bitmap_layer_create(bitmap)
-
-proc destroy*(layer: ptr RotBitmapLayer) {.inline.} =
-  ## Destroy the rotating bitmap layer and free its memory.
-  ## Equivalent to C function `rot_bitmap_layer_destroy(layer)`.
-  ffi.rot_bitmap_layer_destroy(layer)
-
-# ============================================================================
-# Conversion
-# ============================================================================
-
-proc getLayer*(layer: ptr RotBitmapLayer): ptr Layer {.inline.} =
-  ## Get the underlying Layer for hierarchy operations.
-  ## Note: RotBitmapLayer extends Layer, so we can safely cast.
-  result = cast[ptr Layer](layer)
-
-# ============================================================================
-# Rotation
-# ============================================================================
-
-proc setAngle*(layer: ptr RotBitmapLayer; angle: int32) {.inline.} =
-  ## Set the rotation angle in Pebble angle units (0 to TRIG_MAX_ANGLE).
-  ## 0 = upright, increases clockwise.
-  ## Equivalent to C function `rot_bitmap_layer_set_angle(layer, angle)`.
-  ffi.rot_bitmap_layer_set_angle(layer, angle)
-
-proc incrementAngle*(layer: ptr RotBitmapLayer; angle: int32) {.inline.} =
-  ## Increment (or decrement) the rotation angle by the specified amount.
-  ## Positive values rotate clockwise, negative counter-clockwise.
-  ## Equivalent to C function `rot_bitmap_layer_increment_angle(layer, angle)`.
-  ffi.rot_bitmap_layer_increment_angle(layer, angle)
-
-# ============================================================================
-# Appearance
-# ============================================================================
-
-proc setCornerClipColor*(layer: ptr RotBitmapLayer; color: GColor) {.inline.} =
-  ## Set the color used to fill corners when the rotated bitmap doesn't
-  ## cover the entire layer frame.
-  ## Equivalent to C function `rot_bitmap_layer_set_corner_clip_color(layer, color)`.
-  ffi.rot_bitmap_layer_set_corner_clip_color(layer, color)
-
-proc setCompositingMode*(layer: ptr RotBitmapLayer; mode: GCompOp) {.inline.} =
-  ## Set the compositing mode for blending the rotated bitmap.
-  ## Equivalent to C function `rot_bitmap_set_compositing_mode(layer, mode)`.
-  ffi.rot_bitmap_set_compositing_mode(layer, mode)
-
-proc setSrcIc*(layer: ptr RotBitmapLayer; ic: GPoint) {.inline.} =
-  ## Set the pivot point (center of rotation) in source bitmap coordinates.
-  ## Default is center of bitmap. The ic point will stay fixed during rotation.
-  ## Equivalent to C function `rot_bitmap_set_src_ic(layer, ic)`.
-  ffi.rot_bitmap_set_src_ic(layer, ic)
-
-# ============================================================================
-# Nim-idiomatic Helpers
+# Types
 # ============================================================================
 
 type
@@ -85,34 +53,124 @@ type
     raBottomLeft,  ## Rotate around bottom-left corner
     raBottomRight  ## Rotate around bottom-right corner
 
-proc setAnchor*(layer: ptr RotBitmapLayer; bitmap: ptr GBitmap; anchor: RotationAnchor) {.inline.} =
+# ============================================================================
+# Define the Managed Handle
+# ============================================================================
+
+DefineUniqueHandle(RotBitmapLayer, RotBitmapLayer, 
+                   rot_bitmap_layer_create, rot_bitmap_layer_destroy)
+
+# ============================================================================
+# Constructors
+# ============================================================================
+
+proc newRotBitmapLayerHandle*(bitmap: ptr GBitmap): RotBitmapLayerHandle {.inline.} =
+  wrapOwned(ffi.rot_bitmap_layer_create(bitmap))
+
+
+proc newRotBitmapLayer*(bitmap: ptr GBitmap): RotBitmapLayerHandle {.inline.} =
+  ## Alias for `newRotBitmapLayerHandle`.
+  result = newRotBitmapLayerHandle(bitmap)
+
+# ============================================================================
+# Layer Access
+# ============================================================================
+
+proc getLayer*(h: RotBitmapLayerHandle): ptr Layer {.inline.} =
+  ## Get the underlying Layer pointer for adding to parent.
+  ## Note: RotBitmapLayer extends Layer, so we can safely cast.
+  ##
+  ## **Example:**
+  ##   win.rootLayer.addChild(handLayer.getLayer())
+  when ManagedDebug or ManagedStrict:
+    h.checkValid()
+  cast[ptr Layer](h.toPtr)
+
+# ============================================================================
+# Rotation Properties
+# ============================================================================
+
+proc `angle=`*(h: var RotBitmapLayerHandle, angle: int32) {.inline.} =
+  ## Set rotation angle in Pebble angle units (0 to TRIG_MAX_ANGLE).
+  ## 0 = upright, increases clockwise.
+  when ManagedDebug or ManagedStrict:
+    h.checkValid()
+  rot_bitmap_layer_set_angle(h.toPtr, angle)
+
+proc incrementAngle*(h: var RotBitmapLayerHandle, delta: int32) {.inline.} =
+  ## Increment (or decrement) rotation angle.
+  ## Positive values rotate clockwise, negative counter-clockwise.
+  when ManagedDebug or ManagedStrict:
+    h.checkValid()
+  rot_bitmap_layer_increment_angle(h.toPtr, delta)
+
+proc `angleDeg=`*(h: var RotBitmapLayerHandle, degrees: float32) {.inline.} =
+  ## Set rotation angle in degrees (0-360).
+  ## Convenience wrapper that converts to Pebble angle units.
+  when ManagedDebug or ManagedStrict:
+    h.checkValid()
+  let angle = int32(degrees * TRIG_MAX_ANGLE.float32 / 360.0'f32)
+  rot_bitmap_layer_set_angle(h.toPtr, angle)
+
+proc incrementAngleDeg*(h: var RotBitmapLayerHandle, degrees: float32) {.inline.} =
+  ## Increment rotation angle by degrees.
+  when ManagedDebug or ManagedStrict:
+    h.checkValid()
+  let angle = int32(degrees * TRIG_MAX_ANGLE.float32 / 360.0'f32)
+  rot_bitmap_layer_increment_angle(h.toPtr, angle)
+
+# ============================================================================
+# Pivot Point (Rotation Center)
+# ============================================================================
+
+proc `pivot=`*(h: var RotBitmapLayerHandle, point: GPoint) {.inline.} =
+  ## Set the pivot point (center of rotation) in source bitmap coordinates.
+  ## Default is center of bitmap. This point stays fixed during rotation.
+  when ManagedDebug or ManagedStrict:
+    h.checkValid()
+  rot_bitmap_set_src_ic(h.toPtr, point)
+
+proc setAnchor*(h: var RotBitmapLayerHandle, bitmap: ptr GBitmap, anchor: RotationAnchor) {.inline.} =
   ## Set the rotation anchor point using common positions.
-  ## Convenience helper that calculates the correct ic point.
-  let bounds = ffi.gbitmap_get_bounds(bitmap)
+  ##
+  ## **Parameters:**
+  ## - `bitmap`: The bitmap to get dimensions from
+  ## - `anchor`: One of the predefined anchor positions (center, corners, edges)
+  ##
+  ## **Example:**
+  ##   # For a watch hand, anchor at bottom center
+  ##   handLayer.setAnchor(bitmap, raBottom)
+  when ManagedDebug or ManagedStrict:
+    h.checkValid()
+  let bounds = gbitmap_get_bounds(bitmap)
   let w = bounds.size.w.int16
-  let h = bounds.size.h.int16
+  let height = bounds.size.h.int16
   let halfW = int16(w shr 1)
-  let halfH = int16(h shr 1)
+  let halfH = int16(height shr 1)
   let ic = case anchor
     of raCenter:      makeGPoint(halfW, halfH)
     of raTop:         makeGPoint(halfW, 0)
-    of raBottom:      makeGPoint(halfW, h)
+    of raBottom:      makeGPoint(halfW, height)
     of raLeft:        makeGPoint(0, halfH)
     of raRight:       makeGPoint(w, halfH)
     of raTopLeft:     makeGPoint(0, 0)
     of raTopRight:    makeGPoint(w, 0)
-    of raBottomLeft:  makeGPoint(0, h)
-    of raBottomRight: makeGPoint(w, h)
-  setSrcIc(layer, ic)
+    of raBottomLeft:  makeGPoint(0, height)
+    of raBottomRight: makeGPoint(w, height)
+  rot_bitmap_set_src_ic(h.toPtr, ic)
 
-proc setAngleDeg*(layer: ptr RotBitmapLayer; degrees: float32) {.inline.} =
-  ## Set rotation angle in degrees (0-360).
-  ## Convenience wrapper that converts to Pebble angle units.
-  let angle = int32(degrees * 65536.0'f32 / 360.0'f32)
-  setAngle(layer, angle)
+# ============================================================================
+# Appearance
+# ============================================================================
 
-proc incrementAngleDeg*(layer: ptr RotBitmapLayer; degrees: float32) {.inline.} =
-  ## Increment rotation angle by degrees.
-  ## Convenience wrapper that converts to Pebble angle units.
-  let angle = int32(degrees * 65536.0'f32 / 360.0'f32)
-  incrementAngle(layer, angle)
+proc `cornerClipColor=`*(h: var RotBitmapLayerHandle, color: GColor) {.inline.} =
+  ## Set the color used to fill corners when rotated bitmap doesn't fill layer.
+  when ManagedDebug or ManagedStrict:
+    h.checkValid()
+  rot_bitmap_layer_set_corner_clip_color(h.toPtr, color)
+
+proc `compositingMode=`*(h: var RotBitmapLayerHandle, mode: GCompOp) {.inline.} =
+  ## Set the compositing mode for blending the rotated bitmap.
+  when ManagedDebug or ManagedStrict:
+    h.checkValid()
+  rot_bitmap_set_compositing_mode(h.toPtr, mode)

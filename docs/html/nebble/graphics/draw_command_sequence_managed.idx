@@ -1,0 +1,16 @@
+nimTitle	draw_command_sequence_managed	nebble/graphics/draw_command_sequence_managed.html	module nebble/graphics/draw_command_sequence_managed		0
+nim	DrawCommandSequenceHandle	nebble/graphics/draw_command_sequence_managed.html#DrawCommandSequenceHandle	type DrawCommandSequenceHandle		84
+nim	`=destroy`	nebble/graphics/draw_command_sequence_managed.html#=destroy,DrawCommandSequenceHandle	proc `=destroy`(h`gensym0: var DrawCommandSequenceHandle)		96
+nim	`=wasMoved`	nebble/graphics/draw_command_sequence_managed.html#=wasMoved,DrawCommandSequenceHandle	proc `=wasMoved`(h`gensym0: var DrawCommandSequenceHandle)		107
+nim	`=copy`	nebble/graphics/draw_command_sequence_managed.html#=copy,DrawCommandSequenceHandle,DrawCommandSequenceHandle	proc `=copy`(dest`gensym0: var DrawCommandSequenceHandle;\n        src`gensym0: DrawCommandSequenceHandle)		112
+nim	`=sink`	nebble/graphics/draw_command_sequence_managed.html#=sink,DrawCommandSequenceHandle,DrawCommandSequenceHandle	proc `=sink`(dest`gensym0: var DrawCommandSequenceHandle;\n        src`gensym0: DrawCommandSequenceHandle)		116
+nim	toPtr	nebble/graphics/draw_command_sequence_managed.html#toPtr.c,DrawCommandSequenceHandle	converter toPtr(h`gensym0: DrawCommandSequenceHandle): ptr GDrawCommandSequence		131
+nim	isValid	nebble/graphics/draw_command_sequence_managed.html#isValid,DrawCommandSequenceHandle	proc isValid(h`gensym0: DrawCommandSequenceHandle): bool		136
+nim	isNil	nebble/graphics/draw_command_sequence_managed.html#isNil,DrawCommandSequenceHandle	proc isNil(h`gensym0: DrawCommandSequenceHandle): bool		140
+nim	reset	nebble/graphics/draw_command_sequence_managed.html#reset,DrawCommandSequenceHandle	proc reset(h`gensym0: var DrawCommandSequenceHandle)		6
+nim	newDrawCommandSequenceHandle	nebble/graphics/draw_command_sequence_managed.html#newDrawCommandSequenceHandle,uint32	proc newDrawCommandSequenceHandle(resourceId: uint32): DrawCommandSequenceHandle		10
+nim	getFrame	nebble/graphics/draw_command_sequence_managed.html#getFrame,DrawCommandSequenceHandle,uint32	proc getFrame(h: DrawCommandSequenceHandle; index: uint32): ptr GDrawCommandFrame		13
+nim	getNumFrames	nebble/graphics/draw_command_sequence_managed.html#getNumFrames,DrawCommandSequenceHandle	proc getNumFrames(h: DrawCommandSequenceHandle): uint32		18
+nim	getTotalDuration	nebble/graphics/draw_command_sequence_managed.html#getTotalDuration,DrawCommandSequenceHandle	proc getTotalDuration(h: DrawCommandSequenceHandle): uint32		23
+nim	getBoundsSize	nebble/graphics/draw_command_sequence_managed.html#getBoundsSize,DrawCommandSequenceHandle	proc getBoundsSize(h: DrawCommandSequenceHandle): GSize		28
+nim	setBoundsSize	nebble/graphics/draw_command_sequence_managed.html#setBoundsSize,DrawCommandSequenceHandle,GSize	proc setBoundsSize(h: DrawCommandSequenceHandle; size: GSize)		33

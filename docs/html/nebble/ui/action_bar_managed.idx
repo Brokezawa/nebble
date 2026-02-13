@@ -1,0 +1,16 @@
+nimTitle	action_bar_managed	nebble/ui/action_bar_managed.html	module nebble/ui/action_bar_managed		0
+nim	ActionBarLayerHandle	nebble/ui/action_bar_managed.html#ActionBarLayerHandle	object ActionBarLayerHandle		15
+nim	`=destroy`	nebble/ui/action_bar_managed.html#=destroy,ActionBarLayerHandle	proc `=destroy`(h: var ActionBarLayerHandle)		19
+nim	`=wasMoved`	nebble/ui/action_bar_managed.html#=wasMoved,ActionBarLayerHandle	proc `=wasMoved`(h: var ActionBarLayerHandle)		26
+nim	`=copy`	nebble/ui/action_bar_managed.html#=copy,ActionBarLayerHandle,ActionBarLayerHandle	proc `=copy`(dest: var ActionBarLayerHandle; src: ActionBarLayerHandle)		30
+nim	`=sink`	nebble/ui/action_bar_managed.html#=sink,ActionBarLayerHandle,ActionBarLayerHandle	proc `=sink`(dest: var ActionBarLayerHandle; src: ActionBarLayerHandle)		32
+nim	toPtr	nebble/ui/action_bar_managed.html#toPtr.c,ActionBarLayerHandle	converter toPtr(h: ActionBarLayerHandle): ptr ActionBarLayer		40
+nim	isValid	nebble/ui/action_bar_managed.html#isValid,ActionBarLayerHandle	proc isValid(h: ActionBarLayerHandle): bool		42
+nim	newActionBarLayerHandle	nebble/ui/action_bar_managed.html#newActionBarLayerHandle	proc newActionBarLayerHandle(): ActionBarLayerHandle		50
+nim	getLayer	nebble/ui/action_bar_managed.html#getLayer,ActionBarLayerHandle	proc getLayer(h: ActionBarLayerHandle): ptr Layer		54
+nim	addToWindow	nebble/ui/action_bar_managed.html#addToWindow,ActionBarLayerHandle,ptr.struct_Window	proc addToWindow(h: var ActionBarLayerHandle; win: ptr Window)		58
+nim	removeFromWindow	nebble/ui/action_bar_managed.html#removeFromWindow,ActionBarLayerHandle	proc removeFromWindow(h: var ActionBarLayerHandle)		63
+nim	setIcon	nebble/ui/action_bar_managed.html#setIcon,ActionBarLayerHandle,ButtonId,ptr.struct_GBitmap	proc setIcon(h: ActionBarLayerHandle; buttonId: ButtonId; icon: ptr GBitmap)		68
+nim	setIconAnimated	nebble/ui/action_bar_managed.html#setIconAnimated,ActionBarLayerHandle,ButtonId,ptr.struct_GBitmap,bool	proc setIconAnimated(h: ActionBarLayerHandle; buttonId: ButtonId; icon: ptr GBitmap;\n                animated: bool)		72
+nim	clearIcon	nebble/ui/action_bar_managed.html#clearIcon,ActionBarLayerHandle,ButtonId	proc clearIcon(h: ActionBarLayerHandle; buttonId: ButtonId)		76
+nim	backgroundColor=	nebble/ui/action_bar_managed.html#backgroundColor=,ActionBarLayerHandle,GColor	proc backgroundColor=(h: ActionBarLayerHandle; color: GColor)		81

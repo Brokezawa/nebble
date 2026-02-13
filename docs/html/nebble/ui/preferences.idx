@@ -1,0 +1,4 @@
+nimTitle	preferences	nebble/ui/preferences.html	module nebble/ui/preferences		0
+nim	quietTimeIsActive	nebble/ui/preferences.html#quietTimeIsActive	proc quietTimeIsActive(): bool		14
+nim	preferredContentSize	nebble/ui/preferences.html#preferredContentSize_2	proc preferredContentSize(): PreferredContentSize		25
+nim	preferredResultDisplayDuration	nebble/ui/preferences.html#preferredResultDisplayDuration	proc preferredResultDisplayDuration(): uint32		32

@@ -1,6 +1,6 @@
 # AGENTS.md — Nebble (Nim + Pebble SDK)
 
-Nim wrapper for the Pebble smartwatch SDK. Two-layer architecture: low-level FFI bindings (Futhark-generated) + high-level idiomatic Nim API.
+Nim wrapper for the Pebble smartwatch SDK. Two-layer architecture: low-level FFI bindings + high-level idiomatic Nim API.
 
 ## Project Layout
 
@@ -10,26 +10,15 @@ cli/                              # Nebble CLI tool source
 src/nebble/
   foundation/                     # Core Foundation APIs
     app.nim                       # App lifecycle, pebbleApp macro
-    events/                       # Event Services (7 services)
-      accel.nim, battery.nim, compass.nim, connection.nim
-      focus.nim, health.nim, tick.nim
+    events/                       # Event Services (accel, battery, etc.)
     time.nim, timer.nim, storage.nim, wakeup.nim
-    watch_info.nim, logging.nim, i18n.nim, memory.nim, platform.nim
-  ui/                             # User Interface
-    window.nim, layer.nim, animation.nim, clicks.nim
-    text_layer.nim, bitmap_layer.nim, menu_layer.nim
-    action_bar.nim, status_bar.nim, vibes.nim, light.nim
-  graphics/                       # Low-level drawing
-    graphics.nim, fonts.nim, gpath.nim, draw_command.nim
-  comms/                          # Communication
-    message.nim, app_sync.nim, smartstrap.nim
-  input/                          # Input methods
-    dictation.nim
-  util/                           # Utilities
-    math.nim, uuid.nim
+  ui/                             # User Interface (window, layer, text_layer, etc.)
+  graphics/                       # Low-level drawing (graphics, fonts, gpath)
+  comms/                          # Communication (message, app_sync)
+  input/                          # Input methods (dictation)
+  util/                           # Utilities (math, uuid)
   ffi.nim                         # Platform selector + FFI exports
   ffi/generated/*.nim             # ~10k-line bindings per platform
-  ffi/macros.nim                  # Manual C macro replacements
 tests/                            # Test suite
 examples/                         # Sample apps
 ```
@@ -40,7 +29,7 @@ examples/                         # Sample apps
 
 ```bash
 nimble test              # Run all tests (unit + compile + examples)
-nimble testUnit          # Run only host-side unit tests (fast)
+nimble testUnit          # Run host-side unit tests only (fast)
 nimble testCompile       # Compile-only tests for all 6 platforms
 nimble testExamples      # Build all examples for all platforms
 nimble testSize          # Check Aplite binary size < 24KB
@@ -49,7 +38,7 @@ nimble testSize          # Check Aplite binary size < 24KB
 ### Running Single Tests
 
 ```bash
-# Run a single test file (skip project config to avoid ARM flags)
+# Run single test file (skip project config to avoid ARM flags)
 nim c --skipProjCfg -d:pebbleBasalt -r tests/test_macros.nim
 
 # Compile single test for specific platform
@@ -83,13 +72,13 @@ nebble size --platform aplite    # Check 24KB limit
 import std/macros
 import std/strutils
 
-# NEVER import these in device code (no syscalls on Pebble)
+# NEVER import in device code (no syscalls on Pebble)
 # import os, times, streams  # ❌ Forbidden
 
-# FFI layer access
-import nebble/ffi
+# High-level API (preferred)
+import nebble
 
-# Module imports use full paths
+# Or specific modules
 import nebble/foundation/events/battery
 import nebble/ui/animation
 import nebble/graphics/fonts
@@ -128,30 +117,21 @@ export ffi.BatteryStateHandler, ffi.BatteryChargeState
 proc batteryHandler(state: BatteryChargeState) {.cdecl.} =
   discard
 
-# Main entry point
-proc main(): cint {.exportc, cdecl.} =
-  discard
-
-# Wrapper procs use {.inline.} for zero overhead
-proc chargePercent*(): uint8 {.inline.} =
-  result = chargeState().charge_percent
+# Entry point handled by pebbleApp or nebbleWatchface macro
+# proc main(): cint {.exportc, cdecl.} = discard
 ```
 
 ### Types & Error Handling
 
 ```nim
-# Use ptr T for C pointers - NEVER use ref or GC types
-var window: ptr Window  # ✓ Good
-# var window: ref Window  # ❌ Bad
+# Use Managed Handles (Handle suffix) - NEVER use ref for UI objects
+var window: WindowHandle  # ✓ Good
+# var window: ptr Window  # ⚠️ Legacy (use only in callbacks)
+# var window: ref Window  # ❌ Forbidden for layers
 
 # Use cstring for C strings - avoid Nim string in device code
 proc setText*(text: cstring) {.inline.} =
   ffi.text_layer_set_text(layer, text)
-
-# Check return values (NULL pointers, status codes)
-let handle = resource_get_handle(resourceId)
-if handle == nil:
-  return  # Handle error
 
 # No exceptions - disabled with --os:any
 doAssert condition  # Use assertions, not try/except/raise
@@ -161,14 +141,18 @@ doAssert condition  # Use assertions, not try/except/raise
 
 - **ARC:** Compiled with `--mm:arc -d:useMalloc`
 - **No GC:** No cycle collector, no hidden heap allocations
-- **Lifecycle:** Manual `*_create` / `*_destroy` pairs
+- **Lifecycle:** Automatic via Managed Handles (=destroy hooks)
 
 ```nim
-# Create
+# Declarative (Preferred)
+nebbleWatchface:
+  textLayer:
+    id = myLayer
+    text = "Auto-cleaned"
+
+# Manual Handles
 let layer = newTextLayer(frame)
-# Use...
-# Destroy
-layer.destroy()
+# No manual destroy needed!
 ```
 
 ### Platform Guards

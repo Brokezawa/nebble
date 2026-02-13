@@ -1,0 +1,7 @@
+nimTitle	dictation	nebble/input/dictation.html	module nebble/input/dictation		0
+nim	newDictationSession	nebble/input/dictation.html#newDictationSession,uint32,DictationSessionStatusCallback,pointer	proc newDictationSession(bufferSize: uint32;\n                    callback: DictationSessionStatusCallback; context: pointer): ptr DictationSession		15
+nim	destroy	nebble/input/dictation.html#destroy,ptr.struct_DictationSession	proc destroy(session: ptr DictationSession)		23
+nim	start	nebble/input/dictation.html#start,ptr.struct_DictationSession	proc start(session: ptr DictationSession): DictationSessionStatus		29
+nim	stop	nebble/input/dictation.html#stop,ptr.struct_DictationSession	proc stop(session: ptr DictationSession): DictationSessionStatus		35
+nim	enableConfirmation	nebble/input/dictation.html#enableConfirmation,ptr.struct_DictationSession,bool	proc enableConfirmation(session: ptr DictationSession; enabled: bool)		41
+nim	enableErrorDialogs	nebble/input/dictation.html#enableErrorDialogs,ptr.struct_DictationSession,bool	proc enableErrorDialogs(session: ptr DictationSession; enabled: bool)		47

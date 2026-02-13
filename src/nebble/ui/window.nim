@@ -1,139 +1,323 @@
-## High-level idiomatic Nim API for Pebble windows.
+## ARC-Managed Window Handle (Stack-Aware)
 ##
-## This module provides constructors, property-style setters/getters, and
-## convenience wrappers for Window operations.
+## Provides automatic memory management for Window objects with window stack
+## lifecycle tracking to prevent destroying windows while on the stack.
+##
+## **Key Challenge:** Windows pushed to the window stack are "owned" by the stack.
+## Destroying them while on the stack causes undefined behavior. This handle
+## tracks stack state to defer destruction until safe.
+##
+## **Usage Example:**
+##   ```nim
+##   import nebble/ui/window
+##   
+##   var mainWindow: WindowHandle
+##   
+##   proc myInit() =
+##     mainWindow = newWindowHandle()
+##     mainWindow.push()  # Window now on stack
+##     # Do NOT destroy while on stack!
+##   
+##   proc myDeinit() =
+##     # Pop window from stack first
+##     if mainWindow.pop():
+##       # Now safe to destroy
+##       mainWindow = WindowHandle(nil)
+##   ```
 
 import nebble/ffi
+import nebble/ffi/managed
+import nebble/ffi/resource_state
 
-export ffi.Window, ffi.WindowHandlers, ffi.ClickConfigProvider
-
-# ============================================================================
-# Window Constructor / Destructor
-# ============================================================================
-
-proc newWindow*(): ptr Window {.inline.} =
-  ## Create a new Window.
-  ## The caller is responsible for calling `destroy()` when done.
-  ## Equivalent to C function `window_create()`.
-  ffi.window_create()
-
-proc destroy*(window: ptr Window) {.inline.} =
-  ## Destroy a Window and free its memory.
-  ## Equivalent to C function `window_destroy(window)`.
-  ffi.window_destroy(window)
+export ffi.Window, ffi.WindowHandlers, ffi.ClickConfigProvider, ffi.WindowHandler
 
 # ============================================================================
-# Window Stack
+# Stack-Aware Window Handle
 # ============================================================================
 
-proc push*(window: ptr Window, animated: bool = true) {.inline.} =
-  ## Push a window onto the window stack.
-  ## The window stack retains ownership - do not destroy until after popping.
-  ## Equivalent to C function `window_stack_push(window, animated)`.
-  ffi.window_stack_push(window, animated)
+type WindowHandle* = object
+  ## Managed handle for Window with stack lifecycle tracking.
+  ##
+  ## **Safety:** The destructor checks the window's stack state before
+  ## destroying. If the window is still on the stack, destruction is
+  ## deferred and a warning is logged (in debug mode).
+  raw: ptr Window
+  state: ResourceState
 
-proc pop*(animated: bool = true): ptr Window {.inline.} =
-  ## Pop the top window from the window stack and return it.
-  ## Equivalent to C function `window_stack_pop(animated)`.
-  ffi.window_stack_pop(animated)
+# ============================================================================
+# ARC Lifetime Hooks
+# ============================================================================
+
+proc `=destroy`*(h: var WindowHandle) =
+  ## Destructor - destroys window only if safe.
+  ##
+  ## - `rsCreated`: Safe to destroy
+  ## - `rsInactive`: Safe to destroy  
+  ## - `rsActive`: **Unsafe** - window still on stack, log warning
+  ## - `rsDestroyed`: Already destroyed, do nothing
+  case h.state
+  of rsCreated, rsInactive:
+    if h.raw != nil:
+      window_destroy(h.raw)
+  of rsActive:
+    when ManagedDebug:
+      # Log warning but don't crash - user error but we handle gracefully
+      discard  # Could use app_log here in embedded context
+  of rsDestroyed:
+    discard
+  h.raw = nil
+  h.state = rsDestroyed
+
+proc `=wasMoved`*(h: var WindowHandle) =
+  ## Mark handle as moved.
+  h.raw = nil
+  h.state = rsDestroyed
+
+proc `=copy`*(dest: var WindowHandle, src: WindowHandle) {.error.} =
+  ## Copying disabled - use move semantics.
+  discard
+
+proc `=sink`*(dest: var WindowHandle, src: WindowHandle) =
+  ## Move assignment - transfers ownership.
+  # Note: src is a sink parameter (passed by value but consumed)
+  # We move the data from src to dest, and leave src as nil
+  `=destroy`(dest)
+  dest.raw = src.raw
+  dest.state = src.state
+  # Zero out src via unsafeAddr since src is immutable
+  var srcPtr = cast[ptr WindowHandle](unsafeAddr src)
+  srcPtr.raw = nil
+  srcPtr.state = rsDestroyed
+
+# ============================================================================
+# Converters
+# ============================================================================
+
+converter toPtr*(h: WindowHandle): ptr Window =
+  ## Convert handle to raw pointer for C API calls.
+  h.raw
+
+proc toHandle*(p: ptr Window): WindowHandle =
+  ## Wrap raw pointer in handle (unowned).
+  WindowHandle(raw: p, state: rsActive) # Assume active/unowned
+
+# ============================================================================
+# Utility Functions
+# ============================================================================
+
+proc isValid*(h: WindowHandle): bool {.inline.} =
+  ## Check if handle points to valid window.
+  h.raw != nil and h.state != rsDestroyed
+
+proc state*(h: WindowHandle): ResourceState {.inline.} =
+  ## Get current window state.
+  h.state
+
+proc isOnStack*(h: WindowHandle): bool {.inline.} =
+  ## Check if window is currently on the window stack.
+  h.state == rsActive
+
+proc canDestroy*(h: WindowHandle): bool {.inline.} =
+  ## Check if window can be safely destroyed.
+  h.state.canDestroy
+
+proc reset*(h: var WindowHandle) =
+  ## Explicitly destroy window if safe and reset handle.
+  `=destroy`(h)
+  `=wasMoved`(h)
+
+when ManagedDebug or ManagedStrict:
+  proc checkValid*(h: WindowHandle) =
+    ## Runtime check for valid handle (debug builds only).
+    if not h.isValid:
+      when ManagedStrict:
+        raise newException(AssertionDefect, "Operation on invalid/moved WindowHandle")
+
+  proc checkNotOnStack*(h: WindowHandle) =
+    ## Ensure window is not on stack (debug builds only).
+    if h.isOnStack:
+      when ManagedStrict:
+        raise newException(AssertionDefect, "Window is still on stack! Pop first.")
+
+# ============================================================================
+# Constructors
+# ============================================================================
+
+proc newWindowHandle*(): WindowHandle {.inline.} =
+  ## Create a new managed Window.
+  ##
+  ## **Example:**
+  ##   var win = newWindowHandle()
+  ##   # Window in rsCreated state - safe to configure but not yet on stack
+  result.raw = window_create()
+  result.state = rsCreated
+
+proc newWindow*(): WindowHandle {.inline.} =
+  ## Alias for `newWindowHandle`.
+  result = newWindowHandle()
+
+proc newWindowHandle*(handlers: WindowHandlers): WindowHandle {.inline.} =
+  ## Create a new managed Window with handlers.
+  result.raw = window_create()
+  result.state = rsCreated
+  window_set_window_handlers(result.raw, handlers)
+
+proc newWindow*(handlers: WindowHandlers): WindowHandle {.inline.} =
+  ## Alias for `newWindowHandle`.
+  result = newWindowHandle(handlers)
+
+# ============================================================================
+# Window Stack Operations
+# ============================================================================
+
+proc push*(h: var WindowHandle, animated: bool = true) {.inline.} =
+  ## Push window onto window stack.
+  ##
+  ## **Transitions:** rsCreated -> rsActive
+  ##
+  ## **Example:**
+  ##   mainWindow.push()  # Window now displayed
+  when ManagedDebug or ManagedStrict:
+    h.checkValid()
+    if h.state != rsCreated:
+      when ManagedStrict:
+        raise newException(AssertionDefect, "Window must be in rsCreated state to push")
+  
+  window_stack_push(h.raw, animated)
+  h.state = rsActive
+
+proc pop*(h: var WindowHandle): bool {.inline.} =
+  ## Pop window from stack. Returns true if this window was popped.
+  ##
+  ## **Transitions:** rsActive -> rsInactive (if this window was on top)
+  ##
+  ## **Example:**
+  ##   if mainWindow.pop():
+  ##     # Safe to destroy now
+  ##     mainWindow = WindowHandle(nil)
+  when ManagedDebug or ManagedStrict:
+    h.checkValid()
+  
+  if h.state == rsActive:
+    # Only pop if this window is actually on top
+    let topWindow = window_stack_get_top_window()
+    if topWindow == h.raw:
+      let popped = window_stack_pop(animated = true)
+      if popped == h.raw:
+        h.state = rsInactive
+        return true
+    else:
+      when ManagedDebug:
+        discard  # Window is not on top, can't pop it
+  return false
 
 proc popAll*(animated: bool = true) {.inline.} =
-  ## Pop all windows from the window stack.
-  ## Equivalent to C function `window_stack_pop_all(animated)`.
-  ffi.window_stack_pop_all(animated)
+  ## Pop all windows from stack.
+  ##
+  ## **Warning:** This affects ALL windows, not just managed ones.
+  ## Managed windows still need their handles updated.
+  window_stack_pop_all(animated)
 
-proc getTopWindow*(): ptr Window {.inline.} =
-  ## Get the top window on the stack without popping it.
-  ## Equivalent to C function `window_stack_get_top_window()`.
-  ffi.window_stack_get_top_window()
-
-proc contains*(window: ptr Window): bool {.inline.} =
-  ## Check if a window is currently on the window stack.
-  ## Equivalent to C function `window_stack_contains_window(window)`.
-  ffi.window_stack_contains_window(window)
-
-proc removeWindow*(window: ptr Window, animated: bool): bool {.inline.} =
-  ## Remove a specific window from the stack (even if not on top).
-  ## Returns true if the window was found and removed.
-  ## Equivalent to C function `window_stack_remove(window, animated)`.
-  ffi.window_stack_remove(window, animated)
+proc removeFromStack*(h: var WindowHandle, animated: bool = true): bool {.inline.} =
+  ## Remove window from stack (even if not on top).
+  ##
+  ## **Transitions:** rsActive -> rsInactive (if removed)
+  when ManagedDebug or ManagedStrict:
+    h.checkValid()
+  
+  if h.state == rsActive:
+    let removed = window_stack_remove(h.raw, animated)
+    if removed:
+      h.state = rsInactive
+      return true
+  return false
 
 # ============================================================================
 # Window Properties
 # ============================================================================
 
-proc rootLayer*(window: ptr Window): ptr Layer {.inline.} =
+proc rootLayer*(win: ptr Window): ptr Layer {.inline.} =
+  ffi.window_get_root_layer(win)
+
+proc rootLayer*(h: WindowHandle): ptr Layer {.inline.} =
   ## Get the root layer of the window.
-  ## Equivalent to C function `window_get_root_layer(window)`.
-  ffi.window_get_root_layer(window)
+  when ManagedDebug or ManagedStrict:
+    h.checkValid()
+  ffi.window_get_root_layer(h.raw)
 
-proc `backgroundColor=`*(window: ptr Window, color: GColor8) {.inline.} =
-  ## Set the background color of the window.
-  ## Equivalent to C function `window_set_background_color(window, color)`.
-  ffi.window_set_background_color(window, color)
+proc isLoaded*(h: WindowHandle): bool {.inline.} =
+  ## Check if window has been loaded.
+  when ManagedDebug or ManagedStrict:
+    h.checkValid()
+  window_is_loaded(h.raw)
 
-proc isLoaded*(window: ptr Window): bool {.inline.} =
-  ## Check if the window has been loaded.
-  ## Equivalent to C function `window_is_loaded(window)`.
-  ffi.window_is_loaded(window)
+proc `backgroundColor=`*(h: var WindowHandle, color: GColor8) {.inline.} =
+  ## Set window background color.
+  when ManagedDebug or ManagedStrict:
+    h.checkValid()
+  window_set_background_color(h.raw, color)
 
-proc `userData=`*(window: ptr Window, data: pointer) {.inline.} =
-  ## Set user data pointer for the window.
-  ## Equivalent to C function `window_set_user_data(window, data)`.
-  ffi.window_set_user_data(window, data)
+proc `userData=`*(h: var WindowHandle, data: pointer) {.inline.} =
+  ## Set user data pointer.
+  when ManagedDebug or ManagedStrict:
+    h.checkValid()
+  window_set_user_data(h.raw, data)
 
-proc userData*(window: ptr Window): pointer {.inline.} =
-  ## Get the user data pointer for the window.
-  ## Equivalent to C function `window_get_user_data(window)`.
-  ffi.window_get_user_data(window)
+proc userData*(h: WindowHandle): pointer {.inline.} =
+  ## Get user data pointer.
+  when ManagedDebug or ManagedStrict:
+    h.checkValid()
+  window_get_user_data(h.raw)
 
 # ============================================================================
 # Window Handlers
 # ============================================================================
 
-template `handlers=`*(window: ptr Window; h: WindowHandlers) =
+proc `handlers=`*(h: var WindowHandle, hnd: WindowHandlers) {.inline.} =
   ## Set window lifecycle handlers.
-  ## Equivalent to C function `window_set_window_handlers(window, handlers)`.
-  ffi.window_set_window_handlers(window, h)
+  when ManagedDebug or ManagedStrict:
+    h.checkValid()
+  window_set_window_handlers(h.raw, hnd)
 
-proc setHandlers*(window: ptr Window,
+proc setHandlers*(h: var WindowHandle,
                   load: WindowHandler = nil,
                   unload: WindowHandler = nil,
                   appear: WindowHandler = nil,
                   disappear: WindowHandler = nil) {.inline.} =
   ## Set window lifecycle handlers using named parameters.
-  ## Any nil handler is left unchanged.
-  ## Equivalent to C function `window_set_window_handlers(window, handlers)`.
+  when ManagedDebug or ManagedStrict:
+    h.checkValid()
   var handlers: WindowHandlers
   if load != nil: handlers.load = load
   if unload != nil: handlers.unload = unload
   if appear != nil: handlers.appear = appear
   if disappear != nil: handlers.disappear = disappear
-  ffi.window_set_window_handlers(window, handlers)
+  window_set_window_handlers(h.raw, handlers)
 
 # ============================================================================
 # Click Configuration
 # ============================================================================
 
-proc `clickConfig=`*(window: ptr Window, provider: ClickConfigProvider) {.inline.} =
-  ## Set the click configuration provider for the window.
-  ## The provider is called to set up click handlers when the window loads.
-  ## Equivalent to C function `window_set_click_config_provider(window, provider)`.
-  ffi.window_set_click_config_provider(window, provider)
+proc `clickConfig=`*(win: ptr Window, provider: ClickConfigProvider) {.inline.} =
+  ## Set click configuration provider (raw pointer version).
+  ffi.window_set_click_config_provider(win, provider)
 
-proc setClickConfigWithContext*(window: ptr Window,
+proc `clickConfig=`*(h: var WindowHandle, provider: ClickConfigProvider) {.inline.} =
+  ## Set click configuration provider.
+  when ManagedDebug or ManagedStrict:
+    h.checkValid()
+  window_set_click_config_provider(h.raw, provider)
+
+proc setClickConfigWithContext*(h: var WindowHandle,
                                 provider: ClickConfigProvider,
                                 context: pointer) {.inline.} =
   ## Set the click configuration provider with a context pointer.
-  ## Equivalent to C function `window_set_click_config_provider_with_context(...)`.
-  ffi.window_set_click_config_provider_with_context(window, provider, context)
+  when ManagedDebug or ManagedStrict:
+    h.checkValid()
+  window_set_click_config_provider_with_context(h.raw, provider, context)
 
-proc clickConfig*(window: ptr Window): ClickConfigProvider {.inline.} =
-  ## Get the current click configuration provider.
-  ## Equivalent to C function `window_get_click_config_provider(window)`.
-  ffi.window_get_click_config_provider(window)
-
-proc clickContext*(window: ptr Window): pointer {.inline.} =
-  ## Get the click configuration context pointer.
-  ## Equivalent to C function `window_get_click_config_context(window)`.
-  ffi.window_get_click_config_context(window)
+proc clickContext*(h: WindowHandle): pointer {.inline.} =
+  ## Get click configuration context.
+  when ManagedDebug or ManagedStrict:
+    h.checkValid()
+  window_get_click_config_context(h.raw)

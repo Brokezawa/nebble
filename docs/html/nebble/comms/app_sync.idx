@@ -1,0 +1,5 @@
+nimTitle	app_sync	nebble/comms/app_sync.html	module nebble/comms/app_sync		0
+nim	init	nebble/comms/app_sync.html#init,ptr.AppSync,ptr.uint8,uint16,ptr.Tuplet,uint8,AppSyncTupleChangedCallback,AppSyncErrorCallback,pointer	proc init(s: ptr AppSync; buffer: ptr uint8; bufferSize: uint16;\n     keysAndInitialValues: ptr Tuplet; count: uint8;\n     tupleChangedCallback: AppSyncTupleChangedCallback;\n     errorCallback: AppSyncErrorCallback; context: pointer)		14
+nim	deinit	nebble/comms/app_sync.html#deinit,ptr.AppSync	proc deinit(s: ptr AppSync)		24
+nim	set	nebble/comms/app_sync.html#set,ptr.AppSync,ptr.Tuplet,uint8	proc set(s: ptr AppSync; keysAndValuesToUpdate: ptr Tuplet; count: uint8): AppMessageResult		29
+nim	get	nebble/comms/app_sync.html#get,ptr.AppSync,uint32	proc get(s: ptr AppSync; key: uint32): ptr Tuple_f		35

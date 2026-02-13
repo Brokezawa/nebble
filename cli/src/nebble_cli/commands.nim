@@ -286,43 +286,6 @@ proc cmdGenKeys*() =
   echo "  # Read with type safety"
   echo "  let cmd = readInt32(iter, amkCommand)"
 
-proc cmdRegenFfi*() =
-  ## Regenerate Futhark FFI bindings for all platforms
-  echo "Regenerating FFI bindings..."
-  echo ""
-  
-  let platforms = ["aplite", "basalt", "chalk", "diorite", "emery", "flint"]
-  let futharkPath = "src/nebble/ffi/generate.nim"
-  
-  var successCount = 0
-  var failCount = 0
-  
-  for platform in platforms:
-    echo "═══ Generating bindings for ", platform, " ═══"
-    let cmd = "nim r -d:futharkRebuild -d:platform=" & platform & " " & futharkPath
-    echo "  Running: ", cmd
-    
-    let (output, exitCode) = execCmdEx(cmd)
-    
-    if exitCode == 0:
-      echo "✓ Generated ", platform, ".nim"
-      inc successCount
-    else:
-      echo "✗ Failed to generate ", platform
-      echo output
-      inc failCount
-    echo ""
-  
-  echo "═══════════════════════════════"
-  if failCount == 0:
-    echo "✓ FFI regeneration complete!"
-    echo "  Generated ", successCount, " platform bindings"
-  else:
-    echo "⚠ FFI regeneration completed with errors"
-    echo "  Success: ", successCount
-    echo "  Failed:  ", failCount
-    quit(1)
-
 proc cmdResources*(action: string, arg: string = "") =
   ## Manage project resources
   case action

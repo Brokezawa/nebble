@@ -1,0 +1,9 @@
+nimTitle	number_window	nebble/ui/number_window.html	module nebble/ui/number_window		0
+nim	newNumberWindow	nebble/ui/number_window.html#newNumberWindow,cstring,NumberWindowCallbacks,pointer	proc newNumberWindow(label: cstring; callbacks: NumberWindowCallbacks;\n                callbackContext: pointer): ptr NumberWindow		13
+nim	destroy	nebble/ui/number_window.html#destroy,ptr.struct_NumberWindow	proc destroy(numberWindow: ptr NumberWindow)		19
+nim	label=	nebble/ui/number_window.html#label=,ptr.struct_NumberWindow,cstring	proc label=(numberWindow: ptr NumberWindow; label: cstring)		28
+nim	max=	nebble/ui/number_window.html#max=,ptr.struct_NumberWindow,int32	proc max=(numberWindow: ptr NumberWindow; max: int32)		33
+nim	min=	nebble/ui/number_window.html#min=,ptr.struct_NumberWindow,int32	proc min=(numberWindow: ptr NumberWindow; min: int32)		38
+nim	value=	nebble/ui/number_window.html#value=,ptr.struct_NumberWindow,int32	proc value=(numberWindow: ptr NumberWindow; value: int32)		43
+nim	value	nebble/ui/number_window.html#value,ptr.struct_NumberWindow	proc value(numberWindow: ptr NumberWindow): int32		48
+nim	stepSize=	nebble/ui/number_window.html#stepSize=,ptr.struct_NumberWindow,int32	proc stepSize=(numberWindow: ptr NumberWindow; step: int32)		53

@@ -1,0 +1,29 @@
+nimTitle	window_managed	nebble/ui/window_managed.html	module nebble/ui/window_managed		0
+nim	WindowHandle	nebble/ui/window_managed.html#WindowHandle	object WindowHandle		36
+nim	`=destroy`	nebble/ui/window_managed.html#=destroy,WindowHandle	proc `=destroy`(h: var WindowHandle)		49
+nim	`=wasMoved`	nebble/ui/window_managed.html#=wasMoved,WindowHandle	proc `=wasMoved`(h: var WindowHandle)		69
+nim	`=copy`	nebble/ui/window_managed.html#=copy,WindowHandle,WindowHandle	proc `=copy`(dest: var WindowHandle; src: WindowHandle)		74
+nim	`=sink`	nebble/ui/window_managed.html#=sink,WindowHandle,WindowHandle	proc `=sink`(dest: var WindowHandle; src: WindowHandle)		78
+nim	toPtr	nebble/ui/window_managed.html#toPtr.c,WindowHandle	converter toPtr(h: WindowHandle): ptr Window		94
+nim	toHandle	nebble/ui/window_managed.html#toHandle.c,ptr.struct_Window	converter toHandle(p: ptr Window): WindowHandle		98
+nim	isValid	nebble/ui/window_managed.html#isValid,WindowHandle	proc isValid(h: WindowHandle): bool		107
+nim	state	nebble/ui/window_managed.html#state,WindowHandle	proc state(h: WindowHandle): ResourceState		111
+nim	isOnStack	nebble/ui/window_managed.html#isOnStack,WindowHandle	proc isOnStack(h: WindowHandle): bool		115
+nim	canDestroy	nebble/ui/window_managed.html#canDestroy,WindowHandle	proc canDestroy(h: WindowHandle): bool		119
+nim	reset	nebble/ui/window_managed.html#reset,WindowHandle	proc reset(h: var WindowHandle)		123
+nim	newWindowHandle	nebble/ui/window_managed.html#newWindowHandle	proc newWindowHandle(): WindowHandle		145
+nim	newWindowHandle	nebble/ui/window_managed.html#newWindowHandle,WindowHandlers	proc newWindowHandle(handlers: WindowHandlers): WindowHandle		154
+nim	push	nebble/ui/window_managed.html#push,WindowHandle,bool	proc push(h: var WindowHandle; animated: bool = true)		164
+nim	pop	nebble/ui/window_managed.html#pop,WindowHandle	proc pop(h: var WindowHandle): bool		180
+nim	popAll	nebble/ui/window_managed.html#popAll,bool	proc popAll(animated: bool = true)		205
+nim	removeFromStack	nebble/ui/window_managed.html#removeFromStack,WindowHandle,bool	proc removeFromStack(h: var WindowHandle; animated: bool = true): bool		212
+nim	rootLayer	nebble/ui/window_managed.html#rootLayer,WindowHandle	proc rootLayer(h: WindowHandle): ptr Layer		230
+nim	isLoaded	nebble/ui/window_managed.html#isLoaded,WindowHandle	proc isLoaded(h: WindowHandle): bool		236
+nim	backgroundColor=	nebble/ui/window_managed.html#backgroundColor=,WindowHandle,GColor8	proc backgroundColor=(h: var WindowHandle; color: GColor8)		242
+nim	userData=	nebble/ui/window_managed.html#userData=,WindowHandle,pointer	proc userData=(h: var WindowHandle; data: pointer)		248
+nim	userData	nebble/ui/window_managed.html#userData,WindowHandle	proc userData(h: WindowHandle): pointer		254
+nim	handlers=	nebble/ui/window_managed.html#handlers=,WindowHandle,WindowHandlers	proc handlers=(h: var WindowHandle; hnd: WindowHandlers)		264
+nim	setHandlers	nebble/ui/window_managed.html#setHandlers,WindowHandle,WindowHandler,WindowHandler,WindowHandler,WindowHandler	proc setHandlers(h: var WindowHandle; load: WindowHandler = nil;\n            unload: WindowHandler = nil; appear: WindowHandler = nil;\n            disappear: WindowHandler = nil)		270
+nim	clickConfig=	nebble/ui/window_managed.html#clickConfig=,WindowHandle,ClickConfigProvider	proc clickConfig=(h: var WindowHandle; provider: ClickConfigProvider)		289
+nim	clickContext	nebble/ui/window_managed.html#clickContext,WindowHandle	proc clickContext(h: WindowHandle): pointer		295
+nimgrp	newwindowhandle	nebble/ui/window_managed.html#newWindowHandle-procs-all	proc		145

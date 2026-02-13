@@ -1,0 +1,3 @@
+nimTitle	light	nebble/ui/light.html	module nebble/ui/light		0
+nim	enable	nebble/ui/light.html#enable,bool	proc enable(enabled: bool)		11
+nim	enableInteraction	nebble/ui/light.html#enableInteraction	proc enableInteraction()		16

@@ -1,50 +1,43 @@
-## High-level Nim wrapper for Pebble Dictation API.
+## ARC-Managed Dictation Session Handle
 ##
-## Provides voice dictation functionality for text input.
+## Lightweight unique-ownership wrapper around DictationSession pointers.
 
 import nebble/ffi
+import nebble/ffi/managed
 
 # Re-export commonly used types
 export ffi.DictationSession, ffi.DictationSessionStatus, ffi.DictationSessionStatusCallback
 
-# ============================================================================
-# Dictation Session Management
-# ============================================================================
+# Use the DefineUniqueHandle template to create the handle
+DefineUniqueHandle(DictationSession, DictationSession,
+                  dictation_session_create, dictation_session_destroy)
 
-when declared(ffi.dictation_session_create):
-  proc newDictationSession*(bufferSize: uint32, callback: DictationSessionStatusCallback,
-                            context: pointer): ptr DictationSession {.inline.} =
-    ## Create a new dictation session.
-    ## Equivalent to C function `dictation_session_create(buffer_size, callback, context)`.
-    ## Returns a session pointer, or NULL on failure.
-    ffi.dictation_session_create(bufferSize, callback, context)
+# Constructors
+proc newDictationSessionHandle*(bufferSize: uint32; callback: DictationSessionStatusCallback; context: pointer): DictationSessionHandle {.inline.} =
+  ## Create a new managed DictationSession.
+  result = wrapOwned(ffi.dictation_session_create(bufferSize, callback, context))
 
-when declared(ffi.dictation_session_destroy):
-  proc destroy*(session: ptr DictationSession) {.inline.} =
-    ## Destroy a dictation session and free resources.
-    ## Equivalent to C function `dictation_session_destroy(session)`.
-    ffi.dictation_session_destroy(session)
+proc newDictationSession*(bufferSize: uint32; callback: DictationSessionStatusCallback; context: pointer): DictationSessionHandle {.inline.} =
+  ## Alias for `newDictationSessionHandle`.
+  result = newDictationSessionHandle(bufferSize, callback, context)
 
-when declared(ffi.dictation_session_start):
-  proc start*(session: ptr DictationSession): DictationSessionStatus {.inline.} =
-    ## Start the dictation session.
-    ## Equivalent to C function `dictation_session_start(session)`.
-    ffi.dictation_session_start(session)
+# Control helpers
+proc start*(h: DictationSessionHandle): DictationSessionStatus {.inline.} =
+  when ManagedDebug or ManagedStrict:
+    h.checkValid()
+  dictation_session_start(h.toPtr)
 
-when declared(ffi.dictation_session_stop):
-  proc stop*(session: ptr DictationSession): DictationSessionStatus {.inline.} =
-    ## Stop the dictation session.
-    ## Equivalent to C function `dictation_session_stop(session)`.
-    ffi.dictation_session_stop(session)
+proc stop*(h: DictationSessionHandle): DictationSessionStatus {.inline.} =
+  when ManagedDebug or ManagedStrict:
+    h.checkValid()
+  dictation_session_stop(h.toPtr)
 
-when declared(ffi.dictation_session_enable_confirmation):
-  proc enableConfirmation*(session: ptr DictationSession, enabled: bool) {.inline.} =
-    ## Enable or disable confirmation dialog after dictation.
-    ## Equivalent to C function `dictation_session_enable_confirmation(session, enabled)`.
-    ffi.dictation_session_enable_confirmation(session, enabled)
+proc enableConfirmation*(h: DictationSessionHandle, enabled: bool) {.inline.} =
+  when ManagedDebug or ManagedStrict:
+    h.checkValid()
+  dictation_session_enable_confirmation(h.toPtr, enabled)
 
-when declared(ffi.dictation_session_enable_error_dialogs):
-  proc enableErrorDialogs*(session: ptr DictationSession, enabled: bool) {.inline.} =
-    ## Enable or disable error dialogs during dictation.
-    ## Equivalent to C function `dictation_session_enable_error_dialogs(session, enabled)`.
-    ffi.dictation_session_enable_error_dialogs(session, enabled)
+proc enableErrorDialogs*(h: DictationSessionHandle, enabled: bool) {.inline.} =
+  when ManagedDebug or ManagedStrict:
+    h.checkValid()
+  dictation_session_enable_error_dialogs(h.toPtr, enabled)

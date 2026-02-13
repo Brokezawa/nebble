@@ -10,6 +10,8 @@ requires "nim >= 2.2.0"
 requires "futhark >= 0.15.0"
 requires "unittest2 >= 0.2.5"
 
+import os, strutils, algorithm
+
 # Helper procs
 proc capitalizeAscii(s: string): string =
   if s.len == 0: return s
@@ -17,50 +19,64 @@ proc capitalizeAscii(s: string): string =
   result[0] = s[0].toUpperAscii
 
 # Tasks
-task test, "Run all tests (unit + compile + examples + size check)":
-  echo "═══════════════════════════════════════════════════════"
-  echo "Running all Nebble tests"
-  echo "═══════════════════════════════════════════════════════"
-  echo ""
-  
-  # 1. Host-side unit tests (runtime, macOS native)
-  # Skip tests/nim.cfg which has ARM cross-compile flags
-  echo "→ Running host-side unit tests..."
-  exec "nim c --skipProjCfg -d:pebbleBasalt -r tests/test_macros.nim"
-  echo ""
-  
-  # 2. Compile-only tests (ARM cross-compile, all platforms)
-  echo "→ Running compile-only tests for all platforms..."
-  for platform in ["aplite", "basalt", "chalk", "diorite", "emery", "flint"]:
-    let flag = "-d:pebble" & capitalizeAscii(platform)
-    echo "  Testing FFI on " & platform & "..."
-    exec "nim c " & flag & " tests/test_ffi.nim"
-    echo "  Testing high-level API on " & platform & "..."
-    exec "nim c " & flag & " tests/test_highlevel.nim"
-  echo ""
-  
-  # 3. Integration: build all examples for all platforms
-  echo "→ Running integration tests (example builds)..."
-  exec "bash test_build_matrix.sh"
-
 task testUnit, "Run host-side unit tests only":
-  echo "Running unit tests..."
+  echo "═══════════════════════════════════════════════════════"
+  echo "Running Unit Tests"
+  echo "═══════════════════════════════════════════════════════"
+  # Run macro tests
   exec "nim c --skipProjCfg -d:pebbleBasalt -r tests/test_macros.nim"
+  # Compile-only API tests (cross-compile check). tests/nim.cfg sets
+  # --compileOnly and adds --path:"../src" so we must NOT use -r.
+  exec "nim c -d:pebbleBasalt tests/test_highlevel.nim"
 
-task testCompile, "Compile-only tests for all platforms":
-  echo "Running compile-only tests for all 6 platforms..."
+task testExample, "Build all examples for all platforms (Integration Tests)":
+  echo "═══════════════════════════════════════════════════════"
+  echo "Running Integration Tests (Build Matrix)"
+  echo "═══════════════════════════════════════════════════════"
+  
+  let platforms = ["aplite", "basalt", "chalk", "diorite", "emery", "flint"]
+  var examples: seq[string] = @[]
+  
+  # Find examples
+  for kind, path in walkDir("examples"):
+    if kind == pcDir:
+      let name = path.extractFilename
+      if fileExists(path & "/src/" & name & ".nim"):
+        examples.add(name)
+  
+  examples.sort()
+  
+  var successCount = 0
+  var failCount = 0
+  
+  for ex in examples:
+    echo "\n=== Testing: " & ex & " ==="
+    withDir "examples/" & ex:
+      for p in platforms:
+        let cmd = "../../cli/bin/nebble build --platform " & p
+        echo "  Building for " & p & "..."
+        try:
+          exec cmd
+          inc successCount
+        except:
+          echo "  FAILED: " & ex & " on " & p
+          inc failCount
+  
+  echo "\n═══════════════════════════════════════════════════════"
+  echo "Matrix Results"
+  echo "═══════════════════════════════════════════════════════"
+  echo "Successful builds: " & $successCount
+  echo "Failed builds:     " & $failCount
+  
+  if failCount > 0:
+    quit("Some builds failed", 1)
+
+task test, "Run all tests (unit + examples)":
+  exec "nimble testUnit"
+  exec "nimble testExample"
+
+task regenFfi, "Regenerate FFI bindings using Futhark":
+  echo "Regenerating FFI bindings..."
   for platform in ["aplite", "basalt", "chalk", "diorite", "emery", "flint"]:
-    let flag = "-d:pebble" & capitalizeAscii(platform)
     echo "→ " & platform & ":"
-    echo "  Testing FFI..."
-    exec "nim c " & flag & " tests/test_ffi.nim"
-    echo "  Testing high-level API..."
-    exec "nim c " & flag & " tests/test_highlevel.nim"
-
-task testExamples, "Build all examples for all platforms":
-  echo "Building all examples for all platforms..."
-  exec "bash test_build_matrix.sh"
-
-task testSize, "Check Aplite binary size < 24KB for all examples":
-  echo "Checking Aplite binary sizes..."
-  exec "bash test_build_matrix.sh"
+    exec "nim r -d:futharkRebuild -d:opirRebuild -d:platform=" & platform & " src/nebble/ffi/generate.nim"

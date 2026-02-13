@@ -1,128 +1,85 @@
-## animation_demo - Pebble app demonstrating animations in Nim
+## Pure Animation Demo
 ##
-## Shows property animations (position, size) with different curves.
+## A clean demonstration of AnimationHandle with full sequencing API.
+## Shows property animations, scheduling, and chaining.
 
 import nebble
 import nebble/ui/animation
-import nebble/ffi # For BUTTON_ID constants and AnimationCurve enum
 
-var
-  textLayer: ptr TextLayer
-  propAnim: ptr PropertyAnimation
-  animDirection = 0  # 0 = down, 1 = up
+# Forward declarations
+proc onAnimationStarted(anim: ptr Animation, context: pointer) {.cdecl.}
+proc onAnimationStopped(anim: ptr Animation, finished: bool, context: pointer) {.cdecl.}
+proc startMainAnimation()
+proc startPulseAnimation()
+proc startSequenceDemo()
 
-proc animationStopped(animation: ptr Animation; finished: bool; context: pointer) {.cdecl.} =
-  ## Called when animation completes
-  discard
+# Module-level handles to ensure persistence and prevent use-after-free
+var 
+  mainAnim: AnimationHandle
+  pulseAnim: AnimationHandle
+  anim1: AnimationHandle
 
-proc selectClickHandler(recognizer: ClickRecognizerRef; context: pointer) {.cdecl.} =
-  ## Animate the text layer position with ease-in-out curve
-  let layer = textLayer.getLayer()
-  let bounds = layer.frame
-  
-  # Toggle direction
-  var toFrame: GRect
-  if animDirection == 0:
-    # Animate down to bottom
-    toFrame = makeGRect(bounds.origin.x, 120, bounds.size.w, bounds.size.h)
-    animDirection = 1
-  else:
-    # Animate back to top
-    toFrame = makeGRect(bounds.origin.x, 20, bounds.size.w, bounds.size.h)
-    animDirection = 0
-  
-  # Create property animation
-  propAnim = newLayerFrameAnimation(layer, nil, addr toFrame)
-  
-  # Get the base Animation pointer
-  let anim = propAnim.getAnimation()
-  
-  # Set animation curve and duration
-  discard `duration=`(anim, 500)
-  discard `curve=`(anim, constants.AnimationCurveEaseInOut)
-  
-  # Set animation handlers
-  var handlers: AnimationHandlers
-  handlers.stopped = animationStopped
-  anim.setHandlers(handlers, nil)
-  
-  # Start animation
-  discard anim.schedule()
+proc selectClickHandler(r: ClickRecognizerRef, c: pointer) {.cdecl.} = startPulseAnimation()
+proc upClickHandler(r: ClickRecognizerRef, c: pointer) {.cdecl.} = startMainAnimation()
+proc downClickHandler(r: ClickRecognizerRef, c: pointer) {.cdecl.} = startSequenceDemo()
 
-proc upClickHandler(recognizer: ClickRecognizerRef; context: pointer) {.cdecl.} =
-  ## Animate size with linear curve
-  let layer = textLayer.getLayer()
-  let bounds = layer.frame
-  
-  # Grow width
-  var toFrame = makeGRect(bounds.origin.x - 20, bounds.origin.y, 
-                          bounds.size.w + 40, bounds.size.h)
-  propAnim = newLayerFrameAnimation(layer, nil, addr toFrame)
-  
-  let anim = propAnim.getAnimation()
-  discard `duration=`(anim, 300)
-  discard `curve=`(anim, constants.AnimationCurveLinear)
-  
-  var handlers: AnimationHandlers
-  handlers.stopped = animationStopped
-  anim.setHandlers(handlers, nil)
-  discard anim.schedule()
+# Declarative App
+nebbleApp:
+  textLayer:
+    id = titleLayer
+    fullWidth = true
+    y = 50
+    h = 40
+    text = "Animation Demo"
+    font = FONT_KEY_GOTHIC_24_BOLD
+    alignment = GTextAlignmentCenter
+    
+  textLayer:
+    id = boxLayer
+    x = 120
+    y = 150
+    w = 15
+    h = 15
+    bgColor = GColorWhite
 
-proc downClickHandler(recognizer: ClickRecognizerRef; context: pointer) {.cdecl.} =
-  ## Shrink width back to normal
-  let layer = textLayer.getLayer()
-  let bounds = layer.frame
-  
-  # Shrink width
-  var toFrame = makeGRect(bounds.origin.x + 20, bounds.origin.y, 
-                          bounds.size.w - 40, bounds.size.h)
-  propAnim = newLayerFrameAnimation(layer, nil, addr toFrame)
-  
-  let anim = propAnim.getAnimation()
-  discard `duration=`(anim, 300)
-  discard `curve=`(anim, constants.AnimationCurveEaseOut)
-  
-  var handlers: AnimationHandlers
-  handlers.stopped = animationStopped
-  anim.setHandlers(handlers, nil)
-  discard anim.schedule()
+proc startMainAnimation() =
+  # Center text
+  let w = PBLDisplayWidth.int16
+  let startRect = makeGRect(0, 50, w, 40)
+  let endRect = makeGRect(0, 100, w, 40)
 
-proc clickConfigProvider(context: pointer) {.cdecl.} =
-  ## Configure click handlers
-  onClick(constants.BUTTON_ID_SELECT, selectClickHandler)
-  onClick(constants.BUTTON_ID_UP, upClickHandler)
-  onClick(constants.BUTTON_ID_DOWN, downClickHandler)
+  
+  mainAnim = newAnimationHandle(
+    titleLayer.toLayer(), startRect, endRect,
+    duration = 1000,
+    curve = AnimationCurveEaseInOut
+  )
+  mainAnim.setHandlers(onStarted = onAnimationStarted, onStopped = onAnimationStopped)
+  mainAnim.schedule()
 
-proc windowLoad(win: ptr Window) {.cdecl.} =
-  ## Window load handler - create UI
-  let rootLayer = win.rootLayer
-  let bounds = rootLayer.bounds
+proc startPulseAnimation() =
+  # Pulse at current box position (10, 140)
+  let startRect = makeGRect(10, 140, 20, 20)
+  let endRect = makeGRect(5, 135, 30, 30)
   
-  # Set window background color
-  when declared(GColorBlack):
-    win.backgroundColor = GColorBlack
-  
-  # Create text layer starting at top
-  textLayer = newTextLayer(makeGRect(10, 20, bounds.size.w - 20, 60))
-  textLayer.text = "Animate!"
-  textLayer.textAlignment = constants.GTextAlignmentCenter
-  textLayer.font = getSystemFont("RESOURCE_ID_GOTHIC_28_BOLD")
-  
-  when declared(GColorWhite):
-    textLayer.textColor = GColorWhite
-    textLayer.backgroundColor = GColorClear
-  
-  # Add to window
-  rootLayer.addChild(textLayer.getLayer())
+  pulseAnim = newAnimationHandle()
+  pulseAnim.duration = 500
+  pulseAnim.curve = AnimationCurveEaseInOut
+  pulseAnim.playCount = 3
+  pulseAnim.shouldAutoReverse = true
+  pulseAnim.setLayerFrame(boxLayer.toLayer(), startRect, endRect)
+  pulseAnim.schedule()
 
-proc windowUnload(win: ptr Window) {.cdecl.} =
-  ## Window unload handler - destroy UI
-  if propAnim != nil:
-    propAnim.destroy()
-  textLayer.destroy()
+proc startSequenceDemo() =
+  # Just move down once
+  let w = PBLDisplayWidth.int16
+  anim1 = newAnimationHandle()
+  anim1.duration = 500
+  anim1.setLayerFrame(titleLayer.toLayer(), 
+                     makeGRect(0, 50, w, 40),
+                     makeGRect(0, 80, w, 40))
+  
+  anim1.schedule()
 
-pebbleApp(
-  load = windowLoad,
-  unload = windowUnload,
-  clickConfig = clickConfigProvider
-)
+proc onAnimationStarted(anim: ptr Animation, context: pointer) {.cdecl.} = discard
+proc onAnimationStopped(anim: ptr Animation, finished: bool, context: pointer) {.cdecl.} = discard

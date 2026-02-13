@@ -1,0 +1,15 @@
+nimTitle	content_indicator	nebble/ui/content_indicator.html	module nebble/ui/content_indicator		0
+nim	newContentIndicator	nebble/ui/content_indicator.html#newContentIndicator	proc newContentIndicator(): ptr ContentIndicator		15
+nim	destroy	nebble/ui/content_indicator.html#destroy,ptr.struct_ContentIndicator	proc destroy(indicator: ptr ContentIndicator)		21
+nim	configureDirection	nebble/ui/content_indicator.html#configureDirection,ptr.struct_ContentIndicator,ContentIndicatorDirection,ptr.ContentIndicatorConfig	proc configureDirection(indicator: ptr ContentIndicator;\n                   direction: ContentIndicatorDirection;\n                   config: ptr ContentIndicatorConfig): bool		30
+nim	contentAvailable	nebble/ui/content_indicator.html#contentAvailable,ptr.struct_ContentIndicator,ContentIndicatorDirection	proc contentAvailable(indicator: ptr ContentIndicator;\n                 direction: ContentIndicatorDirection): bool		50
+nim	setContentAvailable	nebble/ui/content_indicator.html#setContentAvailable,ptr.struct_ContentIndicator,ContentIndicatorDirection,bool	proc setContentAvailable(indicator: ptr ContentIndicator;\n                    direction: ContentIndicatorDirection; available: bool)		57
+nim	makeConfig	nebble/ui/content_indicator.html#makeConfig,ptr.struct_Layer,GColor,GColor,GAlign,bool	proc makeConfig(layer: ptr Layer; foreground: GColor = GColorBlack;\n           background: GColor = GColorWhite; alignment: GAlign = GAlignCenter;\n           timesOut: bool = true): ContentIndicatorConfig		72
+nim	configureUp	nebble/ui/content_indicator.html#configureUp,ptr.struct_ContentIndicator,ptr.struct_Layer,GColor,GColor	proc configureUp(indicator: ptr ContentIndicator; layer: ptr Layer;\n            foreground: GColor = GColorBlack; background: GColor = GColorWhite): bool		85
+nim	configureDown	nebble/ui/content_indicator.html#configureDown,ptr.struct_ContentIndicator,ptr.struct_Layer,GColor,GColor	proc configureDown(indicator: ptr ContentIndicator; layer: ptr Layer;\n              foreground: GColor = GColorBlack; background: GColor = GColorWhite): bool		94
+nim	showUp	nebble/ui/content_indicator.html#showUp,ptr.struct_ContentIndicator	proc showUp(indicator: ptr ContentIndicator)		105
+nim	hideUp	nebble/ui/content_indicator.html#hideUp,ptr.struct_ContentIndicator	proc hideUp(indicator: ptr ContentIndicator)		109
+nim	showDown	nebble/ui/content_indicator.html#showDown,ptr.struct_ContentIndicator	proc showDown(indicator: ptr ContentIndicator)		113
+nim	hideDown	nebble/ui/content_indicator.html#hideDown,ptr.struct_ContentIndicator	proc hideDown(indicator: ptr ContentIndicator)		117
+nim	isUpVisible	nebble/ui/content_indicator.html#isUpVisible,ptr.struct_ContentIndicator	proc isUpVisible(indicator: ptr ContentIndicator): bool		121
+nim	isDownVisible	nebble/ui/content_indicator.html#isDownVisible,ptr.struct_ContentIndicator	proc isDownVisible(indicator: ptr ContentIndicator): bool		125

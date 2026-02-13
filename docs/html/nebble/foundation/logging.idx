@@ -1,0 +1,5 @@
+nimTitle	logging	nebble/foundation/logging.html	module nebble/foundation/logging		0
+nim	logError	nebble/foundation/logging.html#logError.t,cstring,varargs[untyped]	template logError(fmt: cstring; args: varargs[untyped])		20
+nim	logWarning	nebble/foundation/logging.html#logWarning.t,cstring,varargs[untyped]	template logWarning(fmt: cstring; args: varargs[untyped])		25
+nim	logInfo	nebble/foundation/logging.html#logInfo.t,cstring,varargs[untyped]	template logInfo(fmt: cstring; args: varargs[untyped])		30
+nim	logDebug	nebble/foundation/logging.html#logDebug.t,cstring,varargs[untyped]	template logDebug(fmt: cstring; args: varargs[untyped])		35

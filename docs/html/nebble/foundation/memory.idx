@@ -1,0 +1,4 @@
+nimTitle	memory	nebble/foundation/memory.html	module nebble/foundation/memory		0
+nim	heapBytesFree	nebble/foundation/memory.html#heapBytesFree	proc heapBytesFree(): int		11
+nim	heapBytesUsed	nebble/foundation/memory.html#heapBytesUsed	proc heapBytesUsed(): int		16
+nim	memoryCacheFlush	nebble/foundation/memory.html#memoryCacheFlush,pointer,int	proc memoryCacheFlush(start: pointer; size: int)		26

@@ -1,58 +1,90 @@
-## High-level Nim wrapper for Pebble BitmapLayer API.
+## ARC-Managed BitmapLayer Handle
 ##
-## A BitmapLayer displays a bitmap image. It provides alignment, background
-## color, and compositing mode control.
+## Provides automatic memory management for BitmapLayer objects using Nim's ARC
+## (Automatic Reference Counting) system.
+##
+## **Usage Example:**
+##   ```nim
+##   import nebble/ui/bitmap_layer
+##   
+##   var bitmapLayer: BitmapLayerHandle
+##   
+##   proc windowLoad(win: ptr Window) {.cdecl.} =
+##     bitmapLayer = newBitmapLayer(makeGRect(0, 0, 144, 168))
+##     bitmapLayer.bitmap = myBitmap
+##     bitmapLayer.alignment = GAlignCenter
+##     win.rootLayer.addChild(bitmapLayer.getLayer())
+##   
+##   proc windowUnload(win: ptr Window) {.cdecl.} =
+##     bitmapLayer = BitmapLayerHandle(nil)
+##   ```
 
 import nebble/ffi
+import nebble/ffi/managed
+
+# Re-export FFI types
+export ffi.BitmapLayer, ffi.GAlign, ffi.GCompOp
 
 # ============================================================================
-# Constructor & Destructor
+# Define the Managed Handle
 # ============================================================================
 
-proc newBitmapLayer*(frame: GRect): ptr BitmapLayer {.inline.} =
-  ## Create a new BitmapLayer with the specified frame.
-  ## Equivalent to C function `bitmap_layer_create(frame)`.
-  ffi.bitmap_layer_create(frame)
-
-proc destroy*(bitmapLayer: ptr BitmapLayer) {.inline.} =
-  ## Destroy the bitmap layer and free its memory.
-  ## Equivalent to C function `bitmap_layer_destroy(bitmap_layer)`.
-  ffi.bitmap_layer_destroy(bitmapLayer)
+DefineUniqueHandle(BitmapLayer, BitmapLayer,
+                  bitmap_layer_create, bitmap_layer_destroy)
 
 # ============================================================================
-# Conversion
+# Constructors
 # ============================================================================
 
-proc getLayer*(bitmapLayer: ptr BitmapLayer): ptr Layer {.inline.} =
-  ## Get the underlying Layer for hierarchy operations.
-  ## Equivalent to C function `bitmap_layer_get_layer(bitmap_layer)`.
-  ffi.bitmap_layer_get_layer(bitmapLayer)
+proc newBitmapLayerHandle*(frame: GRect): BitmapLayerHandle {.inline.} =
+  wrapOwned(ffi.bitmap_layer_create(frame))
+
+
+proc newBitmapLayer*(frame: GRect): BitmapLayerHandle {.inline.} =
+  ## Alias for `newBitmapLayerHandle`.
+  result = newBitmapLayerHandle(frame)
 
 # ============================================================================
-# Properties
+# Layer Access
 # ============================================================================
 
-proc `bitmap=`*(bitmapLayer: ptr BitmapLayer, bitmap: ptr GBitmap) {.inline.} =
+proc getLayer*(h: BitmapLayerHandle): ptr Layer {.inline.} =
+  ## Get the underlying Layer pointer for adding to parent.
+  when ManagedDebug or ManagedStrict:
+    h.checkValid()
+  bitmap_layer_get_layer(h.toPtr)
+
+# ============================================================================
+# Property Accessors
+# ============================================================================
+
+proc `bitmap=`*(h: var BitmapLayerHandle, value: ptr GBitmap) {.inline.} =
   ## Set the bitmap to display.
-  ## Equivalent to C function `bitmap_layer_set_bitmap(bitmap_layer, bitmap)`.
-  ffi.bitmap_layer_set_bitmap(bitmapLayer, bitmap)
+  when ManagedDebug or ManagedStrict:
+    h.checkValid()
+  bitmap_layer_set_bitmap(h.toPtr, value)
 
-proc bitmap*(bitmapLayer: ptr BitmapLayer): ptr GBitmap {.inline.} =
-  ## Get the currently displayed bitmap.
-  ## Equivalent to C function `bitmap_layer_get_bitmap(bitmap_layer)`.
-  ffi.bitmap_layer_get_bitmap(bitmapLayer)
+proc bitmap*(h: BitmapLayerHandle): ptr GBitmap {.inline.} =
+  ## Get the current bitmap.
+  when ManagedDebug or ManagedStrict:
+    h.checkValid()
+  bitmap_layer_get_bitmap(h.toPtr)
 
-proc `alignment=`*(bitmapLayer: ptr BitmapLayer, alignment: GAlign) {.inline.} =
-  ## Set the alignment of the bitmap within the layer frame.
-  ## Equivalent to C function `bitmap_layer_set_alignment(bitmap_layer, alignment)`.
-  ffi.bitmap_layer_set_alignment(bitmapLayer, alignment)
+proc `alignment=`*(h: var BitmapLayerHandle, value: GAlign) {.inline.} =
+  ## Set the bitmap alignment within the layer.
+  when ManagedDebug or ManagedStrict:
+    h.checkValid()
+  bitmap_layer_set_alignment(h.toPtr, value)
 
-proc `backgroundColor=`*(bitmapLayer: ptr BitmapLayer, color: GColor) {.inline.} =
-  ## Set the background color shown behind the bitmap.
-  ## Equivalent to C function `bitmap_layer_set_background_color(bitmap_layer, color)`.
-  ffi.bitmap_layer_set_background_color(bitmapLayer, color)
+proc `compositingMode=`*(h: var BitmapLayerHandle, value: GCompOp) {.inline.} =
+  ## Set the compositing mode.
+  when ManagedDebug or ManagedStrict:
+    h.checkValid()
+  bitmap_layer_set_compositing_mode(h.toPtr, value)
 
-proc `compositingMode=`*(bitmapLayer: ptr BitmapLayer, mode: GCompOp) {.inline.} =
-  ## Set the compositing mode for blending the bitmap.
-  ## Equivalent to C function `bitmap_layer_set_compositing_mode(bitmap_layer, mode)`.
-  ffi.bitmap_layer_set_compositing_mode(bitmapLayer, mode)
+proc `backgroundColor=`*(h: var BitmapLayerHandle, value: GColor8) {.inline.} =
+  ## Set the background color (only for color platforms).
+  when ManagedDebug or ManagedStrict:
+    h.checkValid()
+  when declared(bitmap_layer_set_background_color):
+    bitmap_layer_set_background_color(h.toPtr, value)

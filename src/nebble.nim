@@ -34,6 +34,33 @@ export StatusBarLayer
 export HealthMetric, HealthValue, HealthActivity, HealthEventType
 export HealthMinuteData, HealthServiceTimeScope, HealthServiceAccessibilityMask
 export HealthActivityMask, HealthIterationDirection, MeasurementSystem
+
+# Const aliases for HealthMetric values (needed because HealthMetric is a typedef)
+# Wrapped in when declared to support platforms without specific metrics (e.g. Aplite)
+when declared(ffi.HealthMetricStepCount):
+  const HealthMetricStepCount* = ffi.HealthMetricStepCount
+when declared(ffi.HealthMetricActiveSeconds):
+  const HealthMetricActiveSeconds* = ffi.HealthMetricActiveSeconds
+when declared(ffi.HealthMetricWalkedDistanceMeters):
+  const HealthMetricWalkedDistanceMeters* = ffi.HealthMetricWalkedDistanceMeters
+when declared(ffi.HealthMetricSleepSeconds):
+  const HealthMetricSleepSeconds* = ffi.HealthMetricSleepSeconds
+when declared(ffi.HealthMetricSleepRestfulSeconds):
+  const HealthMetricSleepRestfulSeconds* = ffi.HealthMetricSleepRestfulSeconds
+when declared(ffi.HealthMetricRestingKCalories):
+  const HealthMetricRestingKCalories* = ffi.HealthMetricRestingKCalories
+when declared(ffi.HealthMetricActiveKCalories):
+  const HealthMetricActiveKCalories* = ffi.HealthMetricActiveKCalories
+when declared(ffi.HealthMetricHeartRateBPM):
+  const HealthMetricHeartRateBPM* = ffi.HealthMetricHeartRateBPM
+when declared(ffi.HealthMetricHeartRateRawBPM):
+  const HealthMetricHeartRateRawBPM* = ffi.HealthMetricHeartRateRawBPM
+
+const
+  HealthServiceAccessibilityMaskAvailable* = ffi.HealthServiceAccessibilityMaskAvailable
+  HealthServiceAccessibilityMaskNoPermission* = ffi.HealthServiceAccessibilityMaskNoPermission
+  HealthServiceAccessibilityMaskNotSupported* = ffi.HealthServiceAccessibilityMaskNotSupported
+  HealthServiceAccessibilityMaskNotAvailable* = ffi.HealthServiceAccessibilityMaskNotAvailable
 export AccelData, AccelRawData
 export PreferredContentSize
 export WatchInfoModel, WatchInfoColor, WatchInfoVersion
@@ -41,9 +68,25 @@ export BatteryChargeState, BatteryStateHandler
 export BluetoothConnectionHandler
 export VibePattern
 export CompassHeadingData, CompassHeadingHandler, CompassHeading
-export time, localtime, gmtime, strftime, clock_is_24h_style
 export makeGRect, makeGPoint, makeGSize, makeUuid
 export GColorClear, GColorBlack, GColorWhite, makeGColor8
+# Export all 64 color constants from macros.nim
+export GColorOxfordBlue, GColorDukeBlue, GColorBlue, GColorDarkGreen
+export GColorMidnightGreen, GColorCobaltBlue, GColorBlueMoon, GColorIslamicGreen
+export GColorJaegerGreen, GColorTiffanyBlue, GColorVividCerulean, GColorGreen
+export GColorMalachite, GColorMediumSpringGreen, GColorCyan, GColorBulgarianRose
+export GColorImperialPurple, GColorIndigo, GColorElectricUltramarine, GColorArmyGreen
+export GColorDarkGray, GColorLiberty, GColorVeryLightBlue, GColorKellyGreen
+export GColorMayGreen, GColorCadetBlue, GColorPictonBlue, GColorBrightGreen
+export GColorScreaminGreen, GColorMediumAquamarine, GColorElectricBlue, GColorDarkCandyAppleRed
+export GColorJazzberryJam, GColorPurple, GColorVividViolet, GColorWindsorTan
+export GColorRoseVale, GColorPurpureus, GColorLavenderIndigo, GColorLimerick
+export GColorBrass, GColorLightGray, GColorBabyBlueEyes, GColorSpringBud
+export GColorInchworm, GColorMintGreen, GColorCeleste, GColorRed, GColorFolly
+export GColorFashionMagenta, GColorMagenta, GColorOrange, GColorSunsetOrange
+export GColorBrilliantRose, GColorShockingPink, GColorChromeYellow, GColorRajah
+export GColorMelon, GColorRichBrilliantLavender, GColorYellow, GColorIcterine
+export GColorPastelYellow
 export GDrawCommandImage, GDrawCommandSequence, GDrawCommandFrame
 export GDrawCommandType, GDrawCommand, GDrawCommandList
 export TimeUnits, ButtonId, AnimationCurve
@@ -58,8 +101,8 @@ export TimeUnits, ButtonId, AnimationCurve
 import nebble/constants
 export constants
 
-# Export types (values come from constants module above)
-export GTextAlignment, GTextOverflowMode, GAlign, GColor8, TimeUnits, ButtonId, AnimationCurve
+# Note: Types (GTextAlignment, GTextOverflowMode, GAlign, GColor8, TimeUnits, ButtonId, AnimationCurve)
+# are already exported from FFI above. The constants module exports their values.
 
 # Keep font types
 export GFont
@@ -212,43 +255,8 @@ export declarative
 import nebble/ffi/managed
 export managed except DefineUniqueHandle  # Template not needed by users
 
-import nebble/ui/text_layer_managed
-export text_layer_managed
-
-import nebble/ui/bitmap_layer_managed
-export bitmap_layer_managed
-
-import nebble/ui/layer_managed
-export layer_managed
-
-import nebble/ui/window_managed
-export window_managed
-
-import nebble/ui/rot_bitmap_layer_managed
-export rot_bitmap_layer_managed
-
-import nebble/ui/menu_layer_managed
-export menu_layer_managed
-
-# Tier-2 managed components (hierarchy/window-aware)
-import nebble/ui/action_bar_managed
-export action_bar_managed
-import nebble/ui/status_bar_managed
-export status_bar_managed
-import nebble/ui/scroll_layer_managed
-export scroll_layer_managed
-
-import nebble/ui/number_window_managed
-export number_window_managed
-
-import nebble/input/dictation_managed
-export dictation_managed
-
-import nebble/comms/smartstrap_managed
-export smartstrap_managed
-
-import nebble/ui/property_animation_managed
-export property_animation_managed
+import nebble/ui/property_animation
+export property_animation
 
 # ============================================================================
 # Graphics
@@ -263,23 +271,17 @@ export bitmap_sequence
 import nebble/graphics/draw_command
 export draw_command
 
-import nebble/graphics/draw_command_image_managed
-export draw_command_image_managed
+import nebble/graphics/draw_command_image
+export draw_command_image
 
-import nebble/graphics/draw_command_sequence_managed
-export draw_command_sequence_managed
-
-import nebble/graphics/text_attributes_managed
-export text_attributes_managed
+import nebble/graphics/draw_command_sequence
+export draw_command_sequence
 
 import nebble/graphics/draw_command_detail
 export draw_command_detail
 
 import nebble/graphics/gpath
 export gpath
-
-import nebble/graphics/gpath_managed
-export gpath_managed
 
 import nebble/graphics/text_attributes
 export text_attributes
@@ -341,3 +343,6 @@ export math
 
 import nebble/util/uuid
 export uuid
+
+import nebble/util/fixed_strings
+export fixed_strings

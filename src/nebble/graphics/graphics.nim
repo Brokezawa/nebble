@@ -14,6 +14,11 @@ proc drawText*(ctx: ptr GContext, text: cstring, font: GFont, box: GRect,
                overflow: GTextOverflowMode, alignment: GTextAlignment,
                textAttributes: ptr GTextAttributes = nil) {.inline.} =
   ## Draw text in a box with specified font, alignment, and overflow mode.
+  ##
+  ## **⚠️ CString Lifetime:** The `text` cstring must remain valid for the duration
+  ## of the draw operation. Use string literals or ensure the buffer is not freed
+  ## before the function returns.
+  ##
   ## Equivalent to C function `graphics_draw_text(...)`.
   ffi.graphics_draw_text(ctx, text, font, box, overflow, alignment, textAttributes)
 

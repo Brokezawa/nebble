@@ -216,45 +216,10 @@ macro APP_LOG*(level: uint8, fmt: cstring, args: varargs[untyped]): untyped =
   for i in 0 ..< args.len:
     result.add(args[i])
 
-# =============================================================================
 # Platform conditional macros
 #
-# These are resolved at compile time based on which platform is selected.
-# The Futhark-generated bindings already include the correct platform-
-# specific code, so these templates select at compile time.
-# =============================================================================
-
-when defined(pebbleAplite) or defined(pebbleDiorite) or defined(pebbleFlint):
-  template colorFallback*(color, bw: untyped): untyped =
-    ## On BW platforms, returns `bw`. On color platforms, returns `color`.
-    bw
-  template pblIfBwElse*(ifTrue, ifFalse: untyped): untyped = ifTrue
-  template pblIfColorElse*(ifTrue, ifFalse: untyped): untyped = ifFalse
-else:
-  template colorFallback*(color, bw: untyped): untyped =
-    color
-  template pblIfBwElse*(ifTrue, ifFalse: untyped): untyped = ifFalse
-  template pblIfColorElse*(ifTrue, ifFalse: untyped): untyped = ifTrue
-
-when defined(pebbleChalk):
-  template pblIfRectElse*(ifTrue, ifFalse: untyped): untyped = ifFalse
-  template pblIfRoundElse*(ifTrue, ifFalse: untyped): untyped = ifTrue
-else:
-  template pblIfRectElse*(ifTrue, ifFalse: untyped): untyped = ifTrue
-  template pblIfRoundElse*(ifTrue, ifFalse: untyped): untyped = ifFalse
-
-when defined(pebbleAplite):
-  template pblIfHealthElse*(ifTrue, ifFalse: untyped): untyped = ifFalse
-  template pblIfMicrophoneElse*(ifTrue, ifFalse: untyped): untyped = ifFalse
-  template pblIfSmartstrapElse*(ifTrue, ifFalse: untyped): untyped = ifFalse
-elif defined(pebbleFlint):
-  template pblIfHealthElse*(ifTrue, ifFalse: untyped): untyped = ifTrue
-  template pblIfMicrophoneElse*(ifTrue, ifFalse: untyped): untyped = ifTrue
-  template pblIfSmartstrapElse*(ifTrue, ifFalse: untyped): untyped = ifFalse
-else:
-  template pblIfHealthElse*(ifTrue, ifFalse: untyped): untyped = ifTrue
-  template pblIfMicrophoneElse*(ifTrue, ifFalse: untyped): untyped = ifTrue
-  template pblIfSmartstrapElse*(ifTrue, ifFalse: untyped): untyped = ifTrue
+# MOVED to src/nebble/foundation/platform.nim
+# to avoid circular dependencies and ensure global availability.
 
 # =============================================================================
 # Utility

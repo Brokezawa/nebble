@@ -1,0 +1,15 @@
+nimTitle	dictation_managed	nebble/input/dictation_managed.html	module nebble/input/dictation_managed		0
+nim	DictationSessionHandle	nebble/input/dictation_managed.html#DictationSessionHandle	type DictationSessionHandle		84
+nim	`=destroy`	nebble/input/dictation_managed.html#=destroy,DictationSessionHandle	proc `=destroy`(h`gensym0: var DictationSessionHandle)		96
+nim	`=wasMoved`	nebble/input/dictation_managed.html#=wasMoved,DictationSessionHandle	proc `=wasMoved`(h`gensym0: var DictationSessionHandle)		107
+nim	`=copy`	nebble/input/dictation_managed.html#=copy,DictationSessionHandle,DictationSessionHandle	proc `=copy`(dest`gensym0: var DictationSessionHandle;\n        src`gensym0: DictationSessionHandle)		112
+nim	`=sink`	nebble/input/dictation_managed.html#=sink,DictationSessionHandle,DictationSessionHandle	proc `=sink`(dest`gensym0: var DictationSessionHandle;\n        src`gensym0: DictationSessionHandle)		116
+nim	toPtr	nebble/input/dictation_managed.html#toPtr.c,DictationSessionHandle	converter toPtr(h`gensym0: DictationSessionHandle): ptr DictationSession		131
+nim	isValid	nebble/input/dictation_managed.html#isValid,DictationSessionHandle	proc isValid(h`gensym0: DictationSessionHandle): bool		136
+nim	isNil	nebble/input/dictation_managed.html#isNil,DictationSessionHandle	proc isNil(h`gensym0: DictationSessionHandle): bool		140
+nim	reset	nebble/input/dictation_managed.html#reset,DictationSessionHandle	proc reset(h`gensym0: var DictationSessionHandle)		10
+nim	newDictationSessionHandle	nebble/input/dictation_managed.html#newDictationSessionHandle,uint32,DictationSessionStatusCallback,pointer	proc newDictationSessionHandle(bufferSize: uint32;\n                          callback: DictationSessionStatusCallback;\n                          context: pointer): DictationSessionHandle		14
+nim	start	nebble/input/dictation_managed.html#start,DictationSessionHandle	proc start(h: DictationSessionHandle): DictationSessionStatus		19
+nim	stop	nebble/input/dictation_managed.html#stop,DictationSessionHandle	proc stop(h: DictationSessionHandle): DictationSessionStatus		24
+nim	enableConfirmation	nebble/input/dictation_managed.html#enableConfirmation,DictationSessionHandle,bool	proc enableConfirmation(h: DictationSessionHandle; enabled: bool)		29
+nim	enableErrorDialogs	nebble/input/dictation_managed.html#enableErrorDialogs,DictationSessionHandle,bool	proc enableErrorDialogs(h: DictationSessionHandle; enabled: bool)		34

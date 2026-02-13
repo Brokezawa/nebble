@@ -101,7 +101,9 @@ proc copyNimCFiles*(cfg: NebbleConfig, platform: string): bool =
     nimcacheDir = "nimcache"
     srcCDir = "src" / "c"
   
-  # Create src/c directory
+  # Create src/c directory and clean it
+  if dirExists(srcCDir):
+    removeDir(srcCDir)
   createDir(srcCDir)
   
   # Copy all .c files from nimcache to src/c

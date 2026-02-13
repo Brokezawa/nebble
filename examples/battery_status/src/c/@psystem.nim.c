@@ -4,7 +4,6 @@
 
 #include "nimbase.h"
 #include <stdlib.h>
-#include <string.h>
 #undef LANGUAGE_C
 #undef MIPSEB
 #undef MIPSEL
@@ -75,19 +74,6 @@ struct tyObject_StackTraceEntry__1PUuHpJIPD3aeC4eiQfrTg {
 };
 struct tySequence__xhQiLwJj5RFCOa9c4fVuodA_Content { NI cap; tyObject_StackTraceEntry__1PUuHpJIPD3aeC4eiQfrTg data[SEQ_DECL_SIZE]; };
 static N_INLINE(void, initStackBottom)(void);
-N_LIB_PRIVATE N_NOCONV(void*, allocImpl__system_u1757)(NI size_p0);
-static N_INLINE(void, copyMem__system_u1741)(void* dest_p0, void* source_p1, NI size_p2);
-static N_INLINE(void, nimCopyMem)(void* dest_p0, void* source_p1, NI size_p2);
-static N_INLINE(void, zeroMem__system_u1738)(void* p_p0, NI size_p1);
-static N_INLINE(void, nimZeroMem)(void* p_p0, NI size_p1);
-static N_INLINE(void, nimSetMem__systemZmemory_u7)(void* a_p0, int v_p1, NI size_p2);
-static N_INLINE(NIM_BOOL*, nimErrorFlag)(void);
-static N_INLINE(NI, resize__system_u2199)(NI old_p0);
-N_LIB_PRIVATE N_NOCONV(void*, realloc0Impl__system_u1766)(void* p_p0, NI oldSize_p1, NI newSize_p2);
-N_LIB_PRIVATE N_NOCONV(void*, reallocImpl__system_u1763)(void* p_p0, NI newSize_p1);
-N_LIB_PRIVATE N_NIMCALL(void, nimAsgnStrV2)(NimStringV2* a_p0, NimStringV2 b_p1);
-N_LIB_PRIVATE N_NOCONV(void, dealloc)(void* p_p0);
-N_LIB_PRIVATE N_NOCONV(void, deallocImpl__system_u1761)(void* p_p0);
 N_LIB_PRIVATE N_NIMCALL(void, reportUnhandledError__system_u3504)(Exception* e_p0);
 N_LIB_PRIVATE N_NIMCALL(void, eqsink___system_u3264)(Exception** dest_p0, Exception* src_p1);
 static N_INLINE(NIM_BOOL, nimDecRefIsLast)(void* p_p0);
@@ -96,6 +82,8 @@ N_LIB_PRIVATE N_NIMCALL(void, nimDestroyAndDispose)(void* p_p0);
 N_LIB_PRIVATE N_NIMCALL(void, nimRawDispose)(void* p_p0, NI alignment_p1);
 N_LIB_PRIVATE N_NIMCALL(NI, align__system_u1634)(NI address_p0, NI alignment_p1);
 N_LIB_PRIVATE N_NIMCALL(void, alignedDealloc)(void* p_p0, NI align_p1);
+N_LIB_PRIVATE N_NOCONV(void, dealloc)(void* p_p0);
+N_LIB_PRIVATE N_NOCONV(void, deallocImpl__system_u1761)(void* p_p0);
 N_LIB_PRIVATE N_NIMCALL(void, nimTestErrorFlag)(void);
 N_LIB_PRIVATE NIM_CONST NI nimStrVersion = ((NI)2);
 N_LIB_PRIVATE NIM_CONST NI nimSeqVersion = ((NI)2);
@@ -110,255 +98,6 @@ N_LIB_PRIVATE tyProc__W6IXMh2CA4X1rFYGjUb4yg errorMessageWriter__system_u3192;
 N_LIB_PRIVATE tyProc__W6IXMh2CA4X1rFYGjUb4yg onUnhandledException__system_u3424;
 N_LIB_PRIVATE NIM_BOOL nimInErrorMode__system_u3510;
 static N_INLINE(void, initStackBottom)(void) {
-}
-N_LIB_PRIVATE N_NOCONV(void*, allocImpl__system_u1757)(NI size_p0) {
-	void* result;
-	result = malloc(((size_t) (size_p0)));
-	return result;
-}
-static N_INLINE(void, nimCopyMem)(void* dest_p0, void* source_p1, NI size_p2) {
-	void* T1_;
-	T1_ = (void*)0;
-	T1_ = memcpy(dest_p0, source_p1, ((size_t) (size_p2)));
-}
-static N_INLINE(void, copyMem__system_u1741)(void* dest_p0, void* source_p1, NI size_p2) {
-	nimCopyMem(dest_p0, source_p1, size_p2);
-}
-static N_INLINE(void, nimSetMem__systemZmemory_u7)(void* a_p0, int v_p1, NI size_p2) {
-	void* T1_;
-	T1_ = (void*)0;
-	T1_ = memset(a_p0, v_p1, ((size_t) (size_p2)));
-}
-static N_INLINE(NIM_BOOL*, nimErrorFlag)(void) {
-	NIM_BOOL* result;
-	result = (&nimInErrorMode__system_u3510);
-	return result;
-}
-static N_INLINE(void, nimZeroMem)(void* p_p0, NI size_p1) {
-NIM_BOOL* nimErr_;
-{nimErr_ = nimErrorFlag();
-	nimSetMem__systemZmemory_u7(p_p0, ((int)0), size_p1);
-	if (NIM_UNLIKELY(*nimErr_)) goto BeforeRet_;
-	}BeforeRet_: ;
-}
-static N_INLINE(void, zeroMem__system_u1738)(void* p_p0, NI size_p1) {
-	nimZeroMem(p_p0, size_p1);
-}
-static N_INLINE(NI, resize__system_u2199)(NI old_p0) {
-	NI result;
-	{
-		if (!(old_p0 <= ((NI)0))) goto LA3_;
-		result = ((NI)4);
-	}
-	goto LA1_;
-LA3_: ;
-	{
-		if (!(old_p0 <= ((NI)32767))) goto LA6_;
-		result = (NI)(old_p0 * ((NI)2));
-	}
-	goto LA1_;
-LA6_: ;
-	{
-		result = (NI)((NI)(old_p0 / ((NI)2)) + old_p0);
-	}
-LA1_: ;
-	return result;
-}
-N_LIB_PRIVATE N_NOCONV(void*, reallocImpl__system_u1763)(void* p_p0, NI newSize_p1) {
-	void* result;
-	result = realloc(p_p0, ((size_t) (newSize_p1)));
-	return result;
-}
-N_LIB_PRIVATE N_NOCONV(void*, realloc0Impl__system_u1766)(void* p_p0, NI oldSize_p1, NI newSize_p2) {
-	void* result;
-	result = (void*)0;
-	result = reallocImpl__system_u1763(p_p0, ((NI) (((size_t) (newSize_p2)))));
-	{
-		if (!(oldSize_p1 < newSize_p2)) goto LA3_;
-		zeroMem__system_u1738(((void*) ((NU)((NU32)(((NU) (ptrdiff_t) (result))) + (NU32)(((NU) (oldSize_p1)))))), ((NI)(newSize_p2 - oldSize_p1)));
-	}
-LA3_: ;
-	return result;
-}
-N_LIB_PRIVATE N_NIMCALL(void, setLengthStrV2)(NimStringV2* s_p0, NI newLen_p1) {
-	{
-		if (!(newLen_p1 == ((NI)0))) goto LA3_;
-	}
-	goto LA1_;
-LA3_: ;
-	{
-		{
-			NIM_BOOL T8_;
-			NimStrPayload* oldP_1;
-			void* T12_;
-			T8_ = (NIM_BOOL)0;
-			T8_ = ((*s_p0).p == ((NimStrPayload*) NIM_NIL));
-			if (T8_) goto LA9_;
-			T8_ = ((NI)((*(*s_p0).p).cap & ((NI)1073741824)) == ((NI)1073741824));
-LA9_: ;
-			if (!T8_) goto LA10_;
-			oldP_1 = (*s_p0).p;
-			T12_ = (void*)0;
-			T12_ = allocImpl__system_u1757(((NI)((NI)(newLen_p1 + ((NI)1)) + ((NI)4))));
-			(*s_p0).p = ((NimStrPayload*) (T12_));
-			(*(*s_p0).p).cap = newLen_p1;
-			{
-				if (!(((NI)0) < (*s_p0).len)) goto LA15_;
-				copyMem__system_u1741(((void*) ((&(*(*s_p0).p).data[((NI)0)]))), ((void*) ((&(*oldP_1).data[((NI)0)]))), ((((*s_p0).len <= newLen_p1) ? (*s_p0).len : newLen_p1)));
-				{
-					if (!((*s_p0).len < newLen_p1)) goto LA19_;
-					zeroMem__system_u1738(((void*) ((&(*(*s_p0).p).data[(*s_p0).len]))), ((NI)((NI)(newLen_p1 - (*s_p0).len) + ((NI)1))));
-				}
-				goto LA17_;
-LA19_: ;
-				{
-					(*(*s_p0).p).data[newLen_p1] = 0;
-				}
-LA17_: ;
-			}
-			goto LA13_;
-LA15_: ;
-			{
-				zeroMem__system_u1738(((void*) ((&(*(*s_p0).p).data[((NI)0)]))), ((NI)(newLen_p1 + ((NI)1))));
-			}
-LA13_: ;
-		}
-		goto LA6_;
-LA10_: ;
-		{
-			NI oldCap_1;
-			if (!((*s_p0).len < newLen_p1)) goto LA24_;
-			oldCap_1 = (NI)((*(*s_p0).p).cap & ((NI)-1073741825));
-			{
-				NI newCap_1;
-				NI T30_;
-				void* T31_;
-				if (!(oldCap_1 < newLen_p1)) goto LA28_;
-				T30_ = (NI)0;
-				T30_ = resize__system_u2199(oldCap_1);
-				newCap_1 = ((newLen_p1 >= T30_) ? newLen_p1 : T30_);
-				T31_ = (void*)0;
-				T31_ = realloc0Impl__system_u1766(((void*) ((*s_p0).p)), ((NI)((NI)(oldCap_1 + ((NI)1)) + ((NI)4))), ((NI)((NI)(newCap_1 + ((NI)1)) + ((NI)4))));
-				(*s_p0).p = ((NimStrPayload*) (T31_));
-				(*(*s_p0).p).cap = newCap_1;
-			}
-LA28_: ;
-		}
-		goto LA6_;
-LA24_: ;
-LA6_: ;
-		(*(*s_p0).p).data[newLen_p1] = 0;
-	}
-LA1_: ;
-	(*s_p0).len = newLen_p1;
-}
-N_LIB_PRIVATE N_NIMCALL(NimStringV2, rawNewString)(NI space_p0) {
-	NimStringV2 result;
-	nimZeroMem((void*)(&result), sizeof(NimStringV2));
-	{
-		if (!(space_p0 <= ((NI)0))) goto LA3_;
-		result.len = ((NI)0);
-		result.p = ((NimStrPayload*) NIM_NIL);
-	}
-	goto LA1_;
-LA3_: ;
-	{
-		NimStrPayload* p_1;
-		void* T6_;
-		T6_ = (void*)0;
-		T6_ = allocImpl__system_u1757(((NI)((NI)(space_p0 + ((NI)1)) + ((NI)4))));
-		p_1 = ((NimStrPayload*) (T6_));
-		(*p_1).cap = space_p0;
-		(*p_1).data[((NI)0)] = 0;
-		result.len = ((NI)0);
-		result.p = p_1;
-	}
-LA1_: ;
-	return result;
-}
-N_LIB_PRIVATE N_NOCONV(void, deallocImpl__system_u1761)(void* p_p0) {
-	free(p_p0);
-}
-N_LIB_PRIVATE N_NOCONV(void, dealloc)(void* p_p0) {
-	deallocImpl__system_u1761(p_p0);
-}
-N_LIB_PRIVATE N_NIMCALL(void, nimAsgnStrV2)(NimStringV2* a_p0, NimStringV2 b_p1) {
-{	{
-		NIM_BOOL T3_;
-		T3_ = (NIM_BOOL)0;
-		T3_ = ((*a_p0).p == b_p1.p);
-		if (!(T3_)) goto LA4_;
-		T3_ = ((*a_p0).len == b_p1.len);
-LA4_: ;
-		if (!T3_) goto LA5_;
-		goto BeforeRet_;
-	}
-LA5_: ;
-	{
-		NIM_BOOL T9_;
-		T9_ = (NIM_BOOL)0;
-		T9_ = (b_p1.p == ((NimStrPayload*) NIM_NIL));
-		if (T9_) goto LA10_;
-		T9_ = ((NI)((*b_p1.p).cap & ((NI)1073741824)) == ((NI)1073741824));
-LA10_: ;
-		if (!T9_) goto LA11_;
-		{
-			NIM_BOOL T15_;
-			T15_ = (NIM_BOOL)0;
-			T15_ = ((*a_p0).p == ((NimStrPayload*) NIM_NIL));
-			if (T15_) goto LA16_;
-			T15_ = ((NI)((*(*a_p0).p).cap & ((NI)1073741824)) == ((NI)1073741824));
-LA16_: ;
-			if (!!(T15_)) goto LA17_;
-			dealloc(((void*) ((*a_p0).p)));
-		}
-LA17_: ;
-		(*a_p0).len = b_p1.len;
-		(*a_p0).p = b_p1.p;
-	}
-	goto LA7_;
-LA11_: ;
-	{
-		{
-			NIM_BOOL T22_;
-			NIM_BOOL T23_;
-			void* T34_;
-			T22_ = (NIM_BOOL)0;
-			T23_ = (NIM_BOOL)0;
-			T23_ = ((*a_p0).p == ((NimStrPayload*) NIM_NIL));
-			if (T23_) goto LA24_;
-			T23_ = ((NI)((*(*a_p0).p).cap & ((NI)1073741824)) == ((NI)1073741824));
-LA24_: ;
-			T22_ = T23_;
-			if (T22_) goto LA25_;
-			T22_ = ((NI)((*(*a_p0).p).cap & ((NI)-1073741825)) < b_p1.len);
-LA25_: ;
-			if (!T22_) goto LA26_;
-			{
-				NIM_BOOL T30_;
-				T30_ = (NIM_BOOL)0;
-				T30_ = ((*a_p0).p == ((NimStrPayload*) NIM_NIL));
-				if (T30_) goto LA31_;
-				T30_ = ((NI)((*(*a_p0).p).cap & ((NI)1073741824)) == ((NI)1073741824));
-LA31_: ;
-				if (!!(T30_)) goto LA32_;
-				dealloc(((void*) ((*a_p0).p)));
-			}
-LA32_: ;
-			T34_ = (void*)0;
-			T34_ = allocImpl__system_u1757(((NI)((NI)(b_p1.len + ((NI)1)) + ((NI)4))));
-			(*a_p0).p = ((NimStrPayload*) (T34_));
-			(*(*a_p0).p).cap = b_p1.len;
-		}
-LA26_: ;
-		(*a_p0).len = b_p1.len;
-		copyMem__system_u1741(((void*) ((&(*(*a_p0).p).data[((NI)0)]))), ((void*) ((&(*b_p1.p).data[((NI)0)]))), ((NI)(b_p1.len + ((NI)1))));
-	}
-LA7_: ;
-	}BeforeRet_: ;
-}
-N_LIB_PRIVATE N_NIMCALL(void, eqcopy___system_u2612)(NimStringV2* dest_p0, NimStringV2 src_p1) {
-	nimAsgnStrV2(((NimStringV2*) (dest_p0)), src_p1);
 }
 N_LIB_PRIVATE N_NIMCALL(void, reportUnhandledError__system_u3504)(Exception* e_p0) {
 	{
@@ -419,6 +158,12 @@ LA3_: ;
 	}
 LA1_: ;
 	return result;
+}
+N_LIB_PRIVATE N_NOCONV(void, deallocImpl__system_u1761)(void* p_p0) {
+	free(p_p0);
+}
+N_LIB_PRIVATE N_NOCONV(void, dealloc)(void* p_p0) {
+	deallocImpl__system_u1761(p_p0);
 }
 N_LIB_PRIVATE N_NIMCALL(void, alignedDealloc)(void* p_p0, NI align_p1) {
 	{

@@ -5,10 +5,10 @@ import nebble
 import nebble/ffi # For constants
 
 # --- App state ---
-var sWindow: ptr Window
-var sTextLayer: ptr TextLayer
-var sBitmapLayer: ptr BitmapLayer  # Batch 2: bitmap_layer
-var sActionBar: ptr ActionBarLayer  # Batch 2: action_bar
+var sWindow: WindowHandle
+var sTextLayer: TextLayerHandle
+var sBitmapLayer: BitmapLayerHandle  # Batch 2: bitmap_layer
+var sActionBar: ActionBarLayerHandle  # Batch 2: action_bar
 
 # --- Click handlers ---
 proc selectClickHandler(recognizer: ClickRecognizerRef, context: pointer) {.cdecl.} =
@@ -21,9 +21,9 @@ proc downClickHandler(recognizer: ClickRecognizerRef, context: pointer) {.cdecl.
   sTextLayer.text = "Down"
 
 proc clickConfigProvider(context: pointer) {.cdecl.} =
-  onClick(nebble.BUTTON_ID_SELECT, selectClickHandler)
-  onClick(nebble.BUTTON_ID_UP, upClickHandler)
-  onClick(nebble.BUTTON_ID_DOWN, downClickHandler)
+  onClick(constants.BUTTON_ID_SELECT, selectClickHandler)
+  onClick(constants.BUTTON_ID_UP, upClickHandler)
+  onClick(constants.BUTTON_ID_DOWN, downClickHandler)
 
 # --- Window handlers ---
 proc windowLoad(window: ptr Window) {.cdecl.} =
@@ -33,8 +33,9 @@ proc windowLoad(window: ptr Window) {.cdecl.} =
   # Text layer
   sTextLayer = newTextLayer(makeGRect(0, 72, bounds.size.w, 20))
   sTextLayer.text = "Nim on Pebble!"
-  # Use explicit FFI setter to avoid property/field visibility issues in some compile contexts
-  text_layer_set_text_alignment(sTextLayer, GTextAlignmentCenter)
+  # Use the high-level property setter on the managed handle and
+  # qualify the constant to avoid enum/const ambiguity.
+  sTextLayer.textAlignment = constants.GTextAlignmentCenter
   
   # Batch 2: Use a custom font
   let customFont = getSystemFont(FONT_KEY_GOTHIC_24_BOLD)
@@ -44,7 +45,7 @@ proc windowLoad(window: ptr Window) {.cdecl.} =
   
   # Batch 2: Create a bitmap layer (no bitmap loaded, just testing API)
   sBitmapLayer = newBitmapLayer(makeGRect(10, 10, 50, 50))
-  sBitmapLayer.alignment = GAlignCenter
+  sBitmapLayer.alignment = constants.GAlignCenter
   windowLayer.addChild(sBitmapLayer.getLayer)
   
   # Batch 2: Create an action bar (no icons loaded, just testing API)
@@ -52,9 +53,10 @@ proc windowLoad(window: ptr Window) {.cdecl.} =
   sActionBar.addToWindow(window)
 
 proc windowUnload(window: ptr Window) {.cdecl.} =
-  sTextLayer.destroy()
-  sBitmapLayer.destroy()
-  sActionBar.destroy()
+  # Reset managed handles (destroy underlying resources if safe)
+  sTextLayer.reset()
+  sBitmapLayer.reset()
+  sActionBar.reset()
 
 # --- Init / Deinit ---
 proc init() =
@@ -64,7 +66,7 @@ proc init() =
   sWindow.push(animated = true)
 
 proc deinit() =
-  sWindow.destroy()
+  sWindow.reset()
 
 # --- Main entry point ---
 proc main(): cint {.exportc, cdecl.} =

@@ -1,0 +1,11 @@
+nimTitle	smartstrap	nebble/comms/smartstrap.html	module nebble/comms/smartstrap		0
+nim	subscribe	nebble/comms/smartstrap.html#subscribe,SmartstrapHandlers	proc subscribe(handlers: SmartstrapHandlers): SmartstrapResult		15
+nim	unsubscribe	nebble/comms/smartstrap.html#unsubscribe	proc unsubscribe()		21
+nim	setTimeout	nebble/comms/smartstrap.html#setTimeout,uint16	proc setTimeout(timeoutMs: uint16)		27
+nim	newAttribute	nebble/comms/smartstrap.html#newAttribute,SmartstrapServiceId,SmartstrapAttributeId,uint16	proc newAttribute(serviceId: SmartstrapServiceId; attributeId: SmartstrapAttributeId;\n             size: uint16): ptr SmartstrapAttribute		37
+nim	destroy	nebble/comms/smartstrap.html#destroy,ptr.struct_SmartstrapAttribute	proc destroy(attribute: ptr SmartstrapAttribute)		45
+nim	serviceIsAvailable	nebble/comms/smartstrap.html#serviceIsAvailable,SmartstrapServiceId	proc serviceIsAvailable(serviceId: SmartstrapServiceId): bool		51
+nim	getServiceId	nebble/comms/smartstrap.html#getServiceId,ptr.struct_SmartstrapAttribute	proc getServiceId(attribute: ptr SmartstrapAttribute): SmartstrapServiceId		57
+nim	getAttributeId	nebble/comms/smartstrap.html#getAttributeId,ptr.struct_SmartstrapAttribute	proc getAttributeId(attribute: ptr SmartstrapAttribute): SmartstrapAttributeId		63
+nim	read	nebble/comms/smartstrap.html#read,ptr.struct_SmartstrapAttribute	proc read(attribute: ptr SmartstrapAttribute): SmartstrapResult		73
+nim	endWrite	nebble/comms/smartstrap.html#endWrite,ptr.struct_SmartstrapAttribute,uint16,bool	proc endWrite(attribute: ptr SmartstrapAttribute; bytesWritten: uint16; commit: bool): SmartstrapResult		87

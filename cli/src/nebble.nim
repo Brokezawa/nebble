@@ -139,9 +139,6 @@ proc main() =
   of "gen-keys":
     cmdGenKeys()
   
-  of "regen-ffi":
-    cmdRegenFfi()
-  
   else:
     echo "Error: Unknown command '", command, "'"
     echo "Run 'nebble help' for usage information"

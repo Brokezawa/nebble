@@ -1,0 +1,8 @@
+nimTitle	gpath	nebble/graphics/gpath.html	module nebble/graphics/gpath		0
+nim	newGPath	nebble/graphics/gpath.html#newGPath,ptr.GPathInfo	proc newGPath(pathInfo: ptr GPathInfo): ptr GPath		13
+nim	destroy	nebble/graphics/gpath.html#destroy,ptr.GPath	proc destroy(path: ptr GPath)		18
+nim	drawFilled	nebble/graphics/gpath.html#drawFilled,ptr.struct_GContext,ptr.GPath	proc drawFilled(ctx: ptr GContext; path: ptr GPath)		27
+nim	drawOutline	nebble/graphics/gpath.html#drawOutline,ptr.struct_GContext,ptr.GPath	proc drawOutline(ctx: ptr GContext; path: ptr GPath)		32
+nim	drawOutlineOpen	nebble/graphics/gpath.html#drawOutlineOpen,ptr.struct_GContext,ptr.GPath	proc drawOutlineOpen(ctx: ptr GContext; path: ptr GPath)		37
+nim	rotateTo	nebble/graphics/gpath.html#rotateTo,ptr.GPath,int32	proc rotateTo(path: ptr GPath; angle: int32)		46
+nim	moveTo	nebble/graphics/gpath.html#moveTo,ptr.GPath,GPoint	proc moveTo(path: ptr GPath; point: GPoint)		51

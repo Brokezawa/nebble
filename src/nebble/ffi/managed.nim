@@ -14,7 +14,7 @@
 ##
 ## **Usage Example:**
 ##   import nebble/ffi/managed
-##   import nebble/ui/text_layer_managed
+##   import nebble/ui/text_layer
 ##   
 ##   proc myApp() =
 ##     var layer = newTextLayerHandle(makeGRect(0, 50, 144, 40))
@@ -54,95 +54,52 @@ else:
 template DefineUniqueHandle*(Name: untyped, RawType: typedesc, 
                             createProc: untyped, destroyProc: untyped) =
   ## Define a unique ownership handle for a C resource.
-  ##
-  ## This template generates a complete managed type with:
-  ## - Automatic destruction via `=destroy` hook
-  ## - Move semantics (copying disabled with `{.error.}`)
-  ## - Converters for C API compatibility
-  ## - Nil safety checks
-  ##
-  ## **Parameters:**
-  ## - `Name`: Base name for the handle type (e.g., `TextLayer` becomes `TextLayerHandle`)
-  ## - `RawType`: The underlying C struct type (e.g., `TextLayer`)
-  ## - `createProc`: The C constructor function (e.g., `text_layer_create`)
-  ## - `destroyProc`: The C destructor function (e.g., `text_layer_destroy`)
-  ##
-  ## **Generated Types:**
-  ## - `Name Handle`: The distinct handle type
-  ## - Converters: `toPtr`, `toHandle` for seamless C interop
-  ## - Lifetime hooks: `=destroy`, `=wasMoved`, `=copy` (error), `=sink`
-  ##
-  ## **Usage:**
-  ##   DefineUniqueHandle(TextLayer, TextLayer, 
-  ##                     text_layer_create, text_layer_destroy)
-  ##
-  ##   var h = newTextLayerHandle(frame)  # Creates handle
-  ##   # ... use h ...
-  ##   # h destroyed automatically when scope ends
   
-  # Define the type first
-  type `Name Handle`* = distinct ptr RawType
+  type `Name Handle`* = object
     ## Unique ownership handle for `RawType`.
-    ## 
-    ## **Memory Safety:** This handle has unique ownership of the underlying
-    ## C resource. When the handle goes out of scope, `destroyProc` is called
-    ## automatically. Copying is disabled to prevent double-free.
-    ##
-    ## **C Interop:** Use explicit cast to get the raw pointer for C API calls.
-  
-  # Define ALL hooks immediately after type (required by Nim)
-  # Order matters: hooks must be defined before any usage
-  
+    pRaw: ptr RawType
+    pParent: ptr Layer # Optional parent tracking for layers
+
   proc `=destroy`*(h: var `Name Handle`) =
-    ## Destructor - automatically called when handle goes out of scope.
-    let p = cast[ptr RawType](h)
-    when ManagedDebug:
-      if p != nil:
-        discard  # Could add logging here in debug mode
-    if p != nil:
-      destroyProc(p)
-      var hp = cast[ptr ptr RawType](addr h)
-      hp[] = nil  # Prevent double-free
-  
+    if h.pRaw != nil and h.pParent == nil:
+      destroyProc(h.pRaw)
+    h.pRaw = nil
+    h.pParent = nil
+
   proc `=wasMoved`*(h: var `Name Handle`) =
-    ## Mark handle as moved (sets to nil).
-    var p = cast[ptr ptr RawType](addr h)
-    p[] = nil
-  
-  proc `=copy`*(dest: var `Name Handle`, src: `Name Handle`) {.error.} =
-    ## Copying is disabled - use move semantics.
-    discard
-  
+    h.pRaw = nil
+    h.pParent = nil
+
+  proc `=copy`*(dest: var `Name Handle`, src: `Name Handle`) {.error.} = discard
+
   proc `=sink`*(dest: var `Name Handle`, src: `Name Handle`) =
-    ## Move assignment - transfers ownership from src to dest.
-    # Note: src is a sink parameter (passed by value but consumed)
-    # We move the pointer from src to dest, and leave src as nil
-    var destP = cast[ptr ptr RawType](addr dest)
-    # First destroy any existing resource in dest
-    if destP[] != nil:
-      destroyProc(destP[])
-    # Move pointer from src to dest
-    let srcP = cast[ptr ptr RawType](unsafeAddr src)
-    destP[] = srcP[]
-    # Zero out src to prevent double-free
-    srcP[] = nil
-  
-  # Converters (defined after hooks)
-  converter toPtr*(h: `Name Handle`): ptr RawType =
-    ## Convert handle to raw pointer for C API calls.
-    cast[ptr RawType](h)
-  
-  # Utility functions
-  proc isValid*(h: `Name Handle`): bool {.inline.} =
-    ## Check if handle points to valid (non-nil) resource.
-    cast[ptr RawType](h) != nil
-  
-  proc isNil*(h: `Name Handle`): bool {.inline.} =
-    ## Check if handle is nil (convenience function).
-    cast[ptr RawType](h) == nil
-  
+    `=destroy`(dest)
+    dest.pRaw = src.pRaw
+    dest.pParent = src.pParent
+    var srcPtr = cast[ptr `Name Handle`](unsafeAddr src)
+    srcPtr.pRaw = nil
+    srcPtr.pParent = nil
+
+  converter toPtr*(h: `Name Handle`): ptr RawType = h.pRaw
+
+  converter toLayer*(h: `Name Handle`): ptr Layer = 
+    cast[ptr Layer](h.pRaw)
+
+  proc toHandle*(p: ptr RawType): `Name Handle` {.inline.} =
+    ## Wrap raw pointer in handle (unowned).
+    `Name Handle`(pRaw: p, pParent: cast[ptr Layer](1))
+
+  proc wrapOwned*(p: ptr RawType): `Name Handle` {.inline.} =
+    ## Wrap raw pointer in handle (owned).
+    `Name Handle`(pRaw: p, pParent: nil)
+
+  proc isValid*(h: `Name Handle`): bool {.inline.} = h.pRaw != nil
+  proc isNil*(h: `Name Handle`): bool {.inline.} = h.pRaw == nil
+
+  proc setParent*(h: var `Name Handle`, p: ptr Layer) {.inline.} =
+    h.pParent = p
+
   proc reset*(h: var `Name Handle`) =
-    ## Explicitly destroy resource and reset handle to nil.
     `=destroy`(h)
     `=wasMoved`(h)
 
@@ -197,44 +154,47 @@ template deferDestroy*(varName: untyped, body: untyped) =
 # Service Subscription RAII
 # ============================================================================
 
-type ServiceSubscription* = object
-  ## RAII wrapper for Pebble Event Service subscriptions.
-  serviceName*: string
-  isSubscribed*: bool
+type
+  ServiceType* = enum
+    ## Event service types for RAII subscription management.
+    stTick, stBattery, stAccel, stConnection, stCompass, stHealth, stFocus
+
+  ServiceSubscription* = object
+    ## RAII wrapper for Pebble Event Service subscriptions.
+    serviceType*: ServiceType
+    isSubscribed*: bool
 
 proc `=destroy`*(s: var ServiceSubscription) =
   ## Unsubscribe from service if still subscribed.
   if s.isSubscribed:
-    case s.serviceName
-    of "tick": 
+    case s.serviceType
+    of stTick: 
       when declared(tick_timer_service_unsubscribe):
         tick_timer_service_unsubscribe()
-    of "battery":
+    of stBattery:
       when declared(battery_state_service_unsubscribe):
         battery_state_service_unsubscribe()
-    of "accel":
+    of stAccel:
       when declared(accel_data_service_unsubscribe):
         accel_data_service_unsubscribe()
-    of "connection":
+    of stConnection:
       when declared(bluetooth_connection_service_unsubscribe):
         bluetooth_connection_service_unsubscribe()
-    of "compass":
+    of stCompass:
       when declared(compass_service_unsubscribe):
         compass_service_unsubscribe()
-    of "health":
+    of stHealth:
       when declared(health_service_events_unsubscribe):
         discard health_service_events_unsubscribe()
-    of "focus":
+    of stFocus:
       when declared(app_focus_service_unsubscribe):
         app_focus_service_unsubscribe()
-    else:
-      discard
     s.isSubscribed = false
 
-template withService*(serviceName: string, subscribeProc: untyped, body: untyped) =
+template withService*(serviceType: ServiceType, subscribeProc: untyped, body: untyped) =
   ## Subscribe to a service, execute body, then auto-unsubscribe.
   block:
-    var sub = ServiceSubscription(serviceName: serviceName, isSubscribed: true)
+    var sub = ServiceSubscription(serviceType: serviceType, isSubscribed: true)
     subscribeProc
     try:
       body

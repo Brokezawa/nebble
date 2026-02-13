@@ -1,0 +1,10 @@
+{
+  "name": "health_watchface",
+  "type": "watchface",
+  "version": "1.0.0",
+  "uuid": "deadeade-dead-4ead-bead-deaddeaddec1",
+
+  "platforms": ["aplite", "basalt", "chalk", "diorite", "emery", "flint"],
+  "capabilities": [],
+  "appKeys": {}
+}

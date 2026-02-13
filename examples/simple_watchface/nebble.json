@@ -1,0 +1,10 @@
+{
+  "name": "simple_watchface",
+  "type": "watchface",
+  "version": "1.0.0",
+  "uuid": "deadeade-dead-4ead-bead-deaddead0001",
+
+  "platforms": ["aplite", "basalt", "chalk", "diorite", "emery", "flint"],
+  "capabilities": [],
+  "appKeys": {}
+}

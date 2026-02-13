@@ -1,0 +1,7 @@
+nimTitle	worker	nebble/comms/worker.html	module nebble/comms/worker		0
+nim	isRunning	nebble/comms/worker.html#isRunning	proc isRunning(): bool		15
+nim	launch	nebble/comms/worker.html#launch	proc launch(): AppWorkerResult		21
+nim	kill	nebble/comms/worker.html#kill	proc kill(): AppWorkerResult		27
+nim	subscribe	nebble/comms/worker.html#subscribe,AppWorkerMessageHandler	proc subscribe(handler: AppWorkerMessageHandler): bool		37
+nim	unsubscribe	nebble/comms/worker.html#unsubscribe	proc unsubscribe(): bool		43
+nim	sendMessage	nebble/comms/worker.html#sendMessage,uint8,ptr.AppWorkerMessage	proc sendMessage(type_f: uint8; data: ptr AppWorkerMessage)		49

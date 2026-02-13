@@ -1,0 +1,16 @@
+nimTitle	text_layer	nebble/ui/text_layer.html	module nebble/ui/text_layer		0
+nim	newTextLayer	nebble/ui/text_layer.html#newTextLayer,GRect,cstring,GFont,GTextAlignment	proc newTextLayer(frame: GRect; text: cstring = nil; font: GFont = nil;\n             align: GTextAlignment = GTextAlignmentLeft): ptr TextLayer		14
+nim	destroy	nebble/ui/text_layer.html#destroy,ptr.struct_TextLayer	proc destroy(textLayer: ptr TextLayer)		29
+nim	getLayer	nebble/ui/text_layer.html#getLayer,ptr.struct_TextLayer	proc getLayer(textLayer: ptr TextLayer): ptr Layer		38
+nim	text=	nebble/ui/text_layer.html#text=,ptr.struct_TextLayer,cstring	proc text=(textLayer: ptr TextLayer; text: cstring)		47
+nim	text	nebble/ui/text_layer.html#text,ptr.struct_TextLayer	proc text(textLayer: ptr TextLayer): cstring		54
+nim	font=	nebble/ui/text_layer.html#font=,ptr.struct_TextLayer,GFont	proc font=(textLayer: ptr TextLayer; font: GFont)		59
+nim	textAlignment=	nebble/ui/text_layer.html#textAlignment=,ptr.struct_TextLayer,GTextAlignment	proc textAlignment=(textLayer: ptr TextLayer; alignment: GTextAlignment)		64
+nim	backgroundColor=	nebble/ui/text_layer.html#backgroundColor=,ptr.struct_TextLayer,GColor8	proc backgroundColor=(textLayer: ptr TextLayer; color: GColor8)		69
+nim	textColor=	nebble/ui/text_layer.html#textColor=,ptr.struct_TextLayer,GColor8	proc textColor=(textLayer: ptr TextLayer; color: GColor8)		74
+nim	overflowMode=	nebble/ui/text_layer.html#overflowMode=,ptr.struct_TextLayer,GTextOverflowMode	proc overflowMode=(textLayer: ptr TextLayer; mode: GTextOverflowMode)		79
+nim	contentSize	nebble/ui/text_layer.html#contentSize,ptr.struct_TextLayer	proc contentSize(textLayer: ptr TextLayer): GSize		88
+nim	size=	nebble/ui/text_layer.html#size=,ptr.struct_TextLayer,GSize	proc size=(textLayer: ptr TextLayer; maxSize: GSize)		93
+nim	staticText	nebble/ui/text_layer.html#staticText.t,ptr.struct_TextLayer,untyped,string	template staticText(layer: ptr TextLayer; bufVar: untyped; text: string)		102
+nim	enableScreenTextFlowAndPaging	nebble/ui/text_layer.html#enableScreenTextFlowAndPaging,ptr.struct_TextLayer,uint8	proc enableScreenTextFlowAndPaging(textLayer: ptr TextLayer; inset: uint8)		135
+nim	restoreDefaultTextFlowAndPaging	nebble/ui/text_layer.html#restoreDefaultTextFlowAndPaging,ptr.struct_TextLayer	proc restoreDefaultTextFlowAndPaging(textLayer: ptr TextLayer)		140
