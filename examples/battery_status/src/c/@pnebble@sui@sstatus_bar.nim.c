@@ -17,36 +17,36 @@
 #undef powerpc
 #undef unix
 typedef struct tyObject_StatusBarLayerHandle__9a2ctbCKxFpof3q1j9a37Oyw tyObject_StatusBarLayerHandle__9a2ctbCKxFpof3q1j9a37Oyw;
-typedef struct tyObject_struct_StatusBarLayer__ygeqc9bqm7H0IQjQjjaM78w tyObject_struct_StatusBarLayer__ygeqc9bqm7H0IQjQjjaM78w;
-typedef struct tyObject_struct_Layer__KCpfpF2jwj5coKARWsuAMQ tyObject_struct_Layer__KCpfpF2jwj5coKARWsuAMQ;
+typedef struct tyObject_struct_StatusBarLayer__eOHVHD8wUiAT3LyglDHbYA tyObject_struct_StatusBarLayer__eOHVHD8wUiAT3LyglDHbYA;
+typedef struct tyObject_struct_Layer__ArRLSoHcgGa9cBzSS1Rec1A tyObject_struct_Layer__ArRLSoHcgGa9cBzSS1Rec1A;
 struct tyObject_StatusBarLayerHandle__9a2ctbCKxFpof3q1j9a37Oyw {
-	tyObject_struct_StatusBarLayer__ygeqc9bqm7H0IQjQjjaM78w* pRaw;
-	tyObject_struct_Layer__KCpfpF2jwj5coKARWsuAMQ* pParent;
+	tyObject_struct_StatusBarLayer__eOHVHD8wUiAT3LyglDHbYA* pRaw;
+	tyObject_struct_Layer__ArRLSoHcgGa9cBzSS1Rec1A* pParent;
 };
-struct tyObject_struct_StatusBarLayer__ygeqc9bqm7H0IQjQjjaM78w {
+struct tyObject_struct_StatusBarLayer__eOHVHD8wUiAT3LyglDHbYA {
 	char dummy;
 };
-struct tyObject_struct_Layer__KCpfpF2jwj5coKARWsuAMQ {
+struct tyObject_struct_Layer__ArRLSoHcgGa9cBzSS1Rec1A {
 	char dummy;
 };
 N_LIB_PRIVATE N_NIMCALL(void, eqdestroy___OOZOOZOOZsrcZnebbleZuiZstatus95bar_u23)(tyObject_StatusBarLayerHandle__9a2ctbCKxFpof3q1j9a37Oyw* hX60gensym0__p0);
-N_CDECL(void, status_bar_layer_destroy)(tyObject_struct_StatusBarLayer__ygeqc9bqm7H0IQjQjjaM78w* status_bar_layer_p0);
+N_CDECL(void, status_bar_layer_destroy)(tyObject_struct_StatusBarLayer__eOHVHD8wUiAT3LyglDHbYA* status_bar_layer_p0);
 static N_INLINE(NIM_BOOL*, nimErrorFlag)(void);
 extern NIM_BOOL nimInErrorMode__system_u3510;
 N_LIB_PRIVATE N_NIMCALL(void, eqdestroy___OOZOOZOOZsrcZnebbleZuiZstatus95bar_u23)(tyObject_StatusBarLayerHandle__9a2ctbCKxFpof3q1j9a37Oyw* hX60gensym0__p0) {
 	{
 		NIM_BOOL T3_;
 		T3_ = (NIM_BOOL)0;
-		T3_ = !(((*hX60gensym0__p0).pRaw == ((tyObject_struct_StatusBarLayer__ygeqc9bqm7H0IQjQjjaM78w*) NIM_NIL)));
+		T3_ = !(((*hX60gensym0__p0).pRaw == ((tyObject_struct_StatusBarLayer__eOHVHD8wUiAT3LyglDHbYA*) NIM_NIL)));
 		if (!(T3_)) goto LA4_;
-		T3_ = ((*hX60gensym0__p0).pParent == ((tyObject_struct_Layer__KCpfpF2jwj5coKARWsuAMQ*) NIM_NIL));
+		T3_ = ((*hX60gensym0__p0).pParent == ((tyObject_struct_Layer__ArRLSoHcgGa9cBzSS1Rec1A*) NIM_NIL));
 LA4_: ;
 		if (!T3_) goto LA5_;
 		status_bar_layer_destroy((*hX60gensym0__p0).pRaw);
 	}
 LA5_: ;
-	(*hX60gensym0__p0).pRaw = ((tyObject_struct_StatusBarLayer__ygeqc9bqm7H0IQjQjjaM78w*) NIM_NIL);
-	(*hX60gensym0__p0).pParent = ((tyObject_struct_Layer__KCpfpF2jwj5coKARWsuAMQ*) NIM_NIL);
+	(*hX60gensym0__p0).pRaw = ((tyObject_struct_StatusBarLayer__eOHVHD8wUiAT3LyglDHbYA*) NIM_NIL);
+	(*hX60gensym0__p0).pParent = ((tyObject_struct_Layer__ArRLSoHcgGa9cBzSS1Rec1A*) NIM_NIL);
 }
 static N_INLINE(NIM_BOOL*, nimErrorFlag)(void) {
 	NIM_BOOL* result;
@@ -62,12 +62,12 @@ NIM_BOOL* nimErr_;
 	(*destX60gensym0__p0).pRaw = srcX60gensym0__p1.pRaw;
 	(*destX60gensym0__p0).pParent = srcX60gensym0__p1.pParent;
 	srcPtrX60gensym0__1 = ((tyObject_StatusBarLayerHandle__9a2ctbCKxFpof3q1j9a37Oyw*) ((&srcX60gensym0__p1)));
-	(*srcPtrX60gensym0__1).pRaw = ((tyObject_struct_StatusBarLayer__ygeqc9bqm7H0IQjQjjaM78w*) NIM_NIL);
-	(*srcPtrX60gensym0__1).pParent = ((tyObject_struct_Layer__KCpfpF2jwj5coKARWsuAMQ*) NIM_NIL);
+	(*srcPtrX60gensym0__1).pRaw = ((tyObject_struct_StatusBarLayer__eOHVHD8wUiAT3LyglDHbYA*) NIM_NIL);
+	(*srcPtrX60gensym0__1).pParent = ((tyObject_struct_Layer__ArRLSoHcgGa9cBzSS1Rec1A*) NIM_NIL);
 	}BeforeRet_: ;
 }
-N_LIB_PRIVATE N_NIMCALL(tyObject_struct_Layer__KCpfpF2jwj5coKARWsuAMQ*, toLayer__OOZOOZOOZsrcZnebbleZuiZstatus95bar_u77)(tyObject_StatusBarLayerHandle__9a2ctbCKxFpof3q1j9a37Oyw hX60gensym0__p0) {
-	tyObject_struct_Layer__KCpfpF2jwj5coKARWsuAMQ* result;
-	result = ((tyObject_struct_Layer__KCpfpF2jwj5coKARWsuAMQ*) (hX60gensym0__p0.pRaw));
+N_LIB_PRIVATE N_NIMCALL(tyObject_struct_Layer__ArRLSoHcgGa9cBzSS1Rec1A*, toLayer__OOZOOZOOZsrcZnebbleZuiZstatus95bar_u77)(tyObject_StatusBarLayerHandle__9a2ctbCKxFpof3q1j9a37Oyw hX60gensym0__p0) {
+	tyObject_struct_Layer__ArRLSoHcgGa9cBzSS1Rec1A* result;
+	result = ((tyObject_struct_Layer__ArRLSoHcgGa9cBzSS1Rec1A*) (hX60gensym0__p0.pRaw));
 	return result;
 }

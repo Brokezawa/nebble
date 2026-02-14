@@ -13,8 +13,13 @@ htmldocs/
 
 # Pebble SDK
 build/
+appinfo.json
+src/c/
 .lock-waf*
 .pebble-sdk/
+
+#Pebble SDK docs
+sdk-docs/
 
 # IDE
 .vscode/
@@ -30,3 +35,4 @@ Thumbs.db
 # Test artifacts
 /tmp/
 *.pbw
+

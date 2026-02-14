@@ -17,62 +17,57 @@
 #undef powerpc
 #undef unix
 typedef struct tyObject_TextLayerHandle__t9bAY9a7d2BLJR3FU4TDoSGA tyObject_TextLayerHandle__t9bAY9a7d2BLJR3FU4TDoSGA;
-typedef struct tyObject_struct_TextLayer__W2RZgVo7iB0lIlJ4pj15Iw tyObject_struct_TextLayer__W2RZgVo7iB0lIlJ4pj15Iw;
-typedef struct tyObject_struct_Layer__ArRLSoHcgGa9cBzSS1Rec1A tyObject_struct_Layer__ArRLSoHcgGa9cBzSS1Rec1A;
+typedef struct tyObject_struct_TextLayer__nw9b2AOGA5VlSCdX45JcJqQ tyObject_struct_TextLayer__nw9b2AOGA5VlSCdX45JcJqQ;
+typedef struct tyObject_struct_Layer__KCpfpF2jwj5coKARWsuAMQ tyObject_struct_Layer__KCpfpF2jwj5coKARWsuAMQ;
 struct tyObject_TextLayerHandle__t9bAY9a7d2BLJR3FU4TDoSGA {
-	tyObject_struct_TextLayer__W2RZgVo7iB0lIlJ4pj15Iw* pRaw;
-	tyObject_struct_Layer__ArRLSoHcgGa9cBzSS1Rec1A* pParent;
+	tyObject_struct_TextLayer__nw9b2AOGA5VlSCdX45JcJqQ* pRaw;
+	tyObject_struct_Layer__KCpfpF2jwj5coKARWsuAMQ* pParent;
 };
-struct tyObject_struct_TextLayer__W2RZgVo7iB0lIlJ4pj15Iw {
+struct tyObject_struct_TextLayer__nw9b2AOGA5VlSCdX45JcJqQ {
 	char dummy;
 };
-struct tyObject_struct_Layer__ArRLSoHcgGa9cBzSS1Rec1A {
+struct tyObject_struct_Layer__KCpfpF2jwj5coKARWsuAMQ {
 	char dummy;
 };
-N_LIB_PRIVATE N_NIMCALL(void, eqdestroy___OOZOOZOOZsrcZnebbleZuiZtext95layer_u22)(tyObject_TextLayerHandle__t9bAY9a7d2BLJR3FU4TDoSGA* hX60gensym0__p0);
-N_CDECL(void, text_layer_destroy)(tyObject_struct_TextLayer__W2RZgVo7iB0lIlJ4pj15Iw* text_layer_p0);
+N_LIB_PRIVATE N_NIMCALL(void, eqdestroy___OOZOOZOOZsrcZnebbleZuiZtext95layer_u23)(tyObject_TextLayerHandle__t9bAY9a7d2BLJR3FU4TDoSGA* hX60gensym0__p0);
+N_CDECL(void, text_layer_destroy)(tyObject_struct_TextLayer__nw9b2AOGA5VlSCdX45JcJqQ* text_layer_p0);
 static N_INLINE(NIM_BOOL*, nimErrorFlag)(void);
 extern NIM_BOOL nimInErrorMode__system_u3510;
-N_LIB_PRIVATE N_NIMCALL(void, eqdestroy___OOZOOZOOZsrcZnebbleZuiZtext95layer_u22)(tyObject_TextLayerHandle__t9bAY9a7d2BLJR3FU4TDoSGA* hX60gensym0__p0) {
+N_LIB_PRIVATE N_NIMCALL(void, eqdestroy___OOZOOZOOZsrcZnebbleZuiZtext95layer_u23)(tyObject_TextLayerHandle__t9bAY9a7d2BLJR3FU4TDoSGA* hX60gensym0__p0) {
 	{
 		NIM_BOOL T3_;
 		T3_ = (NIM_BOOL)0;
-		T3_ = !(((*hX60gensym0__p0).pRaw == ((tyObject_struct_TextLayer__W2RZgVo7iB0lIlJ4pj15Iw*) NIM_NIL)));
+		T3_ = !(((*hX60gensym0__p0).pRaw == ((tyObject_struct_TextLayer__nw9b2AOGA5VlSCdX45JcJqQ*) NIM_NIL)));
 		if (!(T3_)) goto LA4_;
-		T3_ = ((*hX60gensym0__p0).pParent == ((tyObject_struct_Layer__ArRLSoHcgGa9cBzSS1Rec1A*) NIM_NIL));
+		T3_ = ((*hX60gensym0__p0).pParent == ((tyObject_struct_Layer__KCpfpF2jwj5coKARWsuAMQ*) NIM_NIL));
 LA4_: ;
 		if (!T3_) goto LA5_;
 		text_layer_destroy((*hX60gensym0__p0).pRaw);
 	}
 LA5_: ;
-	(*hX60gensym0__p0).pRaw = ((tyObject_struct_TextLayer__W2RZgVo7iB0lIlJ4pj15Iw*) NIM_NIL);
-	(*hX60gensym0__p0).pParent = ((tyObject_struct_Layer__ArRLSoHcgGa9cBzSS1Rec1A*) NIM_NIL);
+	(*hX60gensym0__p0).pRaw = ((tyObject_struct_TextLayer__nw9b2AOGA5VlSCdX45JcJqQ*) NIM_NIL);
+	(*hX60gensym0__p0).pParent = ((tyObject_struct_Layer__KCpfpF2jwj5coKARWsuAMQ*) NIM_NIL);
 }
 static N_INLINE(NIM_BOOL*, nimErrorFlag)(void) {
 	NIM_BOOL* result;
 	result = (&nimInErrorMode__system_u3510);
 	return result;
 }
-N_LIB_PRIVATE N_NIMCALL(void, eqsink___OOZOOZOOZsrcZnebbleZuiZtext95layer_u53)(tyObject_TextLayerHandle__t9bAY9a7d2BLJR3FU4TDoSGA* destX60gensym0__p0, tyObject_TextLayerHandle__t9bAY9a7d2BLJR3FU4TDoSGA srcX60gensym0__p1) {
+N_LIB_PRIVATE N_NIMCALL(void, eqsink___OOZOOZOOZsrcZnebbleZuiZtext95layer_u54)(tyObject_TextLayerHandle__t9bAY9a7d2BLJR3FU4TDoSGA* destX60gensym0__p0, tyObject_TextLayerHandle__t9bAY9a7d2BLJR3FU4TDoSGA srcX60gensym0__p1) {
 	tyObject_TextLayerHandle__t9bAY9a7d2BLJR3FU4TDoSGA* srcPtrX60gensym0__1;
 NIM_BOOL* nimErr_;
 {nimErr_ = nimErrorFlag();
-	eqdestroy___OOZOOZOOZsrcZnebbleZuiZtext95layer_u22(destX60gensym0__p0);
+	eqdestroy___OOZOOZOOZsrcZnebbleZuiZtext95layer_u23(destX60gensym0__p0);
 	if (NIM_UNLIKELY(*nimErr_)) goto BeforeRet_;
 	(*destX60gensym0__p0).pRaw = srcX60gensym0__p1.pRaw;
 	(*destX60gensym0__p0).pParent = srcX60gensym0__p1.pParent;
 	srcPtrX60gensym0__1 = ((tyObject_TextLayerHandle__t9bAY9a7d2BLJR3FU4TDoSGA*) ((&srcX60gensym0__p1)));
-	(*srcPtrX60gensym0__1).pRaw = ((tyObject_struct_TextLayer__W2RZgVo7iB0lIlJ4pj15Iw*) NIM_NIL);
-	(*srcPtrX60gensym0__1).pParent = ((tyObject_struct_Layer__ArRLSoHcgGa9cBzSS1Rec1A*) NIM_NIL);
+	(*srcPtrX60gensym0__1).pRaw = ((tyObject_struct_TextLayer__nw9b2AOGA5VlSCdX45JcJqQ*) NIM_NIL);
+	(*srcPtrX60gensym0__1).pParent = ((tyObject_struct_Layer__KCpfpF2jwj5coKARWsuAMQ*) NIM_NIL);
 	}BeforeRet_: ;
 }
-N_LIB_PRIVATE N_NIMCALL(tyObject_struct_TextLayer__W2RZgVo7iB0lIlJ4pj15Iw*, toPtr__OOZOOZOOZsrcZnebbleZuiZtext95layer_u73)(tyObject_TextLayerHandle__t9bAY9a7d2BLJR3FU4TDoSGA hX60gensym0__p0) {
-	tyObject_struct_TextLayer__W2RZgVo7iB0lIlJ4pj15Iw* result;
-	result = hX60gensym0__p0.pRaw;
-	return result;
-}
-N_LIB_PRIVATE N_NIMCALL(tyObject_struct_Layer__ArRLSoHcgGa9cBzSS1Rec1A*, toLayer__OOZOOZOOZsrcZnebbleZuiZtext95layer_u76)(tyObject_TextLayerHandle__t9bAY9a7d2BLJR3FU4TDoSGA hX60gensym0__p0) {
-	tyObject_struct_Layer__ArRLSoHcgGa9cBzSS1Rec1A* result;
-	result = ((tyObject_struct_Layer__ArRLSoHcgGa9cBzSS1Rec1A*) (hX60gensym0__p0.pRaw));
+N_LIB_PRIVATE N_NIMCALL(tyObject_struct_Layer__KCpfpF2jwj5coKARWsuAMQ*, toLayer__OOZOOZOOZsrcZnebbleZuiZtext95layer_u77)(tyObject_TextLayerHandle__t9bAY9a7d2BLJR3FU4TDoSGA hX60gensym0__p0) {
+	tyObject_struct_Layer__KCpfpF2jwj5coKARWsuAMQ* result;
+	result = ((tyObject_struct_Layer__KCpfpF2jwj5coKARWsuAMQ*) (hX60gensym0__p0.pRaw));
 	return result;
 }

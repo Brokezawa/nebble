@@ -73,12 +73,3 @@ NIM_BOOL* nimErr_;
 	(*srcPtr_1).state = ((tyEnum_ResourceState__zuZLKhn7SRnYvk4iCTdAkw)3);
 	}BeforeRet_: ;
 }
-N_LIB_PRIVATE N_NIMCALL(tyObject_WindowHandle__QyOpsx5EVgiof5UakzQL7A, toHandle__OOZOOZOOZsrcZnebbleZuiZwindow_u73)(tyObject_struct_Window__esLx3vYHW9aoDk9a25tQZ3QQ* p_p0) {
-	tyObject_WindowHandle__QyOpsx5EVgiof5UakzQL7A result;
-	tyObject_struct_Window__esLx3vYHW9aoDk9a25tQZ3QQ* colontmpD_;
-	colontmpD_ = (tyObject_struct_Window__esLx3vYHW9aoDk9a25tQZ3QQ*)0;
-	colontmpD_ = p_p0;
-	result.raw = colontmpD_;
-	result.state = ((tyEnum_ResourceState__zuZLKhn7SRnYvk4iCTdAkw)0);
-	return result;
-}

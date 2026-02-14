@@ -6,6 +6,8 @@
 import nebble
 import nebble/ui/animation
 
+import nebble/foundation/logging
+
 # Forward declarations
 proc onAnimationStarted(anim: ptr Animation, context: pointer) {.cdecl.}
 proc onAnimationStopped(anim: ptr Animation, finished: bool, context: pointer) {.cdecl.}
@@ -19,9 +21,15 @@ var
   pulseAnim: AnimationHandle
   anim1: AnimationHandle
 
-proc selectClickHandler(r: ClickRecognizerRef, c: pointer) {.cdecl.} = startPulseAnimation()
-proc upClickHandler(r: ClickRecognizerRef, c: pointer) {.cdecl.} = startMainAnimation()
-proc downClickHandler(r: ClickRecognizerRef, c: pointer) {.cdecl.} = startSequenceDemo()
+proc selectClickHandler(r: ClickRecognizerRef, c: pointer) {.cdecl.} = 
+  logInfo("Select Clicked")
+  startPulseAnimation()
+proc upClickHandler(r: ClickRecognizerRef, c: pointer) {.cdecl.} = 
+  logInfo("Up Clicked")
+  startMainAnimation()
+proc downClickHandler(r: ClickRecognizerRef, c: pointer) {.cdecl.} = 
+  logInfo("Down Clicked")
+  startSequenceDemo()
 
 # Declarative App
 nebbleApp:
@@ -41,6 +49,11 @@ nebbleApp:
     w = 15
     h = 15
     bgColor = GColorWhite
+
+  clicks:
+    BUTTON_ID_SELECT = selectClickHandler
+    BUTTON_ID_UP = upClickHandler
+    BUTTON_ID_DOWN = downClickHandler
 
 proc startMainAnimation() =
   # Center text
