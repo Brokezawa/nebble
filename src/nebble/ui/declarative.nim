@@ -392,6 +392,7 @@ macro nebbleApp*(body: untyped): untyped =
   if hasClicks:
     result.add quote do:
       proc `clickProviderName`(ctx: pointer) {.cdecl.} =
+        # APP_LOG(APP_LOG_LEVEL_INFO, "Click Provider Called", 0)
         `clickHandlers`
   
   # Build final output
@@ -409,8 +410,8 @@ macro nebbleApp*(body: untyped): untyped =
     proc init() {.cdecl.} =
       `windowVar` = newWindow()
       `windowVar`.setHandlers(load=windowLoad, unload=windowUnload)
-      `initBody`
       `pushStmt`
+      `initBody`
     
     proc deinit() {.cdecl.} =
       `deinitBody`
