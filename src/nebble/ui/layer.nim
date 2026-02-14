@@ -198,14 +198,14 @@ proc removeChildLayers*(parent: var LayerHandle) {.inline.} =
   if not parent.isValid: return
   ffi.layer_remove_child_layers(parent.pRaw)
 
-proc insertBelowSibling*(h: var LayerHandle, sibling: LayerHandle) {.inline.} =
+proc insertBelowSibling*(h: var LayerHandle, sibling: var LayerHandle) {.inline.} =
   ## Insert a layer below a sibling.
   if not h.isValid or not sibling.isValid: return
   ffi.layer_insert_below_sibling(h.pRaw, sibling.pRaw)
   # Update ownership status
   h.setParent(sibling.pParent)
 
-proc insertAboveSibling*(h: var LayerHandle, sibling: LayerHandle) {.inline.} =
+proc insertAboveSibling*(h: var LayerHandle, sibling: var LayerHandle) {.inline.} =
   ## Insert a layer above a sibling.
   if not h.isValid or not sibling.isValid: return
   ffi.layer_insert_above_sibling(h.pRaw, sibling.pRaw)
