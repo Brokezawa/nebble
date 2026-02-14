@@ -17,17 +17,17 @@
 #undef powerpc
 #undef unix
 typedef struct tyObject_WindowHandle__QyOpsx5EVgiof5UakzQL7A tyObject_WindowHandle__QyOpsx5EVgiof5UakzQL7A;
-typedef struct tyObject_struct_Window__x0oI0MSh79clnNFs7R9bwHcA tyObject_struct_Window__x0oI0MSh79clnNFs7R9bwHcA;
+typedef struct tyObject_struct_Window__2SbsBvsi2ilc9cuGqcWE8uw tyObject_struct_Window__2SbsBvsi2ilc9cuGqcWE8uw;
 typedef NU8 tyEnum_ResourceState__zuZLKhn7SRnYvk4iCTdAkw;
 struct tyObject_WindowHandle__QyOpsx5EVgiof5UakzQL7A {
-	tyObject_struct_Window__x0oI0MSh79clnNFs7R9bwHcA* raw;
+	tyObject_struct_Window__2SbsBvsi2ilc9cuGqcWE8uw* raw;
 	tyEnum_ResourceState__zuZLKhn7SRnYvk4iCTdAkw state;
 };
-struct tyObject_struct_Window__x0oI0MSh79clnNFs7R9bwHcA {
+struct tyObject_struct_Window__2SbsBvsi2ilc9cuGqcWE8uw {
 	char dummy;
 };
 N_LIB_PRIVATE N_NIMCALL(void, eqdestroy___OOZOOZOOZsrcZnebbleZuiZwindow_u7)(tyObject_WindowHandle__QyOpsx5EVgiof5UakzQL7A* h_p0);
-N_CDECL(void, window_destroy)(tyObject_struct_Window__x0oI0MSh79clnNFs7R9bwHcA* window_p0);
+N_CDECL(void, window_destroy)(tyObject_struct_Window__2SbsBvsi2ilc9cuGqcWE8uw* window_p0);
 static N_INLINE(NIM_BOOL*, nimErrorFlag)(void);
 extern NIM_BOOL nimInErrorMode__system_u3510;
 N_LIB_PRIVATE N_NIMCALL(void, eqdestroy___OOZOOZOOZsrcZnebbleZuiZwindow_u7)(tyObject_WindowHandle__QyOpsx5EVgiof5UakzQL7A* h_p0) {
@@ -36,7 +36,7 @@ N_LIB_PRIVATE N_NIMCALL(void, eqdestroy___OOZOOZOOZsrcZnebbleZuiZwindow_u7)(tyOb
 	case ((tyEnum_ResourceState__zuZLKhn7SRnYvk4iCTdAkw)2):
 	{
 		{
-			if (!!(((*h_p0).raw == ((tyObject_struct_Window__x0oI0MSh79clnNFs7R9bwHcA*) NIM_NIL)))) goto LA4_;
+			if (!!(((*h_p0).raw == ((tyObject_struct_Window__2SbsBvsi2ilc9cuGqcWE8uw*) NIM_NIL)))) goto LA4_;
 			window_destroy((*h_p0).raw);
 		}
 LA4_: ;
@@ -52,7 +52,7 @@ LA4_: ;
 	break;
 	default: __builtin_unreachable();
 	}
-	(*h_p0).raw = ((tyObject_struct_Window__x0oI0MSh79clnNFs7R9bwHcA*) NIM_NIL);
+	(*h_p0).raw = ((tyObject_struct_Window__2SbsBvsi2ilc9cuGqcWE8uw*) NIM_NIL);
 	(*h_p0).state = ((tyEnum_ResourceState__zuZLKhn7SRnYvk4iCTdAkw)3);
 }
 static N_INLINE(NIM_BOOL*, nimErrorFlag)(void) {
@@ -69,7 +69,7 @@ NIM_BOOL* nimErr_;
 	(*dest_p0).raw = src_p1.raw;
 	(*dest_p0).state = src_p1.state;
 	srcPtr_1 = ((tyObject_WindowHandle__QyOpsx5EVgiof5UakzQL7A*) ((&src_p1)));
-	(*srcPtr_1).raw = ((tyObject_struct_Window__x0oI0MSh79clnNFs7R9bwHcA*) NIM_NIL);
+	(*srcPtr_1).raw = ((tyObject_struct_Window__2SbsBvsi2ilc9cuGqcWE8uw*) NIM_NIL);
 	(*srcPtr_1).state = ((tyEnum_ResourceState__zuZLKhn7SRnYvk4iCTdAkw)3);
 	}BeforeRet_: ;
 }

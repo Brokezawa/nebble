@@ -3,6 +3,7 @@
 ## Provides persistent key-value storage for app data.
 
 import nebble/ffi
+import nebble/util/fixed_strings
 
 # ============================================================================
 # Existence Check
@@ -44,6 +45,19 @@ proc writeString*(key: uint32, value: cstring): cint {.inline.} =
   ## Returns the length written, or negative on error.
   ## Equivalent to C function `persist_write_string(key, value)`.
   result = ffi.persist_write_string(key, value)
+
+proc read*[N](key: uint32, s: var FixedString[N]): cint {.inline.} =
+  ## Read a string from persistent storage into a FixedString.
+  ## Returns the length of the string, or negative on error.
+  let res = ffi.persist_read_string(key, s.toCstring, N.csize_t)
+  if res >= 0:
+    s.len = res.int
+  result = res
+
+proc write*[N](key: uint32, s: var FixedString[N]): cint {.inline.} =
+  ## Write a FixedString to persistent storage.
+  ## Returns the length written, or negative on error.
+  result = ffi.persist_write_string(key, s.toCstring)
 
 # ============================================================================
 # Data Operations

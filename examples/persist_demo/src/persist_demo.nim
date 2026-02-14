@@ -75,6 +75,7 @@ proc updateDisplay() =
 
 proc saveData() =
   discard storage.writeInt(PERSIST_KEY_COUNTER, counter)
+  discard storage.write(PERSIST_KEY_NAME, nameStr)
 
 proc loadData() =
   if storage.exists(PERSIST_KEY_COUNTER):
@@ -83,7 +84,7 @@ proc loadData() =
     counter = 0
   
   if storage.exists(PERSIST_KEY_NAME):
-    discard storage.readString(PERSIST_KEY_NAME, cast[cstring](addr nameStr.data[0]), 64)
+    discard storage.read(PERSIST_KEY_NAME, nameStr)
   else:
     nameStr.f("Nebble User")
 

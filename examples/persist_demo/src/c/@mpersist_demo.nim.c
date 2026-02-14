@@ -137,7 +137,7 @@ static N_INLINE(void, onClick__OOZOOZOOZsrcZnebbleZuiZclicks_u2)(tyEnum_enum_But
 N_CDECL(void, window_single_click_subscribe)(tyEnum_enum_ButtonId570425836__WRdsyN5X54A09bBtIGHbj1Q button_id_p0, tyProc__LCJy9bQFEE8ObaRc29a4n3LA handler_p1);
 N_LIB_PRIVATE N_CDECL(void, selectClickHandler__persist95demo_u6)(void* recognizer_p0, void* context_p1);
 N_LIB_PRIVATE N_NIMCALL(void, saveData__persist95demo_u17)(void);
-static N_INLINE(int, writeInt__OOZOOZOOZsrcZnebbleZfoundationZstorage_u8)(NU32 key_p0, NI32 value_p1);
+static N_INLINE(int, writeInt__OOZOOZOOZsrcZnebbleZfoundationZstorage_u9)(NU32 key_p0, NI32 value_p1);
 N_CDECL(NI32, persist_write_int)(NU32 key_p0, NI32 value_p1);
 N_LIB_PRIVATE N_NIMCALL(void, updateDisplay__persist95demo_u16)(void);
 static N_INLINE(void, clear__persist95demo_u216)(tyObject_FixedString__xa1xApmG6K4Owp23GMXv3w* s_p0);
@@ -156,14 +156,14 @@ N_LIB_PRIVATE N_CDECL(void, windowUnload__persist95demo_u180)(tyObject_struct_Wi
 static N_INLINE(void, push__OOZOOZOOZsrcZnebbleZuiZwindow_u199)(tyObject_WindowHandle__QyOpsx5EVgiof5UakzQL7A* h_p0, NIM_BOOL animated_p1);
 N_CDECL(void, window_stack_push)(tyObject_struct_Window__esLx3vYHW9aoDk9a25tQZ3QQ* window_p0, NIM_BOOL animated_p1);
 N_LIB_PRIVATE N_NIMCALL(void, loadData__persist95demo_u15)(void);
-static N_INLINE(NIM_BOOL, exists__OOZOOZOOZsrcZnebbleZfoundationZstorage_u2)(NU32 key_p0);
+static N_INLINE(NIM_BOOL, exists__OOZOOZOOZsrcZnebbleZfoundationZstorage_u3)(NU32 key_p0);
 N_CDECL(NIM_BOOL, persist_exists)(NU32 key_p0);
-static N_INLINE(NI32, readInt__OOZOOZOOZsrcZnebbleZfoundationZstorage_u5)(NU32 key_p0);
+static N_INLINE(NI32, readInt__OOZOOZOOZsrcZnebbleZfoundationZstorage_u6)(NU32 key_p0);
 N_CDECL(NI32, persist_read_int)(NU32 key_p0);
-static N_INLINE(int, readString__OOZOOZOOZsrcZnebbleZfoundationZstorage_u12)(NU32 key_p0, NCSTRING buffer_p1, size_t bufferSize_p2);
+static N_INLINE(int, read__persist95demo_u414)(NU32 key_p0, tyObject_FixedString__FEvMMAl6BfSkYl1B6N5cOw* s_p1);
 N_CDECL(int, persist_read_string)(NU32 key_p0, NCSTRING buffer_p1, size_t buffer_size_p2);
-static N_INLINE(void, clear__persist95demo_u415)(tyObject_FixedString__FEvMMAl6BfSkYl1B6N5cOw* s_p0);
-static N_INLINE(void, add__persist95demo_u432)(tyObject_FixedString__FEvMMAl6BfSkYl1B6N5cOw* s_p0, NCSTRING str_p1);
+static N_INLINE(void, clear__persist95demo_u441)(tyObject_FixedString__FEvMMAl6BfSkYl1B6N5cOw* s_p0);
+static N_INLINE(void, add__persist95demo_u458)(tyObject_FixedString__FEvMMAl6BfSkYl1B6N5cOw* s_p0, NCSTRING str_p1);
 N_CDECL(void, app_event_loop)(void);
 N_LIB_PRIVATE N_CDECL(void, deinit__persist95demo_u200)(void);
 static N_INLINE(NIM_BOOL, pop__OOZOOZOOZsrcZnebbleZuiZwindow_u202)(tyObject_WindowHandle__QyOpsx5EVgiof5UakzQL7A* h_p0);
@@ -324,7 +324,7 @@ static N_INLINE(void, clickConfigeq___OOZOOZOOZsrcZnebbleZuiZwindow_u325)(tyObje
 static N_INLINE(void, onClick__OOZOOZOOZsrcZnebbleZuiZclicks_u2)(tyEnum_enum_ButtonId570425836__WRdsyN5X54A09bBtIGHbj1Q buttonId_p0, tyProc__LCJy9bQFEE8ObaRc29a4n3LA handler_p1) {
 	window_single_click_subscribe(buttonId_p0, handler_p1);
 }
-static N_INLINE(int, writeInt__OOZOOZOOZsrcZnebbleZfoundationZstorage_u8)(NU32 key_p0, NI32 value_p1) {
+static N_INLINE(int, writeInt__OOZOOZOOZsrcZnebbleZfoundationZstorage_u9)(NU32 key_p0, NI32 value_p1) {
 	int result;
 	result = persist_write_int(key_p0, value_p1);
 	return result;
@@ -334,7 +334,7 @@ N_LIB_PRIVATE N_NIMCALL(void, saveData__persist95demo_u17)(void) {
 NIM_BOOL* nimErr_;
 {nimErr_ = nimErrorFlag();
 	T1_ = (int)0;
-	T1_ = writeInt__OOZOOZOOZsrcZnebbleZfoundationZstorage_u8(((NU32)1), counter__persist95demo_u18);
+	T1_ = writeInt__OOZOOZOOZsrcZnebbleZfoundationZstorage_u9(((NU32)1), counter__persist95demo_u18);
 	if (NIM_UNLIKELY(*nimErr_)) goto BeforeRet_;
 	(void)(T1_);
 	}BeforeRet_: ;
@@ -738,26 +738,41 @@ static N_INLINE(void, push__OOZOOZOOZsrcZnebbleZuiZwindow_u199)(tyObject_WindowH
 	window_stack_push((*h_p0).raw, animated_p1);
 	(*h_p0).state = ((tyEnum_ResourceState__zuZLKhn7SRnYvk4iCTdAkw)1);
 }
-static N_INLINE(NIM_BOOL, exists__OOZOOZOOZsrcZnebbleZfoundationZstorage_u2)(NU32 key_p0) {
+static N_INLINE(NIM_BOOL, exists__OOZOOZOOZsrcZnebbleZfoundationZstorage_u3)(NU32 key_p0) {
 	NIM_BOOL result;
 	result = persist_exists(key_p0);
 	return result;
 }
-static N_INLINE(NI32, readInt__OOZOOZOOZsrcZnebbleZfoundationZstorage_u5)(NU32 key_p0) {
+static N_INLINE(NI32, readInt__OOZOOZOOZsrcZnebbleZfoundationZstorage_u6)(NU32 key_p0) {
 	NI32 result;
 	result = persist_read_int(key_p0);
 	return result;
 }
-static N_INLINE(int, readString__OOZOOZOOZsrcZnebbleZfoundationZstorage_u12)(NU32 key_p0, NCSTRING buffer_p1, size_t bufferSize_p2) {
+static N_INLINE(int, read__persist95demo_u414)(NU32 key_p0, tyObject_FixedString__FEvMMAl6BfSkYl1B6N5cOw* s_p1) {
 	int result;
-	result = persist_read_string(key_p0, buffer_p1, bufferSize_p2);
+	int res_1;
+	NCSTRING T1_;
+NIM_BOOL* nimErr_;
+{nimErr_ = nimErrorFlag();
+	result = (int)0;
+	T1_ = (NCSTRING)0;
+	T1_ = toCstring__persist95demo_u105(s_p1);
+	if (NIM_UNLIKELY(*nimErr_)) goto BeforeRet_;
+	res_1 = persist_read_string(key_p0, T1_, ((size_t)64));
+	{
+		if (!(((NI32)0) <= res_1)) goto LA4_;
+		(*s_p1).len = ((NI) (res_1));
+	}
+LA4_: ;
+	result = res_1;
+	}BeforeRet_: ;
 	return result;
 }
-static N_INLINE(void, clear__persist95demo_u415)(tyObject_FixedString__FEvMMAl6BfSkYl1B6N5cOw* s_p0) {
+static N_INLINE(void, clear__persist95demo_u441)(tyObject_FixedString__FEvMMAl6BfSkYl1B6N5cOw* s_p0) {
 	(*s_p0).len = ((NI)0);
 	(*s_p0).data[(((NI)0))- 0] = 0;
 }
-static N_INLINE(void, add__persist95demo_u432)(tyObject_FixedString__FEvMMAl6BfSkYl1B6N5cOw* s_p0, NCSTRING str_p1) {
+static N_INLINE(void, add__persist95demo_u458)(tyObject_FixedString__FEvMMAl6BfSkYl1B6N5cOw* s_p0, NCSTRING str_p1) {
 	NI i_1;
 {	{
 		NIM_BOOL T3_;
@@ -792,11 +807,11 @@ NIM_BOOL* nimErr_;
 		NIM_BOOL T3_;
 		NI32 T6_;
 		T3_ = (NIM_BOOL)0;
-		T3_ = exists__OOZOOZOOZsrcZnebbleZfoundationZstorage_u2(((NU32)1));
+		T3_ = exists__OOZOOZOOZsrcZnebbleZfoundationZstorage_u3(((NU32)1));
 		if (NIM_UNLIKELY(*nimErr_)) goto BeforeRet_;
 		if (!T3_) goto LA4_;
 		T6_ = (NI32)0;
-		T6_ = readInt__OOZOOZOOZsrcZnebbleZfoundationZstorage_u5(((NU32)1));
+		T6_ = readInt__OOZOOZOOZsrcZnebbleZfoundationZstorage_u6(((NU32)1));
 		if (NIM_UNLIKELY(*nimErr_)) goto BeforeRet_;
 		counter__persist95demo_u18 = T6_;
 	}
@@ -810,20 +825,20 @@ LA1_: ;
 		NIM_BOOL T10_;
 		int T13_;
 		T10_ = (NIM_BOOL)0;
-		T10_ = exists__OOZOOZOOZsrcZnebbleZfoundationZstorage_u2(((NU32)2));
+		T10_ = exists__OOZOOZOOZsrcZnebbleZfoundationZstorage_u3(((NU32)2));
 		if (NIM_UNLIKELY(*nimErr_)) goto BeforeRet_;
 		if (!T10_) goto LA11_;
 		T13_ = (int)0;
-		T13_ = readString__OOZOOZOOZsrcZnebbleZfoundationZstorage_u12(((NU32)2), ((NCSTRING) ((&nameStr__persist95demo_u37.data[(((NI)0))- 0]))), ((size_t)64));
+		T13_ = read__persist95demo_u414(((NU32)2), (&nameStr__persist95demo_u37));
 		if (NIM_UNLIKELY(*nimErr_)) goto BeforeRet_;
 		(void)(T13_);
 	}
 	goto LA8_;
 LA11_: ;
 	{
-		clear__persist95demo_u415((&nameStr__persist95demo_u37));
+		clear__persist95demo_u441((&nameStr__persist95demo_u37));
 		if (NIM_UNLIKELY(*nimErr_)) goto BeforeRet_;
-		add__persist95demo_u432((&nameStr__persist95demo_u37), "Nebble User");
+		add__persist95demo_u458((&nameStr__persist95demo_u37), "Nebble User");
 		if (NIM_UNLIKELY(*nimErr_)) goto BeforeRet_;
 	}
 LA8_: ;
