@@ -44,8 +44,8 @@ nebbleApp:
     
   textLayer:
     id = boxLayer
-    x = 10
-    y = 140
+    x = 120
+    y = 10
     w = 15
     h = 15
     bgColor = GColorWhite
@@ -72,10 +72,10 @@ proc startMainAnimation() =
   mainAnim.schedule()
 
 proc startPulseAnimation() =
-  # Pulse at current box position
+  # Pulse at current box position (120, 10)
   let b = boxLayer.toLayer().frame
   let startRect = b
-  let endRect = makeGRect(b.origin.x - 10, b.origin.y - 10, b.size.w + 20, b.size.h + 20)
+  let endRect = makeGRect(b.origin.x - 5, b.origin.y - 5, b.size.w + 10, b.size.h + 10)
   
   pulseAnim = newAnimationHandle()
   pulseAnim.duration = 500
