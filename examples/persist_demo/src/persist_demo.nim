@@ -26,7 +26,6 @@ var
 # Declarative App
 nebbleApp:
   init:
-
     loadData()
     updateDisplay()
 
@@ -35,7 +34,9 @@ nebbleApp:
 
   textLayer:
     id = titleLayer
-    frame = (0, 20, 144, 30)
+    fullWidth = true
+    y = pblIfRoundElse(25, 10)
+    h = 35
     text = "Persist Demo"
     alignment = GTextAlignmentCenter
     font = FONT_KEY_GOTHIC_24_BOLD
@@ -43,7 +44,9 @@ nebbleApp:
     
   textLayer:
     id = nameLayer
-    frame = (0, 55, 144, 25)
+    fullWidth = true
+    y = pblIfRoundElse(65, 50)
+    h = 25
     text = nameStr
     alignment = GTextAlignmentCenter
     font = FONT_KEY_GOTHIC_18
@@ -51,14 +54,18 @@ nebbleApp:
     
   textLayer:
     id = counterLayer
-    frame = (0, 85, 144, 35)
+    fullWidth = true
+    y = center
+    h = 40
     alignment = GTextAlignmentCenter
     font = FONT_KEY_GOTHIC_28_BOLD
     bgColor = GColorClear
     
   textLayer:
     id = instrLayer
-    frame = (0, 125, 144, 40)
+    fullWidth = true
+    y = PBLDisplayHeight - 50
+    h = 45
     text = "SELECT: +1\nUP: +10\nDOWN: Reset"
     alignment = GTextAlignmentCenter
     font = FONT_KEY_GOTHIC_14
