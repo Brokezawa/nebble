@@ -95,7 +95,7 @@ macro formatInto*(s: var FixedString, body: varargs[untyped]): untyped =
       # Try to detect if it's an integer or string-like
       # In Pebble context, we mostly care about ints and cstrings
       result.add quote do:
-        when `arg` is int|int32|int16|uint8:
+        when `arg` is int|int32|int16|uint8|uint32|uint16:
           `s`.addInt(`arg`.int32)
         else:
           `s`.add(`arg`)

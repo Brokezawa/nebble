@@ -63,13 +63,16 @@ nebbleApp:
 
 var
   tapCount = 0
-  xBuffer, yBuffer, zBuffer: array[16, char]
-  tapBuffer: array[32, char]
+  xStr, yStr, zStr: FixedString[16]
+  tapStr: FixedString[32]
 
 proc updateAccelDisplay(x, y, z: int16) =
-  xLayer.staticText(xBuffer, "X: " & $x)
-  yLayer.staticText(yBuffer, "Y: " & $y)
-  zLayer.staticText(zBuffer, "Z: " & $z)
+  xStr.f("X: ", x)
+  xLayer.text = xStr
+  yStr.f("Y: ", y)
+  yLayer.text = yStr
+  zStr.f("Z: ", z)
+  zLayer.text = zStr
 
 proc accelDataHandler(data: ptr AccelData; numSamples: uint32) {.cdecl.} =
   if numSamples > 0:
@@ -78,9 +81,10 @@ proc accelDataHandler(data: ptr AccelData; numSamples: uint32) {.cdecl.} =
 
 proc accelTapHandler(axis: AccelAxisType; direction: int32) {.cdecl.} =
   inc tapCount
-  let axisName = case axis
+  let axisName: cstring = case axis
     of ACCEL_AXIS_X: "X"
     of ACCEL_AXIS_Y: "Y"
     of ACCEL_AXIS_Z: "Z"
-  let dirName = if direction > 0: "+" else: "-"
-  tapLayer.staticText(tapBuffer, "Tap #" & $tapCount & " " & dirName & axisName)
+  let dirName: cstring = if direction > 0: "+" else: "-"
+  tapStr.f("Tap #", tapCount, " ", dirName, axisName)
+  tapLayer.text = tapStr

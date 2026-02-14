@@ -71,8 +71,3 @@ N_LIB_PRIVATE N_NIMCALL(tyObject_struct_Layer__KCpfpF2jwj5coKARWsuAMQ*, toLayer_
 	result = ((tyObject_struct_Layer__KCpfpF2jwj5coKARWsuAMQ*) (hX60gensym0__p0.pRaw));
 	return result;
 }
-N_LIB_PRIVATE N_NIMCALL(tyObject_struct_TextLayer__nw9b2AOGA5VlSCdX45JcJqQ*, toPtr__OOZOOZOOZsrcZnebbleZuiZtext95layer_u74)(tyObject_TextLayerHandle__t9bAY9a7d2BLJR3FU4TDoSGA hX60gensym0__p0) {
-	tyObject_struct_TextLayer__nw9b2AOGA5VlSCdX45JcJqQ* result;
-	result = hX60gensym0__p0.pRaw;
-	return result;
-}

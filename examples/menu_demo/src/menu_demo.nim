@@ -29,5 +29,7 @@ nebbleApp:
     
     menuSections[0] = SimpleMenuSection(title: "Main Menu", items: addr menuItems[0], num_items: 4)
     
-    logInfo("Items: " & $menuSections[0].num_items)
+    var logStr: FixedString[32]
+    logStr.f("Items: ", menuSections[0].num_items)
+    logInfo(logStr)
 
