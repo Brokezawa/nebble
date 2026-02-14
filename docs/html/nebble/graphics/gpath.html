@@ -56,34 +56,109 @@
 </li>
 <li>
   <details open>
+    <summary><a class="reference reference-toplevel" href="#7" id="57">Types</a></summary>
+    <ul class="simple simple-toc-section">
+      <li><a class="reference" href="#GPathHandle" title="GPathHandle = object">GPathHandle</a></li>
+
+    </ul>
+  </details>
+</li>
+<li>
+  <details open>
     <summary><a class="reference reference-toplevel" href="#12" id="62">Procs</a></summary>
     <ul class="simple simple-toc-section">
-      <ul class="simple nested-toc-section">destroy
-  <li><a class="reference" href="#destroy%2Cptr.GPath" title="destroy(path: ptr GPath)">destroy(path: ptr GPath)</a></li>
+      <ul class="simple nested-toc-section">=copy
+  <li><a class="reference" href="#%3Dcopy%2CGPathHandle%2CGPathHandle" title="`=copy`(dest`gensym0: var GPathHandle; src`gensym0: GPathHandle)">`=copy`(dest`gensym0: var GPathHandle; src`gensym0: GPathHandle)</a></li>
+
+</ul>
+<ul class="simple nested-toc-section">=destroy
+  <li><a class="reference" href="#%3Ddestroy%2CGPathHandle" title="`=destroy`(h`gensym0: var GPathHandle)">`=destroy`(h`gensym0: var GPathHandle)</a></li>
+
+</ul>
+<ul class="simple nested-toc-section">=sink
+  <li><a class="reference" href="#%3Dsink%2CGPathHandle%2CGPathHandle" title="`=sink`(dest`gensym0: var GPathHandle; src`gensym0: GPathHandle)">`=sink`(dest`gensym0: var GPathHandle; src`gensym0: GPathHandle)</a></li>
+
+</ul>
+<ul class="simple nested-toc-section">=wasMoved
+  <li><a class="reference" href="#%3DwasMoved%2CGPathHandle" title="`=wasMoved`(h`gensym0: var GPathHandle)">`=wasMoved`(h`gensym0: var GPathHandle)</a></li>
+
+</ul>
+<ul class="simple nested-toc-section">draw
+  <li><a class="reference" href="#draw%2CGPathHandle%2Cptr.struct_GContext%2Cbool" title="draw(h: GPathHandle; ctx: ptr GContext; filled: bool = true)">draw(h: GPathHandle; ctx: ptr GContext; filled: bool = true)</a></li>
 
 </ul>
 <ul class="simple nested-toc-section">drawFilled
-  <li><a class="reference" href="#drawFilled%2Cptr.struct_GContext%2Cptr.GPath" title="drawFilled(ctx: ptr GContext; path: ptr GPath)">drawFilled(ctx: ptr GContext; path: ptr GPath)</a></li>
+  <li><a class="reference" href="#drawFilled%2CGPathHandle%2Cptr.struct_GContext" title="drawFilled(h: GPathHandle; ctx: ptr GContext)">drawFilled(h: GPathHandle; ctx: ptr GContext)</a></li>
 
 </ul>
 <ul class="simple nested-toc-section">drawOutline
-  <li><a class="reference" href="#drawOutline%2Cptr.struct_GContext%2Cptr.GPath" title="drawOutline(ctx: ptr GContext; path: ptr GPath)">drawOutline(ctx: ptr GContext; path: ptr GPath)</a></li>
+  <li><a class="reference" href="#drawOutline%2CGPathHandle%2Cptr.struct_GContext" title="drawOutline(h: GPathHandle; ctx: ptr GContext)">drawOutline(h: GPathHandle; ctx: ptr GContext)</a></li>
 
 </ul>
 <ul class="simple nested-toc-section">drawOutlineOpen
-  <li><a class="reference" href="#drawOutlineOpen%2Cptr.struct_GContext%2Cptr.GPath" title="drawOutlineOpen(ctx: ptr GContext; path: ptr GPath)">drawOutlineOpen(ctx: ptr GContext; path: ptr GPath)</a></li>
+  <li><a class="reference" href="#drawOutlineOpen%2CGPathHandle%2Cptr.struct_GContext" title="drawOutlineOpen(h: GPathHandle; ctx: ptr GContext)">drawOutlineOpen(h: GPathHandle; ctx: ptr GContext)</a></li>
+
+</ul>
+<ul class="simple nested-toc-section">isNil
+  <li><a class="reference" href="#isNil%2CGPathHandle" title="isNil(h`gensym0: GPathHandle): bool">isNil(h`gensym0: GPathHandle): bool</a></li>
+
+</ul>
+<ul class="simple nested-toc-section">isValid
+  <li><a class="reference" href="#isValid%2CGPathHandle" title="isValid(h`gensym0: GPathHandle): bool">isValid(h`gensym0: GPathHandle): bool</a></li>
 
 </ul>
 <ul class="simple nested-toc-section">moveTo
-  <li><a class="reference" href="#moveTo%2Cptr.GPath%2CGPoint" title="moveTo(path: ptr GPath; point: GPoint)">moveTo(path: ptr GPath; point: GPoint)</a></li>
+  <li><a class="reference" href="#moveTo%2CGPathHandle%2CGPoint" title="moveTo(h: GPathHandle; point: GPoint)">moveTo(h: GPathHandle; point: GPoint)</a></li>
 
 </ul>
 <ul class="simple nested-toc-section">newGPath
-  <li><a class="reference" href="#newGPath%2Cptr.GPathInfo" title="newGPath(pathInfo: ptr GPathInfo): ptr GPath">newGPath(pathInfo: ptr GPathInfo): ptr GPath</a></li>
+  <li><a class="reference" href="#newGPath%2Cptr.GPathInfo" title="newGPath(pathInfo: ptr GPathInfo): GPathHandle">newGPath(pathInfo: ptr GPathInfo): GPathHandle</a></li>
+<li><a class="reference" href="#newGPath%2CopenArray%5BGPoint%5D" title="newGPath(points: openArray[GPoint]): GPathHandle">newGPath(points: openArray[GPoint]): GPathHandle</a></li>
+
+</ul>
+<ul class="simple nested-toc-section">newGPathHandle
+  <li><a class="reference" href="#newGPathHandle%2Cptr.GPathInfo" title="newGPathHandle(pathInfo: ptr GPathInfo): GPathHandle">newGPathHandle(pathInfo: ptr GPathInfo): GPathHandle</a></li>
+<li><a class="reference" href="#newGPathHandle%2CopenArray%5BGPoint%5D" title="newGPathHandle(points: openArray[GPoint]): GPathHandle">newGPathHandle(points: openArray[GPoint]): GPathHandle</a></li>
+
+</ul>
+<ul class="simple nested-toc-section">reset
+  <li><a class="reference" href="#reset%2CGPathHandle" title="reset(h`gensym0: var GPathHandle)">reset(h`gensym0: var GPathHandle)</a></li>
+
+</ul>
+<ul class="simple nested-toc-section">rotate
+  <li><a class="reference" href="#rotate%2CGPathHandle%2Cint32" title="rotate(h: GPathHandle; degrees: int32)">rotate(h: GPathHandle; degrees: int32)</a></li>
 
 </ul>
 <ul class="simple nested-toc-section">rotateTo
-  <li><a class="reference" href="#rotateTo%2Cptr.GPath%2Cint32" title="rotateTo(path: ptr GPath; angle: int32)">rotateTo(path: ptr GPath; angle: int32)</a></li>
+  <li><a class="reference" href="#rotateTo%2CGPathHandle%2Cint32" title="rotateTo(h: GPathHandle; angle: int32)">rotateTo(h: GPathHandle; angle: int32)</a></li>
+
+</ul>
+<ul class="simple nested-toc-section">setParent
+  <li><a class="reference" href="#setParent%2CGPathHandle%2Cptr.struct_Layer" title="setParent(h`gensym0: var GPathHandle; p`gensym0: ptr Layer)">setParent(h`gensym0: var GPathHandle; p`gensym0: ptr Layer)</a></li>
+
+</ul>
+<ul class="simple nested-toc-section">toHandle
+  <li><a class="reference" href="#toHandle%2Cptr.GPath" title="toHandle(p`gensym0: ptr GPath): GPathHandle">toHandle(p`gensym0: ptr GPath): GPathHandle</a></li>
+
+</ul>
+<ul class="simple nested-toc-section">wrapOwned
+  <li><a class="reference" href="#wrapOwned%2Cptr.GPath" title="wrapOwned(p`gensym0: ptr GPath): GPathHandle">wrapOwned(p`gensym0: ptr GPath): GPathHandle</a></li>
+
+</ul>
+
+    </ul>
+  </details>
+</li>
+<li>
+  <details open>
+    <summary><a class="reference reference-toplevel" href="#16" id="66">Converters</a></summary>
+    <ul class="simple simple-toc-section">
+      <ul class="simple nested-toc-section">toLayer
+  <li><a class="reference" href="#toLayer.c%2CGPathHandle" title="toLayer(h`gensym0: GPathHandle): ptr Layer">toLayer(h`gensym0: GPathHandle): ptr Layer</a></li>
+
+</ul>
+<ul class="simple nested-toc-section">toPtr
+  <li><a class="reference" href="#toPtr.c%2CGPathHandle" title="toPtr(h`gensym0: GPathHandle): ptr GPath">toPtr(h`gensym0: GPathHandle): ptr GPath</a></li>
 
 </ul>
 
@@ -101,72 +176,183 @@
     
     <div id="tocRoot"></div>
     
-    <p class="module-desc"><p>High-level Nim wrapper for Pebble GPath API.</p>
-<p>Provides vector graphics path drawing and manipulation.</p>
+    <p class="module-desc"><p>ARC-Managed GPath Handle</p>
+<p>Provides automatic memory management for GPath objects using Nim's ARC (Automatic Reference Counting) system.</p>
+<p><strong>Key Features:</strong></p>
+<ul class="simple"><li>Automatic destruction when handle goes out of scope</li>
+<li>Move semantics (no copying)</li>
+<li>Property-style accessors for stroke/fill colors and stroke width</li>
+<li>Drawing methods that work with graphics context</li>
+</ul>
+<p><strong>Usage Example:</strong></p>
+<p><pre class="listing"><span class="Keyword">import</span> <span class="Identifier">nebble</span><span class="Operator">/</span><span class="Identifier">graphics</span><span class="Operator">/</span><span class="Identifier">gpath</span>
+
+<span class="Comment"># Define triangle path</span>
+<span class="Keyword">var</span> <span class="Identifier">trianglePoints</span> <span class="Operator">=</span> <span class="Punctuation">[</span>
+  <span class="Identifier">makeGPoint</span><span class="Punctuation">(</span><span class="DecNumber">72</span><span class="Punctuation">,</span> <span class="DecNumber">40</span><span class="Punctuation">)</span><span class="Punctuation">,</span>   <span class="Comment"># Top</span>
+  <span class="Identifier">makeGPoint</span><span class="Punctuation">(</span><span class="DecNumber">40</span><span class="Punctuation">,</span> <span class="DecNumber">100</span><span class="Punctuation">)</span><span class="Punctuation">,</span>  <span class="Comment"># Bottom left</span>
+  <span class="Identifier">makeGPoint</span><span class="Punctuation">(</span><span class="DecNumber">104</span><span class="Punctuation">,</span> <span class="DecNumber">100</span><span class="Punctuation">)</span>  <span class="Comment"># Bottom right</span>
+<span class="Punctuation">]</span>
+
+<span class="Keyword">var</span> <span class="Identifier">path</span> <span class="Operator">=</span> <span class="Identifier">newGPath</span><span class="Punctuation">(</span>
+  <span class="Identifier">GPathInfo</span><span class="Punctuation">(</span><span class="Identifier">numPoints</span><span class="Punctuation">:</span> <span class="DecNumber">3</span><span class="Punctuation">,</span> <span class="Identifier">points</span><span class="Punctuation">:</span> <span class="Keyword">addr</span> <span class="Identifier">trianglePoints</span><span class="Punctuation">[</span><span class="DecNumber">0</span><span class="Punctuation">]</span><span class="Punctuation">)</span>
+<span class="Punctuation">)</span>
+
+<span class="Comment"># In layer update proc:</span>
+<span class="Identifier">path</span><span class="Operator">.</span><span class="Identifier">drawFilled</span><span class="Punctuation">(</span><span class="Identifier">ctx</span><span class="Punctuation">)</span>
+<span class="Identifier">path</span><span class="Operator">.</span><span class="Identifier">drawOutline</span><span class="Punctuation">(</span><span class="Identifier">ctx</span><span class="Punctuation">)</span></pre></p>
 </p>
     <div class="section" id="6">
   <h1><a class="toc-backref" href="#6">Imports</a></h1>
   <dl class="item">
-    <a class="reference external" href="../ffi.html">../ffi</a>
+    <a class="reference external" href="../ffi.html">../ffi</a>, <a class="reference external" href="../ffi/managed.html">../ffi/managed</a>
+  </dl>
+</div>
+<div class="section" id="7">
+  <h1><a class="toc-backref" href="#7">Types</a></h1>
+  <dl class="item">
+    <div id="GPathHandle">
+  <dt><pre><a href="gpath.html#GPathHandle"><span class="Identifier">GPathHandle</span></a> <span class="Other">=</span> <span class="Keyword">object</span></pre></dt>
+  <dd>
+    
+    Unique ownership handle for <tt class="docutils literal"><span class="pre"><span class="Identifier">RawType</span></span></tt>.
+    
+  </dd>
+</div>
+
   </dl>
 </div>
 <div class="section" id="12">
   <h1><a class="toc-backref" href="#12">Procs</a></h1>
   <dl class="item">
-    <div id="destroy-procs-all">
-  <div id="destroy,ptr.GPath">
-  <dt><pre><span class="Keyword">proc</span> <a href="#destroy%2Cptr.GPath"><span class="Identifier">destroy</span></a><span class="Other">(</span><span class="Identifier">path</span><span class="Other">:</span> <span class="Keyword">ptr</span> <a href="../ffi.html#GPath"><span class="Identifier">GPath</span></a><span class="Other">)</span> {.<span class="Identifier">inline</span><span class="Other">,</span> <span><span class="Other pragmadots">...</span></span><span class="pragmawrap"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">forbids</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span>.}</pre></dt>
+    <div id="=copy-procs-all">
+  <div id="=copy,GPathHandle,GPathHandle">
+  <dt><pre><span class="Keyword">proc</span> <a href="#%3Dcopy%2CGPathHandle%2CGPathHandle"><span class="Identifier">`=copy`</span></a><span class="Other">(</span><span class="Identifier">dest`gensym0</span><span class="Other">:</span> <span class="Keyword">var</span> <a href="gpath.html#GPathHandle"><span class="Identifier">GPathHandle</span></a><span class="Other">;</span> <span class="Identifier">src`gensym0</span><span class="Other">:</span> <a href="gpath.html#GPathHandle"><span class="Identifier">GPathHandle</span></a><span class="Other">)</span> {.<span class="Identifier">error</span>.}</pre></dt>
   <dd>
     
-    Destroy a GPath and free its memory. Equivalent to C function <tt class="docutils literal"><span class="pre"><span class="Identifier">gpath_destroy</span><span class="Punctuation">(</span><span class="Identifier">gpath</span><span class="Punctuation">)</span></span></tt>.
+    
+    
+  </dd>
+</div>
+
+</div>
+<div id="=destroy-procs-all">
+  <div id="=destroy,GPathHandle">
+  <dt><pre><span class="Keyword">proc</span> <a href="#%3Ddestroy%2CGPathHandle"><span class="Identifier">`=destroy`</span></a><span class="Other">(</span><span class="Identifier">h`gensym0</span><span class="Other">:</span> <span class="Keyword">var</span> <a href="gpath.html#GPathHandle"><span class="Identifier">GPathHandle</span></a><span class="Other">)</span> {.<span><span class="Other pragmadots">...</span></span><span class="pragmawrap"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">forbids</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span>.}</pre></dt>
+  <dd>
+    
+    
+    
+  </dd>
+</div>
+
+</div>
+<div id="=sink-procs-all">
+  <div id="=sink,GPathHandle,GPathHandle">
+  <dt><pre><span class="Keyword">proc</span> <a href="#%3Dsink%2CGPathHandle%2CGPathHandle"><span class="Identifier">`=sink`</span></a><span class="Other">(</span><span class="Identifier">dest`gensym0</span><span class="Other">:</span> <span class="Keyword">var</span> <a href="gpath.html#GPathHandle"><span class="Identifier">GPathHandle</span></a><span class="Other">;</span> <span class="Identifier">src`gensym0</span><span class="Other">:</span> <a href="gpath.html#GPathHandle"><span class="Identifier">GPathHandle</span></a><span class="Other">)</span> {.
+    <span><span class="Other pragmadots">...</span></span><span class="pragmawrap"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">forbids</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span>.}</pre></dt>
+  <dd>
+    
+    
+    
+  </dd>
+</div>
+
+</div>
+<div id="=wasMoved-procs-all">
+  <div id="=wasMoved,GPathHandle">
+  <dt><pre><span class="Keyword">proc</span> <a href="#%3DwasMoved%2CGPathHandle"><span class="Identifier">`=wasMoved`</span></a><span class="Other">(</span><span class="Identifier">h`gensym0</span><span class="Other">:</span> <span class="Keyword">var</span> <a href="gpath.html#GPathHandle"><span class="Identifier">GPathHandle</span></a><span class="Other">)</span> {.<span><span class="Other pragmadots">...</span></span><span class="pragmawrap"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">forbids</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span>.}</pre></dt>
+  <dd>
+    
+    
+    
+  </dd>
+</div>
+
+</div>
+<div id="draw-procs-all">
+  <div id="draw,GPathHandle,ptr.struct_GContext,bool">
+  <dt><pre><span class="Keyword">proc</span> <a href="#draw%2CGPathHandle%2Cptr.struct_GContext%2Cbool"><span class="Identifier">draw</span></a><span class="Other">(</span><span class="Identifier">h</span><span class="Other">:</span> <a href="gpath.html#GPathHandle"><span class="Identifier">GPathHandle</span></a><span class="Other">;</span> <span class="Identifier">ctx</span><span class="Other">:</span> <span class="Keyword">ptr</span> <a href="../ffi.html#GContext"><span class="Identifier">GContext</span></a><span class="Other">;</span> <span class="Identifier">filled</span><span class="Other">:</span> <span class="Identifier">bool</span> <span class="Other">=</span> <span class="Identifier">true</span><span class="Other">)</span> {.<span class="Identifier">inline</span><span class="Other">,</span>
+    <span><span class="Other pragmadots">...</span></span><span class="pragmawrap"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">forbids</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span>.}</pre></dt>
+  <dd>
+    
+    <p>Draw the path with optional fill.</p>
+<p><strong>Parameters:</strong></p>
+<ul class="simple"><li><tt class="docutils literal"><span class="pre"><span class="Identifier">filled</span></span></tt>: If true, draws filled interior; if false, draws outline only</li>
+</ul>
+
     
   </dd>
 </div>
 
 </div>
 <div id="drawFilled-procs-all">
-  <div id="drawFilled,ptr.struct_GContext,ptr.GPath">
-  <dt><pre><span class="Keyword">proc</span> <a href="#drawFilled%2Cptr.struct_GContext%2Cptr.GPath"><span class="Identifier">drawFilled</span></a><span class="Other">(</span><span class="Identifier">ctx</span><span class="Other">:</span> <span class="Keyword">ptr</span> <a href="../ffi.html#GContext"><span class="Identifier">GContext</span></a><span class="Other">;</span> <span class="Identifier">path</span><span class="Other">:</span> <span class="Keyword">ptr</span> <a href="../ffi.html#GPath"><span class="Identifier">GPath</span></a><span class="Other">)</span> {.<span class="Identifier">inline</span><span class="Other">,</span> <span><span class="Other pragmadots">...</span></span><span class="pragmawrap"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span>
+  <div id="drawFilled,GPathHandle,ptr.struct_GContext">
+  <dt><pre><span class="Keyword">proc</span> <a href="#drawFilled%2CGPathHandle%2Cptr.struct_GContext"><span class="Identifier">drawFilled</span></a><span class="Other">(</span><span class="Identifier">h</span><span class="Other">:</span> <a href="gpath.html#GPathHandle"><span class="Identifier">GPathHandle</span></a><span class="Other">;</span> <span class="Identifier">ctx</span><span class="Other">:</span> <span class="Keyword">ptr</span> <a href="../ffi.html#GContext"><span class="Identifier">GContext</span></a><span class="Other">)</span> {.<span class="Identifier">inline</span><span class="Other">,</span> <span><span class="Other pragmadots">...</span></span><span class="pragmawrap"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span>
     <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">forbids</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span>.}</pre></dt>
   <dd>
     
-    Draw the filled interior of a GPath. Equivalent to C function <tt class="docutils literal"><span class="pre"><span class="Identifier">gpath_draw_filled</span><span class="Punctuation">(</span><span class="Identifier">ctx</span><span class="Punctuation">,</span> <span class="Identifier">path</span><span class="Punctuation">)</span></span></tt>.
+    Draw the filled interior of the path.
     
   </dd>
 </div>
 
 </div>
 <div id="drawOutline-procs-all">
-  <div id="drawOutline,ptr.struct_GContext,ptr.GPath">
-  <dt><pre><span class="Keyword">proc</span> <a href="#drawOutline%2Cptr.struct_GContext%2Cptr.GPath"><span class="Identifier">drawOutline</span></a><span class="Other">(</span><span class="Identifier">ctx</span><span class="Other">:</span> <span class="Keyword">ptr</span> <a href="../ffi.html#GContext"><span class="Identifier">GContext</span></a><span class="Other">;</span> <span class="Identifier">path</span><span class="Other">:</span> <span class="Keyword">ptr</span> <a href="../ffi.html#GPath"><span class="Identifier">GPath</span></a><span class="Other">)</span> {.<span class="Identifier">inline</span><span class="Other">,</span> <span><span class="Other pragmadots">...</span></span><span class="pragmawrap"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span>
+  <div id="drawOutline,GPathHandle,ptr.struct_GContext">
+  <dt><pre><span class="Keyword">proc</span> <a href="#drawOutline%2CGPathHandle%2Cptr.struct_GContext"><span class="Identifier">drawOutline</span></a><span class="Other">(</span><span class="Identifier">h</span><span class="Other">:</span> <a href="gpath.html#GPathHandle"><span class="Identifier">GPathHandle</span></a><span class="Other">;</span> <span class="Identifier">ctx</span><span class="Other">:</span> <span class="Keyword">ptr</span> <a href="../ffi.html#GContext"><span class="Identifier">GContext</span></a><span class="Other">)</span> {.<span class="Identifier">inline</span><span class="Other">,</span> <span><span class="Other pragmadots">...</span></span><span class="pragmawrap"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span>
     <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">forbids</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span>.}</pre></dt>
   <dd>
     
-    Draw the outline of a GPath (closed). Equivalent to C function <tt class="docutils literal"><span class="pre"><span class="Identifier">gpath_draw_outline</span><span class="Punctuation">(</span><span class="Identifier">ctx</span><span class="Punctuation">,</span> <span class="Identifier">path</span><span class="Punctuation">)</span></span></tt>.
+    Draw the outline of the path (closed).
     
   </dd>
 </div>
 
 </div>
 <div id="drawOutlineOpen-procs-all">
-  <div id="drawOutlineOpen,ptr.struct_GContext,ptr.GPath">
-  <dt><pre><span class="Keyword">proc</span> <a href="#drawOutlineOpen%2Cptr.struct_GContext%2Cptr.GPath"><span class="Identifier">drawOutlineOpen</span></a><span class="Other">(</span><span class="Identifier">ctx</span><span class="Other">:</span> <span class="Keyword">ptr</span> <a href="../ffi.html#GContext"><span class="Identifier">GContext</span></a><span class="Other">;</span> <span class="Identifier">path</span><span class="Other">:</span> <span class="Keyword">ptr</span> <a href="../ffi.html#GPath"><span class="Identifier">GPath</span></a><span class="Other">)</span> {.<span class="Identifier">inline</span><span class="Other">,</span> <span><span class="Other pragmadots">...</span></span><span class="pragmawrap"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span>
+  <div id="drawOutlineOpen,GPathHandle,ptr.struct_GContext">
+  <dt><pre><span class="Keyword">proc</span> <a href="#drawOutlineOpen%2CGPathHandle%2Cptr.struct_GContext"><span class="Identifier">drawOutlineOpen</span></a><span class="Other">(</span><span class="Identifier">h</span><span class="Other">:</span> <a href="gpath.html#GPathHandle"><span class="Identifier">GPathHandle</span></a><span class="Other">;</span> <span class="Identifier">ctx</span><span class="Other">:</span> <span class="Keyword">ptr</span> <a href="../ffi.html#GContext"><span class="Identifier">GContext</span></a><span class="Other">)</span> {.<span class="Identifier">inline</span><span class="Other">,</span> <span><span class="Other pragmadots">...</span></span><span class="pragmawrap"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span>
     <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">forbids</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span>.}</pre></dt>
   <dd>
     
-    Draw the outline of a GPath (open). Equivalent to C function <tt class="docutils literal"><span class="pre"><span class="Identifier">gpath_draw_outline_open</span><span class="Punctuation">(</span><span class="Identifier">ctx</span><span class="Punctuation">,</span> <span class="Identifier">path</span><span class="Punctuation">)</span></span></tt>.
+    Draw the outline of the path (open, doesn't close the path).
+    
+  </dd>
+</div>
+
+</div>
+<div id="isNil-procs-all">
+  <div id="isNil,GPathHandle">
+  <dt><pre><span class="Keyword">proc</span> <a href="#isNil%2CGPathHandle"><span class="Identifier">isNil</span></a><span class="Other">(</span><span class="Identifier">h`gensym0</span><span class="Other">:</span> <a href="gpath.html#GPathHandle"><span class="Identifier">GPathHandle</span></a><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">bool</span> {.<span class="Identifier">inline</span><span class="Other">,</span> <span><span class="Other pragmadots">...</span></span><span class="pragmawrap"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span>
+    <span class="Identifier">forbids</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span>.}</pre></dt>
+  <dd>
+    
+    
+    
+  </dd>
+</div>
+
+</div>
+<div id="isValid-procs-all">
+  <div id="isValid,GPathHandle">
+  <dt><pre><span class="Keyword">proc</span> <a href="#isValid%2CGPathHandle"><span class="Identifier">isValid</span></a><span class="Other">(</span><span class="Identifier">h`gensym0</span><span class="Other">:</span> <a href="gpath.html#GPathHandle"><span class="Identifier">GPathHandle</span></a><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">bool</span> {.<span class="Identifier">inline</span><span class="Other">,</span> <span><span class="Other pragmadots">...</span></span><span class="pragmawrap"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span>
+    <span class="Identifier">forbids</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span>.}</pre></dt>
+  <dd>
+    
+    
     
   </dd>
 </div>
 
 </div>
 <div id="moveTo-procs-all">
-  <div id="moveTo,ptr.GPath,GPoint">
-  <dt><pre><span class="Keyword">proc</span> <a href="#moveTo%2Cptr.GPath%2CGPoint"><span class="Identifier">moveTo</span></a><span class="Other">(</span><span class="Identifier">path</span><span class="Other">:</span> <span class="Keyword">ptr</span> <a href="../ffi.html#GPath"><span class="Identifier">GPath</span></a><span class="Other">;</span> <span class="Identifier">point</span><span class="Other">:</span> <a href="../ffi.html#GPoint"><span class="Identifier">GPoint</span></a><span class="Other">)</span> {.<span class="Identifier">inline</span><span class="Other">,</span> <span><span class="Other pragmadots">...</span></span><span class="pragmawrap"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span>
+  <div id="moveTo,GPathHandle,GPoint">
+  <dt><pre><span class="Keyword">proc</span> <a href="#moveTo%2CGPathHandle%2CGPoint"><span class="Identifier">moveTo</span></a><span class="Other">(</span><span class="Identifier">h</span><span class="Other">:</span> <a href="gpath.html#GPathHandle"><span class="Identifier">GPathHandle</span></a><span class="Other">;</span> <span class="Identifier">point</span><span class="Other">:</span> <a href="../ffi.html#GPoint"><span class="Identifier">GPoint</span></a><span class="Other">)</span> {.<span class="Identifier">inline</span><span class="Other">,</span> <span><span class="Other pragmadots">...</span></span><span class="pragmawrap"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span>
     <span class="Identifier">forbids</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span>.}</pre></dt>
   <dd>
     
-    Move the origin of a GPath. Equivalent to C function <tt class="docutils literal"><span class="pre"><span class="Identifier">gpath_move_to</span><span class="Punctuation">(</span><span class="Identifier">path</span><span class="Punctuation">,</span> <span class="Identifier">point</span><span class="Punctuation">)</span></span></tt>.
+    Move the origin of the path to a new position.
     
   </dd>
 </div>
@@ -174,23 +360,148 @@
 </div>
 <div id="newGPath-procs-all">
   <div id="newGPath,ptr.GPathInfo">
-  <dt><pre><span class="Keyword">proc</span> <a href="#newGPath%2Cptr.GPathInfo"><span class="Identifier">newGPath</span></a><span class="Other">(</span><span class="Identifier">pathInfo</span><span class="Other">:</span> <span class="Keyword">ptr</span> <a href="../ffi.html#GPathInfo"><span class="Identifier">GPathInfo</span></a><span class="Other">)</span><span class="Other">:</span> <span class="Keyword">ptr</span> <a href="../ffi.html#GPath"><span class="Identifier">GPath</span></a> {.<span class="Identifier">inline</span><span class="Other">,</span> <span><span class="Other pragmadots">...</span></span><span class="pragmawrap"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span>
+  <dt><pre><span class="Keyword">proc</span> <a href="#newGPath%2Cptr.GPathInfo"><span class="Identifier">newGPath</span></a><span class="Other">(</span><span class="Identifier">pathInfo</span><span class="Other">:</span> <span class="Keyword">ptr</span> <a href="../ffi.html#GPathInfo"><span class="Identifier">GPathInfo</span></a><span class="Other">)</span><span class="Other">:</span> <a href="gpath.html#GPathHandle"><span class="Identifier">GPathHandle</span></a> {.<span class="Identifier">inline</span><span class="Other">,</span> <span><span class="Other pragmadots">...</span></span><span class="pragmawrap"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span>
     <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">forbids</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span>.}</pre></dt>
   <dd>
     
-    Create a new GPath from path info. Equivalent to C function <tt class="docutils literal"><span class="pre"><span class="Identifier">gpath_create</span><span class="Punctuation">(</span><span class="Identifier">init</span><span class="Punctuation">)</span></span></tt>.
+    
+    
+  </dd>
+</div>
+<div id="newGPath,openArray[GPoint]">
+  <dt><pre><span class="Keyword">proc</span> <a href="#newGPath%2CopenArray%5BGPoint%5D"><span class="Identifier">newGPath</span></a><span class="Other">(</span><span class="Identifier">points</span><span class="Other">:</span> <span class="Identifier">openArray</span><span class="Other">[</span><a href="../ffi.html#GPoint"><span class="Identifier">GPoint</span></a><span class="Other">]</span><span class="Other">)</span><span class="Other">:</span> <a href="gpath.html#GPathHandle"><span class="Identifier">GPathHandle</span></a> {.<span class="Identifier">inline</span><span class="Other">,</span> <span><span class="Other pragmadots">...</span></span><span class="pragmawrap"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span>
+    <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">forbids</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span>.}</pre></dt>
+  <dd>
+    
+    Alias for <tt class="docutils literal"><span class="pre"><span class="Identifier">newGPathHandle</span></span></tt>.
+    
+  </dd>
+</div>
+
+</div>
+<div id="newGPathHandle-procs-all">
+  <div id="newGPathHandle,ptr.GPathInfo">
+  <dt><pre><span class="Keyword">proc</span> <a href="#newGPathHandle%2Cptr.GPathInfo"><span class="Identifier">newGPathHandle</span></a><span class="Other">(</span><span class="Identifier">pathInfo</span><span class="Other">:</span> <span class="Keyword">ptr</span> <a href="../ffi.html#GPathInfo"><span class="Identifier">GPathInfo</span></a><span class="Other">)</span><span class="Other">:</span> <a href="gpath.html#GPathHandle"><span class="Identifier">GPathHandle</span></a> {.<span class="Identifier">inline</span><span class="Other">,</span> <span><span class="Other pragmadots">...</span></span><span class="pragmawrap"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span>
+    <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">forbids</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span>.}</pre></dt>
+  <dd>
+    
+    
+    
+  </dd>
+</div>
+<div id="newGPathHandle,openArray[GPoint]">
+  <dt><pre><span class="Keyword">proc</span> <a href="#newGPathHandle%2CopenArray%5BGPoint%5D"><span class="Identifier">newGPathHandle</span></a><span class="Other">(</span><span class="Identifier">points</span><span class="Other">:</span> <span class="Identifier">openArray</span><span class="Other">[</span><a href="../ffi.html#GPoint"><span class="Identifier">GPoint</span></a><span class="Other">]</span><span class="Other">)</span><span class="Other">:</span> <a href="gpath.html#GPathHandle"><span class="Identifier">GPathHandle</span></a> {.<span class="Identifier">inline</span><span class="Other">,</span>
+    <span><span class="Other pragmadots">...</span></span><span class="pragmawrap"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">forbids</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span>.}</pre></dt>
+  <dd>
+    
+    
+    
+  </dd>
+</div>
+
+</div>
+<div id="reset-procs-all">
+  <div id="reset,GPathHandle">
+  <dt><pre><span class="Keyword">proc</span> <a href="#reset%2CGPathHandle"><span class="Identifier">reset</span></a><span class="Other">(</span><span class="Identifier">h`gensym0</span><span class="Other">:</span> <span class="Keyword">var</span> <a href="gpath.html#GPathHandle"><span class="Identifier">GPathHandle</span></a><span class="Other">)</span> {.<span><span class="Other pragmadots">...</span></span><span class="pragmawrap"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">forbids</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span>.}</pre></dt>
+  <dd>
+    
+    
+    
+  </dd>
+</div>
+
+</div>
+<div id="rotate-procs-all">
+  <div id="rotate,GPathHandle,int32">
+  <dt><pre><span class="Keyword">proc</span> <a href="#rotate%2CGPathHandle%2Cint32"><span class="Identifier">rotate</span></a><span class="Other">(</span><span class="Identifier">h</span><span class="Other">:</span> <a href="gpath.html#GPathHandle"><span class="Identifier">GPathHandle</span></a><span class="Other">;</span> <span class="Identifier">degrees</span><span class="Other">:</span> <span class="Identifier">int32</span><span class="Other">)</span> {.<span class="Identifier">inline</span><span class="Other">,</span> <span><span class="Other pragmadots">...</span></span><span class="pragmawrap"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span>
+    <span class="Identifier">forbids</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span>.}</pre></dt>
+  <dd>
+    
+    <p>Rotate the path by degrees (convenience wrapper).</p>
+<p>Converts degrees to Pebble's normalized angle units automatically. 360 degrees = TRIG_MAX_ANGLE (65536)</p>
+
     
   </dd>
 </div>
 
 </div>
 <div id="rotateTo-procs-all">
-  <div id="rotateTo,ptr.GPath,int32">
-  <dt><pre><span class="Keyword">proc</span> <a href="#rotateTo%2Cptr.GPath%2Cint32"><span class="Identifier">rotateTo</span></a><span class="Other">(</span><span class="Identifier">path</span><span class="Other">:</span> <span class="Keyword">ptr</span> <a href="../ffi.html#GPath"><span class="Identifier">GPath</span></a><span class="Other">;</span> <span class="Identifier">angle</span><span class="Other">:</span> <span class="Identifier">int32</span><span class="Other">)</span> {.<span class="Identifier">inline</span><span class="Other">,</span> <span><span class="Other pragmadots">...</span></span><span class="pragmawrap"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span>
+  <div id="rotateTo,GPathHandle,int32">
+  <dt><pre><span class="Keyword">proc</span> <a href="#rotateTo%2CGPathHandle%2Cint32"><span class="Identifier">rotateTo</span></a><span class="Other">(</span><span class="Identifier">h</span><span class="Other">:</span> <a href="gpath.html#GPathHandle"><span class="Identifier">GPathHandle</span></a><span class="Other">;</span> <span class="Identifier">angle</span><span class="Other">:</span> <span class="Identifier">int32</span><span class="Other">)</span> {.<span class="Identifier">inline</span><span class="Other">,</span> <span><span class="Other pragmadots">...</span></span><span class="pragmawrap"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span>
     <span class="Identifier">forbids</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span>.}</pre></dt>
   <dd>
     
-    Set the rotation of a GPath. Equivalent to C function <tt class="docutils literal"><span class="pre"><span class="Identifier">gpath_rotate_to</span><span class="Punctuation">(</span><span class="Identifier">path</span><span class="Punctuation">,</span> <span class="Identifier">angle</span><span class="Punctuation">)</span></span></tt>.
+    <p>Set the rotation of the path.</p>
+<p><strong>Parameters:</strong></p>
+<ul class="simple"><li><tt class="docutils literal"><span class="pre"><span class="Identifier">angle</span></span></tt>: Rotation angle in normalized units (0 to TRIG_MAX_ANGLE)</li>
+</ul>
+
+    
+  </dd>
+</div>
+
+</div>
+<div id="setParent-procs-all">
+  <div id="setParent,GPathHandle,ptr.struct_Layer">
+  <dt><pre><span class="Keyword">proc</span> <a href="#setParent%2CGPathHandle%2Cptr.struct_Layer"><span class="Identifier">setParent</span></a><span class="Other">(</span><span class="Identifier">h`gensym0</span><span class="Other">:</span> <span class="Keyword">var</span> <a href="gpath.html#GPathHandle"><span class="Identifier">GPathHandle</span></a><span class="Other">;</span> <span class="Identifier">p`gensym0</span><span class="Other">:</span> <span class="Keyword">ptr</span> <a href="../ffi.html#Layer"><span class="Identifier">Layer</span></a><span class="Other">)</span> {.<span class="Identifier">inline</span><span class="Other">,</span>
+    <span><span class="Other pragmadots">...</span></span><span class="pragmawrap"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">forbids</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span>.}</pre></dt>
+  <dd>
+    
+    
+    
+  </dd>
+</div>
+
+</div>
+<div id="toHandle-procs-all">
+  <div id="toHandle,ptr.GPath">
+  <dt><pre><span class="Keyword">proc</span> <a href="#toHandle%2Cptr.GPath"><span class="Identifier">toHandle</span></a><span class="Other">(</span><span class="Identifier">p`gensym0</span><span class="Other">:</span> <span class="Keyword">ptr</span> <a href="../ffi.html#GPath"><span class="Identifier">GPath</span></a><span class="Other">)</span><span class="Other">:</span> <a href="gpath.html#GPathHandle"><span class="Identifier">GPathHandle</span></a> {.<span class="Identifier">inline</span><span class="Other">,</span> <span><span class="Other pragmadots">...</span></span><span class="pragmawrap"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span>
+    <span class="Identifier">forbids</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span>.}</pre></dt>
+  <dd>
+    
+    Wrap raw pointer in handle (unowned).
+    
+  </dd>
+</div>
+
+</div>
+<div id="wrapOwned-procs-all">
+  <div id="wrapOwned,ptr.GPath">
+  <dt><pre><span class="Keyword">proc</span> <a href="#wrapOwned%2Cptr.GPath"><span class="Identifier">wrapOwned</span></a><span class="Other">(</span><span class="Identifier">p`gensym0</span><span class="Other">:</span> <span class="Keyword">ptr</span> <a href="../ffi.html#GPath"><span class="Identifier">GPath</span></a><span class="Other">)</span><span class="Other">:</span> <a href="gpath.html#GPathHandle"><span class="Identifier">GPathHandle</span></a> {.<span class="Identifier">inline</span><span class="Other">,</span> <span><span class="Other pragmadots">...</span></span><span class="pragmawrap"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span>
+    <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">forbids</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span>.}</pre></dt>
+  <dd>
+    
+    Wrap raw pointer in handle (owned).
+    
+  </dd>
+</div>
+
+</div>
+
+  </dl>
+</div>
+<div class="section" id="16">
+  <h1><a class="toc-backref" href="#16">Converters</a></h1>
+  <dl class="item">
+    <div id="toLayer-converters-all">
+  <div id="toLayer.c,GPathHandle">
+  <dt><pre><span class="Keyword">converter</span> <a href="#toLayer.c%2CGPathHandle"><span class="Identifier">toLayer</span></a><span class="Other">(</span><span class="Identifier">h`gensym0</span><span class="Other">:</span> <a href="gpath.html#GPathHandle"><span class="Identifier">GPathHandle</span></a><span class="Other">)</span><span class="Other">:</span> <span class="Keyword">ptr</span> <a href="../ffi.html#Layer"><span class="Identifier">Layer</span></a> {.<span><span class="Other pragmadots">...</span></span><span class="pragmawrap"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span>
+    <span class="Identifier">forbids</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span>.}</pre></dt>
+  <dd>
+    
+    
+    
+  </dd>
+</div>
+
+</div>
+<div id="toPtr-converters-all">
+  <div id="toPtr.c,GPathHandle">
+  <dt><pre><span class="Keyword">converter</span> <a href="#toPtr.c%2CGPathHandle"><span class="Identifier">toPtr</span></a><span class="Other">(</span><span class="Identifier">h`gensym0</span><span class="Other">:</span> <a href="gpath.html#GPathHandle"><span class="Identifier">GPathHandle</span></a><span class="Other">)</span><span class="Other">:</span> <span class="Keyword">ptr</span> <a href="../ffi.html#GPath"><span class="Identifier">GPath</span></a> {.<span><span class="Other pragmadots">...</span></span><span class="pragmawrap"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span>
+    <span class="Identifier">forbids</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span>.}</pre></dt>
+  <dd>
+    
+    
     
   </dd>
 </div>
@@ -212,7 +523,7 @@
       <div class="twelve-columns footer">
         <span class="nim-sprite"></span>
         <br>
-        <small style="color: var(--hint);">Made with Nim. Generated: 2026-02-12 14:24:48 UTC</small>
+        <small style="color: var(--hint);">Made with Nim. Generated: 2026-02-14 21:03:57 UTC</small>
       </div>
     </div>
   </div>

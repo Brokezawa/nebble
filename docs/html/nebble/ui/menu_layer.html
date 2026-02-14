@@ -56,88 +56,87 @@
 </li>
 <li>
   <details open>
+    <summary><a class="reference reference-toplevel" href="#7" id="57">Types</a></summary>
+    <ul class="simple simple-toc-section">
+      <li><a class="reference" href="#MenuLayerHandle" title="MenuLayerHandle = object">MenuLayerHandle</a></li>
+
+    </ul>
+  </details>
+</li>
+<li>
+  <details open>
     <summary><a class="reference reference-toplevel" href="#12" id="62">Procs</a></summary>
     <ul class="simple simple-toc-section">
-      <ul class="simple nested-toc-section">centerFocused
-  <li><a class="reference" href="#centerFocused%2Cptr.struct_MenuLayer" title="centerFocused(menuLayer: ptr MenuLayer): bool">centerFocused(menuLayer: ptr MenuLayer): bool</a></li>
+      <ul class="simple nested-toc-section">=copy
+  <li><a class="reference" href="#%3Dcopy%2CMenuLayerHandle%2CMenuLayerHandle" title="`=copy`(dest`gensym0: var MenuLayerHandle; src`gensym0: MenuLayerHandle)">`=copy`(dest`gensym0: var MenuLayerHandle; src`gensym0: MenuLayerHandle)</a></li>
 
 </ul>
-<ul class="simple nested-toc-section">centerFocused=
-  <li><a class="reference" href="#centerFocused%3D%2Cptr.struct_MenuLayer%2Cbool" title="centerFocused=(menuLayer: ptr MenuLayer; centerFocused: bool)">centerFocused=(menuLayer: ptr MenuLayer; centerFocused: bool)</a></li>
+<ul class="simple nested-toc-section">=destroy
+  <li><a class="reference" href="#%3Ddestroy%2CMenuLayerHandle" title="`=destroy`(h`gensym0: var MenuLayerHandle)">`=destroy`(h`gensym0: var MenuLayerHandle)</a></li>
 
 </ul>
-<ul class="simple nested-toc-section">destroy
-  <li><a class="reference" href="#destroy%2Cptr.struct_MenuLayer" title="destroy(menuLayer: ptr MenuLayer)">destroy(menuLayer: ptr MenuLayer)</a></li>
+<ul class="simple nested-toc-section">=sink
+  <li><a class="reference" href="#%3Dsink%2CMenuLayerHandle%2CMenuLayerHandle" title="`=sink`(dest`gensym0: var MenuLayerHandle; src`gensym0: MenuLayerHandle)">`=sink`(dest`gensym0: var MenuLayerHandle; src`gensym0: MenuLayerHandle)</a></li>
 
 </ul>
-<ul class="simple nested-toc-section">drawBasicCell
-  <li><a class="reference" href="#drawBasicCell%2Cptr.struct_GContext%2Cptr.struct_Layer%2Ccstring%2Ccstring%2Cptr.struct_GBitmap" title="drawBasicCell(ctx: ptr GContext; cellLayer: ptr Layer; title: cstring;
-              subtitle: cstring = nil; icon: ptr GBitmap = nil)">drawBasicCell(ctx: ptr GContext; cellLayer: ptr Layer; title: cstring;
-              subtitle: cstring = nil; icon: ptr GBitmap = nil)</a></li>
-
-</ul>
-<ul class="simple nested-toc-section">drawBasicHeader
-  <li><a class="reference" href="#drawBasicHeader%2Cptr.struct_GContext%2Cptr.struct_Layer%2Ccstring" title="drawBasicHeader(ctx: ptr GContext; cellLayer: ptr Layer; title: cstring)">drawBasicHeader(ctx: ptr GContext; cellLayer: ptr Layer; title: cstring)</a></li>
+<ul class="simple nested-toc-section">=wasMoved
+  <li><a class="reference" href="#%3DwasMoved%2CMenuLayerHandle" title="`=wasMoved`(h`gensym0: var MenuLayerHandle)">`=wasMoved`(h`gensym0: var MenuLayerHandle)</a></li>
 
 </ul>
 <ul class="simple nested-toc-section">getLayer
-  <li><a class="reference" href="#getLayer%2Cptr.struct_MenuLayer" title="getLayer(menuLayer: ptr MenuLayer): ptr Layer">getLayer(menuLayer: ptr MenuLayer): ptr Layer</a></li>
+  <li><a class="reference" href="#getLayer%2CMenuLayerHandle" title="getLayer(h: MenuLayerHandle): ptr Layer">getLayer(h: MenuLayerHandle): ptr Layer</a></li>
 
 </ul>
-<ul class="simple nested-toc-section">getScrollLayer
-  <li><a class="reference" href="#getScrollLayer%2Cptr.struct_MenuLayer" title="getScrollLayer(menuLayer: ptr MenuLayer): ptr ScrollLayer">getScrollLayer(menuLayer: ptr MenuLayer): ptr ScrollLayer</a></li>
+<ul class="simple nested-toc-section">isNil
+  <li><a class="reference" href="#isNil%2CMenuLayerHandle" title="isNil(h`gensym0: MenuLayerHandle): bool">isNil(h`gensym0: MenuLayerHandle): bool</a></li>
 
 </ul>
-<ul class="simple nested-toc-section">isIndexSelected
-  <li><a class="reference" href="#isIndexSelected%2Cptr.struct_MenuLayer%2Cptr.MenuIndex" title="isIndexSelected(menuLayer: ptr MenuLayer; index: ptr MenuIndex): bool">isIndexSelected(menuLayer: ptr MenuLayer; index: ptr MenuIndex): bool</a></li>
+<ul class="simple nested-toc-section">isValid
+  <li><a class="reference" href="#isValid%2CMenuLayerHandle" title="isValid(h`gensym0: MenuLayerHandle): bool">isValid(h`gensym0: MenuLayerHandle): bool</a></li>
 
 </ul>
 <ul class="simple nested-toc-section">newMenuLayer
-  <li><a class="reference" href="#newMenuLayer%2CGRect" title="newMenuLayer(frame: GRect): ptr MenuLayer">newMenuLayer(frame: GRect): ptr MenuLayer</a></li>
+  <li><a class="reference" href="#newMenuLayer%2CGRect" title="newMenuLayer(frame: GRect): MenuLayerHandle">newMenuLayer(frame: GRect): MenuLayerHandle</a></li>
 
 </ul>
-<ul class="simple nested-toc-section">padBottomEnable
-  <li><a class="reference" href="#padBottomEnable%2Cptr.struct_MenuLayer%2Cbool" title="padBottomEnable(menuLayer: ptr MenuLayer; enable: bool)">padBottomEnable(menuLayer: ptr MenuLayer; enable: bool)</a></li>
+<ul class="simple nested-toc-section">newMenuLayerHandle
+  <li><a class="reference" href="#newMenuLayerHandle%2CGRect" title="newMenuLayerHandle(frame: GRect): MenuLayerHandle">newMenuLayerHandle(frame: GRect): MenuLayerHandle</a></li>
 
 </ul>
-<ul class="simple nested-toc-section">reloadData
-  <li><a class="reference" href="#reloadData%2Cptr.struct_MenuLayer" title="reloadData(menuLayer: ptr MenuLayer)">reloadData(menuLayer: ptr MenuLayer)</a></li>
-
-</ul>
-<ul class="simple nested-toc-section">selectedIndex
-  <li><a class="reference" href="#selectedIndex%2Cptr.struct_MenuLayer" title="selectedIndex(menuLayer: ptr MenuLayer): MenuIndex">selectedIndex(menuLayer: ptr MenuLayer): MenuIndex</a></li>
-
-</ul>
-<ul class="simple nested-toc-section">selectedIndex=
-  <li><a class="reference" href="#selectedIndex%3D%2Cptr.struct_MenuLayer%2CMenuIndex%2CMenuRowAlign%2Cbool" title="selectedIndex=(menuLayer: ptr MenuLayer; index: MenuIndex; reason: MenuRowAlign;
-               animated: bool)">selectedIndex=(menuLayer: ptr MenuLayer; index: MenuIndex; reason: MenuRowAlign;
-               animated: bool)</a></li>
-
-</ul>
-<ul class="simple nested-toc-section">setCallbacks
-  <li><a class="reference" href="#setCallbacks%2Cptr.struct_MenuLayer%2Cpointer%2CMenuLayerCallbacks" title="setCallbacks(menuLayer: ptr MenuLayer; callbackContext: pointer;
-             callbacks: MenuLayerCallbacks)">setCallbacks(menuLayer: ptr MenuLayer; callbackContext: pointer;
-             callbacks: MenuLayerCallbacks)</a></li>
+<ul class="simple nested-toc-section">reset
+  <li><a class="reference" href="#reset%2CMenuLayerHandle" title="reset(h`gensym0: var MenuLayerHandle)">reset(h`gensym0: var MenuLayerHandle)</a></li>
 
 </ul>
 <ul class="simple nested-toc-section">setClickConfigOntoWindow
-  <li><a class="reference" href="#setClickConfigOntoWindow%2Cptr.struct_MenuLayer%2Cptr.struct_Window" title="setClickConfigOntoWindow(menuLayer: ptr MenuLayer; window: ptr Window)">setClickConfigOntoWindow(menuLayer: ptr MenuLayer; window: ptr Window)</a></li>
+  <li><a class="reference" href="#setClickConfigOntoWindow%2CMenuLayerHandle%2Cptr.struct_Window" title="setClickConfigOntoWindow(h: var MenuLayerHandle; window: ptr Window)">setClickConfigOntoWindow(h: var MenuLayerHandle; window: ptr Window)</a></li>
 
 </ul>
-<ul class="simple nested-toc-section">setHighlightColors
-  <li><a class="reference" href="#setHighlightColors%2Cptr.struct_MenuLayer%2CGColor%2CGColor" title="setHighlightColors(menuLayer: ptr MenuLayer; background: GColor;
-                   foreground: GColor)">setHighlightColors(menuLayer: ptr MenuLayer; background: GColor;
-                   foreground: GColor)</a></li>
+<ul class="simple nested-toc-section">setParent
+  <li><a class="reference" href="#setParent%2CMenuLayerHandle%2Cptr.struct_Layer" title="setParent(h`gensym0: var MenuLayerHandle; p`gensym0: ptr Layer)">setParent(h`gensym0: var MenuLayerHandle; p`gensym0: ptr Layer)</a></li>
 
 </ul>
-<ul class="simple nested-toc-section">setNormalColors
-  <li><a class="reference" href="#setNormalColors%2Cptr.struct_MenuLayer%2CGColor%2CGColor" title="setNormalColors(menuLayer: ptr MenuLayer; background: GColor; foreground: GColor)">setNormalColors(menuLayer: ptr MenuLayer; background: GColor; foreground: GColor)</a></li>
+<ul class="simple nested-toc-section">toHandle
+  <li><a class="reference" href="#toHandle%2Cptr.struct_MenuLayer" title="toHandle(p`gensym0: ptr MenuLayer): MenuLayerHandle">toHandle(p`gensym0: ptr MenuLayer): MenuLayerHandle</a></li>
 
 </ul>
-<ul class="simple nested-toc-section">setSelectedNext
-  <li><a class="reference" href="#setSelectedNext%2Cptr.struct_MenuLayer%2Cbool%2CMenuRowAlign%2Cbool" title="setSelectedNext(menuLayer: ptr MenuLayer; up: bool; reason: MenuRowAlign;
-                animated: bool)">setSelectedNext(menuLayer: ptr MenuLayer; up: bool; reason: MenuRowAlign;
-                animated: bool)</a></li>
+<ul class="simple nested-toc-section">wrapOwned
+  <li><a class="reference" href="#wrapOwned%2Cptr.struct_MenuLayer" title="wrapOwned(p`gensym0: ptr MenuLayer): MenuLayerHandle">wrapOwned(p`gensym0: ptr MenuLayer): MenuLayerHandle</a></li>
+
+</ul>
+
+    </ul>
+  </details>
+</li>
+<li>
+  <details open>
+    <summary><a class="reference reference-toplevel" href="#16" id="66">Converters</a></summary>
+    <ul class="simple simple-toc-section">
+      <ul class="simple nested-toc-section">toLayer
+  <li><a class="reference" href="#toLayer.c%2CMenuLayerHandle" title="toLayer(h`gensym0: MenuLayerHandle): ptr Layer">toLayer(h`gensym0: MenuLayerHandle): ptr Layer</a></li>
+
+</ul>
+<ul class="simple nested-toc-section">toPtr
+  <li><a class="reference" href="#toPtr.c%2CMenuLayerHandle" title="toPtr(h`gensym0: MenuLayerHandle): ptr MenuLayer">toPtr(h`gensym0: MenuLayerHandle): ptr MenuLayer</a></li>
 
 </ul>
 
@@ -155,128 +154,109 @@
     
     <div id="tocRoot"></div>
     
-    <p class="module-desc"><p>High-level Nim wrapper for Pebble MenuLayer API.</p>
-<p>A MenuLayer displays a scrollable list of menu items organized into sections. It provides callbacks for rendering cells, headers, and handling selection.</p>
-</p>
+    <p class="module-desc">ARC-Managed MenuLayer Handle</p>
     <div class="section" id="6">
   <h1><a class="toc-backref" href="#6">Imports</a></h1>
   <dl class="item">
-    <a class="reference external" href="../ffi.html">../ffi</a>
+    <a class="reference external" href="../ffi.html">../ffi</a>, <a class="reference external" href="../ffi/managed.html">../ffi/managed</a>
+  </dl>
+</div>
+<div class="section" id="7">
+  <h1><a class="toc-backref" href="#7">Types</a></h1>
+  <dl class="item">
+    <div id="MenuLayerHandle">
+  <dt><pre><a href="menu_layer.html#MenuLayerHandle"><span class="Identifier">MenuLayerHandle</span></a> <span class="Other">=</span> <span class="Keyword">object</span></pre></dt>
+  <dd>
+    
+    Unique ownership handle for <tt class="docutils literal"><span class="pre"><span class="Identifier">RawType</span></span></tt>.
+    
+  </dd>
+</div>
+
   </dl>
 </div>
 <div class="section" id="12">
   <h1><a class="toc-backref" href="#12">Procs</a></h1>
   <dl class="item">
-    <div id="centerFocused-procs-all">
-  <div id="centerFocused,ptr.struct_MenuLayer">
-  <dt><pre><span class="Keyword">proc</span> <a href="#centerFocused%2Cptr.struct_MenuLayer"><span class="Identifier">centerFocused</span></a><span class="Other">(</span><span class="Identifier">menuLayer</span><span class="Other">:</span> <span class="Keyword">ptr</span> <a href="../ffi.html#MenuLayer"><span class="Identifier">MenuLayer</span></a><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">bool</span> {.<span class="Identifier">inline</span><span class="Other">,</span> <span><span class="Other pragmadots">...</span></span><span class="pragmawrap"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span>
-    <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">forbids</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span>.}</pre></dt>
+    <div id="=copy-procs-all">
+  <div id="=copy,MenuLayerHandle,MenuLayerHandle">
+  <dt><pre><span class="Keyword">proc</span> <a href="#%3Dcopy%2CMenuLayerHandle%2CMenuLayerHandle"><span class="Identifier">`=copy`</span></a><span class="Other">(</span><span class="Identifier">dest`gensym0</span><span class="Other">:</span> <span class="Keyword">var</span> <a href="menu_layer.html#MenuLayerHandle"><span class="Identifier">MenuLayerHandle</span></a><span class="Other">;</span> <span class="Identifier">src`gensym0</span><span class="Other">:</span> <a href="menu_layer.html#MenuLayerHandle"><span class="Identifier">MenuLayerHandle</span></a><span class="Other">)</span> {.
+    <span class="Identifier">error</span>.}</pre></dt>
   <dd>
     
-    Check if the selected item is centered. Equivalent to C function <tt class="docutils literal"><span class="pre"><span class="Identifier">menu_layer_get_center_focused</span><span class="Punctuation">(</span><span class="Identifier">menu_layer</span><span class="Punctuation">)</span></span></tt>.
+    
     
   </dd>
 </div>
 
 </div>
-<div id="centerFocused=-procs-all">
-  <div id="centerFocused=,ptr.struct_MenuLayer,bool">
-  <dt><pre><span class="Keyword">proc</span> <a href="#centerFocused%3D%2Cptr.struct_MenuLayer%2Cbool"><span class="Identifier">centerFocused=</span></a><span class="Other">(</span><span class="Identifier">menuLayer</span><span class="Other">:</span> <span class="Keyword">ptr</span> <a href="../ffi.html#MenuLayer"><span class="Identifier">MenuLayer</span></a><span class="Other">;</span> <span class="Identifier">centerFocused</span><span class="Other">:</span> <span class="Identifier">bool</span><span class="Other">)</span> {.<span class="Identifier">inline</span><span class="Other">,</span>
-    <span><span class="Other pragmadots">...</span></span><span class="pragmawrap"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">forbids</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span>.}</pre></dt>
-  <dd>
-    
-    Set whether the selected item should be centered. Equivalent to C function <tt class="docutils literal"><span class="pre"><span class="Identifier">menu_layer_set_center_focused</span><span class="Punctuation">(</span><span class="Identifier">menu_layer</span><span class="Punctuation">,</span> <span class="Identifier">center_focused</span><span class="Punctuation">)</span></span></tt>.
-    
-  </dd>
-</div>
-
-</div>
-<div id="destroy-procs-all">
-  <div id="destroy,ptr.struct_MenuLayer">
-  <dt><pre><span class="Keyword">proc</span> <a href="#destroy%2Cptr.struct_MenuLayer"><span class="Identifier">destroy</span></a><span class="Other">(</span><span class="Identifier">menuLayer</span><span class="Other">:</span> <span class="Keyword">ptr</span> <a href="../ffi.html#MenuLayer"><span class="Identifier">MenuLayer</span></a><span class="Other">)</span> {.<span class="Identifier">inline</span><span class="Other">,</span> <span><span class="Other pragmadots">...</span></span><span class="pragmawrap"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span>
+<div id="=destroy-procs-all">
+  <div id="=destroy,MenuLayerHandle">
+  <dt><pre><span class="Keyword">proc</span> <a href="#%3Ddestroy%2CMenuLayerHandle"><span class="Identifier">`=destroy`</span></a><span class="Other">(</span><span class="Identifier">h`gensym0</span><span class="Other">:</span> <span class="Keyword">var</span> <a href="menu_layer.html#MenuLayerHandle"><span class="Identifier">MenuLayerHandle</span></a><span class="Other">)</span> {.<span><span class="Other pragmadots">...</span></span><span class="pragmawrap"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span>
     <span class="Identifier">forbids</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span>.}</pre></dt>
   <dd>
     
-    Destroy the menu layer and free its memory. Equivalent to C function <tt class="docutils literal"><span class="pre"><span class="Identifier">menu_layer_destroy</span><span class="Punctuation">(</span><span class="Identifier">menu_layer</span><span class="Punctuation">)</span></span></tt>.
+    
     
   </dd>
 </div>
 
 </div>
-<div id="drawBasicCell-procs-all">
-  <div id="drawBasicCell,ptr.struct_GContext,ptr.struct_Layer,cstring,cstring,ptr.struct_GBitmap">
-  <dt><pre><span class="Keyword">proc</span> <a href="#drawBasicCell%2Cptr.struct_GContext%2Cptr.struct_Layer%2Ccstring%2Ccstring%2Cptr.struct_GBitmap"><span class="Identifier">drawBasicCell</span></a><span class="Other">(</span><span class="Identifier">ctx</span><span class="Other">:</span> <span class="Keyword">ptr</span> <a href="../ffi.html#GContext"><span class="Identifier">GContext</span></a><span class="Other">;</span> <span class="Identifier">cellLayer</span><span class="Other">:</span> <span class="Keyword">ptr</span> <a href="../ffi.html#Layer"><span class="Identifier">Layer</span></a><span class="Other">;</span> <span class="Identifier">title</span><span class="Other">:</span> <span class="Identifier">cstring</span><span class="Other">;</span>
-                   <span class="Identifier">subtitle</span><span class="Other">:</span> <span class="Identifier">cstring</span> <span class="Other">=</span> <span class="Keyword">nil</span><span class="Other">;</span> <span class="Identifier">icon</span><span class="Other">:</span> <span class="Keyword">ptr</span> <a href="../ffi.html#GBitmap"><span class="Identifier">GBitmap</span></a> <span class="Other">=</span> <span class="Keyword">nil</span><span class="Other">)</span> {.<span class="Identifier">inline</span><span class="Other">,</span>
+<div id="=sink-procs-all">
+  <div id="=sink,MenuLayerHandle,MenuLayerHandle">
+  <dt><pre><span class="Keyword">proc</span> <a href="#%3Dsink%2CMenuLayerHandle%2CMenuLayerHandle"><span class="Identifier">`=sink`</span></a><span class="Other">(</span><span class="Identifier">dest`gensym0</span><span class="Other">:</span> <span class="Keyword">var</span> <a href="menu_layer.html#MenuLayerHandle"><span class="Identifier">MenuLayerHandle</span></a><span class="Other">;</span> <span class="Identifier">src`gensym0</span><span class="Other">:</span> <a href="menu_layer.html#MenuLayerHandle"><span class="Identifier">MenuLayerHandle</span></a><span class="Other">)</span> {.
     <span><span class="Other pragmadots">...</span></span><span class="pragmawrap"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">forbids</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span>.}</pre></dt>
   <dd>
     
-    <p>Draw a basic menu cell with optional subtitle and icon. This is a convenience wrapper around <tt class="docutils literal"><span class="pre"><span class="Identifier">menu_cell_basic_draw</span></span></tt>.</p>
-<p><strong>Parameters:</strong></p>
-<ul class="simple"><li><tt class="docutils literal"><span class="pre"><span class="Identifier">ctx</span></span></tt>: Graphics context</li>
-<li><tt class="docutils literal"><span class="pre"><span class="Identifier">cellLayer</span></span></tt>: The cell layer to draw into</li>
-<li><tt class="docutils literal"><span class="pre"><span class="Identifier">title</span></span></tt>: Primary text for the cell</li>
-<li><tt class="docutils literal"><span class="pre"><span class="Identifier">subtitle</span></span></tt>: Secondary text (optional)</li>
-<li><tt class="docutils literal"><span class="pre"><span class="Identifier">icon</span></span></tt>: Icon bitmap (optional)</li>
-</ul>
-<p><strong>Example:</strong></p>
-<p><pre class="listing"><span class="Identifier">drawBasicCell</span><span class="Punctuation">(</span><span class="Identifier">gctx</span><span class="Punctuation">,</span> <span class="Identifier">cellLayer</span><span class="Punctuation">,</span> <span class="StringLit">&quot;Settings&quot;</span><span class="Operator">.</span><span class="Identifier">cstring</span><span class="Punctuation">,</span> <span class="Keyword">nil</span><span class="Punctuation">,</span> <span class="Keyword">nil</span><span class="Punctuation">)</span></pre></p>
-
+    
     
   </dd>
 </div>
 
 </div>
-<div id="drawBasicHeader-procs-all">
-  <div id="drawBasicHeader,ptr.struct_GContext,ptr.struct_Layer,cstring">
-  <dt><pre><span class="Keyword">proc</span> <a href="#drawBasicHeader%2Cptr.struct_GContext%2Cptr.struct_Layer%2Ccstring"><span class="Identifier">drawBasicHeader</span></a><span class="Other">(</span><span class="Identifier">ctx</span><span class="Other">:</span> <span class="Keyword">ptr</span> <a href="../ffi.html#GContext"><span class="Identifier">GContext</span></a><span class="Other">;</span> <span class="Identifier">cellLayer</span><span class="Other">:</span> <span class="Keyword">ptr</span> <a href="../ffi.html#Layer"><span class="Identifier">Layer</span></a><span class="Other">;</span> <span class="Identifier">title</span><span class="Other">:</span> <span class="Identifier">cstring</span><span class="Other">)</span> {.
-    <span class="Identifier">inline</span><span class="Other">,</span> <span><span class="Other pragmadots">...</span></span><span class="pragmawrap"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">forbids</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span>.}</pre></dt>
+<div id="=wasMoved-procs-all">
+  <div id="=wasMoved,MenuLayerHandle">
+  <dt><pre><span class="Keyword">proc</span> <a href="#%3DwasMoved%2CMenuLayerHandle"><span class="Identifier">`=wasMoved`</span></a><span class="Other">(</span><span class="Identifier">h`gensym0</span><span class="Other">:</span> <span class="Keyword">var</span> <a href="menu_layer.html#MenuLayerHandle"><span class="Identifier">MenuLayerHandle</span></a><span class="Other">)</span> {.<span><span class="Other pragmadots">...</span></span><span class="pragmawrap"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span>
+    <span class="Identifier">forbids</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span>.}</pre></dt>
   <dd>
     
-    <p>Draw a basic menu section header. This is a convenience wrapper around <tt class="docutils literal"><span class="pre"><span class="Identifier">menu_cell_basic_header_draw</span></span></tt>.</p>
-<p><strong>Parameters:</strong></p>
-<ul class="simple"><li><tt class="docutils literal"><span class="pre"><span class="Identifier">ctx</span></span></tt>: Graphics context</li>
-<li><tt class="docutils literal"><span class="pre"><span class="Identifier">cellLayer</span></span></tt>: The header layer to draw into</li>
-<li><tt class="docutils literal"><span class="pre"><span class="Identifier">title</span></span></tt>: Header text</li>
-</ul>
-<p><strong>Example:</strong></p>
-<p><pre class="listing"><span class="Identifier">drawBasicHeader</span><span class="Punctuation">(</span><span class="Identifier">gctx</span><span class="Punctuation">,</span> <span class="Identifier">cellLayer</span><span class="Punctuation">,</span> <span class="StringLit">&quot;Main Section&quot;</span><span class="Operator">.</span><span class="Identifier">cstring</span><span class="Punctuation">)</span></pre></p>
-
+    
     
   </dd>
 </div>
 
 </div>
 <div id="getLayer-procs-all">
-  <div id="getLayer,ptr.struct_MenuLayer">
-  <dt><pre><span class="Keyword">proc</span> <a href="#getLayer%2Cptr.struct_MenuLayer"><span class="Identifier">getLayer</span></a><span class="Other">(</span><span class="Identifier">menuLayer</span><span class="Other">:</span> <span class="Keyword">ptr</span> <a href="../ffi.html#MenuLayer"><span class="Identifier">MenuLayer</span></a><span class="Other">)</span><span class="Other">:</span> <span class="Keyword">ptr</span> <a href="../ffi.html#Layer"><span class="Identifier">Layer</span></a> {.<span class="Identifier">inline</span><span class="Other">,</span> <span><span class="Other pragmadots">...</span></span><span class="pragmawrap"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span>
-    <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">forbids</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span>.}</pre></dt>
+  <div id="getLayer,MenuLayerHandle">
+  <dt><pre><span class="Keyword">proc</span> <a href="#getLayer%2CMenuLayerHandle"><span class="Identifier">getLayer</span></a><span class="Other">(</span><span class="Identifier">h</span><span class="Other">:</span> <a href="menu_layer.html#MenuLayerHandle"><span class="Identifier">MenuLayerHandle</span></a><span class="Other">)</span><span class="Other">:</span> <span class="Keyword">ptr</span> <a href="../ffi.html#Layer"><span class="Identifier">Layer</span></a> {.<span class="Identifier">inline</span><span class="Other">,</span> <span><span class="Other pragmadots">...</span></span><span class="pragmawrap"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span>
+    <span class="Identifier">forbids</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span>.}</pre></dt>
   <dd>
     
-    Get the underlying Layer for hierarchy operations. Equivalent to C function <tt class="docutils literal"><span class="pre"><span class="Identifier">menu_layer_get_layer</span><span class="Punctuation">(</span><span class="Identifier">menu_layer</span><span class="Punctuation">)</span></span></tt>.
+    
     
   </dd>
 </div>
 
 </div>
-<div id="getScrollLayer-procs-all">
-  <div id="getScrollLayer,ptr.struct_MenuLayer">
-  <dt><pre><span class="Keyword">proc</span> <a href="#getScrollLayer%2Cptr.struct_MenuLayer"><span class="Identifier">getScrollLayer</span></a><span class="Other">(</span><span class="Identifier">menuLayer</span><span class="Other">:</span> <span class="Keyword">ptr</span> <a href="../ffi.html#MenuLayer"><span class="Identifier">MenuLayer</span></a><span class="Other">)</span><span class="Other">:</span> <span class="Keyword">ptr</span> <a href="../ffi.html#ScrollLayer"><span class="Identifier">ScrollLayer</span></a> {.<span class="Identifier">inline</span><span class="Other">,</span>
-    <span><span class="Other pragmadots">...</span></span><span class="pragmawrap"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">forbids</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span>.}</pre></dt>
+<div id="isNil-procs-all">
+  <div id="isNil,MenuLayerHandle">
+  <dt><pre><span class="Keyword">proc</span> <a href="#isNil%2CMenuLayerHandle"><span class="Identifier">isNil</span></a><span class="Other">(</span><span class="Identifier">h`gensym0</span><span class="Other">:</span> <a href="menu_layer.html#MenuLayerHandle"><span class="Identifier">MenuLayerHandle</span></a><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">bool</span> {.<span class="Identifier">inline</span><span class="Other">,</span> <span><span class="Other pragmadots">...</span></span><span class="pragmawrap"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span>
+    <span class="Identifier">forbids</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span>.}</pre></dt>
   <dd>
     
-    Get the underlying ScrollLayer. Equivalent to C function <tt class="docutils literal"><span class="pre"><span class="Identifier">menu_layer_get_scroll_layer</span><span class="Punctuation">(</span><span class="Identifier">menu_layer</span><span class="Punctuation">)</span></span></tt>.
+    
     
   </dd>
 </div>
 
 </div>
-<div id="isIndexSelected-procs-all">
-  <div id="isIndexSelected,ptr.struct_MenuLayer,ptr.MenuIndex">
-  <dt><pre><span class="Keyword">proc</span> <a href="#isIndexSelected%2Cptr.struct_MenuLayer%2Cptr.MenuIndex"><span class="Identifier">isIndexSelected</span></a><span class="Other">(</span><span class="Identifier">menuLayer</span><span class="Other">:</span> <span class="Keyword">ptr</span> <a href="../ffi.html#MenuLayer"><span class="Identifier">MenuLayer</span></a><span class="Other">;</span> <span class="Identifier">index</span><span class="Other">:</span> <span class="Keyword">ptr</span> <a href="../ffi.html#MenuIndex"><span class="Identifier">MenuIndex</span></a><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">bool</span> {.
-    <span class="Identifier">inline</span><span class="Other">,</span> <span><span class="Other pragmadots">...</span></span><span class="pragmawrap"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">forbids</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span>.}</pre></dt>
+<div id="isValid-procs-all">
+  <div id="isValid,MenuLayerHandle">
+  <dt><pre><span class="Keyword">proc</span> <a href="#isValid%2CMenuLayerHandle"><span class="Identifier">isValid</span></a><span class="Other">(</span><span class="Identifier">h`gensym0</span><span class="Other">:</span> <a href="menu_layer.html#MenuLayerHandle"><span class="Identifier">MenuLayerHandle</span></a><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">bool</span> {.<span class="Identifier">inline</span><span class="Other">,</span> <span><span class="Other pragmadots">...</span></span><span class="pragmawrap"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span>
+    <span class="Identifier">forbids</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span>.}</pre></dt>
   <dd>
     
-    Check if the given index is currently selected. Equivalent to C function <tt class="docutils literal"><span class="pre"><span class="Identifier">menu_layer_is_index_selected</span><span class="Punctuation">(</span><span class="Identifier">menu_layer</span><span class="Punctuation">,</span> <span class="Identifier">index</span><span class="Punctuation">)</span></span></tt>.
+    
     
   </dd>
 </div>
@@ -284,123 +264,112 @@
 </div>
 <div id="newMenuLayer-procs-all">
   <div id="newMenuLayer,GRect">
-  <dt><pre><span class="Keyword">proc</span> <a href="#newMenuLayer%2CGRect"><span class="Identifier">newMenuLayer</span></a><span class="Other">(</span><span class="Identifier">frame</span><span class="Other">:</span> <a href="../ffi.html#GRect"><span class="Identifier">GRect</span></a><span class="Other">)</span><span class="Other">:</span> <span class="Keyword">ptr</span> <a href="../ffi.html#MenuLayer"><span class="Identifier">MenuLayer</span></a> {.<span class="Identifier">inline</span><span class="Other">,</span> <span><span class="Other pragmadots">...</span></span><span class="pragmawrap"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span>
+  <dt><pre><span class="Keyword">proc</span> <a href="#newMenuLayer%2CGRect"><span class="Identifier">newMenuLayer</span></a><span class="Other">(</span><span class="Identifier">frame</span><span class="Other">:</span> <a href="../ffi.html#GRect"><span class="Identifier">GRect</span></a><span class="Other">)</span><span class="Other">:</span> <a href="menu_layer.html#MenuLayerHandle"><span class="Identifier">MenuLayerHandle</span></a> {.<span class="Identifier">inline</span><span class="Other">,</span> <span><span class="Other pragmadots">...</span></span><span class="pragmawrap"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span>
     <span class="Identifier">forbids</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span>.}</pre></dt>
   <dd>
     
-    Create a new MenuLayer with the specified frame. Equivalent to C function <tt class="docutils literal"><span class="pre"><span class="Identifier">menu_layer_create</span><span class="Punctuation">(</span><span class="Identifier">frame</span><span class="Punctuation">)</span></span></tt>.
+    
     
   </dd>
 </div>
 
 </div>
-<div id="padBottomEnable-procs-all">
-  <div id="padBottomEnable,ptr.struct_MenuLayer,bool">
-  <dt><pre><span class="Keyword">proc</span> <a href="#padBottomEnable%2Cptr.struct_MenuLayer%2Cbool"><span class="Identifier">padBottomEnable</span></a><span class="Other">(</span><span class="Identifier">menuLayer</span><span class="Other">:</span> <span class="Keyword">ptr</span> <a href="../ffi.html#MenuLayer"><span class="Identifier">MenuLayer</span></a><span class="Other">;</span> <span class="Identifier">enable</span><span class="Other">:</span> <span class="Identifier">bool</span><span class="Other">)</span> {.<span class="Identifier">inline</span><span class="Other">,</span>
-    <span><span class="Other pragmadots">...</span></span><span class="pragmawrap"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">forbids</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span>.}</pre></dt>
-  <dd>
-    
-    Enable or disable bottom padding. Equivalent to C function <tt class="docutils literal"><span class="pre"><span class="Identifier">menu_layer_pad_bottom_enable</span><span class="Punctuation">(</span><span class="Identifier">menu_layer</span><span class="Punctuation">,</span> <span class="Identifier">enable</span><span class="Punctuation">)</span></span></tt>.
-    
-  </dd>
-</div>
-
-</div>
-<div id="reloadData-procs-all">
-  <div id="reloadData,ptr.struct_MenuLayer">
-  <dt><pre><span class="Keyword">proc</span> <a href="#reloadData%2Cptr.struct_MenuLayer"><span class="Identifier">reloadData</span></a><span class="Other">(</span><span class="Identifier">menuLayer</span><span class="Other">:</span> <span class="Keyword">ptr</span> <a href="../ffi.html#MenuLayer"><span class="Identifier">MenuLayer</span></a><span class="Other">)</span> {.<span class="Identifier">inline</span><span class="Other">,</span> <span><span class="Other pragmadots">...</span></span><span class="pragmawrap"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span>
-    <span class="Identifier">forbids</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span>.}</pre></dt>
-  <dd>
-    
-    Reload all menu data from callbacks. Equivalent to C function <tt class="docutils literal"><span class="pre"><span class="Identifier">menu_layer_reload_data</span><span class="Punctuation">(</span><span class="Identifier">menu_layer</span><span class="Punctuation">)</span></span></tt>.
-    
-  </dd>
-</div>
-
-</div>
-<div id="selectedIndex-procs-all">
-  <div id="selectedIndex,ptr.struct_MenuLayer">
-  <dt><pre><span class="Keyword">proc</span> <a href="#selectedIndex%2Cptr.struct_MenuLayer"><span class="Identifier">selectedIndex</span></a><span class="Other">(</span><span class="Identifier">menuLayer</span><span class="Other">:</span> <span class="Keyword">ptr</span> <a href="../ffi.html#MenuLayer"><span class="Identifier">MenuLayer</span></a><span class="Other">)</span><span class="Other">:</span> <a href="../ffi.html#MenuIndex"><span class="Identifier">MenuIndex</span></a> {.<span class="Identifier">inline</span><span class="Other">,</span> <span><span class="Other pragmadots">...</span></span><span class="pragmawrap"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span>
+<div id="newMenuLayerHandle-procs-all">
+  <div id="newMenuLayerHandle,GRect">
+  <dt><pre><span class="Keyword">proc</span> <a href="#newMenuLayerHandle%2CGRect"><span class="Identifier">newMenuLayerHandle</span></a><span class="Other">(</span><span class="Identifier">frame</span><span class="Other">:</span> <a href="../ffi.html#GRect"><span class="Identifier">GRect</span></a><span class="Other">)</span><span class="Other">:</span> <a href="menu_layer.html#MenuLayerHandle"><span class="Identifier">MenuLayerHandle</span></a> {.<span class="Identifier">inline</span><span class="Other">,</span> <span><span class="Other pragmadots">...</span></span><span class="pragmawrap"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span>
     <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">forbids</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span>.}</pre></dt>
   <dd>
     
-    Get the currently selected menu item index. Equivalent to C function <tt class="docutils literal"><span class="pre"><span class="Identifier">menu_layer_get_selected_index</span><span class="Punctuation">(</span><span class="Identifier">menu_layer</span><span class="Punctuation">)</span></span></tt>.
+    
     
   </dd>
 </div>
 
 </div>
-<div id="selectedIndex=-procs-all">
-  <div id="selectedIndex=,ptr.struct_MenuLayer,MenuIndex,MenuRowAlign,bool">
-  <dt><pre><span class="Keyword">proc</span> <a href="#selectedIndex%3D%2Cptr.struct_MenuLayer%2CMenuIndex%2CMenuRowAlign%2Cbool"><span class="Identifier">selectedIndex=</span></a><span class="Other">(</span><span class="Identifier">menuLayer</span><span class="Other">:</span> <span class="Keyword">ptr</span> <a href="../ffi.html#MenuLayer"><span class="Identifier">MenuLayer</span></a><span class="Other">;</span> <span class="Identifier">index</span><span class="Other">:</span> <a href="../ffi.html#MenuIndex"><span class="Identifier">MenuIndex</span></a><span class="Other">;</span>
-                    <span class="Identifier">reason</span><span class="Other">:</span> <a href="../ffi.html#MenuRowAlign"><span class="Identifier">MenuRowAlign</span></a><span class="Other">;</span> <span class="Identifier">animated</span><span class="Other">:</span> <span class="Identifier">bool</span><span class="Other">)</span> {.<span class="Identifier">inline</span><span class="Other">,</span> <span><span class="Other pragmadots">...</span></span><span class="pragmawrap"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span>
-    <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">forbids</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span>.}</pre></dt>
+<div id="reset-procs-all">
+  <div id="reset,MenuLayerHandle">
+  <dt><pre><span class="Keyword">proc</span> <a href="#reset%2CMenuLayerHandle"><span class="Identifier">reset</span></a><span class="Other">(</span><span class="Identifier">h`gensym0</span><span class="Other">:</span> <span class="Keyword">var</span> <a href="menu_layer.html#MenuLayerHandle"><span class="Identifier">MenuLayerHandle</span></a><span class="Other">)</span> {.<span><span class="Other pragmadots">...</span></span><span class="pragmawrap"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">forbids</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span>.}</pre></dt>
   <dd>
     
-    Set the selected menu item by index. Equivalent to C function <tt class="docutils literal"><span class="pre"><span class="Identifier">menu_layer_set_selected_index</span><span class="Punctuation">(</span><span class="Identifier">menu_layer</span><span class="Punctuation">,</span> <span class="Identifier">index</span><span class="Punctuation">,</span> <span class="Identifier">reason</span><span class="Punctuation">,</span> <span class="Identifier">animated</span><span class="Punctuation">)</span></span></tt>.
     
-  </dd>
-</div>
-
-</div>
-<div id="setCallbacks-procs-all">
-  <div id="setCallbacks,ptr.struct_MenuLayer,pointer,MenuLayerCallbacks">
-  <dt><pre><span class="Keyword">proc</span> <a href="#setCallbacks%2Cptr.struct_MenuLayer%2Cpointer%2CMenuLayerCallbacks"><span class="Identifier">setCallbacks</span></a><span class="Other">(</span><span class="Identifier">menuLayer</span><span class="Other">:</span> <span class="Keyword">ptr</span> <a href="../ffi.html#MenuLayer"><span class="Identifier">MenuLayer</span></a><span class="Other">;</span> <span class="Identifier">callbackContext</span><span class="Other">:</span> <span class="Identifier">pointer</span><span class="Other">;</span>
-                  <span class="Identifier">callbacks</span><span class="Other">:</span> <a href="../ffi.html#MenuLayerCallbacks"><span class="Identifier">MenuLayerCallbacks</span></a><span class="Other">)</span> {.<span class="Identifier">inline</span><span class="Other">,</span> <span><span class="Other pragmadots">...</span></span><span class="pragmawrap"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span>
-    <span class="Identifier">forbids</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span>.}</pre></dt>
-  <dd>
-    
-    Set the callbacks for menu layer behavior. Equivalent to C function <tt class="docutils literal"><span class="pre"><span class="Identifier">menu_layer_set_callbacks</span><span class="Punctuation">(</span><span class="Identifier">menu_layer</span><span class="Punctuation">,</span> <span class="Identifier">callback_context</span><span class="Punctuation">,</span> <span class="Identifier">callbacks</span><span class="Punctuation">)</span></span></tt>.
     
   </dd>
 </div>
 
 </div>
 <div id="setClickConfigOntoWindow-procs-all">
-  <div id="setClickConfigOntoWindow,ptr.struct_MenuLayer,ptr.struct_Window">
-  <dt><pre><span class="Keyword">proc</span> <a href="#setClickConfigOntoWindow%2Cptr.struct_MenuLayer%2Cptr.struct_Window"><span class="Identifier">setClickConfigOntoWindow</span></a><span class="Other">(</span><span class="Identifier">menuLayer</span><span class="Other">:</span> <span class="Keyword">ptr</span> <a href="../ffi.html#MenuLayer"><span class="Identifier">MenuLayer</span></a><span class="Other">;</span> <span class="Identifier">window</span><span class="Other">:</span> <span class="Keyword">ptr</span> <a href="../ffi.html#Window"><span class="Identifier">Window</span></a><span class="Other">)</span> {.
+  <div id="setClickConfigOntoWindow,MenuLayerHandle,ptr.struct_Window">
+  <dt><pre><span class="Keyword">proc</span> <a href="#setClickConfigOntoWindow%2CMenuLayerHandle%2Cptr.struct_Window"><span class="Identifier">setClickConfigOntoWindow</span></a><span class="Other">(</span><span class="Identifier">h</span><span class="Other">:</span> <span class="Keyword">var</span> <a href="menu_layer.html#MenuLayerHandle"><span class="Identifier">MenuLayerHandle</span></a><span class="Other">;</span> <span class="Identifier">window</span><span class="Other">:</span> <span class="Keyword">ptr</span> <a href="../ffi.html#Window"><span class="Identifier">Window</span></a><span class="Other">)</span> {.
     <span class="Identifier">inline</span><span class="Other">,</span> <span><span class="Other pragmadots">...</span></span><span class="pragmawrap"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">forbids</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span>.}</pre></dt>
   <dd>
     
-    Configure click handlers for the menu layer on a window. Equivalent to C function <tt class="docutils literal"><span class="pre"><span class="Identifier">menu_layer_set_click_config_onto_window</span><span class="Punctuation">(</span><span class="Identifier">menu_layer</span><span class="Punctuation">,</span> <span class="Identifier">window</span><span class="Punctuation">)</span></span></tt>.
+    
     
   </dd>
 </div>
 
 </div>
-<div id="setHighlightColors-procs-all">
-  <div id="setHighlightColors,ptr.struct_MenuLayer,GColor,GColor">
-  <dt><pre><span class="Keyword">proc</span> <a href="#setHighlightColors%2Cptr.struct_MenuLayer%2CGColor%2CGColor"><span class="Identifier">setHighlightColors</span></a><span class="Other">(</span><span class="Identifier">menuLayer</span><span class="Other">:</span> <span class="Keyword">ptr</span> <a href="../ffi.html#MenuLayer"><span class="Identifier">MenuLayer</span></a><span class="Other">;</span> <span class="Identifier">background</span><span class="Other">:</span> <a href="../ffi.html#GColor"><span class="Identifier">GColor</span></a><span class="Other">;</span>
-                        <span class="Identifier">foreground</span><span class="Other">:</span> <a href="../ffi.html#GColor"><span class="Identifier">GColor</span></a><span class="Other">)</span> {.<span class="Identifier">inline</span><span class="Other">,</span> <span><span class="Other pragmadots">...</span></span><span class="pragmawrap"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span>
+<div id="setParent-procs-all">
+  <div id="setParent,MenuLayerHandle,ptr.struct_Layer">
+  <dt><pre><span class="Keyword">proc</span> <a href="#setParent%2CMenuLayerHandle%2Cptr.struct_Layer"><span class="Identifier">setParent</span></a><span class="Other">(</span><span class="Identifier">h`gensym0</span><span class="Other">:</span> <span class="Keyword">var</span> <a href="menu_layer.html#MenuLayerHandle"><span class="Identifier">MenuLayerHandle</span></a><span class="Other">;</span> <span class="Identifier">p`gensym0</span><span class="Other">:</span> <span class="Keyword">ptr</span> <a href="../ffi.html#Layer"><span class="Identifier">Layer</span></a><span class="Other">)</span> {.<span class="Identifier">inline</span><span class="Other">,</span>
+    <span><span class="Other pragmadots">...</span></span><span class="pragmawrap"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">forbids</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span>.}</pre></dt>
+  <dd>
+    
+    
+    
+  </dd>
+</div>
+
+</div>
+<div id="toHandle-procs-all">
+  <div id="toHandle,ptr.struct_MenuLayer">
+  <dt><pre><span class="Keyword">proc</span> <a href="#toHandle%2Cptr.struct_MenuLayer"><span class="Identifier">toHandle</span></a><span class="Other">(</span><span class="Identifier">p`gensym0</span><span class="Other">:</span> <span class="Keyword">ptr</span> <a href="../ffi.html#MenuLayer"><span class="Identifier">MenuLayer</span></a><span class="Other">)</span><span class="Other">:</span> <a href="menu_layer.html#MenuLayerHandle"><span class="Identifier">MenuLayerHandle</span></a> {.<span class="Identifier">inline</span><span class="Other">,</span> <span><span class="Other pragmadots">...</span></span><span class="pragmawrap"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span>
+    <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">forbids</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span>.}</pre></dt>
+  <dd>
+    
+    Wrap raw pointer in handle (unowned).
+    
+  </dd>
+</div>
+
+</div>
+<div id="wrapOwned-procs-all">
+  <div id="wrapOwned,ptr.struct_MenuLayer">
+  <dt><pre><span class="Keyword">proc</span> <a href="#wrapOwned%2Cptr.struct_MenuLayer"><span class="Identifier">wrapOwned</span></a><span class="Other">(</span><span class="Identifier">p`gensym0</span><span class="Other">:</span> <span class="Keyword">ptr</span> <a href="../ffi.html#MenuLayer"><span class="Identifier">MenuLayer</span></a><span class="Other">)</span><span class="Other">:</span> <a href="menu_layer.html#MenuLayerHandle"><span class="Identifier">MenuLayerHandle</span></a> {.<span class="Identifier">inline</span><span class="Other">,</span> <span><span class="Other pragmadots">...</span></span><span class="pragmawrap"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span>
+    <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">forbids</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span>.}</pre></dt>
+  <dd>
+    
+    Wrap raw pointer in handle (owned).
+    
+  </dd>
+</div>
+
+</div>
+
+  </dl>
+</div>
+<div class="section" id="16">
+  <h1><a class="toc-backref" href="#16">Converters</a></h1>
+  <dl class="item">
+    <div id="toLayer-converters-all">
+  <div id="toLayer.c,MenuLayerHandle">
+  <dt><pre><span class="Keyword">converter</span> <a href="#toLayer.c%2CMenuLayerHandle"><span class="Identifier">toLayer</span></a><span class="Other">(</span><span class="Identifier">h`gensym0</span><span class="Other">:</span> <a href="menu_layer.html#MenuLayerHandle"><span class="Identifier">MenuLayerHandle</span></a><span class="Other">)</span><span class="Other">:</span> <span class="Keyword">ptr</span> <a href="../ffi.html#Layer"><span class="Identifier">Layer</span></a> {.<span><span class="Other pragmadots">...</span></span><span class="pragmawrap"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span>
     <span class="Identifier">forbids</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span>.}</pre></dt>
   <dd>
     
-    Set the colors for highlighted (selected) cells. Equivalent to C function <tt class="docutils literal"><span class="pre"><span class="Identifier">menu_layer_set_highlight_colors</span><span class="Punctuation">(</span><span class="Identifier">menu_layer</span><span class="Punctuation">,</span> <span class="Identifier">background</span><span class="Punctuation">,</span> <span class="Identifier">foreground</span><span class="Punctuation">)</span></span></tt>. NOTE: Not available on black-and-white platforms (Aplite, Diorite).
+    
     
   </dd>
 </div>
 
 </div>
-<div id="setNormalColors-procs-all">
-  <div id="setNormalColors,ptr.struct_MenuLayer,GColor,GColor">
-  <dt><pre><span class="Keyword">proc</span> <a href="#setNormalColors%2Cptr.struct_MenuLayer%2CGColor%2CGColor"><span class="Identifier">setNormalColors</span></a><span class="Other">(</span><span class="Identifier">menuLayer</span><span class="Other">:</span> <span class="Keyword">ptr</span> <a href="../ffi.html#MenuLayer"><span class="Identifier">MenuLayer</span></a><span class="Other">;</span> <span class="Identifier">background</span><span class="Other">:</span> <a href="../ffi.html#GColor"><span class="Identifier">GColor</span></a><span class="Other">;</span>
-                     <span class="Identifier">foreground</span><span class="Other">:</span> <a href="../ffi.html#GColor"><span class="Identifier">GColor</span></a><span class="Other">)</span> {.<span class="Identifier">inline</span><span class="Other">,</span> <span><span class="Other pragmadots">...</span></span><span class="pragmawrap"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span>
-    <span class="Identifier">forbids</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span>.}</pre></dt>
+<div id="toPtr-converters-all">
+  <div id="toPtr.c,MenuLayerHandle">
+  <dt><pre><span class="Keyword">converter</span> <a href="#toPtr.c%2CMenuLayerHandle"><span class="Identifier">toPtr</span></a><span class="Other">(</span><span class="Identifier">h`gensym0</span><span class="Other">:</span> <a href="menu_layer.html#MenuLayerHandle"><span class="Identifier">MenuLayerHandle</span></a><span class="Other">)</span><span class="Other">:</span> <span class="Keyword">ptr</span> <a href="../ffi.html#MenuLayer"><span class="Identifier">MenuLayer</span></a> {.<span><span class="Other pragmadots">...</span></span><span class="pragmawrap"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span>
+    <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">forbids</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span>.}</pre></dt>
   <dd>
     
-    Set the colors for normal (non-highlighted) cells. Equivalent to C function <tt class="docutils literal"><span class="pre"><span class="Identifier">menu_layer_set_normal_colors</span><span class="Punctuation">(</span><span class="Identifier">menu_layer</span><span class="Punctuation">,</span> <span class="Identifier">background</span><span class="Punctuation">,</span> <span class="Identifier">foreground</span><span class="Punctuation">)</span></span></tt>. NOTE: Not available on black-and-white platforms (Aplite, Diorite).
     
-  </dd>
-</div>
-
-</div>
-<div id="setSelectedNext-procs-all">
-  <div id="setSelectedNext,ptr.struct_MenuLayer,bool,MenuRowAlign,bool">
-  <dt><pre><span class="Keyword">proc</span> <a href="#setSelectedNext%2Cptr.struct_MenuLayer%2Cbool%2CMenuRowAlign%2Cbool"><span class="Identifier">setSelectedNext</span></a><span class="Other">(</span><span class="Identifier">menuLayer</span><span class="Other">:</span> <span class="Keyword">ptr</span> <a href="../ffi.html#MenuLayer"><span class="Identifier">MenuLayer</span></a><span class="Other">;</span> <span class="Identifier">up</span><span class="Other">:</span> <span class="Identifier">bool</span><span class="Other">;</span> <span class="Identifier">reason</span><span class="Other">:</span> <a href="../ffi.html#MenuRowAlign"><span class="Identifier">MenuRowAlign</span></a><span class="Other">;</span>
-                     <span class="Identifier">animated</span><span class="Other">:</span> <span class="Identifier">bool</span><span class="Other">)</span> {.<span class="Identifier">inline</span><span class="Other">,</span> <span><span class="Other pragmadots">...</span></span><span class="pragmawrap"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">forbids</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span>.}</pre></dt>
-  <dd>
-    
-    Move selection to the next or previous item. Equivalent to C function <tt class="docutils literal"><span class="pre"><span class="Identifier">menu_layer_set_selected_next</span><span class="Punctuation">(</span><span class="Identifier">menu_layer</span><span class="Punctuation">,</span> <span class="Identifier">up</span><span class="Punctuation">,</span> <span class="Identifier">reason</span><span class="Punctuation">,</span> <span class="Identifier">animated</span><span class="Punctuation">)</span></span></tt>.
     
   </dd>
 </div>
@@ -412,7 +381,7 @@
 <div class="section" id="19">
   <h1><a class="toc-backref" href="#19">Exports</a></h1>
   <dl class="item">
-    <a href="../ffi.html#MenuLayer"><span class="Identifier">MenuLayer</span></a>, <a href="../ffi.html#MenuLayerCallbacks"><span class="Identifier">MenuLayerCallbacks</span></a>, <a href="../ffi.html#MenuIndex"><span class="Identifier">MenuIndex</span></a>, <a href="../ffi.html#MenuRowAlign"><span class="Identifier">MenuRowAlign</span></a>, <a href="../ffi.html#MenuCellSpan"><span class="Identifier">MenuCellSpan</span></a>, <a href="../ffi.html#MenuRowAlign_2"><span class="Identifier">MenuRowAlign</span></a>
+    <a href="../ffi.html#MenuLayer"><span class="Identifier">MenuLayer</span></a>, <a href="../ffi.html#MenuLayerCallbacks"><span class="Identifier">MenuLayerCallbacks</span></a>, <a href="../ffi.html#MenuIndex"><span class="Identifier">MenuIndex</span></a>, <a href="../ffi.html#MenuRowAlign"><span class="Identifier">MenuRowAlign</span></a>
   </dl>
 </div>
 
@@ -422,7 +391,7 @@
       <div class="twelve-columns footer">
         <span class="nim-sprite"></span>
         <br>
-        <small style="color: var(--hint);">Made with Nim. Generated: 2026-02-12 14:24:48 UTC</small>
+        <small style="color: var(--hint);">Made with Nim. Generated: 2026-02-14 21:03:57 UTC</small>
       </div>
     </div>
   </div>

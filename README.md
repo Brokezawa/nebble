@@ -8,11 +8,11 @@ Nebble (Nim + Pebble) provides comprehensive, type-safe Nim bindings for the Peb
 
 ## Why Nebble?
 
-- ✅ **Automatic Memory Management** - Managed types (Handles) use ARC to handle resource cleanup automatically.
-- ✅ **Type Safety** - Nim's type system catches errors at compile time that C would miss.
-- ✅ **Zero Overhead** - Compiles to efficient C code with zero runtime cost.
-- ✅ **Modern Syntax** - Clean, expressive code with property-style accessors and OOP patterns.
-- ✅ **Complete Coverage** - Full FFI bindings for all 6 Pebble platforms.
+- **Automatic Memory Management** - Managed types (Handles) use ARC to handle resource cleanup automatically.
+- **Type Safety** - Nim's type system catches errors at compile time that C would miss.
+- **Zero Overhead** - Compiles to efficient C code with zero runtime cost.
+- **Modern Syntax** - Clean, expressive code with property-style accessors and OOP patterns.
+- **Complete Coverage** - Full FFI bindings for all 6 Pebble platforms.
 
 ## Quick Start
 
@@ -39,62 +39,61 @@ nebble build
 nebble install --emulator basalt
 ```
 
-### 3. Basic "Managed" Example
+### 3. Declarative DSL Example
 
 ```nim
 import nebble
-import nebble/ui/window_managed
-import nebble/ui/text_layer_managed
 
-var 
-  mainWindow: WindowHandle
-  messageLayer: TextLayerHandle
+proc selectClickHandler(recognizer: ClickRecognizerRef; context: pointer) {.cdecl.} =
+  vibes.shortPulse()
 
-proc windowLoad(win: ptr Window) {.cdecl.} =
-  let bounds = win.rootLayer.bounds
-  messageLayer = newTextLayerHandle(makeGRect(0, 60, bounds.size.w, 40))
-  messageLayer.text = "Hello Nim!"
-  messageLayer.textAlignment = GTextAlignmentCenter
-  win.rootLayer.addChild(messageLayer.getLayer())
-
-pebbleApp(load = windowLoad)
+nebbleApp:
+  textLayer:
+    id = messageLayer
+    fullWidth = true
+    y = center
+    h = 40
+    text = "Hello Nim!"
+    alignment = GTextAlignmentCenter
+    
+  clicks:
+    BUTTON_ID_SELECT = selectClickHandler
 ```
 
 ## Managed API Quick Reference
 
-Managed types (Handles) are the recommended way to use Nebble. They automatically call `_destroy` functions when they go out of scope.
+Managed types (Handles) are the recommended way to use Nebble. They automatically manage transitions between handle-owned and SDK-owned memory.
 
 | Feature | Managed Type | Creation |
 |---------|--------------|----------|
-| **Window** | `WindowHandle` | `newWindowHandle()` |
-| **Text Layer** | `TextLayerHandle` | `newTextLayerHandle(frame)` |
-| **Bitmap Layer** | `BitmapLayerHandle` | `newBitmapLayerHandle(frame)` |
+| **Window** | `WindowHandle` | `newWindow()` |
+| **Text Layer** | `TextLayerHandle` | `newTextLayer(frame)` |
+| **Bitmap Layer** | `BitmapLayerHandle` | `newBitmapLayer(frame)` |
 | **Animation** | `AnimationHandle` | `newAnimationHandle()` |
-| **Layer** | `LayerHandle` | `newLayerHandle(frame)` |
+| **Layer** | `LayerHandle` | `newLayer(frame)` |
 
 ### Common Operations (Managed)
 - `win.push(animated = true)` - Push window to stack.
 - `win.pop()` - Pop window from stack.
-- `layer.addChild(childLayer)` - Add managed child to managed parent (parent takes ownership).
+- `parent.addChild(child)` - Add child layer to parent (handles ownership automatically).
 - `textLayer.text = "Hello"` - Set text content.
-- `textLayer.staticText(buffer, "Dynamic: " & $val)` - Safely set dynamic text using a persistent buffer.
+- `textLayer.text = countStr` - Set text using a heap-free `FixedString`.
 
 ## Documentation
 
+- **[Architecture](docs/ARCHITECTURE.md)** - Details on managed types and the build pipeline.
 - **[Pebble C to Nim Migration Guide](docs/MIGRATION.md)** - Translation reference for C developers.
-- **[Nim Features for Pebble](docs/NIM_FEATURES.md)** - Why Nim is great for embedded development.
-- **[Roadmap](docs/ROADMAP.md)** - Current status and upcoming features.
+- **[Quick Reference](docs/QUICK_REFERENCE.md)** - Fast look at common APIs.
 - **[CLI Reference](cli/README.md)** - Build tool commands and usage.
-- **[API Reference](docs/html/nebble.html)** - Full module documentation.
 
 ## Examples
 
 Check the `examples/` directory for complete working apps:
-- `hello_world`: Basic structure and click handlers.
-- `simple_clock`: Digital watchface with tick timer.
-- `managed_demo`: Comprehensive use of managed types.
-- `offscreen_render`: Advanced graphics manipulation.
+- `hello_world`: Basic structure and responsive layout.
+- `accelerometer_demo`: Real-time data with heap-free formatting.
+- `persist_demo`: Using the idiomatic storage API.
+- `animation_demo`: Property animations and sequences.
 
 ---
 
-**Built with ❤️ for the Pebble community**
+**Built for the Pebble community**

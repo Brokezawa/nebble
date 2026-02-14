@@ -56,16 +56,47 @@
 </li>
 <li>
   <details open>
+    <summary><a class="reference reference-toplevel" href="#7" id="57">Types</a></summary>
+    <ul class="simple simple-toc-section">
+      <li><a class="reference" href="#ActionMenuLevelHandle" title="ActionMenuLevelHandle = object">ActionMenuLevelHandle</a></li>
+
+    </ul>
+  </details>
+</li>
+<li>
+  <details open>
     <summary><a class="reference reference-toplevel" href="#12" id="62">Procs</a></summary>
     <ul class="simple simple-toc-section">
-      <ul class="simple nested-toc-section">addAction
-  <li><a class="reference" href="#addAction%2Cptr.struct_ActionMenuLevel%2Ccstring%2CActionMenuPerformActionCb%2Cpointer" title="addAction(level: ptr ActionMenuLevel; label: cstring;
-          action: ActionMenuPerformActionCb; actionData: pointer): ptr ActionMenuItem">addAction(level: ptr ActionMenuLevel; label: cstring;
-          action: ActionMenuPerformActionCb; actionData: pointer): ptr ActionMenuItem</a></li>
+      <ul class="simple nested-toc-section">=copy
+  <li><a class="reference" href="#%3Dcopy%2CActionMenuLevelHandle%2CActionMenuLevelHandle" title="`=copy`(dest: var ActionMenuLevelHandle; src: ActionMenuLevelHandle)">`=copy`(dest: var ActionMenuLevelHandle; src: ActionMenuLevelHandle)</a></li>
+
+</ul>
+<ul class="simple nested-toc-section">=destroy
+  <li><a class="reference" href="#%3Ddestroy%2CActionMenuLevelHandle" title="`=destroy`(h: var ActionMenuLevelHandle)">`=destroy`(h: var ActionMenuLevelHandle)</a></li>
+
+</ul>
+<ul class="simple nested-toc-section">=sink
+  <li><a class="reference" href="#%3Dsink%2CActionMenuLevelHandle%2CActionMenuLevelHandle" title="`=sink`(dest: var ActionMenuLevelHandle; src: ActionMenuLevelHandle)">`=sink`(dest: var ActionMenuLevelHandle; src: ActionMenuLevelHandle)</a></li>
+
+</ul>
+<ul class="simple nested-toc-section">=wasMoved
+  <li><a class="reference" href="#%3DwasMoved%2CActionMenuLevelHandle" title="`=wasMoved`(h: var ActionMenuLevelHandle)">`=wasMoved`(h: var ActionMenuLevelHandle)</a></li>
+
+</ul>
+<ul class="simple nested-toc-section">addAction
+  <li><a class="reference" href="#addAction%2CActionMenuLevelHandle%2Ccstring%2CActionMenuPerformActionCb%2Cpointer" title="addAction(h: ActionMenuLevelHandle; label: cstring;
+          action: ActionMenuPerformActionCb; actionData: pointer = nil): ptr ActionMenuItem">addAction(h: ActionMenuLevelHandle; label: cstring;
+          action: ActionMenuPerformActionCb; actionData: pointer = nil): ptr ActionMenuItem</a></li>
+<li><a class="reference" href="#addAction%2Cptr.struct_ActionMenuLevel%2Ccstring%2CActionMenuPerformActionCb%2Cpointer" title="addAction(level: ptr ActionMenuLevel; label: cstring;
+          action: ActionMenuPerformActionCb; actionData: pointer = nil): ptr ActionMenuItem">addAction(level: ptr ActionMenuLevel; label: cstring;
+          action: ActionMenuPerformActionCb; actionData: pointer = nil): ptr ActionMenuItem</a></li>
 
 </ul>
 <ul class="simple nested-toc-section">addChild
-  <li><a class="reference" href="#addChild%2Cptr.struct_ActionMenuLevel%2Cptr.struct_ActionMenuLevel%2Ccstring" title="addChild(level: ptr ActionMenuLevel; childLevel: ptr ActionMenuLevel;
+  <li><a class="reference" href="#addChild%2CActionMenuLevelHandle%2CActionMenuLevelHandle%2Ccstring" title="addChild(h: ActionMenuLevelHandle; childLevel: var ActionMenuLevelHandle;
+         label: cstring): ptr ActionMenuItem">addChild(h: ActionMenuLevelHandle; childLevel: var ActionMenuLevelHandle;
+         label: cstring): ptr ActionMenuItem</a></li>
+<li><a class="reference" href="#addChild%2Cptr.struct_ActionMenuLevel%2Cptr.struct_ActionMenuLevel%2Ccstring" title="addChild(level: ptr ActionMenuLevel; childLevel: ptr ActionMenuLevel;
          label: cstring): ptr ActionMenuItem">addChild(level: ptr ActionMenuLevel; childLevel: ptr ActionMenuLevel;
          label: cstring): ptr ActionMenuItem</a></li>
 
@@ -100,8 +131,20 @@
   <li><a class="reference" href="#getRootLevel%2Cptr.struct_ActionMenu" title="getRootLevel(menu: ptr ActionMenu): ptr ActionMenuLevel">getRootLevel(menu: ptr ActionMenu): ptr ActionMenuLevel</a></li>
 
 </ul>
+<ul class="simple nested-toc-section">isValid
+  <li><a class="reference" href="#isValid%2CActionMenuLevelHandle" title="isValid(h: ActionMenuLevelHandle): bool">isValid(h: ActionMenuLevelHandle): bool</a></li>
+
+</ul>
 <ul class="simple nested-toc-section">newActionMenuLevel
-  <li><a class="reference" href="#newActionMenuLevel%2Cuint16" title="newActionMenuLevel(maxItems: uint16): ptr ActionMenuLevel">newActionMenuLevel(maxItems: uint16): ptr ActionMenuLevel</a></li>
+  <li><a class="reference" href="#newActionMenuLevel%2Cuint16" title="newActionMenuLevel(maxItems: uint16): ActionMenuLevelHandle">newActionMenuLevel(maxItems: uint16): ActionMenuLevelHandle</a></li>
+
+</ul>
+<ul class="simple nested-toc-section">newActionMenuLevelHandle
+  <li><a class="reference" href="#newActionMenuLevelHandle%2Cuint16" title="newActionMenuLevelHandle(maxItems: uint16): ActionMenuLevelHandle">newActionMenuLevelHandle(maxItems: uint16): ActionMenuLevelHandle</a></li>
+
+</ul>
+<ul class="simple nested-toc-section">open
+  <li><a class="reference" href="#open%2CActionMenuLevelHandle%2CActionMenuConfig" title="open(h: var ActionMenuLevelHandle; config: var ActionMenuConfig): ptr ActionMenu">open(h: var ActionMenuLevelHandle; config: var ActionMenuConfig): ptr ActionMenu</a></li>
 
 </ul>
 <ul class="simple nested-toc-section">openActionMenu
@@ -109,7 +152,8 @@
 
 </ul>
 <ul class="simple nested-toc-section">setDisplayMode
-  <li><a class="reference" href="#setDisplayMode%2Cptr.struct_ActionMenuLevel%2CActionMenuLevelDisplayMode" title="setDisplayMode(level: ptr ActionMenuLevel;
+  <li><a class="reference" href="#setDisplayMode%2CActionMenuLevelHandle%2CActionMenuLevelDisplayMode" title="setDisplayMode(h: ActionMenuLevelHandle; displayMode: ActionMenuLevelDisplayMode)">setDisplayMode(h: ActionMenuLevelHandle; displayMode: ActionMenuLevelDisplayMode)</a></li>
+<li><a class="reference" href="#setDisplayMode%2Cptr.struct_ActionMenuLevel%2CActionMenuLevelDisplayMode" title="setDisplayMode(level: ptr ActionMenuLevel;
                displayMode: ActionMenuLevelDisplayMode)">setDisplayMode(level: ptr ActionMenuLevel;
                displayMode: ActionMenuLevelDisplayMode)</a></li>
 
@@ -120,6 +164,18 @@
 </ul>
 <ul class="simple nested-toc-section">unfreeze
   <li><a class="reference" href="#unfreeze%2Cptr.struct_ActionMenu" title="unfreeze(menu: ptr ActionMenu)">unfreeze(menu: ptr ActionMenu)</a></li>
+
+</ul>
+
+    </ul>
+  </details>
+</li>
+<li>
+  <details open>
+    <summary><a class="reference reference-toplevel" href="#16" id="66">Converters</a></summary>
+    <ul class="simple simple-toc-section">
+      <ul class="simple nested-toc-section">toPtr
+  <li><a class="reference" href="#toPtr.c%2CActionMenuLevelHandle" title="toPtr(h: ActionMenuLevelHandle): ptr ActionMenuLevel">toPtr(h: ActionMenuLevelHandle): ptr ActionMenuLevel</a></li>
 
 </ul>
 
@@ -138,38 +194,122 @@
     <div id="tocRoot"></div>
     
     <p class="module-desc"><p>High-level Nim wrapper for Pebble Action Menu API.</p>
-<p>Provides a UI for displaying a hierarchical menu of actions.</p>
+<p>Provides a UI for displaying a hierarchical menu of actions. Includes ARC-managed handles for ActionMenuLevel to prevent leaks if a menu is never opened.</p>
 </p>
     <div class="section" id="6">
   <h1><a class="toc-backref" href="#6">Imports</a></h1>
   <dl class="item">
-    <a class="reference external" href="../ffi.html">../ffi</a>
+    <a class="reference external" href="../ffi.html">../ffi</a>, <a class="reference external" href="../ffi/managed.html">../ffi/managed</a>
+  </dl>
+</div>
+<div class="section" id="7">
+  <h1><a class="toc-backref" href="#7">Types</a></h1>
+  <dl class="item">
+    <div id="ActionMenuLevelHandle">
+  <dt><pre><a href="action_menu.html#ActionMenuLevelHandle"><span class="Identifier">ActionMenuLevelHandle</span></a> <span class="Other">=</span> <span class="Keyword">object</span></pre></dt>
+  <dd>
+    
+    <p>Managed handle for ActionMenuLevel hierarchy.</p>
+<p><strong>Ownership:</strong> This handle owns the entire hierarchy starting from this level. If the menu is opened via <tt class="docutils literal"><span class="pre"><span class="Identifier">openActionMenu</span></span></tt>, the OS takes ownership and this handle should be marked as consumed to avoid double-free.</p>
+
+    
+  </dd>
+</div>
+
   </dl>
 </div>
 <div class="section" id="12">
   <h1><a class="toc-backref" href="#12">Procs</a></h1>
   <dl class="item">
-    <div id="addAction-procs-all">
-  <div id="addAction,ptr.struct_ActionMenuLevel,cstring,ActionMenuPerformActionCb,pointer">
-  <dt><pre><span class="Keyword">proc</span> <a href="#addAction%2Cptr.struct_ActionMenuLevel%2Ccstring%2CActionMenuPerformActionCb%2Cpointer"><span class="Identifier">addAction</span></a><span class="Other">(</span><span class="Identifier">level</span><span class="Other">:</span> <span class="Keyword">ptr</span> <a href="../ffi.html#ActionMenuLevel"><span class="Identifier">ActionMenuLevel</span></a><span class="Other">;</span> <span class="Identifier">label</span><span class="Other">:</span> <span class="Identifier">cstring</span><span class="Other">;</span>
-               <span class="Identifier">action</span><span class="Other">:</span> <a href="../ffi.html#ActionMenuPerformActionCb"><span class="Identifier">ActionMenuPerformActionCb</span></a><span class="Other">;</span> <span class="Identifier">actionData</span><span class="Other">:</span> <span class="Identifier">pointer</span><span class="Other">)</span><span class="Other">:</span> <span class="Keyword">ptr</span> <a href="../ffi.html#ActionMenuItem"><span class="Identifier">ActionMenuItem</span></a> {.
+    <div id="=copy-procs-all">
+  <div id="=copy,ActionMenuLevelHandle,ActionMenuLevelHandle">
+  <dt><pre><span class="Keyword">proc</span> <a href="#%3Dcopy%2CActionMenuLevelHandle%2CActionMenuLevelHandle"><span class="Identifier">`=copy`</span></a><span class="Other">(</span><span class="Identifier">dest</span><span class="Other">:</span> <span class="Keyword">var</span> <a href="action_menu.html#ActionMenuLevelHandle"><span class="Identifier">ActionMenuLevelHandle</span></a><span class="Other">;</span> <span class="Identifier">src</span><span class="Other">:</span> <a href="action_menu.html#ActionMenuLevelHandle"><span class="Identifier">ActionMenuLevelHandle</span></a><span class="Other">)</span> {.
+    <span class="Identifier">error</span>.}</pre></dt>
+  <dd>
+    
+    
+    
+  </dd>
+</div>
+
+</div>
+<div id="=destroy-procs-all">
+  <div id="=destroy,ActionMenuLevelHandle">
+  <dt><pre><span class="Keyword">proc</span> <a href="#%3Ddestroy%2CActionMenuLevelHandle"><span class="Identifier">`=destroy`</span></a><span class="Other">(</span><span class="Identifier">h</span><span class="Other">:</span> <span class="Keyword">var</span> <a href="action_menu.html#ActionMenuLevelHandle"><span class="Identifier">ActionMenuLevelHandle</span></a><span class="Other">)</span> {.<span><span class="Other pragmadots">...</span></span><span class="pragmawrap"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span>
+    <span class="Identifier">forbids</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span>.}</pre></dt>
+  <dd>
+    
+    Destroy the hierarchy if it hasn't been consumed by the OS.
+    
+  </dd>
+</div>
+
+</div>
+<div id="=sink-procs-all">
+  <div id="=sink,ActionMenuLevelHandle,ActionMenuLevelHandle">
+  <dt><pre><span class="Keyword">proc</span> <a href="#%3Dsink%2CActionMenuLevelHandle%2CActionMenuLevelHandle"><span class="Identifier">`=sink`</span></a><span class="Other">(</span><span class="Identifier">dest</span><span class="Other">:</span> <span class="Keyword">var</span> <a href="action_menu.html#ActionMenuLevelHandle"><span class="Identifier">ActionMenuLevelHandle</span></a><span class="Other">;</span> <span class="Identifier">src</span><span class="Other">:</span> <a href="action_menu.html#ActionMenuLevelHandle"><span class="Identifier">ActionMenuLevelHandle</span></a><span class="Other">)</span> {.
+    <span><span class="Other pragmadots">...</span></span><span class="pragmawrap"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">forbids</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span>.}</pre></dt>
+  <dd>
+    
+    
+    
+  </dd>
+</div>
+
+</div>
+<div id="=wasMoved-procs-all">
+  <div id="=wasMoved,ActionMenuLevelHandle">
+  <dt><pre><span class="Keyword">proc</span> <a href="#%3DwasMoved%2CActionMenuLevelHandle"><span class="Identifier">`=wasMoved`</span></a><span class="Other">(</span><span class="Identifier">h</span><span class="Other">:</span> <span class="Keyword">var</span> <a href="action_menu.html#ActionMenuLevelHandle"><span class="Identifier">ActionMenuLevelHandle</span></a><span class="Other">)</span> {.<span><span class="Other pragmadots">...</span></span><span class="pragmawrap"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span>
+    <span class="Identifier">forbids</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span>.}</pre></dt>
+  <dd>
+    
+    
+    
+  </dd>
+</div>
+
+</div>
+<div id="addAction-procs-all">
+  <div id="addAction,ActionMenuLevelHandle,cstring,ActionMenuPerformActionCb,pointer">
+  <dt><pre><span class="Keyword">proc</span> <a href="#addAction%2CActionMenuLevelHandle%2Ccstring%2CActionMenuPerformActionCb%2Cpointer"><span class="Identifier">addAction</span></a><span class="Other">(</span><span class="Identifier">h</span><span class="Other">:</span> <a href="action_menu.html#ActionMenuLevelHandle"><span class="Identifier">ActionMenuLevelHandle</span></a><span class="Other">;</span> <span class="Identifier">label</span><span class="Other">:</span> <span class="Identifier">cstring</span><span class="Other">;</span>
+               <span class="Identifier">action</span><span class="Other">:</span> <a href="../ffi.html#ActionMenuPerformActionCb"><span class="Identifier">ActionMenuPerformActionCb</span></a><span class="Other">;</span> <span class="Identifier">actionData</span><span class="Other">:</span> <span class="Identifier">pointer</span> <span class="Other">=</span> <span class="Keyword">nil</span><span class="Other">)</span><span class="Other">:</span> <span class="Keyword">ptr</span> <a href="../ffi.html#ActionMenuItem"><span class="Identifier">ActionMenuItem</span></a> {.
     <span class="Identifier">inline</span><span class="Other">,</span> <span><span class="Other pragmadots">...</span></span><span class="pragmawrap"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">forbids</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span>.}</pre></dt>
   <dd>
     
-    Add an action item to the level. Equivalent to C function <tt class="docutils literal"><span class="pre"><span class="Identifier">action_menu_level_add_action</span><span class="Punctuation">(</span><span class="Operator">...</span><span class="Punctuation">)</span></span></tt>.
+    Add an action item to the level.
+    
+  </dd>
+</div>
+<div id="addAction,ptr.struct_ActionMenuLevel,cstring,ActionMenuPerformActionCb,pointer">
+  <dt><pre><span class="Keyword">proc</span> <a href="#addAction%2Cptr.struct_ActionMenuLevel%2Ccstring%2CActionMenuPerformActionCb%2Cpointer"><span class="Identifier">addAction</span></a><span class="Other">(</span><span class="Identifier">level</span><span class="Other">:</span> <span class="Keyword">ptr</span> <a href="../ffi.html#ActionMenuLevel"><span class="Identifier">ActionMenuLevel</span></a><span class="Other">;</span> <span class="Identifier">label</span><span class="Other">:</span> <span class="Identifier">cstring</span><span class="Other">;</span>
+               <span class="Identifier">action</span><span class="Other">:</span> <a href="../ffi.html#ActionMenuPerformActionCb"><span class="Identifier">ActionMenuPerformActionCb</span></a><span class="Other">;</span> <span class="Identifier">actionData</span><span class="Other">:</span> <span class="Identifier">pointer</span> <span class="Other">=</span> <span class="Keyword">nil</span><span class="Other">)</span><span class="Other">:</span> <span class="Keyword">ptr</span> <a href="../ffi.html#ActionMenuItem"><span class="Identifier">ActionMenuItem</span></a> {.
+    <span class="Identifier">inline</span><span class="Other">,</span> <span><span class="Other pragmadots">...</span></span><span class="pragmawrap"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">forbids</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span>.}</pre></dt>
+  <dd>
+    
+    Add an action item to the level (raw pointer version).
     
   </dd>
 </div>
 
 </div>
 <div id="addChild-procs-all">
-  <div id="addChild,ptr.struct_ActionMenuLevel,ptr.struct_ActionMenuLevel,cstring">
+  <div id="addChild,ActionMenuLevelHandle,ActionMenuLevelHandle,cstring">
+  <dt><pre><span class="Keyword">proc</span> <a href="#addChild%2CActionMenuLevelHandle%2CActionMenuLevelHandle%2Ccstring"><span class="Identifier">addChild</span></a><span class="Other">(</span><span class="Identifier">h</span><span class="Other">:</span> <a href="action_menu.html#ActionMenuLevelHandle"><span class="Identifier">ActionMenuLevelHandle</span></a><span class="Other">;</span> <span class="Identifier">childLevel</span><span class="Other">:</span> <span class="Keyword">var</span> <a href="action_menu.html#ActionMenuLevelHandle"><span class="Identifier">ActionMenuLevelHandle</span></a><span class="Other">;</span>
+              <span class="Identifier">label</span><span class="Other">:</span> <span class="Identifier">cstring</span><span class="Other">)</span><span class="Other">:</span> <span class="Keyword">ptr</span> <a href="../ffi.html#ActionMenuItem"><span class="Identifier">ActionMenuItem</span></a> {.<span class="Identifier">inline</span><span class="Other">,</span> <span><span class="Other pragmadots">...</span></span><span class="pragmawrap"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span>
+    <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">forbids</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span>.}</pre></dt>
+  <dd>
+    
+    Add a child level (submenu) to this level. Ownership of the childLevel is transferred to the parent hierarchy.
+    
+  </dd>
+</div>
+<div id="addChild,ptr.struct_ActionMenuLevel,ptr.struct_ActionMenuLevel,cstring">
   <dt><pre><span class="Keyword">proc</span> <a href="#addChild%2Cptr.struct_ActionMenuLevel%2Cptr.struct_ActionMenuLevel%2Ccstring"><span class="Identifier">addChild</span></a><span class="Other">(</span><span class="Identifier">level</span><span class="Other">:</span> <span class="Keyword">ptr</span> <a href="../ffi.html#ActionMenuLevel"><span class="Identifier">ActionMenuLevel</span></a><span class="Other">;</span> <span class="Identifier">childLevel</span><span class="Other">:</span> <span class="Keyword">ptr</span> <a href="../ffi.html#ActionMenuLevel"><span class="Identifier">ActionMenuLevel</span></a><span class="Other">;</span>
               <span class="Identifier">label</span><span class="Other">:</span> <span class="Identifier">cstring</span><span class="Other">)</span><span class="Other">:</span> <span class="Keyword">ptr</span> <a href="../ffi.html#ActionMenuItem"><span class="Identifier">ActionMenuItem</span></a> {.<span class="Identifier">inline</span><span class="Other">,</span> <span><span class="Other pragmadots">...</span></span><span class="pragmawrap"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span>
     <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">forbids</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span>.}</pre></dt>
   <dd>
     
-    Add a child level (submenu) to this level. Equivalent to C function <tt class="docutils literal"><span class="pre"><span class="Identifier">action_menu_level_add_child</span><span class="Punctuation">(</span><span class="Operator">...</span><span class="Punctuation">)</span></span></tt>.
+    Add a child level (submenu) to this level (raw pointer version).
     
   </dd>
 </div>
@@ -181,7 +321,7 @@
     <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">forbids</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span>.}</pre></dt>
   <dd>
     
-    Close the Action Menu. Equivalent to C function <tt class="docutils literal"><span class="pre"><span class="Identifier">action_menu_close</span><span class="Punctuation">(</span><span class="Identifier">menu</span><span class="Punctuation">,</span> <span class="Identifier">animated</span><span class="Punctuation">)</span></span></tt>.
+    Close the Action Menu.
     
   </dd>
 </div>
@@ -194,7 +334,7 @@
     <span class="Identifier">inline</span><span class="Other">,</span> <span><span class="Other pragmadots">...</span></span><span class="pragmawrap"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">forbids</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span>.}</pre></dt>
   <dd>
     
-    Destroy an ActionMenuLevel hierarchy. NOTE: Usually handled automatically by the system when the menu closes, but needed if you create a hierarchy but never open the menu. Equivalent to C function <tt class="docutils literal"><span class="pre"><span class="Identifier">action_menu_hierarchy_destroy</span><span class="Punctuation">(</span><span class="Identifier">root</span><span class="Punctuation">,</span> <span class="Identifier">each_cb</span><span class="Punctuation">,</span> <span class="Identifier">context</span><span class="Punctuation">)</span></span></tt>.
+    Destroy an ActionMenuLevel hierarchy (raw pointer version).
     
   </dd>
 </div>
@@ -205,7 +345,7 @@
   <dt><pre><span class="Keyword">proc</span> <a href="#freeze%2Cptr.struct_ActionMenu"><span class="Identifier">freeze</span></a><span class="Other">(</span><span class="Identifier">menu</span><span class="Other">:</span> <span class="Keyword">ptr</span> <a href="../ffi.html#ActionMenu"><span class="Identifier">ActionMenu</span></a><span class="Other">)</span> {.<span class="Identifier">inline</span><span class="Other">,</span> <span><span class="Other pragmadots">...</span></span><span class="pragmawrap"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">forbids</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span>.}</pre></dt>
   <dd>
     
-    Freeze the Action Menu (e.g. while performing an async action). Equivalent to C function <tt class="docutils literal"><span class="pre"><span class="Identifier">action_menu_freeze</span><span class="Punctuation">(</span><span class="Identifier">menu</span><span class="Punctuation">)</span></span></tt>.
+    Freeze the Action Menu.
     
   </dd>
 </div>
@@ -217,7 +357,7 @@
     <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">forbids</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span>.}</pre></dt>
   <dd>
     
-    Get the action data associated with an ActionMenuItem. Equivalent to C function <tt class="docutils literal"><span class="pre"><span class="Identifier">action_menu_item_get_action_data</span><span class="Punctuation">(</span><span class="Identifier">item</span><span class="Punctuation">)</span></span></tt>.
+    Get the action data associated with an ActionMenuItem.
     
   </dd>
 </div>
@@ -229,7 +369,7 @@
     <span class="Identifier">forbids</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span>.}</pre></dt>
   <dd>
     
-    Get the context pointer associated with the Action Menu. Equivalent to C function <tt class="docutils literal"><span class="pre"><span class="Identifier">action_menu_get_context</span><span class="Punctuation">(</span><span class="Identifier">menu</span><span class="Punctuation">)</span></span></tt>.
+    Get the context pointer associated with the Action Menu.
     
   </dd>
 </div>
@@ -241,7 +381,7 @@
     <span class="Identifier">forbids</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span>.}</pre></dt>
   <dd>
     
-    Get the label of an ActionMenuItem. Equivalent to C function <tt class="docutils literal"><span class="pre"><span class="Identifier">action_menu_item_get_label</span><span class="Punctuation">(</span><span class="Identifier">item</span><span class="Punctuation">)</span></span></tt>.
+    Get the label of an ActionMenuItem.
     
   </dd>
 </div>
@@ -253,7 +393,19 @@
     <span><span class="Other pragmadots">...</span></span><span class="pragmawrap"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">forbids</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span>.}</pre></dt>
   <dd>
     
-    Get the root level of the Action Menu. Equivalent to C function <tt class="docutils literal"><span class="pre"><span class="Identifier">action_menu_get_root_level</span><span class="Punctuation">(</span><span class="Identifier">menu</span><span class="Punctuation">)</span></span></tt>.
+    Get the root level of the Action Menu.
+    
+  </dd>
+</div>
+
+</div>
+<div id="isValid-procs-all">
+  <div id="isValid,ActionMenuLevelHandle">
+  <dt><pre><span class="Keyword">proc</span> <a href="#isValid%2CActionMenuLevelHandle"><span class="Identifier">isValid</span></a><span class="Other">(</span><span class="Identifier">h</span><span class="Other">:</span> <a href="action_menu.html#ActionMenuLevelHandle"><span class="Identifier">ActionMenuLevelHandle</span></a><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">bool</span> {.<span class="Identifier">inline</span><span class="Other">,</span> <span><span class="Other pragmadots">...</span></span><span class="pragmawrap"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span>
+    <span class="Identifier">forbids</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span>.}</pre></dt>
+  <dd>
+    
+    
     
   </dd>
 </div>
@@ -261,11 +413,35 @@
 </div>
 <div id="newActionMenuLevel-procs-all">
   <div id="newActionMenuLevel,uint16">
-  <dt><pre><span class="Keyword">proc</span> <a href="#newActionMenuLevel%2Cuint16"><span class="Identifier">newActionMenuLevel</span></a><span class="Other">(</span><span class="Identifier">maxItems</span><span class="Other">:</span> <span class="Identifier">uint16</span><span class="Other">)</span><span class="Other">:</span> <span class="Keyword">ptr</span> <a href="../ffi.html#ActionMenuLevel"><span class="Identifier">ActionMenuLevel</span></a> {.<span class="Identifier">inline</span><span class="Other">,</span>
+  <dt><pre><span class="Keyword">proc</span> <a href="#newActionMenuLevel%2Cuint16"><span class="Identifier">newActionMenuLevel</span></a><span class="Other">(</span><span class="Identifier">maxItems</span><span class="Other">:</span> <span class="Identifier">uint16</span><span class="Other">)</span><span class="Other">:</span> <a href="action_menu.html#ActionMenuLevelHandle"><span class="Identifier">ActionMenuLevelHandle</span></a> {.<span class="Identifier">inline</span><span class="Other">,</span>
     <span><span class="Other pragmadots">...</span></span><span class="pragmawrap"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">forbids</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span>.}</pre></dt>
   <dd>
     
-    Create a new ActionMenuLevel. Equivalent to C function <tt class="docutils literal"><span class="pre"><span class="Identifier">action_menu_level_create</span><span class="Punctuation">(</span><span class="Identifier">max_items</span><span class="Punctuation">)</span></span></tt>.
+    Alias for <tt class="docutils literal"><span class="pre"><span class="Identifier">newActionMenuLevelHandle</span></span></tt>.
+    
+  </dd>
+</div>
+
+</div>
+<div id="newActionMenuLevelHandle-procs-all">
+  <div id="newActionMenuLevelHandle,uint16">
+  <dt><pre><span class="Keyword">proc</span> <a href="#newActionMenuLevelHandle%2Cuint16"><span class="Identifier">newActionMenuLevelHandle</span></a><span class="Other">(</span><span class="Identifier">maxItems</span><span class="Other">:</span> <span class="Identifier">uint16</span><span class="Other">)</span><span class="Other">:</span> <a href="action_menu.html#ActionMenuLevelHandle"><span class="Identifier">ActionMenuLevelHandle</span></a> {.<span class="Identifier">inline</span><span class="Other">,</span>
+    <span><span class="Other pragmadots">...</span></span><span class="pragmawrap"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">forbids</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span>.}</pre></dt>
+  <dd>
+    
+    Create a new managed ActionMenuLevel.
+    
+  </dd>
+</div>
+
+</div>
+<div id="open-procs-all">
+  <div id="open,ActionMenuLevelHandle,ActionMenuConfig">
+  <dt><pre><span class="Keyword">proc</span> <a href="#open%2CActionMenuLevelHandle%2CActionMenuConfig"><span class="Identifier">open</span></a><span class="Other">(</span><span class="Identifier">h</span><span class="Other">:</span> <span class="Keyword">var</span> <a href="action_menu.html#ActionMenuLevelHandle"><span class="Identifier">ActionMenuLevelHandle</span></a><span class="Other">;</span> <span class="Identifier">config</span><span class="Other">:</span> <span class="Keyword">var</span> <a href="../ffi.html#ActionMenuConfig"><span class="Identifier">ActionMenuConfig</span></a><span class="Other">)</span><span class="Other">:</span> <span class="Keyword">ptr</span> <a href="../ffi.html#ActionMenu"><span class="Identifier">ActionMenu</span></a> {.
+    <span class="Identifier">inline</span><span class="Other">,</span> <span><span class="Other pragmadots">...</span></span><span class="pragmawrap"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">forbids</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span>.}</pre></dt>
+  <dd>
+    
+    Convenience helper to open a menu from a handle. Marks the handle as consumed.
     
   </dd>
 </div>
@@ -277,20 +453,30 @@
     <span><span class="Other pragmadots">...</span></span><span class="pragmawrap"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">forbids</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span>.}</pre></dt>
   <dd>
     
-    Open the Action Menu. Equivalent to C function <tt class="docutils literal"><span class="pre"><span class="Identifier">action_menu_open</span><span class="Punctuation">(</span><span class="Identifier">config</span><span class="Punctuation">)</span></span></tt>.
+    Open the Action Menu. NOTE: If the config points to an ActionMenuLevelHandle, mark it as consumed!
     
   </dd>
 </div>
 
 </div>
 <div id="setDisplayMode-procs-all">
-  <div id="setDisplayMode,ptr.struct_ActionMenuLevel,ActionMenuLevelDisplayMode">
+  <div id="setDisplayMode,ActionMenuLevelHandle,ActionMenuLevelDisplayMode">
+  <dt><pre><span class="Keyword">proc</span> <a href="#setDisplayMode%2CActionMenuLevelHandle%2CActionMenuLevelDisplayMode"><span class="Identifier">setDisplayMode</span></a><span class="Other">(</span><span class="Identifier">h</span><span class="Other">:</span> <a href="action_menu.html#ActionMenuLevelHandle"><span class="Identifier">ActionMenuLevelHandle</span></a><span class="Other">;</span>
+                    <span class="Identifier">displayMode</span><span class="Other">:</span> <a href="../ffi.html#ActionMenuLevelDisplayMode"><span class="Identifier">ActionMenuLevelDisplayMode</span></a><span class="Other">)</span> {.<span class="Identifier">inline</span><span class="Other">,</span>
+    <span><span class="Other pragmadots">...</span></span><span class="pragmawrap"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">forbids</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span>.}</pre></dt>
+  <dd>
+    
+    Set the display mode for this level (e.g. single row vs grid).
+    
+  </dd>
+</div>
+<div id="setDisplayMode,ptr.struct_ActionMenuLevel,ActionMenuLevelDisplayMode">
   <dt><pre><span class="Keyword">proc</span> <a href="#setDisplayMode%2Cptr.struct_ActionMenuLevel%2CActionMenuLevelDisplayMode"><span class="Identifier">setDisplayMode</span></a><span class="Other">(</span><span class="Identifier">level</span><span class="Other">:</span> <span class="Keyword">ptr</span> <a href="../ffi.html#ActionMenuLevel"><span class="Identifier">ActionMenuLevel</span></a><span class="Other">;</span>
                     <span class="Identifier">displayMode</span><span class="Other">:</span> <a href="../ffi.html#ActionMenuLevelDisplayMode"><span class="Identifier">ActionMenuLevelDisplayMode</span></a><span class="Other">)</span> {.<span class="Identifier">inline</span><span class="Other">,</span>
     <span><span class="Other pragmadots">...</span></span><span class="pragmawrap"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">forbids</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span>.}</pre></dt>
   <dd>
     
-    Set the display mode for this level (e.g. single row vs grid). Equivalent to C function <tt class="docutils literal"><span class="pre"><span class="Identifier">action_menu_level_set_display_mode</span><span class="Punctuation">(</span><span class="Operator">...</span><span class="Punctuation">)</span></span></tt>.
+    Set the display mode for this level (raw pointer version).
     
   </dd>
 </div>
@@ -302,7 +488,7 @@
     <span><span class="Other pragmadots">...</span></span><span class="pragmawrap"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">forbids</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span>.}</pre></dt>
   <dd>
     
-    Set the window that should be focused after the Action Menu closes. Equivalent to C function <tt class="docutils literal"><span class="pre"><span class="Identifier">action_menu_set_result_window</span><span class="Punctuation">(</span><span class="Identifier">menu</span><span class="Punctuation">,</span> <span class="Identifier">window</span><span class="Punctuation">)</span></span></tt>.
+    Set the window that should be focused after the Action Menu closes.
     
   </dd>
 </div>
@@ -313,7 +499,25 @@
   <dt><pre><span class="Keyword">proc</span> <a href="#unfreeze%2Cptr.struct_ActionMenu"><span class="Identifier">unfreeze</span></a><span class="Other">(</span><span class="Identifier">menu</span><span class="Other">:</span> <span class="Keyword">ptr</span> <a href="../ffi.html#ActionMenu"><span class="Identifier">ActionMenu</span></a><span class="Other">)</span> {.<span class="Identifier">inline</span><span class="Other">,</span> <span><span class="Other pragmadots">...</span></span><span class="pragmawrap"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">forbids</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span>.}</pre></dt>
   <dd>
     
-    Unfreeze the Action Menu. Equivalent to C function <tt class="docutils literal"><span class="pre"><span class="Identifier">action_menu_unfreeze</span><span class="Punctuation">(</span><span class="Identifier">menu</span><span class="Punctuation">)</span></span></tt>.
+    Unfreeze the Action Menu.
+    
+  </dd>
+</div>
+
+</div>
+
+  </dl>
+</div>
+<div class="section" id="16">
+  <h1><a class="toc-backref" href="#16">Converters</a></h1>
+  <dl class="item">
+    <div id="toPtr-converters-all">
+  <div id="toPtr.c,ActionMenuLevelHandle">
+  <dt><pre><span class="Keyword">converter</span> <a href="#toPtr.c%2CActionMenuLevelHandle"><span class="Identifier">toPtr</span></a><span class="Other">(</span><span class="Identifier">h</span><span class="Other">:</span> <a href="action_menu.html#ActionMenuLevelHandle"><span class="Identifier">ActionMenuLevelHandle</span></a><span class="Other">)</span><span class="Other">:</span> <span class="Keyword">ptr</span> <a href="../ffi.html#ActionMenuLevel"><span class="Identifier">ActionMenuLevel</span></a> {.<span><span class="Other pragmadots">...</span></span><span class="pragmawrap"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span>
+    <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">forbids</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span>.}</pre></dt>
+  <dd>
+    
+    
     
   </dd>
 </div>
@@ -335,7 +539,7 @@
       <div class="twelve-columns footer">
         <span class="nim-sprite"></span>
         <br>
-        <small style="color: var(--hint);">Made with Nim. Generated: 2026-02-12 14:24:48 UTC</small>
+        <small style="color: var(--hint);">Made with Nim. Generated: 2026-02-14 21:03:57 UTC</small>
       </div>
     </div>
   </div>

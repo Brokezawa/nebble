@@ -70,6 +70,10 @@
   <li><a class="reference" href="#getDataSize%2Cuint32" title="getDataSize(key: uint32): cint">getDataSize(key: uint32): cint</a></li>
 
 </ul>
+<ul class="simple nested-toc-section">read
+  <li><a class="reference" href="#read%2Cuint32%2CFixedString%5BN%5D" title="read[N](key: uint32; s: var FixedString[N]): cint">read[N](key: uint32; s: var FixedString[N]): cint</a></li>
+
+</ul>
 <ul class="simple nested-toc-section">readData
   <li><a class="reference" href="#readData%2Cuint32%2Cpointer%2Ccsize_t" title="readData(key: uint32; buffer: pointer; bufferSize: csize_t): cint">readData(key: uint32; buffer: pointer; bufferSize: csize_t): cint</a></li>
 
@@ -79,7 +83,11 @@
 
 </ul>
 <ul class="simple nested-toc-section">readString
-  <li><a class="reference" href="#readString%2Cuint32%2Ccstring%2Ccsize_t" title="readString(key: uint32; buffer: cstring; bufferSize: csize_t): cint">readString(key: uint32; buffer: cstring; bufferSize: csize_t): cint</a></li>
+  <li><a class="reference" href="#readString%2Cuint32%2Cpointer%2Ccsize_t" title="readString(key: uint32; buffer: pointer; bufferSize: csize_t): cint">readString(key: uint32; buffer: pointer; bufferSize: csize_t): cint</a></li>
+
+</ul>
+<ul class="simple nested-toc-section">write
+  <li><a class="reference" href="#write%2Cuint32%2CFixedString%5BN%5D" title="write[N](key: uint32; s: var FixedString[N]): cint">write[N](key: uint32; s: var FixedString[N]): cint</a></li>
 
 </ul>
 <ul class="simple nested-toc-section">writeData
@@ -112,7 +120,7 @@
     <div class="section" id="6">
   <h1><a class="toc-backref" href="#6">Imports</a></h1>
   <dl class="item">
-    <a class="reference external" href="../ffi.html">../ffi</a>
+    <a class="reference external" href="../ffi.html">../ffi</a>, <a class="reference external" href="../util/fixed_strings.html">../util/fixed_strings</a>
   </dl>
 </div>
 <div class="section" id="12">
@@ -151,6 +159,17 @@
 </div>
 
 </div>
+<div id="read-procs-all">
+  <div id="read,uint32,FixedString[N]">
+  <dt><pre><span class="Keyword">proc</span> <a href="#read%2Cuint32%2CFixedString%5BN%5D"><span class="Identifier">read</span></a><span class="Other">[</span><span class="Identifier">N</span><span class="Other">]</span><span class="Other">(</span><span class="Identifier">key</span><span class="Other">:</span> <span class="Identifier">uint32</span><span class="Other">;</span> <span class="Identifier">s</span><span class="Other">:</span> <span class="Keyword">var</span> <a href="../util/fixed_strings.html#FixedString"><span class="Identifier">FixedString</span></a><span class="Other">[</span><span class="Identifier">N</span><span class="Other">]</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">cint</span> {.<span class="Identifier">inline</span>.}</pre></dt>
+  <dd>
+    
+    Read a string from persistent storage into a FixedString. Returns the length of the string, or negative on error.
+    
+  </dd>
+</div>
+
+</div>
 <div id="readData-procs-all">
   <div id="readData,uint32,pointer,csize_t">
   <dt><pre><span class="Keyword">proc</span> <a href="#readData%2Cuint32%2Cpointer%2Ccsize_t"><span class="Identifier">readData</span></a><span class="Other">(</span><span class="Identifier">key</span><span class="Other">:</span> <span class="Identifier">uint32</span><span class="Other">;</span> <span class="Identifier">buffer</span><span class="Other">:</span> <span class="Identifier">pointer</span><span class="Other">;</span> <span class="Identifier">bufferSize</span><span class="Other">:</span> <span class="Identifier">csize_t</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">cint</span> {.<span class="Identifier">inline</span><span class="Other">,</span>
@@ -175,12 +194,23 @@
 
 </div>
 <div id="readString-procs-all">
-  <div id="readString,uint32,cstring,csize_t">
-  <dt><pre><span class="Keyword">proc</span> <a href="#readString%2Cuint32%2Ccstring%2Ccsize_t"><span class="Identifier">readString</span></a><span class="Other">(</span><span class="Identifier">key</span><span class="Other">:</span> <span class="Identifier">uint32</span><span class="Other">;</span> <span class="Identifier">buffer</span><span class="Other">:</span> <span class="Identifier">cstring</span><span class="Other">;</span> <span class="Identifier">bufferSize</span><span class="Other">:</span> <span class="Identifier">csize_t</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">cint</span> {.
+  <div id="readString,uint32,pointer,csize_t">
+  <dt><pre><span class="Keyword">proc</span> <a href="#readString%2Cuint32%2Cpointer%2Ccsize_t"><span class="Identifier">readString</span></a><span class="Other">(</span><span class="Identifier">key</span><span class="Other">:</span> <span class="Identifier">uint32</span><span class="Other">;</span> <span class="Identifier">buffer</span><span class="Other">:</span> <span class="Identifier">pointer</span><span class="Other">;</span> <span class="Identifier">bufferSize</span><span class="Other">:</span> <span class="Identifier">csize_t</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">cint</span> {.
     <span class="Identifier">inline</span><span class="Other">,</span> <span><span class="Other pragmadots">...</span></span><span class="pragmawrap"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">forbids</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span>.}</pre></dt>
   <dd>
     
     Read a string from persistent storage. Returns the length of the string, or negative on error. Equivalent to C function <tt class="docutils literal"><span class="pre"><span class="Identifier">persist_read_string</span><span class="Punctuation">(</span><span class="Identifier">key</span><span class="Punctuation">,</span> <span class="Identifier">buffer</span><span class="Punctuation">,</span> <span class="Identifier">buffer_size</span><span class="Punctuation">)</span></span></tt>.
+    
+  </dd>
+</div>
+
+</div>
+<div id="write-procs-all">
+  <div id="write,uint32,FixedString[N]">
+  <dt><pre><span class="Keyword">proc</span> <a href="#write%2Cuint32%2CFixedString%5BN%5D"><span class="Identifier">write</span></a><span class="Other">[</span><span class="Identifier">N</span><span class="Other">]</span><span class="Other">(</span><span class="Identifier">key</span><span class="Other">:</span> <span class="Identifier">uint32</span><span class="Other">;</span> <span class="Identifier">s</span><span class="Other">:</span> <span class="Keyword">var</span> <a href="../util/fixed_strings.html#FixedString"><span class="Identifier">FixedString</span></a><span class="Other">[</span><span class="Identifier">N</span><span class="Other">]</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">cint</span> {.<span class="Identifier">inline</span>.}</pre></dt>
+  <dd>
+    
+    Write a FixedString to persistent storage. Returns the length written, or negative on error.
     
   </dd>
 </div>
@@ -232,7 +262,7 @@
       <div class="twelve-columns footer">
         <span class="nim-sprite"></span>
         <br>
-        <small style="color: var(--hint);">Made with Nim. Generated: 2026-02-12 14:24:48 UTC</small>
+        <small style="color: var(--hint);">Made with Nim. Generated: 2026-02-14 21:03:57 UTC</small>
       </div>
     </div>
   </div>

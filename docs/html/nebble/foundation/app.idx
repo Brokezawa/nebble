@@ -1,6 +1,6 @@
 nimTitle	app	nebble/foundation/app.html	module nebble/foundation/app		0
-nim	eventLoop	nebble/foundation/app.html#eventLoop	proc eventLoop()		15
-nim	pebbleApp	nebble/foundation/app.html#pebbleApp.m,untyped,untyped,untyped,untyped,untyped,untyped,untyped,static[bool]	macro pebbleApp(load: untyped = nil; unload: untyped = nil; appear: untyped = nil;\n          disappear: untyped = nil; clickConfig: untyped = nil;\n          init: untyped = nil; deinit: untyped = nil;\n          verbose: static[bool] = false): untyped		25
-nim	launchReason	nebble/foundation/app.html#launchReason	proc launchReason(): AppLaunchReason		137
-nim	launchArgs	nebble/foundation/app.html#launchArgs	proc launchArgs(): uint32		142
-nim	setExitReason	nebble/foundation/app.html#setExitReason,AppExitReason	proc setExitReason(reason: AppExitReason)		148
+nim	eventLoop	nebble/foundation/app.html#eventLoop	proc eventLoop()		16
+nim	pebbleApp	nebble/foundation/app.html#pebbleApp.m,untyped,untyped,untyped,untyped,untyped,untyped,untyped,static[bool]	macro pebbleApp(load: untyped = nil; unload: untyped = nil; appear: untyped = nil;\n          disappear: untyped = nil; clickConfig: untyped = nil;\n          init: untyped = nil; deinit: untyped = nil;\n          verbose: static[bool] = false): untyped		26
+nim	launchReason	nebble/foundation/app.html#launchReason	proc launchReason(): AppLaunchReason		144
+nim	launchArgs	nebble/foundation/app.html#launchArgs	proc launchArgs(): uint32		149
+nim	setExitReason	nebble/foundation/app.html#setExitReason,AppExitReason	proc setExitReason(reason: AppExitReason)		155

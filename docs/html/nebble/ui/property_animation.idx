@@ -1,0 +1,17 @@
+nimTitle	property_animation	nebble/ui/property_animation.html	module nebble/ui/property_animation		0
+nim	PropertyAnimationHandle	nebble/ui/property_animation.html#PropertyAnimationHandle	object PropertyAnimationHandle		70
+nim	`=destroy`	nebble/ui/property_animation.html#=destroy,PropertyAnimationHandle	proc `=destroy`(h`gensym0: var PropertyAnimationHandle)		76
+nim	`=wasMoved`	nebble/ui/property_animation.html#=wasMoved,PropertyAnimationHandle	proc `=wasMoved`(h`gensym0: var PropertyAnimationHandle)		83
+nim	`=copy`	nebble/ui/property_animation.html#=copy,PropertyAnimationHandle,PropertyAnimationHandle	proc `=copy`(dest`gensym0: var PropertyAnimationHandle;\n        src`gensym0: PropertyAnimationHandle)		88
+nim	`=sink`	nebble/ui/property_animation.html#=sink,PropertyAnimationHandle,PropertyAnimationHandle	proc `=sink`(dest`gensym0: var PropertyAnimationHandle;\n        src`gensym0: PropertyAnimationHandle)		90
+nim	toPtr	nebble/ui/property_animation.html#toPtr.c,PropertyAnimationHandle	converter toPtr(h`gensym0: PropertyAnimationHandle): ptr PropertyAnimation		100
+nim	toLayer	nebble/ui/property_animation.html#toLayer.c,PropertyAnimationHandle	converter toLayer(h`gensym0: PropertyAnimationHandle): ptr Layer		102
+nim	toHandle	nebble/ui/property_animation.html#toHandle,ptr.struct_PropertyAnimation	proc toHandle(p`gensym0: ptr PropertyAnimation): PropertyAnimationHandle		105
+nim	wrapOwned	nebble/ui/property_animation.html#wrapOwned,ptr.struct_PropertyAnimation	proc wrapOwned(p`gensym0: ptr PropertyAnimation): PropertyAnimationHandle		109
+nim	isValid	nebble/ui/property_animation.html#isValid,PropertyAnimationHandle	proc isValid(h`gensym0: PropertyAnimationHandle): bool		113
+nim	isNil	nebble/ui/property_animation.html#isNil,PropertyAnimationHandle	proc isNil(h`gensym0: PropertyAnimationHandle): bool		114
+nim	setParent	nebble/ui/property_animation.html#setParent,PropertyAnimationHandle,ptr.struct_Layer	proc setParent(h`gensym0: var PropertyAnimationHandle; p`gensym0: ptr Layer)		116
+nim	reset	nebble/ui/property_animation.html#reset,PropertyAnimationHandle	proc reset(h`gensym0: var PropertyAnimationHandle)		18
+nim	newPropertyAnimationLayerFrame	nebble/ui/property_animation.html#newPropertyAnimationLayerFrame,ptr.struct_Layer,GRect,GRect	proc newPropertyAnimationLayerFrame(layer: ptr Layer; fromFrame: GRect;\n                               toFrame: GRect): PropertyAnimationHandle		22
+nim	newPropertyAnimationBoundsOrigin	nebble/ui/property_animation.html#newPropertyAnimationBoundsOrigin,ptr.struct_Layer,GPoint,GPoint	proc newPropertyAnimationBoundsOrigin(layer: ptr Layer; fromPoint: GPoint;\n                                 toPoint: GPoint): PropertyAnimationHandle		25
+nim	animation	nebble/ui/property_animation.html#animation,PropertyAnimationHandle	proc animation(h: PropertyAnimationHandle): ptr Animation		29

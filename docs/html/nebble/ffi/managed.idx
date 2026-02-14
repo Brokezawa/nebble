@@ -1,19 +1,24 @@
 nimTitle	managed	nebble/ffi/managed.html	module nebble/ffi/managed		0
 nim	ManagedDebug	nebble/ffi/managed.html#ManagedDebug	const ManagedDebug		41
 nim	ManagedStrict	nebble/ffi/managed.html#ManagedStrict	const ManagedStrict		48
-nim	DefineUniqueHandle	nebble/ffi/managed.html#DefineUniqueHandle.t,untyped,typedesc,untyped,untyped	template DefineUniqueHandle(Name: untyped; RawType: typedesc; createProc: untyped;\n                   destroyProc: untyped)		54
-nim	checkValid	nebble/ffi/managed.html#checkValid.t,typed	template checkValid(h: typed)		162
-nim	moved	nebble/ffi/managed.html#moved.t,typed	template moved(h: typed): bool		166
-nim	withResource	nebble/ffi/managed.html#withResource.t,untyped,untyped,untyped	template withResource(createExpr: untyped; varName: untyped; body: untyped)		177
-nim	deferDestroy	nebble/ffi/managed.html#deferDestroy.t,untyped,untyped	template deferDestroy(varName: untyped; body: untyped)		187
-nim	stTick	nebble/ffi/managed.html#stTick	ServiceType.stTick		201
-nim	stBattery	nebble/ffi/managed.html#stBattery	ServiceType.stBattery		201
-nim	stAccel	nebble/ffi/managed.html#stAccel	ServiceType.stAccel		201
-nim	stConnection	nebble/ffi/managed.html#stConnection	ServiceType.stConnection		201
-nim	stCompass	nebble/ffi/managed.html#stCompass	ServiceType.stCompass		201
-nim	stHealth	nebble/ffi/managed.html#stHealth	ServiceType.stHealth		201
-nim	stFocus	nebble/ffi/managed.html#stFocus	ServiceType.stFocus		201
-nim	ServiceType	nebble/ffi/managed.html#ServiceType	enum ServiceType		201
-nim	ServiceSubscription	nebble/ffi/managed.html#ServiceSubscription	object ServiceSubscription		205
-nim	`=destroy`	nebble/ffi/managed.html#=destroy,ServiceSubscription	proc `=destroy`(s: var ServiceSubscription)		210
-nim	withService	nebble/ffi/managed.html#withService.t,ServiceType,untyped,untyped	template withService(serviceType: ServiceType; subscribeProc: untyped; body: untyped)		237
+nim	hoNone	nebble/ffi/managed.html#hoNone	HandleOwnership.hoNone		55
+nim	hoOwned	nebble/ffi/managed.html#hoOwned	HandleOwnership.hoOwned		55
+nim	hoUnowned	nebble/ffi/managed.html#hoUnowned	HandleOwnership.hoUnowned		55
+nim	hoParented	nebble/ffi/managed.html#hoParented	HandleOwnership.hoParented		55
+nim	HandleOwnership	nebble/ffi/managed.html#HandleOwnership	enum HandleOwnership		55
+nim	DefineUniqueHandle	nebble/ffi/managed.html#DefineUniqueHandle.t,untyped,typedesc,untyped,untyped	template DefineUniqueHandle(Name: untyped; RawType: typedesc; createProc: untyped;\n                   destroyProc: untyped)		66
+nim	checkValid	nebble/ffi/managed.html#checkValid.t,typed	template checkValid(h: typed)		143
+nim	moved	nebble/ffi/managed.html#moved.t,typed	template moved(h: typed): bool		147
+nim	withResource	nebble/ffi/managed.html#withResource.t,untyped,untyped,untyped	template withResource(createExpr: untyped; varName: untyped; body: untyped)		158
+nim	deferDestroy	nebble/ffi/managed.html#deferDestroy.t,untyped,untyped	template deferDestroy(varName: untyped; body: untyped)		168
+nim	stTick	nebble/ffi/managed.html#stTick	ServiceType.stTick		182
+nim	stBattery	nebble/ffi/managed.html#stBattery	ServiceType.stBattery		182
+nim	stAccel	nebble/ffi/managed.html#stAccel	ServiceType.stAccel		182
+nim	stConnection	nebble/ffi/managed.html#stConnection	ServiceType.stConnection		182
+nim	stCompass	nebble/ffi/managed.html#stCompass	ServiceType.stCompass		182
+nim	stHealth	nebble/ffi/managed.html#stHealth	ServiceType.stHealth		182
+nim	stFocus	nebble/ffi/managed.html#stFocus	ServiceType.stFocus		182
+nim	ServiceType	nebble/ffi/managed.html#ServiceType	enum ServiceType		182
+nim	ServiceSubscription	nebble/ffi/managed.html#ServiceSubscription	object ServiceSubscription		186
+nim	`=destroy`	nebble/ffi/managed.html#=destroy,ServiceSubscription	proc `=destroy`(s: var ServiceSubscription)		191
+nim	withService	nebble/ffi/managed.html#withService.t,ServiceType,untyped,untyped	template withService(serviceType: ServiceType; subscribeProc: untyped; body: untyped)		218

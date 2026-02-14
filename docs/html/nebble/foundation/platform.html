@@ -59,6 +59,9 @@
     <summary><a class="reference reference-toplevel" href="#10" id="60">Consts</a></summary>
     <ul class="simple simple-toc-section">
       <li><a class="reference" href="#ActionBarWidth" title="ActionBarWidth = 30">ActionBarWidth</a></li>
+<li><a class="reference" href="#isColor" title="isColor = false">isColor</a></li>
+<li><a class="reference" href="#isEmery" title="isEmery = false">isEmery</a></li>
+<li><a class="reference" href="#isRound" title="isRound = false">isRound</a></li>
 <li><a class="reference" href="#PBLDisplayHeight" title="PBLDisplayHeight = 168">PBLDisplayHeight</a></li>
 <li><a class="reference" href="#PBLDisplayWidth" title="PBLDisplayWidth = 144">PBLDisplayWidth</a></li>
 <li><a class="reference" href="#StatusBarLayerHeight" title="StatusBarLayerHeight = 16">StatusBarLayerHeight</a></li>
@@ -82,12 +85,24 @@
   <li><a class="reference" href="#pblIfColorElse.t%2CT%2CT" title="pblIfColorElse[T](colorExpr, bwExpr: T): T">pblIfColorElse[T](colorExpr, bwExpr: T): T</a></li>
 
 </ul>
+<ul class="simple nested-toc-section">pblIfHealthElse
+  <li><a class="reference" href="#pblIfHealthElse.t%2CT%2CT" title="pblIfHealthElse[T](healthExpr, elseExpr: T): T">pblIfHealthElse[T](healthExpr, elseExpr: T): T</a></li>
+
+</ul>
+<ul class="simple nested-toc-section">pblIfMicrophoneElse
+  <li><a class="reference" href="#pblIfMicrophoneElse.t%2CT%2CT" title="pblIfMicrophoneElse[T](micExpr, elseExpr: T): T">pblIfMicrophoneElse[T](micExpr, elseExpr: T): T</a></li>
+
+</ul>
 <ul class="simple nested-toc-section">pblIfRectElse
   <li><a class="reference" href="#pblIfRectElse.t%2CT%2CT" title="pblIfRectElse[T](rectExpr, roundExpr: T): T">pblIfRectElse[T](rectExpr, roundExpr: T): T</a></li>
 
 </ul>
 <ul class="simple nested-toc-section">pblIfRoundElse
   <li><a class="reference" href="#pblIfRoundElse.t%2CT%2CT" title="pblIfRoundElse[T](roundExpr, rectExpr: T): T">pblIfRoundElse[T](roundExpr, rectExpr: T): T</a></li>
+
+</ul>
+<ul class="simple nested-toc-section">pblIfSmartstrapElse
+  <li><a class="reference" href="#pblIfSmartstrapElse.t%2CT%2CT" title="pblIfSmartstrapElse[T](smartstrapExpr, elseExpr: T): T">pblIfSmartstrapElse[T](smartstrapExpr, elseExpr: T): T</a></li>
 
 </ul>
 
@@ -118,7 +133,31 @@
   <dt><pre><a href="platform.html#ActionBarWidth"><span class="Identifier">ActionBarWidth</span></a> <span class="Other">=</span> <span class="DecNumber">30</span></pre></dt>
   <dd>
     
-    Width of the action bar in pixels.
+    
+    
+  </dd>
+</div>
+<div id="isColor">
+  <dt><pre><a href="platform.html#isColor"><span class="Identifier">isColor</span></a> <span class="Other">=</span> <span class="DecNumber">false</span></pre></dt>
+  <dd>
+    
+    
+    
+  </dd>
+</div>
+<div id="isEmery">
+  <dt><pre><a href="platform.html#isEmery"><span class="Identifier">isEmery</span></a> <span class="Other">=</span> <span class="DecNumber">false</span></pre></dt>
+  <dd>
+    
+    
+    
+  </dd>
+</div>
+<div id="isRound">
+  <dt><pre><a href="platform.html#isRound"><span class="Identifier">isRound</span></a> <span class="Other">=</span> <span class="DecNumber">false</span></pre></dt>
+  <dd>
+    
+    
     
   </dd>
 </div>
@@ -126,7 +165,7 @@
   <dt><pre><a href="platform.html#PBLDisplayHeight"><span class="Identifier">PBLDisplayHeight</span></a> <span class="Other">=</span> <span class="DecNumber">168</span></pre></dt>
   <dd>
     
-    Display height in pixels. 168 for Aplite/Basalt/Diorite/Flint, 180 for Chalk (round), 228 for Emery.
+    
     
   </dd>
 </div>
@@ -134,7 +173,7 @@
   <dt><pre><a href="platform.html#PBLDisplayWidth"><span class="Identifier">PBLDisplayWidth</span></a> <span class="Other">=</span> <span class="DecNumber">144</span></pre></dt>
   <dd>
     
-    Display width in pixels. 144 for Aplite/Basalt/Diorite/Flint, 180 for Chalk (round), 200 for Emery.
+    
     
   </dd>
 </div>
@@ -142,7 +181,7 @@
   <dt><pre><a href="platform.html#StatusBarLayerHeight"><span class="Identifier">StatusBarLayerHeight</span></a> <span class="Other">=</span> <span class="DecNumber">16</span></pre></dt>
   <dd>
     
-    Height of the status bar layer in pixels.
+    
     
   </dd>
 </div>
@@ -157,7 +196,7 @@
   <dt><pre><span class="Keyword">template</span> <a href="#colorFallback.t%2CGColor%2CGColor"><span class="Identifier">colorFallback</span></a><span class="Other">(</span><span class="Identifier">color</span><span class="Other">,</span> <span class="Identifier">fallback</span><span class="Other">:</span> <a href="../ffi.html#GColor"><span class="Identifier">GColor</span></a><span class="Other">)</span><span class="Other">:</span> <a href="../ffi.html#GColor"><span class="Identifier">GColor</span></a></pre></dt>
   <dd>
     
-    Returns <tt class="docutils literal"><span class="pre"><span class="Identifier">color</span></span></tt> on color platforms, <tt class="docutils literal"><span class="pre"><span class="Identifier">fallback</span></span></tt> on black and white. Equivalent to C macro pattern for platform-aware color selection.
+    
     
   </dd>
 </div>
@@ -165,10 +204,10 @@
 </div>
 <div id="pblIfBwElse-templates-all">
   <div id="pblIfBwElse.t,T,T">
-  <dt><pre><span class="Keyword">template</span> <a href="#pblIfBwElse.t%2CT%2CT"><span class="Identifier">pblIfBwElse</span></a><span class="Other">[</span><span class="Identifier">T</span><span class="Other">]</span><span class="Other">(</span><span class="Identifier">bwExpr</span><span class="Other">,</span> <span class="Identifier">colorExpr</span><span class="Other">:</span> <span class="Identifier">T</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">T</span></pre></dt>
+  <dt><pre><span class="Keyword">template</span> <a href="#pblIfBwElse.t%2CT%2CT"><span class="Identifier">pblIfBwElse</span></a><span class="Other">[</span><span class="Identifier">T</span><span class="Other">]</span><span class="Other">(</span><span class="Identifier">bwExpr</span><span class="Other">,</span> <span class="Identifier">colorExpr</span><span class="Other">:</span> <span class="Identifier">T</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">T</span> {.<span class="Identifier">redefine</span>.}</pre></dt>
   <dd>
     
-    Platform conditional: returns bwExpr on black and white watches, colorExpr on color watches. Equivalent to C macro <tt class="docutils literal"><span class="pre"><span class="Identifier">PBL_IF_BW_ELSE</span><span class="Punctuation">(</span><span class="Identifier">bw_expr</span><span class="Punctuation">,</span> <span class="Identifier">color_expr</span><span class="Punctuation">)</span></span></tt>.
+    
     
   </dd>
 </div>
@@ -176,10 +215,32 @@
 </div>
 <div id="pblIfColorElse-templates-all">
   <div id="pblIfColorElse.t,T,T">
-  <dt><pre><span class="Keyword">template</span> <a href="#pblIfColorElse.t%2CT%2CT"><span class="Identifier">pblIfColorElse</span></a><span class="Other">[</span><span class="Identifier">T</span><span class="Other">]</span><span class="Other">(</span><span class="Identifier">colorExpr</span><span class="Other">,</span> <span class="Identifier">bwExpr</span><span class="Other">:</span> <span class="Identifier">T</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">T</span></pre></dt>
+  <dt><pre><span class="Keyword">template</span> <a href="#pblIfColorElse.t%2CT%2CT"><span class="Identifier">pblIfColorElse</span></a><span class="Other">[</span><span class="Identifier">T</span><span class="Other">]</span><span class="Other">(</span><span class="Identifier">colorExpr</span><span class="Other">,</span> <span class="Identifier">bwExpr</span><span class="Other">:</span> <span class="Identifier">T</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">T</span> {.<span class="Identifier">redefine</span>.}</pre></dt>
   <dd>
     
-    Platform conditional: returns colorExpr on color watches, bwExpr on black and white watches. Equivalent to C macro <tt class="docutils literal"><span class="pre"><span class="Identifier">PBL_IF_COLOR_ELSE</span><span class="Punctuation">(</span><span class="Identifier">color_expr</span><span class="Punctuation">,</span> <span class="Identifier">bw_expr</span><span class="Punctuation">)</span></span></tt>.
+    
+    
+  </dd>
+</div>
+
+</div>
+<div id="pblIfHealthElse-templates-all">
+  <div id="pblIfHealthElse.t,T,T">
+  <dt><pre><span class="Keyword">template</span> <a href="#pblIfHealthElse.t%2CT%2CT"><span class="Identifier">pblIfHealthElse</span></a><span class="Other">[</span><span class="Identifier">T</span><span class="Other">]</span><span class="Other">(</span><span class="Identifier">healthExpr</span><span class="Other">,</span> <span class="Identifier">elseExpr</span><span class="Other">:</span> <span class="Identifier">T</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">T</span></pre></dt>
+  <dd>
+    
+    
+    
+  </dd>
+</div>
+
+</div>
+<div id="pblIfMicrophoneElse-templates-all">
+  <div id="pblIfMicrophoneElse.t,T,T">
+  <dt><pre><span class="Keyword">template</span> <a href="#pblIfMicrophoneElse.t%2CT%2CT"><span class="Identifier">pblIfMicrophoneElse</span></a><span class="Other">[</span><span class="Identifier">T</span><span class="Other">]</span><span class="Other">(</span><span class="Identifier">micExpr</span><span class="Other">,</span> <span class="Identifier">elseExpr</span><span class="Other">:</span> <span class="Identifier">T</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">T</span></pre></dt>
+  <dd>
+    
+    
     
   </dd>
 </div>
@@ -190,7 +251,7 @@
   <dt><pre><span class="Keyword">template</span> <a href="#pblIfRectElse.t%2CT%2CT"><span class="Identifier">pblIfRectElse</span></a><span class="Other">[</span><span class="Identifier">T</span><span class="Other">]</span><span class="Other">(</span><span class="Identifier">rectExpr</span><span class="Other">,</span> <span class="Identifier">roundExpr</span><span class="Other">:</span> <span class="Identifier">T</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">T</span></pre></dt>
   <dd>
     
-    Platform conditional: returns rectExpr on rectangular watches, roundExpr on round watches. Equivalent to C macro <tt class="docutils literal"><span class="pre"><span class="Identifier">PBL_IF_RECT_ELSE</span><span class="Punctuation">(</span><span class="Identifier">rect_expr</span><span class="Punctuation">,</span> <span class="Identifier">round_expr</span><span class="Punctuation">)</span></span></tt>.
+    
     
   </dd>
 </div>
@@ -198,10 +259,21 @@
 </div>
 <div id="pblIfRoundElse-templates-all">
   <div id="pblIfRoundElse.t,T,T">
-  <dt><pre><span class="Keyword">template</span> <a href="#pblIfRoundElse.t%2CT%2CT"><span class="Identifier">pblIfRoundElse</span></a><span class="Other">[</span><span class="Identifier">T</span><span class="Other">]</span><span class="Other">(</span><span class="Identifier">roundExpr</span><span class="Other">,</span> <span class="Identifier">rectExpr</span><span class="Other">:</span> <span class="Identifier">T</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">T</span></pre></dt>
+  <dt><pre><span class="Keyword">template</span> <a href="#pblIfRoundElse.t%2CT%2CT"><span class="Identifier">pblIfRoundElse</span></a><span class="Other">[</span><span class="Identifier">T</span><span class="Other">]</span><span class="Other">(</span><span class="Identifier">roundExpr</span><span class="Other">,</span> <span class="Identifier">rectExpr</span><span class="Other">:</span> <span class="Identifier">T</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">T</span> {.<span class="Identifier">redefine</span>.}</pre></dt>
   <dd>
     
-    Platform conditional: returns roundExpr on round watches, rectExpr on rectangular watches. Equivalent to C macro <tt class="docutils literal"><span class="pre"><span class="Identifier">PBL_IF_ROUND_ELSE</span><span class="Punctuation">(</span><span class="Identifier">round_expr</span><span class="Punctuation">,</span> <span class="Identifier">rect_expr</span><span class="Punctuation">)</span></span></tt>.
+    
+    
+  </dd>
+</div>
+
+</div>
+<div id="pblIfSmartstrapElse-templates-all">
+  <div id="pblIfSmartstrapElse.t,T,T">
+  <dt><pre><span class="Keyword">template</span> <a href="#pblIfSmartstrapElse.t%2CT%2CT"><span class="Identifier">pblIfSmartstrapElse</span></a><span class="Other">[</span><span class="Identifier">T</span><span class="Other">]</span><span class="Other">(</span><span class="Identifier">smartstrapExpr</span><span class="Other">,</span> <span class="Identifier">elseExpr</span><span class="Other">:</span> <span class="Identifier">T</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">T</span></pre></dt>
+  <dd>
+    
+    
     
   </dd>
 </div>
@@ -217,7 +289,7 @@
       <div class="twelve-columns footer">
         <span class="nim-sprite"></span>
         <br>
-        <small style="color: var(--hint);">Made with Nim. Generated: 2026-02-12 14:24:48 UTC</small>
+        <small style="color: var(--hint);">Made with Nim. Generated: 2026-02-14 21:03:57 UTC</small>
       </div>
     </div>
   </div>

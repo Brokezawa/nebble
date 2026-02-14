@@ -56,65 +56,120 @@
 </li>
 <li>
   <details open>
+    <summary><a class="reference reference-toplevel" href="#7" id="57">Types</a></summary>
+    <ul class="simple simple-toc-section">
+      <li><a class="reference" href="#ActionBarLayerHandle" title="ActionBarLayerHandle = object
+  pRaw*: ptr ActionBarLayer
+  ownership*: HandleOwnership
+  pParent*: ptr Layer
+  attachedWindow*: ptr Window">ActionBarLayerHandle</a></li>
+
+    </ul>
+  </details>
+</li>
+<li>
+  <details open>
     <summary><a class="reference reference-toplevel" href="#12" id="62">Procs</a></summary>
     <ul class="simple simple-toc-section">
-      <ul class="simple nested-toc-section">addToWindow
-  <li><a class="reference" href="#addToWindow%2Cptr.struct_ActionBarLayer%2Cptr.struct_Window" title="addToWindow(actionBar: ptr ActionBarLayer; window: ptr Window)">addToWindow(actionBar: ptr ActionBarLayer; window: ptr Window)</a></li>
+      <ul class="simple nested-toc-section">=copy
+  <li><a class="reference" href="#%3Dcopy%2CActionBarLayerHandle%2CActionBarLayerHandle" title="`=copy`(dest: var ActionBarLayerHandle; src: ActionBarLayerHandle)">`=copy`(dest: var ActionBarLayerHandle; src: ActionBarLayerHandle)</a></li>
+
+</ul>
+<ul class="simple nested-toc-section">=destroy
+  <li><a class="reference" href="#%3Ddestroy%2CActionBarLayerHandle" title="`=destroy`(h: var ActionBarLayerHandle)">`=destroy`(h: var ActionBarLayerHandle)</a></li>
+
+</ul>
+<ul class="simple nested-toc-section">=sink
+  <li><a class="reference" href="#%3Dsink%2CActionBarLayerHandle%2CActionBarLayerHandle" title="`=sink`(dest: var ActionBarLayerHandle; src: ActionBarLayerHandle)">`=sink`(dest: var ActionBarLayerHandle; src: ActionBarLayerHandle)</a></li>
+
+</ul>
+<ul class="simple nested-toc-section">=wasMoved
+  <li><a class="reference" href="#%3DwasMoved%2CActionBarLayerHandle" title="`=wasMoved`(h: var ActionBarLayerHandle)">`=wasMoved`(h: var ActionBarLayerHandle)</a></li>
+
+</ul>
+<ul class="simple nested-toc-section">addToWindow
+  <li><a class="reference" href="#addToWindow%2CActionBarLayerHandle%2Cptr.struct_Window" title="addToWindow(h: var ActionBarLayerHandle; win: ptr Window)">addToWindow(h: var ActionBarLayerHandle; win: ptr Window)</a></li>
 
 </ul>
 <ul class="simple nested-toc-section">backgroundColor=
-  <li><a class="reference" href="#backgroundColor%3D%2Cptr.struct_ActionBarLayer%2CGColor" title="backgroundColor=(actionBar: ptr ActionBarLayer; color: GColor)">backgroundColor=(actionBar: ptr ActionBarLayer; color: GColor)</a></li>
+  <li><a class="reference" href="#backgroundColor%3D%2CActionBarLayerHandle%2CGColor" title="backgroundColor=(h: ActionBarLayerHandle; color: GColor)">backgroundColor=(h: ActionBarLayerHandle; color: GColor)</a></li>
+<li><a class="reference" href="#backgroundColor%3D%2Cptr.struct_ActionBarLayer%2CGColor" title="backgroundColor=(p: ptr ActionBarLayer; color: GColor)">backgroundColor=(p: ptr ActionBarLayer; color: GColor)</a></li>
 
 </ul>
 <ul class="simple nested-toc-section">clearIcon
-  <li><a class="reference" href="#clearIcon%2Cptr.struct_ActionBarLayer%2CButtonId" title="clearIcon(actionBar: ptr ActionBarLayer; buttonId: ButtonId)">clearIcon(actionBar: ptr ActionBarLayer; buttonId: ButtonId)</a></li>
+  <li><a class="reference" href="#clearIcon%2CActionBarLayerHandle%2CButtonId" title="clearIcon(h: ActionBarLayerHandle; buttonId: ButtonId)">clearIcon(h: ActionBarLayerHandle; buttonId: ButtonId)</a></li>
 
 </ul>
 <ul class="simple nested-toc-section">clickConfigProvider=
-  <li><a class="reference" href="#clickConfigProvider%3D%2Cptr.struct_ActionBarLayer%2CClickConfigProvider" title="clickConfigProvider=(actionBar: ptr ActionBarLayer;
-                     provider: ClickConfigProvider)">clickConfigProvider=(actionBar: ptr ActionBarLayer;
-                     provider: ClickConfigProvider)</a></li>
+  <li><a class="reference" href="#clickConfigProvider%3D%2CActionBarLayerHandle%2CClickConfigProvider" title="clickConfigProvider=(h: ActionBarLayerHandle; provider: ClickConfigProvider)">clickConfigProvider=(h: ActionBarLayerHandle; provider: ClickConfigProvider)</a></li>
+<li><a class="reference" href="#clickConfigProvider%3D%2Cptr.struct_ActionBarLayer%2CClickConfigProvider" title="clickConfigProvider=(p: ptr ActionBarLayer; provider: ClickConfigProvider)">clickConfigProvider=(p: ptr ActionBarLayer; provider: ClickConfigProvider)</a></li>
 
 </ul>
 <ul class="simple nested-toc-section">context=
-  <li><a class="reference" href="#context%3D%2Cptr.struct_ActionBarLayer%2Cpointer" title="context=(actionBar: ptr ActionBarLayer; context: pointer)">context=(actionBar: ptr ActionBarLayer; context: pointer)</a></li>
-
-</ul>
-<ul class="simple nested-toc-section">destroy
-  <li><a class="reference" href="#destroy%2Cptr.struct_ActionBarLayer" title="destroy(actionBar: ptr ActionBarLayer)">destroy(actionBar: ptr ActionBarLayer)</a></li>
+  <li><a class="reference" href="#context%3D%2CActionBarLayerHandle%2Cpointer" title="context=(h: ActionBarLayerHandle; context: pointer)">context=(h: ActionBarLayerHandle; context: pointer)</a></li>
 
 </ul>
 <ul class="simple nested-toc-section">getLayer
-  <li><a class="reference" href="#getLayer%2Cptr.struct_ActionBarLayer" title="getLayer(actionBar: ptr ActionBarLayer): ptr Layer">getLayer(actionBar: ptr ActionBarLayer): ptr Layer</a></li>
+  <li><a class="reference" href="#getLayer%2CActionBarLayerHandle" title="getLayer(h: ActionBarLayerHandle): ptr Layer">getLayer(h: ActionBarLayerHandle): ptr Layer</a></li>
+
+</ul>
+<ul class="simple nested-toc-section">isValid
+  <li><a class="reference" href="#isValid%2CActionBarLayerHandle" title="isValid(h: ActionBarLayerHandle): bool">isValid(h: ActionBarLayerHandle): bool</a></li>
 
 </ul>
 <ul class="simple nested-toc-section">newActionBarLayer
-  <li><a class="reference" href="#newActionBarLayer" title="newActionBarLayer(): ptr ActionBarLayer">newActionBarLayer(): ptr ActionBarLayer</a></li>
+  <li><a class="reference" href="#newActionBarLayer" title="newActionBarLayer(): ActionBarLayerHandle">newActionBarLayer(): ActionBarLayerHandle</a></li>
+
+</ul>
+<ul class="simple nested-toc-section">newActionBarLayerHandle
+  <li><a class="reference" href="#newActionBarLayerHandle" title="newActionBarLayerHandle(): ActionBarLayerHandle">newActionBarLayerHandle(): ActionBarLayerHandle</a></li>
 
 </ul>
 <ul class="simple nested-toc-section">removeFromWindow
-  <li><a class="reference" href="#removeFromWindow%2Cptr.struct_ActionBarLayer" title="removeFromWindow(actionBar: ptr ActionBarLayer)">removeFromWindow(actionBar: ptr ActionBarLayer)</a></li>
+  <li><a class="reference" href="#removeFromWindow%2CActionBarLayerHandle" title="removeFromWindow(h: var ActionBarLayerHandle)">removeFromWindow(h: var ActionBarLayerHandle)</a></li>
 
 </ul>
 <ul class="simple nested-toc-section">setIcon
-  <li><a class="reference" href="#setIcon%2Cptr.struct_ActionBarLayer%2CButtonId%2Cptr.struct_GBitmap" title="setIcon(actionBar: ptr ActionBarLayer; buttonId: ButtonId; icon: ptr GBitmap)">setIcon(actionBar: ptr ActionBarLayer; buttonId: ButtonId; icon: ptr GBitmap)</a></li>
+  <li><a class="reference" href="#setIcon%2CActionBarLayerHandle%2CButtonId%2Cptr.struct_GBitmap" title="setIcon(h: ActionBarLayerHandle; buttonId: ButtonId; icon: ptr GBitmap)">setIcon(h: ActionBarLayerHandle; buttonId: ButtonId; icon: ptr GBitmap)</a></li>
+<li><a class="reference" href="#setIcon%2Cptr.struct_ActionBarLayer%2CButtonId%2Cptr.struct_GBitmap" title="setIcon(p: ptr ActionBarLayer; buttonId: ButtonId; icon: ptr GBitmap)">setIcon(p: ptr ActionBarLayer; buttonId: ButtonId; icon: ptr GBitmap)</a></li>
 
 </ul>
 <ul class="simple nested-toc-section">setIconAnimated
-  <li><a class="reference" href="#setIconAnimated%2Cptr.struct_ActionBarLayer%2CButtonId%2Cptr.struct_GBitmap%2Cbool" title="setIconAnimated(actionBar: ptr ActionBarLayer; buttonId: ButtonId;
-                icon: ptr GBitmap; animated: bool)">setIconAnimated(actionBar: ptr ActionBarLayer; buttonId: ButtonId;
-                icon: ptr GBitmap; animated: bool)</a></li>
+  <li><a class="reference" href="#setIconAnimated%2CActionBarLayerHandle%2CButtonId%2Cptr.struct_GBitmap%2Cbool" title="setIconAnimated(h: ActionBarLayerHandle; buttonId: ButtonId; icon: ptr GBitmap;
+                animated: bool)">setIconAnimated(h: ActionBarLayerHandle; buttonId: ButtonId; icon: ptr GBitmap;
+                animated: bool)</a></li>
 
 </ul>
-<ul class="simple nested-toc-section">setIconPressAnimation
-  <li><a class="reference" href="#setIconPressAnimation%2Cptr.struct_ActionBarLayer%2CButtonId%2CActionBarLayerIconPressAnimation" title="setIconPressAnimation(actionBar: ptr ActionBarLayer; buttonId: ButtonId;
-                      animation: ActionBarLayerIconPressAnimation)">setIconPressAnimation(actionBar: ptr ActionBarLayer; buttonId: ButtonId;
-                      animation: ActionBarLayerIconPressAnimation)</a></li>
+<ul class="simple nested-toc-section">setParent
+  <li><a class="reference" href="#setParent%2CActionBarLayerHandle%2Cptr.struct_Layer" title="setParent(h: var ActionBarLayerHandle; p: ptr Layer)">setParent(h: var ActionBarLayerHandle; p: ptr Layer)</a></li>
+
+</ul>
+<ul class="simple nested-toc-section">toHandle
+  <li><a class="reference" href="#toHandle%2Cptr.struct_ActionBarLayer" title="toHandle(p: ptr ActionBarLayer): ActionBarLayerHandle">toHandle(p: ptr ActionBarLayer): ActionBarLayerHandle</a></li>
+
+</ul>
+<ul class="simple nested-toc-section">wrapOwned
+  <li><a class="reference" href="#wrapOwned%2Cptr.struct_ActionBarLayer" title="wrapOwned(p: ptr ActionBarLayer): ActionBarLayerHandle">wrapOwned(p: ptr ActionBarLayer): ActionBarLayerHandle</a></li>
 
 </ul>
 
     </ul>
   </details>
+</li>
+<li>
+  <details open>
+    <summary><a class="reference reference-toplevel" href="#16" id="66">Converters</a></summary>
+    <ul class="simple simple-toc-section">
+      <ul class="simple nested-toc-section">toPtr
+  <li><a class="reference" href="#toPtr.c%2CActionBarLayerHandle" title="toPtr(h: ActionBarLayerHandle): ptr ActionBarLayer">toPtr(h: ActionBarLayerHandle): ptr ActionBarLayer</a></li>
+
+</ul>
+
+    </ul>
+  </details>
+</li>
+<li>
+  <a class="reference reference-toplevel" href="#19" id="69">Exports</a>
 </li>
 
 </ul>
@@ -124,98 +179,179 @@
     
     <div id="tocRoot"></div>
     
-    <p class="module-desc"><p>High-level Nim wrapper for Pebble ActionBarLayer API.</p>
-<p>An ActionBarLayer displays up to 3 icon buttons on the right side of a window (UP, SELECT, DOWN). It automatically adjusts for round displays.</p>
+    <p class="module-desc"><p>ARC-Managed ActionBarLayer Handle (Window-Aware)</p>
+<p>Managed wrapper for ActionBarLayer. Tracks whether the action bar is attached to a Window to avoid destroying it while the window owns it.</p>
 </p>
     <div class="section" id="6">
   <h1><a class="toc-backref" href="#6">Imports</a></h1>
   <dl class="item">
-    <a class="reference external" href="../ffi.html">../ffi</a>
+    <a class="reference external" href="../ffi.html">../ffi</a>, <a class="reference external" href="../ffi/managed.html">../ffi/managed</a>
+  </dl>
+</div>
+<div class="section" id="7">
+  <h1><a class="toc-backref" href="#7">Types</a></h1>
+  <dl class="item">
+    <div id="ActionBarLayerHandle">
+  <dt><pre><a href="action_bar.html#ActionBarLayerHandle"><span class="Identifier">ActionBarLayerHandle</span></a> <span class="Other">=</span> <span class="Keyword">object</span>
+  <span class="Identifier">pRaw</span><span class="Operator">*</span><span class="Other">:</span> <span class="Keyword">ptr</span> <a href="../ffi.html#ActionBarLayer"><span class="Identifier">ActionBarLayer</span></a>
+  <span class="Identifier">ownership</span><span class="Operator">*</span><span class="Other">:</span> <a href="../ffi/managed.html#HandleOwnership"><span class="Identifier">HandleOwnership</span></a>
+  <span class="Identifier">pParent</span><span class="Operator">*</span><span class="Other">:</span> <span class="Keyword">ptr</span> <a href="../ffi.html#Layer"><span class="Identifier">Layer</span></a>
+  <span class="Identifier">attachedWindow</span><span class="Operator">*</span><span class="Other">:</span> <span class="Keyword">ptr</span> <a href="../ffi.html#Window"><span class="Identifier">Window</span></a></pre></dt>
+  <dd>
+    
+    
+    
+  </dd>
+</div>
+
   </dl>
 </div>
 <div class="section" id="12">
   <h1><a class="toc-backref" href="#12">Procs</a></h1>
   <dl class="item">
-    <div id="addToWindow-procs-all">
-  <div id="addToWindow,ptr.struct_ActionBarLayer,ptr.struct_Window">
-  <dt><pre><span class="Keyword">proc</span> <a href="#addToWindow%2Cptr.struct_ActionBarLayer%2Cptr.struct_Window"><span class="Identifier">addToWindow</span></a><span class="Other">(</span><span class="Identifier">actionBar</span><span class="Other">:</span> <span class="Keyword">ptr</span> <a href="../ffi.html#ActionBarLayer"><span class="Identifier">ActionBarLayer</span></a><span class="Other">;</span> <span class="Identifier">window</span><span class="Other">:</span> <span class="Keyword">ptr</span> <a href="../ffi.html#Window"><span class="Identifier">Window</span></a><span class="Other">)</span> {.<span class="Identifier">inline</span><span class="Other">,</span>
+    <div id="=copy-procs-all">
+  <div id="=copy,ActionBarLayerHandle,ActionBarLayerHandle">
+  <dt><pre><span class="Keyword">proc</span> <a href="#%3Dcopy%2CActionBarLayerHandle%2CActionBarLayerHandle"><span class="Identifier">`=copy`</span></a><span class="Other">(</span><span class="Identifier">dest</span><span class="Other">:</span> <span class="Keyword">var</span> <a href="action_bar.html#ActionBarLayerHandle"><span class="Identifier">ActionBarLayerHandle</span></a><span class="Other">;</span> <span class="Identifier">src</span><span class="Other">:</span> <a href="action_bar.html#ActionBarLayerHandle"><span class="Identifier">ActionBarLayerHandle</span></a><span class="Other">)</span> {.<span class="Identifier">error</span>.}</pre></dt>
+  <dd>
+    
+    
+    
+  </dd>
+</div>
+
+</div>
+<div id="=destroy-procs-all">
+  <div id="=destroy,ActionBarLayerHandle">
+  <dt><pre><span class="Keyword">proc</span> <a href="#%3Ddestroy%2CActionBarLayerHandle"><span class="Identifier">`=destroy`</span></a><span class="Other">(</span><span class="Identifier">h</span><span class="Other">:</span> <span class="Keyword">var</span> <a href="action_bar.html#ActionBarLayerHandle"><span class="Identifier">ActionBarLayerHandle</span></a><span class="Other">)</span> {.<span><span class="Other pragmadots">...</span></span><span class="pragmawrap"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">forbids</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span>.}</pre></dt>
+  <dd>
+    
+    Destroy only if not attached to a window.
+    
+  </dd>
+</div>
+
+</div>
+<div id="=sink-procs-all">
+  <div id="=sink,ActionBarLayerHandle,ActionBarLayerHandle">
+  <dt><pre><span class="Keyword">proc</span> <a href="#%3Dsink%2CActionBarLayerHandle%2CActionBarLayerHandle"><span class="Identifier">`=sink`</span></a><span class="Other">(</span><span class="Identifier">dest</span><span class="Other">:</span> <span class="Keyword">var</span> <a href="action_bar.html#ActionBarLayerHandle"><span class="Identifier">ActionBarLayerHandle</span></a><span class="Other">;</span> <span class="Identifier">src</span><span class="Other">:</span> <a href="action_bar.html#ActionBarLayerHandle"><span class="Identifier">ActionBarLayerHandle</span></a><span class="Other">)</span> {.
     <span><span class="Other pragmadots">...</span></span><span class="pragmawrap"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">forbids</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span>.}</pre></dt>
   <dd>
     
-    Add the action bar to a window (right side). Equivalent to C function <tt class="docutils literal"><span class="pre"><span class="Identifier">ffi</span><span class="Operator">.</span><span class="Identifier">action_bar_layer_add_to_window</span><span class="Punctuation">(</span><span class="Identifier">action_bar</span><span class="Punctuation">,</span> <span class="Identifier">window</span><span class="Punctuation">)</span></span></tt>.
+    
+    
+  </dd>
+</div>
+
+</div>
+<div id="=wasMoved-procs-all">
+  <div id="=wasMoved,ActionBarLayerHandle">
+  <dt><pre><span class="Keyword">proc</span> <a href="#%3DwasMoved%2CActionBarLayerHandle"><span class="Identifier">`=wasMoved`</span></a><span class="Other">(</span><span class="Identifier">h</span><span class="Other">:</span> <span class="Keyword">var</span> <a href="action_bar.html#ActionBarLayerHandle"><span class="Identifier">ActionBarLayerHandle</span></a><span class="Other">)</span> {.<span><span class="Other pragmadots">...</span></span><span class="pragmawrap"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span>
+    <span class="Identifier">forbids</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span>.}</pre></dt>
+  <dd>
+    
+    
+    
+  </dd>
+</div>
+
+</div>
+<div id="addToWindow-procs-all">
+  <div id="addToWindow,ActionBarLayerHandle,ptr.struct_Window">
+  <dt><pre><span class="Keyword">proc</span> <a href="#addToWindow%2CActionBarLayerHandle%2Cptr.struct_Window"><span class="Identifier">addToWindow</span></a><span class="Other">(</span><span class="Identifier">h</span><span class="Other">:</span> <span class="Keyword">var</span> <a href="action_bar.html#ActionBarLayerHandle"><span class="Identifier">ActionBarLayerHandle</span></a><span class="Other">;</span> <span class="Identifier">win</span><span class="Other">:</span> <span class="Keyword">ptr</span> <a href="../ffi.html#Window"><span class="Identifier">Window</span></a><span class="Other">)</span> {.<span class="Identifier">inline</span><span class="Other">,</span>
+    <span><span class="Other pragmadots">...</span></span><span class="pragmawrap"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">forbids</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span>.}</pre></dt>
+  <dd>
+    
+    
     
   </dd>
 </div>
 
 </div>
 <div id="backgroundColor=-procs-all">
-  <div id="backgroundColor=,ptr.struct_ActionBarLayer,GColor">
-  <dt><pre><span class="Keyword">proc</span> <a href="#backgroundColor%3D%2Cptr.struct_ActionBarLayer%2CGColor"><span class="Identifier">backgroundColor=</span></a><span class="Other">(</span><span class="Identifier">actionBar</span><span class="Other">:</span> <span class="Keyword">ptr</span> <a href="../ffi.html#ActionBarLayer"><span class="Identifier">ActionBarLayer</span></a><span class="Other">;</span> <span class="Identifier">color</span><span class="Other">:</span> <a href="../ffi.html#GColor"><span class="Identifier">GColor</span></a><span class="Other">)</span> {.<span class="Identifier">inline</span><span class="Other">,</span>
+  <div id="backgroundColor=,ActionBarLayerHandle,GColor">
+  <dt><pre><span class="Keyword">proc</span> <a href="#backgroundColor%3D%2CActionBarLayerHandle%2CGColor"><span class="Identifier">backgroundColor=</span></a><span class="Other">(</span><span class="Identifier">h</span><span class="Other">:</span> <a href="action_bar.html#ActionBarLayerHandle"><span class="Identifier">ActionBarLayerHandle</span></a><span class="Other">;</span> <span class="Identifier">color</span><span class="Other">:</span> <a href="../ffi.html#GColor"><span class="Identifier">GColor</span></a><span class="Other">)</span> {.<span class="Identifier">inline</span><span class="Other">,</span>
     <span><span class="Other pragmadots">...</span></span><span class="pragmawrap"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">forbids</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span>.}</pre></dt>
   <dd>
     
-    Set the background color of the action bar. Equivalent to C function <tt class="docutils literal"><span class="pre"><span class="Identifier">ffi</span><span class="Operator">.</span><span class="Identifier">action_bar_layer_set_background_color</span><span class="Punctuation">(</span><span class="Identifier">action_bar</span><span class="Punctuation">,</span> <span class="Identifier">color</span><span class="Punctuation">)</span></span></tt>. NOTE: Not available on black-and-white platforms (Aplite, Diorite).
+    
+    
+  </dd>
+</div>
+<div id="backgroundColor=,ptr.struct_ActionBarLayer,GColor">
+  <dt><pre><span class="Keyword">proc</span> <a href="#backgroundColor%3D%2Cptr.struct_ActionBarLayer%2CGColor"><span class="Identifier">backgroundColor=</span></a><span class="Other">(</span><span class="Identifier">p</span><span class="Other">:</span> <span class="Keyword">ptr</span> <a href="../ffi.html#ActionBarLayer"><span class="Identifier">ActionBarLayer</span></a><span class="Other">;</span> <span class="Identifier">color</span><span class="Other">:</span> <a href="../ffi.html#GColor"><span class="Identifier">GColor</span></a><span class="Other">)</span> {.<span class="Identifier">inline</span><span class="Other">,</span>
+    <span><span class="Other pragmadots">...</span></span><span class="pragmawrap"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">forbids</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span>.}</pre></dt>
+  <dd>
+    
+    
     
   </dd>
 </div>
 
 </div>
 <div id="clearIcon-procs-all">
-  <div id="clearIcon,ptr.struct_ActionBarLayer,ButtonId">
-  <dt><pre><span class="Keyword">proc</span> <a href="#clearIcon%2Cptr.struct_ActionBarLayer%2CButtonId"><span class="Identifier">clearIcon</span></a><span class="Other">(</span><span class="Identifier">actionBar</span><span class="Other">:</span> <span class="Keyword">ptr</span> <a href="../ffi.html#ActionBarLayer"><span class="Identifier">ActionBarLayer</span></a><span class="Other">;</span> <span class="Identifier">buttonId</span><span class="Other">:</span> <a href="../ffi.html#ButtonId"><span class="Identifier">ButtonId</span></a><span class="Other">)</span> {.<span class="Identifier">inline</span><span class="Other">,</span>
+  <div id="clearIcon,ActionBarLayerHandle,ButtonId">
+  <dt><pre><span class="Keyword">proc</span> <a href="#clearIcon%2CActionBarLayerHandle%2CButtonId"><span class="Identifier">clearIcon</span></a><span class="Other">(</span><span class="Identifier">h</span><span class="Other">:</span> <a href="action_bar.html#ActionBarLayerHandle"><span class="Identifier">ActionBarLayerHandle</span></a><span class="Other">;</span> <span class="Identifier">buttonId</span><span class="Other">:</span> <a href="../ffi.html#ButtonId"><span class="Identifier">ButtonId</span></a><span class="Other">)</span> {.<span class="Identifier">inline</span><span class="Other">,</span>
     <span><span class="Other pragmadots">...</span></span><span class="pragmawrap"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">forbids</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span>.}</pre></dt>
   <dd>
     
-    Clear the icon for a button. Equivalent to C function <tt class="docutils literal"><span class="pre"><span class="Identifier">ffi</span><span class="Operator">.</span><span class="Identifier">action_bar_layer_clear_icon</span><span class="Punctuation">(</span><span class="Identifier">action_bar</span><span class="Punctuation">,</span> <span class="Identifier">button_id</span><span class="Punctuation">)</span></span></tt>.
+    
     
   </dd>
 </div>
 
 </div>
 <div id="clickConfigProvider=-procs-all">
-  <div id="clickConfigProvider=,ptr.struct_ActionBarLayer,ClickConfigProvider">
-  <dt><pre><span class="Keyword">proc</span> <a href="#clickConfigProvider%3D%2Cptr.struct_ActionBarLayer%2CClickConfigProvider"><span class="Identifier">clickConfigProvider=</span></a><span class="Other">(</span><span class="Identifier">actionBar</span><span class="Other">:</span> <span class="Keyword">ptr</span> <a href="../ffi.html#ActionBarLayer"><span class="Identifier">ActionBarLayer</span></a><span class="Other">;</span>
-                          <span class="Identifier">provider</span><span class="Other">:</span> <a href="../ffi.html#ClickConfigProvider"><span class="Identifier">ClickConfigProvider</span></a><span class="Other">)</span> {.<span class="Identifier">inline</span><span class="Other">,</span> <span><span class="Other pragmadots">...</span></span><span class="pragmawrap"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span>
-    <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">forbids</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span>.}</pre></dt>
+  <div id="clickConfigProvider=,ActionBarLayerHandle,ClickConfigProvider">
+  <dt><pre><span class="Keyword">proc</span> <a href="#clickConfigProvider%3D%2CActionBarLayerHandle%2CClickConfigProvider"><span class="Identifier">clickConfigProvider=</span></a><span class="Other">(</span><span class="Identifier">h</span><span class="Other">:</span> <a href="action_bar.html#ActionBarLayerHandle"><span class="Identifier">ActionBarLayerHandle</span></a><span class="Other">;</span> <span class="Identifier">provider</span><span class="Other">:</span> <a href="../ffi.html#ClickConfigProvider"><span class="Identifier">ClickConfigProvider</span></a><span class="Other">)</span> {.
+    <span class="Identifier">inline</span><span class="Other">,</span> <span><span class="Other pragmadots">...</span></span><span class="pragmawrap"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">forbids</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span>.}</pre></dt>
   <dd>
     
-    Set the click configuration provider. Equivalent to C function <tt class="docutils literal"><span class="pre"><span class="Identifier">ffi</span><span class="Operator">.</span><span class="Identifier">action_bar_layer_set_click_config_provider</span><span class="Punctuation">(</span><span class="Identifier">action_bar</span><span class="Punctuation">,</span> <span class="Identifier">provider</span><span class="Punctuation">)</span></span></tt>.
+    
+    
+  </dd>
+</div>
+<div id="clickConfigProvider=,ptr.struct_ActionBarLayer,ClickConfigProvider">
+  <dt><pre><span class="Keyword">proc</span> <a href="#clickConfigProvider%3D%2Cptr.struct_ActionBarLayer%2CClickConfigProvider"><span class="Identifier">clickConfigProvider=</span></a><span class="Other">(</span><span class="Identifier">p</span><span class="Other">:</span> <span class="Keyword">ptr</span> <a href="../ffi.html#ActionBarLayer"><span class="Identifier">ActionBarLayer</span></a><span class="Other">;</span> <span class="Identifier">provider</span><span class="Other">:</span> <a href="../ffi.html#ClickConfigProvider"><span class="Identifier">ClickConfigProvider</span></a><span class="Other">)</span> {.
+    <span class="Identifier">inline</span><span class="Other">,</span> <span><span class="Other pragmadots">...</span></span><span class="pragmawrap"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">forbids</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span>.}</pre></dt>
+  <dd>
+    
+    
     
   </dd>
 </div>
 
 </div>
 <div id="context=-procs-all">
-  <div id="context=,ptr.struct_ActionBarLayer,pointer">
-  <dt><pre><span class="Keyword">proc</span> <a href="#context%3D%2Cptr.struct_ActionBarLayer%2Cpointer"><span class="Identifier">context=</span></a><span class="Other">(</span><span class="Identifier">actionBar</span><span class="Other">:</span> <span class="Keyword">ptr</span> <a href="../ffi.html#ActionBarLayer"><span class="Identifier">ActionBarLayer</span></a><span class="Other">;</span> <span class="Identifier">context</span><span class="Other">:</span> <span class="Identifier">pointer</span><span class="Other">)</span> {.<span class="Identifier">inline</span><span class="Other">,</span>
-    <span><span class="Other pragmadots">...</span></span><span class="pragmawrap"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">forbids</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span>.}</pre></dt>
+  <div id="context=,ActionBarLayerHandle,pointer">
+  <dt><pre><span class="Keyword">proc</span> <a href="#context%3D%2CActionBarLayerHandle%2Cpointer"><span class="Identifier">context=</span></a><span class="Other">(</span><span class="Identifier">h</span><span class="Other">:</span> <a href="action_bar.html#ActionBarLayerHandle"><span class="Identifier">ActionBarLayerHandle</span></a><span class="Other">;</span> <span class="Identifier">context</span><span class="Other">:</span> <span class="Identifier">pointer</span><span class="Other">)</span> {.<span class="Identifier">inline</span><span class="Other">,</span> <span><span class="Other pragmadots">...</span></span><span class="pragmawrap"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span>
+    <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">forbids</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span>.}</pre></dt>
   <dd>
     
-    Set the user context pointer for click callbacks. Equivalent to C function <tt class="docutils literal"><span class="pre"><span class="Identifier">ffi</span><span class="Operator">.</span><span class="Identifier">action_bar_layer_set_context</span><span class="Punctuation">(</span><span class="Identifier">action_bar</span><span class="Punctuation">,</span> <span class="Identifier">context</span><span class="Punctuation">)</span></span></tt>.
     
-  </dd>
-</div>
-
-</div>
-<div id="destroy-procs-all">
-  <div id="destroy,ptr.struct_ActionBarLayer">
-  <dt><pre><span class="Keyword">proc</span> <a href="#destroy%2Cptr.struct_ActionBarLayer"><span class="Identifier">destroy</span></a><span class="Other">(</span><span class="Identifier">actionBar</span><span class="Other">:</span> <span class="Keyword">ptr</span> <a href="../ffi.html#ActionBarLayer"><span class="Identifier">ActionBarLayer</span></a><span class="Other">)</span> {.<span class="Identifier">inline</span><span class="Other">,</span> <span><span class="Other pragmadots">...</span></span><span class="pragmawrap"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span>
-    <span class="Identifier">forbids</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span>.}</pre></dt>
-  <dd>
-    
-    Destroy the action bar layer and free its memory. Equivalent to C function <tt class="docutils literal"><span class="pre"><span class="Identifier">ffi</span><span class="Operator">.</span><span class="Identifier">action_bar_layer_destroy</span><span class="Punctuation">(</span><span class="Identifier">action_bar_layer</span><span class="Punctuation">)</span></span></tt>.
     
   </dd>
 </div>
 
 </div>
 <div id="getLayer-procs-all">
-  <div id="getLayer,ptr.struct_ActionBarLayer">
-  <dt><pre><span class="Keyword">proc</span> <a href="#getLayer%2Cptr.struct_ActionBarLayer"><span class="Identifier">getLayer</span></a><span class="Other">(</span><span class="Identifier">actionBar</span><span class="Other">:</span> <span class="Keyword">ptr</span> <a href="../ffi.html#ActionBarLayer"><span class="Identifier">ActionBarLayer</span></a><span class="Other">)</span><span class="Other">:</span> <span class="Keyword">ptr</span> <a href="../ffi.html#Layer"><span class="Identifier">Layer</span></a> {.<span class="Identifier">inline</span><span class="Other">,</span> <span><span class="Other pragmadots">...</span></span><span class="pragmawrap"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span>
+  <div id="getLayer,ActionBarLayerHandle">
+  <dt><pre><span class="Keyword">proc</span> <a href="#getLayer%2CActionBarLayerHandle"><span class="Identifier">getLayer</span></a><span class="Other">(</span><span class="Identifier">h</span><span class="Other">:</span> <a href="action_bar.html#ActionBarLayerHandle"><span class="Identifier">ActionBarLayerHandle</span></a><span class="Other">)</span><span class="Other">:</span> <span class="Keyword">ptr</span> <a href="../ffi.html#Layer"><span class="Identifier">Layer</span></a> {.<span class="Identifier">inline</span><span class="Other">,</span> <span><span class="Other pragmadots">...</span></span><span class="pragmawrap"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span>
     <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">forbids</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span>.}</pre></dt>
   <dd>
     
-    Get the underlying Layer for hierarchy operations. Equivalent to C function <tt class="docutils literal"><span class="pre"><span class="Identifier">ffi</span><span class="Operator">.</span><span class="Identifier">action_bar_layer_get_layer</span><span class="Punctuation">(</span><span class="Identifier">action_bar_layer</span><span class="Punctuation">)</span></span></tt>.
+    
+    
+  </dd>
+</div>
+
+</div>
+<div id="isValid-procs-all">
+  <div id="isValid,ActionBarLayerHandle">
+  <dt><pre><span class="Keyword">proc</span> <a href="#isValid%2CActionBarLayerHandle"><span class="Identifier">isValid</span></a><span class="Other">(</span><span class="Identifier">h</span><span class="Other">:</span> <a href="action_bar.html#ActionBarLayerHandle"><span class="Identifier">ActionBarLayerHandle</span></a><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">bool</span> {.<span class="Identifier">inline</span><span class="Other">,</span> <span><span class="Other pragmadots">...</span></span><span class="pragmawrap"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span>
+    <span class="Identifier">forbids</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span>.}</pre></dt>
+  <dd>
+    
+    
     
   </dd>
 </div>
@@ -223,67 +359,135 @@
 </div>
 <div id="newActionBarLayer-procs-all">
   <div id="newActionBarLayer">
-  <dt><pre><span class="Keyword">proc</span> <a href="#newActionBarLayer"><span class="Identifier">newActionBarLayer</span></a><span class="Other">(</span><span class="Other">)</span><span class="Other">:</span> <span class="Keyword">ptr</span> <a href="../ffi.html#ActionBarLayer"><span class="Identifier">ActionBarLayer</span></a> {.<span class="Identifier">inline</span><span class="Other">,</span> <span><span class="Other pragmadots">...</span></span><span class="pragmawrap"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span>
+  <dt><pre><span class="Keyword">proc</span> <a href="#newActionBarLayer"><span class="Identifier">newActionBarLayer</span></a><span class="Other">(</span><span class="Other">)</span><span class="Other">:</span> <a href="action_bar.html#ActionBarLayerHandle"><span class="Identifier">ActionBarLayerHandle</span></a> {.<span class="Identifier">inline</span><span class="Other">,</span> <span><span class="Other pragmadots">...</span></span><span class="pragmawrap"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span>
     <span class="Identifier">forbids</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span>.}</pre></dt>
   <dd>
     
-    Create a new ActionBarLayer. Equivalent to C function <tt class="docutils literal"><span class="pre"><span class="Identifier">ffi</span><span class="Operator">.</span><span class="Identifier">action_bar_layer_create</span><span class="Punctuation">(</span><span class="Punctuation">)</span></span></tt>.
+    Alias for <tt class="docutils literal"><span class="pre"><span class="Identifier">newActionBarLayerHandle</span></span></tt>.
+    
+  </dd>
+</div>
+
+</div>
+<div id="newActionBarLayerHandle-procs-all">
+  <div id="newActionBarLayerHandle">
+  <dt><pre><span class="Keyword">proc</span> <a href="#newActionBarLayerHandle"><span class="Identifier">newActionBarLayerHandle</span></a><span class="Other">(</span><span class="Other">)</span><span class="Other">:</span> <a href="action_bar.html#ActionBarLayerHandle"><span class="Identifier">ActionBarLayerHandle</span></a> {.<span class="Identifier">inline</span><span class="Other">,</span> <span><span class="Other pragmadots">...</span></span><span class="pragmawrap"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span>
+    <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">forbids</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span>.}</pre></dt>
+  <dd>
+    
+    
     
   </dd>
 </div>
 
 </div>
 <div id="removeFromWindow-procs-all">
-  <div id="removeFromWindow,ptr.struct_ActionBarLayer">
-  <dt><pre><span class="Keyword">proc</span> <a href="#removeFromWindow%2Cptr.struct_ActionBarLayer"><span class="Identifier">removeFromWindow</span></a><span class="Other">(</span><span class="Identifier">actionBar</span><span class="Other">:</span> <span class="Keyword">ptr</span> <a href="../ffi.html#ActionBarLayer"><span class="Identifier">ActionBarLayer</span></a><span class="Other">)</span> {.<span class="Identifier">inline</span><span class="Other">,</span> <span><span class="Other pragmadots">...</span></span><span class="pragmawrap"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span>
+  <div id="removeFromWindow,ActionBarLayerHandle">
+  <dt><pre><span class="Keyword">proc</span> <a href="#removeFromWindow%2CActionBarLayerHandle"><span class="Identifier">removeFromWindow</span></a><span class="Other">(</span><span class="Identifier">h</span><span class="Other">:</span> <span class="Keyword">var</span> <a href="action_bar.html#ActionBarLayerHandle"><span class="Identifier">ActionBarLayerHandle</span></a><span class="Other">)</span> {.<span class="Identifier">inline</span><span class="Other">,</span> <span><span class="Other pragmadots">...</span></span><span class="pragmawrap"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span>
     <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">forbids</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span>.}</pre></dt>
   <dd>
     
-    Remove the action bar from its window. Equivalent to C function <tt class="docutils literal"><span class="pre"><span class="Identifier">ffi</span><span class="Operator">.</span><span class="Identifier">action_bar_layer_remove_from_window</span><span class="Punctuation">(</span><span class="Identifier">action_bar</span><span class="Punctuation">)</span></span></tt>.
+    
     
   </dd>
 </div>
 
 </div>
 <div id="setIcon-procs-all">
-  <div id="setIcon,ptr.struct_ActionBarLayer,ButtonId,ptr.struct_GBitmap">
-  <dt><pre><span class="Keyword">proc</span> <a href="#setIcon%2Cptr.struct_ActionBarLayer%2CButtonId%2Cptr.struct_GBitmap"><span class="Identifier">setIcon</span></a><span class="Other">(</span><span class="Identifier">actionBar</span><span class="Other">:</span> <span class="Keyword">ptr</span> <a href="../ffi.html#ActionBarLayer"><span class="Identifier">ActionBarLayer</span></a><span class="Other">;</span> <span class="Identifier">buttonId</span><span class="Other">:</span> <a href="../ffi.html#ButtonId"><span class="Identifier">ButtonId</span></a><span class="Other">;</span>
-             <span class="Identifier">icon</span><span class="Other">:</span> <span class="Keyword">ptr</span> <a href="../ffi.html#GBitmap"><span class="Identifier">GBitmap</span></a><span class="Other">)</span> {.<span class="Identifier">inline</span><span class="Other">,</span> <span><span class="Other pragmadots">...</span></span><span class="pragmawrap"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">forbids</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span>.}</pre></dt>
+  <div id="setIcon,ActionBarLayerHandle,ButtonId,ptr.struct_GBitmap">
+  <dt><pre><span class="Keyword">proc</span> <a href="#setIcon%2CActionBarLayerHandle%2CButtonId%2Cptr.struct_GBitmap"><span class="Identifier">setIcon</span></a><span class="Other">(</span><span class="Identifier">h</span><span class="Other">:</span> <a href="action_bar.html#ActionBarLayerHandle"><span class="Identifier">ActionBarLayerHandle</span></a><span class="Other">;</span> <span class="Identifier">buttonId</span><span class="Other">:</span> <a href="../ffi.html#ButtonId"><span class="Identifier">ButtonId</span></a><span class="Other">;</span> <span class="Identifier">icon</span><span class="Other">:</span> <span class="Keyword">ptr</span> <a href="../ffi.html#GBitmap"><span class="Identifier">GBitmap</span></a><span class="Other">)</span> {.
+    <span class="Identifier">inline</span><span class="Other">,</span> <span><span class="Other pragmadots">...</span></span><span class="pragmawrap"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">forbids</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span>.}</pre></dt>
   <dd>
     
-    Set the icon for a button (BUTTON_ID_UP, BUTTON_ID_SELECT, BUTTON_ID_DOWN). Equivalent to C function <tt class="docutils literal"><span class="pre"><span class="Identifier">ffi</span><span class="Operator">.</span><span class="Identifier">action_bar_layer_set_icon</span><span class="Punctuation">(</span><span class="Identifier">action_bar</span><span class="Punctuation">,</span> <span class="Identifier">button_id</span><span class="Punctuation">,</span> <span class="Identifier">icon</span><span class="Punctuation">)</span></span></tt>.
+    
+    
+  </dd>
+</div>
+<div id="setIcon,ptr.struct_ActionBarLayer,ButtonId,ptr.struct_GBitmap">
+  <dt><pre><span class="Keyword">proc</span> <a href="#setIcon%2Cptr.struct_ActionBarLayer%2CButtonId%2Cptr.struct_GBitmap"><span class="Identifier">setIcon</span></a><span class="Other">(</span><span class="Identifier">p</span><span class="Other">:</span> <span class="Keyword">ptr</span> <a href="../ffi.html#ActionBarLayer"><span class="Identifier">ActionBarLayer</span></a><span class="Other">;</span> <span class="Identifier">buttonId</span><span class="Other">:</span> <a href="../ffi.html#ButtonId"><span class="Identifier">ButtonId</span></a><span class="Other">;</span> <span class="Identifier">icon</span><span class="Other">:</span> <span class="Keyword">ptr</span> <a href="../ffi.html#GBitmap"><span class="Identifier">GBitmap</span></a><span class="Other">)</span> {.
+    <span class="Identifier">inline</span><span class="Other">,</span> <span><span class="Other pragmadots">...</span></span><span class="pragmawrap"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">forbids</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span>.}</pre></dt>
+  <dd>
+    
+    
     
   </dd>
 </div>
 
 </div>
 <div id="setIconAnimated-procs-all">
-  <div id="setIconAnimated,ptr.struct_ActionBarLayer,ButtonId,ptr.struct_GBitmap,bool">
-  <dt><pre><span class="Keyword">proc</span> <a href="#setIconAnimated%2Cptr.struct_ActionBarLayer%2CButtonId%2Cptr.struct_GBitmap%2Cbool"><span class="Identifier">setIconAnimated</span></a><span class="Other">(</span><span class="Identifier">actionBar</span><span class="Other">:</span> <span class="Keyword">ptr</span> <a href="../ffi.html#ActionBarLayer"><span class="Identifier">ActionBarLayer</span></a><span class="Other">;</span> <span class="Identifier">buttonId</span><span class="Other">:</span> <a href="../ffi.html#ButtonId"><span class="Identifier">ButtonId</span></a><span class="Other">;</span>
+  <div id="setIconAnimated,ActionBarLayerHandle,ButtonId,ptr.struct_GBitmap,bool">
+  <dt><pre><span class="Keyword">proc</span> <a href="#setIconAnimated%2CActionBarLayerHandle%2CButtonId%2Cptr.struct_GBitmap%2Cbool"><span class="Identifier">setIconAnimated</span></a><span class="Other">(</span><span class="Identifier">h</span><span class="Other">:</span> <a href="action_bar.html#ActionBarLayerHandle"><span class="Identifier">ActionBarLayerHandle</span></a><span class="Other">;</span> <span class="Identifier">buttonId</span><span class="Other">:</span> <a href="../ffi.html#ButtonId"><span class="Identifier">ButtonId</span></a><span class="Other">;</span>
                      <span class="Identifier">icon</span><span class="Other">:</span> <span class="Keyword">ptr</span> <a href="../ffi.html#GBitmap"><span class="Identifier">GBitmap</span></a><span class="Other">;</span> <span class="Identifier">animated</span><span class="Other">:</span> <span class="Identifier">bool</span><span class="Other">)</span> {.<span class="Identifier">inline</span><span class="Other">,</span> <span><span class="Other pragmadots">...</span></span><span class="pragmawrap"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span>
     <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">forbids</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span>.}</pre></dt>
   <dd>
     
-    Set the icon for a button with optional animation. Equivalent to C function <tt class="docutils literal"><span class="pre"><span class="Identifier">ffi</span><span class="Operator">.</span><span class="Identifier">action_bar_layer_set_icon_animated</span><span class="Punctuation">(</span><span class="Identifier">action_bar</span><span class="Punctuation">,</span> <span class="Identifier">button_id</span><span class="Punctuation">,</span> <span class="Identifier">icon</span><span class="Punctuation">,</span> <span class="Identifier">animated</span><span class="Punctuation">)</span></span></tt>.
+    
     
   </dd>
 </div>
 
 </div>
-<div id="setIconPressAnimation-procs-all">
-  <div id="setIconPressAnimation,ptr.struct_ActionBarLayer,ButtonId,ActionBarLayerIconPressAnimation">
-  <dt><pre><span class="Keyword">proc</span> <a href="#setIconPressAnimation%2Cptr.struct_ActionBarLayer%2CButtonId%2CActionBarLayerIconPressAnimation"><span class="Identifier">setIconPressAnimation</span></a><span class="Other">(</span><span class="Identifier">actionBar</span><span class="Other">:</span> <span class="Keyword">ptr</span> <a href="../ffi.html#ActionBarLayer"><span class="Identifier">ActionBarLayer</span></a><span class="Other">;</span> <span class="Identifier">buttonId</span><span class="Other">:</span> <a href="../ffi.html#ButtonId"><span class="Identifier">ButtonId</span></a><span class="Other">;</span>
-                           <span class="Identifier">animation</span><span class="Other">:</span> <a href="../ffi.html#ActionBarLayerIconPressAnimation"><span class="Identifier">ActionBarLayerIconPressAnimation</span></a><span class="Other">)</span> {.
-    <span class="Identifier">inline</span><span class="Other">,</span> <span><span class="Other pragmadots">...</span></span><span class="pragmawrap"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">forbids</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span>.}</pre></dt>
+<div id="setParent-procs-all">
+  <div id="setParent,ActionBarLayerHandle,ptr.struct_Layer">
+  <dt><pre><span class="Keyword">proc</span> <a href="#setParent%2CActionBarLayerHandle%2Cptr.struct_Layer"><span class="Identifier">setParent</span></a><span class="Other">(</span><span class="Identifier">h</span><span class="Other">:</span> <span class="Keyword">var</span> <a href="action_bar.html#ActionBarLayerHandle"><span class="Identifier">ActionBarLayerHandle</span></a><span class="Other">;</span> <span class="Identifier">p</span><span class="Other">:</span> <span class="Keyword">ptr</span> <a href="../ffi.html#Layer"><span class="Identifier">Layer</span></a><span class="Other">)</span> {.<span class="Identifier">inline</span><span class="Other">,</span> <span><span class="Other pragmadots">...</span></span><span class="pragmawrap"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span>
+    <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">forbids</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span>.}</pre></dt>
   <dd>
     
-    Set the press animation for a button icon. Equivalent to C function <tt class="docutils literal"><span class="pre"><span class="Identifier">ffi</span><span class="Operator">.</span><span class="Identifier">action_bar_layer_set_icon_press_animation</span><span class="Punctuation">(</span><span class="Identifier">action_bar</span><span class="Punctuation">,</span> <span class="Identifier">button_id</span><span class="Punctuation">,</span> <span class="Identifier">animation</span><span class="Punctuation">)</span></span></tt>.
+    
+    
+  </dd>
+</div>
+
+</div>
+<div id="toHandle-procs-all">
+  <div id="toHandle,ptr.struct_ActionBarLayer">
+  <dt><pre><span class="Keyword">proc</span> <a href="#toHandle%2Cptr.struct_ActionBarLayer"><span class="Identifier">toHandle</span></a><span class="Other">(</span><span class="Identifier">p</span><span class="Other">:</span> <span class="Keyword">ptr</span> <a href="../ffi.html#ActionBarLayer"><span class="Identifier">ActionBarLayer</span></a><span class="Other">)</span><span class="Other">:</span> <a href="action_bar.html#ActionBarLayerHandle"><span class="Identifier">ActionBarLayerHandle</span></a> {.<span class="Identifier">inline</span><span class="Other">,</span> <span><span class="Other pragmadots">...</span></span><span class="pragmawrap"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span>
+    <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">forbids</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span>.}</pre></dt>
+  <dd>
+    
+    Wrap raw pointer in handle (unowned).
+    
+  </dd>
+</div>
+
+</div>
+<div id="wrapOwned-procs-all">
+  <div id="wrapOwned,ptr.struct_ActionBarLayer">
+  <dt><pre><span class="Keyword">proc</span> <a href="#wrapOwned%2Cptr.struct_ActionBarLayer"><span class="Identifier">wrapOwned</span></a><span class="Other">(</span><span class="Identifier">p</span><span class="Other">:</span> <span class="Keyword">ptr</span> <a href="../ffi.html#ActionBarLayer"><span class="Identifier">ActionBarLayer</span></a><span class="Other">)</span><span class="Other">:</span> <a href="action_bar.html#ActionBarLayerHandle"><span class="Identifier">ActionBarLayerHandle</span></a> {.<span class="Identifier">inline</span><span class="Other">,</span>
+    <span><span class="Other pragmadots">...</span></span><span class="pragmawrap"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">forbids</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span>.}</pre></dt>
+  <dd>
+    
+    Wrap raw pointer in handle (owned).
     
   </dd>
 </div>
 
 </div>
 
+  </dl>
+</div>
+<div class="section" id="16">
+  <h1><a class="toc-backref" href="#16">Converters</a></h1>
+  <dl class="item">
+    <div id="toPtr-converters-all">
+  <div id="toPtr.c,ActionBarLayerHandle">
+  <dt><pre><span class="Keyword">converter</span> <a href="#toPtr.c%2CActionBarLayerHandle"><span class="Identifier">toPtr</span></a><span class="Other">(</span><span class="Identifier">h</span><span class="Other">:</span> <a href="action_bar.html#ActionBarLayerHandle"><span class="Identifier">ActionBarLayerHandle</span></a><span class="Other">)</span><span class="Other">:</span> <span class="Keyword">ptr</span> <a href="../ffi.html#ActionBarLayer"><span class="Identifier">ActionBarLayer</span></a> {.<span><span class="Other pragmadots">...</span></span><span class="pragmawrap"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span>
+    <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">forbids</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span>.}</pre></dt>
+  <dd>
+    
+    
+    
+  </dd>
+</div>
+
+</div>
+
+  </dl>
+</div>
+<div class="section" id="19">
+  <h1><a class="toc-backref" href="#19">Exports</a></h1>
+  <dl class="item">
+    <a href="../ffi.html#ActionBarLayer"><span class="Identifier">ActionBarLayer</span></a>
   </dl>
 </div>
 
@@ -293,7 +497,7 @@
       <div class="twelve-columns footer">
         <span class="nim-sprite"></span>
         <br>
-        <small style="color: var(--hint);">Made with Nim. Generated: 2026-02-12 14:24:48 UTC</small>
+        <small style="color: var(--hint);">Made with Nim. Generated: 2026-02-14 21:03:57 UTC</small>
       </div>
     </div>
   </div>

@@ -1,8 +1,21 @@
 nimTitle	status_bar	nebble/ui/status_bar.html	module nebble/ui/status_bar		0
-nim	newStatusBarLayer	nebble/ui/status_bar.html#newStatusBarLayer	proc newStatusBarLayer(): ptr StatusBarLayer		14
-nim	destroy	nebble/ui/status_bar.html#destroy,ptr.struct_StatusBarLayer	proc destroy(statusBar: ptr StatusBarLayer)		20
-nim	getLayer	nebble/ui/status_bar.html#getLayer,ptr.struct_StatusBarLayer	proc getLayer(statusBar: ptr StatusBarLayer): ptr Layer		30
-nim	setColors	nebble/ui/status_bar.html#setColors,ptr.struct_StatusBarLayer,GColor,GColor	proc setColors(statusBar: ptr StatusBarLayer; background: GColor; foreground: GColor)		40
-nim	backgroundColor	nebble/ui/status_bar.html#backgroundColor,ptr.struct_StatusBarLayer	proc backgroundColor(statusBar: ptr StatusBarLayer): GColor		47
-nim	foregroundColor	nebble/ui/status_bar.html#foregroundColor,ptr.struct_StatusBarLayer	proc foregroundColor(statusBar: ptr StatusBarLayer): GColor		53
-nim	separatorMode=	nebble/ui/status_bar.html#separatorMode=,ptr.struct_StatusBarLayer,StatusBarLayerSeparatorMode	proc separatorMode=(statusBar: ptr StatusBarLayer; mode: StatusBarLayerSeparatorMode)		63
+nim	StatusBarLayerHandle	nebble/ui/status_bar.html#StatusBarLayerHandle	object StatusBarLayerHandle		70
+nim	`=destroy`	nebble/ui/status_bar.html#=destroy,StatusBarLayerHandle	proc `=destroy`(h`gensym0: var StatusBarLayerHandle)		76
+nim	`=wasMoved`	nebble/ui/status_bar.html#=wasMoved,StatusBarLayerHandle	proc `=wasMoved`(h`gensym0: var StatusBarLayerHandle)		83
+nim	`=copy`	nebble/ui/status_bar.html#=copy,StatusBarLayerHandle,StatusBarLayerHandle	proc `=copy`(dest`gensym0: var StatusBarLayerHandle;\n        src`gensym0: StatusBarLayerHandle)		88
+nim	`=sink`	nebble/ui/status_bar.html#=sink,StatusBarLayerHandle,StatusBarLayerHandle	proc `=sink`(dest`gensym0: var StatusBarLayerHandle;\n        src`gensym0: StatusBarLayerHandle)		90
+nim	toPtr	nebble/ui/status_bar.html#toPtr.c,StatusBarLayerHandle	converter toPtr(h`gensym0: StatusBarLayerHandle): ptr StatusBarLayer		100
+nim	toLayer	nebble/ui/status_bar.html#toLayer.c,StatusBarLayerHandle	converter toLayer(h`gensym0: StatusBarLayerHandle): ptr Layer		102
+nim	toHandle	nebble/ui/status_bar.html#toHandle,ptr.struct_StatusBarLayer	proc toHandle(p`gensym0: ptr StatusBarLayer): StatusBarLayerHandle		105
+nim	wrapOwned	nebble/ui/status_bar.html#wrapOwned,ptr.struct_StatusBarLayer	proc wrapOwned(p`gensym0: ptr StatusBarLayer): StatusBarLayerHandle		109
+nim	isValid	nebble/ui/status_bar.html#isValid,StatusBarLayerHandle	proc isValid(h`gensym0: StatusBarLayerHandle): bool		113
+nim	isNil	nebble/ui/status_bar.html#isNil,StatusBarLayerHandle	proc isNil(h`gensym0: StatusBarLayerHandle): bool		114
+nim	setParent	nebble/ui/status_bar.html#setParent,StatusBarLayerHandle,ptr.struct_Layer	proc setParent(h`gensym0: var StatusBarLayerHandle; p`gensym0: ptr Layer)		116
+nim	reset	nebble/ui/status_bar.html#reset,StatusBarLayerHandle	proc reset(h`gensym0: var StatusBarLayerHandle)		15
+nim	newStatusBarLayerHandle	nebble/ui/status_bar.html#newStatusBarLayerHandle	proc newStatusBarLayerHandle(): StatusBarLayerHandle		22
+nim	newStatusBarLayer	nebble/ui/status_bar.html#newStatusBarLayer	proc newStatusBarLayer(): StatusBarLayerHandle		25
+nim	getLayer	nebble/ui/status_bar.html#getLayer,StatusBarLayerHandle	proc getLayer(h: StatusBarLayerHandle): ptr Layer		33
+nim	setColors	nebble/ui/status_bar.html#setColors,StatusBarLayerHandle,GColor,GColor	proc setColors(h: StatusBarLayerHandle; background: GColor; foreground: GColor)		37
+nim	backgroundColor	nebble/ui/status_bar.html#backgroundColor,StatusBarLayerHandle	proc backgroundColor(h: StatusBarLayerHandle): GColor		41
+nim	foregroundColor	nebble/ui/status_bar.html#foregroundColor,StatusBarLayerHandle	proc foregroundColor(h: StatusBarLayerHandle): GColor		45
+nim	separatorMode=	nebble/ui/status_bar.html#separatorMode=,StatusBarLayerHandle,StatusBarLayerSeparatorMode	proc separatorMode=(h: StatusBarLayerHandle; mode: StatusBarLayerSeparatorMode)		49

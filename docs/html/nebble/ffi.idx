@@ -1040,34 +1040,26 @@ nim	makeUuidFromLEBytes	nebble/ffi.html#makeUuidFromLEBytes,array[,uint8]	proc m
 nim	trigAngleToDeg	nebble/ffi.html#trigAngleToDeg.t,untyped	template trigAngleToDeg(trigAngle: untyped): untyped		190
 nim	degToTrigAngle	nebble/ffi.html#degToTrigAngle.t,untyped	template degToTrigAngle(angle: untyped): untyped		195
 nim	APP_LOG	nebble/ffi.html#APP_LOG.m,uint8,cstring,varargs[untyped]	macro APP_LOG(level: uint8; fmt: cstring; args: varargs[untyped]): untyped		206
-nim	colorFallback	nebble/ffi.html#colorFallback.t,untyped,untyped	template colorFallback(color, bw: untyped): untyped		234
-nim	pblIfBwElse	nebble/ffi.html#pblIfBwElse.t,untyped,untyped	template pblIfBwElse(ifTrue, ifFalse: untyped): untyped		236
-nim	pblIfColorElse	nebble/ffi.html#pblIfColorElse.t,untyped,untyped	template pblIfColorElse(ifTrue, ifFalse: untyped): untyped		237
-nim	pblIfRectElse	nebble/ffi.html#pblIfRectElse.t,untyped,untyped	template pblIfRectElse(ifTrue, ifFalse: untyped): untyped		243
-nim	pblIfRoundElse	nebble/ffi.html#pblIfRoundElse.t,untyped,untyped	template pblIfRoundElse(ifTrue, ifFalse: untyped): untyped		244
-nim	pblIfHealthElse	nebble/ffi.html#pblIfHealthElse.t,untyped,untyped	template pblIfHealthElse(ifTrue, ifFalse: untyped): untyped		255
-nim	pblIfMicrophoneElse	nebble/ffi.html#pblIfMicrophoneElse.t,untyped,untyped	template pblIfMicrophoneElse(ifTrue, ifFalse: untyped): untyped		256
-nim	pblIfSmartstrapElse	nebble/ffi.html#pblIfSmartstrapElse.t,untyped,untyped	template pblIfSmartstrapElse(ifTrue, ifFalse: untyped): untyped		257
-nim	arrayLength	nebble/ffi.html#arrayLength.t,array[I,T]	template arrayLength[I, T](arr: array[I, T]): int		263
-nim	propertyAnimationClone	nebble/ffi.html#propertyAnimationClone,ptr.struct_PropertyAnimation	proc propertyAnimationClone(anim: ptr PropertyAnimation): ptr PropertyAnimation		275
-nim	propertyAnimationGetFromGRect	nebble/ffi.html#propertyAnimationGetFromGRect,ptr.struct_PropertyAnimation,ptr.GRect	proc propertyAnimationGetFromGRect(anim: ptr PropertyAnimation; value: ptr GRect): bool		279
-nim	propertyAnimationSetFromGRect	nebble/ffi.html#propertyAnimationSetFromGRect,ptr.struct_PropertyAnimation,ptr.GRect	proc propertyAnimationSetFromGRect(anim: ptr PropertyAnimation; value: ptr GRect): bool		282
-nim	propertyAnimationGetFromGPoint	nebble/ffi.html#propertyAnimationGetFromGPoint,ptr.struct_PropertyAnimation,ptr.GPoint	proc propertyAnimationGetFromGPoint(anim: ptr PropertyAnimation; value: ptr GPoint): bool		285
-nim	propertyAnimationSetFromGPoint	nebble/ffi.html#propertyAnimationSetFromGPoint,ptr.struct_PropertyAnimation,ptr.GPoint	proc propertyAnimationSetFromGPoint(anim: ptr PropertyAnimation; value: ptr GPoint): bool		288
-nim	propertyAnimationGetFromInt16	nebble/ffi.html#propertyAnimationGetFromInt16,ptr.struct_PropertyAnimation,ptr.int16	proc propertyAnimationGetFromInt16(anim: ptr PropertyAnimation; value: ptr int16): bool		291
-nim	propertyAnimationSetFromInt16	nebble/ffi.html#propertyAnimationSetFromInt16,ptr.struct_PropertyAnimation,ptr.int16	proc propertyAnimationSetFromInt16(anim: ptr PropertyAnimation; value: ptr int16): bool		294
-nim	propertyAnimationGetToGRect	nebble/ffi.html#propertyAnimationGetToGRect,ptr.struct_PropertyAnimation,ptr.GRect	proc propertyAnimationGetToGRect(anim: ptr PropertyAnimation; value: ptr GRect): bool		297
-nim	propertyAnimationSetToGRect	nebble/ffi.html#propertyAnimationSetToGRect,ptr.struct_PropertyAnimation,ptr.GRect	proc propertyAnimationSetToGRect(anim: ptr PropertyAnimation; value: ptr GRect): bool		300
-nim	propertyAnimationGetToGPoint	nebble/ffi.html#propertyAnimationGetToGPoint,ptr.struct_PropertyAnimation,ptr.GPoint	proc propertyAnimationGetToGPoint(anim: ptr PropertyAnimation; value: ptr GPoint): bool		303
-nim	propertyAnimationSetToGPoint	nebble/ffi.html#propertyAnimationSetToGPoint,ptr.struct_PropertyAnimation,ptr.GPoint	proc propertyAnimationSetToGPoint(anim: ptr PropertyAnimation; value: ptr GPoint): bool		306
-nim	propertyAnimationGetToInt16	nebble/ffi.html#propertyAnimationGetToInt16,ptr.struct_PropertyAnimation,ptr.int16	proc propertyAnimationGetToInt16(anim: ptr PropertyAnimation; value: ptr int16): bool		309
-nim	propertyAnimationSetToInt16	nebble/ffi.html#propertyAnimationSetToInt16,ptr.struct_PropertyAnimation,ptr.int16	proc propertyAnimationSetToInt16(anim: ptr PropertyAnimation; value: ptr int16): bool		312
-nim	propertyAnimationGetSubject	nebble/ffi.html#propertyAnimationGetSubject,ptr.struct_PropertyAnimation,ptr.pointer	proc propertyAnimationGetSubject(anim: ptr PropertyAnimation; subject: ptr pointer): bool		315
-nim	propertyAnimationSetSubject	nebble/ffi.html#propertyAnimationSetSubject,ptr.struct_PropertyAnimation,ptr.pointer	proc propertyAnimationSetSubject(anim: ptr PropertyAnimation; subject: ptr pointer): bool		318
-nim	makeTupletBytes	nebble/ffi.html#makeTupletBytes,uint32,pointer,uint16	proc makeTupletBytes(key: uint32; data: pointer; length: uint16): Tuplet		325
-nim	makeTupletCString	nebble/ffi.html#makeTupletCString,uint32,cstring	proc makeTupletCString(key: uint32; str: cstring): Tuplet		332
-nim	makeTupletInteger	nebble/ffi.html#makeTupletInteger,uint32,uint32	proc makeTupletInteger(key: uint32; value: uint32): Tuplet		339
-nim	makeTupletUInteger	nebble/ffi.html#makeTupletUInteger,uint32,uint32	proc makeTupletUInteger(key: uint32; value: uint32): Tuplet		346
-nim	ACTION_BAR_WIDTH	nebble/ffi.html#ACTION_BAR_WIDTH	const ACTION_BAR_WIDTH		404
-nim	STATUS_BAR_LAYER_HEIGHT	nebble/ffi.html#STATUS_BAR_LAYER_HEIGHT	const STATUS_BAR_LAYER_HEIGHT		405
+nim	arrayLength	nebble/ffi.html#arrayLength.t,array[I,T]	template arrayLength[I, T](arr: array[I, T]): int		228
+nim	propertyAnimationClone	nebble/ffi.html#propertyAnimationClone,ptr.struct_PropertyAnimation	proc propertyAnimationClone(anim: ptr PropertyAnimation): ptr PropertyAnimation		240
+nim	propertyAnimationGetFromGRect	nebble/ffi.html#propertyAnimationGetFromGRect,ptr.struct_PropertyAnimation,ptr.GRect	proc propertyAnimationGetFromGRect(anim: ptr PropertyAnimation; value: ptr GRect): bool		244
+nim	propertyAnimationSetFromGRect	nebble/ffi.html#propertyAnimationSetFromGRect,ptr.struct_PropertyAnimation,ptr.GRect	proc propertyAnimationSetFromGRect(anim: ptr PropertyAnimation; value: ptr GRect): bool		247
+nim	propertyAnimationGetFromGPoint	nebble/ffi.html#propertyAnimationGetFromGPoint,ptr.struct_PropertyAnimation,ptr.GPoint	proc propertyAnimationGetFromGPoint(anim: ptr PropertyAnimation; value: ptr GPoint): bool		250
+nim	propertyAnimationSetFromGPoint	nebble/ffi.html#propertyAnimationSetFromGPoint,ptr.struct_PropertyAnimation,ptr.GPoint	proc propertyAnimationSetFromGPoint(anim: ptr PropertyAnimation; value: ptr GPoint): bool		253
+nim	propertyAnimationGetFromInt16	nebble/ffi.html#propertyAnimationGetFromInt16,ptr.struct_PropertyAnimation,ptr.int16	proc propertyAnimationGetFromInt16(anim: ptr PropertyAnimation; value: ptr int16): bool		256
+nim	propertyAnimationSetFromInt16	nebble/ffi.html#propertyAnimationSetFromInt16,ptr.struct_PropertyAnimation,ptr.int16	proc propertyAnimationSetFromInt16(anim: ptr PropertyAnimation; value: ptr int16): bool		259
+nim	propertyAnimationGetToGRect	nebble/ffi.html#propertyAnimationGetToGRect,ptr.struct_PropertyAnimation,ptr.GRect	proc propertyAnimationGetToGRect(anim: ptr PropertyAnimation; value: ptr GRect): bool		262
+nim	propertyAnimationSetToGRect	nebble/ffi.html#propertyAnimationSetToGRect,ptr.struct_PropertyAnimation,ptr.GRect	proc propertyAnimationSetToGRect(anim: ptr PropertyAnimation; value: ptr GRect): bool		265
+nim	propertyAnimationGetToGPoint	nebble/ffi.html#propertyAnimationGetToGPoint,ptr.struct_PropertyAnimation,ptr.GPoint	proc propertyAnimationGetToGPoint(anim: ptr PropertyAnimation; value: ptr GPoint): bool		268
+nim	propertyAnimationSetToGPoint	nebble/ffi.html#propertyAnimationSetToGPoint,ptr.struct_PropertyAnimation,ptr.GPoint	proc propertyAnimationSetToGPoint(anim: ptr PropertyAnimation; value: ptr GPoint): bool		271
+nim	propertyAnimationGetToInt16	nebble/ffi.html#propertyAnimationGetToInt16,ptr.struct_PropertyAnimation,ptr.int16	proc propertyAnimationGetToInt16(anim: ptr PropertyAnimation; value: ptr int16): bool		274
+nim	propertyAnimationSetToInt16	nebble/ffi.html#propertyAnimationSetToInt16,ptr.struct_PropertyAnimation,ptr.int16	proc propertyAnimationSetToInt16(anim: ptr PropertyAnimation; value: ptr int16): bool		277
+nim	propertyAnimationGetSubject	nebble/ffi.html#propertyAnimationGetSubject,ptr.struct_PropertyAnimation,ptr.pointer	proc propertyAnimationGetSubject(anim: ptr PropertyAnimation; subject: ptr pointer): bool		280
+nim	propertyAnimationSetSubject	nebble/ffi.html#propertyAnimationSetSubject,ptr.struct_PropertyAnimation,ptr.pointer	proc propertyAnimationSetSubject(anim: ptr PropertyAnimation; subject: ptr pointer): bool		283
+nim	makeTupletBytes	nebble/ffi.html#makeTupletBytes,uint32,pointer,uint16	proc makeTupletBytes(key: uint32; data: pointer; length: uint16): Tuplet		290
+nim	makeTupletCString	nebble/ffi.html#makeTupletCString,uint32,cstring	proc makeTupletCString(key: uint32; str: cstring): Tuplet		297
+nim	makeTupletInteger	nebble/ffi.html#makeTupletInteger,uint32,uint32	proc makeTupletInteger(key: uint32; value: uint32): Tuplet		304
+nim	makeTupletUInteger	nebble/ffi.html#makeTupletUInteger,uint32,uint32	proc makeTupletUInteger(key: uint32; value: uint32): Tuplet		311
+nim	ACTION_BAR_WIDTH	nebble/ffi.html#ACTION_BAR_WIDTH	const ACTION_BAR_WIDTH		369
+nim	STATUS_BAR_LAYER_HEIGHT	nebble/ffi.html#STATUS_BAR_LAYER_HEIGHT	const STATUS_BAR_LAYER_HEIGHT		370
 nimgrp	makegedgeinsets	nebble/ffi.html#makeGEdgeInsets-procs-all	proc		29

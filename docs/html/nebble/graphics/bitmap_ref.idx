@@ -15,11 +15,11 @@ nim	bytesPerRow	nebble/graphics/bitmap_ref.html#bytesPerRow,GBitmapRef	proc byte
 nim	palette	nebble/graphics/bitmap_ref.html#palette,GBitmapRef	proc palette(bitmapRef: GBitmapRef): ptr GColor		238
 nim	paletteSizeForFormat	nebble/graphics/bitmap_ref.html#paletteSizeForFormat,GBitmapFormat	proc paletteSizeForFormat(format: GBitmapFormat): int		245
 nim	palette=	nebble/graphics/bitmap_ref.html#palette=,GBitmapRef,ptr.GColor	proc palette=(bitmapRef: GBitmapRef; palette: ptr GColor)		256
-nim	data	nebble/graphics/bitmap_ref.html#data,GBitmapRef	proc data(bitmapRef: GBitmapRef): ptr uint8		286
-nim	data=	nebble/graphics/bitmap_ref.html#data=,GBitmapRef,ptr.uint8,GBitmapFormat,uint16,bool	proc data=(bitmapRef: GBitmapRef; data: ptr uint8; format: GBitmapFormat;\n      rowSizeBytes: uint16; freeOnDestroy: bool = false)		293
-nim	isValid	nebble/graphics/bitmap_ref.html#isValid,GBitmapRef	proc isValid(bitmapRef: GBitmapRef): bool		302
-nim	isSubBitmap	nebble/graphics/bitmap_ref.html#isSubBitmap,GBitmapRef	proc isSubBitmap(bitmapRef: GBitmapRef): bool		306
-nim	isSystemResource	nebble/graphics/bitmap_ref.html#isSystemResource,GBitmapRef	proc isSystemResource(bitmapRef: GBitmapRef): bool		313
+nim	data	nebble/graphics/bitmap_ref.html#data,GBitmapRef	proc data(bitmapRef: GBitmapRef): ptr uint8		285
+nim	data=	nebble/graphics/bitmap_ref.html#data=,GBitmapRef,ptr.uint8,GBitmapFormat,uint16,bool	proc data=(bitmapRef: GBitmapRef; data: ptr uint8; format: GBitmapFormat;\n      rowSizeBytes: uint16; freeOnDestroy: bool = false)		292
+nim	isValid	nebble/graphics/bitmap_ref.html#isValid,GBitmapRef	proc isValid(bitmapRef: GBitmapRef): bool		301
+nim	isSubBitmap	nebble/graphics/bitmap_ref.html#isSubBitmap,GBitmapRef	proc isSubBitmap(bitmapRef: GBitmapRef): bool		305
+nim	isSystemResource	nebble/graphics/bitmap_ref.html#isSystemResource,GBitmapRef	proc isSystemResource(bitmapRef: GBitmapRef): bool		312
 nimgrp	newblankbitmapref	nebble/graphics/bitmap_ref.html#newBlankBitmapRef-procs-all	proc		167
 nimgrp	newbitmapref	nebble/graphics/bitmap_ref.html#newBitmapRef-procs-all	proc		91
 nimgrp	createsubbitmapref	nebble/graphics/bitmap_ref.html#createSubBitmapRef-procs-all	proc		133

@@ -1,19 +1,18 @@
 nimTitle	menu_layer	nebble/ui/menu_layer.html	module nebble/ui/menu_layer		0
-nim	newMenuLayer	nebble/ui/menu_layer.html#newMenuLayer,GRect	proc newMenuLayer(frame: GRect): ptr MenuLayer		16
-nim	destroy	nebble/ui/menu_layer.html#destroy,ptr.struct_MenuLayer	proc destroy(menuLayer: ptr MenuLayer)		21
-nim	getLayer	nebble/ui/menu_layer.html#getLayer,ptr.struct_MenuLayer	proc getLayer(menuLayer: ptr MenuLayer): ptr Layer		30
-nim	getScrollLayer	nebble/ui/menu_layer.html#getScrollLayer,ptr.struct_MenuLayer	proc getScrollLayer(menuLayer: ptr MenuLayer): ptr ScrollLayer		35
-nim	setCallbacks	nebble/ui/menu_layer.html#setCallbacks,ptr.struct_MenuLayer,pointer,MenuLayerCallbacks	proc setCallbacks(menuLayer: ptr MenuLayer; callbackContext: pointer;\n             callbacks: MenuLayerCallbacks)		44
-nim	setClickConfigOntoWindow	nebble/ui/menu_layer.html#setClickConfigOntoWindow,ptr.struct_MenuLayer,ptr.struct_Window	proc setClickConfigOntoWindow(menuLayer: ptr MenuLayer; window: ptr Window)		51
-nim	setSelectedNext	nebble/ui/menu_layer.html#setSelectedNext,ptr.struct_MenuLayer,bool,MenuRowAlign,bool	proc setSelectedNext(menuLayer: ptr MenuLayer; up: bool; reason: MenuRowAlign;\n                animated: bool)		60
-nim	selectedIndex=	nebble/ui/menu_layer.html#selectedIndex=,ptr.struct_MenuLayer,MenuIndex,MenuRowAlign,bool	proc selectedIndex=(menuLayer: ptr MenuLayer; index: MenuIndex; reason: MenuRowAlign;\n               animated: bool)		66
-nim	selectedIndex	nebble/ui/menu_layer.html#selectedIndex,ptr.struct_MenuLayer	proc selectedIndex(menuLayer: ptr MenuLayer): MenuIndex		72
-nim	isIndexSelected	nebble/ui/menu_layer.html#isIndexSelected,ptr.struct_MenuLayer,ptr.MenuIndex	proc isIndexSelected(menuLayer: ptr MenuLayer; index: ptr MenuIndex): bool		77
-nim	reloadData	nebble/ui/menu_layer.html#reloadData,ptr.struct_MenuLayer	proc reloadData(menuLayer: ptr MenuLayer)		86
-nim	setNormalColors	nebble/ui/menu_layer.html#setNormalColors,ptr.struct_MenuLayer,GColor,GColor	proc setNormalColors(menuLayer: ptr MenuLayer; background: GColor; foreground: GColor)		96
-nim	setHighlightColors	nebble/ui/menu_layer.html#setHighlightColors,ptr.struct_MenuLayer,GColor,GColor	proc setHighlightColors(menuLayer: ptr MenuLayer; background: GColor;\n                   foreground: GColor)		104
-nim	padBottomEnable	nebble/ui/menu_layer.html#padBottomEnable,ptr.struct_MenuLayer,bool	proc padBottomEnable(menuLayer: ptr MenuLayer; enable: bool)		111
-nim	centerFocused=	nebble/ui/menu_layer.html#centerFocused=,ptr.struct_MenuLayer,bool	proc centerFocused=(menuLayer: ptr MenuLayer; centerFocused: bool)		120
-nim	centerFocused	nebble/ui/menu_layer.html#centerFocused,ptr.struct_MenuLayer	proc centerFocused(menuLayer: ptr MenuLayer): bool		125
-nim	drawBasicCell	nebble/ui/menu_layer.html#drawBasicCell,ptr.struct_GContext,ptr.struct_Layer,cstring,cstring,ptr.struct_GBitmap	proc drawBasicCell(ctx: ptr GContext; cellLayer: ptr Layer; title: cstring;\n              subtitle: cstring = nil; icon: ptr GBitmap = nil)		134
-nim	drawBasicHeader	nebble/ui/menu_layer.html#drawBasicHeader,ptr.struct_GContext,ptr.struct_Layer,cstring	proc drawBasicHeader(ctx: ptr GContext; cellLayer: ptr Layer; title: cstring)		152
+nim	MenuLayerHandle	nebble/ui/menu_layer.html#MenuLayerHandle	object MenuLayerHandle		70
+nim	`=destroy`	nebble/ui/menu_layer.html#=destroy,MenuLayerHandle	proc `=destroy`(h`gensym0: var MenuLayerHandle)		76
+nim	`=wasMoved`	nebble/ui/menu_layer.html#=wasMoved,MenuLayerHandle	proc `=wasMoved`(h`gensym0: var MenuLayerHandle)		83
+nim	`=copy`	nebble/ui/menu_layer.html#=copy,MenuLayerHandle,MenuLayerHandle	proc `=copy`(dest`gensym0: var MenuLayerHandle; src`gensym0: MenuLayerHandle)		88
+nim	`=sink`	nebble/ui/menu_layer.html#=sink,MenuLayerHandle,MenuLayerHandle	proc `=sink`(dest`gensym0: var MenuLayerHandle; src`gensym0: MenuLayerHandle)		90
+nim	toPtr	nebble/ui/menu_layer.html#toPtr.c,MenuLayerHandle	converter toPtr(h`gensym0: MenuLayerHandle): ptr MenuLayer		100
+nim	toLayer	nebble/ui/menu_layer.html#toLayer.c,MenuLayerHandle	converter toLayer(h`gensym0: MenuLayerHandle): ptr Layer		102
+nim	toHandle	nebble/ui/menu_layer.html#toHandle,ptr.struct_MenuLayer	proc toHandle(p`gensym0: ptr MenuLayer): MenuLayerHandle		105
+nim	wrapOwned	nebble/ui/menu_layer.html#wrapOwned,ptr.struct_MenuLayer	proc wrapOwned(p`gensym0: ptr MenuLayer): MenuLayerHandle		109
+nim	isValid	nebble/ui/menu_layer.html#isValid,MenuLayerHandle	proc isValid(h`gensym0: MenuLayerHandle): bool		113
+nim	isNil	nebble/ui/menu_layer.html#isNil,MenuLayerHandle	proc isNil(h`gensym0: MenuLayerHandle): bool		114
+nim	setParent	nebble/ui/menu_layer.html#setParent,MenuLayerHandle,ptr.struct_Layer	proc setParent(h`gensym0: var MenuLayerHandle; p`gensym0: ptr Layer)		116
+nim	reset	nebble/ui/menu_layer.html#reset,MenuLayerHandle	proc reset(h`gensym0: var MenuLayerHandle)		11
+nim	newMenuLayerHandle	nebble/ui/menu_layer.html#newMenuLayerHandle,GRect	proc newMenuLayerHandle(frame: GRect): MenuLayerHandle		18
+nim	newMenuLayer	nebble/ui/menu_layer.html#newMenuLayer,GRect	proc newMenuLayer(frame: GRect): MenuLayerHandle		21
+nim	getLayer	nebble/ui/menu_layer.html#getLayer,MenuLayerHandle	proc getLayer(h: MenuLayerHandle): ptr Layer		28
+nim	setClickConfigOntoWindow	nebble/ui/menu_layer.html#setClickConfigOntoWindow,MenuLayerHandle,ptr.struct_Window	proc setClickConfigOntoWindow(h: var MenuLayerHandle; window: ptr Window)		32

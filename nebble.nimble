@@ -80,3 +80,12 @@ task regenFfi, "Regenerate FFI bindings using Futhark":
   for platform in ["aplite", "basalt", "chalk", "diorite", "emery", "flint"]:
     echo "→ " & platform & ":"
     exec "nim r -d:futharkRebuild -d:opirRebuild -d:platform=" & platform & " src/nebble/ffi/generate.nim"
+
+task docs, "Generate documentation":
+  echo "Generating documentation..."
+  if not dirExists("docs/html"):
+    mkDir("docs/html")
+  
+  # Standard documentation generation for high-level API
+  let docCmd = "nim doc --project --outdir:docs/html --path:src src/nebble.nim"
+  exec docCmd

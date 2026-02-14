@@ -1,9 +1,22 @@
 nimTitle	bitmap_layer	nebble/ui/bitmap_layer.html	module nebble/ui/bitmap_layer		0
-nim	newBitmapLayer	nebble/ui/bitmap_layer.html#newBitmapLayer,GRect	proc newBitmapLayer(frame: GRect): ptr BitmapLayer		12
-nim	destroy	nebble/ui/bitmap_layer.html#destroy,ptr.struct_BitmapLayer	proc destroy(bitmapLayer: ptr BitmapLayer)		17
-nim	getLayer	nebble/ui/bitmap_layer.html#getLayer,ptr.struct_BitmapLayer	proc getLayer(bitmapLayer: ptr BitmapLayer): ptr Layer		26
-nim	bitmap=	nebble/ui/bitmap_layer.html#bitmap=,ptr.struct_BitmapLayer,ptr.struct_GBitmap	proc bitmap=(bitmapLayer: ptr BitmapLayer; bitmap: ptr GBitmap)		35
-nim	bitmap	nebble/ui/bitmap_layer.html#bitmap,ptr.struct_BitmapLayer	proc bitmap(bitmapLayer: ptr BitmapLayer): ptr GBitmap		40
-nim	alignment=	nebble/ui/bitmap_layer.html#alignment=,ptr.struct_BitmapLayer,GAlign	proc alignment=(bitmapLayer: ptr BitmapLayer; alignment: GAlign)		45
-nim	backgroundColor=	nebble/ui/bitmap_layer.html#backgroundColor=,ptr.struct_BitmapLayer,GColor	proc backgroundColor=(bitmapLayer: ptr BitmapLayer; color: GColor)		50
-nim	compositingMode=	nebble/ui/bitmap_layer.html#compositingMode=,ptr.struct_BitmapLayer,GCompOp	proc compositingMode=(bitmapLayer: ptr BitmapLayer; mode: GCompOp)		55
+nim	BitmapLayerHandle	nebble/ui/bitmap_layer.html#BitmapLayerHandle	object BitmapLayerHandle		70
+nim	`=destroy`	nebble/ui/bitmap_layer.html#=destroy,BitmapLayerHandle	proc `=destroy`(h`gensym0: var BitmapLayerHandle)		76
+nim	`=wasMoved`	nebble/ui/bitmap_layer.html#=wasMoved,BitmapLayerHandle	proc `=wasMoved`(h`gensym0: var BitmapLayerHandle)		83
+nim	`=copy`	nebble/ui/bitmap_layer.html#=copy,BitmapLayerHandle,BitmapLayerHandle	proc `=copy`(dest`gensym0: var BitmapLayerHandle; src`gensym0: BitmapLayerHandle)		88
+nim	`=sink`	nebble/ui/bitmap_layer.html#=sink,BitmapLayerHandle,BitmapLayerHandle	proc `=sink`(dest`gensym0: var BitmapLayerHandle; src`gensym0: BitmapLayerHandle)		90
+nim	toPtr	nebble/ui/bitmap_layer.html#toPtr.c,BitmapLayerHandle	converter toPtr(h`gensym0: BitmapLayerHandle): ptr BitmapLayer		100
+nim	toLayer	nebble/ui/bitmap_layer.html#toLayer.c,BitmapLayerHandle	converter toLayer(h`gensym0: BitmapLayerHandle): ptr Layer		102
+nim	toHandle	nebble/ui/bitmap_layer.html#toHandle,ptr.struct_BitmapLayer	proc toHandle(p`gensym0: ptr BitmapLayer): BitmapLayerHandle		105
+nim	wrapOwned	nebble/ui/bitmap_layer.html#wrapOwned,ptr.struct_BitmapLayer	proc wrapOwned(p`gensym0: ptr BitmapLayer): BitmapLayerHandle		109
+nim	isValid	nebble/ui/bitmap_layer.html#isValid,BitmapLayerHandle	proc isValid(h`gensym0: BitmapLayerHandle): bool		113
+nim	isNil	nebble/ui/bitmap_layer.html#isNil,BitmapLayerHandle	proc isNil(h`gensym0: BitmapLayerHandle): bool		114
+nim	setParent	nebble/ui/bitmap_layer.html#setParent,BitmapLayerHandle,ptr.struct_Layer	proc setParent(h`gensym0: var BitmapLayerHandle; p`gensym0: ptr Layer)		116
+nim	reset	nebble/ui/bitmap_layer.html#reset,BitmapLayerHandle	proc reset(h`gensym0: var BitmapLayerHandle)		32
+nim	newBitmapLayerHandle	nebble/ui/bitmap_layer.html#newBitmapLayerHandle,GRect	proc newBitmapLayerHandle(frame: GRect): BitmapLayerHandle		39
+nim	newBitmapLayer	nebble/ui/bitmap_layer.html#newBitmapLayer,GRect	proc newBitmapLayer(frame: GRect): BitmapLayerHandle		43
+nim	getLayer	nebble/ui/bitmap_layer.html#getLayer,BitmapLayerHandle	proc getLayer(h: BitmapLayerHandle): ptr Layer		51
+nim	bitmap=	nebble/ui/bitmap_layer.html#bitmap=,BitmapLayerHandle,ptr.struct_GBitmap	proc bitmap=(h: var BitmapLayerHandle; value: ptr GBitmap)		60
+nim	bitmap	nebble/ui/bitmap_layer.html#bitmap,BitmapLayerHandle	proc bitmap(h: BitmapLayerHandle): ptr GBitmap		65
+nim	alignment=	nebble/ui/bitmap_layer.html#alignment=,BitmapLayerHandle,GAlign	proc alignment=(h: var BitmapLayerHandle; value: GAlign)		70
+nim	compositingMode=	nebble/ui/bitmap_layer.html#compositingMode=,BitmapLayerHandle,GCompOp	proc compositingMode=(h: var BitmapLayerHandle; value: GCompOp)		75
+nim	backgroundColor=	nebble/ui/bitmap_layer.html#backgroundColor=,BitmapLayerHandle,GColor8	proc backgroundColor=(h: var BitmapLayerHandle; value: GColor8)		80

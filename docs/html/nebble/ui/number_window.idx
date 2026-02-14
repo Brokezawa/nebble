@@ -1,9 +1,22 @@
 nimTitle	number_window	nebble/ui/number_window.html	module nebble/ui/number_window		0
-nim	newNumberWindow	nebble/ui/number_window.html#newNumberWindow,cstring,NumberWindowCallbacks,pointer	proc newNumberWindow(label: cstring; callbacks: NumberWindowCallbacks;\n                callbackContext: pointer): ptr NumberWindow		13
-nim	destroy	nebble/ui/number_window.html#destroy,ptr.struct_NumberWindow	proc destroy(numberWindow: ptr NumberWindow)		19
-nim	label=	nebble/ui/number_window.html#label=,ptr.struct_NumberWindow,cstring	proc label=(numberWindow: ptr NumberWindow; label: cstring)		28
-nim	max=	nebble/ui/number_window.html#max=,ptr.struct_NumberWindow,int32	proc max=(numberWindow: ptr NumberWindow; max: int32)		33
-nim	min=	nebble/ui/number_window.html#min=,ptr.struct_NumberWindow,int32	proc min=(numberWindow: ptr NumberWindow; min: int32)		38
-nim	value=	nebble/ui/number_window.html#value=,ptr.struct_NumberWindow,int32	proc value=(numberWindow: ptr NumberWindow; value: int32)		43
-nim	value	nebble/ui/number_window.html#value,ptr.struct_NumberWindow	proc value(numberWindow: ptr NumberWindow): int32		48
-nim	stepSize=	nebble/ui/number_window.html#stepSize=,ptr.struct_NumberWindow,int32	proc stepSize=(numberWindow: ptr NumberWindow; step: int32)		53
+nim	NumberWindowHandle	nebble/ui/number_window.html#NumberWindowHandle	object NumberWindowHandle		70
+nim	`=destroy`	nebble/ui/number_window.html#=destroy,NumberWindowHandle	proc `=destroy`(h`gensym0: var NumberWindowHandle)		76
+nim	`=wasMoved`	nebble/ui/number_window.html#=wasMoved,NumberWindowHandle	proc `=wasMoved`(h`gensym0: var NumberWindowHandle)		83
+nim	`=copy`	nebble/ui/number_window.html#=copy,NumberWindowHandle,NumberWindowHandle	proc `=copy`(dest`gensym0: var NumberWindowHandle; src`gensym0: NumberWindowHandle)		88
+nim	`=sink`	nebble/ui/number_window.html#=sink,NumberWindowHandle,NumberWindowHandle	proc `=sink`(dest`gensym0: var NumberWindowHandle; src`gensym0: NumberWindowHandle)		90
+nim	toPtr	nebble/ui/number_window.html#toPtr.c,NumberWindowHandle	converter toPtr(h`gensym0: NumberWindowHandle): ptr NumberWindow		100
+nim	toLayer	nebble/ui/number_window.html#toLayer.c,NumberWindowHandle	converter toLayer(h`gensym0: NumberWindowHandle): ptr Layer		102
+nim	toHandle	nebble/ui/number_window.html#toHandle,ptr.struct_NumberWindow	proc toHandle(p`gensym0: ptr NumberWindow): NumberWindowHandle		105
+nim	wrapOwned	nebble/ui/number_window.html#wrapOwned,ptr.struct_NumberWindow	proc wrapOwned(p`gensym0: ptr NumberWindow): NumberWindowHandle		109
+nim	isValid	nebble/ui/number_window.html#isValid,NumberWindowHandle	proc isValid(h`gensym0: NumberWindowHandle): bool		113
+nim	isNil	nebble/ui/number_window.html#isNil,NumberWindowHandle	proc isNil(h`gensym0: NumberWindowHandle): bool		114
+nim	setParent	nebble/ui/number_window.html#setParent,NumberWindowHandle,ptr.struct_Layer	proc setParent(h`gensym0: var NumberWindowHandle; p`gensym0: ptr Layer)		116
+nim	reset	nebble/ui/number_window.html#reset,NumberWindowHandle	proc reset(h`gensym0: var NumberWindowHandle)		11
+nim	newNumberWindowHandle	nebble/ui/number_window.html#newNumberWindowHandle,cstring,NumberWindowCallbacks,pointer	proc newNumberWindowHandle(label: cstring; callbacks: NumberWindowCallbacks;\n                      context: pointer): NumberWindowHandle		15
+nim	newNumberWindow	nebble/ui/number_window.html#newNumberWindow,cstring,NumberWindowCallbacks,pointer	proc newNumberWindow(label: cstring; callbacks: NumberWindowCallbacks;\n                context: pointer): NumberWindowHandle		19
+nim	label=	nebble/ui/number_window.html#label=,NumberWindowHandle,cstring	proc label=(h: var NumberWindowHandle; lbl: cstring)		24
+nim	max=	nebble/ui/number_window.html#max=,NumberWindowHandle,int32	proc max=(h: var NumberWindowHandle; mx: int32)		29
+nim	min=	nebble/ui/number_window.html#min=,NumberWindowHandle,int32	proc min=(h: var NumberWindowHandle; mn: int32)		34
+nim	value=	nebble/ui/number_window.html#value=,NumberWindowHandle,int32	proc value=(h: var NumberWindowHandle; v: int32)		39
+nim	value	nebble/ui/number_window.html#value,NumberWindowHandle	proc value(h: NumberWindowHandle): int32		44
+nim	stepSize=	nebble/ui/number_window.html#stepSize=,NumberWindowHandle,int32	proc stepSize=(h: var NumberWindowHandle; step: int32)		49

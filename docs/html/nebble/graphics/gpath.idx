@@ -1,8 +1,27 @@
 nimTitle	gpath	nebble/graphics/gpath.html	module nebble/graphics/gpath		0
-nim	newGPath	nebble/graphics/gpath.html#newGPath,ptr.GPathInfo	proc newGPath(pathInfo: ptr GPathInfo): ptr GPath		13
-nim	destroy	nebble/graphics/gpath.html#destroy,ptr.GPath	proc destroy(path: ptr GPath)		18
-nim	drawFilled	nebble/graphics/gpath.html#drawFilled,ptr.struct_GContext,ptr.GPath	proc drawFilled(ctx: ptr GContext; path: ptr GPath)		27
-nim	drawOutline	nebble/graphics/gpath.html#drawOutline,ptr.struct_GContext,ptr.GPath	proc drawOutline(ctx: ptr GContext; path: ptr GPath)		32
-nim	drawOutlineOpen	nebble/graphics/gpath.html#drawOutlineOpen,ptr.struct_GContext,ptr.GPath	proc drawOutlineOpen(ctx: ptr GContext; path: ptr GPath)		37
-nim	rotateTo	nebble/graphics/gpath.html#rotateTo,ptr.GPath,int32	proc rotateTo(path: ptr GPath; angle: int32)		46
-nim	moveTo	nebble/graphics/gpath.html#moveTo,ptr.GPath,GPoint	proc moveTo(path: ptr GPath; point: GPoint)		51
+nim	GPathHandle	nebble/graphics/gpath.html#GPathHandle	object GPathHandle		70
+nim	`=destroy`	nebble/graphics/gpath.html#=destroy,GPathHandle	proc `=destroy`(h`gensym0: var GPathHandle)		76
+nim	`=wasMoved`	nebble/graphics/gpath.html#=wasMoved,GPathHandle	proc `=wasMoved`(h`gensym0: var GPathHandle)		83
+nim	`=copy`	nebble/graphics/gpath.html#=copy,GPathHandle,GPathHandle	proc `=copy`(dest`gensym0: var GPathHandle; src`gensym0: GPathHandle)		88
+nim	`=sink`	nebble/graphics/gpath.html#=sink,GPathHandle,GPathHandle	proc `=sink`(dest`gensym0: var GPathHandle; src`gensym0: GPathHandle)		90
+nim	toPtr	nebble/graphics/gpath.html#toPtr.c,GPathHandle	converter toPtr(h`gensym0: GPathHandle): ptr GPath		100
+nim	toLayer	nebble/graphics/gpath.html#toLayer.c,GPathHandle	converter toLayer(h`gensym0: GPathHandle): ptr Layer		102
+nim	toHandle	nebble/graphics/gpath.html#toHandle,ptr.GPath	proc toHandle(p`gensym0: ptr GPath): GPathHandle		105
+nim	wrapOwned	nebble/graphics/gpath.html#wrapOwned,ptr.GPath	proc wrapOwned(p`gensym0: ptr GPath): GPathHandle		109
+nim	isValid	nebble/graphics/gpath.html#isValid,GPathHandle	proc isValid(h`gensym0: GPathHandle): bool		113
+nim	isNil	nebble/graphics/gpath.html#isNil,GPathHandle	proc isNil(h`gensym0: GPathHandle): bool		114
+nim	setParent	nebble/graphics/gpath.html#setParent,GPathHandle,ptr.struct_Layer	proc setParent(h`gensym0: var GPathHandle; p`gensym0: ptr Layer)		116
+nim	reset	nebble/graphics/gpath.html#reset,GPathHandle	proc reset(h`gensym0: var GPathHandle)		41
+nim	newGPathHandle	nebble/graphics/gpath.html#newGPathHandle,ptr.GPathInfo	proc newGPathHandle(pathInfo: ptr GPathInfo): GPathHandle		47
+nim	newGPath	nebble/graphics/gpath.html#newGPath,ptr.GPathInfo	proc newGPath(pathInfo: ptr GPathInfo): GPathHandle		50
+nim	newGPathHandle	nebble/graphics/gpath.html#newGPathHandle,openArray[GPoint]	proc newGPathHandle(points: openArray[GPoint]): GPathHandle		53
+nim	newGPath	nebble/graphics/gpath.html#newGPath,openArray[GPoint]	proc newGPath(points: openArray[GPoint]): GPathHandle		57
+nim	drawFilled	nebble/graphics/gpath.html#drawFilled,GPathHandle,ptr.struct_GContext	proc drawFilled(h: GPathHandle; ctx: ptr GContext)		65
+nim	drawOutline	nebble/graphics/gpath.html#drawOutline,GPathHandle,ptr.struct_GContext	proc drawOutline(h: GPathHandle; ctx: ptr GContext)		70
+nim	drawOutlineOpen	nebble/graphics/gpath.html#drawOutlineOpen,GPathHandle,ptr.struct_GContext	proc drawOutlineOpen(h: GPathHandle; ctx: ptr GContext)		75
+nim	rotateTo	nebble/graphics/gpath.html#rotateTo,GPathHandle,int32	proc rotateTo(h: GPathHandle; angle: int32)		84
+nim	moveTo	nebble/graphics/gpath.html#moveTo,GPathHandle,GPoint	proc moveTo(h: GPathHandle; point: GPoint)		92
+nim	draw	nebble/graphics/gpath.html#draw,GPathHandle,ptr.struct_GContext,bool	proc draw(h: GPathHandle; ctx: ptr GContext; filled: bool = true)		101
+nim	rotate	nebble/graphics/gpath.html#rotate,GPathHandle,int32	proc rotate(h: GPathHandle; degrees: int32)		112
+nimgrp	newgpathhandle	nebble/graphics/gpath.html#newGPathHandle-procs-all	proc		47
+nimgrp	newgpath	nebble/graphics/gpath.html#newGPath-procs-all	proc		50

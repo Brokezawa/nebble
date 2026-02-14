@@ -56,64 +56,146 @@
 </li>
 <li>
   <details open>
+    <summary><a class="reference reference-toplevel" href="#7" id="57">Types</a></summary>
+    <ul class="simple simple-toc-section">
+      <li><a class="reference" href="#TextLayerHandle" title="TextLayerHandle = object">TextLayerHandle</a></li>
+
+    </ul>
+  </details>
+</li>
+<li>
+  <details open>
     <summary><a class="reference reference-toplevel" href="#12" id="62">Procs</a></summary>
     <ul class="simple simple-toc-section">
-      <ul class="simple nested-toc-section">backgroundColor=
-  <li><a class="reference" href="#backgroundColor%3D%2Cptr.struct_TextLayer%2CGColor8" title="backgroundColor=(textLayer: ptr TextLayer; color: GColor8)">backgroundColor=(textLayer: ptr TextLayer; color: GColor8)</a></li>
+      <ul class="simple nested-toc-section">=copy
+  <li><a class="reference" href="#%3Dcopy%2CTextLayerHandle%2CTextLayerHandle" title="`=copy`(dest`gensym0: var TextLayerHandle; src`gensym0: TextLayerHandle)">`=copy`(dest`gensym0: var TextLayerHandle; src`gensym0: TextLayerHandle)</a></li>
+
+</ul>
+<ul class="simple nested-toc-section">=destroy
+  <li><a class="reference" href="#%3Ddestroy%2CTextLayerHandle" title="`=destroy`(h`gensym0: var TextLayerHandle)">`=destroy`(h`gensym0: var TextLayerHandle)</a></li>
+
+</ul>
+<ul class="simple nested-toc-section">=sink
+  <li><a class="reference" href="#%3Dsink%2CTextLayerHandle%2CTextLayerHandle" title="`=sink`(dest`gensym0: var TextLayerHandle; src`gensym0: TextLayerHandle)">`=sink`(dest`gensym0: var TextLayerHandle; src`gensym0: TextLayerHandle)</a></li>
+
+</ul>
+<ul class="simple nested-toc-section">=wasMoved
+  <li><a class="reference" href="#%3DwasMoved%2CTextLayerHandle" title="`=wasMoved`(h`gensym0: var TextLayerHandle)">`=wasMoved`(h`gensym0: var TextLayerHandle)</a></li>
+
+</ul>
+<ul class="simple nested-toc-section">backgroundColor=
+  <li><a class="reference" href="#backgroundColor%3D%2CTextLayerHandle%2CGColor8" title="backgroundColor=(h: var TextLayerHandle; value: GColor8)">backgroundColor=(h: var TextLayerHandle; value: GColor8)</a></li>
+<li><a class="reference" href="#backgroundColor%3D%2Cptr.struct_TextLayer%2CGColor8" title="backgroundColor=(p: ptr TextLayer; value: GColor8)">backgroundColor=(p: ptr TextLayer; value: GColor8)</a></li>
 
 </ul>
 <ul class="simple nested-toc-section">contentSize
-  <li><a class="reference" href="#contentSize%2Cptr.struct_TextLayer" title="contentSize(textLayer: ptr TextLayer): GSize">contentSize(textLayer: ptr TextLayer): GSize</a></li>
-
-</ul>
-<ul class="simple nested-toc-section">destroy
-  <li><a class="reference" href="#destroy%2Cptr.struct_TextLayer" title="destroy(textLayer: ptr TextLayer)">destroy(textLayer: ptr TextLayer)</a></li>
+  <li><a class="reference" href="#contentSize%2CTextLayerHandle" title="contentSize(h: TextLayerHandle): GSize">contentSize(h: TextLayerHandle): GSize</a></li>
 
 </ul>
 <ul class="simple nested-toc-section">enableScreenTextFlowAndPaging
-  <li><a class="reference" href="#enableScreenTextFlowAndPaging%2Cptr.struct_TextLayer%2Cuint8" title="enableScreenTextFlowAndPaging(textLayer: ptr TextLayer; inset: uint8)">enableScreenTextFlowAndPaging(textLayer: ptr TextLayer; inset: uint8)</a></li>
+  <li><a class="reference" href="#enableScreenTextFlowAndPaging%2CTextLayerHandle%2Cuint8" title="enableScreenTextFlowAndPaging(h: var TextLayerHandle; inset: uint8)">enableScreenTextFlowAndPaging(h: var TextLayerHandle; inset: uint8)</a></li>
 
 </ul>
 <ul class="simple nested-toc-section">font=
-  <li><a class="reference" href="#font%3D%2Cptr.struct_TextLayer%2CGFont" title="font=(textLayer: ptr TextLayer; font: GFont)">font=(textLayer: ptr TextLayer; font: GFont)</a></li>
+  <li><a class="reference" href="#font%3D%2CTextLayerHandle%2CGFont" title="font=(h: var TextLayerHandle; value: GFont)">font=(h: var TextLayerHandle; value: GFont)</a></li>
+<li><a class="reference" href="#font%3D%2Cptr.struct_TextLayer%2CGFont" title="font=(p: ptr TextLayer; value: GFont)">font=(p: ptr TextLayer; value: GFont)</a></li>
+
+</ul>
+<ul class="simple nested-toc-section">frame
+  <li><a class="reference" href="#frame%2CTextLayerHandle" title="frame(h: TextLayerHandle): GRect">frame(h: TextLayerHandle): GRect</a></li>
+
+</ul>
+<ul class="simple nested-toc-section">frame=
+  <li><a class="reference" href="#frame%3D%2CTextLayerHandle%2CGRect" title="frame=(h: var TextLayerHandle; value: GRect)">frame=(h: var TextLayerHandle; value: GRect)</a></li>
 
 </ul>
 <ul class="simple nested-toc-section">getLayer
-  <li><a class="reference" href="#getLayer%2Cptr.struct_TextLayer" title="getLayer(textLayer: ptr TextLayer): ptr Layer">getLayer(textLayer: ptr TextLayer): ptr Layer</a></li>
+  <li><a class="reference" href="#getLayer%2CTextLayerHandle" title="getLayer(h: TextLayerHandle): ptr Layer">getLayer(h: TextLayerHandle): ptr Layer</a></li>
+
+</ul>
+<ul class="simple nested-toc-section">isNil
+  <li><a class="reference" href="#isNil%2CTextLayerHandle" title="isNil(h`gensym0: TextLayerHandle): bool">isNil(h`gensym0: TextLayerHandle): bool</a></li>
+
+</ul>
+<ul class="simple nested-toc-section">isValid
+  <li><a class="reference" href="#isValid%2CTextLayerHandle" title="isValid(h`gensym0: TextLayerHandle): bool">isValid(h`gensym0: TextLayerHandle): bool</a></li>
 
 </ul>
 <ul class="simple nested-toc-section">newTextLayer
-  <li><a class="reference" href="#newTextLayer%2CGRect%2Ccstring%2CGFont%2CGTextAlignment" title="newTextLayer(frame: GRect; text: cstring = nil; font: GFont = nil;
-             align: GTextAlignment = GTextAlignmentLeft): ptr TextLayer">newTextLayer(frame: GRect; text: cstring = nil; font: GFont = nil;
-             align: GTextAlignment = GTextAlignmentLeft): ptr TextLayer</a></li>
+  <li><a class="reference" href="#newTextLayer%2CGRect" title="newTextLayer(frame: GRect): TextLayerHandle">newTextLayer(frame: GRect): TextLayerHandle</a></li>
+<li><a class="reference" href="#newTextLayer%2CGRect%2Ccstring%2CGFont%2CGTextAlignment" title="newTextLayer(frame: GRect; text: cstring; font: GFont = nil;
+             align: GTextAlignment = GTextAlignmentLeft): TextLayerHandle">newTextLayer(frame: GRect; text: cstring; font: GFont = nil;
+             align: GTextAlignment = GTextAlignmentLeft): TextLayerHandle</a></li>
+
+</ul>
+<ul class="simple nested-toc-section">newTextLayerHandle
+  <li><a class="reference" href="#newTextLayerHandle%2CGRect" title="newTextLayerHandle(frame: GRect): TextLayerHandle">newTextLayerHandle(frame: GRect): TextLayerHandle</a></li>
+<li><a class="reference" href="#newTextLayerHandle%2CGRect%2Ccstring%2CGFont%2CGTextAlignment" title="newTextLayerHandle(frame: GRect; text: cstring; font: GFont = nil;
+                   align: GTextAlignment = GTextAlignmentLeft): TextLayerHandle">newTextLayerHandle(frame: GRect; text: cstring; font: GFont = nil;
+                   align: GTextAlignment = GTextAlignmentLeft): TextLayerHandle</a></li>
 
 </ul>
 <ul class="simple nested-toc-section">overflowMode=
-  <li><a class="reference" href="#overflowMode%3D%2Cptr.struct_TextLayer%2CGTextOverflowMode" title="overflowMode=(textLayer: ptr TextLayer; mode: GTextOverflowMode)">overflowMode=(textLayer: ptr TextLayer; mode: GTextOverflowMode)</a></li>
+  <li><a class="reference" href="#overflowMode%3D%2CTextLayerHandle%2CGTextOverflowMode" title="overflowMode=(h: var TextLayerHandle; value: GTextOverflowMode)">overflowMode=(h: var TextLayerHandle; value: GTextOverflowMode)</a></li>
+
+</ul>
+<ul class="simple nested-toc-section">reset
+  <li><a class="reference" href="#reset%2CTextLayerHandle" title="reset(h`gensym0: var TextLayerHandle)">reset(h`gensym0: var TextLayerHandle)</a></li>
 
 </ul>
 <ul class="simple nested-toc-section">restoreDefaultTextFlowAndPaging
-  <li><a class="reference" href="#restoreDefaultTextFlowAndPaging%2Cptr.struct_TextLayer" title="restoreDefaultTextFlowAndPaging(textLayer: ptr TextLayer)">restoreDefaultTextFlowAndPaging(textLayer: ptr TextLayer)</a></li>
+  <li><a class="reference" href="#restoreDefaultTextFlowAndPaging%2CTextLayerHandle" title="restoreDefaultTextFlowAndPaging(h: var TextLayerHandle)">restoreDefaultTextFlowAndPaging(h: var TextLayerHandle)</a></li>
+
+</ul>
+<ul class="simple nested-toc-section">setParent
+  <li><a class="reference" href="#setParent%2CTextLayerHandle%2Cptr.struct_Layer" title="setParent(h`gensym0: var TextLayerHandle; p`gensym0: ptr Layer)">setParent(h`gensym0: var TextLayerHandle; p`gensym0: ptr Layer)</a></li>
 
 </ul>
 <ul class="simple nested-toc-section">size=
-  <li><a class="reference" href="#size%3D%2Cptr.struct_TextLayer%2CGSize" title="size=(textLayer: ptr TextLayer; maxSize: GSize)">size=(textLayer: ptr TextLayer; maxSize: GSize)</a></li>
+  <li><a class="reference" href="#size%3D%2CTextLayerHandle%2CGSize" title="size=(h: var TextLayerHandle; value: GSize)">size=(h: var TextLayerHandle; value: GSize)</a></li>
 
 </ul>
 <ul class="simple nested-toc-section">text
-  <li><a class="reference" href="#text%2Cptr.struct_TextLayer" title="text(textLayer: ptr TextLayer): cstring">text(textLayer: ptr TextLayer): cstring</a></li>
+  <li><a class="reference" href="#text%2CTextLayerHandle" title="text(h: TextLayerHandle): cstring">text(h: TextLayerHandle): cstring</a></li>
 
 </ul>
 <ul class="simple nested-toc-section">text=
-  <li><a class="reference" href="#text%3D%2Cptr.struct_TextLayer%2Ccstring" title="text=(textLayer: ptr TextLayer; text: cstring)">text=(textLayer: ptr TextLayer; text: cstring)</a></li>
+  <li><a class="reference" href="#text%3D%2CTextLayerHandle%2Ccstring" title="text=(h: var TextLayerHandle; value: cstring)">text=(h: var TextLayerHandle; value: cstring)</a></li>
+<li><a class="reference" href="#text%3D%2Cptr.struct_TextLayer%2Ccstring" title="text=(p: ptr TextLayer; value: cstring)">text=(p: ptr TextLayer; value: cstring)</a></li>
 
 </ul>
 <ul class="simple nested-toc-section">textAlignment=
-  <li><a class="reference" href="#textAlignment%3D%2Cptr.struct_TextLayer%2CGTextAlignment" title="textAlignment=(textLayer: ptr TextLayer; alignment: GTextAlignment)">textAlignment=(textLayer: ptr TextLayer; alignment: GTextAlignment)</a></li>
+  <li><a class="reference" href="#textAlignment%3D%2CTextLayerHandle%2CGTextAlignment" title="textAlignment=(h: var TextLayerHandle; value: GTextAlignment)">textAlignment=(h: var TextLayerHandle; value: GTextAlignment)</a></li>
+<li><a class="reference" href="#textAlignment%3D%2Cptr.struct_TextLayer%2CGTextAlignment" title="textAlignment=(p: ptr TextLayer; value: GTextAlignment)">textAlignment=(p: ptr TextLayer; value: GTextAlignment)</a></li>
 
 </ul>
 <ul class="simple nested-toc-section">textColor=
-  <li><a class="reference" href="#textColor%3D%2Cptr.struct_TextLayer%2CGColor8" title="textColor=(textLayer: ptr TextLayer; color: GColor8)">textColor=(textLayer: ptr TextLayer; color: GColor8)</a></li>
+  <li><a class="reference" href="#textColor%3D%2CTextLayerHandle%2CGColor8" title="textColor=(h: var TextLayerHandle; value: GColor8)">textColor=(h: var TextLayerHandle; value: GColor8)</a></li>
+<li><a class="reference" href="#textColor%3D%2Cptr.struct_TextLayer%2CGColor8" title="textColor=(p: ptr TextLayer; value: GColor8)">textColor=(p: ptr TextLayer; value: GColor8)</a></li>
+
+</ul>
+<ul class="simple nested-toc-section">toHandle
+  <li><a class="reference" href="#toHandle%2Cptr.struct_TextLayer" title="toHandle(p`gensym0: ptr TextLayer): TextLayerHandle">toHandle(p`gensym0: ptr TextLayer): TextLayerHandle</a></li>
+
+</ul>
+<ul class="simple nested-toc-section">wrapOwned
+  <li><a class="reference" href="#wrapOwned%2Cptr.struct_TextLayer" title="wrapOwned(p`gensym0: ptr TextLayer): TextLayerHandle">wrapOwned(p`gensym0: ptr TextLayer): TextLayerHandle</a></li>
+
+</ul>
+
+    </ul>
+  </details>
+</li>
+<li>
+  <details open>
+    <summary><a class="reference reference-toplevel" href="#16" id="66">Converters</a></summary>
+    <ul class="simple simple-toc-section">
+      <ul class="simple nested-toc-section">toLayer
+  <li><a class="reference" href="#toLayer.c%2CTextLayerHandle" title="toLayer(h`gensym0: TextLayerHandle): ptr Layer">toLayer(h`gensym0: TextLayerHandle): ptr Layer</a></li>
+
+</ul>
+<ul class="simple nested-toc-section">toPtr
+  <li><a class="reference" href="#toPtr.c%2CTextLayerHandle" title="toPtr(h`gensym0: TextLayerHandle): ptr TextLayer">toPtr(h`gensym0: TextLayerHandle): ptr TextLayer</a></li>
 
 </ul>
 
@@ -125,7 +207,7 @@
     <summary><a class="reference reference-toplevel" href="#18" id="68">Templates</a></summary>
     <ul class="simple simple-toc-section">
       <ul class="simple nested-toc-section">staticText
-  <li><a class="reference" href="#staticText.t%2Cptr.struct_TextLayer%2Cuntyped%2Cstring" title="staticText(layer: ptr TextLayer; bufVar: untyped; text: string)">staticText(layer: ptr TextLayer; bufVar: untyped; text: string)</a></li>
+  <li><a class="reference" href="#staticText.t%2CTextLayerHandle%2Cuntyped%2Cstring" title="staticText(h: var TextLayerHandle; bufVar: untyped; text: string)">staticText(h: var TextLayerHandle; bufVar: untyped; text: string)</a></li>
 
 </ul>
 
@@ -143,99 +225,275 @@
     
     <div id="tocRoot"></div>
     
-    <p class="module-desc"><p>High-level idiomatic Nim API for Pebble text layers.</p>
-<p>TextLayer provides simple text rendering on screen with customizable font, color, alignment, and overflow modes.</p>
+    <p class="module-desc"><p>ARC-Managed TextLayer Handle</p>
+<p>Provides automatic memory management for TextLayer objects using Nim's ARC (Automatic Reference Counting) system.</p>
+<p><strong>Key Features:</strong></p>
+<ul class="simple"><li>Automatic destruction when handle goes out of scope</li>
+<li>Move semantics (no copying)</li>
+<li>Property-style accessors for common operations</li>
+<li>Compatible with manual <tt class="docutils literal"><span class="pre"><span class="Keyword">ptr</span> <span class="Identifier">TextLayer</span></span></tt> API via converters</li>
+</ul>
+<p><strong>Usage Example:</strong></p>
+<p><pre class="listing"><span class="Keyword">import</span> <span class="Identifier">nebble</span><span class="Operator">/</span><span class="Identifier">ui</span><span class="Operator">/</span><span class="Identifier">text_layer</span>
+
+<span class="Keyword">var</span> <span class="Identifier">textLayer</span><span class="Punctuation">:</span> <span class="Identifier">TextLayerHandle</span>  <span class="Comment"># Module-level persistence</span>
+
+<span class="Keyword">proc</span> <span class="Identifier">windowLoad</span><span class="Punctuation">(</span><span class="Identifier">win</span><span class="Punctuation">:</span> <span class="Keyword">ptr</span> <span class="Identifier">Window</span><span class="Punctuation">)</span> <span class="Punctuation">{</span><span class="Operator">.</span><span class="Identifier">cdecl</span><span class="Operator">.</span><span class="Punctuation">}</span> <span class="Operator">=</span>
+  <span class="Identifier">textLayer</span> <span class="Operator">=</span> <span class="Identifier">newTextLayer</span><span class="Punctuation">(</span><span class="Identifier">makeGRect</span><span class="Punctuation">(</span><span class="DecNumber">0</span><span class="Punctuation">,</span> <span class="DecNumber">50</span><span class="Punctuation">,</span> <span class="DecNumber">144</span><span class="Punctuation">,</span> <span class="DecNumber">40</span><span class="Punctuation">)</span><span class="Punctuation">)</span>
+  <span class="Identifier">textLayer</span><span class="Operator">.</span><span class="Identifier">text</span> <span class="Operator">=</span> <span class="StringLit">&quot;Hello World&quot;</span>
+  <span class="Identifier">textLayer</span><span class="Operator">.</span><span class="Identifier">font</span> <span class="Operator">=</span> <span class="Identifier">BITHAM_42_BOLD</span>
+  <span class="Identifier">win</span><span class="Operator">.</span><span class="Identifier">rootLayer</span><span class="Operator">.</span><span class="Identifier">addChild</span><span class="Punctuation">(</span><span class="Identifier">textLayer</span><span class="Operator">.</span><span class="Identifier">getLayer</span><span class="Punctuation">(</span><span class="Punctuation">)</span><span class="Punctuation">)</span>
+
+<span class="Keyword">proc</span> <span class="Identifier">windowUnload</span><span class="Punctuation">(</span><span class="Identifier">win</span><span class="Punctuation">:</span> <span class="Keyword">ptr</span> <span class="Identifier">Window</span><span class="Punctuation">)</span> <span class="Punctuation">{</span><span class="Operator">.</span><span class="Identifier">cdecl</span><span class="Operator">.</span><span class="Punctuation">}</span> <span class="Operator">=</span>
+  <span class="Identifier">textLayer</span> <span class="Operator">=</span> <span class="Identifier">TextLayerHandle</span><span class="Punctuation">(</span><span class="Keyword">nil</span><span class="Punctuation">)</span>  <span class="Comment"># Explicit destroy</span></pre></p>
+<p><strong>Memory Safety:</strong> The handle has unique ownership of the TextLayer. When the handle is reassigned or goes out of scope, <tt class="docutils literal"><span class="pre"><span class="Identifier">text_layer_destroy</span></span></tt> is called automatically. Copying is disabled to prevent double-free errors.</p>
 </p>
     <div class="section" id="6">
   <h1><a class="toc-backref" href="#6">Imports</a></h1>
   <dl class="item">
-    <a class="reference external" href="../ffi.html">../ffi</a>
+    <a class="reference external" href="../ffi.html">../ffi</a>, <a class="reference external" href="../ffi/managed.html">../ffi/managed</a>
+  </dl>
+</div>
+<div class="section" id="7">
+  <h1><a class="toc-backref" href="#7">Types</a></h1>
+  <dl class="item">
+    <div id="TextLayerHandle">
+  <dt><pre><a href="text_layer.html#TextLayerHandle"><span class="Identifier">TextLayerHandle</span></a> <span class="Other">=</span> <span class="Keyword">object</span></pre></dt>
+  <dd>
+    
+    Unique ownership handle for <tt class="docutils literal"><span class="pre"><span class="Identifier">RawType</span></span></tt>.
+    
+  </dd>
+</div>
+
   </dl>
 </div>
 <div class="section" id="12">
   <h1><a class="toc-backref" href="#12">Procs</a></h1>
   <dl class="item">
-    <div id="backgroundColor=-procs-all">
-  <div id="backgroundColor=,ptr.struct_TextLayer,GColor8">
-  <dt><pre><span class="Keyword">proc</span> <a href="#backgroundColor%3D%2Cptr.struct_TextLayer%2CGColor8"><span class="Identifier">backgroundColor=</span></a><span class="Other">(</span><span class="Identifier">textLayer</span><span class="Other">:</span> <span class="Keyword">ptr</span> <a href="../ffi.html#TextLayer"><span class="Identifier">TextLayer</span></a><span class="Other">;</span> <span class="Identifier">color</span><span class="Other">:</span> <a href="../ffi.html#GColor8"><span class="Identifier">GColor8</span></a><span class="Other">)</span> {.<span class="Identifier">inline</span><span class="Other">,</span>
+    <div id="=copy-procs-all">
+  <div id="=copy,TextLayerHandle,TextLayerHandle">
+  <dt><pre><span class="Keyword">proc</span> <a href="#%3Dcopy%2CTextLayerHandle%2CTextLayerHandle"><span class="Identifier">`=copy`</span></a><span class="Other">(</span><span class="Identifier">dest`gensym0</span><span class="Other">:</span> <span class="Keyword">var</span> <a href="text_layer.html#TextLayerHandle"><span class="Identifier">TextLayerHandle</span></a><span class="Other">;</span> <span class="Identifier">src`gensym0</span><span class="Other">:</span> <a href="text_layer.html#TextLayerHandle"><span class="Identifier">TextLayerHandle</span></a><span class="Other">)</span> {.
+    <span class="Identifier">error</span>.}</pre></dt>
+  <dd>
+    
+    
+    
+  </dd>
+</div>
+
+</div>
+<div id="=destroy-procs-all">
+  <div id="=destroy,TextLayerHandle">
+  <dt><pre><span class="Keyword">proc</span> <a href="#%3Ddestroy%2CTextLayerHandle"><span class="Identifier">`=destroy`</span></a><span class="Other">(</span><span class="Identifier">h`gensym0</span><span class="Other">:</span> <span class="Keyword">var</span> <a href="text_layer.html#TextLayerHandle"><span class="Identifier">TextLayerHandle</span></a><span class="Other">)</span> {.<span><span class="Other pragmadots">...</span></span><span class="pragmawrap"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span>
+    <span class="Identifier">forbids</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span>.}</pre></dt>
+  <dd>
+    
+    
+    
+  </dd>
+</div>
+
+</div>
+<div id="=sink-procs-all">
+  <div id="=sink,TextLayerHandle,TextLayerHandle">
+  <dt><pre><span class="Keyword">proc</span> <a href="#%3Dsink%2CTextLayerHandle%2CTextLayerHandle"><span class="Identifier">`=sink`</span></a><span class="Other">(</span><span class="Identifier">dest`gensym0</span><span class="Other">:</span> <span class="Keyword">var</span> <a href="text_layer.html#TextLayerHandle"><span class="Identifier">TextLayerHandle</span></a><span class="Other">;</span> <span class="Identifier">src`gensym0</span><span class="Other">:</span> <a href="text_layer.html#TextLayerHandle"><span class="Identifier">TextLayerHandle</span></a><span class="Other">)</span> {.
     <span><span class="Other pragmadots">...</span></span><span class="pragmawrap"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">forbids</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span>.}</pre></dt>
   <dd>
     
-    Set the background color. Equivalent to C function <tt class="docutils literal"><span class="pre"><span class="Identifier">text_layer_set_background_color</span><span class="Punctuation">(</span><span class="Identifier">text_layer</span><span class="Punctuation">,</span> <span class="Identifier">color</span><span class="Punctuation">)</span></span></tt>.
+    
+    
+  </dd>
+</div>
+
+</div>
+<div id="=wasMoved-procs-all">
+  <div id="=wasMoved,TextLayerHandle">
+  <dt><pre><span class="Keyword">proc</span> <a href="#%3DwasMoved%2CTextLayerHandle"><span class="Identifier">`=wasMoved`</span></a><span class="Other">(</span><span class="Identifier">h`gensym0</span><span class="Other">:</span> <span class="Keyword">var</span> <a href="text_layer.html#TextLayerHandle"><span class="Identifier">TextLayerHandle</span></a><span class="Other">)</span> {.<span><span class="Other pragmadots">...</span></span><span class="pragmawrap"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span>
+    <span class="Identifier">forbids</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span>.}</pre></dt>
+  <dd>
+    
+    
+    
+  </dd>
+</div>
+
+</div>
+<div id="backgroundColor=-procs-all">
+  <div id="backgroundColor=,TextLayerHandle,GColor8">
+  <dt><pre><span class="Keyword">proc</span> <a href="#backgroundColor%3D%2CTextLayerHandle%2CGColor8"><span class="Identifier">backgroundColor=</span></a><span class="Other">(</span><span class="Identifier">h</span><span class="Other">:</span> <span class="Keyword">var</span> <a href="text_layer.html#TextLayerHandle"><span class="Identifier">TextLayerHandle</span></a><span class="Other">;</span> <span class="Identifier">value</span><span class="Other">:</span> <a href="../ffi.html#GColor8"><span class="Identifier">GColor8</span></a><span class="Other">)</span> {.<span class="Identifier">inline</span><span class="Other">,</span>
+    <span><span class="Other pragmadots">...</span></span><span class="pragmawrap"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">forbids</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span>.}</pre></dt>
+  <dd>
+    
+    
+    
+  </dd>
+</div>
+<div id="backgroundColor=,ptr.struct_TextLayer,GColor8">
+  <dt><pre><span class="Keyword">proc</span> <a href="#backgroundColor%3D%2Cptr.struct_TextLayer%2CGColor8"><span class="Identifier">backgroundColor=</span></a><span class="Other">(</span><span class="Identifier">p</span><span class="Other">:</span> <span class="Keyword">ptr</span> <a href="../ffi.html#TextLayer"><span class="Identifier">TextLayer</span></a><span class="Other">;</span> <span class="Identifier">value</span><span class="Other">:</span> <a href="../ffi.html#GColor8"><span class="Identifier">GColor8</span></a><span class="Other">)</span> {.<span class="Identifier">inline</span><span class="Other">,</span> <span><span class="Other pragmadots">...</span></span><span class="pragmawrap"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span>
+    <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">forbids</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span>.}</pre></dt>
+  <dd>
+    
+    
     
   </dd>
 </div>
 
 </div>
 <div id="contentSize-procs-all">
-  <div id="contentSize,ptr.struct_TextLayer">
-  <dt><pre><span class="Keyword">proc</span> <a href="#contentSize%2Cptr.struct_TextLayer"><span class="Identifier">contentSize</span></a><span class="Other">(</span><span class="Identifier">textLayer</span><span class="Other">:</span> <span class="Keyword">ptr</span> <a href="../ffi.html#TextLayer"><span class="Identifier">TextLayer</span></a><span class="Other">)</span><span class="Other">:</span> <a href="../ffi.html#GSize"><span class="Identifier">GSize</span></a> {.<span class="Identifier">inline</span><span class="Other">,</span> <span><span class="Other pragmadots">...</span></span><span class="pragmawrap"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span>
-    <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">forbids</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span>.}</pre></dt>
-  <dd>
-    
-    Get the size of the rendered text content. Equivalent to C function <tt class="docutils literal"><span class="pre"><span class="Identifier">text_layer_get_content_size</span><span class="Punctuation">(</span><span class="Identifier">text_layer</span><span class="Punctuation">)</span></span></tt>.
-    
-  </dd>
-</div>
-
-</div>
-<div id="destroy-procs-all">
-  <div id="destroy,ptr.struct_TextLayer">
-  <dt><pre><span class="Keyword">proc</span> <a href="#destroy%2Cptr.struct_TextLayer"><span class="Identifier">destroy</span></a><span class="Other">(</span><span class="Identifier">textLayer</span><span class="Other">:</span> <span class="Keyword">ptr</span> <a href="../ffi.html#TextLayer"><span class="Identifier">TextLayer</span></a><span class="Other">)</span> {.<span class="Identifier">inline</span><span class="Other">,</span> <span><span class="Other pragmadots">...</span></span><span class="pragmawrap"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span>
+  <div id="contentSize,TextLayerHandle">
+  <dt><pre><span class="Keyword">proc</span> <a href="#contentSize%2CTextLayerHandle"><span class="Identifier">contentSize</span></a><span class="Other">(</span><span class="Identifier">h</span><span class="Other">:</span> <a href="text_layer.html#TextLayerHandle"><span class="Identifier">TextLayerHandle</span></a><span class="Other">)</span><span class="Other">:</span> <a href="../ffi.html#GSize"><span class="Identifier">GSize</span></a> {.<span class="Identifier">inline</span><span class="Other">,</span> <span><span class="Other pragmadots">...</span></span><span class="pragmawrap"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span>
     <span class="Identifier">forbids</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span>.}</pre></dt>
   <dd>
     
-    Destroy a TextLayer and free its memory. Equivalent to C function <tt class="docutils literal"><span class="pre"><span class="Identifier">text_layer_destroy</span><span class="Punctuation">(</span><span class="Identifier">text_layer</span><span class="Punctuation">)</span></span></tt>.
+    Get the size of the rendered text content.
     
   </dd>
 </div>
 
 </div>
 <div id="enableScreenTextFlowAndPaging-procs-all">
-  <div id="enableScreenTextFlowAndPaging,ptr.struct_TextLayer,uint8">
-  <dt><pre><span class="Keyword">proc</span> <a href="#enableScreenTextFlowAndPaging%2Cptr.struct_TextLayer%2Cuint8"><span class="Identifier">enableScreenTextFlowAndPaging</span></a><span class="Other">(</span><span class="Identifier">textLayer</span><span class="Other">:</span> <span class="Keyword">ptr</span> <a href="../ffi.html#TextLayer"><span class="Identifier">TextLayer</span></a><span class="Other">;</span> <span class="Identifier">inset</span><span class="Other">:</span> <span class="Identifier">uint8</span><span class="Other">)</span> {.
+  <div id="enableScreenTextFlowAndPaging,TextLayerHandle,uint8">
+  <dt><pre><span class="Keyword">proc</span> <a href="#enableScreenTextFlowAndPaging%2CTextLayerHandle%2Cuint8"><span class="Identifier">enableScreenTextFlowAndPaging</span></a><span class="Other">(</span><span class="Identifier">h</span><span class="Other">:</span> <span class="Keyword">var</span> <a href="text_layer.html#TextLayerHandle"><span class="Identifier">TextLayerHandle</span></a><span class="Other">;</span> <span class="Identifier">inset</span><span class="Other">:</span> <span class="Identifier">uint8</span><span class="Other">)</span> {.
     <span class="Identifier">inline</span><span class="Other">,</span> <span><span class="Other pragmadots">...</span></span><span class="pragmawrap"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">forbids</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span>.}</pre></dt>
   <dd>
     
-    Enable screen text flow and paging for long text. Equivalent to C function <tt class="docutils literal"><span class="pre"><span class="Identifier">text_layer_enable_screen_text_flow_and_paging</span><span class="Punctuation">(</span><span class="Operator">...</span><span class="Punctuation">)</span></span></tt>.
+    Enable screen text flow and paging for long text. <strong>Note:</strong> Only available on Pebble Time 2 platforms.
     
   </dd>
 </div>
 
 </div>
 <div id="font=-procs-all">
-  <div id="font=,ptr.struct_TextLayer,GFont">
-  <dt><pre><span class="Keyword">proc</span> <a href="#font%3D%2Cptr.struct_TextLayer%2CGFont"><span class="Identifier">font=</span></a><span class="Other">(</span><span class="Identifier">textLayer</span><span class="Other">:</span> <span class="Keyword">ptr</span> <a href="../ffi.html#TextLayer"><span class="Identifier">TextLayer</span></a><span class="Other">;</span> <span class="Identifier">font</span><span class="Other">:</span> <a href="../ffi.html#GFont"><span class="Identifier">GFont</span></a><span class="Other">)</span> {.<span class="Identifier">inline</span><span class="Other">,</span> <span><span class="Other pragmadots">...</span></span><span class="pragmawrap"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span>
+  <div id="font=,TextLayerHandle,GFont">
+  <dt><pre><span class="Keyword">proc</span> <a href="#font%3D%2CTextLayerHandle%2CGFont"><span class="Identifier">font=</span></a><span class="Other">(</span><span class="Identifier">h</span><span class="Other">:</span> <span class="Keyword">var</span> <a href="text_layer.html#TextLayerHandle"><span class="Identifier">TextLayerHandle</span></a><span class="Other">;</span> <span class="Identifier">value</span><span class="Other">:</span> <a href="../ffi.html#GFont"><span class="Identifier">GFont</span></a><span class="Other">)</span> {.<span class="Identifier">inline</span><span class="Other">,</span> <span><span class="Other pragmadots">...</span></span><span class="pragmawrap"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span>
+    <span class="Identifier">forbids</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span>.}</pre></dt>
+  <dd>
+    
+    
+    
+  </dd>
+</div>
+<div id="font=,ptr.struct_TextLayer,GFont">
+  <dt><pre><span class="Keyword">proc</span> <a href="#font%3D%2Cptr.struct_TextLayer%2CGFont"><span class="Identifier">font=</span></a><span class="Other">(</span><span class="Identifier">p</span><span class="Other">:</span> <span class="Keyword">ptr</span> <a href="../ffi.html#TextLayer"><span class="Identifier">TextLayer</span></a><span class="Other">;</span> <span class="Identifier">value</span><span class="Other">:</span> <a href="../ffi.html#GFont"><span class="Identifier">GFont</span></a><span class="Other">)</span> {.<span class="Identifier">inline</span><span class="Other">,</span> <span><span class="Other pragmadots">...</span></span><span class="pragmawrap"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span>
+    <span class="Identifier">forbids</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span>.}</pre></dt>
+  <dd>
+    
+    
+    
+  </dd>
+</div>
+
+</div>
+<div id="frame-procs-all">
+  <div id="frame,TextLayerHandle">
+  <dt><pre><span class="Keyword">proc</span> <a href="#frame%2CTextLayerHandle"><span class="Identifier">frame</span></a><span class="Other">(</span><span class="Identifier">h</span><span class="Other">:</span> <a href="text_layer.html#TextLayerHandle"><span class="Identifier">TextLayerHandle</span></a><span class="Other">)</span><span class="Other">:</span> <a href="../ffi.html#GRect"><span class="Identifier">GRect</span></a> {.<span class="Identifier">inline</span><span class="Other">,</span> <span><span class="Other pragmadots">...</span></span><span class="pragmawrap"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span>
+                                        <span class="Identifier">forbids</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span>.}</pre></dt>
+  <dd>
+    
+    Get the layer frame.
+    
+  </dd>
+</div>
+
+</div>
+<div id="frame=-procs-all">
+  <div id="frame=,TextLayerHandle,GRect">
+  <dt><pre><span class="Keyword">proc</span> <a href="#frame%3D%2CTextLayerHandle%2CGRect"><span class="Identifier">frame=</span></a><span class="Other">(</span><span class="Identifier">h</span><span class="Other">:</span> <span class="Keyword">var</span> <a href="text_layer.html#TextLayerHandle"><span class="Identifier">TextLayerHandle</span></a><span class="Other">;</span> <span class="Identifier">value</span><span class="Other">:</span> <a href="../ffi.html#GRect"><span class="Identifier">GRect</span></a><span class="Other">)</span> {.<span class="Identifier">inline</span><span class="Other">,</span> <span><span class="Other pragmadots">...</span></span><span class="pragmawrap"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span>
     <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">forbids</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span>.}</pre></dt>
   <dd>
     
-    Set the font. Equivalent to C function <tt class="docutils literal"><span class="pre"><span class="Identifier">text_layer_set_font</span><span class="Punctuation">(</span><span class="Identifier">text_layer</span><span class="Punctuation">,</span> <span class="Identifier">font</span><span class="Punctuation">)</span></span></tt>.
+    Set the layer frame (position and size).
     
   </dd>
 </div>
 
 </div>
 <div id="getLayer-procs-all">
-  <div id="getLayer,ptr.struct_TextLayer">
-  <dt><pre><span class="Keyword">proc</span> <a href="#getLayer%2Cptr.struct_TextLayer"><span class="Identifier">getLayer</span></a><span class="Other">(</span><span class="Identifier">textLayer</span><span class="Other">:</span> <span class="Keyword">ptr</span> <a href="../ffi.html#TextLayer"><span class="Identifier">TextLayer</span></a><span class="Other">)</span><span class="Other">:</span> <span class="Keyword">ptr</span> <a href="../ffi.html#Layer"><span class="Identifier">Layer</span></a> {.<span class="Identifier">inline</span><span class="Other">,</span> <span><span class="Other pragmadots">...</span></span><span class="pragmawrap"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span>
-    <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">forbids</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span>.}</pre></dt>
+  <div id="getLayer,TextLayerHandle">
+  <dt><pre><span class="Keyword">proc</span> <a href="#getLayer%2CTextLayerHandle"><span class="Identifier">getLayer</span></a><span class="Other">(</span><span class="Identifier">h</span><span class="Other">:</span> <a href="text_layer.html#TextLayerHandle"><span class="Identifier">TextLayerHandle</span></a><span class="Other">)</span><span class="Other">:</span> <span class="Keyword">ptr</span> <a href="../ffi.html#Layer"><span class="Identifier">Layer</span></a> {.<span class="Identifier">inline</span><span class="Other">,</span> <span><span class="Other pragmadots">...</span></span><span class="pragmawrap"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span>
+    <span class="Identifier">forbids</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span>.}</pre></dt>
   <dd>
     
-    Get the underlying Layer for adding to a parent. Equivalent to C function <tt class="docutils literal"><span class="pre"><span class="Identifier">text_layer_get_layer</span><span class="Punctuation">(</span><span class="Identifier">text_layer</span><span class="Punctuation">)</span></span></tt>.
+    <p>Get the underlying Layer pointer for adding to parent.</p>
+<p><strong>Example:</strong> win.rootLayer.addChild(textLayer.getLayer())</p>
+<p><strong>Note:</strong> The returned pointer is valid as long as the handle exists. Do not destroy the layer via the returned pointer.</p>
+
+    
+  </dd>
+</div>
+
+</div>
+<div id="isNil-procs-all">
+  <div id="isNil,TextLayerHandle">
+  <dt><pre><span class="Keyword">proc</span> <a href="#isNil%2CTextLayerHandle"><span class="Identifier">isNil</span></a><span class="Other">(</span><span class="Identifier">h`gensym0</span><span class="Other">:</span> <a href="text_layer.html#TextLayerHandle"><span class="Identifier">TextLayerHandle</span></a><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">bool</span> {.<span class="Identifier">inline</span><span class="Other">,</span> <span><span class="Other pragmadots">...</span></span><span class="pragmawrap"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span>
+    <span class="Identifier">forbids</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span>.}</pre></dt>
+  <dd>
+    
+    
+    
+  </dd>
+</div>
+
+</div>
+<div id="isValid-procs-all">
+  <div id="isValid,TextLayerHandle">
+  <dt><pre><span class="Keyword">proc</span> <a href="#isValid%2CTextLayerHandle"><span class="Identifier">isValid</span></a><span class="Other">(</span><span class="Identifier">h`gensym0</span><span class="Other">:</span> <a href="text_layer.html#TextLayerHandle"><span class="Identifier">TextLayerHandle</span></a><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">bool</span> {.<span class="Identifier">inline</span><span class="Other">,</span> <span><span class="Other pragmadots">...</span></span><span class="pragmawrap"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span>
+    <span class="Identifier">forbids</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span>.}</pre></dt>
+  <dd>
+    
+    
     
   </dd>
 </div>
 
 </div>
 <div id="newTextLayer-procs-all">
-  <div id="newTextLayer,GRect,cstring,GFont,GTextAlignment">
-  <dt><pre><span class="Keyword">proc</span> <a href="#newTextLayer%2CGRect%2Ccstring%2CGFont%2CGTextAlignment"><span class="Identifier">newTextLayer</span></a><span class="Other">(</span><span class="Identifier">frame</span><span class="Other">:</span> <a href="../ffi.html#GRect"><span class="Identifier">GRect</span></a><span class="Other">;</span> <span class="Identifier">text</span><span class="Other">:</span> <span class="Identifier">cstring</span> <span class="Other">=</span> <span class="Keyword">nil</span><span class="Other">;</span> <span class="Identifier">font</span><span class="Other">:</span> <a href="../ffi.html#GFont"><span class="Identifier">GFont</span></a> <span class="Other">=</span> <span class="Keyword">nil</span><span class="Other">;</span>
-                  <span class="Identifier">align</span><span class="Other">:</span> <a href="../ffi.html#GTextAlignment"><span class="Identifier">GTextAlignment</span></a> <span class="Other">=</span> <span class="Identifier">GTextAlignmentLeft</span><span class="Other">)</span><span class="Other">:</span> <span class="Keyword">ptr</span> <a href="../ffi.html#TextLayer"><span class="Identifier">TextLayer</span></a> {.
-    <span class="Identifier">inline</span><span class="Other">,</span> <span><span class="Other pragmadots">...</span></span><span class="pragmawrap"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">forbids</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span>.}</pre></dt>
+  <div id="newTextLayer,GRect">
+  <dt><pre><span class="Keyword">proc</span> <a href="#newTextLayer%2CGRect"><span class="Identifier">newTextLayer</span></a><span class="Other">(</span><span class="Identifier">frame</span><span class="Other">:</span> <a href="../ffi.html#GRect"><span class="Identifier">GRect</span></a><span class="Other">)</span><span class="Other">:</span> <a href="text_layer.html#TextLayerHandle"><span class="Identifier">TextLayerHandle</span></a> {.<span><span class="Other pragmadots">...</span></span><span class="pragmawrap"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span>
+    <span class="Identifier">forbids</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span>.}</pre></dt>
   <dd>
     
-    <p>Create a new TextLayer with optional common properties. The caller is responsible for calling <tt class="docutils literal"><span class="pre"><span class="Identifier">destroy</span><span class="Punctuation">(</span><span class="Punctuation">)</span></span></tt> when done. Equivalent to C function <tt class="docutils literal"><span class="pre"><span class="Identifier">text_layer_create</span><span class="Punctuation">(</span><span class="Identifier">frame</span><span class="Punctuation">)</span></span></tt> with optional property setters.</p>
-<p>Example: newTextLayer(makeGRect(0, 0, 144, 40))  # Basic usage newTextLayer(frame, &quot;Hello&quot;, myFont, GTextAlignmentCenter)  # With properties</p>
+    Alias for <tt class="docutils literal"><span class="pre"><span class="Identifier">newTextLayerHandle</span></span></tt>.
+    
+  </dd>
+</div>
+<div id="newTextLayer,GRect,cstring,GFont,GTextAlignment">
+  <dt><pre><span class="Keyword">proc</span> <a href="#newTextLayer%2CGRect%2Ccstring%2CGFont%2CGTextAlignment"><span class="Identifier">newTextLayer</span></a><span class="Other">(</span><span class="Identifier">frame</span><span class="Other">:</span> <a href="../ffi.html#GRect"><span class="Identifier">GRect</span></a><span class="Other">;</span> <span class="Identifier">text</span><span class="Other">:</span> <span class="Identifier">cstring</span><span class="Other">;</span> <span class="Identifier">font</span><span class="Other">:</span> <a href="../ffi.html#GFont"><span class="Identifier">GFont</span></a> <span class="Other">=</span> <span class="Keyword">nil</span><span class="Other">;</span>
+                  <span class="Identifier">align</span><span class="Other">:</span> <a href="../ffi.html#GTextAlignment"><span class="Identifier">GTextAlignment</span></a> <span class="Other">=</span> <span class="Identifier">GTextAlignmentLeft</span><span class="Other">)</span><span class="Other">:</span> <a href="text_layer.html#TextLayerHandle"><span class="Identifier">TextLayerHandle</span></a> {.
+    <span><span class="Other pragmadots">...</span></span><span class="pragmawrap"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">forbids</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span>.}</pre></dt>
+  <dd>
+    
+    Alias for <tt class="docutils literal"><span class="pre"><span class="Identifier">newTextLayerHandle</span></span></tt>.
+    
+  </dd>
+</div>
+
+</div>
+<div id="newTextLayerHandle-procs-all">
+  <div id="newTextLayerHandle,GRect">
+  <dt><pre><span class="Keyword">proc</span> <a href="#newTextLayerHandle%2CGRect"><span class="Identifier">newTextLayerHandle</span></a><span class="Other">(</span><span class="Identifier">frame</span><span class="Other">:</span> <a href="../ffi.html#GRect"><span class="Identifier">GRect</span></a><span class="Other">)</span><span class="Other">:</span> <a href="text_layer.html#TextLayerHandle"><span class="Identifier">TextLayerHandle</span></a> {.<span><span class="Other pragmadots">...</span></span><span class="pragmawrap"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span>
+    <span class="Identifier">forbids</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span>.}</pre></dt>
+  <dd>
+    
+    
+    
+  </dd>
+</div>
+<div id="newTextLayerHandle,GRect,cstring,GFont,GTextAlignment">
+  <dt><pre><span class="Keyword">proc</span> <a href="#newTextLayerHandle%2CGRect%2Ccstring%2CGFont%2CGTextAlignment"><span class="Identifier">newTextLayerHandle</span></a><span class="Other">(</span><span class="Identifier">frame</span><span class="Other">:</span> <a href="../ffi.html#GRect"><span class="Identifier">GRect</span></a><span class="Other">;</span> <span class="Identifier">text</span><span class="Other">:</span> <span class="Identifier">cstring</span><span class="Other">;</span> <span class="Identifier">font</span><span class="Other">:</span> <a href="../ffi.html#GFont"><span class="Identifier">GFont</span></a> <span class="Other">=</span> <span class="Keyword">nil</span><span class="Other">;</span>
+                        <span class="Identifier">align</span><span class="Other">:</span> <a href="../ffi.html#GTextAlignment"><span class="Identifier">GTextAlignment</span></a> <span class="Other">=</span> <span class="Identifier">GTextAlignmentLeft</span><span class="Other">)</span><span class="Other">:</span> <a href="text_layer.html#TextLayerHandle"><span class="Identifier">TextLayerHandle</span></a> {.
+    <span><span class="Other pragmadots">...</span></span><span class="pragmawrap"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">forbids</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span>.}</pre></dt>
+  <dd>
+    
+    <p>Create a new managed TextLayer with initial properties.</p>
+<p><strong>Parameters:</strong></p>
+<ul class="simple"><li><tt class="docutils literal"><span class="pre"><span class="Identifier">frame</span></span></tt>: The frame rectangle</li>
+<li><tt class="docutils literal"><span class="pre"><span class="Identifier">text</span></span></tt>: Initial text content (cstring, must remain valid)</li>
+<li><tt class="docutils literal"><span class="pre"><span class="Identifier">font</span></span></tt>: Initial font (optional)</li>
+<li><tt class="docutils literal"><span class="pre"><span class="Identifier">align</span></span></tt>: Text alignment (default: Left)</li>
+</ul>
+<p><strong>Example:</strong> var layer = newTextLayer( makeGRect(0, 50, 144, 40), &quot;Hello World&quot;, BITHAM_42_BOLD, GTextAlignmentCenter )</p>
 
     
   </dd>
@@ -243,84 +501,188 @@
 
 </div>
 <div id="overflowMode=-procs-all">
-  <div id="overflowMode=,ptr.struct_TextLayer,GTextOverflowMode">
-  <dt><pre><span class="Keyword">proc</span> <a href="#overflowMode%3D%2Cptr.struct_TextLayer%2CGTextOverflowMode"><span class="Identifier">overflowMode=</span></a><span class="Other">(</span><span class="Identifier">textLayer</span><span class="Other">:</span> <span class="Keyword">ptr</span> <a href="../ffi.html#TextLayer"><span class="Identifier">TextLayer</span></a><span class="Other">;</span> <span class="Identifier">mode</span><span class="Other">:</span> <a href="../ffi.html#GTextOverflowMode"><span class="Identifier">GTextOverflowMode</span></a><span class="Other">)</span> {.<span class="Identifier">inline</span><span class="Other">,</span>
+  <div id="overflowMode=,TextLayerHandle,GTextOverflowMode">
+  <dt><pre><span class="Keyword">proc</span> <a href="#overflowMode%3D%2CTextLayerHandle%2CGTextOverflowMode"><span class="Identifier">overflowMode=</span></a><span class="Other">(</span><span class="Identifier">h</span><span class="Other">:</span> <span class="Keyword">var</span> <a href="text_layer.html#TextLayerHandle"><span class="Identifier">TextLayerHandle</span></a><span class="Other">;</span> <span class="Identifier">value</span><span class="Other">:</span> <a href="../ffi.html#GTextOverflowMode"><span class="Identifier">GTextOverflowMode</span></a><span class="Other">)</span> {.<span class="Identifier">inline</span><span class="Other">,</span>
     <span><span class="Other pragmadots">...</span></span><span class="pragmawrap"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">forbids</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span>.}</pre></dt>
   <dd>
     
-    Set the overflow mode (wordWrap, trailing ellipsis, fill). Equivalent to C function <tt class="docutils literal"><span class="pre"><span class="Identifier">text_layer_set_overflow_mode</span><span class="Punctuation">(</span><span class="Identifier">text_layer</span><span class="Punctuation">,</span> <span class="Identifier">mode</span><span class="Punctuation">)</span></span></tt>.
+    Set the overflow mode (wordWrap, trailing ellipsis, fill).
+    
+  </dd>
+</div>
+
+</div>
+<div id="reset-procs-all">
+  <div id="reset,TextLayerHandle">
+  <dt><pre><span class="Keyword">proc</span> <a href="#reset%2CTextLayerHandle"><span class="Identifier">reset</span></a><span class="Other">(</span><span class="Identifier">h`gensym0</span><span class="Other">:</span> <span class="Keyword">var</span> <a href="text_layer.html#TextLayerHandle"><span class="Identifier">TextLayerHandle</span></a><span class="Other">)</span> {.<span><span class="Other pragmadots">...</span></span><span class="pragmawrap"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">forbids</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span>.}</pre></dt>
+  <dd>
+    
+    
     
   </dd>
 </div>
 
 </div>
 <div id="restoreDefaultTextFlowAndPaging-procs-all">
-  <div id="restoreDefaultTextFlowAndPaging,ptr.struct_TextLayer">
-  <dt><pre><span class="Keyword">proc</span> <a href="#restoreDefaultTextFlowAndPaging%2Cptr.struct_TextLayer"><span class="Identifier">restoreDefaultTextFlowAndPaging</span></a><span class="Other">(</span><span class="Identifier">textLayer</span><span class="Other">:</span> <span class="Keyword">ptr</span> <a href="../ffi.html#TextLayer"><span class="Identifier">TextLayer</span></a><span class="Other">)</span> {.<span class="Identifier">inline</span><span class="Other">,</span>
+  <div id="restoreDefaultTextFlowAndPaging,TextLayerHandle">
+  <dt><pre><span class="Keyword">proc</span> <a href="#restoreDefaultTextFlowAndPaging%2CTextLayerHandle"><span class="Identifier">restoreDefaultTextFlowAndPaging</span></a><span class="Other">(</span><span class="Identifier">h</span><span class="Other">:</span> <span class="Keyword">var</span> <a href="text_layer.html#TextLayerHandle"><span class="Identifier">TextLayerHandle</span></a><span class="Other">)</span> {.<span class="Identifier">inline</span><span class="Other">,</span>
     <span><span class="Other pragmadots">...</span></span><span class="pragmawrap"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">forbids</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span>.}</pre></dt>
   <dd>
     
-    Restore the default text flow and paging behavior. Equivalent to C function <tt class="docutils literal"><span class="pre"><span class="Identifier">text_layer_restore_default_text_flow_and_paging</span><span class="Punctuation">(</span><span class="Operator">...</span><span class="Punctuation">)</span></span></tt>.
+    Restore the default text flow and paging behavior.
+    
+  </dd>
+</div>
+
+</div>
+<div id="setParent-procs-all">
+  <div id="setParent,TextLayerHandle,ptr.struct_Layer">
+  <dt><pre><span class="Keyword">proc</span> <a href="#setParent%2CTextLayerHandle%2Cptr.struct_Layer"><span class="Identifier">setParent</span></a><span class="Other">(</span><span class="Identifier">h`gensym0</span><span class="Other">:</span> <span class="Keyword">var</span> <a href="text_layer.html#TextLayerHandle"><span class="Identifier">TextLayerHandle</span></a><span class="Other">;</span> <span class="Identifier">p`gensym0</span><span class="Other">:</span> <span class="Keyword">ptr</span> <a href="../ffi.html#Layer"><span class="Identifier">Layer</span></a><span class="Other">)</span> {.<span class="Identifier">inline</span><span class="Other">,</span>
+    <span><span class="Other pragmadots">...</span></span><span class="pragmawrap"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">forbids</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span>.}</pre></dt>
+  <dd>
+    
+    
     
   </dd>
 </div>
 
 </div>
 <div id="size=-procs-all">
-  <div id="size=,ptr.struct_TextLayer,GSize">
-  <dt><pre><span class="Keyword">proc</span> <a href="#size%3D%2Cptr.struct_TextLayer%2CGSize"><span class="Identifier">size=</span></a><span class="Other">(</span><span class="Identifier">textLayer</span><span class="Other">:</span> <span class="Keyword">ptr</span> <a href="../ffi.html#TextLayer"><span class="Identifier">TextLayer</span></a><span class="Other">;</span> <span class="Identifier">maxSize</span><span class="Other">:</span> <a href="../ffi.html#GSize"><span class="Identifier">GSize</span></a><span class="Other">)</span> {.<span class="Identifier">inline</span><span class="Other">,</span> <span><span class="Other pragmadots">...</span></span><span class="pragmawrap"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span>
-    <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">forbids</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span>.}</pre></dt>
+  <div id="size=,TextLayerHandle,GSize">
+  <dt><pre><span class="Keyword">proc</span> <a href="#size%3D%2CTextLayerHandle%2CGSize"><span class="Identifier">size=</span></a><span class="Other">(</span><span class="Identifier">h</span><span class="Other">:</span> <span class="Keyword">var</span> <a href="text_layer.html#TextLayerHandle"><span class="Identifier">TextLayerHandle</span></a><span class="Other">;</span> <span class="Identifier">value</span><span class="Other">:</span> <a href="../ffi.html#GSize"><span class="Identifier">GSize</span></a><span class="Other">)</span> {.<span class="Identifier">inline</span><span class="Other">,</span> <span><span class="Other pragmadots">...</span></span><span class="pragmawrap"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span>
+    <span class="Identifier">forbids</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span>.}</pre></dt>
   <dd>
     
-    Set the maximum size for text rendering. Equivalent to C function <tt class="docutils literal"><span class="pre"><span class="Identifier">text_layer_set_size</span><span class="Punctuation">(</span><span class="Identifier">text_layer</span><span class="Punctuation">,</span> <span class="Identifier">max_size</span><span class="Punctuation">)</span></span></tt>.
+    Set the maximum size for text rendering.
     
   </dd>
 </div>
 
 </div>
 <div id="text-procs-all">
-  <div id="text,ptr.struct_TextLayer">
-  <dt><pre><span class="Keyword">proc</span> <a href="#text%2Cptr.struct_TextLayer"><span class="Identifier">text</span></a><span class="Other">(</span><span class="Identifier">textLayer</span><span class="Other">:</span> <span class="Keyword">ptr</span> <a href="../ffi.html#TextLayer"><span class="Identifier">TextLayer</span></a><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">cstring</span> {.<span class="Identifier">inline</span><span class="Other">,</span> <span><span class="Other pragmadots">...</span></span><span class="pragmawrap"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span>
+  <div id="text,TextLayerHandle">
+  <dt><pre><span class="Keyword">proc</span> <a href="#text%2CTextLayerHandle"><span class="Identifier">text</span></a><span class="Other">(</span><span class="Identifier">h</span><span class="Other">:</span> <a href="text_layer.html#TextLayerHandle"><span class="Identifier">TextLayerHandle</span></a><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">cstring</span> {.<span class="Identifier">inline</span><span class="Other">,</span> <span><span class="Other pragmadots">...</span></span><span class="pragmawrap"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span>
     <span class="Identifier">forbids</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span>.}</pre></dt>
   <dd>
     
-    Get the current text content. Equivalent to C function <tt class="docutils literal"><span class="pre"><span class="Identifier">text_layer_get_text</span><span class="Punctuation">(</span><span class="Identifier">text_layer</span><span class="Punctuation">)</span></span></tt>.
+    Get the current text content.
     
   </dd>
 </div>
 
 </div>
 <div id="text=-procs-all">
-  <div id="text=,ptr.struct_TextLayer,cstring">
-  <dt><pre><span class="Keyword">proc</span> <a href="#text%3D%2Cptr.struct_TextLayer%2Ccstring"><span class="Identifier">text=</span></a><span class="Other">(</span><span class="Identifier">textLayer</span><span class="Other">:</span> <span class="Keyword">ptr</span> <a href="../ffi.html#TextLayer"><span class="Identifier">TextLayer</span></a><span class="Other">;</span> <span class="Identifier">text</span><span class="Other">:</span> <span class="Identifier">cstring</span><span class="Other">)</span> {.<span class="Identifier">inline</span><span class="Other">,</span> <span><span class="Other pragmadots">...</span></span><span class="pragmawrap"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span>
+  <div id="text=,TextLayerHandle,cstring">
+  <dt><pre><span class="Keyword">proc</span> <a href="#text%3D%2CTextLayerHandle%2Ccstring"><span class="Identifier">text=</span></a><span class="Other">(</span><span class="Identifier">h</span><span class="Other">:</span> <span class="Keyword">var</span> <a href="text_layer.html#TextLayerHandle"><span class="Identifier">TextLayerHandle</span></a><span class="Other">;</span> <span class="Identifier">value</span><span class="Other">:</span> <span class="Identifier">cstring</span><span class="Other">)</span> {.<span class="Identifier">inline</span><span class="Other">,</span> <span><span class="Other pragmadots">...</span></span><span class="pragmawrap"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span>
     <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">forbids</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span>.}</pre></dt>
   <dd>
     
-    Set the text content. The string must remain valid for the lifetime of the TextLayer (use a string literal or static buffer, not a temporary). Equivalent to C function <tt class="docutils literal"><span class="pre"><span class="Identifier">text_layer_set_text</span><span class="Punctuation">(</span><span class="Identifier">text_layer</span><span class="Punctuation">,</span> <span class="Identifier">text</span><span class="Punctuation">)</span></span></tt>.
+    
+    
+  </dd>
+</div>
+<div id="text=,ptr.struct_TextLayer,cstring">
+  <dt><pre><span class="Keyword">proc</span> <a href="#text%3D%2Cptr.struct_TextLayer%2Ccstring"><span class="Identifier">text=</span></a><span class="Other">(</span><span class="Identifier">p</span><span class="Other">:</span> <span class="Keyword">ptr</span> <a href="../ffi.html#TextLayer"><span class="Identifier">TextLayer</span></a><span class="Other">;</span> <span class="Identifier">value</span><span class="Other">:</span> <span class="Identifier">cstring</span><span class="Other">)</span> {.<span class="Identifier">inline</span><span class="Other">,</span> <span><span class="Other pragmadots">...</span></span><span class="pragmawrap"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span>
+    <span class="Identifier">forbids</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span>.}</pre></dt>
+  <dd>
+    
+    
     
   </dd>
 </div>
 
 </div>
 <div id="textAlignment=-procs-all">
-  <div id="textAlignment=,ptr.struct_TextLayer,GTextAlignment">
-  <dt><pre><span class="Keyword">proc</span> <a href="#textAlignment%3D%2Cptr.struct_TextLayer%2CGTextAlignment"><span class="Identifier">textAlignment=</span></a><span class="Other">(</span><span class="Identifier">textLayer</span><span class="Other">:</span> <span class="Keyword">ptr</span> <a href="../ffi.html#TextLayer"><span class="Identifier">TextLayer</span></a><span class="Other">;</span> <span class="Identifier">alignment</span><span class="Other">:</span> <a href="../ffi.html#GTextAlignment"><span class="Identifier">GTextAlignment</span></a><span class="Other">)</span> {.
-    <span class="Identifier">inline</span><span class="Other">,</span> <span><span class="Other pragmadots">...</span></span><span class="pragmawrap"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">forbids</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span>.}</pre></dt>
+  <div id="textAlignment=,TextLayerHandle,GTextAlignment">
+  <dt><pre><span class="Keyword">proc</span> <a href="#textAlignment%3D%2CTextLayerHandle%2CGTextAlignment"><span class="Identifier">textAlignment=</span></a><span class="Other">(</span><span class="Identifier">h</span><span class="Other">:</span> <span class="Keyword">var</span> <a href="text_layer.html#TextLayerHandle"><span class="Identifier">TextLayerHandle</span></a><span class="Other">;</span> <span class="Identifier">value</span><span class="Other">:</span> <a href="../ffi.html#GTextAlignment"><span class="Identifier">GTextAlignment</span></a><span class="Other">)</span> {.<span class="Identifier">inline</span><span class="Other">,</span>
+    <span><span class="Other pragmadots">...</span></span><span class="pragmawrap"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">forbids</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span>.}</pre></dt>
   <dd>
     
-    Set the text alignment (left, center, right). Equivalent to C function <tt class="docutils literal"><span class="pre"><span class="Identifier">text_layer_set_text_alignment</span><span class="Punctuation">(</span><span class="Identifier">text_layer</span><span class="Punctuation">,</span> <span class="Identifier">alignment</span><span class="Punctuation">)</span></span></tt>.
+    
+    
+  </dd>
+</div>
+<div id="textAlignment=,ptr.struct_TextLayer,GTextAlignment">
+  <dt><pre><span class="Keyword">proc</span> <a href="#textAlignment%3D%2Cptr.struct_TextLayer%2CGTextAlignment"><span class="Identifier">textAlignment=</span></a><span class="Other">(</span><span class="Identifier">p</span><span class="Other">:</span> <span class="Keyword">ptr</span> <a href="../ffi.html#TextLayer"><span class="Identifier">TextLayer</span></a><span class="Other">;</span> <span class="Identifier">value</span><span class="Other">:</span> <a href="../ffi.html#GTextAlignment"><span class="Identifier">GTextAlignment</span></a><span class="Other">)</span> {.<span class="Identifier">inline</span><span class="Other">,</span>
+    <span><span class="Other pragmadots">...</span></span><span class="pragmawrap"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">forbids</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span>.}</pre></dt>
+  <dd>
+    
+    
     
   </dd>
 </div>
 
 </div>
 <div id="textColor=-procs-all">
-  <div id="textColor=,ptr.struct_TextLayer,GColor8">
-  <dt><pre><span class="Keyword">proc</span> <a href="#textColor%3D%2Cptr.struct_TextLayer%2CGColor8"><span class="Identifier">textColor=</span></a><span class="Other">(</span><span class="Identifier">textLayer</span><span class="Other">:</span> <span class="Keyword">ptr</span> <a href="../ffi.html#TextLayer"><span class="Identifier">TextLayer</span></a><span class="Other">;</span> <span class="Identifier">color</span><span class="Other">:</span> <a href="../ffi.html#GColor8"><span class="Identifier">GColor8</span></a><span class="Other">)</span> {.<span class="Identifier">inline</span><span class="Other">,</span> <span><span class="Other pragmadots">...</span></span><span class="pragmawrap"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span>
+  <div id="textColor=,TextLayerHandle,GColor8">
+  <dt><pre><span class="Keyword">proc</span> <a href="#textColor%3D%2CTextLayerHandle%2CGColor8"><span class="Identifier">textColor=</span></a><span class="Other">(</span><span class="Identifier">h</span><span class="Other">:</span> <span class="Keyword">var</span> <a href="text_layer.html#TextLayerHandle"><span class="Identifier">TextLayerHandle</span></a><span class="Other">;</span> <span class="Identifier">value</span><span class="Other">:</span> <a href="../ffi.html#GColor8"><span class="Identifier">GColor8</span></a><span class="Other">)</span> {.<span class="Identifier">inline</span><span class="Other">,</span> <span><span class="Other pragmadots">...</span></span><span class="pragmawrap"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span>
     <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">forbids</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span>.}</pre></dt>
   <dd>
     
-    Set the text color. Equivalent to C function <tt class="docutils literal"><span class="pre"><span class="Identifier">text_layer_set_text_color</span><span class="Punctuation">(</span><span class="Identifier">text_layer</span><span class="Punctuation">,</span> <span class="Identifier">color</span><span class="Punctuation">)</span></span></tt>.
+    
+    
+  </dd>
+</div>
+<div id="textColor=,ptr.struct_TextLayer,GColor8">
+  <dt><pre><span class="Keyword">proc</span> <a href="#textColor%3D%2Cptr.struct_TextLayer%2CGColor8"><span class="Identifier">textColor=</span></a><span class="Other">(</span><span class="Identifier">p</span><span class="Other">:</span> <span class="Keyword">ptr</span> <a href="../ffi.html#TextLayer"><span class="Identifier">TextLayer</span></a><span class="Other">;</span> <span class="Identifier">value</span><span class="Other">:</span> <a href="../ffi.html#GColor8"><span class="Identifier">GColor8</span></a><span class="Other">)</span> {.<span class="Identifier">inline</span><span class="Other">,</span> <span><span class="Other pragmadots">...</span></span><span class="pragmawrap"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span>
+    <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">forbids</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span>.}</pre></dt>
+  <dd>
+    
+    
+    
+  </dd>
+</div>
+
+</div>
+<div id="toHandle-procs-all">
+  <div id="toHandle,ptr.struct_TextLayer">
+  <dt><pre><span class="Keyword">proc</span> <a href="#toHandle%2Cptr.struct_TextLayer"><span class="Identifier">toHandle</span></a><span class="Other">(</span><span class="Identifier">p`gensym0</span><span class="Other">:</span> <span class="Keyword">ptr</span> <a href="../ffi.html#TextLayer"><span class="Identifier">TextLayer</span></a><span class="Other">)</span><span class="Other">:</span> <a href="text_layer.html#TextLayerHandle"><span class="Identifier">TextLayerHandle</span></a> {.<span class="Identifier">inline</span><span class="Other">,</span> <span><span class="Other pragmadots">...</span></span><span class="pragmawrap"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span>
+    <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">forbids</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span>.}</pre></dt>
+  <dd>
+    
+    Wrap raw pointer in handle (unowned).
+    
+  </dd>
+</div>
+
+</div>
+<div id="wrapOwned-procs-all">
+  <div id="wrapOwned,ptr.struct_TextLayer">
+  <dt><pre><span class="Keyword">proc</span> <a href="#wrapOwned%2Cptr.struct_TextLayer"><span class="Identifier">wrapOwned</span></a><span class="Other">(</span><span class="Identifier">p`gensym0</span><span class="Other">:</span> <span class="Keyword">ptr</span> <a href="../ffi.html#TextLayer"><span class="Identifier">TextLayer</span></a><span class="Other">)</span><span class="Other">:</span> <a href="text_layer.html#TextLayerHandle"><span class="Identifier">TextLayerHandle</span></a> {.<span class="Identifier">inline</span><span class="Other">,</span> <span><span class="Other pragmadots">...</span></span><span class="pragmawrap"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span>
+    <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">forbids</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span>.}</pre></dt>
+  <dd>
+    
+    Wrap raw pointer in handle (owned).
+    
+  </dd>
+</div>
+
+</div>
+
+  </dl>
+</div>
+<div class="section" id="16">
+  <h1><a class="toc-backref" href="#16">Converters</a></h1>
+  <dl class="item">
+    <div id="toLayer-converters-all">
+  <div id="toLayer.c,TextLayerHandle">
+  <dt><pre><span class="Keyword">converter</span> <a href="#toLayer.c%2CTextLayerHandle"><span class="Identifier">toLayer</span></a><span class="Other">(</span><span class="Identifier">h`gensym0</span><span class="Other">:</span> <a href="text_layer.html#TextLayerHandle"><span class="Identifier">TextLayerHandle</span></a><span class="Other">)</span><span class="Other">:</span> <span class="Keyword">ptr</span> <a href="../ffi.html#Layer"><span class="Identifier">Layer</span></a> {.<span><span class="Other pragmadots">...</span></span><span class="pragmawrap"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span>
+    <span class="Identifier">forbids</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span>.}</pre></dt>
+  <dd>
+    
+    
+    
+  </dd>
+</div>
+
+</div>
+<div id="toPtr-converters-all">
+  <div id="toPtr.c,TextLayerHandle">
+  <dt><pre><span class="Keyword">converter</span> <a href="#toPtr.c%2CTextLayerHandle"><span class="Identifier">toPtr</span></a><span class="Other">(</span><span class="Identifier">h`gensym0</span><span class="Other">:</span> <a href="text_layer.html#TextLayerHandle"><span class="Identifier">TextLayerHandle</span></a><span class="Other">)</span><span class="Other">:</span> <span class="Keyword">ptr</span> <a href="../ffi.html#TextLayer"><span class="Identifier">TextLayer</span></a> {.<span><span class="Other pragmadots">...</span></span><span class="pragmawrap"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span>
+    <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">forbids</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span>.}</pre></dt>
+  <dd>
+    
+    
     
   </dd>
 </div>
@@ -333,20 +695,13 @@
   <h1><a class="toc-backref" href="#18">Templates</a></h1>
   <dl class="item">
     <div id="staticText-templates-all">
-  <div id="staticText.t,ptr.struct_TextLayer,untyped,string">
-  <dt><pre><span class="Keyword">template</span> <a href="#staticText.t%2Cptr.struct_TextLayer%2Cuntyped%2Cstring"><span class="Identifier">staticText</span></a><span class="Other">(</span><span class="Identifier">layer</span><span class="Other">:</span> <span class="Keyword">ptr</span> <a href="../ffi.html#TextLayer"><span class="Identifier">TextLayer</span></a><span class="Other">;</span> <span class="Identifier">bufVar</span><span class="Other">:</span> <span class="Identifier">untyped</span><span class="Other">;</span> <span class="Identifier">text</span><span class="Other">:</span> <span class="Identifier">string</span><span class="Other">)</span></pre></dt>
+  <div id="staticText.t,TextLayerHandle,untyped,string">
+  <dt><pre><span class="Keyword">template</span> <a href="#staticText.t%2CTextLayerHandle%2Cuntyped%2Cstring"><span class="Identifier">staticText</span></a><span class="Other">(</span><span class="Identifier">h</span><span class="Other">:</span> <span class="Keyword">var</span> <a href="text_layer.html#TextLayerHandle"><span class="Identifier">TextLayerHandle</span></a><span class="Other">;</span> <span class="Identifier">bufVar</span><span class="Other">:</span> <span class="Identifier">untyped</span><span class="Other">;</span> <span class="Identifier">text</span><span class="Other">:</span> <span class="Identifier">string</span><span class="Other">)</span></pre></dt>
   <dd>
     
-    <p>Copy text into a static buffer and set it on the layer. Handles null-termination and length clamping automatically.</p>
-<p><strong>Before (5 lines, repeated ~20 times across examples):</strong></p>
-<p><pre class="listing"><span class="Keyword">let</span> <span class="Identifier">stepsText</span> <span class="Operator">=</span> <span class="StringLit">&quot;Steps: &quot;</span> <span class="Operator">&amp;</span> <span class="Operator">$</span><span class="Identifier">steps</span>
-<span class="Keyword">for</span> <span class="Identifier">i</span> <span class="Keyword">in</span> <span class="FloatNumber">0.</span><span class="Operator">.&lt;</span><span class="Identifier">min</span><span class="Punctuation">(</span><span class="Identifier">stepsText</span><span class="Operator">.</span><span class="Identifier">len</span><span class="Punctuation">,</span> <span class="DecNumber">31</span><span class="Punctuation">)</span><span class="Punctuation">:</span>
-  <span class="Identifier">stepsBuffer</span><span class="Punctuation">[</span><span class="Identifier">i</span><span class="Punctuation">]</span> <span class="Operator">=</span> <span class="Identifier">stepsText</span><span class="Punctuation">[</span><span class="Identifier">i</span><span class="Punctuation">]</span>
-<span class="Identifier">stepsBuffer</span><span class="Punctuation">[</span><span class="Identifier">min</span><span class="Punctuation">(</span><span class="Identifier">stepsText</span><span class="Operator">.</span><span class="Identifier">len</span><span class="Punctuation">,</span> <span class="DecNumber">31</span><span class="Punctuation">)</span><span class="Punctuation">]</span> <span class="Operator">=</span> <span class="CharLit">'\0'</span>
-<span class="Identifier">text_layer_set_text</span><span class="Punctuation">(</span><span class="Identifier">stepsLayer</span><span class="Punctuation">,</span> <span class="Keyword">cast</span><span class="Punctuation">[</span><span class="Identifier">cstring</span><span class="Punctuation">]</span><span class="Punctuation">(</span><span class="Keyword">addr</span> <span class="Identifier">stepsBuffer</span><span class="Punctuation">[</span><span class="DecNumber">0</span><span class="Punctuation">]</span><span class="Punctuation">)</span><span class="Punctuation">)</span></pre></p>
-<p><strong>After (1 line):</strong></p>
-<p><pre class="listing"><span class="Identifier">stepsLayer</span><span class="Operator">.</span><span class="Identifier">staticText</span><span class="Punctuation">(</span><span class="Identifier">stepsBuffer</span><span class="Punctuation">,</span> <span class="StringLit">&quot;Steps: &quot;</span> <span class="Operator">&amp;</span> <span class="Operator">$</span><span class="Identifier">steps</span><span class="Punctuation">)</span></pre></p>
-<p>The buffer variable must be a module-level <tt class="docutils literal"><span class="pre"><span class="Keyword">var</span> <span class="Identifier">array</span><span class="Punctuation">[</span><span class="Identifier">N</span><span class="Punctuation">,</span> <span class="Identifier">char</span><span class="Punctuation">]</span></span></tt>. Local buffers are not supported (they have stack lifetime).</p>
+    <p>Copy text into a static buffer and set it on the managed layer.</p>
+<p><strong>Usage:</strong> var buffer: array<a class="reference internal" href="#32, char">32, char</a> textLayer.staticText(buffer, &quot;Steps: &quot; &amp; $stepCount)</p>
+<p><strong>Note:</strong> <tt class="docutils literal"><span class="pre"><span class="Identifier">bufVar</span></span></tt> must be a module-level <tt class="docutils literal"><span class="pre"><span class="Keyword">var</span> <span class="Identifier">array</span><span class="Punctuation">[</span><span class="Identifier">N</span><span class="Punctuation">,</span> <span class="Identifier">char</span><span class="Punctuation">]</span></span></tt>. Local buffers are not supported due to stack lifetime.</p>
 
     
   </dd>
@@ -369,7 +724,7 @@
       <div class="twelve-columns footer">
         <span class="nim-sprite"></span>
         <br>
-        <small style="color: var(--hint);">Made with Nim. Generated: 2026-02-12 14:24:48 UTC</small>
+        <small style="color: var(--hint);">Made with Nim. Generated: 2026-02-14 21:03:57 UTC</small>
       </div>
     </div>
   </div>

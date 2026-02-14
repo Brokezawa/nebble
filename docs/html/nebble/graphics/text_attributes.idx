@@ -1,16 +1,27 @@
 nimTitle	text_attributes	nebble/graphics/text_attributes.html	module nebble/graphics/text_attributes		0
-nim	newTextAttributes	nebble/graphics/text_attributes.html#newTextAttributes	proc newTextAttributes(): ptr GTextAttributes		14
-nim	destroy	nebble/graphics/text_attributes.html#destroy,ptr.struct_GTextAttributes	proc destroy(attrs: ptr GTextAttributes)		20
-nim	enableScreenTextFlow	nebble/graphics/text_attributes.html#enableScreenTextFlow,ptr.struct_GTextAttributes,uint8	proc enableScreenTextFlow(attrs: ptr GTextAttributes; inset: uint8)		29
-nim	restoreDefaultTextFlow	nebble/graphics/text_attributes.html#restoreDefaultTextFlow,ptr.struct_GTextAttributes	proc restoreDefaultTextFlow(attrs: ptr GTextAttributes)		40
-nim	enablePaging	nebble/graphics/text_attributes.html#enablePaging,ptr.struct_GTextAttributes,GPoint,GRect	proc enablePaging(attrs: ptr GTextAttributes; origin: GPoint; pageRect: GRect)		49
-nim	restoreDefaultPaging	nebble/graphics/text_attributes.html#restoreDefaultPaging,ptr.struct_GTextAttributes	proc restoreDefaultPaging(attrs: ptr GTextAttributes)		59
-nim	TextFlowConfig	nebble/graphics/text_attributes.html#TextFlowConfig	object TextFlowConfig		69
-nim	PagingConfig	nebble/graphics/text_attributes.html#PagingConfig	object PagingConfig		73
-nim	apply	nebble/graphics/text_attributes.html#apply,ptr.struct_GTextAttributes,TextFlowConfig	proc apply(attrs: ptr GTextAttributes; config: TextFlowConfig)		79
-nim	apply	nebble/graphics/text_attributes.html#apply,ptr.struct_GTextAttributes,PagingConfig	proc apply(attrs: ptr GTextAttributes; config: PagingConfig)		87
-nim	withTextFlow	nebble/graphics/text_attributes.html#withTextFlow,ptr.struct_GTextAttributes,uint8	proc withTextFlow(attrs: ptr GTextAttributes; inset: uint8): ptr GTextAttributes		95
-nim	withPaging	nebble/graphics/text_attributes.html#withPaging,ptr.struct_GTextAttributes,GPoint,GRect	proc withPaging(attrs: ptr GTextAttributes; origin: GPoint; pageRect: GRect): ptr GTextAttributes		101
-nim	enableScreenTextFlowAndPaging	nebble/graphics/text_attributes.html#enableScreenTextFlowAndPaging,ptr.struct_TextLayer,uint8	proc enableScreenTextFlowAndPaging(textLayer: ptr TextLayer; inset: uint8)		111
-nim	restoreDefaultTextFlowAndPaging	nebble/graphics/text_attributes.html#restoreDefaultTextFlowAndPaging,ptr.struct_TextLayer	proc restoreDefaultTextFlowAndPaging(textLayer: ptr TextLayer)		120
-nimgrp	apply	nebble/graphics/text_attributes.html#apply-procs-all	proc		79
+nim	TextAttributesHandle	nebble/graphics/text_attributes.html#TextAttributesHandle	object TextAttributesHandle		70
+nim	`=destroy`	nebble/graphics/text_attributes.html#=destroy,TextAttributesHandle	proc `=destroy`(h`gensym0: var TextAttributesHandle)		76
+nim	`=wasMoved`	nebble/graphics/text_attributes.html#=wasMoved,TextAttributesHandle	proc `=wasMoved`(h`gensym0: var TextAttributesHandle)		83
+nim	`=copy`	nebble/graphics/text_attributes.html#=copy,TextAttributesHandle,TextAttributesHandle	proc `=copy`(dest`gensym0: var TextAttributesHandle;\n        src`gensym0: TextAttributesHandle)		88
+nim	`=sink`	nebble/graphics/text_attributes.html#=sink,TextAttributesHandle,TextAttributesHandle	proc `=sink`(dest`gensym0: var TextAttributesHandle;\n        src`gensym0: TextAttributesHandle)		90
+nim	toPtr	nebble/graphics/text_attributes.html#toPtr.c,TextAttributesHandle	converter toPtr(h`gensym0: TextAttributesHandle): ptr GTextAttributes		100
+nim	toLayer	nebble/graphics/text_attributes.html#toLayer.c,TextAttributesHandle	converter toLayer(h`gensym0: TextAttributesHandle): ptr Layer		102
+nim	toHandle	nebble/graphics/text_attributes.html#toHandle,ptr.struct_GTextAttributes	proc toHandle(p`gensym0: ptr GTextAttributes): TextAttributesHandle		105
+nim	wrapOwned	nebble/graphics/text_attributes.html#wrapOwned,ptr.struct_GTextAttributes	proc wrapOwned(p`gensym0: ptr GTextAttributes): TextAttributesHandle		109
+nim	isValid	nebble/graphics/text_attributes.html#isValid,TextAttributesHandle	proc isValid(h`gensym0: TextAttributesHandle): bool		113
+nim	isNil	nebble/graphics/text_attributes.html#isNil,TextAttributesHandle	proc isNil(h`gensym0: TextAttributesHandle): bool		114
+nim	setParent	nebble/graphics/text_attributes.html#setParent,TextAttributesHandle,ptr.struct_Layer	proc setParent(h`gensym0: var TextAttributesHandle; p`gensym0: ptr Layer)		116
+nim	reset	nebble/graphics/text_attributes.html#reset,TextAttributesHandle	proc reset(h`gensym0: var TextAttributesHandle)		7
+nim	newTextAttributesHandle	nebble/graphics/text_attributes.html#newTextAttributesHandle	proc newTextAttributesHandle(): TextAttributesHandle		11
+nim	newTextAttributes	nebble/graphics/text_attributes.html#newTextAttributes	proc newTextAttributes(): TextAttributesHandle		14
+nim	enableScreenTextFlow	nebble/graphics/text_attributes.html#enableScreenTextFlow,TextAttributesHandle,uint8	proc enableScreenTextFlow(h: TextAttributesHandle; inset: uint8)		18
+nim	restoreDefaultTextFlow	nebble/graphics/text_attributes.html#restoreDefaultTextFlow,TextAttributesHandle	proc restoreDefaultTextFlow(h: TextAttributesHandle)		23
+nim	enablePaging	nebble/graphics/text_attributes.html#enablePaging,TextAttributesHandle,GPoint,GRect	proc enablePaging(h: TextAttributesHandle; origin: GPoint; pageRect: GRect)		28
+nim	restoreDefaultPaging	nebble/graphics/text_attributes.html#restoreDefaultPaging,TextAttributesHandle	proc restoreDefaultPaging(h: TextAttributesHandle)		33
+nim	TextFlowConfig	nebble/graphics/text_attributes.html#TextFlowConfig	object TextFlowConfig		43
+nim	PagingConfig	nebble/graphics/text_attributes.html#PagingConfig	object PagingConfig		47
+nim	apply	nebble/graphics/text_attributes.html#apply,TextAttributesHandle,TextFlowConfig	proc apply(h: TextAttributesHandle; config: TextFlowConfig)		53
+nim	apply	nebble/graphics/text_attributes.html#apply,TextAttributesHandle,PagingConfig	proc apply(h: TextAttributesHandle; config: PagingConfig)		61
+nim	withTextFlow	nebble/graphics/text_attributes.html#withTextFlow,TextAttributesHandle,uint8	proc withTextFlow(h: TextAttributesHandle; inset: uint8): TextAttributesHandle		69
+nim	withPaging	nebble/graphics/text_attributes.html#withPaging,TextAttributesHandle,GPoint,GRect	proc withPaging(h: TextAttributesHandle; origin: GPoint; pageRect: GRect): TextAttributesHandle		75
+nimgrp	apply	nebble/graphics/text_attributes.html#apply-procs-all	proc		53
