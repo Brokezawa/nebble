@@ -26,13 +26,17 @@ proc newScrollLayer*(frame: GRect): ScrollLayerHandle {.inline.} =
 # ============================================================================
 
 proc getLayer*(h: ScrollLayerHandle): ptr Layer {.inline.} =
+  if h.pRaw == nil: return nil
   ffi.scroll_layer_get_layer(h.toPtr)
 
 proc setContentSize*(h: var ScrollLayerHandle, size: GSize) {.inline.} =
+  if h.pRaw == nil: return
   ffi.scroll_layer_set_content_size(h.pRaw, size)
 
 proc `contentSize=`*(h: var ScrollLayerHandle, size: GSize) {.inline.} =
+  if h.pRaw == nil: return
   ffi.scroll_layer_set_content_size(h.pRaw, size)
 
 proc setClickConfigOntoWindow*(h: var ScrollLayerHandle, window: ptr Window) {.inline.} =
+  if h.pRaw == nil or window == nil: return
   ffi.scroll_layer_set_click_config_onto_window(h.pRaw, window)

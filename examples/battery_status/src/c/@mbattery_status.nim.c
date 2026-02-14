@@ -120,7 +120,7 @@ static N_INLINE(tyObject_StatusBarLayerHandle__9a2ctbCKxFpof3q1j9a37Oyw, newStat
 static N_INLINE(tyObject_StatusBarLayerHandle__9a2ctbCKxFpof3q1j9a37Oyw, wrapOwned__OOZOOZOOZsrcZnebbleZuiZstatus95bar_u87)(tyObject_struct_StatusBarLayer__ygeqc9bqm7H0IQjQjjaM78w* pX60gensym0__p0);
 N_CDECL(tyObject_struct_StatusBarLayer__ygeqc9bqm7H0IQjQjjaM78w*, status_bar_layer_create)(void);
 N_LIB_PRIVATE N_NIMCALL(void, eqdestroy___OOZOOZOOZsrcZnebbleZuiZstatus95bar_u24)(tyObject_StatusBarLayerHandle__9a2ctbCKxFpof3q1j9a37Oyw* hX60gensym0__p0);
-static N_INLINE(void, setColors__OOZOOZOOZsrcZnebbleZuiZstatus95bar_u131)(tyObject_StatusBarLayerHandle__9a2ctbCKxFpof3q1j9a37Oyw h_p0, tyObject_union_GColor8570426115__5r6qkn4jWQz1dbWRrH9aefw background_p1, tyObject_union_GColor8570426115__5r6qkn4jWQz1dbWRrH9aefw foreground_p2);
+static N_INLINE(void, setColors__OOZOOZOOZsrcZnebbleZuiZstatus95bar_u135)(tyObject_StatusBarLayerHandle__9a2ctbCKxFpof3q1j9a37Oyw h_p0, tyObject_union_GColor8570426115__5r6qkn4jWQz1dbWRrH9aefw background_p1, tyObject_union_GColor8570426115__5r6qkn4jWQz1dbWRrH9aefw foreground_p2);
 N_CDECL(void, status_bar_layer_set_colors)(tyObject_struct_StatusBarLayer__ygeqc9bqm7H0IQjQjjaM78w* status_bar_layer_p0, tyObject_union_GColor8570426115__5r6qkn4jWQz1dbWRrH9aefw background_p1, tyObject_union_GColor8570426115__5r6qkn4jWQz1dbWRrH9aefw foreground_p2);
 static N_INLINE(void, makeGColor8__OOZOOZOOZsrcZnebbleZffi_u3515)(NU8 argb_p0, tyObject_union_GColor8570426115__5r6qkn4jWQz1dbWRrH9aefw* Result);
 N_LIB_PRIVATE N_NIMCALL(void, eqsink___OOZOOZOOZsrcZnebbleZuiZtext95layer_u55)(tyObject_TextLayerHandle__t9bAY9a7d2BLJR3FU4TDoSGA* destX60gensym0__p0, tyObject_TextLayerHandle__t9bAY9a7d2BLJR3FU4TDoSGA srcX60gensym0__p1);
@@ -276,8 +276,14 @@ NIM_BOOL* nimErr_;
 	}BeforeRet_: ;
 	return result;
 }
-static N_INLINE(void, setColors__OOZOOZOOZsrcZnebbleZuiZstatus95bar_u131)(tyObject_StatusBarLayerHandle__9a2ctbCKxFpof3q1j9a37Oyw h_p0, tyObject_union_GColor8570426115__5r6qkn4jWQz1dbWRrH9aefw background_p1, tyObject_union_GColor8570426115__5r6qkn4jWQz1dbWRrH9aefw foreground_p2) {
+static N_INLINE(void, setColors__OOZOOZOOZsrcZnebbleZuiZstatus95bar_u135)(tyObject_StatusBarLayerHandle__9a2ctbCKxFpof3q1j9a37Oyw h_p0, tyObject_union_GColor8570426115__5r6qkn4jWQz1dbWRrH9aefw background_p1, tyObject_union_GColor8570426115__5r6qkn4jWQz1dbWRrH9aefw foreground_p2) {
+{	{
+		if (!(h_p0.pRaw == ((tyObject_struct_StatusBarLayer__ygeqc9bqm7H0IQjQjjaM78w*) NIM_NIL))) goto LA3_;
+		goto BeforeRet_;
+	}
+LA3_: ;
 	status_bar_layer_set_colors(h_p0.pRaw, background_p1, foreground_p2);
+	}BeforeRet_: ;
 }
 static N_INLINE(void, makeGColor8__OOZOOZOOZsrcZnebbleZffi_u3515)(NU8 argb_p0, tyObject_union_GColor8570426115__5r6qkn4jWQz1dbWRrH9aefw* Result) {
 	nimZeroMem((void*)Result, sizeof(tyObject_union_GColor8570426115__5r6qkn4jWQz1dbWRrH9aefw));
@@ -404,7 +410,7 @@ NIM_BOOL* nimErr_;
 	nimZeroMem((void*)(&T3_), sizeof(tyObject_union_GColor8570426115__5r6qkn4jWQz1dbWRrH9aefw));
 	makeGColor8__OOZOOZOOZsrcZnebbleZffi_u3515(((NU8)255), (&T3_));
 	if (NIM_UNLIKELY(*nimErr_)) goto BeforeRet_;
-	setColors__OOZOOZOOZsrcZnebbleZuiZstatus95bar_u131(sStatusBar__battery95status_u77, T2_, T3_);
+	setColors__OOZOOZOOZsrcZnebbleZuiZstatus95bar_u135(sStatusBar__battery95status_u77, T2_, T3_);
 	if (NIM_UNLIKELY(*nimErr_)) goto BeforeRet_;
 	T4_ = makeGRect__OOZOOZOOZsrcZnebbleZffi_u3487(((NI16)0), ((NI16)60), ((NI16)144), ((NI16)30));
 	if (NIM_UNLIKELY(*nimErr_)) goto BeforeRet_;

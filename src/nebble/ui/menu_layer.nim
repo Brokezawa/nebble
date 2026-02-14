@@ -26,7 +26,9 @@ proc newMenuLayer*(frame: GRect): MenuLayerHandle {.inline.} =
 # ============================================================================
 
 proc getLayer*(h: MenuLayerHandle): ptr Layer {.inline.} =
+  if h.pRaw == nil: return nil
   ffi.menu_layer_get_layer(h.toPtr)
 
 proc setClickConfigOntoWindow*(h: var MenuLayerHandle, window: ptr Window) {.inline.} =
+  if h.pRaw == nil or window == nil: return
   ffi.menu_layer_set_click_config_onto_window(h.pRaw, window)

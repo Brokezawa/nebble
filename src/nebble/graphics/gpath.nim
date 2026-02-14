@@ -64,20 +64,17 @@ proc newGPath*(points: openArray[GPoint]): GPathHandle {.inline.} =
 
 proc drawFilled*(h: GPathHandle, ctx: ptr GContext) {.inline.} =
   ## Draw the filled interior of the path.
-  when ManagedDebug or ManagedStrict:
-    h.checkValid()
+  if h.pRaw == nil: return
   gpath_draw_filled(ctx, h.toPtr)
 
 proc drawOutline*(h: GPathHandle, ctx: ptr GContext) {.inline.} =
   ## Draw the outline of the path (closed).
-  when ManagedDebug or ManagedStrict:
-    h.checkValid()
+  if h.pRaw == nil: return
   gpath_draw_outline(ctx, h.toPtr)
 
 proc drawOutlineOpen*(h: GPathHandle, ctx: ptr GContext) {.inline.} =
   ## Draw the outline of the path (open, doesn't close the path).
-  when ManagedDebug or ManagedStrict:
-    h.checkValid()
+  if h.pRaw == nil: return
   gpath_draw_outline_open(ctx, h.toPtr)
 
 # ============================================================================
@@ -89,17 +86,12 @@ proc rotateTo*(h: GPathHandle, angle: int32) {.inline.} =
   ##
   ## **Parameters:**
   ## - `angle`: Rotation angle in normalized units (0 to TRIG_MAX_ANGLE)
-  ##
-  ## **Example:**
-  ##   path.rotateTo(TRIG_MAX_ANGLE div 4)  # Rotate 90 degrees
-  when ManagedDebug or ManagedStrict:
-    h.checkValid()
+  if h.pRaw == nil: return
   gpath_rotate_to(h.toPtr, angle)
 
 proc moveTo*(h: GPathHandle, point: GPoint) {.inline.} =
   ## Move the origin of the path to a new position.
-  when ManagedDebug or ManagedStrict:
-    h.checkValid()
+  if h.pRaw == nil: return
   gpath_move_to(h.toPtr, point)
 
 # ============================================================================
@@ -111,8 +103,7 @@ proc draw*(h: GPathHandle, ctx: ptr GContext, filled: bool = true) {.inline.} =
   ##
   ## **Parameters:**
   ## - `filled`: If true, draws filled interior; if false, draws outline only
-  when ManagedDebug or ManagedStrict:
-    h.checkValid()
+  if h.pRaw == nil: return
   if filled:
     gpath_draw_filled(ctx, h.toPtr)
   else:
@@ -123,10 +114,6 @@ proc rotate*(h: GPathHandle, degrees: int32) {.inline.} =
   ##
   ## Converts degrees to Pebble's normalized angle units automatically.
   ## 360 degrees = TRIG_MAX_ANGLE (65536)
-  ##
-  ## **Example:**
-  ##   path.rotate(90)  # Rotate 90 degrees clockwise
-  when ManagedDebug or ManagedStrict:
-    h.checkValid()
+  if h.pRaw == nil: return
   let angle = (degrees.int64 * TRIG_MAX_ANGLE.int64 div 360).int32
   gpath_rotate_to(h.toPtr, angle)

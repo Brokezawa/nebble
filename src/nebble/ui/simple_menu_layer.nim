@@ -30,13 +30,17 @@ proc newSimpleMenuLayer*(frame: GRect, window: ptr Window,
 # ============================================================================
 
 proc getLayer*(h: SimpleMenuLayerHandle): ptr Layer {.inline.} =
+  if h.pRaw == nil: return nil
   ffi.simple_menu_layer_get_layer(h.toPtr)
 
 proc getLayer*(menuLayer: ptr SimpleMenuLayer): ptr Layer {.inline.} =
+  if menuLayer == nil: return nil
   ffi.simple_menu_layer_get_layer(menuLayer)
 
 proc selectedIndex*(h: SimpleMenuLayerHandle): int32 {.inline.} =
+  if h.pRaw == nil: return -1
   ffi.simple_menu_layer_get_selected_index(h.pRaw)
 
 proc `selectedIndex=`*(h: var SimpleMenuLayerHandle, index: int32) {.inline.} =
+  if h.pRaw == nil: return
   ffi.simple_menu_layer_set_selected_index(h.pRaw, index, true)

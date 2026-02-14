@@ -166,37 +166,40 @@ proc addChild*(parent: ptr Layer, child: var auto) {.inline.} =
     if parent != nil and child != nil:
       ffi.layer_add_child(parent, child)
 
-proc addChild*(parent: var LayerHandle, child: var auto) {.inline.} =
+proc addChild*(parent: auto, child: var auto) {.inline.} =
   ## Add child layer to parent. Parent takes ownership of child.
-  if not parent.isValid: return
-  addChild(parent.pRaw, child)
+  let pPtr = when parent is ptr Layer: parent
+             elif compiles(parent.getLayer()): parent.getLayer()
+             elif compiles(parent.pRaw): cast[ptr Layer](parent.pRaw)
+             else: cast[ptr Layer](nil)
+  if pPtr == nil: return
+  addChild(pPtr, child)
 
-proc removeFromParent*(child: var LayerHandle) {.inline.} =
+proc removeFromParent*(child: var auto) {.inline.} =
   ## Remove this layer from its parent.
   ## After removal, the layer becomes an orphan and must be destroyed explicitly.
-  if not child.isValid: return
+  let cPtr = when child is ptr Layer: child
+             elif compiles(child.getLayer()): child.getLayer()
+             elif compiles(child.pRaw): cast[ptr Layer](child.pRaw)
+             else: cast[ptr Layer](nil)
   
-  ffi.layer_remove_from_parent(child.pRaw)
-  child.pParent = nil
-  if child.ownership == hoParented:
-    child.ownership = hoOwned # Regains ownership
+  if cPtr == nil: return
+  
+  ffi.layer_remove_from_parent(cPtr)
+  
+  # Update ownership if it's a managed handle
+  when compiles(child.setParent):
+    child.setParent(nil)
 
-proc setParent*(child: var any, parentPtr: ptr Layer) {.inline.} =
-  ## Internal helper to set the parent pointer on a child handle.
-  when compiles(child.pParent):
-    if parentPtr != nil:
-      child.pParent = parentPtr
-      if child.ownership == hoOwned:
-        child.ownership = hoParented
-    else:
-      child.pParent = nil
-      if child.ownership == hoParented:
-        child.ownership = hoOwned
-
-proc removeChildLayers*(parent: var LayerHandle) {.inline.} =
+proc removeChildLayers*(parent: auto) {.inline.} =
   ## Remove all child layers from this parent.
-  if not parent.isValid: return
-  ffi.layer_remove_child_layers(parent.pRaw)
+  let pPtr = when parent is ptr Layer: parent
+             elif compiles(parent.getLayer()): parent.getLayer()
+             elif compiles(parent.pRaw): cast[ptr Layer](parent.pRaw)
+             else: cast[ptr Layer](nil)
+  if pPtr == nil: return
+  ffi.layer_remove_child_layers(pPtr)
+
 
 proc insertBelowSibling*(h: var auto, sibling: var auto) {.inline.} =
   ## Insert a layer below a sibling.

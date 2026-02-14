@@ -118,6 +118,7 @@ proc unschedule*(h: var AnimationHandle) {.inline.} =
   h.state = asCreated
 
 proc newAnimationHandle*(layer: ptr Layer, startFrame, endFrame: GRect, duration: uint32 = 250, curve: AnimationCurve = AnimationCurveEaseInOut): AnimationHandle {.inline.} =
+  if layer == nil: return AnimationHandle(raw: nil, state: asDestroyed)
   let prop = ffi.property_animation_create_layer_frame(layer, addr startFrame, addr endFrame)
   result.raw = cast[ptr Animation](prop)
   result.state = asCreated
@@ -125,7 +126,7 @@ proc newAnimationHandle*(layer: ptr Layer, startFrame, endFrame: GRect, duration
   result.curve = curve
 
 proc setLayerFrame*(h: var AnimationHandle, layer: ptr Layer, startFrame, endFrame: GRect) {.inline.} =
-  if h.raw == nil: return
+  if h.raw == nil or layer == nil: return
   let prop = ffi.property_animation_create_layer_frame(layer, addr startFrame, addr endFrame)
   # Replace current animation with property animation
   discard ffi.animation_destroy(h.raw)

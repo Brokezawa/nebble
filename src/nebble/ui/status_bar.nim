@@ -31,21 +31,21 @@ proc newStatusBarLayer*(): StatusBarLayerHandle {.inline.} =
 # ============================================================================
 
 proc getLayer*(h: StatusBarLayerHandle): ptr Layer {.inline.} =
-  when ManagedDebug or ManagedStrict: h.checkValid()
+  if h.pRaw == nil: return nil
   ffi.status_bar_layer_get_layer(h.toPtr)
 
 proc setColors*(h: StatusBarLayerHandle, background: GColor, foreground: GColor) {.inline.} =
-  when ManagedDebug or ManagedStrict: h.checkValid()
+  if h.pRaw == nil: return
   ffi.status_bar_layer_set_colors(h.pRaw, background, foreground)
 
 proc backgroundColor*(h: StatusBarLayerHandle): GColor {.inline.} =
-  when ManagedDebug or ManagedStrict: h.checkValid()
+  if h.pRaw == nil: return GColorClear
   ffi.status_bar_layer_get_background_color(h.pRaw)
 
 proc foregroundColor*(h: StatusBarLayerHandle): GColor {.inline.} =
-  when ManagedDebug or ManagedStrict: h.checkValid()
+  if h.pRaw == nil: return GColorClear
   ffi.status_bar_layer_get_foreground_color(h.pRaw)
 
 proc `separatorMode=`*(h: StatusBarLayerHandle, mode: StatusBarLayerSeparatorMode) {.inline.} =
-  when ManagedDebug or ManagedStrict: h.checkValid()
+  if h.pRaw == nil: return
   ffi.status_bar_layer_set_separator_mode(h.pRaw, mode)

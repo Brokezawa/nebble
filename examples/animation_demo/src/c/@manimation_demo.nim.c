@@ -117,7 +117,7 @@ N_LIB_PRIVATE N_CDECL(void, windowLoad__animation95demo_u109)(tyObject_struct_Wi
 N_LIB_PRIVATE N_NIMCALL(void, eqsink___OOZOOZOOZsrcZnebbleZuiZtext95layer_u55)(tyObject_TextLayerHandle__t9bAY9a7d2BLJR3FU4TDoSGA* destX60gensym0__p0, tyObject_TextLayerHandle__t9bAY9a7d2BLJR3FU4TDoSGA srcX60gensym0__p1);
 N_LIB_PRIVATE N_NIMCALL(tyObject_TextLayerHandle__t9bAY9a7d2BLJR3FU4TDoSGA, newTextLayer__OOZOOZOOZsrcZnebbleZuiZtext95layer_u127)(tyObject_struct_GRect570426129__ba9bjUwtvD4v9a2AKX0gWCcg frame_p0);
 static N_INLINE(tyObject_struct_GRect570426129__ba9bjUwtvD4v9a2AKX0gWCcg, makeGRect__OOZOOZOOZsrcZnebbleZffi_u3487)(NI16 x_p0, NI16 y_p1, NI16 w_p2, NI16 h_p3);
-static N_INLINE(tyObject_struct_GRect570426129__ba9bjUwtvD4v9a2AKX0gWCcg, bounds__OOZOOZOOZsrcZnebbleZuiZlayer_u232)(tyObject_struct_Layer__KCpfpF2jwj5coKARWsuAMQ* p_p0);
+static N_INLINE(tyObject_struct_GRect570426129__ba9bjUwtvD4v9a2AKX0gWCcg, bounds__OOZOOZOOZsrcZnebbleZuiZlayer_u230)(tyObject_struct_Layer__KCpfpF2jwj5coKARWsuAMQ* p_p0);
 N_CDECL(tyObject_struct_GRect570426129__ba9bjUwtvD4v9a2AKX0gWCcg, layer_get_bounds)(tyObject_struct_Layer__KCpfpF2jwj5coKARWsuAMQ* layer_p0);
 static N_INLINE(tyObject_struct_Layer__KCpfpF2jwj5coKARWsuAMQ*, rootLayer__OOZOOZOOZsrcZnebbleZuiZwindow_u242)(tyObject_struct_Window__x0oI0MSh79clnNFs7R9bwHcA* win_p0);
 N_CDECL(tyObject_struct_Layer__KCpfpF2jwj5coKARWsuAMQ*, window_get_root_layer)(tyObject_struct_Window__x0oI0MSh79clnNFs7R9bwHcA* window_p0);
@@ -144,7 +144,7 @@ N_CDECL(void, window_single_click_subscribe)(tyEnum_enum_ButtonId570425848__Rzy1
 N_LIB_PRIVATE N_CDECL(void, selectClickHandler__animation95demo_u17)(void* r_p0, void* c_p1);
 N_CDECL(void, app_log)(NU8 log_level_p0, NCSTRING src_filename_p1, int src_line_number_p2, NCSTRING fmt_p3, ...);
 N_LIB_PRIVATE N_NIMCALL(void, startPulseAnimation__animation95demo_u12)(void);
-static N_INLINE(tyObject_struct_GRect570426129__ba9bjUwtvD4v9a2AKX0gWCcg, frame__OOZOOZOOZsrcZnebbleZuiZlayer_u211)(tyObject_struct_Layer__KCpfpF2jwj5coKARWsuAMQ* p_p0);
+static N_INLINE(tyObject_struct_GRect570426129__ba9bjUwtvD4v9a2AKX0gWCcg, frame__OOZOOZOOZsrcZnebbleZuiZlayer_u209)(tyObject_struct_Layer__KCpfpF2jwj5coKARWsuAMQ* p_p0);
 N_CDECL(tyObject_struct_GRect570426129__ba9bjUwtvD4v9a2AKX0gWCcg, layer_get_frame)(tyObject_struct_Layer__KCpfpF2jwj5coKARWsuAMQ* layer_p0);
 N_LIB_PRIVATE N_NIMCALL(void, eqsink___OOZOOZOOZsrcZnebbleZuiZanimation_u54)(tyObject_AnimationHandle__IxP1NBoRqBwj4HtS0T0Abw* dest_p0, tyObject_AnimationHandle__IxP1NBoRqBwj4HtS0T0Abw src_p1);
 static N_INLINE(tyObject_AnimationHandle__IxP1NBoRqBwj4HtS0T0Abw, newAnimationHandle__OOZOOZOOZsrcZnebbleZuiZanimation_u121)(void);
@@ -157,9 +157,9 @@ static N_INLINE(void, curveeq___OOZOOZOOZsrcZnebbleZuiZanimation_u144)(tyObject_
 N_CDECL(NIM_BOOL, animation_set_curve)(tyObject_struct_Animation__GeFIafrrNFcU9buDmxGFXZA* animation_p0, tyEnum_enum_AnimationCurve570426249__Jh7YAes8V4Mf5be2jnnp4Q curve_p1);
 static N_INLINE(void, playCounteq___OOZOOZOOZsrcZnebbleZuiZanimation_u158)(tyObject_AnimationHandle__IxP1NBoRqBwj4HtS0T0Abw* h_p0, NU32 count_p1);
 N_CDECL(NIM_BOOL, animation_set_play_count)(tyObject_struct_Animation__GeFIafrrNFcU9buDmxGFXZA* animation_p0, NU32 play_count_p1);
-static N_INLINE(void, shouldAutoReverseeq___OOZOOZOOZsrcZnebbleZuiZanimation_u434)(tyObject_AnimationHandle__IxP1NBoRqBwj4HtS0T0Abw* h_p0, NIM_BOOL reverse_p1);
+static N_INLINE(void, shouldAutoReverseeq___OOZOOZOOZsrcZnebbleZuiZanimation_u442)(tyObject_AnimationHandle__IxP1NBoRqBwj4HtS0T0Abw* h_p0, NIM_BOOL reverse_p1);
 N_CDECL(NIM_BOOL, animation_set_reverse)(tyObject_struct_Animation__GeFIafrrNFcU9buDmxGFXZA* animation_p0, NIM_BOOL reverse_p1);
-static N_INLINE(void, setLayerFrame__OOZOOZOOZsrcZnebbleZuiZanimation_u226)(tyObject_AnimationHandle__IxP1NBoRqBwj4HtS0T0Abw* h_p0, tyObject_struct_Layer__KCpfpF2jwj5coKARWsuAMQ* layer_p1, tyObject_struct_GRect570426129__ba9bjUwtvD4v9a2AKX0gWCcg startFrame_p2, tyObject_struct_GRect570426129__ba9bjUwtvD4v9a2AKX0gWCcg endFrame_p3);
+static N_INLINE(void, setLayerFrame__OOZOOZOOZsrcZnebbleZuiZanimation_u230)(tyObject_AnimationHandle__IxP1NBoRqBwj4HtS0T0Abw* h_p0, tyObject_struct_Layer__KCpfpF2jwj5coKARWsuAMQ* layer_p1, tyObject_struct_GRect570426129__ba9bjUwtvD4v9a2AKX0gWCcg startFrame_p2, tyObject_struct_GRect570426129__ba9bjUwtvD4v9a2AKX0gWCcg endFrame_p3);
 N_CDECL(tyObject_struct_PropertyAnimation__5f9cslO7HNzgZxhYW9a4UHdw*, property_animation_create_layer_frame)(tyObject_struct_Layer__KCpfpF2jwj5coKARWsuAMQ* layer_p0, tyObject_struct_GRect570426129__ba9bjUwtvD4v9a2AKX0gWCcg* from_frame_p1, tyObject_struct_GRect570426129__ba9bjUwtvD4v9a2AKX0gWCcg* to_frame_p2);
 N_CDECL(NIM_BOOL, animation_destroy)(tyObject_struct_Animation__GeFIafrrNFcU9buDmxGFXZA* animation_p0);
 static N_INLINE(void, schedule__OOZOOZOOZsrcZnebbleZuiZanimation_u206)(tyObject_AnimationHandle__IxP1NBoRqBwj4HtS0T0Abw* h_p0);
@@ -266,7 +266,7 @@ static N_INLINE(tyObject_struct_GRect570426129__ba9bjUwtvD4v9a2AKX0gWCcg, makeGR
 	result.size.h = h_p3;
 	return result;
 }
-static N_INLINE(tyObject_struct_GRect570426129__ba9bjUwtvD4v9a2AKX0gWCcg, bounds__OOZOOZOOZsrcZnebbleZuiZlayer_u232)(tyObject_struct_Layer__KCpfpF2jwj5coKARWsuAMQ* p_p0) {
+static N_INLINE(tyObject_struct_GRect570426129__ba9bjUwtvD4v9a2AKX0gWCcg, bounds__OOZOOZOOZsrcZnebbleZuiZlayer_u230)(tyObject_struct_Layer__KCpfpF2jwj5coKARWsuAMQ* p_p0) {
 	tyObject_struct_GRect570426129__ba9bjUwtvD4v9a2AKX0gWCcg result;
 {	nimZeroMem((void*)(&result), sizeof(tyObject_struct_GRect570426129__ba9bjUwtvD4v9a2AKX0gWCcg));
 	{
@@ -367,7 +367,7 @@ LA3_: ;
 static N_INLINE(void, onClick__OOZOOZOOZsrcZnebbleZuiZclicks_u2)(tyEnum_enum_ButtonId570425848__Rzy1M9a2qUvvKVCZfJa2Ciw buttonId_p0, tyProc__LCJy9bQFEE8ObaRc29a4n3LA handler_p1) {
 	window_single_click_subscribe(buttonId_p0, handler_p1);
 }
-static N_INLINE(tyObject_struct_GRect570426129__ba9bjUwtvD4v9a2AKX0gWCcg, frame__OOZOOZOOZsrcZnebbleZuiZlayer_u211)(tyObject_struct_Layer__KCpfpF2jwj5coKARWsuAMQ* p_p0) {
+static N_INLINE(tyObject_struct_GRect570426129__ba9bjUwtvD4v9a2AKX0gWCcg, frame__OOZOOZOOZsrcZnebbleZuiZlayer_u209)(tyObject_struct_Layer__KCpfpF2jwj5coKARWsuAMQ* p_p0) {
 	tyObject_struct_GRect570426129__ba9bjUwtvD4v9a2AKX0gWCcg result;
 {	nimZeroMem((void*)(&result), sizeof(tyObject_struct_GRect570426129__ba9bjUwtvD4v9a2AKX0gWCcg));
 	{
@@ -438,7 +438,7 @@ LA3_: ;
 	(void)(T5_);
 	}BeforeRet_: ;
 }
-static N_INLINE(void, shouldAutoReverseeq___OOZOOZOOZsrcZnebbleZuiZanimation_u434)(tyObject_AnimationHandle__IxP1NBoRqBwj4HtS0T0Abw* h_p0, NIM_BOOL reverse_p1) {
+static N_INLINE(void, shouldAutoReverseeq___OOZOOZOOZsrcZnebbleZuiZanimation_u442)(tyObject_AnimationHandle__IxP1NBoRqBwj4HtS0T0Abw* h_p0, NIM_BOOL reverse_p1) {
 	NIM_BOOL T5_;
 {	{
 		if (!((*h_p0).raw == ((tyObject_struct_Animation__GeFIafrrNFcU9buDmxGFXZA*) NIM_NIL))) goto LA3_;
@@ -450,18 +450,24 @@ LA3_: ;
 	(void)(T5_);
 	}BeforeRet_: ;
 }
-static N_INLINE(void, setLayerFrame__OOZOOZOOZsrcZnebbleZuiZanimation_u226)(tyObject_AnimationHandle__IxP1NBoRqBwj4HtS0T0Abw* h_p0, tyObject_struct_Layer__KCpfpF2jwj5coKARWsuAMQ* layer_p1, tyObject_struct_GRect570426129__ba9bjUwtvD4v9a2AKX0gWCcg startFrame_p2, tyObject_struct_GRect570426129__ba9bjUwtvD4v9a2AKX0gWCcg endFrame_p3) {
+static N_INLINE(void, setLayerFrame__OOZOOZOOZsrcZnebbleZuiZanimation_u230)(tyObject_AnimationHandle__IxP1NBoRqBwj4HtS0T0Abw* h_p0, tyObject_struct_Layer__KCpfpF2jwj5coKARWsuAMQ* layer_p1, tyObject_struct_GRect570426129__ba9bjUwtvD4v9a2AKX0gWCcg startFrame_p2, tyObject_struct_GRect570426129__ba9bjUwtvD4v9a2AKX0gWCcg endFrame_p3) {
 	tyObject_struct_PropertyAnimation__5f9cslO7HNzgZxhYW9a4UHdw* prop_1;
-	NIM_BOOL T5_;
+	NIM_BOOL T7_;
 {	{
-		if (!((*h_p0).raw == ((tyObject_struct_Animation__GeFIafrrNFcU9buDmxGFXZA*) NIM_NIL))) goto LA3_;
+		NIM_BOOL T3_;
+		T3_ = (NIM_BOOL)0;
+		T3_ = ((*h_p0).raw == ((tyObject_struct_Animation__GeFIafrrNFcU9buDmxGFXZA*) NIM_NIL));
+		if (T3_) goto LA4_;
+		T3_ = (layer_p1 == ((tyObject_struct_Layer__KCpfpF2jwj5coKARWsuAMQ*) NIM_NIL));
+LA4_: ;
+		if (!T3_) goto LA5_;
 		goto BeforeRet_;
 	}
-LA3_: ;
+LA5_: ;
 	prop_1 = property_animation_create_layer_frame(layer_p1, (&startFrame_p2), (&endFrame_p3));
-	T5_ = (NIM_BOOL)0;
-	T5_ = animation_destroy((*h_p0).raw);
-	(void)(T5_);
+	T7_ = (NIM_BOOL)0;
+	T7_ = animation_destroy((*h_p0).raw);
+	(void)(T7_);
 	(*h_p0).raw = ((tyObject_struct_Animation__GeFIafrrNFcU9buDmxGFXZA*) (prop_1));
 	(*h_p0).state = ((tyEnum_AnimationState__I67DgB9c2xhR6k3WjH49b5TA)0);
 	}BeforeRet_: ;
@@ -491,7 +497,7 @@ NIM_BOOL* nimErr_;
 	T1_ = (tyObject_struct_Layer__KCpfpF2jwj5coKARWsuAMQ*)0;
 	T1_ = toLayer__OOZOOZOOZsrcZnebbleZuiZtext95layer_u78(boxLayer__animation95demo_u108);
 	if (NIM_UNLIKELY(*nimErr_)) goto BeforeRet_;
-	b_1 = frame__OOZOOZOOZsrcZnebbleZuiZlayer_u211(T1_);
+	b_1 = frame__OOZOOZOOZsrcZnebbleZuiZlayer_u209(T1_);
 	if (NIM_UNLIKELY(*nimErr_)) goto BeforeRet_;
 	startRect_1 = b_1;
 	endRect_1 = makeGRect__OOZOOZOOZsrcZnebbleZffi_u3487((NI16)(b_1.origin.x - ((NI16)5)), (NI16)(b_1.origin.y - ((NI16)5)), (NI16)(b_1.size.w + ((NI16)10)), (NI16)(b_1.size.h + ((NI16)10)));
@@ -506,12 +512,12 @@ NIM_BOOL* nimErr_;
 	if (NIM_UNLIKELY(*nimErr_)) goto BeforeRet_;
 	playCounteq___OOZOOZOOZsrcZnebbleZuiZanimation_u158((&pulseAnim__animation95demo_u15), ((NU32)3));
 	if (NIM_UNLIKELY(*nimErr_)) goto BeforeRet_;
-	shouldAutoReverseeq___OOZOOZOOZsrcZnebbleZuiZanimation_u434((&pulseAnim__animation95demo_u15), NIM_TRUE);
+	shouldAutoReverseeq___OOZOOZOOZsrcZnebbleZuiZanimation_u442((&pulseAnim__animation95demo_u15), NIM_TRUE);
 	if (NIM_UNLIKELY(*nimErr_)) goto BeforeRet_;
 	T3_ = (tyObject_struct_Layer__KCpfpF2jwj5coKARWsuAMQ*)0;
 	T3_ = toLayer__OOZOOZOOZsrcZnebbleZuiZtext95layer_u78(boxLayer__animation95demo_u108);
 	if (NIM_UNLIKELY(*nimErr_)) goto BeforeRet_;
-	setLayerFrame__OOZOOZOOZsrcZnebbleZuiZanimation_u226((&pulseAnim__animation95demo_u15), T3_, startRect_1, endRect_1);
+	setLayerFrame__OOZOOZOOZsrcZnebbleZuiZanimation_u230((&pulseAnim__animation95demo_u15), T3_, startRect_1, endRect_1);
 	if (NIM_UNLIKELY(*nimErr_)) goto BeforeRet_;
 	schedule__OOZOOZOOZsrcZnebbleZuiZanimation_u206((&pulseAnim__animation95demo_u15));
 	if (NIM_UNLIKELY(*nimErr_)) goto BeforeRet_;
@@ -531,6 +537,14 @@ static N_INLINE(tyObject_AnimationHandle__IxP1NBoRqBwj4HtS0T0Abw, newAnimationHa
 NIM_BOOL* nimErr_;
 {nimErr_ = nimErrorFlag();
 	nimZeroMem((void*)(&result), sizeof(tyObject_AnimationHandle__IxP1NBoRqBwj4HtS0T0Abw));
+	{
+		if (!(layer_p0 == ((tyObject_struct_Layer__KCpfpF2jwj5coKARWsuAMQ*) NIM_NIL))) goto LA3_;
+		nimZeroMem((void*)(&result), sizeof(tyObject_AnimationHandle__IxP1NBoRqBwj4HtS0T0Abw));
+		result.raw = ((tyObject_struct_Animation__GeFIafrrNFcU9buDmxGFXZA*) NIM_NIL);
+		result.state = ((tyEnum_AnimationState__I67DgB9c2xhR6k3WjH49b5TA)4);
+		goto BeforeRet_;
+	}
+LA3_: ;
 	prop_1 = property_animation_create_layer_frame(layer_p0, (&startFrame_p1), (&endFrame_p2));
 	result.raw = ((tyObject_struct_Animation__GeFIafrrNFcU9buDmxGFXZA*) (prop_1));
 	result.state = ((tyEnum_AnimationState__I67DgB9c2xhR6k3WjH49b5TA)0);
@@ -623,7 +637,7 @@ NIM_BOOL* nimErr_;
 	if (NIM_UNLIKELY(*nimErr_)) goto BeforeRet_;
 	T4_ = makeGRect__OOZOOZOOZsrcZnebbleZffi_u3487(((NI16)0), (NI16)(h_1 - ((NI16)40)), w_1, ((NI16)40));
 	if (NIM_UNLIKELY(*nimErr_)) goto BeforeRet_;
-	setLayerFrame__OOZOOZOOZsrcZnebbleZuiZanimation_u226((&anim1__animation95demo_u16), T2_, T3_, T4_);
+	setLayerFrame__OOZOOZOOZsrcZnebbleZuiZanimation_u230((&anim1__animation95demo_u16), T2_, T3_, T4_);
 	if (NIM_UNLIKELY(*nimErr_)) goto BeforeRet_;
 	schedule__OOZOOZOOZsrcZnebbleZuiZanimation_u206((&anim1__animation95demo_u16));
 	if (NIM_UNLIKELY(*nimErr_)) goto BeforeRet_;
@@ -671,7 +685,7 @@ NIM_BOOL* nimErr_;
 		T6_ = (tyObject_struct_Layer__KCpfpF2jwj5coKARWsuAMQ*)0;
 		T6_ = rootLayer__OOZOOZOOZsrcZnebbleZuiZwindow_u242(win_p0);
 		if (NIM_UNLIKELY(*nimErr_)) goto BeforeRet_;
-		T7_ = bounds__OOZOOZOOZsrcZnebbleZuiZlayer_u232(T6_);
+		T7_ = bounds__OOZOOZOOZsrcZnebbleZuiZlayer_u230(T6_);
 		if (NIM_UNLIKELY(*nimErr_)) goto BeforeRet_;
 		colontmpD_ = T7_.size.w;
 		T1_ = colontmpD_;
@@ -684,7 +698,7 @@ LA4_: ;
 		T9_ = (tyObject_struct_Layer__KCpfpF2jwj5coKARWsuAMQ*)0;
 		T9_ = rootLayer__OOZOOZOOZsrcZnebbleZuiZwindow_u242(win_p0);
 		if (NIM_UNLIKELY(*nimErr_)) goto BeforeRet_;
-		T10_ = bounds__OOZOOZOOZsrcZnebbleZuiZlayer_u232(T9_);
+		T10_ = bounds__OOZOOZOOZsrcZnebbleZuiZlayer_u230(T9_);
 		if (NIM_UNLIKELY(*nimErr_)) goto BeforeRet_;
 		colontmpD__2 = T10_.size.w;
 		T1_ = colontmpD__2;
