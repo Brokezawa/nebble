@@ -12,9 +12,9 @@ htmldocs/
 *.obj
 
 # Pebble SDK
-build/
-appinfo.json
-src/c/
+**/build/
+**/appinfo.json
+**/src/c/
 .lock-waf*
 .pebble-sdk/
 
