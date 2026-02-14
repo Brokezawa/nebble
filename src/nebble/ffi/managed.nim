@@ -48,6 +48,18 @@ else:
   const ManagedStrict* = false
 
 # ============================================================================
+# Handle Ownership Model
+# ============================================================================
+
+type
+  HandleOwnership* = enum
+    ## Defines the ownership level of a managed handle.
+    hoNone      ## Not initialized or has been moved
+    hoOwned     ## Handle owns the resource; will call C destroy
+    hoUnowned   ## Transient wrapper around a raw pointer; will NOT call C destroy
+    hoParented  ## Resource is owned by a parent (e.g. Layer); will NOT call C destroy
+
+# ============================================================================
 # Core Template: DefineUniqueHandle
 # ============================================================================
 
@@ -58,16 +70,19 @@ template DefineUniqueHandle*(Name: untyped, RawType: typedesc,
   type `Name Handle`* = object
     ## Unique ownership handle for `RawType`.
     pRaw: ptr RawType
+    ownership: HandleOwnership
     pParent: ptr Layer # Optional parent tracking for layers
 
   proc `=destroy`*(h: var `Name Handle`) =
-    if h.pRaw != nil and h.pParent == nil:
+    if h.pRaw != nil and h.ownership == hoOwned:
       destroyProc(h.pRaw)
     h.pRaw = nil
+    h.ownership = hoNone
     h.pParent = nil
 
   proc `=wasMoved`*(h: var `Name Handle`) =
     h.pRaw = nil
+    h.ownership = hoNone
     h.pParent = nil
 
   proc `=copy`*(dest: var `Name Handle`, src: `Name Handle`) {.error.} = discard
@@ -75,9 +90,11 @@ template DefineUniqueHandle*(Name: untyped, RawType: typedesc,
   proc `=sink`*(dest: var `Name Handle`, src: `Name Handle`) =
     `=destroy`(dest)
     dest.pRaw = src.pRaw
+    dest.ownership = src.ownership
     dest.pParent = src.pParent
     var srcPtr = cast[ptr `Name Handle`](unsafeAddr src)
     srcPtr.pRaw = nil
+    srcPtr.ownership = hoNone
     srcPtr.pParent = nil
 
   converter toPtr*(h: `Name Handle`): ptr RawType = h.pRaw
@@ -87,17 +104,23 @@ template DefineUniqueHandle*(Name: untyped, RawType: typedesc,
 
   proc toHandle*(p: ptr RawType): `Name Handle` {.inline.} =
     ## Wrap raw pointer in handle (unowned).
-    `Name Handle`(pRaw: p, pParent: cast[ptr Layer](1))
+    `Name Handle`(pRaw: p, ownership: hoUnowned, pParent: nil)
 
   proc wrapOwned*(p: ptr RawType): `Name Handle` {.inline.} =
     ## Wrap raw pointer in handle (owned).
-    `Name Handle`(pRaw: p, pParent: nil)
+    `Name Handle`(pRaw: p, ownership: hoOwned, pParent: nil)
 
   proc isValid*(h: `Name Handle`): bool {.inline.} = h.pRaw != nil
   proc isNil*(h: `Name Handle`): bool {.inline.} = h.pRaw == nil
 
   proc setParent*(h: var `Name Handle`, p: ptr Layer) {.inline.} =
     h.pParent = p
+    if p != nil:
+      h.ownership = hoParented
+    else:
+      # If parent is cleared, we assume it's now owned by the handle again?
+      # Usually Pebble doesn't work this way (removeFromParent means you own it again)
+      h.ownership = hoOwned
 
   proc reset*(h: var `Name Handle`) =
     `=destroy`(h)

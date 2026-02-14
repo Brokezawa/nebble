@@ -82,8 +82,7 @@ proc getLayer*(h: RotBitmapLayerHandle): ptr Layer {.inline.} =
   ##
   ## **Example:**
   ##   win.rootLayer.addChild(handLayer.getLayer())
-  when ManagedDebug or ManagedStrict:
-    h.checkValid()
+  if h.pRaw == nil: return nil
   cast[ptr Layer](h.toPtr)
 
 # ============================================================================
@@ -93,29 +92,25 @@ proc getLayer*(h: RotBitmapLayerHandle): ptr Layer {.inline.} =
 proc `angle=`*(h: var RotBitmapLayerHandle, angle: int32) {.inline.} =
   ## Set rotation angle in Pebble angle units (0 to TRIG_MAX_ANGLE).
   ## 0 = upright, increases clockwise.
-  when ManagedDebug or ManagedStrict:
-    h.checkValid()
+  if h.pRaw == nil: return
   rot_bitmap_layer_set_angle(h.toPtr, angle)
 
 proc incrementAngle*(h: var RotBitmapLayerHandle, delta: int32) {.inline.} =
   ## Increment (or decrement) rotation angle.
   ## Positive values rotate clockwise, negative counter-clockwise.
-  when ManagedDebug or ManagedStrict:
-    h.checkValid()
+  if h.pRaw == nil: return
   rot_bitmap_layer_increment_angle(h.toPtr, delta)
 
 proc `angleDeg=`*(h: var RotBitmapLayerHandle, degrees: float32) {.inline.} =
   ## Set rotation angle in degrees (0-360).
   ## Convenience wrapper that converts to Pebble angle units.
-  when ManagedDebug or ManagedStrict:
-    h.checkValid()
+  if h.pRaw == nil: return
   let angle = int32(degrees * TRIG_MAX_ANGLE.float32 / 360.0'f32)
   rot_bitmap_layer_set_angle(h.toPtr, angle)
 
 proc incrementAngleDeg*(h: var RotBitmapLayerHandle, degrees: float32) {.inline.} =
   ## Increment rotation angle by degrees.
-  when ManagedDebug or ManagedStrict:
-    h.checkValid()
+  if h.pRaw == nil: return
   let angle = int32(degrees * TRIG_MAX_ANGLE.float32 / 360.0'f32)
   rot_bitmap_layer_increment_angle(h.toPtr, angle)
 
@@ -126,8 +121,7 @@ proc incrementAngleDeg*(h: var RotBitmapLayerHandle, degrees: float32) {.inline.
 proc `pivot=`*(h: var RotBitmapLayerHandle, point: GPoint) {.inline.} =
   ## Set the pivot point (center of rotation) in source bitmap coordinates.
   ## Default is center of bitmap. This point stays fixed during rotation.
-  when ManagedDebug or ManagedStrict:
-    h.checkValid()
+  if h.pRaw == nil: return
   rot_bitmap_set_src_ic(h.toPtr, point)
 
 proc setAnchor*(h: var RotBitmapLayerHandle, bitmap: ptr GBitmap, anchor: RotationAnchor) {.inline.} =
@@ -140,8 +134,7 @@ proc setAnchor*(h: var RotBitmapLayerHandle, bitmap: ptr GBitmap, anchor: Rotati
   ## **Example:**
   ##   # For a watch hand, anchor at bottom center
   ##   handLayer.setAnchor(bitmap, raBottom)
-  when ManagedDebug or ManagedStrict:
-    h.checkValid()
+  if h.pRaw == nil or bitmap == nil: return
   let bounds = gbitmap_get_bounds(bitmap)
   let w = bounds.size.w.int16
   let height = bounds.size.h.int16
@@ -165,12 +158,10 @@ proc setAnchor*(h: var RotBitmapLayerHandle, bitmap: ptr GBitmap, anchor: Rotati
 
 proc `cornerClipColor=`*(h: var RotBitmapLayerHandle, color: GColor) {.inline.} =
   ## Set the color used to fill corners when rotated bitmap doesn't fill layer.
-  when ManagedDebug or ManagedStrict:
-    h.checkValid()
+  if h.pRaw == nil: return
   rot_bitmap_layer_set_corner_clip_color(h.toPtr, color)
 
 proc `compositingMode=`*(h: var RotBitmapLayerHandle, mode: GCompOp) {.inline.} =
   ## Set the compositing mode for blending the rotated bitmap.
-  when ManagedDebug or ManagedStrict:
-    h.checkValid()
+  if h.pRaw == nil: return
   rot_bitmap_set_compositing_mode(h.toPtr, mode)

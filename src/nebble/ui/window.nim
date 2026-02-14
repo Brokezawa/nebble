@@ -237,36 +237,32 @@ proc removeFromStack*(h: var WindowHandle, animated: bool = true): bool {.inline
 # ============================================================================
 
 proc rootLayer*(win: ptr Window): ptr Layer {.inline.} =
+  if win == nil: return nil
   ffi.window_get_root_layer(win)
 
 proc rootLayer*(h: WindowHandle): ptr Layer {.inline.} =
   ## Get the root layer of the window.
-  when ManagedDebug or ManagedStrict:
-    h.checkValid()
+  if h.raw == nil: return nil
   ffi.window_get_root_layer(h.raw)
 
 proc isLoaded*(h: WindowHandle): bool {.inline.} =
   ## Check if window has been loaded.
-  when ManagedDebug or ManagedStrict:
-    h.checkValid()
+  if h.raw == nil: return false
   window_is_loaded(h.raw)
 
 proc `backgroundColor=`*(h: var WindowHandle, color: GColor8) {.inline.} =
   ## Set window background color.
-  when ManagedDebug or ManagedStrict:
-    h.checkValid()
+  if h.raw == nil: return
   window_set_background_color(h.raw, color)
 
 proc `userData=`*(h: var WindowHandle, data: pointer) {.inline.} =
   ## Set user data pointer.
-  when ManagedDebug or ManagedStrict:
-    h.checkValid()
+  if h.raw == nil: return
   window_set_user_data(h.raw, data)
 
 proc userData*(h: WindowHandle): pointer {.inline.} =
   ## Get user data pointer.
-  when ManagedDebug or ManagedStrict:
-    h.checkValid()
+  if h.raw == nil: return nil
   window_get_user_data(h.raw)
 
 # ============================================================================
@@ -275,8 +271,7 @@ proc userData*(h: WindowHandle): pointer {.inline.} =
 
 proc `handlers=`*(h: var WindowHandle, hnd: WindowHandlers) {.inline.} =
   ## Set window lifecycle handlers.
-  when ManagedDebug or ManagedStrict:
-    h.checkValid()
+  if h.raw == nil: return
   window_set_window_handlers(h.raw, hnd)
 
 proc setHandlers*(h: var WindowHandle,
@@ -285,8 +280,7 @@ proc setHandlers*(h: var WindowHandle,
                   appear: WindowHandler = nil,
                   disappear: WindowHandler = nil) {.inline.} =
   ## Set window lifecycle handlers using named parameters.
-  when ManagedDebug or ManagedStrict:
-    h.checkValid()
+  if h.raw == nil: return
   var handlers: WindowHandlers
   if load != nil: handlers.load = load
   if unload != nil: handlers.unload = unload
@@ -300,24 +294,22 @@ proc setHandlers*(h: var WindowHandle,
 
 proc `clickConfig=`*(win: ptr Window, provider: ClickConfigProvider) {.inline.} =
   ## Set click configuration provider (raw pointer version).
+  if win == nil: return
   ffi.window_set_click_config_provider(win, provider)
 
 proc `clickConfig=`*(h: var WindowHandle, provider: ClickConfigProvider) {.inline.} =
   ## Set click configuration provider.
-  when ManagedDebug or ManagedStrict:
-    h.checkValid()
+  if h.raw == nil: return
   window_set_click_config_provider(h.raw, provider)
 
 proc setClickConfigWithContext*(h: var WindowHandle,
                                 provider: ClickConfigProvider,
                                 context: pointer) {.inline.} =
   ## Set the click configuration provider with a context pointer.
-  when ManagedDebug or ManagedStrict:
-    h.checkValid()
+  if h.raw == nil: return
   window_set_click_config_provider_with_context(h.raw, provider, context)
 
 proc clickContext*(h: WindowHandle): pointer {.inline.} =
   ## Get click configuration context.
-  when ManagedDebug or ManagedStrict:
-    h.checkValid()
+  if h.raw == nil: return nil
   window_get_click_config_context(h.raw)

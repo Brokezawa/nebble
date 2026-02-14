@@ -60,35 +60,46 @@ proc toHandle*(p: ptr Animation): AnimationHandle =
 
 proc raw*(h: AnimationHandle): ptr Animation {.inline.} = h.raw
 
+proc wrapOwned*(p: ptr Animation): AnimationHandle {.inline.} =
+  AnimationHandle(raw: p, state: asCreated)
+
 proc newAnimationHandle*(): AnimationHandle {.inline.} =
-  result.raw = ffi.animation_create()
-  result.state = asCreated
+  wrapOwned(ffi.animation_create())
 
 proc setDuration*(h: var AnimationHandle, duration: uint32) {.inline.} =
+  if h.raw == nil: return
   discard ffi.animation_set_duration(h.raw, duration)
 
 proc `duration=`*(h: var AnimationHandle, duration: uint32) {.inline.} =
+  if h.raw == nil: return
   discard ffi.animation_set_duration(h.raw, duration)
 
 proc setCurve*(h: var AnimationHandle, curve: AnimationCurve) {.inline.} =
+  if h.raw == nil: return
   discard ffi.animation_set_curve(h.raw, curve)
 
 proc `curve=`*(h: var AnimationHandle, curve: AnimationCurve) {.inline.} =
+  if h.raw == nil: return
   discard ffi.animation_set_curve(h.raw, curve)
 
 proc setPlayCount*(h: var AnimationHandle, count: uint32) {.inline.} =
+  if h.raw == nil: return
   discard ffi.animation_set_play_count(h.raw, count)
 
 proc `playCount=`*(h: var AnimationHandle, count: uint32) {.inline.} =
+  if h.raw == nil: return
   discard ffi.animation_set_play_count(h.raw, count)
 
 proc setDelay*(h: var AnimationHandle, delay: uint32) {.inline.} =
+  if h.raw == nil: return
   discard ffi.animation_set_delay(h.raw, delay)
 
 proc `delay=`*(h: var AnimationHandle, delay: uint32) {.inline.} =
+  if h.raw == nil: return
   discard ffi.animation_set_delay(h.raw, delay)
 
 proc setHandlers*(h: var AnimationHandle, onStarted: AnimationStartedHandler = nil, onStopped: AnimationStoppedHandler = nil, context: pointer = nil) {.inline.} =
+  if h.raw == nil: return
   h.onStarted = onStarted
   h.onStopped = onStopped
   var handlers: AnimationHandlers
@@ -97,34 +108,39 @@ proc setHandlers*(h: var AnimationHandle, onStarted: AnimationStartedHandler = n
   discard ffi.animation_set_handlers(h.raw, handlers, context)
 
 proc schedule*(h: var AnimationHandle) {.inline.} =
+  if h.raw == nil: return
   discard ffi.animation_schedule(h.raw)
   h.state = asScheduled
 
 proc unschedule*(h: var AnimationHandle) {.inline.} =
+  if h.raw == nil: return
   discard ffi.animation_unschedule(h.raw)
   h.state = asCreated
 
 proc newAnimationHandle*(layer: ptr Layer, startFrame, endFrame: GRect, duration: uint32 = 250, curve: AnimationCurve = AnimationCurveEaseInOut): AnimationHandle {.inline.} =
-  result = newAnimationHandle()
-  result.duration = duration
-  result.curve = curve
   let prop = ffi.property_animation_create_layer_frame(layer, addr startFrame, addr endFrame)
   result.raw = cast[ptr Animation](prop)
+  result.state = asCreated
+  result.duration = duration
+  result.curve = curve
 
 proc setLayerFrame*(h: var AnimationHandle, layer: ptr Layer, startFrame, endFrame: GRect) {.inline.} =
+  if h.raw == nil: return
   let prop = ffi.property_animation_create_layer_frame(layer, addr startFrame, addr endFrame)
   # Replace current animation with property animation
-  if h.raw != nil: discard ffi.animation_destroy(h.raw)
+  discard ffi.animation_destroy(h.raw)
   h.raw = cast[ptr Animation](prop)
 
 proc createSequence*(animations: varargs[ptr Animation]): AnimationHandle {.inline.} =
-  if animations.len == 0: return newAnimationHandle()
-  # Standard 3-arg version for demo, real implementation should use ffi correctly
-  result = toHandle(ffi.animation_sequence_create(animations[0], animations[1], animations[2]))
+  if animations.len == 0: return AnimationHandle(raw: nil, state: asDestroyed)
+  let res = ffi.animation_sequence_create_from_array(cast[ptr ptr Animation](unsafeAddr animations[0]), animations.len.uint32)
+  result = wrapOwned(res)
 
 proc createSpawn*(animations: varargs[ptr Animation]): AnimationHandle {.inline.} =
-  if animations.len == 0: return newAnimationHandle()
-  result = toHandle(ffi.animation_spawn_create(animations[0], animations[1], animations[2]))
+  if animations.len == 0: return AnimationHandle(raw: nil, state: asDestroyed)
+  let res = ffi.animation_spawn_create_from_array(cast[ptr ptr Animation](unsafeAddr animations[0]), animations.len.uint32)
+  result = wrapOwned(res)
 
 proc `shouldAutoReverse=`*(h: var AnimationHandle, reverse: bool) {.inline.} =
+  if h.raw == nil: return
   discard ffi.animation_set_reverse(h.raw, reverse)

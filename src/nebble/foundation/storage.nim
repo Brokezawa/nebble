@@ -34,16 +34,18 @@ proc writeInt*(key: uint32, value: int32): cint {.inline.} =
 # String Operations
 # ============================================================================
 
-proc readString*(key: uint32, buffer: cstring, bufferSize: csize_t): cint {.inline.} =
+proc readString*(key: uint32, buffer: pointer, bufferSize: csize_t): cint {.inline.} =
   ## Read a string from persistent storage.
   ## Returns the length of the string, or negative on error.
   ## Equivalent to C function `persist_read_string(key, buffer, buffer_size)`.
-  result = ffi.persist_read_string(key, buffer, bufferSize)
+  if buffer == nil: return -1
+  result = ffi.persist_read_string(key, cast[cstring](buffer), bufferSize)
 
 proc writeString*(key: uint32, value: cstring): cint {.inline.} =
   ## Write a string to persistent storage.
   ## Returns the length written, or negative on error.
   ## Equivalent to C function `persist_write_string(key, value)`.
+  if value == nil: return -1
   result = ffi.persist_write_string(key, value)
 
 proc read*[N](key: uint32, s: var FixedString[N]): cint {.inline.} =
@@ -51,7 +53,8 @@ proc read*[N](key: uint32, s: var FixedString[N]): cint {.inline.} =
   ## Returns the length of the string, or negative on error.
   let res = ffi.persist_read_string(key, s.toCstring, N.csize_t)
   if res >= 0:
-    s.len = res.int
+    s.len = min(res.int, N - 1)
+    s.data[s.len] = '\0' # Ensure null termination
   result = res
 
 proc write*[N](key: uint32, s: var FixedString[N]): cint {.inline.} =

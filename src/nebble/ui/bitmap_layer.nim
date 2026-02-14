@@ -36,11 +36,11 @@ DefineUniqueHandle(BitmapLayer, BitmapLayer,
 # Constructors
 # ============================================================================
 
-proc newBitmapLayerHandle*(frame: GRect): BitmapLayerHandle {.inline.} =
+proc newBitmapLayerHandle*(frame: GRect): BitmapLayerHandle =
   wrapOwned(ffi.bitmap_layer_create(frame))
 
 
-proc newBitmapLayer*(frame: GRect): BitmapLayerHandle {.inline.} =
+proc newBitmapLayer*(frame: GRect): BitmapLayerHandle =
   ## Alias for `newBitmapLayerHandle`.
   result = newBitmapLayerHandle(frame)
 
@@ -50,8 +50,7 @@ proc newBitmapLayer*(frame: GRect): BitmapLayerHandle {.inline.} =
 
 proc getLayer*(h: BitmapLayerHandle): ptr Layer {.inline.} =
   ## Get the underlying Layer pointer for adding to parent.
-  when ManagedDebug or ManagedStrict:
-    h.checkValid()
+  if h.pRaw == nil: return nil
   bitmap_layer_get_layer(h.toPtr)
 
 # ============================================================================
@@ -60,31 +59,26 @@ proc getLayer*(h: BitmapLayerHandle): ptr Layer {.inline.} =
 
 proc `bitmap=`*(h: var BitmapLayerHandle, value: ptr GBitmap) {.inline.} =
   ## Set the bitmap to display.
-  when ManagedDebug or ManagedStrict:
-    h.checkValid()
+  if h.pRaw == nil: return
   bitmap_layer_set_bitmap(h.toPtr, value)
 
 proc bitmap*(h: BitmapLayerHandle): ptr GBitmap {.inline.} =
   ## Get the current bitmap.
-  when ManagedDebug or ManagedStrict:
-    h.checkValid()
+  if h.pRaw == nil: return nil
   bitmap_layer_get_bitmap(h.toPtr)
 
 proc `alignment=`*(h: var BitmapLayerHandle, value: GAlign) {.inline.} =
   ## Set the bitmap alignment within the layer.
-  when ManagedDebug or ManagedStrict:
-    h.checkValid()
+  if h.pRaw == nil: return
   bitmap_layer_set_alignment(h.toPtr, value)
 
 proc `compositingMode=`*(h: var BitmapLayerHandle, value: GCompOp) {.inline.} =
   ## Set the compositing mode.
-  when ManagedDebug or ManagedStrict:
-    h.checkValid()
+  if h.pRaw == nil: return
   bitmap_layer_set_compositing_mode(h.toPtr, value)
 
 proc `backgroundColor=`*(h: var BitmapLayerHandle, value: GColor8) {.inline.} =
   ## Set the background color (only for color platforms).
-  when ManagedDebug or ManagedStrict:
-    h.checkValid()
+  if h.pRaw == nil: return
   when declared(bitmap_layer_set_background_color):
     bitmap_layer_set_background_color(h.toPtr, value)

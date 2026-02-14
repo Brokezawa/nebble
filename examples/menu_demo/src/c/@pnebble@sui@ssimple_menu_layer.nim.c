@@ -19,8 +19,10 @@
 typedef struct tyObject_SimpleMenuLayerHandle__a9aCNmuuwQ1Dn8L9aSXP9ck2g tyObject_SimpleMenuLayerHandle__a9aCNmuuwQ1Dn8L9aSXP9ck2g;
 typedef struct tyObject_struct_SimpleMenuLayer__KSECKROhMu2Pbk9aGa1JCIg tyObject_struct_SimpleMenuLayer__KSECKROhMu2Pbk9aGa1JCIg;
 typedef struct tyObject_struct_Layer__KCpfpF2jwj5coKARWsuAMQ tyObject_struct_Layer__KCpfpF2jwj5coKARWsuAMQ;
+typedef NU8 tyEnum_HandleOwnership__3LuuM4we4wvfaiVTiUX3UQ;
 struct tyObject_SimpleMenuLayerHandle__a9aCNmuuwQ1Dn8L9aSXP9ck2g {
 	tyObject_struct_SimpleMenuLayer__KSECKROhMu2Pbk9aGa1JCIg* pRaw;
+	tyEnum_HandleOwnership__3LuuM4we4wvfaiVTiUX3UQ ownership;
 	tyObject_struct_Layer__KCpfpF2jwj5coKARWsuAMQ* pParent;
 };
 struct tyObject_struct_SimpleMenuLayer__KSECKROhMu2Pbk9aGa1JCIg {
@@ -29,23 +31,24 @@ struct tyObject_struct_SimpleMenuLayer__KSECKROhMu2Pbk9aGa1JCIg {
 struct tyObject_struct_Layer__KCpfpF2jwj5coKARWsuAMQ {
 	char dummy;
 };
-N_LIB_PRIVATE N_NIMCALL(void, eqdestroy___OOZOOZOOZsrcZnebbleZuiZsimple95menu95layer_u23)(tyObject_SimpleMenuLayerHandle__a9aCNmuuwQ1Dn8L9aSXP9ck2g* hX60gensym0__p0);
+N_LIB_PRIVATE N_NIMCALL(void, eqdestroy___OOZOOZOOZsrcZnebbleZuiZsimple95menu95layer_u24)(tyObject_SimpleMenuLayerHandle__a9aCNmuuwQ1Dn8L9aSXP9ck2g* hX60gensym0__p0);
 N_CDECL(void, simple_menu_layer_destroy)(tyObject_struct_SimpleMenuLayer__KSECKROhMu2Pbk9aGa1JCIg* menu_layer_p0);
 static N_INLINE(NIM_BOOL*, nimErrorFlag)(void);
 extern NIM_BOOL nimInErrorMode__system_u3510;
-N_LIB_PRIVATE N_NIMCALL(void, eqdestroy___OOZOOZOOZsrcZnebbleZuiZsimple95menu95layer_u23)(tyObject_SimpleMenuLayerHandle__a9aCNmuuwQ1Dn8L9aSXP9ck2g* hX60gensym0__p0) {
+N_LIB_PRIVATE N_NIMCALL(void, eqdestroy___OOZOOZOOZsrcZnebbleZuiZsimple95menu95layer_u24)(tyObject_SimpleMenuLayerHandle__a9aCNmuuwQ1Dn8L9aSXP9ck2g* hX60gensym0__p0) {
 	{
 		NIM_BOOL T3_;
 		T3_ = (NIM_BOOL)0;
 		T3_ = !(((*hX60gensym0__p0).pRaw == ((tyObject_struct_SimpleMenuLayer__KSECKROhMu2Pbk9aGa1JCIg*) NIM_NIL)));
 		if (!(T3_)) goto LA4_;
-		T3_ = ((*hX60gensym0__p0).pParent == ((tyObject_struct_Layer__KCpfpF2jwj5coKARWsuAMQ*) NIM_NIL));
+		T3_ = ((*hX60gensym0__p0).ownership == ((tyEnum_HandleOwnership__3LuuM4we4wvfaiVTiUX3UQ)1));
 LA4_: ;
 		if (!T3_) goto LA5_;
 		simple_menu_layer_destroy((*hX60gensym0__p0).pRaw);
 	}
 LA5_: ;
 	(*hX60gensym0__p0).pRaw = ((tyObject_struct_SimpleMenuLayer__KSECKROhMu2Pbk9aGa1JCIg*) NIM_NIL);
+	(*hX60gensym0__p0).ownership = ((tyEnum_HandleOwnership__3LuuM4we4wvfaiVTiUX3UQ)0);
 	(*hX60gensym0__p0).pParent = ((tyObject_struct_Layer__KCpfpF2jwj5coKARWsuAMQ*) NIM_NIL);
 }
 static N_INLINE(NIM_BOOL*, nimErrorFlag)(void) {
@@ -53,20 +56,27 @@ static N_INLINE(NIM_BOOL*, nimErrorFlag)(void) {
 	result = (&nimInErrorMode__system_u3510);
 	return result;
 }
-N_LIB_PRIVATE N_NIMCALL(void, eqsink___OOZOOZOOZsrcZnebbleZuiZsimple95menu95layer_u54)(tyObject_SimpleMenuLayerHandle__a9aCNmuuwQ1Dn8L9aSXP9ck2g* destX60gensym0__p0, tyObject_SimpleMenuLayerHandle__a9aCNmuuwQ1Dn8L9aSXP9ck2g srcX60gensym0__p1) {
+N_LIB_PRIVATE N_NIMCALL(void, eqsink___OOZOOZOOZsrcZnebbleZuiZsimple95menu95layer_u55)(tyObject_SimpleMenuLayerHandle__a9aCNmuuwQ1Dn8L9aSXP9ck2g* destX60gensym0__p0, tyObject_SimpleMenuLayerHandle__a9aCNmuuwQ1Dn8L9aSXP9ck2g srcX60gensym0__p1) {
 	tyObject_SimpleMenuLayerHandle__a9aCNmuuwQ1Dn8L9aSXP9ck2g* srcPtrX60gensym0__1;
 NIM_BOOL* nimErr_;
 {nimErr_ = nimErrorFlag();
-	eqdestroy___OOZOOZOOZsrcZnebbleZuiZsimple95menu95layer_u23(destX60gensym0__p0);
+	eqdestroy___OOZOOZOOZsrcZnebbleZuiZsimple95menu95layer_u24(destX60gensym0__p0);
 	if (NIM_UNLIKELY(*nimErr_)) goto BeforeRet_;
 	(*destX60gensym0__p0).pRaw = srcX60gensym0__p1.pRaw;
+	(*destX60gensym0__p0).ownership = srcX60gensym0__p1.ownership;
 	(*destX60gensym0__p0).pParent = srcX60gensym0__p1.pParent;
 	srcPtrX60gensym0__1 = ((tyObject_SimpleMenuLayerHandle__a9aCNmuuwQ1Dn8L9aSXP9ck2g*) ((&srcX60gensym0__p1)));
 	(*srcPtrX60gensym0__1).pRaw = ((tyObject_struct_SimpleMenuLayer__KSECKROhMu2Pbk9aGa1JCIg*) NIM_NIL);
+	(*srcPtrX60gensym0__1).ownership = ((tyEnum_HandleOwnership__3LuuM4we4wvfaiVTiUX3UQ)0);
 	(*srcPtrX60gensym0__1).pParent = ((tyObject_struct_Layer__KCpfpF2jwj5coKARWsuAMQ*) NIM_NIL);
 	}BeforeRet_: ;
 }
-N_LIB_PRIVATE N_NIMCALL(tyObject_struct_Layer__KCpfpF2jwj5coKARWsuAMQ*, toLayer__OOZOOZOOZsrcZnebbleZuiZsimple95menu95layer_u77)(tyObject_SimpleMenuLayerHandle__a9aCNmuuwQ1Dn8L9aSXP9ck2g hX60gensym0__p0) {
+N_LIB_PRIVATE N_NIMCALL(tyObject_struct_SimpleMenuLayer__KSECKROhMu2Pbk9aGa1JCIg*, toPtr__OOZOOZOOZsrcZnebbleZuiZsimple95menu95layer_u75)(tyObject_SimpleMenuLayerHandle__a9aCNmuuwQ1Dn8L9aSXP9ck2g hX60gensym0__p0) {
+	tyObject_struct_SimpleMenuLayer__KSECKROhMu2Pbk9aGa1JCIg* result;
+	result = hX60gensym0__p0.pRaw;
+	return result;
+}
+N_LIB_PRIVATE N_NIMCALL(tyObject_struct_Layer__KCpfpF2jwj5coKARWsuAMQ*, toLayer__OOZOOZOOZsrcZnebbleZuiZsimple95menu95layer_u78)(tyObject_SimpleMenuLayerHandle__a9aCNmuuwQ1Dn8L9aSXP9ck2g hX60gensym0__p0) {
 	tyObject_struct_Layer__KCpfpF2jwj5coKARWsuAMQ* result;
 	result = ((tyObject_struct_Layer__KCpfpF2jwj5coKARWsuAMQ*) (hX60gensym0__p0.pRaw));
 	return result;

@@ -47,16 +47,16 @@ DefineUniqueHandle(TextLayer, TextLayer,
 # Constructors
 # ============================================================================
 
-proc newTextLayerHandle*(frame: GRect): TextLayerHandle {.inline.} =
+proc newTextLayerHandle*(frame: GRect): TextLayerHandle =
   wrapOwned(ffi.text_layer_create(frame))
 
-proc newTextLayer*(frame: GRect): TextLayerHandle {.inline.} =
+proc newTextLayer*(frame: GRect): TextLayerHandle =
   ## Alias for `newTextLayerHandle`.
   result = newTextLayerHandle(frame)
 
 proc newTextLayerHandle*(frame: GRect; text: cstring;
                         font: GFont = nil;
-                        align: GTextAlignment = GTextAlignmentLeft): TextLayerHandle {.inline.} =
+                        align: GTextAlignment = GTextAlignmentLeft): TextLayerHandle =
   ## Create a new managed TextLayer with initial properties.
   ##
   ## **Parameters:**
@@ -79,7 +79,7 @@ proc newTextLayerHandle*(frame: GRect; text: cstring;
 
 proc newTextLayer*(frame: GRect; text: cstring;
                    font: GFont = nil;
-                   align: GTextAlignment = GTextAlignmentLeft): TextLayerHandle {.inline.} =
+                   align: GTextAlignment = GTextAlignmentLeft): TextLayerHandle =
   ## Alias for `newTextLayerHandle`.
   result = newTextLayerHandle(frame, text, font, align)
 
@@ -104,50 +104,53 @@ proc getLayer*(h: TextLayerHandle): ptr Layer {.inline.} =
 # ============================================================================
 
 proc `text=`*(h: var TextLayerHandle, value: cstring) {.inline.} =
-  when ManagedDebug or ManagedStrict: h.checkValid()
+  if h.pRaw == nil: return
   text_layer_set_text(h.pRaw, value)
 
 proc `text=`*(p: ptr TextLayer, value: cstring) {.inline.} =
+  if p == nil: return
   text_layer_set_text(p, value)
 
 proc text*(h: TextLayerHandle): cstring {.inline.} =
   ## Get the current text content.
-  when ManagedDebug or ManagedStrict:
-    h.checkValid()
+  if h.pRaw == nil: return nil
   text_layer_get_text(h.toPtr)
 
 proc `font=`*(h: var TextLayerHandle, value: GFont) {.inline.} =
-  when ManagedDebug or ManagedStrict: h.checkValid()
+  if h.pRaw == nil: return
   text_layer_set_font(h.pRaw, value)
 
 proc `font=`*(p: ptr TextLayer, value: GFont) {.inline.} =
+  if p == nil: return
   text_layer_set_font(p, value)
 
 proc `textAlignment=`*(h: var TextLayerHandle, value: GTextAlignment) {.inline.} =
-  when ManagedDebug or ManagedStrict: h.checkValid()
+  if h.pRaw == nil: return
   text_layer_set_text_alignment(h.pRaw, value)
 
 proc `textAlignment=`*(p: ptr TextLayer, value: GTextAlignment) {.inline.} =
+  if p == nil: return
   text_layer_set_text_alignment(p, value)
 
 proc `textColor=`*(h: var TextLayerHandle, value: GColor8) {.inline.} =
-  when ManagedDebug or ManagedStrict: h.checkValid()
+  if h.pRaw == nil: return
   text_layer_set_text_color(h.pRaw, value)
 
 proc `textColor=`*(p: ptr TextLayer, value: GColor8) {.inline.} =
+  if p == nil: return
   text_layer_set_text_color(p, value)
 
 proc `backgroundColor=`*(h: var TextLayerHandle, value: GColor8) {.inline.} =
-  when ManagedDebug or ManagedStrict: h.checkValid()
+  if h.pRaw == nil: return
   text_layer_set_background_color(h.pRaw, value)
 
 proc `backgroundColor=`*(p: ptr TextLayer, value: GColor8) {.inline.} =
+  if p == nil: return
   text_layer_set_background_color(p, value)
 
 proc `overflowMode=`*(h: var TextLayerHandle, value: GTextOverflowMode) {.inline.} =
   ## Set the overflow mode (wordWrap, trailing ellipsis, fill).
-  when ManagedDebug or ManagedStrict:
-    h.checkValid()
+  if h.pRaw == nil: return
   text_layer_set_overflow_mode(h.toPtr, value)
 
 # ============================================================================
@@ -156,27 +159,23 @@ proc `overflowMode=`*(h: var TextLayerHandle, value: GTextOverflowMode) {.inline
 
 proc contentSize*(h: TextLayerHandle): GSize {.inline.} =
   ## Get the size of the rendered text content.
-  when ManagedDebug or ManagedStrict:
-    h.checkValid()
+  if h.pRaw == nil: return GSize(w: 0, h: 0)
   text_layer_get_content_size(h.toPtr)
 
 proc `size=`*(h: var TextLayerHandle, value: GSize) {.inline.} =
   ## Set the maximum size for text rendering.
-  when ManagedDebug or ManagedStrict:
-    h.checkValid()
+  if h.pRaw == nil: return
   text_layer_set_size(h.toPtr, value)
 
 proc `frame=`*(h: var TextLayerHandle, value: GRect) {.inline.} =
   ## Set the layer frame (position and size).
-  when ManagedDebug or ManagedStrict:
-    h.checkValid()
+  if h.pRaw == nil: return
   let layer = text_layer_get_layer(h.toPtr)
   layer_set_frame(layer, value)
 
 proc frame*(h: TextLayerHandle): GRect {.inline.} =
   ## Get the layer frame.
-  when ManagedDebug or ManagedStrict:
-    h.checkValid()
+  if h.pRaw == nil: return makeGRect(0, 0, 0, 0)
   let layer = text_layer_get_layer(h.toPtr)
   layer_get_frame(layer)
 

@@ -15,19 +15,22 @@ export ffi.ActionBarLayer
 
 type ActionBarLayerHandle* = object
   pRaw*: ptr ActionBarLayer
+  ownership*: HandleOwnership
   pParent*: ptr Layer # Use pParent for consistency with LayerHandle logic
-  attachedWindow: ptr Window
+  attachedWindow*: ptr Window
 
 proc `=destroy`*(h: var ActionBarLayerHandle) =
   ## Destroy only if not attached to a window.
-  if h.pRaw != nil and h.attachedWindow == nil and h.pParent == nil:
+  if h.pRaw != nil and h.ownership == hoOwned and h.attachedWindow == nil:
     ffi.action_bar_layer_destroy(h.pRaw)
   h.pRaw = nil
+  h.ownership = hoNone
   h.attachedWindow = nil
   h.pParent = nil
 
 proc `=wasMoved`*(h: var ActionBarLayerHandle) =
   h.pRaw = nil
+  h.ownership = hoNone
   h.attachedWindow = nil
   h.pParent = nil
 
@@ -36,10 +39,12 @@ proc `=copy`*(dest: var ActionBarLayerHandle, src: ActionBarLayerHandle) {.error
 proc `=sink`*(dest: var ActionBarLayerHandle, src: ActionBarLayerHandle) =
   `=destroy`(dest)
   dest.pRaw = src.pRaw
+  dest.ownership = src.ownership
   dest.attachedWindow = src.attachedWindow
   dest.pParent = src.pParent
   var srcPtr = cast[ptr ActionBarLayerHandle](unsafeAddr src)
   srcPtr.pRaw = nil
+  srcPtr.ownership = hoNone
   srcPtr.attachedWindow = nil
   srcPtr.pParent = nil
 
@@ -49,6 +54,8 @@ proc isValid*(h: ActionBarLayerHandle): bool {.inline.} = h.pRaw != nil
 
 proc setParent*(h: var ActionBarLayerHandle, p: ptr Layer) {.inline.} =
   h.pParent = p
+  if p != nil: h.ownership = hoParented
+  else: h.ownership = hoOwned
 
 when ManagedDebug or ManagedStrict:
   proc checkValid*(h: ActionBarLayerHandle) =
@@ -58,11 +65,11 @@ when ManagedDebug or ManagedStrict:
 
 proc toHandle*(p: ptr ActionBarLayer): ActionBarLayerHandle {.inline.} =
   ## Wrap raw pointer in handle (unowned).
-  ActionBarLayerHandle(pRaw: p, pParent: cast[ptr Layer](1), attachedWindow: nil)
+  ActionBarLayerHandle(pRaw: p, ownership: hoUnowned, pParent: nil, attachedWindow: nil)
 
 proc wrapOwned*(p: ptr ActionBarLayer): ActionBarLayerHandle {.inline.} =
   ## Wrap raw pointer in handle (owned).
-  ActionBarLayerHandle(pRaw: p, pParent: nil, attachedWindow: nil)
+  ActionBarLayerHandle(pRaw: p, ownership: hoOwned, pParent: nil, attachedWindow: nil)
 
 proc newActionBarLayerHandle*(): ActionBarLayerHandle {.inline.} =
   wrapOwned(ffi.action_bar_layer_create())
@@ -72,49 +79,54 @@ proc newActionBarLayer*(): ActionBarLayerHandle {.inline.} =
   result = newActionBarLayerHandle()
 
 proc getLayer*(h: ActionBarLayerHandle): ptr Layer {.inline.} =
-  when ManagedDebug or ManagedStrict: h.checkValid()
+  if h.pRaw == nil: return nil
   ffi.action_bar_layer_get_layer(h.pRaw)
 
 proc addToWindow*(h: var ActionBarLayerHandle, win: ptr Window) {.inline.} =
-  when ManagedDebug or ManagedStrict: h.checkValid()
+  if h.pRaw == nil: return
   ffi.action_bar_layer_add_to_window(h.pRaw, win)
   h.attachedWindow = win
+  h.ownership = hoParented # Owned by window stack logic
 
 proc removeFromWindow*(h: var ActionBarLayerHandle) {.inline.} =
-  when ManagedDebug or ManagedStrict: h.checkValid()
+  if h.pRaw == nil: return
   ffi.action_bar_layer_remove_from_window(h.pRaw)
   h.attachedWindow = nil
+  h.ownership = hoOwned # Back to owned
 
 proc setIcon*(h: ActionBarLayerHandle, buttonId: ButtonId, icon: ptr GBitmap) {.inline.} =
-  when ManagedDebug or ManagedStrict: h.checkValid()
+  if h.pRaw == nil: return
   ffi.action_bar_layer_set_icon(h.pRaw, buttonId, icon)
 
 proc setIcon*(p: ptr ActionBarLayer, buttonId: ButtonId, icon: ptr GBitmap) {.inline.} =
+  if p == nil: return
   ffi.action_bar_layer_set_icon(p, buttonId, icon)
 
 proc setIconAnimated*(h: ActionBarLayerHandle, buttonId: ButtonId, icon: ptr GBitmap, animated: bool) {.inline.} =
-  when ManagedDebug or ManagedStrict: h.checkValid()
+  if h.pRaw == nil: return
   ffi.action_bar_layer_set_icon_animated(h.pRaw, buttonId, icon, animated)
 
 proc clearIcon*(h: ActionBarLayerHandle, buttonId: ButtonId) {.inline.} =
-  when ManagedDebug or ManagedStrict: h.checkValid()
+  if h.pRaw == nil: return
   ffi.action_bar_layer_clear_icon(h.pRaw, buttonId)
 
 proc `backgroundColor=`*(h: ActionBarLayerHandle, color: GColor) {.inline.} =
-  when ManagedDebug or ManagedStrict: h.checkValid()
+  if h.pRaw == nil: return
   ffi.action_bar_layer_set_background_color(h.pRaw, color)
 
 proc `backgroundColor=`*(p: ptr ActionBarLayer, color: GColor) {.inline.} =
+  if p == nil: return
   ffi.action_bar_layer_set_background_color(p, color)
 
 when declared(ffi.action_bar_layer_set_context):
   proc `context=`*(h: ActionBarLayerHandle, context: pointer) {.inline.} =
-    when ManagedDebug or ManagedStrict: h.checkValid()
+    if h.pRaw == nil: return
     ffi.action_bar_layer_set_context(h.pRaw, context)
 
 proc `clickConfigProvider=`*(h: ActionBarLayerHandle, provider: ClickConfigProvider) {.inline.} =
-  when ManagedDebug or ManagedStrict: h.checkValid()
+  if h.pRaw == nil: return
   ffi.action_bar_layer_set_click_config_provider(h.pRaw, provider)
 
 proc `clickConfigProvider=`*(p: ptr ActionBarLayer, provider: ClickConfigProvider) {.inline.} =
+  if p == nil: return
   ffi.action_bar_layer_set_click_config_provider(p, provider)
