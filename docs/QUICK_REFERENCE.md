@@ -20,7 +20,9 @@ nebbleApp:
 
   textLayer:
     id = myLabel
-    frame = (0, 60, 144, 40)
+    fullWidth = true
+    y = center
+    h = 40
     text = "Hello Nim!"
     alignment = GTextAlignmentCenter
     
@@ -43,14 +45,17 @@ nebbleApp:
 
 ## 2. Managed Handles (Manual)
 
-If you need manual control, use **Managed Handles** which use ARC for memory safety.
+If you need manual control, use **Managed Handles** which use ARC for memory safety. They automatically manage transitions between handle-owned and SDK-owned memory.
 
-| Handle Type | Creation | Underlying Pointer |
-|-------------|----------|--------------------|
-| `WindowHandle` | `newWindow()` | `ptr Window` |
-| `TextLayerHandle` | `newTextLayer(frame)` | `ptr TextLayer` |
-| `BitmapLayerHandle` | `newBitmapLayer(frame)` | `ptr BitmapLayer` |
-| `LayerHandle` | `newLayer(frame)` | `ptr Layer` |
+| Handle Type | Creation | Get Underlying Layer |
+|-------------|----------|-----------------------|
+| `WindowHandle` | `newWindow()` | `h.rootLayer()` |
+| `TextLayerHandle` | `newTextLayer(frame)` | `h.getLayer()` |
+| `BitmapLayerHandle` | `newBitmapLayer(frame)` | `h.getLayer()` |
+| `ActionBarLayerHandle` | `newActionBarLayer()` | `h.getLayer()` |
+| `MenuLayerHandle` | `newMenuLayer(frame)` | `h.getLayer()` |
+| `ScrollLayerHandle` | `newScrollLayer(frame)` | `h.getLayer()` |
+| `GPathHandle` | `newGPath(points)` | N/A (Drawing) |
 
 ---
 

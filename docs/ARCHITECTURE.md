@@ -26,45 +26,52 @@ This layer wraps the FFI in Nim-friendly abstractions.
 The most significant technical challenge in wrapping the Pebble SDK is its manual memory management (`_create` and `_destroy` pairs) in a 24KB-256KB RAM environment.
 
 ### ARC-Based Handles
-Nebble uses Nim's **ARC (Automatic Reference Counting)** memory management. We implement "Managed Handles" using the following pattern:
+Nebble uses Nim's **ARC (Automatic Reference Counting)** memory management. We implement "Managed Handles" using an ownership-aware object model:
 
-1. **Distinct Types:** Handles are defined as `distinct ptr T`.
-2. **Destructors:** We implement the `=destroy` hook. When a handle goes out of scope or is reassigned, Nim automatically calls the corresponding C `_destroy` function.
-3. **Move Semantics:** Copying is disabled via `{.error.}` on `=copy`, ensuring unique ownership of UI resources.
+1. **Internal Structure:** Handles (e.g., `TextLayerHandle`) are defined as `object` types containing:
+   - `pRaw`: The underlying C pointer to the SDK resource.
+   - `ownership`: A `HandleOwnership` enum (`hoOwned`, `hoParented`, `hoUnowned`).
+   - `pParent`: An optional pointer to a parent layer for hierarchy tracking.
+2. **Destructors:** We implement the `=destroy` hook. Nim calls this automatically when a handle goes out of scope or is reassigned. The destructor only calls the C `_destroy` function if `ownership == hoOwned`.
+3. **Move Semantics:** Copying is disabled via `{.error.}` on `=copy`, ensuring unique ownership of UI resources. Reassignment performs a `=sink` which transfers ownership and invalidates the source.
 
-### Hierarchy Awareness
-Pebble's UI system is hierarchical: destroying a parent Layer automatically destroys its children. To prevent **double-free errors**, Nebble's `LayerHandle` tracks its parent state:
-- If a layer has a parent, the destructor skips calling `layer_destroy`.
-- If a layer is orphaned, the destructor cleans up the memory.
+### Hierarchy & Ownership Lifecycle
+Pebble's UI system is hierarchical: destroying a parent Layer automatically destroys its children. To prevent **double-free errors**, Nebble handles automatically transition through ownership states:
+- **`hoOwned`**: The handle is responsible for calling C `_destroy`.
+- **`hoParented`**: The layer has been added to a parent (via `addChild` or insertion). The SDK now manages its memory; Nim's destructor will skip the C `_destroy` call.
+- **`hoUnowned`**: A transient wrapper around a system-provided pointer (like `window.rootLayer`). It will never be destroyed by Nim.
+
+When a layer is removed from its parent, the handle automatically transitions back to `hoOwned`, ensuring it isn't leaked.
 
 ---
 
 ## 3. The Build Pipeline
 
-Nebble doesn't just provide a library; it provides a compilation pipeline via the `nebble` CLI.
+Nebble doesn't just provide a library; it provides an intelligent compilation pipeline via the `nebble` CLI.
 
 1. **Nim Phase:** `nim c --os:any --cpu:arm --mm:arc --compileOnly ...`
    - Nim compiles the code into C source files.
    - Cross-compilation flags are used to target the ARM Cortex-M architecture without a standard OS.
-2. **Bridge Phase:** The CLI copies the generated C files into the `src/c/` directory of a standard Pebble project structure.
+2. **Bridge Phase:** The CLI generates a platform-specific `appinfo.json` and copies the generated C files into the `src/c/` directory.
 3. **Pebble Phase:** `pebble build`
    - The Pebble SDK's `waf` build system takes over.
-   - It compiles the generated C files using the Pebble ARM GCC toolchain and links them against the Pebble OS object libraries.
-   - Resources (images, fonts) are bundled into the final `.pbw`.
+   - The CLI intelligently renames resulting `.pbw` files to include the platform name (e.g., `my_app_basalt.pbw`) to prevent overwriting during multi-platform builds.
 
 ---
 
 ## 4. Metaprogramming & Scaffolding
 
-### The `pebbleApp` Macro
-To remove C boilerplate (entry point, window creation, event loop), Nebble uses a powerful macro that generates the entire app skeleton at compile-time based on provided handlers.
+### The `nebbleApp` Macro
+To remove C boilerplate (entry point, window creation, event loop), Nebble uses a powerful macro that generates the entire app skeleton. Key features include:
+- **Responsive Layout:** Supports `fullWidth`, `fullHeight`, `x=center`, and `y=center` which calculate coordinates at runtime relative to the parent layer.
+- **Initialization Order:** Ensures the window is pushed to the stack *before* the user's `init:` block runs, making all UI components available for manipulation immediately.
+- **Runtime Init:** Explicitly handles `NimMain()` and provides the necessary `_exit` stubs for the ARM toolchain.
 
-### The `staticText` Template
-Since `TextLayer` doesn't copy the string it displays, using dynamic Nim strings is dangerous (they might be freed while the layer still points to them). 
-The `staticText` template:
-1. Validates a module-level buffer exists.
-2. Safely copies the dynamic Nim string into the static C-compatible buffer.
-3. Updates the `TextLayer` pointer.
+### Heap-Free Strings (`FixedString`)
+Since `TextLayer` doesn't copy the string it displays, and heap allocations are expensive/dangerous on Pebble, Nebble provides a `FixedString[N]` type and an `f` macro for safe, stack-based formatting:
+1. **Zero Allocation:** All string operations happen within a pre-allocated stack buffer.
+2. **Safety:** The `f` macro provides `fmt`-like convenience while ensuring bounds-checking and null-termination.
+3. **Storage Integration:** The persistent storage API (`storage.read`) natively supports `FixedString` for safe data loading.
 
 ---
 

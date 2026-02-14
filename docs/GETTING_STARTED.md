@@ -106,10 +106,12 @@ proc selectClickHandler(recognizer: ClickRecognizerRef; context: pointer) {.cdec
   vibes.shortPulse()
 
 # Declarative UI and interaction
-nebbleWatchface:
+nebbleApp:
   textLayer:
     id = myLabel
-    frame = (0, 60, 144, 40)
+    fullWidth = true
+    y = center
+    h = 40
     text = "Hello Nim!"
     alignment = GTextAlignmentCenter
     
@@ -125,10 +127,11 @@ nebble build
 
 This:
 1. Compiles Nim code to C (`nim c --compileOnly`)
-2. Copies generated C files into Pebble project structure
-3. Runs `pebble build` to create `.pbw` bundle
+2. CLI generates platform-specific `appinfo.json`
+3. CLI copies generated C files into Pebble project structure
+4. CLI runs `pebble build` to create `.pbw` bundles for all platforms
 
-Output: `build/my_first_app.pbw`
+Output: `build/my_first_app_basalt.pbw`, etc.
 
 ### Step 4: Install and Run
 
@@ -209,11 +212,12 @@ label.text = "Managed"
 # No destroy() needed!
 ```
 
-### Pattern 3: Dynamic Text
+### Pattern 3: Heap-Free Dynamic Text
 
 ```nim
-var buffer: array[32, char] # Must be module-scope to persist
-textLayer.staticText(buffer, "Count: " & $value)
+var countStr: FixedString[32]
+countStr.f("Count: ", value)
+textLayer.text = countStr
 ```
 
 ## Platform-Specific Features

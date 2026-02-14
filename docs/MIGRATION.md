@@ -24,17 +24,19 @@ Nebble uses **Managed Types** (handles) which leverage Nim's ARC memory manageme
 
 | Manual C API Type | Managed Nim Handle | Creation | Destruction |
 |-------------------|--------------------|----------|-------------|
-| `Window*` | `WindowHandle` | `newWindow()` | Automatic |
-| `TextLayer*` | `TextLayerHandle` | `newTextLayer()` | Automatic |
-| `BitmapLayer*` | `BitmapLayerHandle` | `newBitmapLayer()` | Automatic |
-| `Layer*` | `LayerHandle` | `newLayer()` | Automatic |
-| `MenuLayer*` | `MenuLayerHandle` | `newMenuLayer()` | Automatic |
-| `ScrollLayer*` | `ScrollLayerHandle` | `newScrollLayer()` | Automatic |
+| `Window*` | `WindowHandle` | `newWindow()` | Automatic (Stack-Aware) |
+| `TextLayer*` | `TextLayerHandle` | `newTextLayer()` | Automatic (Hierarchy-Aware) |
+| `BitmapLayer*` | `BitmapLayerHandle` | `newBitmapLayer()` | Automatic (Hierarchy-Aware) |
+| `ActionBarLayer*` | `ActionBarLayerHandle` | `newActionBarLayer()` | Automatic (Stack-Aware) |
+| `MenuLayer*` | `MenuLayerHandle` | `newMenuLayer()` | Automatic (Hierarchy-Aware) |
+| `ScrollLayer*` | `ScrollLayerHandle` | `newScrollLayer()` | Automatic (Hierarchy-Aware) |
+| `GPath*` | `GPathHandle` | `newGPath()` | Automatic |
 
 ### Benefits of Managed Types
-1. **RAII Semantics**: Resources are freed when the handle goes out of scope or is reassigned to `nil`.
-2. **Stack Safety**: `WindowHandle` tracks its position on the window stack and avoids destruction if it's currently being displayed.
-3. **Parent Tracking**: `LayerHandle` avoids double-free by tracking its parent layer.
+1. **ARC RAII Semantics**: Resources are freed when the handle goes out of scope or is reassigned.
+2. **Enum-Based Ownership**: Handles track whether they are `hoOwned` (Nim destroys), `hoParented` (SDK destroys), or `hoUnowned` (transient).
+3. **Double-Free Prevention**: Adding a layer to a parent automatically transitions the handle to `hoParented` status.
+4. **Stack Safety**: `WindowHandle` tracks its state on the window stack and avoids destruction if it's currently `rsActive`.
 
 ---
 
@@ -117,10 +119,11 @@ window.push(animated = true)
 layer_add_child(root_layer, text_layer_get_layer(text_layer));
 ```
 
-**Nim (Managed):**
+**Nim (Modern):**
 ```nim
-# Parent takes ownership of child lifecycle if both are managed
-parentLayer.addChild(childLayer.getLayer())
+# Hierarchy operations are generic and handle ownership automatically.
+# Works with any managed handle (TextLayer, BitmapLayer, etc.)
+parent.addChild(child)
 ```
 
 ---
@@ -136,11 +139,11 @@ snprintf(buffer, sizeof(buffer), "Count: %d", counter);
 text_layer_set_text(text_layer, buffer);
 ```
 
-**Nim (Managed):**
+**Nim (Modern):**
 ```nim
-var buffer: array[32, char] # Must persist (static or module scope)
-# Managed handles have a staticText helper
-textLayer.staticText(buffer, "Count: " & $counter)
+var displayStr: FixedString[32]
+displayStr.f("Count: ", counter)
+textLayer.text = displayStr
 ```
 
 ---
