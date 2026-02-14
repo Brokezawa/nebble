@@ -13,29 +13,42 @@ proc accelTapHandler(axis: AccelAxisType; direction: int32) {.cdecl.}
 nebbleApp:
   textLayer:
     id = titleLayer
-    frame = (0, 20, 144, 30)
+    fullWidth = true
+    y = 20
+    h = 30
     text = "Accelerometer"
     alignment = GTextAlignmentCenter
     font = FONT_KEY_GOTHIC_24_BOLD
     
   textLayer:
     id = xLayer
-    frame = (20, 55, 104, 20)
+    x = center
+    y = 55
+    w = 104
+    h = 20
     font = FONT_KEY_GOTHIC_18
     
   textLayer:
     id = yLayer
-    frame = (20, 75, 104, 20)
+    x = center
+    y = 75
+    w = 104
+    h = 20
     font = FONT_KEY_GOTHIC_18
     
   textLayer:
     id = zLayer
-    frame = (20, 95, 104, 20)
+    x = center
+    y = 95
+    w = 104
+    h = 20
     font = FONT_KEY_GOTHIC_18
     
   textLayer:
     id = tapLayer
-    frame = (0, 125, 144, 25)
+    fullWidth = true
+    y = 125
+    h = 25
     text = "Tap the watch!"
     alignment = GTextAlignmentCenter
     font = FONT_KEY_GOTHIC_18_BOLD

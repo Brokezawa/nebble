@@ -21,7 +21,9 @@ var
 nebbleApp:
   textLayer:
     id = myTextLayer
-    frame = (0, 60, 144, 40)
+    fullWidth = true
+    y = center
+    h = 40
     text = "Press SELECT"
     alignment = GTextAlignmentCenter
     

@@ -14,14 +14,18 @@ proc downClickHandler(recognizer: ClickRecognizerRef; context: pointer) {.cdecl.
 nebbleApp:
   textLayer:
     id = titleLayer
-    frame = (0, 50, 144, 40)
+    fullWidth = true
+    y = center
+    h = 40
     text = "Vibes Demo"
     alignment = GTextAlignmentCenter
     font = FONT_KEY_GOTHIC_28_BOLD
     
   textLayer:
     id = instructionsLayer
-    frame = (0, 95, 144, 60)
+    fullWidth = true
+    y = 120
+    h = 60
     text = "SELECT: Short\nUP: Long\nDOWN: Double"
     alignment = GTextAlignmentCenter
     font = FONT_KEY_GOTHIC_18
@@ -33,7 +37,12 @@ nebbleApp:
 
 # Implementations
 proc selectClickHandler(recognizer: ClickRecognizerRef; context: pointer) {.cdecl.} =
-  vibes.shortPulse()
+  when defined(pebbleAplite):
+    # Try custom pattern on Aplite
+    var durations: array[2, uint32] = [100'u32, 100'u32]
+    vibes.enqueueCustomPattern(addr durations[0], 2)
+  else:
+    vibes.shortPulse()
   titleLayer.text = "Short Pulse"
 
 proc upClickHandler(recognizer: ClickRecognizerRef; context: pointer) {.cdecl.} =

@@ -44,8 +44,8 @@ nebbleApp:
     
   textLayer:
     id = boxLayer
-    x = 120
-    y = 150
+    x = center
+    y = center
     w = 15
     h = 15
     bgColor = GColorWhite
@@ -58,8 +58,9 @@ nebbleApp:
 proc startMainAnimation() =
   # Center text
   let w = PBLDisplayWidth.int16
+  let h = PBLDisplayHeight.int16
   let startRect = makeGRect(0, 50, w, 40)
-  let endRect = makeGRect(0, 100, w, 40)
+  let endRect = makeGRect(0, h - 40, w, 40)
 
   
   mainAnim = newAnimationHandle(
@@ -71,9 +72,10 @@ proc startMainAnimation() =
   mainAnim.schedule()
 
 proc startPulseAnimation() =
-  # Pulse at current box position (10, 140)
-  let startRect = makeGRect(10, 140, 20, 20)
-  let endRect = makeGRect(5, 135, 30, 30)
+  # Pulse at current box position
+  let b = boxLayer.toLayer().frame
+  let startRect = b
+  let endRect = makeGRect(b.origin.x - 10, b.origin.y - 10, b.size.w + 20, b.size.h + 20)
   
   pulseAnim = newAnimationHandle()
   pulseAnim.duration = 500
@@ -86,11 +88,12 @@ proc startPulseAnimation() =
 proc startSequenceDemo() =
   # Just move down once
   let w = PBLDisplayWidth.int16
+  let h = PBLDisplayHeight.int16
   anim1 = newAnimationHandle()
   anim1.duration = 500
   anim1.setLayerFrame(titleLayer.toLayer(), 
                      makeGRect(0, 50, w, 40),
-                     makeGRect(0, 80, w, 40))
+                     makeGRect(0, h - 40, w, 40))
   
   anim1.schedule()
 
