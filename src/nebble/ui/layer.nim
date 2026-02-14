@@ -200,20 +200,53 @@ proc removeChildLayers*(parent: var LayerHandle) {.inline.} =
 
 proc insertBelowSibling*(h: var auto, sibling: var auto) {.inline.} =
   ## Insert a layer below a sibling.
-  when compiles(h.pRaw) and compiles(sibling.pRaw):
-    if not h.isValid or not sibling.isValid or sibling.pParent == nil: return
-    ffi.layer_insert_below_sibling(cast[ptr Layer](h.pRaw), cast[ptr Layer](sibling.pRaw))
-    # Update ownership status
-    when compiles(h.setParent):
-      h.setParent(sibling.pParent)
+  ## Supports both managed handles and raw pointers.
+  let hPtr = when h is ptr Layer: h
+             elif compiles(h.getLayer()): h.getLayer()
+             else: cast[ptr Layer](nil)
+             
+  let sPtr = when sibling is ptr Layer: sibling
+             elif compiles(sibling.getLayer()): sibling.getLayer()
+             else: cast[ptr Layer](nil)
+
+  if hPtr == nil or sPtr == nil: return
+
+  # For handle logic, we need the parent tracking from the sibling handle
+  let sParent = when compiles(sibling.pParent): sibling.pParent
+                else: ffi.layer_get_parent(sPtr)
+
+  if sParent == nil: return
+
+  ffi.layer_insert_below_sibling(hPtr, sPtr)
+  
+  # Update ownership if h is a managed handle
+  when compiles(h.setParent):
+    h.setParent(sParent)
 
 proc insertAboveSibling*(h: var auto, sibling: var auto) {.inline.} =
   ## Insert a layer above a sibling.
-  when compiles(h.pRaw) and compiles(sibling.pRaw):
-    if not h.isValid or not sibling.isValid or sibling.pParent == nil: return
-    ffi.layer_insert_above_sibling(cast[ptr Layer](h.pRaw), cast[ptr Layer](sibling.pRaw))
-    when compiles(h.setParent):
-      h.setParent(sibling.pParent)
+  ## Supports both managed handles and raw pointers.
+  let hPtr = when h is ptr Layer: h
+             elif compiles(h.getLayer()): h.getLayer()
+             else: cast[ptr Layer](nil)
+             
+  let sPtr = when sibling is ptr Layer: sibling
+             elif compiles(sibling.getLayer()): sibling.getLayer()
+             else: cast[ptr Layer](nil)
+
+  if hPtr == nil or sPtr == nil: return
+
+  # For handle logic, we need the parent tracking from the sibling handle
+  let sParent = when compiles(sibling.pParent): sibling.pParent
+                else: ffi.layer_get_parent(sPtr)
+
+  if sParent == nil: return
+
+  ffi.layer_insert_above_sibling(hPtr, sPtr)
+  
+  # Update ownership if h is a managed handle
+  when compiles(h.setParent):
+    h.setParent(sParent)
 
 # ============================================================================
 # Frame and Bounds
