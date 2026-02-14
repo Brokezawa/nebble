@@ -73,7 +73,7 @@ proc generateAppInfo*(cfg: NebbleConfig, platform: string): bool =
     "versionLabel": versionLabel,
     "versionCode": 1,
     "sdkVersion": "3",
-    "targetPlatforms": cfg.platforms,
+    "targetPlatforms": [platform],
     "watchapp": {
       "watchface": isWatchface
     },

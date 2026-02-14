@@ -157,18 +157,26 @@ proc cmdInstall*(platform: string, toPhone: bool, phoneIp: string) =
     echo "✓ Installed to phone"
   else:
     # Install to emulator
-    if not validatePlatform(platform):
-      echo "Error: Invalid platform '", platform, "'"
-      quit(1)
+    let targetPlatforms = if platform.toLowerAscii == "all":
+      @validPlatforms
+    else:
+      if not validatePlatform(platform):
+        echo "Error: Invalid platform '", platform, "'"
+        quit(1)
+      @[platform]
     
-    echo "Installing to ", platform, " emulator..."
-    let cmd = "pebble install --emulator " & platform
-    let (output, exitCode) = execCmdEx(cmd)
-    if exitCode != 0:
-      echo "✗ Install failed"
-      echo output
-      quit(1)
-    echo "✓ Installed to ", platform, " emulator"
+    for p in targetPlatforms:
+      echo "Installing to ", p, " emulator..."
+      let cmd = "pebble install --emulator " & p
+      let (output, exitCode) = execCmdEx(cmd)
+      if exitCode != 0:
+        echo "✗ Install failed for ", p
+        echo output
+        # Continue with others if 'all'
+        if targetPlatforms.len == 1:
+          quit(1)
+      else:
+        echo "✓ Installed to ", p, " emulator"
 
 proc cmdClean*() =
   ## Clean build artifacts
