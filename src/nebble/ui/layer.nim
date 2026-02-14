@@ -203,15 +203,13 @@ proc insertBelowSibling*(h: var LayerHandle, sibling: LayerHandle) {.inline.} =
   if not h.isValid or not sibling.isValid: return
   ffi.layer_insert_below_sibling(h.pRaw, sibling.pRaw)
   # Update ownership status
-  h.pParent = sibling.pParent
-  if h.pParent != nil: h.ownership = hoParented
+  h.setParent(sibling.pParent)
 
 proc insertAboveSibling*(h: var LayerHandle, sibling: LayerHandle) {.inline.} =
   ## Insert a layer above a sibling.
   if not h.isValid or not sibling.isValid: return
   ffi.layer_insert_above_sibling(h.pRaw, sibling.pRaw)
-  h.pParent = sibling.pParent
-  if h.pParent != nil: h.ownership = hoParented
+  h.setParent(sibling.pParent)
 
 # ============================================================================
 # Frame and Bounds
