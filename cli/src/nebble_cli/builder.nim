@@ -141,7 +141,7 @@ proc copyNimCFiles*(cfg: NebbleConfig, platform: string): bool =
   echo "  Copied ", filesCopied, " files to src/c/"
   return true
 
-proc runPebbleBuild*(platform: string): bool =
+proc runPebbleBuild*(cfg: NebbleConfig, platform: string): bool =
   ## Run pebble build command
   let cmd = "pebble build"
   
@@ -152,6 +152,12 @@ proc runPebbleBuild*(platform: string): bool =
     echo "  Pebble build failed:"
     echo output
     return false
+  
+  # Rename the output .pbw to include the platform name
+  let pbwFile = "build" / (cfg.name & ".pbw")
+  let platformPbwFile = "build" / (cfg.name & "_" & platform & ".pbw")
+  if fileExists(pbwFile):
+    moveFile(pbwFile, platformPbwFile)
   
   # Show relevant output (success messages)
   for line in output.splitLines():

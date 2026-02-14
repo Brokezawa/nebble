@@ -119,7 +119,7 @@ proc cmdBuild*(platform: string) =
     echo "✓ Copied Nim-generated C files"
     
     # Step 4: Run Pebble build
-    if not runPebbleBuild(p):
+    if not runPebbleBuild(cfg, p):
       echo "✗ Pebble build failed for ", p
       quit(1)
     echo "✓ Pebble build successful"
@@ -130,7 +130,7 @@ proc cmdBuild*(platform: string) =
   echo ""
   echo "Generated files:"
   for p in platforms:
-    let pbwFile = "build" / (cfg.name & ".pbw")
+    let pbwFile = "build" / (cfg.name & "_" & p & ".pbw")
     if fileExists(pbwFile):
       echo "  ", pbwFile, " (", p, ")"
 
@@ -167,7 +167,14 @@ proc cmdInstall*(platform: string, toPhone: bool, phoneIp: string) =
     
     for p in targetPlatforms:
       echo "Installing to ", p, " emulator..."
-      let cmd = "pebble install --emulator " & p
+      let pbwFile = "build" / (cfg.name & "_" & p & ".pbw")
+      if not fileExists(pbwFile):
+        echo "✗ Error: ", pbwFile, " not found. Run 'nebble build --platform ", p, "' first."
+        if targetPlatforms.len == 1:
+          quit(1)
+        continue
+
+      let cmd = "pebble install " & pbwFile & " --emulator " & p
       let (output, exitCode) = execCmdEx(cmd)
       if exitCode != 0:
         echo "✗ Install failed for ", p
@@ -177,6 +184,21 @@ proc cmdInstall*(platform: string, toPhone: bool, phoneIp: string) =
           quit(1)
       else:
         echo "✓ Installed to ", p, " emulator"
+      
+      if targetPlatforms.len > 1:
+        # Give some time for emulator to start/settle before next install
+        sleep(2000)
+
+proc cmdKill*(force: bool) =
+  ## Kill Pebble emulators
+  echo "Killing Pebble emulators..."
+  let cmd = if force: "pebble kill --force" else: "pebble kill"
+  let (output, exitCode) = execCmdEx(cmd)
+  if exitCode != 0:
+    echo "✗ Failed to kill emulators"
+    echo output
+  else:
+    echo "✓ Emulators killed"
 
 proc cmdClean*() =
   ## Clean build artifacts

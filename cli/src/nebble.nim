@@ -20,22 +20,13 @@ Usage:
   nebble build [--platform <p>]       Build the project (default: all platforms)
   nebble install --emulator <p>       Install to emulator
   nebble install --phone [<IP>]       Install to connected phone (optionally specify IP)
+  nebble kill [--force]               Kill all Pebble emulators
   nebble gen-keys                     Generate type-safe message keys from nebble.json
   nebble regen-ffi                    Regenerate Futhark FFI bindings (requires Futhark)
   nebble clean                        Remove build artifacts
   nebble size [--platform <p>]        Show binary size breakdown
   nebble help                         Show this help
   nebble version                      Show version
-
-Platforms: aplite, basalt, chalk, diorite, emery, flint
-
-Examples:
-  nebble new my_watchface --watchface
-  nebble build
-  nebble build --platform basalt
-  nebble install --emulator basalt
-  nebble size --platform aplite
-  nebble gen-keys
 """
 
 proc showHelp() =
@@ -113,6 +104,14 @@ proc main() =
     else:
       echo "Error: Specify --emulator <platform> or --phone [<IP>]"
       quit(1)
+  
+  of "kill":
+    var force = false
+    for i in 1..<args.len:
+      if args[i] == "--force":
+        force = true
+        break
+    cmdKill(force)
   
   of "clean":
     cmdClean()
