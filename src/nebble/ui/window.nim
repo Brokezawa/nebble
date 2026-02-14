@@ -177,8 +177,9 @@ proc push*(h: var WindowHandle, animated: bool = true) {.inline.} =
   ##
   ## **Example:**
   ##   mainWindow.push()  # Window now displayed
+  if h.raw == nil: return
+  
   when ManagedDebug or ManagedStrict:
-    h.checkValid()
     if h.state != rsCreated:
       when ManagedStrict:
         raise newException(AssertionDefect, "Window must be in rsCreated state to push")
@@ -195,8 +196,7 @@ proc pop*(h: var WindowHandle): bool {.inline.} =
   ##   if mainWindow.pop():
   ##     # Safe to destroy now
   ##     mainWindow = WindowHandle(nil)
-  when ManagedDebug or ManagedStrict:
-    h.checkValid()
+  if h.raw == nil: return false
   
   if h.state == rsActive:
     # Only pop if this window is actually on top
@@ -206,24 +206,13 @@ proc pop*(h: var WindowHandle): bool {.inline.} =
       if popped == h.raw:
         h.state = rsInactive
         return true
-    else:
-      when ManagedDebug:
-        discard  # Window is not on top, can't pop it
   return false
-
-proc popAll*(animated: bool = true) {.inline.} =
-  ## Pop all windows from stack.
-  ##
-  ## **Warning:** This affects ALL windows, not just managed ones.
-  ## Managed windows still need their handles updated.
-  window_stack_pop_all(animated)
 
 proc removeFromStack*(h: var WindowHandle, animated: bool = true): bool {.inline.} =
   ## Remove window from stack (even if not on top).
   ##
   ## **Transitions:** rsActive -> rsInactive (if removed)
-  when ManagedDebug or ManagedStrict:
-    h.checkValid()
+  if h.raw == nil: return false
   
   if h.state == rsActive:
     let removed = window_stack_remove(h.raw, animated)
@@ -231,6 +220,14 @@ proc removeFromStack*(h: var WindowHandle, animated: bool = true): bool {.inline
       h.state = rsInactive
       return true
   return false
+
+
+proc popAll*(animated: bool = true) {.inline.} =
+  ## Pop all windows from stack.
+  ##
+  ## **Warning:** This affects ALL windows, not just managed ones.
+  ## Managed windows still need their handles updated.
+  window_stack_pop_all(animated)
 
 # ============================================================================
 # Window Properties

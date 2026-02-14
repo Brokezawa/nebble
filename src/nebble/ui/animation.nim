@@ -130,6 +130,7 @@ proc setLayerFrame*(h: var AnimationHandle, layer: ptr Layer, startFrame, endFra
   # Replace current animation with property animation
   discard ffi.animation_destroy(h.raw)
   h.raw = cast[ptr Animation](prop)
+  h.state = asCreated
 
 proc createSequence*(animations: varargs[AnimationHandle]): AnimationHandle {.inline.} =
   ## Create a sequence animation from a list of handles.

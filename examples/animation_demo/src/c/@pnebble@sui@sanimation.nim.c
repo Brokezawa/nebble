@@ -17,28 +17,28 @@
 #undef powerpc
 #undef unix
 typedef struct tyObject_AnimationHandle__IxP1NBoRqBwj4HtS0T0Abw tyObject_AnimationHandle__IxP1NBoRqBwj4HtS0T0Abw;
-typedef struct tyObject_struct_Animation__Yalc269cwnitWaFaU4xcv9cQ tyObject_struct_Animation__Yalc269cwnitWaFaU4xcv9cQ;
+typedef struct tyObject_struct_Animation__GeFIafrrNFcU9buDmxGFXZA tyObject_struct_Animation__GeFIafrrNFcU9buDmxGFXZA;
 typedef NU8 tyEnum_AnimationState__I67DgB9c2xhR6k3WjH49b5TA;
-typedef N_CDECL_PTR(void, tyProc__nNVZwOwMLkuGp0pBSx60Wg) (tyObject_struct_Animation__Yalc269cwnitWaFaU4xcv9cQ* a0_p0, void* a1_p1);
-typedef N_CDECL_PTR(void, tyProc__ZOqJKIfCiOy9cltFlCNekgw) (tyObject_struct_Animation__Yalc269cwnitWaFaU4xcv9cQ* a0_p0, NIM_BOOL a1_p1, void* a2_p2);
+typedef N_CDECL_PTR(void, tyProc__WgpoLNNa9cb8bKU3Mu39aNSw) (tyObject_struct_Animation__GeFIafrrNFcU9buDmxGFXZA* a0_p0, void* a1_p1);
+typedef N_CDECL_PTR(void, tyProc__wjVgfDy9a1ePsNkEyMz3NvQ) (tyObject_struct_Animation__GeFIafrrNFcU9buDmxGFXZA* a0_p0, NIM_BOOL a1_p1, void* a2_p2);
 struct tyObject_AnimationHandle__IxP1NBoRqBwj4HtS0T0Abw {
-	tyObject_struct_Animation__Yalc269cwnitWaFaU4xcv9cQ* raw;
+	tyObject_struct_Animation__GeFIafrrNFcU9buDmxGFXZA* raw;
 	tyEnum_AnimationState__I67DgB9c2xhR6k3WjH49b5TA state;
-	tyProc__nNVZwOwMLkuGp0pBSx60Wg onStarted;
-	tyProc__ZOqJKIfCiOy9cltFlCNekgw onStopped;
+	tyProc__WgpoLNNa9cb8bKU3Mu39aNSw onStarted;
+	tyProc__wjVgfDy9a1ePsNkEyMz3NvQ onStopped;
 };
-struct tyObject_struct_Animation__Yalc269cwnitWaFaU4xcv9cQ {
+struct tyObject_struct_Animation__GeFIafrrNFcU9buDmxGFXZA {
 	char dummy;
 };
 N_LIB_PRIVATE N_NIMCALL(void, eqdestroy___OOZOOZOOZsrcZnebbleZuiZanimation_u18)(tyObject_AnimationHandle__IxP1NBoRqBwj4HtS0T0Abw* h_p0);
-N_CDECL(NIM_BOOL, animation_destroy)(tyObject_struct_Animation__Yalc269cwnitWaFaU4xcv9cQ* animation_p0);
-N_CDECL(NIM_BOOL, animation_unschedule)(tyObject_struct_Animation__Yalc269cwnitWaFaU4xcv9cQ* animation_p0);
+N_CDECL(NIM_BOOL, animation_destroy)(tyObject_struct_Animation__GeFIafrrNFcU9buDmxGFXZA* animation_p0);
+N_CDECL(NIM_BOOL, animation_unschedule)(tyObject_struct_Animation__GeFIafrrNFcU9buDmxGFXZA* animation_p0);
 static N_INLINE(NIM_BOOL*, nimErrorFlag)(void);
 extern NIM_BOOL nimInErrorMode__system_u3510;
 N_LIB_PRIVATE N_NIMCALL(void, eqdestroy___OOZOOZOOZsrcZnebbleZuiZanimation_u18)(tyObject_AnimationHandle__IxP1NBoRqBwj4HtS0T0Abw* h_p0) {
 {	{
 		if (!((*h_p0).state == ((tyEnum_AnimationState__I67DgB9c2xhR6k3WjH49b5TA)5))) goto LA3_;
-		(*h_p0).raw = ((tyObject_struct_Animation__Yalc269cwnitWaFaU4xcv9cQ*) NIM_NIL);
+		(*h_p0).raw = ((tyObject_struct_Animation__GeFIafrrNFcU9buDmxGFXZA*) NIM_NIL);
 		goto BeforeRet_;
 	}
 LA3_: ;
@@ -48,7 +48,7 @@ LA3_: ;
 	{
 		{
 			NIM_BOOL T10_;
-			if (!!(((*h_p0).raw == ((tyObject_struct_Animation__Yalc269cwnitWaFaU4xcv9cQ*) NIM_NIL)))) goto LA8_;
+			if (!!(((*h_p0).raw == ((tyObject_struct_Animation__GeFIafrrNFcU9buDmxGFXZA*) NIM_NIL)))) goto LA8_;
 			T10_ = (NIM_BOOL)0;
 			T10_ = animation_destroy((*h_p0).raw);
 			(void)(T10_);
@@ -62,7 +62,7 @@ LA8_: ;
 		{
 			NIM_BOOL T16_;
 			NIM_BOOL T17_;
-			if (!!(((*h_p0).raw == ((tyObject_struct_Animation__Yalc269cwnitWaFaU4xcv9cQ*) NIM_NIL)))) goto LA14_;
+			if (!!(((*h_p0).raw == ((tyObject_struct_Animation__GeFIafrrNFcU9buDmxGFXZA*) NIM_NIL)))) goto LA14_;
 			T16_ = (NIM_BOOL)0;
 			T16_ = animation_unschedule((*h_p0).raw);
 			(void)(T16_);
@@ -78,7 +78,7 @@ LA14_: ;
 	}
 	break;
 	}
-	(*h_p0).raw = ((tyObject_struct_Animation__Yalc269cwnitWaFaU4xcv9cQ*) NIM_NIL);
+	(*h_p0).raw = ((tyObject_struct_Animation__GeFIafrrNFcU9buDmxGFXZA*) NIM_NIL);
 	(*h_p0).state = ((tyEnum_AnimationState__I67DgB9c2xhR6k3WjH49b5TA)4);
 	}BeforeRet_: ;
 }
@@ -98,7 +98,7 @@ NIM_BOOL* nimErr_;
 	(*dest_p0).onStarted = src_p1.onStarted;
 	(*dest_p0).onStopped = src_p1.onStopped;
 	srcPtr_1 = ((tyObject_AnimationHandle__IxP1NBoRqBwj4HtS0T0Abw*) ((&src_p1)));
-	(*srcPtr_1).raw = ((tyObject_struct_Animation__Yalc269cwnitWaFaU4xcv9cQ*) NIM_NIL);
+	(*srcPtr_1).raw = ((tyObject_struct_Animation__GeFIafrrNFcU9buDmxGFXZA*) NIM_NIL);
 	(*srcPtr_1).state = ((tyEnum_AnimationState__I67DgB9c2xhR6k3WjH49b5TA)4);
 	}BeforeRet_: ;
 }
