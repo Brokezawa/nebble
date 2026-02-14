@@ -15,7 +15,7 @@ nebbleApp:
   textLayer:
     id = titleLayer
     fullWidth = true
-    y = center
+    y = 40
     h = 40
     text = "Vibes Demo"
     alignment = GTextAlignmentCenter
@@ -24,7 +24,7 @@ nebbleApp:
   textLayer:
     id = instructionsLayer
     fullWidth = true
-    y = 120
+    y = 90
     h = 60
     text = "SELECT: Short\nUP: Long\nDOWN: Double"
     alignment = GTextAlignmentCenter
@@ -35,12 +35,15 @@ nebbleApp:
     BUTTON_ID_UP = upClickHandler
     BUTTON_ID_DOWN = downClickHandler
 
+var
+  # Use global to ensure memory persists for Aplite pattern
+  apliteDurations: array[2, uint32] = [100'u32, 100'u32]
+
 # Implementations
 proc selectClickHandler(recognizer: ClickRecognizerRef; context: pointer) {.cdecl.} =
   when defined(pebbleAplite):
-    # Try custom pattern on Aplite
-    var durations: array[2, uint32] = [100'u32, 100'u32]
-    vibes.enqueueCustomPattern(addr durations[0], 2)
+    # Enqueue custom pattern for Aplite (workaround for emulator issues)
+    vibes.enqueueCustomPattern(addr apliteDurations[0], 2)
   else:
     vibes.shortPulse()
   titleLayer.text = "Short Pulse"

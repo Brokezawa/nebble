@@ -44,8 +44,8 @@ nebbleApp:
     
   textLayer:
     id = boxLayer
-    x = center
-    y = center
+    x = 10
+    y = 140
     w = 15
     h = 15
     bgColor = GColorWhite
