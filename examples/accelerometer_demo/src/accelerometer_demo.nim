@@ -14,8 +14,8 @@ nebbleApp:
   textLayer:
     id = titleLayer
     fullWidth = true
-    y = 20
-    h = 30
+    y = pblIfRoundElse(25, 10)
+    h = 35
     text = "Accelerometer"
     alignment = GTextAlignmentCenter
     font = FONT_KEY_GOTHIC_24_BOLD
@@ -23,32 +23,35 @@ nebbleApp:
   textLayer:
     id = xLayer
     x = center
-    y = 55
-    w = 104
-    h = 20
+    y = pblIfRoundElse(65, 50)
+    w = 140
+    h = 24
     font = FONT_KEY_GOTHIC_18
+    alignment = GTextAlignmentCenter
     
   textLayer:
     id = yLayer
     x = center
-    y = 75
-    w = 104
-    h = 20
+    y = pblIfRoundElse(90, 75)
+    w = 140
+    h = 24
     font = FONT_KEY_GOTHIC_18
+    alignment = GTextAlignmentCenter
     
   textLayer:
     id = zLayer
     x = center
-    y = 95
-    w = 104
-    h = 20
+    y = pblIfRoundElse(115, 100)
+    w = 140
+    h = 24
     font = FONT_KEY_GOTHIC_18
+    alignment = GTextAlignmentCenter
     
   textLayer:
     id = tapLayer
     fullWidth = true
-    y = 125
-    h = 25
+    y = PBLDisplayHeight - 40
+    h = 30
     text = "Tap the watch!"
     alignment = GTextAlignmentCenter
     font = FONT_KEY_GOTHIC_18_BOLD
