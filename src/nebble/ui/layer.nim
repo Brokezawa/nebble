@@ -178,16 +178,20 @@ proc removeFromParent*(child: var LayerHandle) {.inline.} =
   
   ffi.layer_remove_from_parent(child.pRaw)
   child.pParent = nil
-  child.ownership = hoOwned # Regains ownership
+  if child.ownership == hoParented:
+    child.ownership = hoOwned # Regains ownership
 
 proc setParent*(child: var any, parentPtr: ptr Layer) {.inline.} =
   ## Internal helper to set the parent pointer on a child handle.
   when compiles(child.pParent):
-    child.pParent = parentPtr
     if parentPtr != nil:
-      child.ownership = hoParented
+      child.pParent = parentPtr
+      if child.ownership == hoOwned:
+        child.ownership = hoParented
     else:
-      child.ownership = hoOwned
+      child.pParent = nil
+      if child.ownership == hoParented:
+        child.ownership = hoOwned
 
 proc removeChildLayers*(parent: var LayerHandle) {.inline.} =
   ## Remove all child layers from this parent.

@@ -52,9 +52,12 @@ proc read*[N](key: uint32, s: var FixedString[N]): cint {.inline.} =
   ## Read a string from persistent storage into a FixedString.
   ## Returns the length of the string, or negative on error.
   let res = ffi.persist_read_string(key, s.toCstring, N.csize_t)
-  if res >= 0:
-    s.len = min(res.int, N - 1)
+  if res > 0:
+    # persist_read_string returns length including NULL terminator
+    s.len = min(res.int - 1, N - 1)
     s.data[s.len] = '\0' # Ensure null termination
+  elif res == 0:
+    s.clear()
   result = res
 
 proc write*[N](key: uint32, s: var FixedString[N]): cint {.inline.} =

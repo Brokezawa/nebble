@@ -17,27 +17,27 @@
 #undef powerpc
 #undef unix
 typedef struct tyObject_ActionBarLayerHandle__DsZ3uDf7iYQU3yX00y7WMg tyObject_ActionBarLayerHandle__DsZ3uDf7iYQU3yX00y7WMg;
-typedef struct tyObject_struct_ActionBarLayer__WTvPbtZjrbDUaeqziPvLOA tyObject_struct_ActionBarLayer__WTvPbtZjrbDUaeqziPvLOA;
-typedef struct tyObject_struct_Layer__KCpfpF2jwj5coKARWsuAMQ tyObject_struct_Layer__KCpfpF2jwj5coKARWsuAMQ;
-typedef struct tyObject_struct_Window__x0oI0MSh79clnNFs7R9bwHcA tyObject_struct_Window__x0oI0MSh79clnNFs7R9bwHcA;
+typedef struct tyObject_struct_ActionBarLayer__mdZNVulk2eRLxA9coyKDTfQ tyObject_struct_ActionBarLayer__mdZNVulk2eRLxA9coyKDTfQ;
+typedef struct tyObject_struct_Layer__ArRLSoHcgGa9cBzSS1Rec1A tyObject_struct_Layer__ArRLSoHcgGa9cBzSS1Rec1A;
+typedef struct tyObject_struct_Window__esLx3vYHW9aoDk9a25tQZ3QQ tyObject_struct_Window__esLx3vYHW9aoDk9a25tQZ3QQ;
 typedef NU8 tyEnum_HandleOwnership__3LuuM4we4wvfaiVTiUX3UQ;
 struct tyObject_ActionBarLayerHandle__DsZ3uDf7iYQU3yX00y7WMg {
-	tyObject_struct_ActionBarLayer__WTvPbtZjrbDUaeqziPvLOA* pRaw;
+	tyObject_struct_ActionBarLayer__mdZNVulk2eRLxA9coyKDTfQ* pRaw;
 	tyEnum_HandleOwnership__3LuuM4we4wvfaiVTiUX3UQ ownership;
-	tyObject_struct_Layer__KCpfpF2jwj5coKARWsuAMQ* pParent;
-	tyObject_struct_Window__x0oI0MSh79clnNFs7R9bwHcA* attachedWindow;
+	tyObject_struct_Layer__ArRLSoHcgGa9cBzSS1Rec1A* pParent;
+	tyObject_struct_Window__esLx3vYHW9aoDk9a25tQZ3QQ* attachedWindow;
 };
-struct tyObject_struct_ActionBarLayer__WTvPbtZjrbDUaeqziPvLOA {
+struct tyObject_struct_ActionBarLayer__mdZNVulk2eRLxA9coyKDTfQ {
 	char dummy;
 };
-struct tyObject_struct_Window__x0oI0MSh79clnNFs7R9bwHcA {
+struct tyObject_struct_Window__esLx3vYHW9aoDk9a25tQZ3QQ {
 	char dummy;
 };
-struct tyObject_struct_Layer__KCpfpF2jwj5coKARWsuAMQ {
+struct tyObject_struct_Layer__ArRLSoHcgGa9cBzSS1Rec1A {
 	char dummy;
 };
 N_LIB_PRIVATE N_NIMCALL(void, eqdestroy___OOZOOZOOZsrcZnebbleZuiZaction95bar_u8)(tyObject_ActionBarLayerHandle__DsZ3uDf7iYQU3yX00y7WMg* h_p0);
-N_CDECL(void, action_bar_layer_destroy)(tyObject_struct_ActionBarLayer__WTvPbtZjrbDUaeqziPvLOA* action_bar_layer_p0);
+N_CDECL(void, action_bar_layer_destroy)(tyObject_struct_ActionBarLayer__mdZNVulk2eRLxA9coyKDTfQ* action_bar_layer_p0);
 static N_INLINE(NIM_BOOL*, nimErrorFlag)(void);
 extern NIM_BOOL nimInErrorMode__system_u3510;
 N_LIB_PRIVATE N_NIMCALL(void, eqdestroy___OOZOOZOOZsrcZnebbleZuiZaction95bar_u8)(tyObject_ActionBarLayerHandle__DsZ3uDf7iYQU3yX00y7WMg* h_p0) {
@@ -46,22 +46,22 @@ N_LIB_PRIVATE N_NIMCALL(void, eqdestroy___OOZOOZOOZsrcZnebbleZuiZaction95bar_u8)
 		NIM_BOOL T4_;
 		T3_ = (NIM_BOOL)0;
 		T4_ = (NIM_BOOL)0;
-		T4_ = !(((*h_p0).pRaw == ((tyObject_struct_ActionBarLayer__WTvPbtZjrbDUaeqziPvLOA*) NIM_NIL)));
+		T4_ = !(((*h_p0).pRaw == ((tyObject_struct_ActionBarLayer__mdZNVulk2eRLxA9coyKDTfQ*) NIM_NIL)));
 		if (!(T4_)) goto LA5_;
 		T4_ = ((*h_p0).ownership == ((tyEnum_HandleOwnership__3LuuM4we4wvfaiVTiUX3UQ)1));
 LA5_: ;
 		T3_ = T4_;
 		if (!(T3_)) goto LA6_;
-		T3_ = ((*h_p0).attachedWindow == ((tyObject_struct_Window__x0oI0MSh79clnNFs7R9bwHcA*) NIM_NIL));
+		T3_ = ((*h_p0).attachedWindow == ((tyObject_struct_Window__esLx3vYHW9aoDk9a25tQZ3QQ*) NIM_NIL));
 LA6_: ;
 		if (!T3_) goto LA7_;
 		action_bar_layer_destroy((*h_p0).pRaw);
 	}
 LA7_: ;
-	(*h_p0).pRaw = ((tyObject_struct_ActionBarLayer__WTvPbtZjrbDUaeqziPvLOA*) NIM_NIL);
+	(*h_p0).pRaw = ((tyObject_struct_ActionBarLayer__mdZNVulk2eRLxA9coyKDTfQ*) NIM_NIL);
 	(*h_p0).ownership = ((tyEnum_HandleOwnership__3LuuM4we4wvfaiVTiUX3UQ)0);
-	(*h_p0).attachedWindow = ((tyObject_struct_Window__x0oI0MSh79clnNFs7R9bwHcA*) NIM_NIL);
-	(*h_p0).pParent = ((tyObject_struct_Layer__KCpfpF2jwj5coKARWsuAMQ*) NIM_NIL);
+	(*h_p0).attachedWindow = ((tyObject_struct_Window__esLx3vYHW9aoDk9a25tQZ3QQ*) NIM_NIL);
+	(*h_p0).pParent = ((tyObject_struct_Layer__ArRLSoHcgGa9cBzSS1Rec1A*) NIM_NIL);
 }
 static N_INLINE(NIM_BOOL*, nimErrorFlag)(void) {
 	NIM_BOOL* result;
@@ -79,9 +79,9 @@ NIM_BOOL* nimErr_;
 	(*dest_p0).attachedWindow = src_p1.attachedWindow;
 	(*dest_p0).pParent = src_p1.pParent;
 	srcPtr_1 = ((tyObject_ActionBarLayerHandle__DsZ3uDf7iYQU3yX00y7WMg*) ((&src_p1)));
-	(*srcPtr_1).pRaw = ((tyObject_struct_ActionBarLayer__WTvPbtZjrbDUaeqziPvLOA*) NIM_NIL);
+	(*srcPtr_1).pRaw = ((tyObject_struct_ActionBarLayer__mdZNVulk2eRLxA9coyKDTfQ*) NIM_NIL);
 	(*srcPtr_1).ownership = ((tyEnum_HandleOwnership__3LuuM4we4wvfaiVTiUX3UQ)0);
-	(*srcPtr_1).attachedWindow = ((tyObject_struct_Window__x0oI0MSh79clnNFs7R9bwHcA*) NIM_NIL);
-	(*srcPtr_1).pParent = ((tyObject_struct_Layer__KCpfpF2jwj5coKARWsuAMQ*) NIM_NIL);
+	(*srcPtr_1).attachedWindow = ((tyObject_struct_Window__esLx3vYHW9aoDk9a25tQZ3QQ*) NIM_NIL);
+	(*srcPtr_1).pParent = ((tyObject_struct_Layer__ArRLSoHcgGa9cBzSS1Rec1A*) NIM_NIL);
 	}BeforeRet_: ;
 }

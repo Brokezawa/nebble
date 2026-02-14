@@ -131,14 +131,33 @@ proc setLayerFrame*(h: var AnimationHandle, layer: ptr Layer, startFrame, endFra
   discard ffi.animation_destroy(h.raw)
   h.raw = cast[ptr Animation](prop)
 
-proc createSequence*(animations: varargs[ptr Animation]): AnimationHandle {.inline.} =
+proc createSequence*(animations: varargs[AnimationHandle]): AnimationHandle {.inline.} =
+  ## Create a sequence animation from a list of handles.
+  ## Ownership of the animations is transferred to the sequence.
   if animations.len == 0: return AnimationHandle(raw: nil, state: asDestroyed)
-  let res = ffi.animation_sequence_create_from_array(cast[ptr ptr Animation](unsafeAddr animations[0]), animations.len.uint32)
+  
+  var raws = newSeq[ptr Animation](animations.len)
+  for i in 0..<animations.len:
+    raws[i] = animations[i].raw
+    # Transfer ownership: mark source as unowned so it doesn't destroy on scope exit
+    var srcPtr = cast[ptr AnimationHandle](unsafeAddr animations[i])
+    srcPtr.state = asUnowned
+    
+  let res = ffi.animation_sequence_create_from_array(addr raws[0], animations.len.uint32)
   result = wrapOwned(res)
 
-proc createSpawn*(animations: varargs[ptr Animation]): AnimationHandle {.inline.} =
+proc createSpawn*(animations: varargs[AnimationHandle]): AnimationHandle {.inline.} =
+  ## Create a spawn animation from a list of handles.
+  ## Ownership of the animations is transferred to the group.
   if animations.len == 0: return AnimationHandle(raw: nil, state: asDestroyed)
-  let res = ffi.animation_spawn_create_from_array(cast[ptr ptr Animation](unsafeAddr animations[0]), animations.len.uint32)
+  
+  var raws = newSeq[ptr Animation](animations.len)
+  for i in 0..<animations.len:
+    raws[i] = animations[i].raw
+    var srcPtr = cast[ptr AnimationHandle](unsafeAddr animations[i])
+    srcPtr.state = asUnowned
+    
+  let res = ffi.animation_spawn_create_from_array(addr raws[0], animations.len.uint32)
   result = wrapOwned(res)
 
 proc `shouldAutoReverse=`*(h: var AnimationHandle, reverse: bool) {.inline.} =

@@ -114,13 +114,14 @@ template DefineUniqueHandle*(Name: untyped, RawType: typedesc,
   proc isNil*(h: `Name Handle`): bool {.inline.} = h.pRaw == nil
 
   proc setParent*(h: var `Name Handle`, p: ptr Layer) {.inline.} =
-    h.pParent = p
     if p != nil:
-      h.ownership = hoParented
+      h.pParent = p
+      if h.ownership == hoOwned:
+        h.ownership = hoParented
     else:
-      # If parent is cleared, we assume it's now owned by the handle again?
-      # Usually Pebble doesn't work this way (removeFromParent means you own it again)
-      h.ownership = hoOwned
+      h.pParent = nil
+      if h.ownership == hoParented:
+        h.ownership = hoOwned
 
   proc reset*(h: var `Name Handle`) =
     `=destroy`(h)

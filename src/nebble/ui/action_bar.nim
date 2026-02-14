@@ -53,9 +53,14 @@ converter toPtr*(h: ActionBarLayerHandle): ptr ActionBarLayer = h.pRaw
 proc isValid*(h: ActionBarLayerHandle): bool {.inline.} = h.pRaw != nil
 
 proc setParent*(h: var ActionBarLayerHandle, p: ptr Layer) {.inline.} =
-  h.pParent = p
-  if p != nil: h.ownership = hoParented
-  else: h.ownership = hoOwned
+  if p != nil:
+    h.pParent = p
+    if h.ownership == hoOwned:
+      h.ownership = hoParented
+  else:
+    h.pParent = nil
+    if h.ownership == hoParented:
+      h.ownership = hoOwned
 
 when ManagedDebug or ManagedStrict:
   proc checkValid*(h: ActionBarLayerHandle) =
@@ -83,16 +88,18 @@ proc getLayer*(h: ActionBarLayerHandle): ptr Layer {.inline.} =
   ffi.action_bar_layer_get_layer(h.pRaw)
 
 proc addToWindow*(h: var ActionBarLayerHandle, win: ptr Window) {.inline.} =
-  if h.pRaw == nil: return
+  if h.pRaw == nil or win == nil: return
   ffi.action_bar_layer_add_to_window(h.pRaw, win)
   h.attachedWindow = win
-  h.ownership = hoParented # Owned by window stack logic
+  if h.ownership == hoOwned:
+    h.ownership = hoParented # Owned by window stack logic
 
 proc removeFromWindow*(h: var ActionBarLayerHandle) {.inline.} =
   if h.pRaw == nil: return
   ffi.action_bar_layer_remove_from_window(h.pRaw)
   h.attachedWindow = nil
-  h.ownership = hoOwned # Back to owned
+  if h.ownership == hoParented:
+    h.ownership = hoOwned # Back to owned
 
 proc setIcon*(h: ActionBarLayerHandle, buttonId: ButtonId, icon: ptr GBitmap) {.inline.} =
   if h.pRaw == nil: return
