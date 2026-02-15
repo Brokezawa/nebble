@@ -195,22 +195,18 @@
     
     <p class="module-desc"><p>High-level Nim wrapper for Pebble Health Service API.</p>
 <p>Provides access to fitness and health metrics including steps, distance, active seconds, sleep, and heart rate. Supports both current values and historical data aggregation.</p>
-Example usage (device or host smoke tests):<ol class="simple"><li><p>Check availability and sum a metric over 7 days:</p>
-<p><pre class="listing"><span class="Keyword">let</span> <span class="Identifier">now</span> <span class="Operator">=</span> <span class="Identifier">epochTime</span><span class="Punctuation">(</span><span class="Punctuation">)</span>
-<span class="Keyword">let</span> <span class="Identifier">start</span> <span class="Operator">=</span> <span class="Identifier">now</span> <span class="Operator">-</span> <span class="DecNumber">7</span> <span class="Operator">*</span> <span class="DecNumber">24</span> <span class="Operator">*</span> <span class="DecNumber">60</span> <span class="Operator">*</span> <span class="DecNumber">60</span>
-<span class="Keyword">if</span> <span class="Identifier">metricAveragedAccessible</span><span class="Punctuation">(</span><span class="Identifier">HealthMetricStepCount</span><span class="Punctuation">,</span> <span class="Identifier">start</span><span class="Punctuation">,</span> <span class="Identifier">now</span><span class="Punctuation">,</span> <span class="Identifier">HealthServiceTimeScopeDaily</span><span class="Punctuation">)</span> <span class="Operator">!=</span> <span class="DecNumber">0</span><span class="Punctuation">:</span>
-  <span class="Keyword">let</span> <span class="Identifier">total</span> <span class="Operator">=</span> <span class="Identifier">sum</span><span class="Punctuation">(</span><span class="Identifier">HealthMetricStepCount</span><span class="Punctuation">,</span> <span class="Identifier">start</span><span class="Punctuation">,</span> <span class="Identifier">now</span><span class="Punctuation">)</span></pre></p>
-</li>
-<li><p>Read minute history into a caller-provided array (no heap allocation):</p>
-<p><pre class="listing"><span class="Keyword">var</span> <span class="Identifier">buf</span><span class="Punctuation">:</span> <span class="Identifier">array</span><span class="Punctuation">[</span><span class="DecNumber">60</span><span class="Punctuation">,</span> <span class="Identifier">HealthMinuteData</span><span class="Punctuation">]</span>
-<span class="Keyword">let</span> <span class="Identifier">count</span> <span class="Operator">=</span> <span class="Identifier">getMinuteHistory</span><span class="Punctuation">(</span><span class="Keyword">addr</span> <span class="Identifier">buf</span><span class="Punctuation">[</span><span class="DecNumber">0</span><span class="Punctuation">]</span><span class="Punctuation">,</span> <span class="Identifier">uint32</span><span class="Punctuation">(</span><span class="Identifier">buf</span><span class="Operator">.</span><span class="Identifier">len</span><span class="Punctuation">)</span><span class="Punctuation">,</span> <span class="Keyword">addr</span> <span class="Identifier">start</span><span class="Punctuation">,</span> <span class="Keyword">addr</span> <span class="Identifier">now</span><span class="Punctuation">)</span></pre></p>
-</li>
-<li><p>Register + cancel metric alert:</p>
-<p><pre class="listing"><span class="Keyword">let</span> <span class="Identifier">alert</span> <span class="Operator">=</span> <span class="Identifier">registerMetricAlert</span><span class="Punctuation">(</span><span class="Identifier">HealthMetricStepCount</span><span class="Punctuation">,</span> <span class="DecNumber">1000</span><span class="Punctuation">)</span>
-<span class="Keyword">if</span> <span class="Identifier">alert</span> <span class="Operator">!=</span> <span class="Keyword">nil</span><span class="Punctuation">:</span> <span class="Keyword">discard</span> <span class="Identifier">cancelMetricAlert</span><span class="Punctuation">(</span><span class="Identifier">alert</span><span class="Punctuation">)</span></pre></p>
-</li>
+Example usage:<ol class="simple"><li>Check availability and sum a metric over 7 days:</li>
 </ol>
-</p>
+<pre class="listing"><span class="Keyword">let</span> <span class="Identifier">now</span> <span class="Operator">=</span> <span class="Identifier">epochTime</span><span class="Punctuation">(</span><span class="Punctuation">)</span>
+<span class="Keyword">let</span> <span class="Identifier">start</span> <span class="Operator">=</span> <span class="Identifier">now</span> <span class="Operator">-</span> <span class="DecNumber">7</span> <span class="Operator">*</span> <span class="DecNumber">24</span> <span class="Operator">*</span> <span class="DecNumber">60</span> <span class="Operator">*</span> <span class="DecNumber">60</span>
+<span class="Keyword">if</span> <span class="Identifier">metricAveragedAccessible</span><span class="Punctuation">(</span><span class="Identifier">HealthMetricStepCount</span><span class="Punctuation">,</span> <span class="Identifier">start</span><span class="Punctuation">,</span> <span class="Identifier">now</span><span class="Punctuation">,</span> <span class="Identifier">HealthServiceTimeScopeDaily</span><span class="Punctuation">)</span> <span class="Operator">!=</span> <span class="Identifier">HealthServiceAccessibilityMaskAvailable</span><span class="Punctuation">:</span>
+  <span class="Keyword">let</span> <span class="Identifier">total</span> <span class="Operator">=</span> <span class="Identifier">sum</span><span class="Punctuation">(</span><span class="Identifier">HealthMetricStepCount</span><span class="Punctuation">,</span> <span class="Identifier">start</span><span class="Punctuation">,</span> <span class="Identifier">now</span><span class="Punctuation">)</span></pre><ol class="simple" start="2"><li>Read minute history into a caller-provided array (no heap allocation):</li>
+</ol>
+<pre class="listing"><span class="Keyword">var</span> <span class="Identifier">buf</span><span class="Punctuation">:</span> <span class="Identifier">array</span><span class="Punctuation">[</span><span class="DecNumber">60</span><span class="Punctuation">,</span> <span class="Identifier">HealthMinuteData</span><span class="Punctuation">]</span>
+<span class="Keyword">let</span> <span class="Identifier">count</span> <span class="Operator">=</span> <span class="Identifier">getMinuteHistory</span><span class="Punctuation">(</span><span class="Keyword">addr</span> <span class="Identifier">buf</span><span class="Punctuation">[</span><span class="DecNumber">0</span><span class="Punctuation">]</span><span class="Punctuation">,</span> <span class="DecNumber">60</span><span class="Punctuation">,</span> <span class="Keyword">addr</span> <span class="Identifier">start</span><span class="Punctuation">,</span> <span class="Keyword">addr</span> <span class="Identifier">now</span><span class="Punctuation">)</span></pre><ol class="simple" start="3"><li>Register + cancel metric alert:</li>
+</ol>
+<pre class="listing"><span class="Keyword">let</span> <span class="Identifier">alert</span> <span class="Operator">=</span> <span class="Identifier">registerMetricAlert</span><span class="Punctuation">(</span><span class="Identifier">HealthMetricStepCount</span><span class="Punctuation">,</span> <span class="DecNumber">1000</span><span class="Punctuation">)</span>
+<span class="Keyword">if</span> <span class="Identifier">alert</span> <span class="Operator">!=</span> <span class="Keyword">nil</span><span class="Punctuation">:</span> <span class="Keyword">discard</span> <span class="Identifier">cancelMetricAlert</span><span class="Punctuation">(</span><span class="Identifier">alert</span><span class="Punctuation">)</span></pre></p>
     <div class="section" id="6">
   <h1><a class="toc-backref" href="#6">Imports</a></h1>
   <dl class="item">
@@ -354,8 +350,7 @@ Example usage (device or host smoke tests):<ol class="simple"><li><p>Check avail
   <dd>
     
     <p>Get per-minute health data history. Fills minuteData array with steps per minute for the requested time range. Returns the number of minutes actually retrieved.</p>
-<p>Usage: var data: array<a class="reference internal" href="#60, HealthMinuteData">60, HealthMinuteData</a> let count = getMinuteHistory(addr data<a class="reference internal" href="#0">0</a>, 60, addr startTime, addr endTime)</p>
-<p>Equivalent to C function <tt class="docutils literal"><span class="pre"><span class="Identifier">health_service_get_minute_history</span><span class="Punctuation">(</span><span class="Identifier">minute_data</span><span class="Punctuation">,</span> <span class="Identifier">max_records</span><span class="Punctuation">,</span> <span class="Identifier">time_start</span><span class="Punctuation">,</span> <span class="Identifier">time_end</span><span class="Punctuation">)</span></span></tt>.</p>
+<p>Usage: var data: <tt class="docutils literal"><span class="pre"><span class="Identifier">array</span><span class="Punctuation">[</span><span class="DecNumber">60</span><span class="Punctuation">,</span> <span class="Identifier">HealthMinuteData</span><span class="Punctuation">]</span></span></tt> let count = getMinuteHistory(addr data<a class="reference internal" href="#0">0</a>, 60, addr startTime, addr endTime)</p>
 
     
   </dd>
@@ -546,7 +541,7 @@ Example usage (device or host smoke tests):<ol class="simple"><li><p>Check avail
       <div class="twelve-columns footer">
         <span class="nim-sprite"></span>
         <br>
-        <small style="color: var(--hint);">Made with Nim. Generated: 2026-02-14 21:03:57 UTC</small>
+        <small style="color: var(--hint);">Made with Nim. Generated: 2026-02-15 12:22:51 UTC</small>
       </div>
     </div>
   </div>

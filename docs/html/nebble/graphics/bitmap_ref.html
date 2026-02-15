@@ -112,6 +112,7 @@
 </ul>
 <ul class="simple nested-toc-section">newBitmapRef
   <li><a class="reference" href="#newBitmapRef%2Cptr.uint8" title="newBitmapRef(data: ptr uint8): GBitmapRef">newBitmapRef(data: ptr uint8): GBitmapRef</a></li>
+<li><a class="reference" href="#newBitmapRef%2Cptr.uint8%2Cint" title="newBitmapRef(pngData: ptr uint8; len: int): GBitmapRef">newBitmapRef(pngData: ptr uint8; len: int): GBitmapRef</a></li>
 <li><a class="reference" href="#newBitmapRef%2Cseq%5Bbyte%5D" title="newBitmapRef(pngData: seq[byte]): GBitmapRef">newBitmapRef(pngData: seq[byte]): GBitmapRef</a></li>
 <li><a class="reference" href="#newBitmapRef%2Cuint32" title="newBitmapRef(resourceId: uint32): GBitmapRef">newBitmapRef(resourceId: uint32): GBitmapRef</a></li>
 
@@ -355,12 +356,21 @@
     
   </dd>
 </div>
+<div id="newBitmapRef,ptr.uint8,int">
+  <dt><pre><span class="Keyword">proc</span> <a href="#newBitmapRef%2Cptr.uint8%2Cint"><span class="Identifier">newBitmapRef</span></a><span class="Other">(</span><span class="Identifier">pngData</span><span class="Other">:</span> <span class="Keyword">ptr</span> <span class="Identifier">uint8</span><span class="Other">;</span> <span class="Identifier">len</span><span class="Other">:</span> <span class="Identifier">int</span><span class="Other">)</span><span class="Other">:</span> <a href="bitmap_ref.html#GBitmapRef"><span class="Identifier">GBitmapRef</span></a> {.<span><span class="Other pragmadots">...</span></span><span class="pragmawrap"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span>
+    <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">forbids</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span>.}</pre></dt>
+  <dd>
+    
+    Create a reference-counted bitmap from raw PNG data. This avoids Nim heap allocations if the data is in a static buffer.
+    
+  </dd>
+</div>
 <div id="newBitmapRef,seq[byte]">
   <dt><pre><span class="Keyword">proc</span> <a href="#newBitmapRef%2Cseq%5Bbyte%5D"><span class="Identifier">newBitmapRef</span></a><span class="Other">(</span><span class="Identifier">pngData</span><span class="Other">:</span> <span class="Identifier">seq</span><span class="Other">[</span><span class="Identifier">byte</span><span class="Other">]</span><span class="Other">)</span><span class="Other">:</span> <a href="bitmap_ref.html#GBitmapRef"><span class="Identifier">GBitmapRef</span></a> {.<span><span class="Other pragmadots">...</span></span><span class="pragmawrap"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span>
     <span class="Identifier">forbids</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span>.}</pre></dt>
   <dd>
     
-    Create a reference-counted bitmap from PNG data. Note: PNG support may vary by platform.
+    Create a reference-counted bitmap from PNG data. <strong>Note:</strong> This will allocate on the Nim heap due to the <tt class="docutils literal"><span class="pre"><span class="Identifier">seq</span><span class="Punctuation">[</span><span class="Identifier">byte</span><span class="Punctuation">]</span></span></tt> parameter. Use the <tt class="docutils literal"><span class="pre"><span class="Keyword">ptr</span> <span class="Identifier">uint8</span></span></tt> overload for zero-heap operation with static data.
     
   </dd>
 </div>
@@ -478,7 +488,7 @@
       <div class="twelve-columns footer">
         <span class="nim-sprite"></span>
         <br>
-        <small style="color: var(--hint);">Made with Nim. Generated: 2026-02-14 21:03:57 UTC</small>
+        <small style="color: var(--hint);">Made with Nim. Generated: 2026-02-15 12:22:51 UTC</small>
       </div>
     </div>
   </div>

@@ -1,35 +1,35 @@
 nimTitle	animation	nebble/ui/animation.html	module nebble/ui/animation		0
-nim	asCreated	nebble/ui/animation.html#asCreated	AnimationState.asCreated		8
-nim	asScheduled	nebble/ui/animation.html#asScheduled	AnimationState.asScheduled		8
-nim	asRunning	nebble/ui/animation.html#asRunning	AnimationState.asRunning		8
-nim	asCompleted	nebble/ui/animation.html#asCompleted	AnimationState.asCompleted		8
-nim	asDestroyed	nebble/ui/animation.html#asDestroyed	AnimationState.asDestroyed		8
-nim	asUnowned	nebble/ui/animation.html#asUnowned	AnimationState.asUnowned		8
-nim	AnimationState	nebble/ui/animation.html#AnimationState	enum AnimationState		8
-nim	AnimationHandle	nebble/ui/animation.html#AnimationHandle	object AnimationHandle		16
-nim	`=destroy`	nebble/ui/animation.html#=destroy,AnimationHandle	proc `=destroy`(h: var AnimationHandle)		22
-nim	`=wasMoved`	nebble/ui/animation.html#=wasMoved,AnimationHandle	proc `=wasMoved`(h: var AnimationHandle)		40
-nim	`=copy`	nebble/ui/animation.html#=copy,AnimationHandle,AnimationHandle	proc `=copy`(dest: var AnimationHandle; src: AnimationHandle)		44
-nim	`=sink`	nebble/ui/animation.html#=sink,AnimationHandle,AnimationHandle	proc `=sink`(dest: var AnimationHandle; src: AnimationHandle)		46
-nim	toPtr	nebble/ui/animation.html#toPtr.c,AnimationHandle	converter toPtr(h: AnimationHandle): ptr Animation		56
-nim	toHandle	nebble/ui/animation.html#toHandle,ptr.struct_Animation	proc toHandle(p: ptr Animation): AnimationHandle		58
-nim	raw	nebble/ui/animation.html#raw,AnimationHandle	proc raw(h: AnimationHandle): ptr Animation		61
-nim	wrapOwned	nebble/ui/animation.html#wrapOwned,ptr.struct_Animation	proc wrapOwned(p: ptr Animation): AnimationHandle		63
-nim	newAnimationHandle	nebble/ui/animation.html#newAnimationHandle	proc newAnimationHandle(): AnimationHandle		66
-nim	setDuration	nebble/ui/animation.html#setDuration,AnimationHandle,uint32	proc setDuration(h: var AnimationHandle; duration: uint32)		69
-nim	duration=	nebble/ui/animation.html#duration=,AnimationHandle,uint32	proc duration=(h: var AnimationHandle; duration: uint32)		73
-nim	setCurve	nebble/ui/animation.html#setCurve,AnimationHandle,AnimationCurve	proc setCurve(h: var AnimationHandle; curve: AnimationCurve)		77
-nim	curve=	nebble/ui/animation.html#curve=,AnimationHandle,AnimationCurve	proc curve=(h: var AnimationHandle; curve: AnimationCurve)		81
-nim	setPlayCount	nebble/ui/animation.html#setPlayCount,AnimationHandle,uint32	proc setPlayCount(h: var AnimationHandle; count: uint32)		85
-nim	playCount=	nebble/ui/animation.html#playCount=,AnimationHandle,uint32	proc playCount=(h: var AnimationHandle; count: uint32)		89
-nim	setDelay	nebble/ui/animation.html#setDelay,AnimationHandle,uint32	proc setDelay(h: var AnimationHandle; delay: uint32)		93
-nim	delay=	nebble/ui/animation.html#delay=,AnimationHandle,uint32	proc delay=(h: var AnimationHandle; delay: uint32)		97
-nim	setHandlers	nebble/ui/animation.html#setHandlers,AnimationHandle,AnimationStartedHandler,AnimationStoppedHandler,pointer	proc setHandlers(h: var AnimationHandle; onStarted: AnimationStartedHandler = nil;\n            onStopped: AnimationStoppedHandler = nil; context: pointer = nil)		101
-nim	schedule	nebble/ui/animation.html#schedule,AnimationHandle	proc schedule(h: var AnimationHandle)		110
-nim	unschedule	nebble/ui/animation.html#unschedule,AnimationHandle	proc unschedule(h: var AnimationHandle)		115
-nim	newAnimationHandle	nebble/ui/animation.html#newAnimationHandle,ptr.struct_Layer,GRect,GRect,uint32,AnimationCurve	proc newAnimationHandle(layer: ptr Layer; startFrame, endFrame: GRect;\n                   duration: uint32 = 250;\n                   curve: AnimationCurve = AnimationCurveEaseInOut): AnimationHandle		120
-nim	setLayerFrame	nebble/ui/animation.html#setLayerFrame,AnimationHandle,ptr.struct_Layer,GRect,GRect	proc setLayerFrame(h: var AnimationHandle; layer: ptr Layer;\n              startFrame, endFrame: GRect)		128
-nim	createSequence	nebble/ui/animation.html#createSequence,varargs[AnimationHandle]	proc createSequence(animations: varargs[AnimationHandle]): AnimationHandle		136
-nim	createSpawn	nebble/ui/animation.html#createSpawn,varargs[AnimationHandle]	proc createSpawn(animations: varargs[AnimationHandle]): AnimationHandle		151
-nim	shouldAutoReverse=	nebble/ui/animation.html#shouldAutoReverse=,AnimationHandle,bool	proc shouldAutoReverse=(h: var AnimationHandle; reverse: bool)		165
-nimgrp	newanimationhandle	nebble/ui/animation.html#newAnimationHandle-procs-all	proc		66
+nim	asCreated	nebble/ui/animation.html#asCreated	AnimationState.asCreated		7
+nim	asScheduled	nebble/ui/animation.html#asScheduled	AnimationState.asScheduled		7
+nim	asRunning	nebble/ui/animation.html#asRunning	AnimationState.asRunning		7
+nim	asCompleted	nebble/ui/animation.html#asCompleted	AnimationState.asCompleted		7
+nim	asDestroyed	nebble/ui/animation.html#asDestroyed	AnimationState.asDestroyed		7
+nim	asUnowned	nebble/ui/animation.html#asUnowned	AnimationState.asUnowned		7
+nim	AnimationState	nebble/ui/animation.html#AnimationState	enum AnimationState		7
+nim	AnimationHandle	nebble/ui/animation.html#AnimationHandle	object AnimationHandle		15
+nim	`=destroy`	nebble/ui/animation.html#=destroy,AnimationHandle	proc `=destroy`(h: var AnimationHandle)		21
+nim	`=wasMoved`	nebble/ui/animation.html#=wasMoved,AnimationHandle	proc `=wasMoved`(h: var AnimationHandle)		39
+nim	`=copy`	nebble/ui/animation.html#=copy,AnimationHandle,AnimationHandle	proc `=copy`(dest: var AnimationHandle; src: AnimationHandle)		43
+nim	`=sink`	nebble/ui/animation.html#=sink,AnimationHandle,AnimationHandle	proc `=sink`(dest: var AnimationHandle; src: AnimationHandle)		45
+nim	toPtr	nebble/ui/animation.html#toPtr.c,AnimationHandle	converter toPtr(h: AnimationHandle): ptr Animation		55
+nim	toHandle	nebble/ui/animation.html#toHandle,ptr.struct_Animation	proc toHandle(p: ptr Animation): AnimationHandle		57
+nim	raw	nebble/ui/animation.html#raw,AnimationHandle	proc raw(h: AnimationHandle): ptr Animation		60
+nim	wrapOwned	nebble/ui/animation.html#wrapOwned,ptr.struct_Animation	proc wrapOwned(p: ptr Animation): AnimationHandle		62
+nim	newAnimationHandle	nebble/ui/animation.html#newAnimationHandle	proc newAnimationHandle(): AnimationHandle		65
+nim	setDuration	nebble/ui/animation.html#setDuration,AnimationHandle,uint32	proc setDuration(h: var AnimationHandle; duration: uint32)		68
+nim	duration=	nebble/ui/animation.html#duration=,AnimationHandle,uint32	proc duration=(h: var AnimationHandle; duration: uint32)		72
+nim	setCurve	nebble/ui/animation.html#setCurve,AnimationHandle,AnimationCurve	proc setCurve(h: var AnimationHandle; curve: AnimationCurve)		76
+nim	curve=	nebble/ui/animation.html#curve=,AnimationHandle,AnimationCurve	proc curve=(h: var AnimationHandle; curve: AnimationCurve)		80
+nim	setPlayCount	nebble/ui/animation.html#setPlayCount,AnimationHandle,uint32	proc setPlayCount(h: var AnimationHandle; count: uint32)		84
+nim	playCount=	nebble/ui/animation.html#playCount=,AnimationHandle,uint32	proc playCount=(h: var AnimationHandle; count: uint32)		88
+nim	setDelay	nebble/ui/animation.html#setDelay,AnimationHandle,uint32	proc setDelay(h: var AnimationHandle; delay: uint32)		92
+nim	delay=	nebble/ui/animation.html#delay=,AnimationHandle,uint32	proc delay=(h: var AnimationHandle; delay: uint32)		96
+nim	setHandlers	nebble/ui/animation.html#setHandlers,AnimationHandle,AnimationStartedHandler,AnimationStoppedHandler,pointer	proc setHandlers(h: var AnimationHandle; onStarted: AnimationStartedHandler = nil;\n            onStopped: AnimationStoppedHandler = nil; context: pointer = nil)		100
+nim	schedule	nebble/ui/animation.html#schedule,AnimationHandle	proc schedule(h: var AnimationHandle)		109
+nim	unschedule	nebble/ui/animation.html#unschedule,AnimationHandle	proc unschedule(h: var AnimationHandle)		114
+nim	newAnimationHandle	nebble/ui/animation.html#newAnimationHandle,ptr.struct_Layer,GRect,GRect,uint32,AnimationCurve	proc newAnimationHandle(layer: ptr Layer; startFrame, endFrame: GRect;\n                   duration: uint32 = 250;\n                   curve: AnimationCurve = AnimationCurveEaseInOut): AnimationHandle		119
+nim	setLayerFrame	nebble/ui/animation.html#setLayerFrame,AnimationHandle,ptr.struct_Layer,GRect,GRect	proc setLayerFrame(h: var AnimationHandle; layer: ptr Layer;\n              startFrame, endFrame: GRect)		127
+nim	createSequence	nebble/ui/animation.html#createSequence,varargs[AnimationHandle]	proc createSequence(animations: varargs[AnimationHandle]): AnimationHandle		135
+nim	createSpawn	nebble/ui/animation.html#createSpawn,varargs[AnimationHandle]	proc createSpawn(animations: varargs[AnimationHandle]): AnimationHandle		161
+nim	shouldAutoReverse=	nebble/ui/animation.html#shouldAutoReverse=,AnimationHandle,bool	proc shouldAutoReverse=(h: var AnimationHandle; reverse: bool)		183
+nimgrp	newanimationhandle	nebble/ui/animation.html#newAnimationHandle-procs-all	proc		65

@@ -162,6 +162,8 @@
 <ul class="simple nested-toc-section">text=
   <li><a class="reference" href="#text%3D%2CTextLayerHandle%2Ccstring" title="text=(h: var TextLayerHandle; value: cstring)">text=(h: var TextLayerHandle; value: cstring)</a></li>
 <li><a class="reference" href="#text%3D%2Cptr.struct_TextLayer%2Ccstring" title="text=(p: ptr TextLayer; value: cstring)">text=(p: ptr TextLayer; value: cstring)</a></li>
+<li><a class="reference" href="#text%3D%2CTextLayerHandle%2CFixedString%5BN%5D" title="text=[N](h: var TextLayerHandle; value: FixedString[N])">text=[N](h: var TextLayerHandle; value: FixedString[N])</a></li>
+<li><a class="reference" href="#text%3D%2Cptr.struct_TextLayer%2CFixedString%5BN%5D" title="text=[N](p: ptr TextLayer; value: FixedString[N])">text=[N](p: ptr TextLayer; value: FixedString[N])</a></li>
 
 </ul>
 <ul class="simple nested-toc-section">textAlignment=
@@ -196,18 +198,6 @@
 </ul>
 <ul class="simple nested-toc-section">toPtr
   <li><a class="reference" href="#toPtr.c%2CTextLayerHandle" title="toPtr(h`gensym0: TextLayerHandle): ptr TextLayer">toPtr(h`gensym0: TextLayerHandle): ptr TextLayer</a></li>
-
-</ul>
-
-    </ul>
-  </details>
-</li>
-<li>
-  <details open>
-    <summary><a class="reference reference-toplevel" href="#18" id="68">Templates</a></summary>
-    <ul class="simple simple-toc-section">
-      <ul class="simple nested-toc-section">staticText
-  <li><a class="reference" href="#staticText.t%2CTextLayerHandle%2Cuntyped%2Cstring" title="staticText(h: var TextLayerHandle; bufVar: untyped; text: string)">staticText(h: var TextLayerHandle; bufVar: untyped; text: string)</a></li>
 
 </ul>
 
@@ -251,7 +241,7 @@
     <div class="section" id="6">
   <h1><a class="toc-backref" href="#6">Imports</a></h1>
   <dl class="item">
-    <a class="reference external" href="../ffi.html">../ffi</a>, <a class="reference external" href="../ffi/managed.html">../ffi/managed</a>
+    <a class="reference external" href="../ffi.html">../ffi</a>, <a class="reference external" href="../ffi/managed.html">../ffi/managed</a>, <a class="reference external" href="../util/fixed_strings.html">../util/fixed_strings</a>
   </dl>
 </div>
 <div class="section" id="7">
@@ -590,6 +580,22 @@
     
   </dd>
 </div>
+<div id="text=,TextLayerHandle,FixedString[N]">
+  <dt><pre><span class="Keyword">proc</span> <a href="#text%3D%2CTextLayerHandle%2CFixedString%5BN%5D"><span class="Identifier">text=</span></a><span class="Other">[</span><span class="Identifier">N</span><span class="Other">]</span><span class="Other">(</span><span class="Identifier">h</span><span class="Other">:</span> <span class="Keyword">var</span> <a href="text_layer.html#TextLayerHandle"><span class="Identifier">TextLayerHandle</span></a><span class="Other">;</span> <span class="Identifier">value</span><span class="Other">:</span> <a href="../util/fixed_strings.html#FixedString"><span class="Identifier">FixedString</span></a><span class="Other">[</span><span class="Identifier">N</span><span class="Other">]</span><span class="Other">)</span> {.<span class="Identifier">inline</span>.}</pre></dt>
+  <dd>
+    
+    Set text using a heap-free FixedString.
+    
+  </dd>
+</div>
+<div id="text=,ptr.struct_TextLayer,FixedString[N]">
+  <dt><pre><span class="Keyword">proc</span> <a href="#text%3D%2Cptr.struct_TextLayer%2CFixedString%5BN%5D"><span class="Identifier">text=</span></a><span class="Other">[</span><span class="Identifier">N</span><span class="Other">]</span><span class="Other">(</span><span class="Identifier">p</span><span class="Other">:</span> <span class="Keyword">ptr</span> <a href="../ffi.html#TextLayer"><span class="Identifier">TextLayer</span></a><span class="Other">;</span> <span class="Identifier">value</span><span class="Other">:</span> <a href="../util/fixed_strings.html#FixedString"><span class="Identifier">FixedString</span></a><span class="Other">[</span><span class="Identifier">N</span><span class="Other">]</span><span class="Other">)</span> {.<span class="Identifier">inline</span>.}</pre></dt>
+  <dd>
+    
+    Set text using a heap-free FixedString.
+    
+  </dd>
+</div>
 
 </div>
 <div id="textAlignment=-procs-all">
@@ -691,26 +697,6 @@
 
   </dl>
 </div>
-<div class="section" id="18">
-  <h1><a class="toc-backref" href="#18">Templates</a></h1>
-  <dl class="item">
-    <div id="staticText-templates-all">
-  <div id="staticText.t,TextLayerHandle,untyped,string">
-  <dt><pre><span class="Keyword">template</span> <a href="#staticText.t%2CTextLayerHandle%2Cuntyped%2Cstring"><span class="Identifier">staticText</span></a><span class="Other">(</span><span class="Identifier">h</span><span class="Other">:</span> <span class="Keyword">var</span> <a href="text_layer.html#TextLayerHandle"><span class="Identifier">TextLayerHandle</span></a><span class="Other">;</span> <span class="Identifier">bufVar</span><span class="Other">:</span> <span class="Identifier">untyped</span><span class="Other">;</span> <span class="Identifier">text</span><span class="Other">:</span> <span class="Identifier">string</span><span class="Other">)</span></pre></dt>
-  <dd>
-    
-    <p>Copy text into a static buffer and set it on the managed layer.</p>
-<p><strong>Usage:</strong> var buffer: array<a class="reference internal" href="#32, char">32, char</a> textLayer.staticText(buffer, &quot;Steps: &quot; &amp; $stepCount)</p>
-<p><strong>Note:</strong> <tt class="docutils literal"><span class="pre"><span class="Identifier">bufVar</span></span></tt> must be a module-level <tt class="docutils literal"><span class="pre"><span class="Keyword">var</span> <span class="Identifier">array</span><span class="Punctuation">[</span><span class="Identifier">N</span><span class="Punctuation">,</span> <span class="Identifier">char</span><span class="Punctuation">]</span></span></tt>. Local buffers are not supported due to stack lifetime.</p>
-
-    
-  </dd>
-</div>
-
-</div>
-
-  </dl>
-</div>
 <div class="section" id="19">
   <h1><a class="toc-backref" href="#19">Exports</a></h1>
   <dl class="item">
@@ -724,7 +710,7 @@
       <div class="twelve-columns footer">
         <span class="nim-sprite"></span>
         <br>
-        <small style="color: var(--hint);">Made with Nim. Generated: 2026-02-14 21:03:57 UTC</small>
+        <small style="color: var(--hint);">Made with Nim. Generated: 2026-02-15 12:22:51 UTC</small>
       </div>
     </div>
   </div>

@@ -292,6 +292,9 @@ export fonts
 import nebble/graphics/bitmap_ref
 export bitmap_ref
 
+import nebble/graphics/bitmap_sequence_ref
+export bitmap_sequence_ref
+
 import nebble/graphics/font_ref
 export font_ref
 
@@ -319,6 +322,9 @@ export worker
 
 import nebble/comms/smartstrap
 export smartstrap
+
+import nebble/comms/app_glance
+export app_glance
 
 # ============================================================================
 # Resources

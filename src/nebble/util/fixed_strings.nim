@@ -72,9 +72,9 @@ proc addInt*[N](s: var FixedString[N], val: int32) {.inline.} =
 # Converters
 # ============================================================================
 
-converter toCstring*[N](s: var FixedString[N]): cstring {.inline.} =
+template toCstring*[N](s: FixedString[N]): cstring =
   ## Automatically convert to cstring for Pebble API calls.
-  cast[cstring](addr s.data[0])
+  cast[cstring](unsafeAddr s.data[0])
 
 # ============================================================================
 # Format Macro (The "fmt" experience)
@@ -85,7 +85,7 @@ macro formatInto*(s: var FixedString, body: varargs[untyped]): untyped =
   ## Expands to a series of s.add and s.addInt calls.
   ## 
   ## Example:
-  ##   var str: FixedString[32]
+  ##   var str: `FixedString[32]`
   ##   str.formatInto("Score: ", score, "/", total)
   result = newStmtList()
   for arg in body:

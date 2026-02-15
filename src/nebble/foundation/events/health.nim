@@ -14,27 +14,27 @@ export ffi.HealthMetric, ffi.HealthValue, ffi.HealthActivity, ffi.HealthEventTyp
         ffi.HealthMetricAlert, ffi.HealthActivityIteratorCB, ffi.HealthEventHandler,
         ffi.HealthAggregation
 
-## Example usage (device or host smoke tests):
+## Example usage:
 ##
 ## 1) Check availability and sum a metric over 7 days:
-##    ```nim
+##
+## .. code-block:: nim
 ##    let now = epochTime()
 ##    let start = now - 7 * 24 * 60 * 60
-##    if metricAveragedAccessible(HealthMetricStepCount, start, now, HealthServiceTimeScopeDaily) != 0:
+##    if metricAveragedAccessible(HealthMetricStepCount, start, now, HealthServiceTimeScopeDaily) != HealthServiceAccessibilityMaskAvailable:
 ##      let total = sum(HealthMetricStepCount, start, now)
-##    ```
 ##
 ## 2) Read minute history into a caller-provided array (no heap allocation):
-##    ```nim
+##
+## .. code-block:: nim
 ##    var buf: array[60, HealthMinuteData]
-##    let count = getMinuteHistory(addr buf[0], uint32(buf.len), addr start, addr now)
-##    ```
+##    let count = getMinuteHistory(addr buf[0], 60, addr start, addr now)
 ##
 ## 3) Register + cancel metric alert:
-##    ```nim
+##
+## .. code-block:: nim
 ##    let alert = registerMetricAlert(HealthMetricStepCount, 1000)
 ##    if alert != nil: discard cancelMetricAlert(alert)
-##    ```
 
 # ============================================================================
 # Events
@@ -112,9 +112,10 @@ when declared(ffi.health_service_get_minute_history):
     ## Fills minuteData array with steps per minute for the requested time range.
     ## Returns the number of minutes actually retrieved.
     ##
-    ## Usage:
-    ##   var data: array[60, HealthMinuteData]
-    ##   let count = getMinuteHistory(addr data[0], 60, addr startTime, addr endTime)
+  ## Usage:
+  ##   var data: `array[60, HealthMinuteData]`
+  ##   let count = getMinuteHistory(addr data[0], 60, addr startTime, addr endTime)
+
     ##
     ## Equivalent to C function `health_service_get_minute_history(minute_data, max_records, time_start, time_end)`.
     result = ffi.health_service_get_minute_history(minuteData, maxRecords, timeStart, timeEnd)

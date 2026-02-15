@@ -1,0 +1,5 @@
+nimTitle	app_glance	nebble/comms/app_glance.html	module nebble/comms/app_glance		0
+nim	APP_GLANCE_SLICE_NO_EXPIRATION	nebble/comms/app_glance.html#APP_GLANCE_SLICE_NO_EXPIRATION	const APP_GLANCE_SLICE_NO_EXPIRATION		11
+nim	APP_GLANCE_SLICE_DEFAULT_ICON	nebble/comms/app_glance.html#APP_GLANCE_SLICE_DEFAULT_ICON	const APP_GLANCE_SLICE_DEFAULT_ICON		12
+nim	addSlice	nebble/comms/app_glance.html#addSlice,ptr.struct_AppGlanceReloadSession,cstring,uint32,int32	proc addSlice(session: ptr AppGlanceReloadSession; subtitle: cstring;\n         icon: uint32 = APP_GLANCE_SLICE_DEFAULT_ICON;\n         expiration: int32 = APP_GLANCE_SLICE_NO_EXPIRATION): AppGlanceResult		19
+nim	reload	nebble/comms/app_glance.html#reload,AppGlanceReloadCallback,pointer	proc reload(callback: AppGlanceReloadCallback; context: pointer = nil)		40

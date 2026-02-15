@@ -87,6 +87,10 @@
   <li><a class="reference" href="#getLayer%2CMenuLayerHandle" title="getLayer(h: MenuLayerHandle): ptr Layer">getLayer(h: MenuLayerHandle): ptr Layer</a></li>
 
 </ul>
+<ul class="simple nested-toc-section">getSelectedIndex
+  <li><a class="reference" href="#getSelectedIndex%2CMenuLayerHandle" title="getSelectedIndex(h: MenuLayerHandle): MenuIndex">getSelectedIndex(h: MenuLayerHandle): MenuIndex</a></li>
+
+</ul>
 <ul class="simple nested-toc-section">isNil
   <li><a class="reference" href="#isNil%2CMenuLayerHandle" title="isNil(h`gensym0: MenuLayerHandle): bool">isNil(h`gensym0: MenuLayerHandle): bool</a></li>
 
@@ -103,8 +107,18 @@
   <li><a class="reference" href="#newMenuLayerHandle%2CGRect" title="newMenuLayerHandle(frame: GRect): MenuLayerHandle">newMenuLayerHandle(frame: GRect): MenuLayerHandle</a></li>
 
 </ul>
+<ul class="simple nested-toc-section">reloadData
+  <li><a class="reference" href="#reloadData%2CMenuLayerHandle" title="reloadData(h: var MenuLayerHandle)">reloadData(h: var MenuLayerHandle)</a></li>
+
+</ul>
 <ul class="simple nested-toc-section">reset
   <li><a class="reference" href="#reset%2CMenuLayerHandle" title="reset(h`gensym0: var MenuLayerHandle)">reset(h`gensym0: var MenuLayerHandle)</a></li>
+
+</ul>
+<ul class="simple nested-toc-section">setCallbacks
+  <li><a class="reference" href="#setCallbacks%2CMenuLayerHandle%2Cpointer%2CMenuLayerCallbacks" title="setCallbacks(h: var MenuLayerHandle; callbackContext: pointer;
+             callbacks: MenuLayerCallbacks)">setCallbacks(h: var MenuLayerHandle; callbackContext: pointer;
+             callbacks: MenuLayerCallbacks)</a></li>
 
 </ul>
 <ul class="simple nested-toc-section">setClickConfigOntoWindow
@@ -113,6 +127,12 @@
 </ul>
 <ul class="simple nested-toc-section">setParent
   <li><a class="reference" href="#setParent%2CMenuLayerHandle%2Cptr.struct_Layer" title="setParent(h`gensym0: var MenuLayerHandle; p`gensym0: ptr Layer)">setParent(h`gensym0: var MenuLayerHandle; p`gensym0: ptr Layer)</a></li>
+
+</ul>
+<ul class="simple nested-toc-section">setSelectedIndex
+  <li><a class="reference" href="#setSelectedIndex%2CMenuLayerHandle%2CMenuIndex%2CMenuRowAlign%2Cbool" title="setSelectedIndex(h: var MenuLayerHandle; index: MenuIndex; align: MenuRowAlign;
+                 animated: bool)">setSelectedIndex(h: var MenuLayerHandle; index: MenuIndex; align: MenuRowAlign;
+                 animated: bool)</a></li>
 
 </ul>
 <ul class="simple nested-toc-section">toHandle
@@ -238,6 +258,18 @@
 </div>
 
 </div>
+<div id="getSelectedIndex-procs-all">
+  <div id="getSelectedIndex,MenuLayerHandle">
+  <dt><pre><span class="Keyword">proc</span> <a href="#getSelectedIndex%2CMenuLayerHandle"><span class="Identifier">getSelectedIndex</span></a><span class="Other">(</span><span class="Identifier">h</span><span class="Other">:</span> <a href="menu_layer.html#MenuLayerHandle"><span class="Identifier">MenuLayerHandle</span></a><span class="Other">)</span><span class="Other">:</span> <a href="../ffi.html#MenuIndex"><span class="Identifier">MenuIndex</span></a> {.<span class="Identifier">inline</span><span class="Other">,</span> <span><span class="Other pragmadots">...</span></span><span class="pragmawrap"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span>
+    <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">forbids</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span>.}</pre></dt>
+  <dd>
+    
+    Get the currently selected menu index.
+    
+  </dd>
+</div>
+
+</div>
 <div id="isNil-procs-all">
   <div id="isNil,MenuLayerHandle">
   <dt><pre><span class="Keyword">proc</span> <a href="#isNil%2CMenuLayerHandle"><span class="Identifier">isNil</span></a><span class="Other">(</span><span class="Identifier">h`gensym0</span><span class="Other">:</span> <a href="menu_layer.html#MenuLayerHandle"><span class="Identifier">MenuLayerHandle</span></a><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">bool</span> {.<span class="Identifier">inline</span><span class="Other">,</span> <span><span class="Other pragmadots">...</span></span><span class="pragmawrap"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span>
@@ -286,12 +318,42 @@
 </div>
 
 </div>
+<div id="reloadData-procs-all">
+  <div id="reloadData,MenuLayerHandle">
+  <dt><pre><span class="Keyword">proc</span> <a href="#reloadData%2CMenuLayerHandle"><span class="Identifier">reloadData</span></a><span class="Other">(</span><span class="Identifier">h</span><span class="Other">:</span> <span class="Keyword">var</span> <a href="menu_layer.html#MenuLayerHandle"><span class="Identifier">MenuLayerHandle</span></a><span class="Other">)</span> {.<span class="Identifier">inline</span><span class="Other">,</span> <span><span class="Other pragmadots">...</span></span><span class="pragmawrap"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span>
+    <span class="Identifier">forbids</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span>.}</pre></dt>
+  <dd>
+    
+    Reload the menu data. Call this if the underlying data has changed.
+    
+  </dd>
+</div>
+
+</div>
 <div id="reset-procs-all">
   <div id="reset,MenuLayerHandle">
   <dt><pre><span class="Keyword">proc</span> <a href="#reset%2CMenuLayerHandle"><span class="Identifier">reset</span></a><span class="Other">(</span><span class="Identifier">h`gensym0</span><span class="Other">:</span> <span class="Keyword">var</span> <a href="menu_layer.html#MenuLayerHandle"><span class="Identifier">MenuLayerHandle</span></a><span class="Other">)</span> {.<span><span class="Other pragmadots">...</span></span><span class="pragmawrap"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">forbids</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span>.}</pre></dt>
   <dd>
     
     
+    
+  </dd>
+</div>
+
+</div>
+<div id="setCallbacks-procs-all">
+  <div id="setCallbacks,MenuLayerHandle,pointer,MenuLayerCallbacks">
+  <dt><pre><span class="Keyword">proc</span> <a href="#setCallbacks%2CMenuLayerHandle%2Cpointer%2CMenuLayerCallbacks"><span class="Identifier">setCallbacks</span></a><span class="Other">(</span><span class="Identifier">h</span><span class="Other">:</span> <span class="Keyword">var</span> <a href="menu_layer.html#MenuLayerHandle"><span class="Identifier">MenuLayerHandle</span></a><span class="Other">;</span> <span class="Identifier">callbackContext</span><span class="Other">:</span> <span class="Identifier">pointer</span><span class="Other">;</span>
+                  <span class="Identifier">callbacks</span><span class="Other">:</span> <a href="../ffi.html#MenuLayerCallbacks"><span class="Identifier">MenuLayerCallbacks</span></a><span class="Other">)</span> {.<span class="Identifier">inline</span><span class="Other">,</span> <span><span class="Other pragmadots">...</span></span><span class="pragmawrap"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span>
+    <span class="Identifier">forbids</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span>.}</pre></dt>
+  <dd>
+    
+    <p>Set the callbacks for the menu layer.</p>
+<p><strong>Parameters:</strong></p>
+<ul class="simple"><li><tt class="docutils literal"><span class="pre"><span class="Identifier">callbackContext</span></span></tt>: Pointer to data that will be passed to each callback.</li>
+<li><tt class="docutils literal"><span class="pre"><span class="Identifier">callbacks</span></span></tt>: Struct containing the function pointers for menu events.</li>
+</ul>
+
     
   </dd>
 </div>
@@ -316,6 +378,19 @@
   <dd>
     
     
+    
+  </dd>
+</div>
+
+</div>
+<div id="setSelectedIndex-procs-all">
+  <div id="setSelectedIndex,MenuLayerHandle,MenuIndex,MenuRowAlign,bool">
+  <dt><pre><span class="Keyword">proc</span> <a href="#setSelectedIndex%2CMenuLayerHandle%2CMenuIndex%2CMenuRowAlign%2Cbool"><span class="Identifier">setSelectedIndex</span></a><span class="Other">(</span><span class="Identifier">h</span><span class="Other">:</span> <span class="Keyword">var</span> <a href="menu_layer.html#MenuLayerHandle"><span class="Identifier">MenuLayerHandle</span></a><span class="Other">;</span> <span class="Identifier">index</span><span class="Other">:</span> <a href="../ffi.html#MenuIndex"><span class="Identifier">MenuIndex</span></a><span class="Other">;</span>
+                      <span class="Identifier">align</span><span class="Other">:</span> <a href="../ffi.html#MenuRowAlign"><span class="Identifier">MenuRowAlign</span></a><span class="Other">;</span> <span class="Identifier">animated</span><span class="Other">:</span> <span class="Identifier">bool</span><span class="Other">)</span> {.<span class="Identifier">inline</span><span class="Other">,</span> <span><span class="Other pragmadots">...</span></span><span class="pragmawrap"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span>
+    <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">forbids</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span>.}</pre></dt>
+  <dd>
+    
+    Set the currently selected menu index.
     
   </dd>
 </div>
@@ -381,7 +456,7 @@
 <div class="section" id="19">
   <h1><a class="toc-backref" href="#19">Exports</a></h1>
   <dl class="item">
-    <a href="../ffi.html#MenuLayer"><span class="Identifier">MenuLayer</span></a>, <a href="../ffi.html#MenuLayerCallbacks"><span class="Identifier">MenuLayerCallbacks</span></a>, <a href="../ffi.html#MenuIndex"><span class="Identifier">MenuIndex</span></a>, <a href="../ffi.html#MenuRowAlign"><span class="Identifier">MenuRowAlign</span></a>
+    <a href="../ffi.html#MenuLayer"><span class="Identifier">MenuLayer</span></a>, <a href="../ffi.html#MenuLayerCallbacks"><span class="Identifier">MenuLayerCallbacks</span></a>, <a href="../ffi.html#MenuIndex"><span class="Identifier">MenuIndex</span></a>, <a href="../ffi.html#MenuRowAlign"><span class="Identifier">MenuRowAlign</span></a>, <a href="../ffi.html#MenuLayerSelectionChangedCallback"><span class="Identifier">MenuLayerSelectionChangedCallback</span></a>, <a href="../ffi.html#MenuLayerGetCellHeightCallback"><span class="Identifier">MenuLayerGetCellHeightCallback</span></a>, <a href="../ffi.html#MenuLayerSelectionWillChangeCallback"><span class="Identifier">MenuLayerSelectionWillChangeCallback</span></a>, <a href="../ffi.html#MenuLayerDrawRowCallback"><span class="Identifier">MenuLayerDrawRowCallback</span></a>, <a href="../ffi.html#MenuLayerGetNumberOfSectionsCallback"><span class="Identifier">MenuLayerGetNumberOfSectionsCallback</span></a>, <a href="../ffi.html#MenuLayerGetNumberOfRowsInSectionsCallback"><span class="Identifier">MenuLayerGetNumberOfRowsInSectionsCallback</span></a>, <a href="../ffi.html#MenuLayerDrawHeaderCallback"><span class="Identifier">MenuLayerDrawHeaderCallback</span></a>, <a href="../ffi.html#MenuLayerDrawBackgroundCallback"><span class="Identifier">MenuLayerDrawBackgroundCallback</span></a>, <a href="../ffi.html#MenuLayerSelectCallback"><span class="Identifier">MenuLayerSelectCallback</span></a>, <a href="../ffi.html#MenuLayerGetHeaderHeightCallback"><span class="Identifier">MenuLayerGetHeaderHeightCallback</span></a>, <a href="../ffi.html#MenuLayerGetSeparatorHeightCallback"><span class="Identifier">MenuLayerGetSeparatorHeightCallback</span></a>, <a href="../ffi.html#MenuLayerDrawSeparatorCallback"><span class="Identifier">MenuLayerDrawSeparatorCallback</span></a>
   </dl>
 </div>
 
@@ -391,7 +466,7 @@
       <div class="twelve-columns footer">
         <span class="nim-sprite"></span>
         <br>
-        <small style="color: var(--hint);">Made with Nim. Generated: 2026-02-14 21:03:57 UTC</small>
+        <small style="color: var(--hint);">Made with Nim. Generated: 2026-02-15 12:22:51 UTC</small>
       </div>
     </div>
   </div>

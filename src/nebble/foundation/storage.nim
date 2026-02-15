@@ -5,6 +5,10 @@
 import nebble/ffi
 import nebble/util/fixed_strings
 
+type PersistStatus* = int32
+  ## Status code returned by storage operations.
+  ## 0 indicates success, negative values indicate errors.
+
 # ============================================================================
 # Existence Check
 # ============================================================================
@@ -24,7 +28,7 @@ proc readInt*(key: uint32): int32 {.inline.} =
   ## Equivalent to C function `persist_read_int(key)`.
   result = ffi.persist_read_int(key)
 
-proc writeInt*(key: uint32, value: int32): cint {.inline.} =
+proc writeInt*(key: uint32, value: int32): PersistStatus {.inline.} =
   ## Write a 32-bit integer to persistent storage.
   ## Returns 0 on success, negative on error.
   ## Equivalent to C function `persist_write_int(key, value)`.
@@ -34,21 +38,21 @@ proc writeInt*(key: uint32, value: int32): cint {.inline.} =
 # String Operations
 # ============================================================================
 
-proc readString*(key: uint32, buffer: pointer, bufferSize: csize_t): cint {.inline.} =
+proc readString*(key: uint32, buffer: pointer, bufferSize: csize_t): PersistStatus {.inline.} =
   ## Read a string from persistent storage.
   ## Returns the length of the string, or negative on error.
   ## Equivalent to C function `persist_read_string(key, buffer, buffer_size)`.
   if buffer == nil: return -1
   result = ffi.persist_read_string(key, cast[cstring](buffer), bufferSize)
 
-proc writeString*(key: uint32, value: cstring): cint {.inline.} =
+proc writeString*(key: uint32, value: cstring): PersistStatus {.inline.} =
   ## Write a string to persistent storage.
   ## Returns the length written, or negative on error.
   ## Equivalent to C function `persist_write_string(key, value)`.
   if value == nil: return -1
   result = ffi.persist_write_string(key, value)
 
-proc read*[N](key: uint32, s: var FixedString[N]): cint {.inline.} =
+proc read*[N](key: uint32, s: var FixedString[N]): PersistStatus {.inline.} =
   ## Read a string from persistent storage into a FixedString.
   ## Returns the length of the string, or negative on error.
   let res = ffi.persist_read_string(key, s.toCstring, N.csize_t)
@@ -60,7 +64,7 @@ proc read*[N](key: uint32, s: var FixedString[N]): cint {.inline.} =
     s.clear()
   result = res
 
-proc write*[N](key: uint32, s: var FixedString[N]): cint {.inline.} =
+proc write*[N](key: uint32, s: FixedString[N]): PersistStatus {.inline.} =
   ## Write a FixedString to persistent storage.
   ## Returns the length written, or negative on error.
   result = ffi.persist_write_string(key, s.toCstring)
@@ -69,13 +73,13 @@ proc write*[N](key: uint32, s: var FixedString[N]): cint {.inline.} =
 # Data Operations
 # ============================================================================
 
-proc readData*(key: uint32, buffer: pointer, bufferSize: csize_t): cint {.inline.} =
+proc readData*(key: uint32, buffer: pointer, bufferSize: csize_t): PersistStatus {.inline.} =
   ## Read raw data from persistent storage.
   ## Returns the size of the data, or negative on error.
   ## Equivalent to C function `persist_read_data(key, buffer, buffer_size)`.
   result = ffi.persist_read_data(key, buffer, bufferSize)
 
-proc writeData*(key: uint32, data: pointer, size: csize_t): cint {.inline.} =
+proc writeData*(key: uint32, data: pointer, size: csize_t): PersistStatus {.inline.} =
   ## Write raw data to persistent storage.
   ## Returns the size written, or negative on error.
   ## Equivalent to C function `persist_write_data(key, data, size)`.
@@ -85,7 +89,7 @@ proc writeData*(key: uint32, data: pointer, size: csize_t): cint {.inline.} =
 # Deletion
 # ============================================================================
 
-proc delete*(key: uint32): cint {.inline.} =
+proc delete*(key: uint32): PersistStatus {.inline.} =
   ## Delete a key from persistent storage.
   ## Returns 0 on success, negative on error.
   ## Equivalent to C function `persist_delete(key)`.
@@ -95,7 +99,7 @@ proc delete*(key: uint32): cint {.inline.} =
 # Size Information
 # ============================================================================
 
-proc getDataSize*(key: uint32): cint {.inline.} =
+proc getDataSize*(key: uint32): PersistStatus {.inline.} =
   ## Get the size of data stored at a key.
   ## Returns the size in bytes, or negative if key doesn't exist.
   ## Equivalent to C function `persist_get_size(key)`.

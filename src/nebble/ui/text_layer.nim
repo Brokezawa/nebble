@@ -32,6 +32,7 @@
 
 import nebble/ffi
 import nebble/ffi/managed
+import ../util/fixed_strings
 
 # Re-export FFI types for compatibility/completeness
 export ffi.TextLayer, ffi.GFont, ffi.GTextAlignment, ffi.GTextOverflowMode
@@ -111,6 +112,16 @@ proc `text=`*(p: ptr TextLayer, value: cstring) {.inline.} =
   if p == nil: return
   text_layer_set_text(p, value)
 
+proc `text=`*[N](h: var TextLayerHandle, value: FixedString[N]) {.inline.} =
+  ## Set text using a heap-free FixedString.
+  if h.pRaw == nil: return
+  text_layer_set_text(h.pRaw, value.toCstring)
+
+proc `text=`*[N](p: ptr TextLayer, value: FixedString[N]) {.inline.} =
+  ## Set text using a heap-free FixedString.
+  if p == nil: return
+  text_layer_set_text(p, value.toCstring)
+
 proc text*(h: TextLayerHandle): cstring {.inline.} =
   ## Get the current text content.
   if h.pRaw == nil: return nil
@@ -179,34 +190,7 @@ proc frame*(h: TextLayerHandle): GRect {.inline.} =
   let layer = text_layer_get_layer(h.toPtr)
   layer_get_frame(layer)
 
-# ============================================================================
-# Static Text Helper
-# ============================================================================
-
-template staticText*(h: var TextLayerHandle, bufVar: untyped, text: string) =
-  ## Copy text into a static buffer and set it on the managed layer.
-  ##
-  ## **Usage:**
-  ##   var buffer: array[32, char]
-  ##   textLayer.staticText(buffer, "Steps: " & $stepCount)
-  ##
-  ## **Note:** `bufVar` must be a module-level `var array[N, char]`.
-  ## Local buffers are not supported due to stack lifetime.
-  static:
-    # Compile-time check that bufVar is an array type
-    when not (bufVar is array):
-      {.error: "bufVar must be an array type (e.g., array[32, char])".}
-  when ManagedDebug or ManagedStrict:
-    h.checkValid()
-  let src = text
-  let maxLen = bufVar.len - 1
-  let copyLen = min(src.len, maxLen)
-  for i in 0..<copyLen:
-    bufVar[i] = src[i]
-  bufVar[copyLen] = '\0'
-  text_layer_set_text(h.toPtr, cast[cstring](addr bufVar[0]))
-
-# ============================================================================
+# = ===========================================================================
 # Platform-Specific Features
 # ============================================================================
 

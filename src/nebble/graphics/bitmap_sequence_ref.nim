@@ -91,7 +91,7 @@ proc playCount*(h: BitmapSequenceRef): uint32 {.inline.} =
 proc `playCount=`*(h: BitmapSequenceRef, count: uint32) {.inline.} =
   if not isValid(h):
     return
-  playCount(h.seq) = count
+  h.seq.playCount = count
 
 ## Internal timer callback trampoline
 proc internalBitmapSeqTimer(ctx: pointer) {.cdecl.} =
@@ -119,7 +119,7 @@ proc internalBitmapSeqTimer(ctx: pointer) {.cdecl.} =
 
   # Schedule next frame if needed
   if delay > 0:
-    h.timer = after(delay, internalBitmapSeqTimer, h)
+    h.timer = after(delay, internalBitmapSeqTimer, cast[pointer](h))
   else:
     h.timer = nil
 
@@ -145,7 +145,7 @@ proc scheduleNextFrame*(h: BitmapSequenceRef; bitmap: ptr GBitmap; handler: Anim
     return false
 
   if delay > 0:
-    h.timer = after(delay, internalBitmapSeqTimer, h)
+    h.timer = after(delay, internalBitmapSeqTimer, cast[pointer](h))
   else:
     h.timer = nil
 

@@ -11,35 +11,36 @@ nim	wrapOwned	nebble/ui/text_layer.html#wrapOwned,ptr.struct_TextLayer	proc wrap
 nim	isValid	nebble/ui/text_layer.html#isValid,TextLayerHandle	proc isValid(h`gensym0: TextLayerHandle): bool		113
 nim	isNil	nebble/ui/text_layer.html#isNil,TextLayerHandle	proc isNil(h`gensym0: TextLayerHandle): bool		114
 nim	setParent	nebble/ui/text_layer.html#setParent,TextLayerHandle,ptr.struct_Layer	proc setParent(h`gensym0: var TextLayerHandle; p`gensym0: ptr Layer)		116
-nim	reset	nebble/ui/text_layer.html#reset,TextLayerHandle	proc reset(h`gensym0: var TextLayerHandle)		43
-nim	newTextLayerHandle	nebble/ui/text_layer.html#newTextLayerHandle,GRect	proc newTextLayerHandle(frame: GRect): TextLayerHandle		50
-nim	newTextLayer	nebble/ui/text_layer.html#newTextLayer,GRect	proc newTextLayer(frame: GRect): TextLayerHandle		53
-nim	newTextLayerHandle	nebble/ui/text_layer.html#newTextLayerHandle,GRect,cstring,GFont,GTextAlignment	proc newTextLayerHandle(frame: GRect; text: cstring; font: GFont = nil;\n                   align: GTextAlignment = GTextAlignmentLeft): TextLayerHandle		57
-nim	newTextLayer	nebble/ui/text_layer.html#newTextLayer,GRect,cstring,GFont,GTextAlignment	proc newTextLayer(frame: GRect; text: cstring; font: GFont = nil;\n             align: GTextAlignment = GTextAlignmentLeft): TextLayerHandle		80
-nim	getLayer	nebble/ui/text_layer.html#getLayer,TextLayerHandle	proc getLayer(h: TextLayerHandle): ptr Layer		90
-nim	text=	nebble/ui/text_layer.html#text=,TextLayerHandle,cstring	proc text=(h: var TextLayerHandle; value: cstring)		106
-nim	text=	nebble/ui/text_layer.html#text=,ptr.struct_TextLayer,cstring	proc text=(p: ptr TextLayer; value: cstring)		110
-nim	text	nebble/ui/text_layer.html#text,TextLayerHandle	proc text(h: TextLayerHandle): cstring		114
-nim	font=	nebble/ui/text_layer.html#font=,TextLayerHandle,GFont	proc font=(h: var TextLayerHandle; value: GFont)		119
-nim	font=	nebble/ui/text_layer.html#font=,ptr.struct_TextLayer,GFont	proc font=(p: ptr TextLayer; value: GFont)		123
-nim	textAlignment=	nebble/ui/text_layer.html#textAlignment=,TextLayerHandle,GTextAlignment	proc textAlignment=(h: var TextLayerHandle; value: GTextAlignment)		127
-nim	textAlignment=	nebble/ui/text_layer.html#textAlignment=,ptr.struct_TextLayer,GTextAlignment	proc textAlignment=(p: ptr TextLayer; value: GTextAlignment)		131
-nim	textColor=	nebble/ui/text_layer.html#textColor=,TextLayerHandle,GColor8	proc textColor=(h: var TextLayerHandle; value: GColor8)		135
-nim	textColor=	nebble/ui/text_layer.html#textColor=,ptr.struct_TextLayer,GColor8	proc textColor=(p: ptr TextLayer; value: GColor8)		139
-nim	backgroundColor=	nebble/ui/text_layer.html#backgroundColor=,TextLayerHandle,GColor8	proc backgroundColor=(h: var TextLayerHandle; value: GColor8)		143
-nim	backgroundColor=	nebble/ui/text_layer.html#backgroundColor=,ptr.struct_TextLayer,GColor8	proc backgroundColor=(p: ptr TextLayer; value: GColor8)		147
-nim	overflowMode=	nebble/ui/text_layer.html#overflowMode=,TextLayerHandle,GTextOverflowMode	proc overflowMode=(h: var TextLayerHandle; value: GTextOverflowMode)		151
-nim	contentSize	nebble/ui/text_layer.html#contentSize,TextLayerHandle	proc contentSize(h: TextLayerHandle): GSize		160
-nim	size=	nebble/ui/text_layer.html#size=,TextLayerHandle,GSize	proc size=(h: var TextLayerHandle; value: GSize)		165
-nim	frame=	nebble/ui/text_layer.html#frame=,TextLayerHandle,GRect	proc frame=(h: var TextLayerHandle; value: GRect)		170
-nim	frame	nebble/ui/text_layer.html#frame,TextLayerHandle	proc frame(h: TextLayerHandle): GRect		176
-nim	staticText	nebble/ui/text_layer.html#staticText.t,TextLayerHandle,untyped,string	template staticText(h: var TextLayerHandle; bufVar: untyped; text: string)		186
-nim	enableScreenTextFlowAndPaging	nebble/ui/text_layer.html#enableScreenTextFlowAndPaging,TextLayerHandle,uint8	proc enableScreenTextFlowAndPaging(h: var TextLayerHandle; inset: uint8)		214
-nim	restoreDefaultTextFlowAndPaging	nebble/ui/text_layer.html#restoreDefaultTextFlowAndPaging,TextLayerHandle	proc restoreDefaultTextFlowAndPaging(h: var TextLayerHandle)		221
-nimgrp	backgroundcolor=	nebble/ui/text_layer.html#backgroundColor=-procs-all	proc		143
-nimgrp	textalignment=	nebble/ui/text_layer.html#textAlignment=-procs-all	proc		127
-nimgrp	font=	nebble/ui/text_layer.html#font=-procs-all	proc		119
-nimgrp	textcolor=	nebble/ui/text_layer.html#textColor=-procs-all	proc		135
-nimgrp	newtextlayer	nebble/ui/text_layer.html#newTextLayer-procs-all	proc		53
-nimgrp	text=	nebble/ui/text_layer.html#text=-procs-all	proc		106
-nimgrp	newtextlayerhandle	nebble/ui/text_layer.html#newTextLayerHandle-procs-all	proc		50
+nim	reset	nebble/ui/text_layer.html#reset,TextLayerHandle	proc reset(h`gensym0: var TextLayerHandle)		44
+nim	newTextLayerHandle	nebble/ui/text_layer.html#newTextLayerHandle,GRect	proc newTextLayerHandle(frame: GRect): TextLayerHandle		51
+nim	newTextLayer	nebble/ui/text_layer.html#newTextLayer,GRect	proc newTextLayer(frame: GRect): TextLayerHandle		54
+nim	newTextLayerHandle	nebble/ui/text_layer.html#newTextLayerHandle,GRect,cstring,GFont,GTextAlignment	proc newTextLayerHandle(frame: GRect; text: cstring; font: GFont = nil;\n                   align: GTextAlignment = GTextAlignmentLeft): TextLayerHandle		58
+nim	newTextLayer	nebble/ui/text_layer.html#newTextLayer,GRect,cstring,GFont,GTextAlignment	proc newTextLayer(frame: GRect; text: cstring; font: GFont = nil;\n             align: GTextAlignment = GTextAlignmentLeft): TextLayerHandle		81
+nim	getLayer	nebble/ui/text_layer.html#getLayer,TextLayerHandle	proc getLayer(h: TextLayerHandle): ptr Layer		91
+nim	text=	nebble/ui/text_layer.html#text=,TextLayerHandle,cstring	proc text=(h: var TextLayerHandle; value: cstring)		107
+nim	text=	nebble/ui/text_layer.html#text=,ptr.struct_TextLayer,cstring	proc text=(p: ptr TextLayer; value: cstring)		111
+nim	text=	nebble/ui/text_layer.html#text=,TextLayerHandle,FixedString[N]	proc text=[N](h: var TextLayerHandle; value: FixedString[N])		115
+nim	text=	nebble/ui/text_layer.html#text=,ptr.struct_TextLayer,FixedString[N]	proc text=[N](p: ptr TextLayer; value: FixedString[N])		120
+nim	text	nebble/ui/text_layer.html#text,TextLayerHandle	proc text(h: TextLayerHandle): cstring		125
+nim	font=	nebble/ui/text_layer.html#font=,TextLayerHandle,GFont	proc font=(h: var TextLayerHandle; value: GFont)		130
+nim	font=	nebble/ui/text_layer.html#font=,ptr.struct_TextLayer,GFont	proc font=(p: ptr TextLayer; value: GFont)		134
+nim	textAlignment=	nebble/ui/text_layer.html#textAlignment=,TextLayerHandle,GTextAlignment	proc textAlignment=(h: var TextLayerHandle; value: GTextAlignment)		138
+nim	textAlignment=	nebble/ui/text_layer.html#textAlignment=,ptr.struct_TextLayer,GTextAlignment	proc textAlignment=(p: ptr TextLayer; value: GTextAlignment)		142
+nim	textColor=	nebble/ui/text_layer.html#textColor=,TextLayerHandle,GColor8	proc textColor=(h: var TextLayerHandle; value: GColor8)		146
+nim	textColor=	nebble/ui/text_layer.html#textColor=,ptr.struct_TextLayer,GColor8	proc textColor=(p: ptr TextLayer; value: GColor8)		150
+nim	backgroundColor=	nebble/ui/text_layer.html#backgroundColor=,TextLayerHandle,GColor8	proc backgroundColor=(h: var TextLayerHandle; value: GColor8)		154
+nim	backgroundColor=	nebble/ui/text_layer.html#backgroundColor=,ptr.struct_TextLayer,GColor8	proc backgroundColor=(p: ptr TextLayer; value: GColor8)		158
+nim	overflowMode=	nebble/ui/text_layer.html#overflowMode=,TextLayerHandle,GTextOverflowMode	proc overflowMode=(h: var TextLayerHandle; value: GTextOverflowMode)		162
+nim	contentSize	nebble/ui/text_layer.html#contentSize,TextLayerHandle	proc contentSize(h: TextLayerHandle): GSize		171
+nim	size=	nebble/ui/text_layer.html#size=,TextLayerHandle,GSize	proc size=(h: var TextLayerHandle; value: GSize)		176
+nim	frame=	nebble/ui/text_layer.html#frame=,TextLayerHandle,GRect	proc frame=(h: var TextLayerHandle; value: GRect)		181
+nim	frame	nebble/ui/text_layer.html#frame,TextLayerHandle	proc frame(h: TextLayerHandle): GRect		187
+nim	enableScreenTextFlowAndPaging	nebble/ui/text_layer.html#enableScreenTextFlowAndPaging,TextLayerHandle,uint8	proc enableScreenTextFlowAndPaging(h: var TextLayerHandle; inset: uint8)		198
+nim	restoreDefaultTextFlowAndPaging	nebble/ui/text_layer.html#restoreDefaultTextFlowAndPaging,TextLayerHandle	proc restoreDefaultTextFlowAndPaging(h: var TextLayerHandle)		205
+nimgrp	backgroundcolor=	nebble/ui/text_layer.html#backgroundColor=-procs-all	proc		154
+nimgrp	textalignment=	nebble/ui/text_layer.html#textAlignment=-procs-all	proc		138
+nimgrp	font=	nebble/ui/text_layer.html#font=-procs-all	proc		130
+nimgrp	textcolor=	nebble/ui/text_layer.html#textColor=-procs-all	proc		146
+nimgrp	newtextlayer	nebble/ui/text_layer.html#newTextLayer-procs-all	proc		54
+nimgrp	text=	nebble/ui/text_layer.html#text=-procs-all	proc		107
+nimgrp	newtextlayerhandle	nebble/ui/text_layer.html#newTextLayerHandle-procs-all	proc		51

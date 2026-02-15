@@ -1,12 +1,13 @@
 nimTitle	storage	nebble/foundation/storage.html	module nebble/foundation/storage		0
-nim	exists	nebble/foundation/storage.html#exists,uint32	proc exists(key: uint32): bool		12
-nim	readInt	nebble/foundation/storage.html#readInt,uint32	proc readInt(key: uint32): int32		21
-nim	writeInt	nebble/foundation/storage.html#writeInt,uint32,int32	proc writeInt(key: uint32; value: int32): cint		27
-nim	readString	nebble/foundation/storage.html#readString,uint32,pointer,csize_t	proc readString(key: uint32; buffer: pointer; bufferSize: csize_t): cint		37
-nim	writeString	nebble/foundation/storage.html#writeString,uint32,cstring	proc writeString(key: uint32; value: cstring): cint		44
-nim	read	nebble/foundation/storage.html#read,uint32,FixedString[N]	proc read[N](key: uint32; s: var FixedString[N]): cint		51
-nim	write	nebble/foundation/storage.html#write,uint32,FixedString[N]	proc write[N](key: uint32; s: var FixedString[N]): cint		63
-nim	readData	nebble/foundation/storage.html#readData,uint32,pointer,csize_t	proc readData(key: uint32; buffer: pointer; bufferSize: csize_t): cint		72
-nim	writeData	nebble/foundation/storage.html#writeData,uint32,pointer,csize_t	proc writeData(key: uint32; data: pointer; size: csize_t): cint		78
-nim	delete	nebble/foundation/storage.html#delete,uint32	proc delete(key: uint32): cint		88
-nim	getDataSize	nebble/foundation/storage.html#getDataSize,uint32	proc getDataSize(key: uint32): cint		98
+nim	PersistStatus	nebble/foundation/storage.html#PersistStatus	type PersistStatus		8
+nim	exists	nebble/foundation/storage.html#exists,uint32	proc exists(key: uint32): bool		16
+nim	readInt	nebble/foundation/storage.html#readInt,uint32	proc readInt(key: uint32): int32		25
+nim	writeInt	nebble/foundation/storage.html#writeInt,uint32,int32	proc writeInt(key: uint32; value: int32): PersistStatus		31
+nim	readString	nebble/foundation/storage.html#readString,uint32,pointer,csize_t	proc readString(key: uint32; buffer: pointer; bufferSize: csize_t): PersistStatus		41
+nim	writeString	nebble/foundation/storage.html#writeString,uint32,cstring	proc writeString(key: uint32; value: cstring): PersistStatus		48
+nim	read	nebble/foundation/storage.html#read,uint32,FixedString[N]	proc read[N](key: uint32; s: var FixedString[N]): PersistStatus		55
+nim	write	nebble/foundation/storage.html#write,uint32,FixedString[N]	proc write[N](key: uint32; s: FixedString[N]): PersistStatus		67
+nim	readData	nebble/foundation/storage.html#readData,uint32,pointer,csize_t	proc readData(key: uint32; buffer: pointer; bufferSize: csize_t): PersistStatus		76
+nim	writeData	nebble/foundation/storage.html#writeData,uint32,pointer,csize_t	proc writeData(key: uint32; data: pointer; size: csize_t): PersistStatus		82
+nim	delete	nebble/foundation/storage.html#delete,uint32	proc delete(key: uint32): PersistStatus		92
+nim	getDataSize	nebble/foundation/storage.html#getDataSize,uint32	proc getDataSize(key: uint32): PersistStatus		102

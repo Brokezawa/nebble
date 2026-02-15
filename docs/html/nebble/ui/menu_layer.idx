@@ -11,8 +11,12 @@ nim	wrapOwned	nebble/ui/menu_layer.html#wrapOwned,ptr.struct_MenuLayer	proc wrap
 nim	isValid	nebble/ui/menu_layer.html#isValid,MenuLayerHandle	proc isValid(h`gensym0: MenuLayerHandle): bool		113
 nim	isNil	nebble/ui/menu_layer.html#isNil,MenuLayerHandle	proc isNil(h`gensym0: MenuLayerHandle): bool		114
 nim	setParent	nebble/ui/menu_layer.html#setParent,MenuLayerHandle,ptr.struct_Layer	proc setParent(h`gensym0: var MenuLayerHandle; p`gensym0: ptr Layer)		116
-nim	reset	nebble/ui/menu_layer.html#reset,MenuLayerHandle	proc reset(h`gensym0: var MenuLayerHandle)		11
-nim	newMenuLayerHandle	nebble/ui/menu_layer.html#newMenuLayerHandle,GRect	proc newMenuLayerHandle(frame: GRect): MenuLayerHandle		18
-nim	newMenuLayer	nebble/ui/menu_layer.html#newMenuLayer,GRect	proc newMenuLayer(frame: GRect): MenuLayerHandle		21
-nim	getLayer	nebble/ui/menu_layer.html#getLayer,MenuLayerHandle	proc getLayer(h: MenuLayerHandle): ptr Layer		28
-nim	setClickConfigOntoWindow	nebble/ui/menu_layer.html#setClickConfigOntoWindow,MenuLayerHandle,ptr.struct_Window	proc setClickConfigOntoWindow(h: var MenuLayerHandle; window: ptr Window)		32
+nim	reset	nebble/ui/menu_layer.html#reset,MenuLayerHandle	proc reset(h`gensym0: var MenuLayerHandle)		17
+nim	newMenuLayerHandle	nebble/ui/menu_layer.html#newMenuLayerHandle,GRect	proc newMenuLayerHandle(frame: GRect): MenuLayerHandle		24
+nim	newMenuLayer	nebble/ui/menu_layer.html#newMenuLayer,GRect	proc newMenuLayer(frame: GRect): MenuLayerHandle		27
+nim	getLayer	nebble/ui/menu_layer.html#getLayer,MenuLayerHandle	proc getLayer(h: MenuLayerHandle): ptr Layer		34
+nim	setClickConfigOntoWindow	nebble/ui/menu_layer.html#setClickConfigOntoWindow,MenuLayerHandle,ptr.struct_Window	proc setClickConfigOntoWindow(h: var MenuLayerHandle; window: ptr Window)		38
+nim	setCallbacks	nebble/ui/menu_layer.html#setCallbacks,MenuLayerHandle,pointer,MenuLayerCallbacks	proc setCallbacks(h: var MenuLayerHandle; callbackContext: pointer;\n             callbacks: MenuLayerCallbacks)		42
+nim	reloadData	nebble/ui/menu_layer.html#reloadData,MenuLayerHandle	proc reloadData(h: var MenuLayerHandle)		52
+nim	getSelectedIndex	nebble/ui/menu_layer.html#getSelectedIndex,MenuLayerHandle	proc getSelectedIndex(h: MenuLayerHandle): MenuIndex		57
+nim	setSelectedIndex	nebble/ui/menu_layer.html#setSelectedIndex,MenuLayerHandle,MenuIndex,MenuRowAlign,bool	proc setSelectedIndex(h: var MenuLayerHandle; index: MenuIndex; align: MenuRowAlign;\n                 animated: bool)		62

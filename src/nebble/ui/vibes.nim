@@ -29,7 +29,7 @@ proc enqueueCustomPattern*(durations: ptr uint32; numSegments: uint32) {.inline.
   ## Enqueue a custom vibration pattern.
   ## `durations` is an array of segment durations in milliseconds.
   ## Odd indices are ON durations, even indices are OFF durations.
-  ## Example: [100, 50, 100] means vibrate 100ms, pause 50ms, vibrate 100ms.
+  ## Example: `[100, 50, 100]` means vibrate 100ms, pause 50ms, vibrate 100ms.
   ## Equivalent to C function `vibes_enqueue_custom_pattern()`.
   let pattern = VibePattern(
     durations: durations,

@@ -4,7 +4,7 @@ nim	clear	nebble/util/fixed_strings.html#clear,FixedString[N]	proc clear[N](s: v
 nim	add	nebble/util/fixed_strings.html#add,FixedString[N],char	proc add[N](s: var FixedString[N]; c: char)		25
 nim	add	nebble/util/fixed_strings.html#add,FixedString[N],cstring	proc add[N](s: var FixedString[N]; str: cstring)		32
 nim	addInt	nebble/util/fixed_strings.html#addInt,FixedString[N],int32	proc addInt[N](s: var FixedString[N]; val: int32)		46
-nim	toCstring	nebble/util/fixed_strings.html#toCstring.c,FixedString[N]	converter toCstring[N](s: var FixedString[N]): cstring		75
+nim	toCstring	nebble/util/fixed_strings.html#toCstring.t,FixedString[N]	template toCstring[N](s: FixedString[N]): cstring		75
 nim	formatInto	nebble/util/fixed_strings.html#formatInto.m,FixedString,varargs[untyped]	macro formatInto(s: var FixedString; body: varargs[untyped]): untyped		83
 nim	f	nebble/util/fixed_strings.html#f.t,FixedString[N],varargs[untyped]	template f[N](s: var FixedString[N]; body: varargs[untyped])		103
 nimgrp	add	nebble/util/fixed_strings.html#add-procs-all	proc		25

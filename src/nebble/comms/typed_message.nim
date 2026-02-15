@@ -17,6 +17,7 @@
 ##   let cmd = readInt32(iter, amkCommand)
 
 import ./message
+import ../util/fixed_strings
 
 # Re-export types from message module
 type
@@ -65,9 +66,9 @@ template send*(iter: ptr DictionaryIterator, key: typed, value: cstring) =
   ## Send a string value with the specified key
   discard message.dictWriteCstring(iter, key.int, value)
 
-template send*(iter: ptr DictionaryIterator, key: typed, value: string) =
-  ## Send a Nim string value with the specified key
-  discard message.dictWriteCstring(iter, key.int, value.cstring)
+template send*[N](iter: ptr DictionaryIterator, key: typed, value: FixedString[N]) =
+  ## Send a FixedString value with the specified key
+  discard message.dictWriteCstring(iter, key.int, value.toCstring)
 
 # Type-safe read operations
 template readInt8*(iter: ptr DictionaryIterator, key: typed): int8 =

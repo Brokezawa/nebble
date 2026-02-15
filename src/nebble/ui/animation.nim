@@ -1,6 +1,5 @@
 ## ARC-Managed Animation Handle
 import nebble/ffi
-import nebble/ffi/managed
 
 export ffi.Animation, ffi.AnimationHandlers, ffi.AnimationCurve, ffi.AnimationProgress, ffi.AnimationStartedHandler, ffi.AnimationStoppedHandler
 
@@ -133,34 +132,53 @@ proc setLayerFrame*(h: var AnimationHandle, layer: ptr Layer, startFrame, endFra
   h.raw = cast[ptr Animation](prop)
   h.state = asCreated
 
-proc createSequence*(animations: varargs[AnimationHandle]): AnimationHandle {.inline.} =
+proc createSequence*(animations: varargs[AnimationHandle]): AnimationHandle =
   ## Create a sequence animation from a list of handles.
   ## Ownership of the animations is transferred to the sequence.
   if animations.len == 0: return AnimationHandle(raw: nil, state: asDestroyed)
   
-  var raws = newSeq[ptr Animation](animations.len)
-  for i in 0..<animations.len:
-    raws[i] = animations[i].raw
-    # Transfer ownership: mark source as unowned so it doesn't destroy on scope exit
-    var srcPtr = cast[ptr AnimationHandle](unsafeAddr animations[i])
-    srcPtr.state = asUnowned
-    
-  let res = ffi.animation_sequence_create_from_array(addr raws[0], animations.len.uint32)
-  result = wrapOwned(res)
+  # Use a stack array for common small sequences (up to 16)
+  # For larger ones, we'll use a temporary heap allocation
+  if animations.len <= 16:
+    var raws: array[16, ptr Animation]
+    for i in 0..<animations.len:
+      raws[i] = animations[i].raw
+      # Transfer ownership: mark source as unowned
+      var srcPtr = cast[ptr AnimationHandle](unsafeAddr animations[i])
+      srcPtr.state = asUnowned
+    let res = ffi.animation_sequence_create_from_array(addr raws[0], animations.len.uint32)
+    result = wrapOwned(res)
+  else:
+    # Fallback for large sequences (rare)
+    var raws = newSeq[ptr Animation](animations.len)
+    for i in 0..<animations.len:
+      raws[i] = animations[i].raw
+      var srcPtr = cast[ptr AnimationHandle](unsafeAddr animations[i])
+      srcPtr.state = asUnowned
+    let res = ffi.animation_sequence_create_from_array(addr raws[0], animations.len.uint32)
+    result = wrapOwned(res)
 
-proc createSpawn*(animations: varargs[AnimationHandle]): AnimationHandle {.inline.} =
+proc createSpawn*(animations: varargs[AnimationHandle]): AnimationHandle =
   ## Create a spawn animation from a list of handles.
   ## Ownership of the animations is transferred to the group.
   if animations.len == 0: return AnimationHandle(raw: nil, state: asDestroyed)
   
-  var raws = newSeq[ptr Animation](animations.len)
-  for i in 0..<animations.len:
-    raws[i] = animations[i].raw
-    var srcPtr = cast[ptr AnimationHandle](unsafeAddr animations[i])
-    srcPtr.state = asUnowned
-    
-  let res = ffi.animation_spawn_create_from_array(addr raws[0], animations.len.uint32)
-  result = wrapOwned(res)
+  if animations.len <= 16:
+    var raws: array[16, ptr Animation]
+    for i in 0..<animations.len:
+      raws[i] = animations[i].raw
+      var srcPtr = cast[ptr AnimationHandle](unsafeAddr animations[i])
+      srcPtr.state = asUnowned
+    let res = ffi.animation_spawn_create_from_array(addr raws[0], animations.len.uint32)
+    result = wrapOwned(res)
+  else:
+    var raws = newSeq[ptr Animation](animations.len)
+    for i in 0..<animations.len:
+      raws[i] = animations[i].raw
+      var srcPtr = cast[ptr AnimationHandle](unsafeAddr animations[i])
+      srcPtr.state = asUnowned
+    let res = ffi.animation_spawn_create_from_array(addr raws[0], animations.len.uint32)
+    result = wrapOwned(res)
 
 proc `shouldAutoReverse=`*(h: var AnimationHandle, reverse: bool) {.inline.} =
   if h.raw == nil: return

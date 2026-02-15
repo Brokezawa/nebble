@@ -5,7 +5,6 @@
 ## if a menu is never opened.
 
 import nebble/ffi
-import nebble/ffi/managed
 
 # Re-export FFI types
 export ffi.ActionMenu, ffi.ActionMenuLevel, ffi.ActionMenuItem

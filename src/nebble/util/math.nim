@@ -8,9 +8,9 @@ import nebble/ffi
 # Trigonometry
 # ============================================================================
 
-const TRIG_MAX_ANGLE* = 0x10000
 ## Maximum Pebble angle value (2 * pi radians = 65536 angle units).
 ## Use this to convert between degrees and Pebble angle units.
+const TRIG_MAX_ANGLE* = 0x10000
 
 proc trigAngleToDeg*(angle: int32): float32 {.inline.} =
   ## Convert Pebble angle units to degrees.

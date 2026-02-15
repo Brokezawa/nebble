@@ -1,0 +1,14 @@
+nimTitle	bitmap_sequence_ref	nebble/graphics/bitmap_sequence_ref.html	module nebble/graphics/bitmap_sequence_ref		0
+nim	BitmapSequenceRef	nebble/graphics/bitmap_sequence_ref.html#BitmapSequenceRef	type BitmapSequenceRef		31
+nim	newBitmapSequenceRef	nebble/graphics/bitmap_sequence_ref.html#newBitmapSequenceRef,uint32	proc newBitmapSequenceRef(resourceId: uint32): BitmapSequenceRef		34
+nim	wrapBitmapSequence	nebble/graphics/bitmap_sequence_ref.html#wrapBitmapSequence,ptr.struct_GBitmapSequence,bool	proc wrapBitmapSequence(seq: ptr GBitmapSequence; owned: bool = true): BitmapSequenceRef		43
+nim	isValid	nebble/graphics/bitmap_sequence_ref.html#isValid,BitmapSequenceRef	proc isValid(h: BitmapSequenceRef): bool		53
+nim	updateNextFrame	nebble/graphics/bitmap_sequence_ref.html#updateNextFrame,BitmapSequenceRef,ptr.struct_GBitmap,uint32	proc updateNextFrame(h: BitmapSequenceRef; bitmap: ptr GBitmap; delayMs: var uint32): bool		56
+nim	updateByElapsed	nebble/graphics/bitmap_sequence_ref.html#updateByElapsed,BitmapSequenceRef,ptr.struct_GBitmap,uint32	proc updateByElapsed(h: BitmapSequenceRef; bitmap: ptr GBitmap; elapsedMs: uint32): bool		61
+nim	restart	nebble/graphics/bitmap_sequence_ref.html#restart,BitmapSequenceRef	proc restart(h: BitmapSequenceRef): bool		66
+nim	bitmapSize	nebble/graphics/bitmap_sequence_ref.html#bitmapSize,BitmapSequenceRef	proc bitmapSize(h: BitmapSequenceRef): GSize		71
+nim	currentFrameIndex	nebble/graphics/bitmap_sequence_ref.html#currentFrameIndex,BitmapSequenceRef	proc currentFrameIndex(h: BitmapSequenceRef): int32		76
+nim	totalFrames	nebble/graphics/bitmap_sequence_ref.html#totalFrames,BitmapSequenceRef	proc totalFrames(h: BitmapSequenceRef): uint32		81
+nim	playCount	nebble/graphics/bitmap_sequence_ref.html#playCount,BitmapSequenceRef	proc playCount(h: BitmapSequenceRef): uint32		86
+nim	playCount=	nebble/graphics/bitmap_sequence_ref.html#playCount=,BitmapSequenceRef,uint32	proc playCount=(h: BitmapSequenceRef; count: uint32)		91
+nim	scheduleNextFrame	nebble/graphics/bitmap_sequence_ref.html#scheduleNextFrame,BitmapSequenceRef,ptr.struct_GBitmap,AnimationHandler,pointer	proc scheduleNextFrame(h: BitmapSequenceRef; bitmap: ptr GBitmap;\n                  handler: AnimationHandler; context: pointer = nil): bool		127

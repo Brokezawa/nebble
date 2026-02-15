@@ -110,21 +110,24 @@ proc newBitmapRef*(data: ptr uint8): GBitmapRef =
   result.isSystemResource = false
   result.parent = nil
 
-proc newBitmapRef*(pngData: seq[byte]): GBitmapRef =
-  ## Create a reference-counted bitmap from PNG data.
-  ## Note: PNG support may vary by platform.
+proc newBitmapRef*(pngData: ptr uint8, len: int): GBitmapRef =
+  ## Create a reference-counted bitmap from raw PNG data.
+  ## This avoids Nim heap allocations if the data is in a static buffer.
   new(result)
   when declared(gbitmap_create_from_png_data):
-    result.bitmap = gbitmap_create_from_png_data(
-      cast[ptr uint8](unsafeAddr pngData[0]), 
-      pngData.len.csize_t
-    )
+    result.bitmap = gbitmap_create_from_png_data(pngData, len.csize_t)
   else:
-    # Fallback: not supported on this platform
     result.bitmap = nil
   result.isSubBitmap = false
   result.isSystemResource = false
   result.parent = nil
+
+proc newBitmapRef*(pngData: seq[byte]): GBitmapRef =
+  ## Create a reference-counted bitmap from PNG data.
+  ## **Note:** This will allocate on the Nim heap due to the `seq[byte]` parameter.
+  ## Use the `ptr uint8` overload for zero-heap operation with static data.
+  if pngData.len == 0: return nil
+  result = newBitmapRef(unsafeAddr pngData[0], pngData.len)
 
 # ============================================================================
 # Sub-Bitmap Constructors

@@ -59,7 +59,22 @@ If you need manual control, use **Managed Handles** which use ARC for memory saf
 
 ---
 
-## 3. Persistent Storage (`nebble/foundation/storage`)
+## 3. App Glance (`nebble/comms/app_glance`)
+
+Allows displaying information in the Pebble app menu or on the watchface.
+
+```nim
+proc onAppGlanceReload(session: ptr AppGlanceReloadSession, 
+                       limit: csize_t, context: pointer) {.cdecl.} =
+  discard session.addSlice("Hello Glance")
+
+# Trigger reload
+app_glance.reload(onAppGlanceReload)
+```
+
+---
+
+## 4. Persistent Storage (`nebble/foundation/storage`)
 
 ```nim
 const KEY_SCORE = 1
