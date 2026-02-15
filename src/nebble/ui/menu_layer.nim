@@ -64,3 +64,29 @@ proc setSelectedIndex*(h: var MenuLayerHandle, index: MenuIndex,
   ## Set the currently selected menu index.
   if h.pRaw == nil: return
   ffi.menu_layer_set_selected_index(h.pRaw, index, align, animated)
+
+proc setSelectedNext*(h: var MenuLayerHandle, up: bool, 
+                      align: MenuRowAlign, animated: bool) {.inline.} =
+  ## Select the next or previous row.
+  if h.pRaw == nil: return
+  ffi.menu_layer_set_selected_next(h.pRaw, up, align, animated)
+
+proc basicDraw*(ctx: ptr GContext, cellLayer: ptr Layer, 
+                title, subtitle: cstring, icon: ptr GBitmap = nil) {.inline.} =
+  ## Helper to draw a standard menu cell with title, subtitle and icon.
+  ffi.menu_cell_basic_draw(ctx, cellLayer, title, subtitle, icon)
+
+proc setNormalColors*(h: var MenuLayerHandle, background, foreground: GColor) {.inline.} =
+  ## Set the colors used for unselected rows.
+  if h.pRaw == nil: return
+  ffi.menu_layer_set_normal_colors(h.pRaw, background, foreground)
+
+proc setHighlightColors*(h: var MenuLayerHandle, background, foreground: GColor) {.inline.} =
+  ## Set the colors used for the selected row.
+  if h.pRaw == nil: return
+  ffi.menu_layer_set_highlight_colors(h.pRaw, background, foreground)
+
+proc setCenterFocused*(h: var MenuLayerHandle, enabled: bool) {.inline.} =
+  ## Set whether the focused row should be centered (useful for round screens).
+  if h.pRaw == nil: return
+  ffi.menu_layer_set_center_focused(h.pRaw, enabled)

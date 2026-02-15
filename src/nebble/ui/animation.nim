@@ -137,10 +137,10 @@ proc createSequence*(animations: varargs[AnimationHandle]): AnimationHandle =
   ## Ownership of the animations is transferred to the sequence.
   if animations.len == 0: return AnimationHandle(raw: nil, state: asDestroyed)
   
-  # Use a stack array for common small sequences (up to 16)
+  # Use a stack array for common small sequences (up to 32)
   # For larger ones, we'll use a temporary heap allocation
-  if animations.len <= 16:
-    var raws: array[16, ptr Animation]
+  if animations.len <= 32:
+    var raws: array[32, ptr Animation]
     for i in 0..<animations.len:
       raws[i] = animations[i].raw
       # Transfer ownership: mark source as unowned
@@ -150,6 +150,7 @@ proc createSequence*(animations: varargs[AnimationHandle]): AnimationHandle =
     result = wrapOwned(res)
   else:
     # Fallback for large sequences (rare)
+    # WARNING: This causes a temporary Nim heap allocation.
     var raws = newSeq[ptr Animation](animations.len)
     for i in 0..<animations.len:
       raws[i] = animations[i].raw
@@ -163,8 +164,8 @@ proc createSpawn*(animations: varargs[AnimationHandle]): AnimationHandle =
   ## Ownership of the animations is transferred to the group.
   if animations.len == 0: return AnimationHandle(raw: nil, state: asDestroyed)
   
-  if animations.len <= 16:
-    var raws: array[16, ptr Animation]
+  if animations.len <= 32:
+    var raws: array[32, ptr Animation]
     for i in 0..<animations.len:
       raws[i] = animations[i].raw
       var srcPtr = cast[ptr AnimationHandle](unsafeAddr animations[i])
@@ -172,6 +173,8 @@ proc createSpawn*(animations: varargs[AnimationHandle]): AnimationHandle =
     let res = ffi.animation_spawn_create_from_array(addr raws[0], animations.len.uint32)
     result = wrapOwned(res)
   else:
+    # Fallback for large groups (rare)
+    # WARNING: This causes a temporary Nim heap allocation.
     var raws = newSeq[ptr Animation](animations.len)
     for i in 0..<animations.len:
       raws[i] = animations[i].raw

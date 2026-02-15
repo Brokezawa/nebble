@@ -22,7 +22,7 @@ This guide helps you translate common Pebble C SDK patterns into idiomatic Nebbl
 
 Nebble uses **Managed Types** (handles) which leverage Nim's ARC memory management to automatically handle resource cleanup. These are your default choice for building safe apps.
 
-| Manual C API Type | Managed Nim Handle | Creation | Destruction |
+| `Manual C API Type` | `Managed Nim Handle` | `Creation` | `Destruction` |
 |-------------------|--------------------|----------|-------------|
 | `Window*` | `WindowHandle` | `newWindow()` | Automatic (Stack-Aware) |
 | `TextLayer*` | `TextLayerHandle` | `newTextLayer()` | Automatic (Hierarchy-Aware) |
@@ -31,6 +31,9 @@ Nebble uses **Managed Types** (handles) which leverage Nim's ARC memory manageme
 | `MenuLayer*` | `MenuLayerHandle` | `newMenuLayer()` | Automatic (Hierarchy-Aware) |
 | `ScrollLayer*` | `ScrollLayerHandle` | `newScrollLayer()` | Automatic (Hierarchy-Aware) |
 | `GPath*` | `GPathHandle` | `newGPath()` | Automatic |
+| `DataLoggingSessionRef` | `DataLoggingSessionHandle` | `newDataLoggingSession()` | Automatic |
+| `AppSync` | `AppSyncHandle` | `newAppSync()` | Automatic |
+| `GBitmap*` | `GBitmapRef` | `newBitmapRef()` | Automatic (Ref-Counted) |
 
 ### Benefits of Managed Types
 1. **ARC RAII Semantics**: Resources are freed when the handle goes out of scope or is reassigned.

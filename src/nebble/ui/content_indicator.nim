@@ -5,65 +5,56 @@
 ## more content is available above/below/left/right.
 
 import nebble/ffi
+import nebble/ffi/managed
 
 export ffi.ContentIndicator, ffi.ContentIndicatorDirection, ffi.ContentIndicatorConfig
 
 # ============================================================================
-# Constructor & Destructor
+# Define the Managed Handle
 # ============================================================================
 
-proc newContentIndicator*(): ptr ContentIndicator {.inline.} =
-  ## Create a new ContentIndicator.
-  ## Returns nil on failure (out of memory).
-  ## Equivalent to C function `content_indicator_create()`.
-  ffi.content_indicator_create()
+DefineUniqueHandle(ContentIndicator, ContentIndicator,
+                  content_indicator_create, content_indicator_destroy)
 
-proc destroy*(indicator: ptr ContentIndicator) {.inline.} =
-  ## Destroy a ContentIndicator and free its memory.
-  ## Equivalent to C function `content_indicator_destroy(indicator)`.
-  ffi.content_indicator_destroy(indicator)
+# ============================================================================
+# Constructor
+# ============================================================================
+
+proc newContentIndicatorHandle*(): ContentIndicatorHandle {.inline.} =
+  ## Create a new managed ContentIndicator.
+  wrapOwned(ffi.content_indicator_create())
+
+proc newContentIndicator*(): ContentIndicatorHandle {.inline.} =
+  ## Alias for `newContentIndicatorHandle`.
+  result = newContentIndicatorHandle()
 
 # ============================================================================
 # Direction Configuration
 # ============================================================================
 
-proc configureDirection*(indicator: ptr ContentIndicator;
+proc configureDirection*(h: ContentIndicatorHandle;
                          direction: ContentIndicatorDirection;
                          config: ptr ContentIndicatorConfig): bool {.inline.} =
   ## Configure a direction with the given configuration.
-  ## Returns true on success.
-  ##
-  ## The config struct should specify:
-  ## - `layer` - The layer to display the indicator in
-  ## - `colors.foreground` - Arrow color
-  ## - `colors.background` - Background color
-  ## - `alignment` - Where to position the indicator
-  ## - `times_out` - Whether the indicator should fade out
-  ##
-  ## Equivalent to C function `content_indicator_configure_direction(...)`.
-  result = ffi.content_indicator_configure_direction(indicator, direction, config)
+  if h.pRaw == nil: return false
+  result = ffi.content_indicator_configure_direction(h.pRaw, direction, config)
 
 # ============================================================================
 # Content Availability
 # ============================================================================
 
-proc contentAvailable*(indicator: ptr ContentIndicator;
+proc contentAvailable*(h: ContentIndicatorHandle;
                        direction: ContentIndicatorDirection): bool {.inline.} =
   ## Check if content is marked as available in a direction.
-  ## Returns true if the indicator should show for this direction.
-  ## Equivalent to C function `content_indicator_get_content_available(...)`.
-  result = ffi.content_indicator_get_content_available(indicator, direction)
+  if h.pRaw == nil: return false
+  result = ffi.content_indicator_get_content_available(h.pRaw, direction)
 
-proc setContentAvailable*(indicator: ptr ContentIndicator;
+proc setContentAvailable*(h: ContentIndicatorHandle;
                           direction: ContentIndicatorDirection;
                           available: bool) {.inline.} =
   ## Manually set whether content is available in a direction.
-  ## Set to true to show the indicator, false to hide it.
-  ##
-  ## Note: If using ScrollLayer integration, this may be automatically managed.
-  ##
-  ## Equivalent to C function `content_indicator_set_content_available(...)`.
-  ffi.content_indicator_set_content_available(indicator, direction, available)
+  if h.pRaw == nil: return
+  ffi.content_indicator_set_content_available(h.pRaw, direction, available)
 
 # ============================================================================
 # Nim-idiomatic Helpers
@@ -75,53 +66,49 @@ proc makeConfig*(layer: ptr Layer;
                  alignment: GAlign = GAlignCenter;
                  timesOut: bool = true): ContentIndicatorConfig {.inline.} =
   ## Create a ContentIndicatorConfig with the specified settings.
-  ## Convenience helper for configuring indicators.
   result.layer = layer
   result.colors.foreground = foreground
   result.colors.background = background
   result.alignment = alignment
   result.times_out = timesOut
 
-proc configureUp*(indicator: ptr ContentIndicator;
+proc configureUp*(h: ContentIndicatorHandle;
                   layer: ptr Layer;
                   foreground: GColor = GColorBlack;
                   background: GColor = GColorWhite): bool {.inline.} =
   ## Configure the "up" direction indicator.
-  ## Convenience helper for common configuration.
-  let config = makeConfig(layer, foreground, background, GAlignTop, true)
-  result = configureDirection(indicator, ContentIndicatorDirectionUp, addr config)
+  var config = makeConfig(layer, foreground, background, GAlignTop, true)
+  result = h.configureDirection(ContentIndicatorDirectionUp, addr config)
 
-proc configureDown*(indicator: ptr ContentIndicator;
-                   layer: ptr Layer;
-                   foreground: GColor = GColorBlack;
-                   background: GColor = GColorWhite): bool {.inline.} =
+proc configureDown*(h: ContentIndicatorHandle;
+                    layer: ptr Layer;
+                    foreground: GColor = GColorBlack;
+                    background: GColor = GColorWhite): bool {.inline.} =
   ## Configure the "down" direction indicator.
-  ## Convenience helper for common configuration.
-  let config = makeConfig(layer, foreground, background, GAlignBottom, true)
-  result = configureDirection(indicator, ContentIndicatorDirectionDown, addr config)
+  var config = makeConfig(layer, foreground, background, GAlignBottom, true)
+  result = h.configureDirection(ContentIndicatorDirectionDown, addr config)
 
-
-
-proc showUp*(indicator: ptr ContentIndicator) {.inline.} =
+proc showUp*(h: ContentIndicatorHandle) {.inline.} =
   ## Manually show the up indicator.
-  setContentAvailable(indicator, ContentIndicatorDirectionUp, true)
+  h.setContentAvailable(ContentIndicatorDirectionUp, true)
 
-proc hideUp*(indicator: ptr ContentIndicator) {.inline.} =
+proc hideUp*(h: ContentIndicatorHandle) {.inline.} =
   ## Manually hide the up indicator.
-  setContentAvailable(indicator, ContentIndicatorDirectionUp, false)
+  h.setContentAvailable(ContentIndicatorDirectionUp, false)
 
-proc showDown*(indicator: ptr ContentIndicator) {.inline.} =
+proc showDown*(h: ContentIndicatorHandle) {.inline.} =
   ## Manually show the down indicator.
-  setContentAvailable(indicator, ContentIndicatorDirectionDown, true)
+  h.setContentAvailable(ContentIndicatorDirectionDown, true)
 
-proc hideDown*(indicator: ptr ContentIndicator) {.inline.} =
+proc hideDown*(h: ContentIndicatorHandle) {.inline.} =
   ## Manually hide the down indicator.
-  setContentAvailable(indicator, ContentIndicatorDirectionDown, false)
+  h.setContentAvailable(ContentIndicatorDirectionDown, false)
 
-proc isUpVisible*(indicator: ptr ContentIndicator): bool {.inline.} =
+proc isUpVisible*(h: ContentIndicatorHandle): bool {.inline.} =
   ## Check if the up indicator is currently visible.
-  result = contentAvailable(indicator, ContentIndicatorDirectionUp)
+  result = h.contentAvailable(ContentIndicatorDirectionUp)
 
-proc isDownVisible*(indicator: ptr ContentIndicator): bool {.inline.} =
+proc isDownVisible*(h: ContentIndicatorHandle): bool {.inline.} =
   ## Check if the down indicator is currently visible.
-  result = contentAvailable(indicator, ContentIndicatorDirectionDown)
+  result = h.contentAvailable(ContentIndicatorDirectionDown)
+

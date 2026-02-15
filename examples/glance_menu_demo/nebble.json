@@ -1,0 +1,16 @@
+{
+  "name": "glance_menu_demo",
+  "type": "app",
+  "version": "1.0.0",
+  "uuid": "a8177b55-b927-40e0-868d-5211c37f6ad7",
+  "platforms": [
+    "aplite",
+    "basalt",
+    "chalk",
+    "diorite",
+    "emery",
+    "flint"
+  ],
+  "capabilities": [],
+  "appKeys": {}
+}

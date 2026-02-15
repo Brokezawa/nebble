@@ -122,13 +122,6 @@ proc newBitmapRef*(pngData: ptr uint8, len: int): GBitmapRef =
   result.isSystemResource = false
   result.parent = nil
 
-proc newBitmapRef*(pngData: seq[byte]): GBitmapRef =
-  ## Create a reference-counted bitmap from PNG data.
-  ## **Note:** This will allocate on the Nim heap due to the `seq[byte]` parameter.
-  ## Use the `ptr uint8` overload for zero-heap operation with static data.
-  if pngData.len == 0: return nil
-  result = newBitmapRef(unsafeAddr pngData[0], pngData.len)
-
 # ============================================================================
 # Sub-Bitmap Constructors
 # ============================================================================

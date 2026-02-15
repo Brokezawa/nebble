@@ -225,8 +225,10 @@ proc removeFromStack*(h: var WindowHandle, animated: bool = true): bool {.inline
 proc popAll*(animated: bool = true) {.inline.} =
   ## Pop all windows from stack.
   ##
-  ## **Warning:** This affects ALL windows, not just managed ones.
-  ## Managed windows still need their handles updated.
+  ## **⚠️ Warning:** This affects ALL windows, not just managed ones.
+  ## Managed windows still on the stack will have their state desynchronized.
+  ## You MUST manually call `reset()` on all managed `WindowHandle` objects 
+  ## after calling `popAll` to ensure they are properly destroyed.
   window_stack_pop_all(animated)
 
 # ============================================================================

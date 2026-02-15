@@ -51,6 +51,10 @@ proc addInt*[N](s: var FixedString[N], val: int32) {.inline.} =
     s.add '0'
     return
 
+  if val == low(int32):
+    s.add "-2147483648"
+    return
+
   var v = val
   if v < 0:
     s.add '-'

@@ -88,6 +88,17 @@ proc hasParent*(h: LayerHandle): bool {.inline.} =
   ## Check if layer has a parent (was added to another layer).
   h.ownership == hoParented
 
+proc setParent*(h: var LayerHandle, p: ptr Layer) {.inline.} =
+  ## Internal helper to set the parent pointer on a child handle.
+  if p != nil:
+    h.pParent = p
+    if h.ownership == hoOwned:
+      h.ownership = hoParented
+  else:
+    h.pParent = nil
+    if h.ownership == hoParented:
+      h.ownership = hoOwned
+
 proc reset*(h: var LayerHandle) =
   ## Explicitly destroy layer (if no parent) and reset handle.
   `=destroy`(h)
