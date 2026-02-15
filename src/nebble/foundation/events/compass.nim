@@ -4,7 +4,12 @@
 
 import nebble/ffi
 
-export ffi.CompassHeadingData, ffi.CompassHeadingHandler, ffi.CompassHeading
+export ffi.CompassHeadingData, ffi.CompassHeadingHandler, ffi.CompassHeading, ffi.CompassStatus
+
+template CompassStatusUnavailable*(): CompassStatus = ffi.CompassStatusUnavailable
+template CompassStatusDataInvalid*(): CompassStatus = ffi.CompassStatusDataInvalid
+template CompassStatusCalibrating*(): CompassStatus = ffi.CompassStatusCalibrating
+template CompassStatusCalibrated*(): CompassStatus = ffi.CompassStatusCalibrated
 
 # ============================================================================
 # Compass Service

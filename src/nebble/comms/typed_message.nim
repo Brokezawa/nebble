@@ -40,64 +40,64 @@ type
 
 template send*(iter: ptr DictionaryIterator, key: typed, value: int8) =
   ## Send an int8 value with the specified key
-  discard message.dictWriteInt8(iter, key.int, value)
+  discard message.dictWriteInt8(iter, key.uint32, value)
 
 template send*(iter: ptr DictionaryIterator, key: typed, value: int16) =
   ## Send an int16 value with the specified key
-  discard message.dictWriteInt16(iter, key.int, value)
+  discard message.dictWriteInt16(iter, key.uint32, value)
 
 template send*(iter: ptr DictionaryIterator, key: typed, value: int32) =
   ## Send an int32 value with the specified key
-  discard message.dictWriteInt32(iter, key.int, value)
+  discard message.dictWriteInt32(iter, key.uint32, value)
 
 template send*(iter: ptr DictionaryIterator, key: typed, value: uint8) =
   ## Send a uint8 value with the specified key
-  discard message.dictWriteUint8(iter, key.int, value)
+  discard message.dictWriteUint8(iter, key.uint32, value)
 
 template send*(iter: ptr DictionaryIterator, key: typed, value: uint16) =
   ## Send a uint16 value with the specified key
-  discard message.dictWriteUint16(iter, key.int, value)
+  discard message.dictWriteUint16(iter, key.uint32, value)
 
 template send*(iter: ptr DictionaryIterator, key: typed, value: uint32) =
   ## Send a uint32 value with the specified key
-  discard message.dictWriteUint32(iter, key.int, value)
+  discard message.dictWriteUint32(iter, key.uint32, value)
 
 template send*(iter: ptr DictionaryIterator, key: typed, value: cstring) =
   ## Send a string value with the specified key
-  discard message.dictWriteCstring(iter, key.int, value)
+  discard message.dictWriteCstring(iter, key.uint32, value)
 
 template send*[N](iter: ptr DictionaryIterator, key: typed, value: FixedString[N]) =
   ## Send a FixedString value with the specified key
-  discard message.dictWriteCstring(iter, key.int, value.toCstring)
+  discard message.dictWriteCstring(iter, key.uint32, value.toCstring)
 
 # Type-safe read operations
 template readInt8*(iter: ptr DictionaryIterator, key: typed): int8 =
   ## Read an int8 value for the specified key
-  message.dictReadInt8(iter, key.int)
+  message.dictReadInt8(iter, key.uint32)
 
 template readInt16*(iter: ptr DictionaryIterator, key: typed): int16 =
   ## Read an int16 value for the specified key
-  message.dictReadInt16(iter, key.int)
+  message.dictReadInt16(iter, key.uint32)
 
 template readInt32*(iter: ptr DictionaryIterator, key: typed): int32 =
   ## Read an int32 value for the specified key
-  message.dictReadInt32(iter, key.int)
+  message.dictReadInt32(iter, key.uint32)
 
 template readUint8*(iter: ptr DictionaryIterator, key: typed): uint8 =
   ## Read a uint8 value for the specified key
-  message.dictReadUint8(iter, key.int)
+  message.dictReadUint8(iter, key.uint32)
 
 template readUint16*(iter: ptr DictionaryIterator, key: typed): uint16 =
   ## Read a uint16 value for the specified key
-  message.dictReadUint16(iter, key.int)
+  message.dictReadUint16(iter, key.uint32)
 
 template readUint32*(iter: ptr DictionaryIterator, key: typed): uint32 =
   ## Read a uint32 value for the specified key
-  message.dictReadUint32(iter, key.int)
+  message.dictReadUint32(iter, key.uint32)
 
 template readCstring*(iter: ptr DictionaryIterator, key: typed): cstring =
   ## Read a cstring value for the specified key
-  message.dictReadCstring(iter, key.int)
+  message.dictReadCstring(iter, key.uint32)
 
 # Utility operations
 template key*(k: typed): int =
@@ -124,21 +124,20 @@ proc close*() {.inline.} =
 # Callback registration
 template onInboxReceived*(handler: InboxReceivedCallback) =
   ## Register callback for incoming messages
-  message.registerInboxReceived(handler)
+  discard message.registerInboxReceived(handler)
 
 template onInboxDropped*(handler: InboxDroppedCallback) =
   ## Register callback for dropped messages
-  message.registerInboxDropped(handler)
+  discard message.registerInboxDropped(handler)
 
 template onOutboxSent*(handler: OutboxSentCallback) =
   ## Register callback for sent messages
-  message.registerOutboxSent(handler)
+  discard message.registerOutboxSent(handler)
 
 template onOutboxFailed*(handler: OutboxFailedCallback) =
   ## Register callback for failed sends
-  message.registerOutboxFailed(handler)
+  discard message.registerOutboxFailed(handler)
 
-# Constants
-const
-  inboxSizeMaximum* = message.inboxSizeMaximum
-  outboxSizeMaximum* = message.outboxSizeMaximum
+# Constants (proxied as templates to avoid compile-time evaluation of importc)
+template inboxSizeMaximum*(): uint32 = message.inboxSizeMaximum()
+template outboxSizeMaximum*(): uint32 = message.outboxSizeMaximum()

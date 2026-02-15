@@ -113,7 +113,7 @@ macro pebbleApp*(load: untyped = nil,
       
   deinitBody.add quote do:
     if `windowVar`.pop():
-      `windowVar` = WindowHandle(nil)
+      `windowVar` = default(WindowHandle)
 
   result.add quote do:
     proc deinit() {.cdecl.} =

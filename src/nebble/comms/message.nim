@@ -9,6 +9,9 @@ export ffi.AppMessageResult, ffi.DictionaryIterator, ffi.Tuple_f, ffi.Dictionary
 export ffi.AppMessageInboxReceived, ffi.AppMessageInboxDropped
 export ffi.AppMessageOutboxSent, ffi.AppMessageOutboxFailed
 
+template APP_MSG_OK*(): AppMessageResult = ffi.APP_MSG_OK
+template DICT_OK*(): DictionaryResult = ffi.DICT_OK
+
 # ============================================================================
 # AppMessage Lifecycle
 # ============================================================================
@@ -103,58 +106,58 @@ proc size*(iter: ptr DictionaryIterator): uint32 {.inline.} =
   ## Equivalent to C function `dict_size(iter)`.
   ffi.dict_size(iter)
 
-proc writeBegin*(iter: ptr DictionaryIterator, buffer: ptr uint8, size: uint16): DictionaryResult {.inline.} =
+proc dictWriteBegin*(iter: ptr DictionaryIterator, buffer: ptr uint8, size: uint16): DictionaryResult {.inline.} =
   ## Begin writing to a dictionary.
   ## Equivalent to C function `dict_write_begin(iter, buffer, size)`.
   ffi.dict_write_begin(iter, buffer, size)
 
-proc writeData*(iter: ptr DictionaryIterator, key: uint32, data: ptr uint8, size: uint16): DictionaryResult {.inline.} =
+proc dictWriteData*(iter: ptr DictionaryIterator, key: uint32, data: ptr uint8, size: uint16): DictionaryResult {.inline.} =
   ## Write binary data to the dictionary.
   ## Equivalent to C function `dict_write_data(iter, key, data, size)`.
   ffi.dict_write_data(iter, key, data, size)
 
-proc writeCstring*(iter: ptr DictionaryIterator, key: uint32, cstring: cstring): DictionaryResult {.inline.} =
+proc dictWriteCstring*(iter: ptr DictionaryIterator, key: uint32, cstring: cstring): DictionaryResult {.inline.} =
   ## Write a C string to the dictionary.
   ## Equivalent to C function `dict_write_cstring(iter, key, cstring)`.
   ffi.dict_write_cstring(iter, key, cstring)
 
-proc writeInt*(iter: ptr DictionaryIterator, key: uint32, value: int32): DictionaryResult {.inline.} =
+proc dictWriteInt*(iter: ptr DictionaryIterator, key: uint32, value: int32): DictionaryResult {.inline.} =
   ## Write a signed 32-bit integer to the dictionary.
   ## Equivalent to C function `dict_write_int(iter, key, &value, 4, true)`.
   var val = value
   ffi.dict_write_int(iter, key, addr val, 4, true)
 
-proc writeUint8*(iter: ptr DictionaryIterator, key: uint32, value: uint8): DictionaryResult {.inline.} =
+proc dictWriteUint8*(iter: ptr DictionaryIterator, key: uint32, value: uint8): DictionaryResult {.inline.} =
   ## Write an unsigned 8-bit integer to the dictionary.
   ## Equivalent to C function `dict_write_uint8(iter, key, value)`.
   ffi.dict_write_uint8(iter, key, value)
 
-proc writeUint16*(iter: ptr DictionaryIterator, key: uint32, value: uint16): DictionaryResult {.inline.} =
+proc dictWriteUint16*(iter: ptr DictionaryIterator, key: uint32, value: uint16): DictionaryResult {.inline.} =
   ## Write an unsigned 16-bit integer to the dictionary.
   ## Equivalent to C function `dict_write_uint16(iter, key, value)`.
   ffi.dict_write_uint16(iter, key, value)
 
-proc writeUint32*(iter: ptr DictionaryIterator, key: uint32, value: uint32): DictionaryResult {.inline.} =
+proc dictWriteUint32*(iter: ptr DictionaryIterator, key: uint32, value: uint32): DictionaryResult {.inline.} =
   ## Write an unsigned 32-bit integer to the dictionary.
   ## Equivalent to C function `dict_write_uint32(iter, key, value)`.
   ffi.dict_write_uint32(iter, key, value)
 
-proc writeInt8*(iter: ptr DictionaryIterator, key: uint32, value: int8): DictionaryResult {.inline.} =
+proc dictWriteInt8*(iter: ptr DictionaryIterator, key: uint32, value: int8): DictionaryResult {.inline.} =
   ## Write a signed 8-bit integer to the dictionary.
   ## Equivalent to C function `dict_write_int8(iter, key, value)`.
   ffi.dict_write_int8(iter, key, value)
 
-proc writeInt16*(iter: ptr DictionaryIterator, key: uint32, value: int16): DictionaryResult {.inline.} =
+proc dictWriteInt16*(iter: ptr DictionaryIterator, key: uint32, value: int16): DictionaryResult {.inline.} =
   ## Write a signed 16-bit integer to the dictionary.
   ## Equivalent to C function `dict_write_int16(iter, key, value)`.
   ffi.dict_write_int16(iter, key, value)
 
-proc writeInt32*(iter: ptr DictionaryIterator, key: uint32, value: int32): DictionaryResult {.inline.} =
+proc dictWriteInt32*(iter: ptr DictionaryIterator, key: uint32, value: int32): DictionaryResult {.inline.} =
   ## Write a signed 32-bit integer to the dictionary.
   ## Equivalent to C function `dict_write_int32(iter, key, value)`.
   ffi.dict_write_int32(iter, key, value)
 
-proc writeEnd*(iter: ptr DictionaryIterator): uint32 {.inline.} =
+proc dictWriteEnd*(iter: ptr DictionaryIterator): uint32 {.inline.} =
   ## Finish writing to the dictionary.
   ## Equivalent to C function `dict_write_end(iter)`.
   ffi.dict_write_end(iter)
@@ -163,6 +166,11 @@ proc readBeginFromBuffer*(iter: ptr DictionaryIterator, buffer: ptr uint8, size:
   ## Begin reading from a dictionary buffer.
   ## Equivalent to C function `dict_read_begin_from_buffer(iter, buffer, size)`.
   ffi.dict_read_begin_from_buffer(iter, buffer, size)
+
+proc dictRewind*(iter: ptr DictionaryIterator): ptr Tuple_f {.inline.} =
+  ## Rewind the dictionary iterator to the beginning.
+  ## Returns the first tuple.
+  ffi.dict_read_first(iter)
 
 proc readNext*(iter: ptr DictionaryIterator): ptr Tuple_f {.inline.} =
   ## Read the next tuple from the dictionary.
@@ -173,6 +181,45 @@ proc readFirst*(iter: ptr DictionaryIterator): ptr Tuple_f {.inline.} =
   ## Read the first tuple from the dictionary.
   ## Equivalent to C function `dict_read_first(iter)`.
   ffi.dict_read_first(iter)
+
+# ============================================================================
+# Dictionary Read Helpers
+# ============================================================================
+
+proc dictReadInt8*(iter: ptr DictionaryIterator, key: uint32): int8 {.inline.} =
+  let t = ffi.dict_find(iter, key)
+  if t != nil: return t.anon0.int8
+  return 0
+
+proc dictReadInt16*(iter: ptr DictionaryIterator, key: uint32): int16 {.inline.} =
+  let t = ffi.dict_find(iter, key)
+  if t != nil: return t.anon0.int16
+  return 0
+
+proc dictReadInt32*(iter: ptr DictionaryIterator, key: uint32): int32 {.inline.} =
+  let t = ffi.dict_find(iter, key)
+  if t != nil: return t.anon0.int32
+  return 0
+
+proc dictReadUint8*(iter: ptr DictionaryIterator, key: uint32): uint8 {.inline.} =
+  let t = ffi.dict_find(iter, key)
+  if t != nil: return t.anon0.uint8
+  return 0
+
+proc dictReadUint16*(iter: ptr DictionaryIterator, key: uint32): uint16 {.inline.} =
+  let t = ffi.dict_find(iter, key)
+  if t != nil: return t.anon0.uint16
+  return 0
+
+proc dictReadUint32*(iter: ptr DictionaryIterator, key: uint32): uint32 {.inline.} =
+  let t = ffi.dict_find(iter, key)
+  if t != nil: return t.anon0.uint32
+  return 0
+
+proc dictReadCstring*(iter: ptr DictionaryIterator, key: uint32): cstring {.inline.} =
+  let t = ffi.dict_find(iter, key)
+  if t != nil: return cast[cstring](addr t.anon0.cstring)
+  return nil
 
 # ============================================================================
 # Dictionary Buffer Helpers

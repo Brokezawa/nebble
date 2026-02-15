@@ -19,7 +19,7 @@ htmldocs/
 .pebble-sdk/
 
 #Pebble SDK docs
-sdk-docs/
+# pebble-docs/
 
 # IDE
 .vscode/
