@@ -69,25 +69,9 @@ jobs:
         with:
           path: artifacts
 
-      - name: Create Release Notes
-        run: |
-          VERSION=${GITHUB_REF#refs/tags/}
-          echo "# Nebble $VERSION" > RELEASE_NOTES.md
-          echo "" >> RELEASE_NOTES.md
-          echo "## Features" >> RELEASE_NOTES.md
-          echo "- Full-Stack Nim support (Watch + Phone)" >> RELEASE_NOTES.md
-          echo "- ARC-managed memory with Handles" >> RELEASE_NOTES.md
-          echo "- Declarative UI DSL" >> RELEASE_NOTES.md
-          echo "" >> RELEASE_NOTES.md
-          echo "## Installation" >> RELEASE_NOTES.md
-          echo '```bash' >> RELEASE_NOTES.md
-          echo 'nimble install nebble' >> RELEASE_NOTES.md
-          echo '```' >> RELEASE_NOTES.md
-
       - name: Create GitHub Release
         uses: softprops/action-gh-release@v1
         with:
-          body_path: RELEASE_NOTES.md
           files: |
             artifacts/nebble-linux-x64/nebble-linux-x64
             artifacts/nebble-macos-x64/nebble-macos-x64
