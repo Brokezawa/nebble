@@ -1,6 +1,6 @@
 {
   "name": "battery_status",
-  "type": "app",
+  "appType": "app",
   "version": "1.0.0",
   "uuid": "f812eac7-2a4b-4b84-8197-ae7158c39ddc",
   "platforms": [

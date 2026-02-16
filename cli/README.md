@@ -51,7 +51,7 @@ Remove all build artifacts (build/, nimcache/, etc.).
 ### `nebble size [--platform <p>]`
 Show binary size breakdown and RAM utilization (critical for Aplite's 24KB limit).
 
-### `nebble genkeys`
+### `nebble gen-keys`
 Generate type-safe Nim message keys from the `appKeys` defined in `nebble.json`.
 
 ### `nebble regen-ffi`
@@ -59,15 +59,16 @@ Regenerate Futhark FFI bindings (requires Futhark and libclang).
 
 ## Project Configuration
 
-Nebble projects are configured via `nebble.json` in the project root. This file is automatically converted to `appinfo.json` during the build process.
+Nebble projects are configured via `nebble.json` in the project root. This file is automatically converted to `package.json` (modern SDK) and `appinfo.json` (legacy compatibility) during the build process.
 
 ```json
 {
   "name": "my_app",
-  "type": "app",
+  "appType": "app",
   "version": "1.0.0",
   "uuid": "...",
   "platforms": ["aplite", "basalt", "chalk", "diorite", "emery", "flint"],
+  "appType": "app",
   "capabilities": [],
   "appKeys": {
     "Data": 0,
@@ -79,6 +80,6 @@ Nebble projects are configured via `nebble.json` in the project root. This file 
 ## Development Workflow
 
 1. **New Project**: `nebble new my_face --watchface`
-2. **Write Code**: Edit `src/my_face.nim`
+2. **Write Code**: Edit `src/my_face.nim` (watch) and `src/pkjs.nim` (phone)
 3. **Build & Test**: `nebble build && nebble install --emulator all`
 4. **Optimize**: `nebble size --platform aplite`

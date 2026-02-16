@@ -1,6 +1,6 @@
 {
   "name": "simple_watchface",
-  "type": "watchface",
+  "appType": "watchface",
   "version": "1.0.0",
   "uuid": "deadeade-dead-4ead-bead-deaddead0001",
 

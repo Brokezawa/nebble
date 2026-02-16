@@ -1,7 +1,5 @@
 ## Project templates for Nebble
 
-import std/strutils
-
 proc getAppTemplate*(name: string): string =
   ## Get the hello world app template
   result = "## " & name & """ - Pebble app written in Nim
@@ -37,7 +35,7 @@ nebbleWatchface:
 proc selectClickHandler(recognizer: ClickRecognizerRef; context: pointer) {.cdecl.} =
   ## Handle SELECT button clicks
   inc clickCount
-  myTextLayer.staticText(textBuffer, "Clicks: " & $clickCount)
+  myTextLayer.text = "Clicks: " & $clickCount
 
 proc upClickHandler(recognizer: ClickRecognizerRef; context: pointer) {.cdecl.} =
   ## Handle UP button clicks
@@ -154,6 +152,35 @@ Pebble.addEventListener('appmessage', function(e) {
     Pebble.sendAppMessage({'JSReady': 1});
   }
 });
+"""
+
+proc getPkjsNimTemplate*(name: string): string =
+  ## Get the PebbleKit JS Nim template
+  result = """## Phone-side logic for """ & name & """ in Nim
+
+import nebble/pkjs
+import std/jsffi
+import gen/app_keys
+
+proc onReady(e: ReadyEvent) {.cdecl.} =
+  echo "JS component ready (Nim)!"
+  
+  # Signal to watch that JS is ready
+  let data = newJsObject()
+  data[cstring"JSReady"] = 1.toJs()
+  Pebble.sendAppMessage(data)
+
+proc onMessage(e: AppMessageEvent) {.cdecl.} =
+  echo "Received message"
+  
+  if e.payload.hasOwnProperty("WatchReady"):
+    # If watch signals it's ready, respond with JSReady
+    let data = newJsObject()
+    data[cstring"JSReady"] = 1.toJs()
+    Pebble.sendAppMessage(data)
+
+onReady(onReady)
+onAppMessage(onMessage)
 """
 
 proc getWscript*(): string =

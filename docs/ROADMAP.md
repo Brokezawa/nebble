@@ -3,7 +3,7 @@
 **Status:** v1.0.0 Release
 **Last Updated:** February 16, 2026
 
-## ✅ Completed Milestones
+## ✅ Completed Milestones (v1.0.0)
 
 ### Phase 1: Foundation
 - [x] **FFI Bindings**: Generated bindings for all 6 Pebble platforms.
@@ -16,11 +16,12 @@
 - [x] **Events**: Coverage for all Pebble event services.
 - [x] **Managed Types**: Robust ownership model (`hoOwned`, `hoParented`).
 
-### Phase 3: Polish & Hardening
+### Phase 3: Full-Stack & Hardening
 - [x] **Declarative DSL**: Powerful `nebbleApp` macro for minimal boilerplate.
+- [x] **Unified Full-Stack**: Support for writing `pebble-js-app.js` in Nim.
+- [x] **Modern Tooling**: `package.json` support and improved CLI workflow.
 - [x] **Zero-Heap Architecture**: `FixedString` and heap-free formatting.
-- [x] **Stability**: OOM guards, nil safety, and release-mode hardening.
-- [x] **Validation**: 11 core examples covering the entire SDK.
+- [x] **Validation**: Core examples covering the entire SDK stack.
 
 ---
 
@@ -36,8 +37,8 @@
 - [ ] **AppMessage Serialization**: Macro-driven object mapping.
 
 ### 3. Ecosystem
-- [ ] **Unified Nim Full-Stack**: Support for writing `pebble-js-app.js` in Nim.
 - [ ] **Package Registry**: Central repository for community components.
+- [ ] **Cloud Build**: Web-based build service integration.
 
 ---
 

@@ -1,6 +1,6 @@
 {
   "name": "hello_world",
-  "type": "app",
+  "appType": "app",
   "version": "1.0.0",
   "uuid": "d7714836-4ba7-401d-8538-bc663cfa6220",
   "platforms": [

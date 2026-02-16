@@ -13,10 +13,10 @@ import nebble_cli/commands
 const
   version = "0.2.0"
   helpText = """
-Nebble - Pebble smartwatch app development in Nim
+Nebble - Pebble smartwatch app development in Nim (Full-Stack)
 
 Usage:
-  nebble new <name> [--watchface]     Create a new Pebble project
+  nebble new <name> [--watchface]     Create a new Pebble project (Full Nim)
   nebble build [--platform <p>]       Build the project (default: all platforms)
   nebble install --emulator <p>       Install to emulator
   nebble install --phone <IP> [<pbw>] Install to phone (optionally specify IP and PBW file)

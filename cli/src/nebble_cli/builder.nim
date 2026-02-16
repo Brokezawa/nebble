@@ -49,6 +49,45 @@ proc compileNimToC*(cfg: NebbleConfig, platform: string): bool =
   
   return true
 
+proc compileNimToJs*(cfg: NebbleConfig): bool =
+  ## Compile Nim code to JS for the phone-side component
+  let
+    sourcePath = "src" / "pkjs.nim"
+    destPath = "src" / "js" / "pebble-js-app.js"
+  
+  if not fileExists(sourcePath):
+    # Optional component
+    return true
+
+  echo "  Compiling Nim to JS..."
+  
+  # Ensure destination directory exists
+  createDir("src" / "js")
+  
+  # Find nebble library path
+  var nebblePath = ""
+  let possiblePaths = ["../../src", "../src", "src"]
+  for path in possiblePaths:
+    if dirExists(path / "nebble"):
+      nebblePath = path
+      break
+
+  # Compile Nim to JS
+  var cmd = "nim js -d:release"
+  if nebblePath != "":
+    cmd &= " --path:\"" & nebblePath & "\""
+  cmd &= " --out:\"" & destPath & "\" " & sourcePath
+  
+  echo "  Running: ", cmd
+  let (output, exitCode) = execCmdEx(cmd)
+  
+  if exitCode != 0:
+    echo "  Nim JS compilation failed:"
+    echo output
+    return false
+  
+  return true
+
 proc generateAppInfo*(cfg: NebbleConfig, platform: string): bool =
   ## Generate appinfo.json from nebble.json config
   # Pebble SDK expects appinfo.json in project root, not in build/

@@ -19,8 +19,8 @@ nim	newTextLayer	nebble/ui/text_layer.html#newTextLayer,GRect,cstring,GFont,GTex
 nim	getLayer	nebble/ui/text_layer.html#getLayer,TextLayerHandle	proc getLayer(h: TextLayerHandle): ptr Layer		91
 nim	text=	nebble/ui/text_layer.html#text=,TextLayerHandle,cstring	proc text=(h: var TextLayerHandle; value: cstring)		107
 nim	text=	nebble/ui/text_layer.html#text=,ptr.struct_TextLayer,cstring	proc text=(p: ptr TextLayer; value: cstring)		111
-nim	text=	nebble/ui/text_layer.html#text=,TextLayerHandle,FixedString[N]	proc text=[N](h: var TextLayerHandle; value: FixedString[N])		115
-nim	text=	nebble/ui/text_layer.html#text=,ptr.struct_TextLayer,FixedString[N]	proc text=[N](p: ptr TextLayer; value: FixedString[N])		120
+nim	text=	nebble/ui/text_layer.html#text=.t,TextLayerHandle,FixedString[N]	template text=[N](h: var TextLayerHandle; value: FixedString[N])		115
+nim	text=	nebble/ui/text_layer.html#text=.t,ptr.struct_TextLayer,FixedString[N]	template text=[N](p: ptr TextLayer; value: FixedString[N])		120
 nim	text	nebble/ui/text_layer.html#text,TextLayerHandle	proc text(h: TextLayerHandle): cstring		125
 nim	font=	nebble/ui/text_layer.html#font=,TextLayerHandle,GFont	proc font=(h: var TextLayerHandle; value: GFont)		130
 nim	font=	nebble/ui/text_layer.html#font=,ptr.struct_TextLayer,GFont	proc font=(p: ptr TextLayer; value: GFont)		134
@@ -44,3 +44,4 @@ nimgrp	textcolor=	nebble/ui/text_layer.html#textColor=-procs-all	proc		146
 nimgrp	newtextlayer	nebble/ui/text_layer.html#newTextLayer-procs-all	proc		54
 nimgrp	text=	nebble/ui/text_layer.html#text=-procs-all	proc		107
 nimgrp	newtextlayerhandle	nebble/ui/text_layer.html#newTextLayerHandle-procs-all	proc		51
+nimgrp	text=	nebble/ui/text_layer.html#text=-templates-all	template		115

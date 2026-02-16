@@ -1,6 +1,6 @@
 {
   "name": "comms_demo",
-  "type": "app",
+  "appType": "app",
   "version": "1.0.0",
   "uuid": "7649d21b-1854-473d-9d48-319a2853243a",
   "platforms": [

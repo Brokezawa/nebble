@@ -1,6 +1,6 @@
 {
   "name": "menu_demo",
-  "type": "app",
+  "appType": "app",
   "version": "1.0.0",
   "uuid": "c94298db-51f2-438c-99bf-b1a307425968",
   "platforms": [

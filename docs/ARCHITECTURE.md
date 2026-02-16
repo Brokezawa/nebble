@@ -49,12 +49,13 @@ When a layer is removed from its parent, the handle automatically transitions ba
 
 Nebble doesn't just provide a library; it provides an intelligent compilation pipeline via the `nebble` CLI.
 
-1. **Nim Phase:** `nim c --os:any --cpu:arm --mm:arc --compileOnly ...`
-   - Nim compiles the code into C source files.
+1. **Nim Phase:**
+   - **Watch:** `nim c --os:any --cpu:arm --mm:arc --compileOnly ...` compiles Nim to C source files.
+   - **Phone:** `nim js -d:release ...` compiles `src/pkjs.nim` to JavaScript.
    - Cross-compilation flags are used to target the ARM Cortex-M architecture without a standard OS.
-2. **Bridge Phase:** The CLI generates a platform-specific `appinfo.json` and copies the generated C files into the `src/c/` directory.
+2. **Bridge Phase:** The CLI generates a platform-specific `package.json` (replacing the legacy `appinfo.json`) and copies the generated C files into the `src/c/` directory.
 3. **Pebble Phase:** `pebble build`
-   - The Pebble SDK's `waf` build system takes over.
+   - The Pebble SDK's `waf` build system takes over, using Webpack for JS bundling if `enableMultiJS` is set (handled by Nebble CLI).
    - The CLI intelligently renames resulting `.pbw` files to include the platform name (e.g., `my_app_basalt.pbw`) to prevent overwriting during multi-platform builds.
 
 ---

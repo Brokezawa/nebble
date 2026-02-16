@@ -84,6 +84,14 @@ Inside a `LayerUpdateProc`:
 - **AppMessage**: `open(inbox, outbox)`, `onInboxReceived(handler)`
 - **AppSync**: `h.set(tuplets)`, `h.get(key)`
 
+## 7. Phone Component (PKJS in Nim)
+
+In `src/pkjs.nim`:
+- `onReady(handler)`: JS environment initialized.
+- `onAppMessage(handler)`: Received message from watch.
+- `Pebble.sendAppMessage(data)`: Send data to watch.
+- `Pebble.showSimpleNotificationOnPebble(title, msg)`: Show watch notification.
+
 ## Important Note: Callbacks
 All callbacks MUST use the `{.cdecl.}` pragma to be compatible with the Pebble C SDK.
 ```nim

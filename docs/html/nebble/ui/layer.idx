@@ -6,50 +6,51 @@ nim	`=copy`	nebble/ui/layer.html#=copy,LayerHandle,LayerHandle	proc `=copy`(dest
 nim	`=sink`	nebble/ui/layer.html#=sink,LayerHandle,LayerHandle	proc `=sink`(dest: var LayerHandle; src: LayerHandle)		52
 nim	toPtr	nebble/ui/layer.html#toPtr.c,LayerHandle	converter toPtr(h: LayerHandle): ptr Layer		67
 nim	toHandle	nebble/ui/layer.html#toHandle,ptr.struct_Layer	proc toHandle(p: ptr Layer): LayerHandle		71
-nim	wrapOwned	nebble/ui/layer.html#wrapOwned,ptr.struct_Layer	proc wrapOwned(p: ptr Layer): LayerHandle		75
-nim	isValid	nebble/ui/layer.html#isValid,LayerHandle	proc isValid(h: LayerHandle): bool		83
-nim	hasParent	nebble/ui/layer.html#hasParent,LayerHandle	proc hasParent(h: LayerHandle): bool		87
-nim	setParent	nebble/ui/layer.html#setParent,LayerHandle,ptr.struct_Layer	proc setParent(h: var LayerHandle; p: ptr Layer)		91
-nim	reset	nebble/ui/layer.html#reset,LayerHandle	proc reset(h: var LayerHandle)		102
-nim	newLayerHandle	nebble/ui/layer.html#newLayerHandle,GRect	proc newLayerHandle(frame: GRect): LayerHandle		118
-nim	newLayer	nebble/ui/layer.html#newLayer,GRect	proc newLayer(frame: GRect): LayerHandle		122
-nim	newLayerWithData	nebble/ui/layer.html#newLayerWithData,GRect,int	proc newLayerWithData(frame: GRect; dataSize: int): LayerHandle		126
-nim	addChild	nebble/ui/layer.html#addChild,ptr.struct_Layer,ptr.struct_Layer	proc addChild(parent: ptr Layer; child: ptr Layer)		134
-nim	removeFromParent	nebble/ui/layer.html#removeFromParent,ptr.struct_Layer	proc removeFromParent(child: ptr Layer)		140
-nim	removeChildLayers	nebble/ui/layer.html#removeChildLayers,ptr.struct_Layer	proc removeChildLayers(parent: ptr Layer)		146
-nim	insertBelowSibling	nebble/ui/layer.html#insertBelowSibling,ptr.struct_Layer,ptr.struct_Layer	proc insertBelowSibling(layerToInsert, sibling: ptr Layer)		152
-nim	insertAboveSibling	nebble/ui/layer.html#insertAboveSibling,ptr.struct_Layer,ptr.struct_Layer	proc insertAboveSibling(layerToInsert, sibling: ptr Layer)		158
-nim	addChild	nebble/ui/layer.html#addChild,ptr.struct_Layer,auto	proc addChild(parent: ptr Layer; child: var auto)		168
-nim	addChild	nebble/ui/layer.html#addChild,auto,auto	proc addChild(parent: auto; child: var auto)		180
-nim	removeFromParent	nebble/ui/layer.html#removeFromParent,auto	proc removeFromParent(child: var auto)		189
-nim	removeChildLayers	nebble/ui/layer.html#removeChildLayers,auto	proc removeChildLayers(parent: auto)		205
-nim	insertBelowSibling	nebble/ui/layer.html#insertBelowSibling,auto,auto	proc insertBelowSibling(h: var auto; sibling: var auto)		215
-nim	insertAboveSibling	nebble/ui/layer.html#insertAboveSibling,auto,auto	proc insertAboveSibling(h: var auto; sibling: var auto)		240
-nim	frame=	nebble/ui/layer.html#frame=,LayerHandle,GRect	proc frame=(h: var LayerHandle; value: GRect)		269
-nim	frame	nebble/ui/layer.html#frame,LayerHandle	proc frame(h: LayerHandle): GRect		273
-nim	frame	nebble/ui/layer.html#frame,ptr.struct_Layer	proc frame(p: ptr Layer): GRect		277
-nim	frame=	nebble/ui/layer.html#frame=,ptr.struct_Layer,GRect	proc frame=(p: ptr Layer; value: GRect)		281
-nim	bounds	nebble/ui/layer.html#bounds,LayerHandle	proc bounds(h: LayerHandle): GRect		285
-nim	bounds	nebble/ui/layer.html#bounds,ptr.struct_Layer	proc bounds(p: ptr Layer): GRect		289
-nim	bounds=	nebble/ui/layer.html#bounds=,LayerHandle,GRect	proc bounds=(h: var LayerHandle; value: GRect)		293
-nim	bounds=	nebble/ui/layer.html#bounds=,ptr.struct_Layer,GRect	proc bounds=(p: ptr Layer; value: GRect)		297
-nim	unobstructedBounds	nebble/ui/layer.html#unobstructedBounds,LayerHandle	proc unobstructedBounds(h: LayerHandle): GRect		302
-nim	hidden	nebble/ui/layer.html#hidden,LayerHandle	proc hidden(h: LayerHandle): bool		311
-nim	hidden=	nebble/ui/layer.html#hidden=,LayerHandle,bool	proc hidden=(h: var LayerHandle; value: bool)		315
-nim	clips	nebble/ui/layer.html#clips,LayerHandle	proc clips(h: LayerHandle): bool		319
-nim	clips=	nebble/ui/layer.html#clips=,LayerHandle,bool	proc clips=(h: var LayerHandle; value: bool)		323
-nim	updateProc=	nebble/ui/layer.html#updateProc=,LayerHandle,LayerUpdateProc	proc updateProc=(h: var LayerHandle; updateProc: LayerUpdateProc)		331
-nim	markDirty	nebble/ui/layer.html#markDirty,LayerHandle	proc markDirty(h: LayerHandle)		336
-nim	getData	nebble/ui/layer.html#getData,LayerHandle	proc getData(h: LayerHandle): pointer		341
-nim	convertPointToScreen	nebble/ui/layer.html#convertPointToScreen,LayerHandle,GPoint	proc convertPointToScreen(h: LayerHandle; point: GPoint): GPoint		350
-nim	convertRectToScreen	nebble/ui/layer.html#convertRectToScreen,LayerHandle,GRect	proc convertRectToScreen(h: LayerHandle; rect: GRect): GRect		354
-nim	getWindow	nebble/ui/layer.html#getWindow,LayerHandle	proc getWindow(h: LayerHandle): ptr Window		362
-nimgrp	addchild	nebble/ui/layer.html#addChild-procs-all	proc		134
-nimgrp	insertbelowsibling	nebble/ui/layer.html#insertBelowSibling-procs-all	proc		152
-nimgrp	frame=	nebble/ui/layer.html#frame=-procs-all	proc		269
-nimgrp	insertabovesibling	nebble/ui/layer.html#insertAboveSibling-procs-all	proc		158
-nimgrp	removefromparent	nebble/ui/layer.html#removeFromParent-procs-all	proc		140
-nimgrp	bounds=	nebble/ui/layer.html#bounds=-procs-all	proc		293
-nimgrp	removechildlayers	nebble/ui/layer.html#removeChildLayers-procs-all	proc		146
-nimgrp	bounds	nebble/ui/layer.html#bounds-procs-all	proc		285
-nimgrp	frame	nebble/ui/layer.html#frame-procs-all	proc		273
+nim	getLayer	nebble/ui/layer.html#getLayer,LayerHandle	proc getLayer(h: LayerHandle): ptr Layer		75
+nim	wrapOwned	nebble/ui/layer.html#wrapOwned,ptr.struct_Layer	proc wrapOwned(p: ptr Layer): LayerHandle		79
+nim	isValid	nebble/ui/layer.html#isValid,LayerHandle	proc isValid(h: LayerHandle): bool		87
+nim	hasParent	nebble/ui/layer.html#hasParent,LayerHandle	proc hasParent(h: LayerHandle): bool		91
+nim	setParent	nebble/ui/layer.html#setParent,LayerHandle,ptr.struct_Layer	proc setParent(h: var LayerHandle; p: ptr Layer)		95
+nim	reset	nebble/ui/layer.html#reset,LayerHandle	proc reset(h: var LayerHandle)		106
+nim	newLayerHandle	nebble/ui/layer.html#newLayerHandle,GRect	proc newLayerHandle(frame: GRect): LayerHandle		122
+nim	newLayer	nebble/ui/layer.html#newLayer,GRect	proc newLayer(frame: GRect): LayerHandle		126
+nim	newLayerWithData	nebble/ui/layer.html#newLayerWithData,GRect,int	proc newLayerWithData(frame: GRect; dataSize: int): LayerHandle		130
+nim	addChild	nebble/ui/layer.html#addChild,ptr.struct_Layer,ptr.struct_Layer	proc addChild(parent: ptr Layer; child: ptr Layer)		138
+nim	removeFromParent	nebble/ui/layer.html#removeFromParent,ptr.struct_Layer	proc removeFromParent(child: ptr Layer)		144
+nim	removeChildLayers	nebble/ui/layer.html#removeChildLayers,ptr.struct_Layer	proc removeChildLayers(parent: ptr Layer)		150
+nim	insertBelowSibling	nebble/ui/layer.html#insertBelowSibling,ptr.struct_Layer,ptr.struct_Layer	proc insertBelowSibling(layerToInsert, sibling: ptr Layer)		156
+nim	insertAboveSibling	nebble/ui/layer.html#insertAboveSibling,ptr.struct_Layer,ptr.struct_Layer	proc insertAboveSibling(layerToInsert, sibling: ptr Layer)		162
+nim	addChild	nebble/ui/layer.html#addChild,ptr.struct_Layer,auto	proc addChild(parent: ptr Layer; child: var auto)		172
+nim	addChild	nebble/ui/layer.html#addChild,auto,auto	proc addChild(parent: auto; child: var auto)		184
+nim	removeFromParent	nebble/ui/layer.html#removeFromParent,auto	proc removeFromParent(child: var auto)		193
+nim	removeChildLayers	nebble/ui/layer.html#removeChildLayers,auto	proc removeChildLayers(parent: auto)		209
+nim	insertBelowSibling	nebble/ui/layer.html#insertBelowSibling,auto,auto	proc insertBelowSibling(h: var auto; sibling: var auto)		219
+nim	insertAboveSibling	nebble/ui/layer.html#insertAboveSibling,auto,auto	proc insertAboveSibling(h: var auto; sibling: var auto)		244
+nim	frame=	nebble/ui/layer.html#frame=,LayerHandle,GRect	proc frame=(h: var LayerHandle; value: GRect)		273
+nim	frame	nebble/ui/layer.html#frame,LayerHandle	proc frame(h: LayerHandle): GRect		277
+nim	frame	nebble/ui/layer.html#frame,ptr.struct_Layer	proc frame(p: ptr Layer): GRect		281
+nim	frame=	nebble/ui/layer.html#frame=,ptr.struct_Layer,GRect	proc frame=(p: ptr Layer; value: GRect)		285
+nim	bounds	nebble/ui/layer.html#bounds,LayerHandle	proc bounds(h: LayerHandle): GRect		289
+nim	bounds	nebble/ui/layer.html#bounds,ptr.struct_Layer	proc bounds(p: ptr Layer): GRect		293
+nim	bounds=	nebble/ui/layer.html#bounds=,LayerHandle,GRect	proc bounds=(h: var LayerHandle; value: GRect)		297
+nim	bounds=	nebble/ui/layer.html#bounds=,ptr.struct_Layer,GRect	proc bounds=(p: ptr Layer; value: GRect)		301
+nim	unobstructedBounds	nebble/ui/layer.html#unobstructedBounds,LayerHandle	proc unobstructedBounds(h: LayerHandle): GRect		306
+nim	hidden	nebble/ui/layer.html#hidden,LayerHandle	proc hidden(h: LayerHandle): bool		315
+nim	hidden=	nebble/ui/layer.html#hidden=,LayerHandle,bool	proc hidden=(h: var LayerHandle; value: bool)		319
+nim	clips	nebble/ui/layer.html#clips,LayerHandle	proc clips(h: LayerHandle): bool		323
+nim	clips=	nebble/ui/layer.html#clips=,LayerHandle,bool	proc clips=(h: var LayerHandle; value: bool)		327
+nim	updateProc=	nebble/ui/layer.html#updateProc=,LayerHandle,LayerUpdateProc	proc updateProc=(h: var LayerHandle; updateProc: LayerUpdateProc)		335
+nim	markDirty	nebble/ui/layer.html#markDirty,LayerHandle	proc markDirty(h: LayerHandle)		340
+nim	getData	nebble/ui/layer.html#getData,LayerHandle	proc getData(h: LayerHandle): pointer		345
+nim	convertPointToScreen	nebble/ui/layer.html#convertPointToScreen,LayerHandle,GPoint	proc convertPointToScreen(h: LayerHandle; point: GPoint): GPoint		354
+nim	convertRectToScreen	nebble/ui/layer.html#convertRectToScreen,LayerHandle,GRect	proc convertRectToScreen(h: LayerHandle; rect: GRect): GRect		358
+nim	getWindow	nebble/ui/layer.html#getWindow,LayerHandle	proc getWindow(h: LayerHandle): ptr Window		366
+nimgrp	addchild	nebble/ui/layer.html#addChild-procs-all	proc		138
+nimgrp	insertbelowsibling	nebble/ui/layer.html#insertBelowSibling-procs-all	proc		156
+nimgrp	frame=	nebble/ui/layer.html#frame=-procs-all	proc		273
+nimgrp	insertabovesibling	nebble/ui/layer.html#insertAboveSibling-procs-all	proc		162
+nimgrp	removefromparent	nebble/ui/layer.html#removeFromParent-procs-all	proc		144
+nimgrp	bounds=	nebble/ui/layer.html#bounds=-procs-all	proc		297
+nimgrp	removechildlayers	nebble/ui/layer.html#removeChildLayers-procs-all	proc		150
+nimgrp	bounds	nebble/ui/layer.html#bounds-procs-all	proc		289
+nimgrp	frame	nebble/ui/layer.html#frame-procs-all	proc		277

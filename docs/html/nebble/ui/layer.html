@@ -132,6 +132,10 @@
   <li><a class="reference" href="#getData%2CLayerHandle" title="getData(h: LayerHandle): pointer">getData(h: LayerHandle): pointer</a></li>
 
 </ul>
+<ul class="simple nested-toc-section">getLayer
+  <li><a class="reference" href="#getLayer%2CLayerHandle" title="getLayer(h: LayerHandle): ptr Layer">getLayer(h: LayerHandle): ptr Layer</a></li>
+
+</ul>
 <ul class="simple nested-toc-section">getWindow
   <li><a class="reference" href="#getWindow%2CLayerHandle" title="getWindow(h: LayerHandle): ptr Window">getWindow(h: LayerHandle): ptr Window</a></li>
 
@@ -483,6 +487,18 @@
 </div>
 
 </div>
+<div id="getLayer-procs-all">
+  <div id="getLayer,LayerHandle">
+  <dt><pre><span class="Keyword">proc</span> <a href="#getLayer%2CLayerHandle"><span class="Identifier">getLayer</span></a><span class="Other">(</span><span class="Identifier">h</span><span class="Other">:</span> <a href="layer.html#LayerHandle"><span class="Identifier">LayerHandle</span></a><span class="Other">)</span><span class="Other">:</span> <span class="Keyword">ptr</span> <a href="../ffi.html#Layer"><span class="Identifier">Layer</span></a> {.<span class="Identifier">inline</span><span class="Other">,</span> <span><span class="Other pragmadots">...</span></span><span class="pragmawrap"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span>
+    <span class="Identifier">forbids</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span>.}</pre></dt>
+  <dd>
+    
+    Get the underlying Layer pointer.
+    
+  </dd>
+</div>
+
+</div>
 <div id="getWindow-procs-all">
   <div id="getWindow,LayerHandle">
   <dt><pre><span class="Keyword">proc</span> <a href="#getWindow%2CLayerHandle"><span class="Identifier">getWindow</span></a><span class="Other">(</span><span class="Identifier">h</span><span class="Other">:</span> <a href="layer.html#LayerHandle"><span class="Identifier">LayerHandle</span></a><span class="Other">)</span><span class="Other">:</span> <span class="Keyword">ptr</span> <a href="../ffi.html#Window"><span class="Identifier">Window</span></a> {.<span class="Identifier">inline</span><span class="Other">,</span> <span><span class="Other pragmadots">...</span></span><span class="pragmawrap"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span>
@@ -770,7 +786,7 @@
       <div class="twelve-columns footer">
         <span class="nim-sprite"></span>
         <br>
-        <small style="color: var(--hint);">Made with Nim. Generated: 2026-02-16 10:45:10 UTC</small>
+        <small style="color: var(--hint);">Made with Nim. Generated: 2026-02-16 16:06:33 UTC</small>
       </div>
     </div>
   </div>

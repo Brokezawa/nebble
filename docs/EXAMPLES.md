@@ -10,7 +10,7 @@ Nebble includes a comprehensive set of example applications demonstrating variou
 | **[accelerometer_demo](../examples/accelerometer_demo)** | Motion sensing | `Accel` service, heap-free formatting with `FixedString` |
 | **[animation_demo](../examples/animation_demo)** | UI Animation | `PropertyAnimation`, sequences, state tracking |
 | **[battery_status](../examples/battery_status)** | Power management | `Battery` service, status bar integration |
-| **[comms_demo](../examples/comms_demo)** | Communication | `AppMessage`, Bluetooth connection, Compass service |
+| **[comms_demo](../examples/comms_demo)** | Full-Stack Communication | `AppMessage`, Full Nim PKJS, shared enums, Bluetooth |
 | **[glance_menu_demo](../examples/glance_menu_demo)** | App Glance & Menus | `AppGlance` API, dynamic `MenuLayer` callbacks |
 | **[graphics_demo](../examples/graphics_demo)** | Custom drawing | `GContext`, `GPath`, drawing primitives |
 | **[health_watchface](../examples/health_watchface)** | Health tracking | `Health` service, background data access |

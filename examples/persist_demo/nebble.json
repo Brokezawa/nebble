@@ -1,6 +1,6 @@
 {
   "name": "persist_demo",
-  "type": "app",
+  "appType": "app",
   "version": "1.0.0",
   "uuid": "b38fd479-d783-4972-8fd9-c9ef9f5da771",
   "platforms": [

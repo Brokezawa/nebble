@@ -19,8 +19,8 @@ Nebble (Nim + Pebble) provides comprehensive, type-safe Nim bindings for the Peb
 ### 1. Installation
 
 ```bash
-# Install Nim (>= 2.2.0)
-brew install nim
+# Install Nim (>= 2.2.0) using choosenim
+curl https://nim-lang.org/choosenim/init.sh -sSf | sh
 
 # Install Pebble SDK (standard installation)
 # Install Nebble

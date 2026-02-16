@@ -35,7 +35,7 @@ proc cmdNew*(name: string, isWatchface: bool) =
   # Create nebble.json config
   let config = %* {
     "name": name,
-    "type": appType,
+    "appType": appType,
     "version": "1.0.0",
     "uuid": generateUuid(),
     "platforms": ["aplite", "basalt", "chalk", "diorite", "emery", "flint"],
@@ -59,8 +59,8 @@ proc cmdNew*(name: string, isWatchface: bool) =
   # Create nim.cfg for cross-compilation
   writeFile(name / "nim.cfg", getNimCfg())
   
-  # Create js/pebble-js-app.js
-  writeFile(name / "src" / "js" / "pebble-js-app.js", getPkjsTemplate())
+  # Create pkjs.nim for phone-side logic
+  writeFile(name / "src" / "pkjs.nim", getPkjsNimTemplate(name))
   
   # Create wscript for Pebble build system
   writeFile(name / "wscript", getWscript())
@@ -120,6 +120,11 @@ proc cmdBuild*(platform: string) =
       echo "✗ Nim compilation failed for ", p
       quit(1)
     echo "✓ Nim → C compilation successful"
+
+    # Step 1b: Compile Nim to JS (if src/pkjs.nim exists)
+    if not compileNimToJs(cfg):
+      echo "✗ Nim JS compilation failed"
+      quit(1)
     
     # Step 2: Generate package.json (sole source of truth for SDK 3+)
     if not generatePackageJson(cfg, p):
@@ -265,14 +270,36 @@ proc cmdClean*() =
   
   # Find and remove .lock-waf* files
   for kind, path in walkDir("."):
-    if kind == pcFile and path.startsWith(".lock-waf"):
+    let filename = extractFilename(path)
+    if kind == pcFile and filename.startsWith(".lock-waf"):
       removeFile(path)
       inc cleaned
       echo "✓ Removed ", path
-    elif kind == pcFile and (path == "appinfo.json" or path == "package.json"):
+    elif kind == pcFile and (filename == "appinfo.json" or filename == "package.json"):
       removeFile(path)
       inc cleaned
       echo "✓ Removed ", path
+  
+  # Remove generated JS
+  let genJs = "src" / "js" / "pebble-js-app.js"
+  if fileExists(genJs):
+    removeFile(genJs)
+    inc cleaned
+    echo "✓ Removed ", genJs
+  
+  # Remove generated C files
+  let srcCDir = "src" / "c"
+  if dirExists(srcCDir):
+    removeDir(srcCDir)
+    inc cleaned
+    echo "✓ Removed ", srcCDir
+
+  # Remove generated Nim keys
+  let genNimDir = "src" / "gen"
+  if dirExists(genNimDir):
+    removeDir(genNimDir)
+    inc cleaned
+    echo "✓ Removed ", genNimDir
   
   if cleaned == 0:
     echo "Nothing to clean"

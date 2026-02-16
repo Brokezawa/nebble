@@ -1,6 +1,6 @@
 ## Resource management helpers for Nebble CLI
 
-import std/[os, json, strutils, sequtils]
+import std/[os, json]
 import config
 
 proc listResources*() =

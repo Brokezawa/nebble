@@ -75,10 +75,11 @@ my_first_app/
 ├── nim.cfg             # Cross-compilation flags
 ├── wscript             # Waf build configuration
 └── src/
-    └── my_first_app.nim  # Your Nim source code
+    ├── my_first_app.nim  # Your Nim watchapp source
+    └── pkjs.nim          # Your Nim phone-side logic
 ```
 
-*Note: `appinfo.json` is generated automatically by Nebble during the build process.*
+*Note: `package.json` and phone-side JavaScript are generated automatically by Nebble during the build process.*
 
 ### Step 2: Write Your App Code
 
@@ -112,9 +113,10 @@ nebble build
 ```
 
 This command triggers the entire pipeline:
-1. Nim compilation to C.
-2. Generating the correct `appinfo.json` metadata on the fly.
-3. Invoking the Pebble build system.
+1. Nim compilation to C (for the watch).
+2. Nim compilation to JS (for the phone component).
+3. Generating the correct `package.json` metadata on the fly.
+4. Invoking the Pebble build system.
 
 ### Step 4: Run in Emulator
 
@@ -142,3 +144,7 @@ Nebble has a two-layer architecture:
 2.  **High-Level API (`nebble`)**: Idiomatic Nim wrappers with ARC memory management (Handles).
 
 Always prefer the High-Level API for application logic to benefit from automatic memory management and type safety.
+
+### Full-Stack Development
+
+Nebble is a **Full-Stack** framework. When you create a project, you get a `src/pkjs.nim` file. This is where you write your phone-side logic (Net requests, GPS, etc.) in Nim. It shares the same types and keys as your watch code. See the [Full-Stack Guide](NIM_PKJS.md) for details.

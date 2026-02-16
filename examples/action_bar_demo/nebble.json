@@ -1,6 +1,6 @@
 {
   "name": "action_bar_demo",
-  "type": "app",
+  "appType": "app",
   "version": "1.0.0",
   "uuid": "df975e99-6d20-443a-898f-9585bf71204a",
   "platforms": [
