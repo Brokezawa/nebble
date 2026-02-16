@@ -17,8 +17,7 @@ proc updateTime(tickTime: ptr tm; unitsChanged: TimeUnits) {.cdecl.}
 # Declarative Watchface
 nebbleApp:
   window:
-    # Set background color explicitly based on platform capability
-    backgroundColor = pblIfColorElse(GColorBlack, GColorWhite)
+    backgroundColor = GColorWhite
 
   textLayer:
     id = timeLayer
@@ -29,7 +28,7 @@ nebbleApp:
     text = "00:00"
     # Use Leco numbers which are more narrow and fit better than Bitham
     font = FONT_KEY_LECO_32_BOLD_NUMBERS
-    color = pblIfColorElse(GColorWhite, GColorBlack)
+    color = GColorBlack
     bgColor = GColorClear
     alignment = GTextAlignmentCenter
     
@@ -40,7 +39,7 @@ nebbleApp:
     h = 30
     text = "Steps: ---"
     font = FONT_KEY_GOTHIC_24
-    color = pblIfColorElse(GColorWhite, GColorBlack)
+    color = GColorBlack
     bgColor = GColorClear
     alignment = GTextAlignmentCenter
 
@@ -51,7 +50,7 @@ nebbleApp:
     h = 30
     text = "Sleep: ---"
     font = FONT_KEY_GOTHIC_18
-    color = pblIfColorElse(GColorWhite, GColorBlack)
+    color = GColorBlack
     bgColor = GColorClear
     alignment = GTextAlignmentCenter
 
