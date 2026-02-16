@@ -365,9 +365,9 @@ macro nebbleApp*(body: untyped): untyped =
   
   # Generate the full watchface scaffold
   var windowLoadBody = newStmtList()
+  windowLoadBody.add windowInits # Set window properties first (e.g. background color)
   windowLoadBody.add layerInits
   windowLoadBody.add layerAdds
-  windowLoadBody.add windowInits
   
   if hasClicks:
     if not actionBarId.isNil:

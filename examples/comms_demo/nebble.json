@@ -2,7 +2,7 @@
   "name": "comms_demo",
   "type": "app",
   "version": "1.0.0",
-  "uuid": "7e60e202-a38a-4186-84f3-4bed35d1175f",
+  "uuid": "f47ac10b-58cc-4372-a567-0e02b2c3d479",
   "platforms": [
     "aplite",
     "basalt",
@@ -11,7 +11,7 @@
     "emery",
     "flint"
   ],
-  "capabilities": ["configurable"],
+  "capabilities": [],
   "appKeys": {
     "Msg": 0,
     "Heading": 1,

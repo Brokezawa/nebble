@@ -20,6 +20,9 @@ proc selectClickHandler(recognizer: ClickRecognizerRef; context: pointer) {.cdec
 proc connectionHandler(connected: bool) {.cdecl.}
 proc compassHandler(data: CompassHeadingData) {.cdecl.}
 proc inboxReceived(iter: ptr typed_message.DictionaryIterator, context: pointer) {.cdecl.}
+proc inboxDropped(result: typed_message.AppMessageResult, context: pointer) {.cdecl.}
+proc outboxSent(iter: ptr typed_message.DictionaryIterator, context: pointer) {.cdecl.}
+proc outboxFailed(iter: ptr typed_message.DictionaryIterator, result: typed_message.AppMessageResult, context: pointer) {.cdecl.}
 
 # = ===========================================================================
 # Declarative App
@@ -64,9 +67,17 @@ nebbleApp:
     compass.subscribe(compassHandler)
     compass.setHeadingFilter(5) # 5 degree filter
     
-    # 3. AppMessage
-    discard typed_message.open(typed_message.inboxSizeMaximum(), typed_message.outboxSizeMaximum())
+    # 3. AppMessage (Register callbacks BEFORE opening)
     onInboxReceived(inboxReceived)
+    onInboxDropped(inboxDropped)
+    onOutboxSent(outboxSent)
+    onOutboxFailed(outboxFailed)
+    
+    let res = typed_message.open(256, 256)
+    if res == APP_MSG_OK():
+      logInfo("AppMessage opened successfully")
+    else:
+      logInfo("AppMessage failed to open")
 
   deinit:
     connection.unsubscribe()
@@ -94,16 +105,43 @@ proc compassHandler(data: CompassHeadingData) {.cdecl.} =
 
 proc inboxReceived(iter: ptr typed_message.DictionaryIterator, context: pointer) {.cdecl.} =
   # Handle "Pong" from phone
+  logInfo("Inbox received")
   let msg = readCstring(iter, AppMessageKey.amkMsg)
   if msg != nil:
+    # Use FixedString for logging to avoid heap
+    var logMsg: FixedString[64]
+    logMsg.f("Message data: ", msg)
+    logInfo(logMsg.toCstring)
+    
     msgStr.f("Phone: ", msg)
     msgLayer.text = msgStr
     vibes.shortPulse()
+  else:
+    logInfo("Message field 'Msg' not found")
+
+proc inboxDropped(result: typed_message.AppMessageResult, context: pointer) {.cdecl.} =
+  logInfo("Inbox dropped")
+
+proc outboxSent(iter: ptr typed_message.DictionaryIterator, context: pointer) {.cdecl.} =
+  logInfo("Outbox sent successfully")
+  msgLayer.text = "Ping sent!"
+
+proc outboxFailed(iter: ptr typed_message.DictionaryIterator, result: typed_message.AppMessageResult, context: pointer) {.cdecl.} =
+  var err: FixedString[32]
+  err.f("Outbox failed: ", result.int32)
+  logInfo(err.toCstring)
+  msgLayer.text = "Ping failed!"
 
 proc selectClickHandler(recognizer: ClickRecognizerRef; context: pointer) {.cdecl.} =
   # Send "Ping" to phone
+  logInfo("Select clicked, building outbox")
   var iter: ptr typed_message.DictionaryIterator
-  if outboxBegin(addr iter) == APP_MSG_OK:
+  if outboxBegin(addr iter) == APP_MSG_OK():
     send(iter, AppMessageKey.amkMsg, "Ping")
-    discard outboxSend()
-    msgLayer.text = "Sending Ping..."
+    let res = outboxSend()
+    if res == APP_MSG_OK():
+      msgLayer.text = "Sending..."
+    else:
+      logInfo("outboxSend failed")
+  else:
+    logInfo("outboxBegin failed")
