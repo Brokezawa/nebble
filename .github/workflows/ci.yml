@@ -96,7 +96,7 @@ jobs:
       - name: Install dependencies
         run: |
           sudo apt-get update
-          sudo apt-get install -y libclang-dev nodejs npm libsdl1.2debian libfdt1
+          sudo apt-get install -y nodejs npm libsdl1.2debian libfdt1
       
       - name: Checkout repository
         uses: actions/checkout@v4

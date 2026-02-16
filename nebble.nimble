@@ -1,5 +1,5 @@
 # Package
-version       = "0.1.0"
+version       = "1.0.0"
 author        = "Brokezawa"
 description   = "Nim wrapper for the Pebble smartwatch SDK"
 license       = "MIT"
@@ -7,7 +7,6 @@ srcDir        = "src"
 
 # Dependencies
 requires "nim >= 2.2.0"
-requires "futhark >= 0.15.0"
 requires "unittest2 >= 0.2.5"
 
 import os, strutils, algorithm
