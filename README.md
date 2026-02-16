@@ -1,6 +1,6 @@
 # Nebble
 
-[![CI](https://github.com/zawa-t/nebble/actions/workflows/ci.yml/badge.svg)](https://github.com/zawa-t/nebble/actions/workflows/ci.yml)
+[![CI](https://github.com/Brokezawa/nebble/actions/workflows/ci.yml/badge.svg)](https://github.com/Brokezawa/nebble/actions/workflows/ci.yml)
 
 **Nim wrapper library for Pebble smartwatch development**
 

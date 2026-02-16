@@ -7,7 +7,7 @@ Thank you for your interest in contributing to Nebble! This project aims to prov
 1.  **Fork the repository** on GitHub.
 2.  **Clone your fork** locally.
 3.  **Install dependencies**:
-    - Nim (>= 2.2.0)
+    - Nim (>= 2.2.0, installed via `choosenim` recommended)
     - Pebble SDK (installed and in PATH)
     - `nimble install -d` (installs test dependencies)
 
@@ -19,7 +19,8 @@ We use the `nebble` CLI tool (which is built from this repo) to build and test e
     ```bash
     cd cli
     nimble build
-    # Add cli/bin to your PATH or use relative path
+    # Install the CLI locally
+    nimble install_local
     ```
 
 2.  **Run Tests**:
@@ -30,18 +31,29 @@ We use the `nebble` CLI tool (which is built from this repo) to build and test e
 
 ## Code Style
 
-We follow standard Nim style conventions. Please read [AGENTS.md](../AGENTS.md) for detailed guidelines on:
-- Imports
-- Naming conventions
-- Managed types (handles)
-- FFI patterns
+We follow standard Nim style conventions (NEP 1).
+
+### Naming Conventions
+- **Types**: `PascalCase` (e.g., `WindowHandle`)
+- **Procs/Vars/Fields**: `camelCase` (e.g., `newWindow`, `backgroundColor`)
+- **Constants**: `PascalCase` or `UPPER_SNAKE_CASE` for FFI-level constants (e.g., `GColorBlack`)
+- **Modules**: `snake_case` (standard Nim practice, though we prefer descriptive names)
+
+### Spacing and Indentation
+- Use **2 spaces** for indentation.
+- No tabs.
+- Use spaces around operators (e.g., `x + y`, not `x+y`).
+
+### Documentation
+- Use double hashes `##` for documentation comments.
+- All exported procs must have documentation.
 
 ## Managed Types (ARC)
 
 Nebble uses Nim's ARC memory management to wrap Pebble C resources.
 - Always use `DefineUniqueHandle` template for new types where possible.
 - Ensure destructors are safe (check for double-free).
-- Use `{.inline.}` for wrappers to ensure zero overhead.
+- Use `{.inline.}` for trivial wrappers to ensure zero overhead.
 
 ## Adding Features
 

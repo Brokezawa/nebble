@@ -1,6 +1,6 @@
 # Package
 version       = "0.1.0"
-author        = "zawa"
+author        = "Brokezawa"
 description   = "Nim wrapper for the Pebble smartwatch SDK"
 license       = "MIT"
 srcDir        = "src"

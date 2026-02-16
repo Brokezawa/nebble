@@ -4,47 +4,29 @@ Nebble is a Nim wrapper library for Pebble smartwatch development. This guide wi
 
 ## Prerequisites
 
-### Required Software
+### 1. Nim Compiler (>= 2.2.0)
 
-1. **Nim compiler** (>= 2.2.0)
-   ```bash
-   # macOS (Homebrew)
-   brew install nim
-   
-   # Linux
-   curl https://nim-lang.org/choosenim/init.sh -sSf | sh
-   
-   # Verify installation
-   nim --version
-   ```
+We strongly recommend installing Nim using **choosenim** to ensure you have the latest version and consistent environment for documentation generation.
 
-2. **Pebble SDK** (v4.x)
-   ```bash
-   # Install dependencies (macOS)
-   brew install python@2 pipenv
-   
-   # Install Pebble SDK
-   cd ~
-   git clone https://github.com/pebble/pebble-tool.git
-   cd pebble-tool
-   pipenv install
-   pipenv shell
-   pebble sdk install latest
-   
-   # Verify installation
-   pebble --version
-   ```
+- **Windows**: [Download choosenim-x86_64-pc-windows-gnu.zip](https://nim-lang.org/install_windows.html)
+- **macOS / Linux**:
+  ```bash
+  curl https://nim-lang.org/choosenim/init.sh -sSf | sh
+  ```
 
-3. **Pebble Emulator**
-   
-   Download from: https://github.com/pebble/pebble-tool/releases
-   
-   Or use hardware device connected via USB.
+After installation, verify with:
+```bash
+nim --version
+```
 
-### Optional Tools
+### 2. Pebble SDK
 
-- **libclang** - Only needed if regenerating FFI bindings (not required for normal use)
-- **Futhark** (>= 0.15.0) - Only needed if regenerating FFI bindings
+To develop for Pebble, you need the Pebble SDK. Follow the instructions at **[RePebble SDK Installation Guide](https://developer.repebble.com/sdk/)** for your platform (Windows, macOS, or Linux).
+
+Verify that the `pebble` command is in your PATH:
+```bash
+pebble --version
+```
 
 ## Installation
 
@@ -57,20 +39,23 @@ nimble install nebble
 ### Option 2: From Source
 
 ```bash
-git clone https://github.com/zawa-t/nebble.git
+git clone https://github.com/Brokezawa/nebble.git
 cd nebble
 nimble install
 ```
 
-### Verify Installation
+### Build the CLI tool
+
+Nebble includes a CLI tool to simplify the build process. To build and install it locally:
 
 ```bash
-# Check that nebble CLI is available
-nebble --version
+cd cli
+nimble install_local
+```
 
-# Run tests
-cd nebble
-nimble test
+Verify the installation:
+```bash
+nebble version
 ```
 
 ## Your First App: Hello World
@@ -83,20 +68,21 @@ nebble new my_first_app
 cd my_first_app
 ```
 
-This generates:
+This generates the project structure:
 ```
 my_first_app/
 ├── nebble.json         # Nebble project metadata
-├── appinfo.json        # Pebble app metadata (name, UUID, resources)
 ├── nim.cfg             # Cross-compilation flags
 ├── wscript             # Waf build configuration
 └── src/
     └── my_first_app.nim  # Your Nim source code
 ```
 
+*Note: `appinfo.json` is generated automatically by Nebble during the build process.*
+
 ### Step 2: Write Your App Code
 
-Open `src/my_first_app.nim`. You'll see the modern **Declarative DSL** which eliminates almost all boilerplate:
+Open `src/my_first_app.nim`. Nebble provides a Declarative DSL to minimize boilerplate:
 
 ```nim
 import nebble
@@ -125,123 +111,34 @@ nebbleApp:
 nebble build
 ```
 
-This:
-1. Compiles Nim code to C (`nim c --compileOnly`)
-2. CLI generates platform-specific `appinfo.json`
-3. CLI copies generated C files into Pebble project structure
-4. CLI runs `pebble build` to create `.pbw` bundles for all platforms
+This command triggers the entire pipeline:
+1. Nim compilation to C.
+2. Generating the correct `appinfo.json` metadata on the fly.
+3. Invoking the Pebble build system.
 
-Output: `build/my_first_app_basalt.pbw`, etc.
+### Step 4: Run in Emulator
 
-### Step 4: Install and Run
-
-#### On Emulator:
+Nebble provides aliases for common Pebble commands for consistency:
 
 ```bash
-# Start emulator (in separate terminal)
-pebble install --emulator basalt
-
-# Or use nebble CLI
+# Start emulator and install
 nebble install --emulator basalt
 ```
 
-#### On Hardware Device:
+*Note: `nebble install` is a wrapper around `pebble install`.*
 
-```bash
-# Connect Pebble via USB, enable developer mode
-pebble install --phone <PHONE_IP>
+## Cross-Platform Usage
 
-# Or
-nebble install --phone <PHONE_IP>
-```
+Nebble works on Windows, macOS, and Linux. The CLI tool abstracts platform differences:
 
-### Step 5: Test Your App
+- **Windows**: Use PowerShell or Command Prompt. Ensure Python 2.7 and the ARM toolchain (provided by Pebble SDK) are correctly configured.
+- **macOS/Linux**: Standard shell environments.
 
-You should see "Hello Nim!" displayed in the center of the watch screen. Press the SELECT button to feel a short pulse.
+## API Structure
 
-## Understanding the API Structure
+Nebble has a two-layer architecture:
 
-Nebble has a **two-layer architecture**:
+1.  **Low-Level FFI (`nebble/ffi`)**: Direct 1:1 mapping of the C SDK.
+2.  **High-Level API (`nebble`)**: Idiomatic Nim wrappers with ARC memory management (Handles).
 
-### Layer 1: Low-Level FFI Bindings (`nebble/ffi`)
-
-- **Purpose:** Direct 1:1 mapping of Pebble C SDK
-- **Naming:** Preserves C `snake_case` exactly
-- **Usage:** `import nebble/ffi as ffi`
-
-**When to use:**
-- Maximum control over Pebble SDK
-- Performance-critical code
-- Following C SDK examples directly
-
-### Layer 2: High-Level Idiomatic API (`nebble/*`)
-
-- **Purpose:** Nim-friendly wrappers with object-oriented patterns and ARC memory management
-- **Naming:** `camelCase` with type-safe wrappers (Managed Handles)
-- **Usage:** `import nebble` (imports all high-level modules)
-
-**When to use:**
-- Most application logic
-- Type safety and convenience
-- Automatic memory management (no manual `.destroy()`)
-
-## Common Patterns
-
-### Pattern 1: Declarative UI (DSL)
-
-The `nebbleWatchface` macro is the recommended way to build UIs. It handles window creation, layer management, and event subscription.
-
-```nim
-nebbleWatchface:
-  window:
-    backgroundColor = GColorBlack
-  textLayer:
-    id = myLabel
-    frame = (0, 50, 144, 30)
-    text = "Hello"
-```
-
-### Pattern 2: Managed Handles (Manual)
-
-If you need more control, use Managed Handles (e.g., `TextLayerHandle`):
-
-```nim
-var label: TextLayerHandle
-label = newTextLayer(makeGRect(0, 0, 144, 30))
-label.text = "Managed"
-# No destroy() needed!
-```
-
-### Pattern 3: Heap-Free Dynamic Text
-
-```nim
-var countStr: FixedString[32]
-countStr.f("Count: ", value)
-textLayer.text = countStr
-```
-
-## Platform-Specific Features
-
-Pebble has 6 hardware platforms with different capabilities:
-
-| Feature     | aplite | basalt | chalk | diorite | emery | flint |
-|-------------|--------|--------|-------|---------|-------|-------|
-| Color       | No     | Yes    | Yes   | No      | Yes   | No    |
-| Round       | No     | No     | Yes   | No      | No    | No    |
-| Health      | Stub   | Yes    | Yes   | Yes     | Yes   | Yes   |
-| Microphone  | No     | Yes    | Yes   | Yes     | Yes   | Yes   |
-
-### Compile-Time Platform Checks
-
-Use `when declared()` or `defined()` to handle differences:
-
-```nim
-when defined(pebbleColor):
-  textLayer.backgroundColor = GColorBlueMoon
-else:
-  textLayer.backgroundColor = GColorBlack
-```
-
----
-
-## Happy Pebble hacking with Nim! 🎉
+Always prefer the High-Level API for application logic to benefit from automatic memory management and type safety.
