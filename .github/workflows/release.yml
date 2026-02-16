@@ -74,8 +74,10 @@ jobs:
           VERSION=${GITHUB_REF#refs/tags/}
           echo "# Nebble $VERSION" > RELEASE_NOTES.md
           echo "" >> RELEASE_NOTES.md
-          echo "## What's New" >> RELEASE_NOTES.md
-          echo "See [CHANGELOG.md](CHANGELOG.md) for detailed changes." >> RELEASE_NOTES.md
+          echo "## Features" >> RELEASE_NOTES.md
+          echo "- Full-Stack Nim support (Watch + Phone)" >> RELEASE_NOTES.md
+          echo "- ARC-managed memory with Handles" >> RELEASE_NOTES.md
+          echo "- Declarative UI DSL" >> RELEASE_NOTES.md
           echo "" >> RELEASE_NOTES.md
           echo "## Installation" >> RELEASE_NOTES.md
           echo '```bash' >> RELEASE_NOTES.md
