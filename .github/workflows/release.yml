@@ -27,6 +27,12 @@ jobs:
     runs-on: ${{ matrix.os }}
     
     steps:
+      - name: Install dependencies (Linux)
+        if: runner.os == 'Linux'
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y libclang-dev
+      
       - name: Checkout repository
         uses: actions/checkout@v4
       
@@ -96,6 +102,11 @@ jobs:
     needs: github-release
     
     steps:
+      - name: Install dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y libclang-dev
+      
       - name: Checkout repository
         uses: actions/checkout@v4
       
