@@ -31,6 +31,7 @@ jobs:
           python-version: '3.13'
       
       - name: Cache Pebble SDK
+        id: cache-pebble-sdk
         uses: actions/cache@v4
         with:
           path: ~/.pebble-sdk
@@ -38,21 +39,31 @@ jobs:
           restore-keys: |
             pebble-sdk-${{ runner.os }}-
       
-      - name: Install Pebble SDK
+      - name: Install pebble-tool
         run: |
           python -m pip install --user pebble-tool
           echo "$HOME/.local/bin" >> $GITHUB_PATH
+      
+      - name: Install Pebble SDK
+        if: steps.cache-pebble-sdk.outputs.cache-hit != 'true'
+        run: |
           export PATH="$HOME/.local/bin:$PATH"
           pebble sdk install latest
-          
+      
+      - name: Add ARM toolchain to path
+        run: |
           # Find ARM toolchain and add to path
           TOOL_PATH=$(find $HOME/.pebble-sdk -type f -name arm-none-eabi-size -exec dirname {} \; | head -n 1)
           if [ -n "$TOOL_PATH" ]; then
             echo "$TOOL_PATH" >> $GITHUB_PATH
+          else
+            echo "Warning: arm-none-eabi-size not found"
+            exit 1
           fi
       
       - name: Verify Pebble SDK
         run: |
+          export PATH="$HOME/.local/bin:$PATH"
           pebble --version
           pebble sdk list
           arm-none-eabi-size --version
