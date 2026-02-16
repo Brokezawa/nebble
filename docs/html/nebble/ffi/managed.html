@@ -138,6 +138,7 @@
     
     <p class="module-desc"><p>Managed Resource Infrastructure for ARC Memory Safety</p>
 <p>This module provides the foundational types, templates, and macros for creating ARC-managed wrappers around Pebble C objects. These wrappers use Nim's destructor system (<tt class="docutils literal"><span class="pre"><span class="Operator">=</span><span class="Identifier">destroy</span></span></tt>, <tt class="docutils literal"><span class="pre"><span class="Operator">=</span><span class="Identifier">copy</span></span></tt>, <tt class="docutils literal"><span class="pre"><span class="Operator">=</span><span class="Identifier">sink</span></span></tt>) to automatically manage object lifecycles, preventing memory leaks and double-frees.</p>
+<p>For details on how Nebble achieves zero heap fragmentation, see the <a class="reference external" href="../../../docs/HEAP_FREE.md">Zero-Heap Performance guide</a>.</p>
 <p><strong>Design Philosophy:</strong></p>
 <ul class="simple"><li>Optional managed wrappers coexist with manual <tt class="docutils literal"><span class="pre"><span class="Keyword">ptr</span> <span class="Identifier">T</span></span></tt> API</li>
 <li>Zero runtime overhead when not used</li>
@@ -321,7 +322,7 @@ The managed infrastructure provides:<ul class="simple"><li><tt class="docutils l
       <div class="twelve-columns footer">
         <span class="nim-sprite"></span>
         <br>
-        <small style="color: var(--hint);">Made with Nim. Generated: 2026-02-16 08:51:50 UTC</small>
+        <small style="color: var(--hint);">Made with Nim. Generated: 2026-02-16 09:17:54 UTC</small>
       </div>
     </div>
   </div>

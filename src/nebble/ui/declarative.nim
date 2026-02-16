@@ -1,6 +1,9 @@
 ## Declarative UI macros for Nebble
 ##
 ## Provides a DSL for defining Pebble UI with minimal boilerplate.
+##
+## For a detailed guide on the DSL features and responsive layout, 
+## see the [Declarative DSL guide](../../../docs/DECLARATIVE_DSL.md).
 
 import std/macros
 import nebble/ffi

@@ -20,4 +20,14 @@ task build, "Build the nebble CLI":
 
 task install_local, "Install nebble CLI locally":
   exec "nimble build"
-  exec "cp bin/nebble ~/.nimble/bin/"
+  let binExt = when defined(windows): ".exe" else: ""
+  let binFile = "bin/nebble" & binExt
+  # In Nimble tasks, we should use standardized paths or shell expansion
+  # Since getHomeDir isn't available, we'll use a portable shell command
+  if defined(windows):
+    let binFileWin = binFile.replace("/", "\\")
+    exec "if not exist %USERPROFILE%\\.nimble\\bin mkdir %USERPROFILE%\\.nimble\\bin"
+    exec "copy /Y " & binFileWin & " %USERPROFILE%\\.nimble\\bin\\nebble.exe"
+  else:
+    exec "mkdir -p ~/.nimble/bin"
+    exec "cp bin/nebble ~/.nimble/bin/"

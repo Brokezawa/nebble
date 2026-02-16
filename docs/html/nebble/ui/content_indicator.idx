@@ -1,16 +1,16 @@
 nimTitle	content_indicator	nebble/ui/content_indicator.html	module nebble/ui/content_indicator		0
-nim	ContentIndicatorHandle	nebble/ui/content_indicator.html#ContentIndicatorHandle	object ContentIndicatorHandle		70
-nim	`=destroy`	nebble/ui/content_indicator.html#=destroy,ContentIndicatorHandle	proc `=destroy`(h`gensym0: var ContentIndicatorHandle)		76
-nim	`=wasMoved`	nebble/ui/content_indicator.html#=wasMoved,ContentIndicatorHandle	proc `=wasMoved`(h`gensym0: var ContentIndicatorHandle)		83
-nim	`=copy`	nebble/ui/content_indicator.html#=copy,ContentIndicatorHandle,ContentIndicatorHandle	proc `=copy`(dest`gensym0: var ContentIndicatorHandle;\n        src`gensym0: ContentIndicatorHandle)		88
-nim	`=sink`	nebble/ui/content_indicator.html#=sink,ContentIndicatorHandle,ContentIndicatorHandle	proc `=sink`(dest`gensym0: var ContentIndicatorHandle;\n        src`gensym0: ContentIndicatorHandle)		90
-nim	toPtr	nebble/ui/content_indicator.html#toPtr.c,ContentIndicatorHandle	converter toPtr(h`gensym0: ContentIndicatorHandle): ptr ContentIndicator		100
-nim	toLayer	nebble/ui/content_indicator.html#toLayer.c,ContentIndicatorHandle	converter toLayer(h`gensym0: ContentIndicatorHandle): ptr Layer		102
-nim	toHandle	nebble/ui/content_indicator.html#toHandle,ptr.struct_ContentIndicator	proc toHandle(p`gensym0: ptr ContentIndicator): ContentIndicatorHandle		105
-nim	wrapOwned	nebble/ui/content_indicator.html#wrapOwned,ptr.struct_ContentIndicator	proc wrapOwned(p`gensym0: ptr ContentIndicator): ContentIndicatorHandle		109
-nim	isValid	nebble/ui/content_indicator.html#isValid,ContentIndicatorHandle	proc isValid(h`gensym0: ContentIndicatorHandle): bool		113
-nim	isNil	nebble/ui/content_indicator.html#isNil,ContentIndicatorHandle	proc isNil(h`gensym0: ContentIndicatorHandle): bool		114
-nim	setParent	nebble/ui/content_indicator.html#setParent,ContentIndicatorHandle,ptr.struct_Layer	proc setParent(h`gensym0: var ContentIndicatorHandle; p`gensym0: ptr Layer)		116
+nim	ContentIndicatorHandle	nebble/ui/content_indicator.html#ContentIndicatorHandle	object ContentIndicatorHandle		73
+nim	`=destroy`	nebble/ui/content_indicator.html#=destroy,ContentIndicatorHandle	proc `=destroy`(h`gensym0: var ContentIndicatorHandle)		79
+nim	`=wasMoved`	nebble/ui/content_indicator.html#=wasMoved,ContentIndicatorHandle	proc `=wasMoved`(h`gensym0: var ContentIndicatorHandle)		86
+nim	`=copy`	nebble/ui/content_indicator.html#=copy,ContentIndicatorHandle,ContentIndicatorHandle	proc `=copy`(dest`gensym0: var ContentIndicatorHandle;\n        src`gensym0: ContentIndicatorHandle)		91
+nim	`=sink`	nebble/ui/content_indicator.html#=sink,ContentIndicatorHandle,ContentIndicatorHandle	proc `=sink`(dest`gensym0: var ContentIndicatorHandle;\n        src`gensym0: ContentIndicatorHandle)		93
+nim	toPtr	nebble/ui/content_indicator.html#toPtr.c,ContentIndicatorHandle	converter toPtr(h`gensym0: ContentIndicatorHandle): ptr ContentIndicator		103
+nim	toLayer	nebble/ui/content_indicator.html#toLayer.c,ContentIndicatorHandle	converter toLayer(h`gensym0: ContentIndicatorHandle): ptr Layer		105
+nim	toHandle	nebble/ui/content_indicator.html#toHandle,ptr.struct_ContentIndicator	proc toHandle(p`gensym0: ptr ContentIndicator): ContentIndicatorHandle		108
+nim	wrapOwned	nebble/ui/content_indicator.html#wrapOwned,ptr.struct_ContentIndicator	proc wrapOwned(p`gensym0: ptr ContentIndicator): ContentIndicatorHandle		112
+nim	isValid	nebble/ui/content_indicator.html#isValid,ContentIndicatorHandle	proc isValid(h`gensym0: ContentIndicatorHandle): bool		116
+nim	isNil	nebble/ui/content_indicator.html#isNil,ContentIndicatorHandle	proc isNil(h`gensym0: ContentIndicatorHandle): bool		117
+nim	setParent	nebble/ui/content_indicator.html#setParent,ContentIndicatorHandle,ptr.struct_Layer	proc setParent(h`gensym0: var ContentIndicatorHandle; p`gensym0: ptr Layer)		119
 nim	reset	nebble/ui/content_indicator.html#reset,ContentIndicatorHandle	proc reset(h`gensym0: var ContentIndicatorHandle)		16
 nim	newContentIndicatorHandle	nebble/ui/content_indicator.html#newContentIndicatorHandle	proc newContentIndicatorHandle(): ContentIndicatorHandle		23
 nim	newContentIndicator	nebble/ui/content_indicator.html#newContentIndicator	proc newContentIndicator(): ContentIndicatorHandle		27

@@ -1,16 +1,16 @@
 nimTitle	menu_layer	nebble/ui/menu_layer.html	module nebble/ui/menu_layer		0
-nim	MenuLayerHandle	nebble/ui/menu_layer.html#MenuLayerHandle	object MenuLayerHandle		70
-nim	`=destroy`	nebble/ui/menu_layer.html#=destroy,MenuLayerHandle	proc `=destroy`(h`gensym0: var MenuLayerHandle)		76
-nim	`=wasMoved`	nebble/ui/menu_layer.html#=wasMoved,MenuLayerHandle	proc `=wasMoved`(h`gensym0: var MenuLayerHandle)		83
-nim	`=copy`	nebble/ui/menu_layer.html#=copy,MenuLayerHandle,MenuLayerHandle	proc `=copy`(dest`gensym0: var MenuLayerHandle; src`gensym0: MenuLayerHandle)		88
-nim	`=sink`	nebble/ui/menu_layer.html#=sink,MenuLayerHandle,MenuLayerHandle	proc `=sink`(dest`gensym0: var MenuLayerHandle; src`gensym0: MenuLayerHandle)		90
-nim	toPtr	nebble/ui/menu_layer.html#toPtr.c,MenuLayerHandle	converter toPtr(h`gensym0: MenuLayerHandle): ptr MenuLayer		100
-nim	toLayer	nebble/ui/menu_layer.html#toLayer.c,MenuLayerHandle	converter toLayer(h`gensym0: MenuLayerHandle): ptr Layer		102
-nim	toHandle	nebble/ui/menu_layer.html#toHandle,ptr.struct_MenuLayer	proc toHandle(p`gensym0: ptr MenuLayer): MenuLayerHandle		105
-nim	wrapOwned	nebble/ui/menu_layer.html#wrapOwned,ptr.struct_MenuLayer	proc wrapOwned(p`gensym0: ptr MenuLayer): MenuLayerHandle		109
-nim	isValid	nebble/ui/menu_layer.html#isValid,MenuLayerHandle	proc isValid(h`gensym0: MenuLayerHandle): bool		113
-nim	isNil	nebble/ui/menu_layer.html#isNil,MenuLayerHandle	proc isNil(h`gensym0: MenuLayerHandle): bool		114
-nim	setParent	nebble/ui/menu_layer.html#setParent,MenuLayerHandle,ptr.struct_Layer	proc setParent(h`gensym0: var MenuLayerHandle; p`gensym0: ptr Layer)		116
+nim	MenuLayerHandle	nebble/ui/menu_layer.html#MenuLayerHandle	object MenuLayerHandle		73
+nim	`=destroy`	nebble/ui/menu_layer.html#=destroy,MenuLayerHandle	proc `=destroy`(h`gensym0: var MenuLayerHandle)		79
+nim	`=wasMoved`	nebble/ui/menu_layer.html#=wasMoved,MenuLayerHandle	proc `=wasMoved`(h`gensym0: var MenuLayerHandle)		86
+nim	`=copy`	nebble/ui/menu_layer.html#=copy,MenuLayerHandle,MenuLayerHandle	proc `=copy`(dest`gensym0: var MenuLayerHandle; src`gensym0: MenuLayerHandle)		91
+nim	`=sink`	nebble/ui/menu_layer.html#=sink,MenuLayerHandle,MenuLayerHandle	proc `=sink`(dest`gensym0: var MenuLayerHandle; src`gensym0: MenuLayerHandle)		93
+nim	toPtr	nebble/ui/menu_layer.html#toPtr.c,MenuLayerHandle	converter toPtr(h`gensym0: MenuLayerHandle): ptr MenuLayer		103
+nim	toLayer	nebble/ui/menu_layer.html#toLayer.c,MenuLayerHandle	converter toLayer(h`gensym0: MenuLayerHandle): ptr Layer		105
+nim	toHandle	nebble/ui/menu_layer.html#toHandle,ptr.struct_MenuLayer	proc toHandle(p`gensym0: ptr MenuLayer): MenuLayerHandle		108
+nim	wrapOwned	nebble/ui/menu_layer.html#wrapOwned,ptr.struct_MenuLayer	proc wrapOwned(p`gensym0: ptr MenuLayer): MenuLayerHandle		112
+nim	isValid	nebble/ui/menu_layer.html#isValid,MenuLayerHandle	proc isValid(h`gensym0: MenuLayerHandle): bool		116
+nim	isNil	nebble/ui/menu_layer.html#isNil,MenuLayerHandle	proc isNil(h`gensym0: MenuLayerHandle): bool		117
+nim	setParent	nebble/ui/menu_layer.html#setParent,MenuLayerHandle,ptr.struct_Layer	proc setParent(h`gensym0: var MenuLayerHandle; p`gensym0: ptr Layer)		119
 nim	reset	nebble/ui/menu_layer.html#reset,MenuLayerHandle	proc reset(h`gensym0: var MenuLayerHandle)		17
 nim	newMenuLayerHandle	nebble/ui/menu_layer.html#newMenuLayerHandle,GRect	proc newMenuLayerHandle(frame: GRect): MenuLayerHandle		24
 nim	newMenuLayer	nebble/ui/menu_layer.html#newMenuLayer,GRect	proc newMenuLayer(frame: GRect): MenuLayerHandle		27

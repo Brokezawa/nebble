@@ -350,8 +350,9 @@ Example usage:<ol class="simple"><li>Check availability and sum a metric over 7 
   <dd>
     
     <p>Get per-minute health data history. Fills minuteData array with steps per minute for the requested time range. Returns the number of minutes actually retrieved.</p>
-<p>Usage: var data: <tt class="docutils literal"><span class="pre"><span class="Identifier">array</span><span class="Punctuation">[</span><span class="DecNumber">60</span><span class="Punctuation">,</span> <span class="Identifier">HealthMinuteData</span><span class="Punctuation">]</span></span></tt> let count = getMinuteHistory(addr data<a class="reference internal" href="#0">0</a>, 60, addr startTime, addr endTime)</p>
-
+<p>Usage:</p>
+<pre class="listing"><span class="Keyword">var</span> <span class="Identifier">data</span><span class="Punctuation">:</span> <span class="Identifier">array</span><span class="Punctuation">[</span><span class="DecNumber">60</span><span class="Punctuation">,</span> <span class="Identifier">HealthMinuteData</span><span class="Punctuation">]</span>
+<span class="Keyword">let</span> <span class="Identifier">count</span> <span class="Operator">=</span> <span class="Identifier">getMinuteHistory</span><span class="Punctuation">(</span><span class="Keyword">addr</span> <span class="Identifier">data</span><span class="Punctuation">[</span><span class="DecNumber">0</span><span class="Punctuation">]</span><span class="Punctuation">,</span> <span class="DecNumber">60</span><span class="Punctuation">,</span> <span class="Keyword">addr</span> <span class="Identifier">startTime</span><span class="Punctuation">,</span> <span class="Keyword">addr</span> <span class="Identifier">endTime</span><span class="Punctuation">)</span></pre>
     
   </dd>
 </div>
@@ -541,7 +542,7 @@ Example usage:<ol class="simple"><li>Check availability and sum a metric over 7 
       <div class="twelve-columns footer">
         <span class="nim-sprite"></span>
         <br>
-        <small style="color: var(--hint);">Made with Nim. Generated: 2026-02-16 08:51:50 UTC</small>
+        <small style="color: var(--hint);">Made with Nim. Generated: 2026-02-16 09:17:54 UTC</small>
       </div>
     </div>
   </div>

@@ -1,16 +1,16 @@
 nimTitle	draw_command_image	nebble/graphics/draw_command_image.html	module nebble/graphics/draw_command_image		0
-nim	DrawCommandImageHandle	nebble/graphics/draw_command_image.html#DrawCommandImageHandle	object DrawCommandImageHandle		70
-nim	`=destroy`	nebble/graphics/draw_command_image.html#=destroy,DrawCommandImageHandle	proc `=destroy`(h`gensym0: var DrawCommandImageHandle)		76
-nim	`=wasMoved`	nebble/graphics/draw_command_image.html#=wasMoved,DrawCommandImageHandle	proc `=wasMoved`(h`gensym0: var DrawCommandImageHandle)		83
-nim	`=copy`	nebble/graphics/draw_command_image.html#=copy,DrawCommandImageHandle,DrawCommandImageHandle	proc `=copy`(dest`gensym0: var DrawCommandImageHandle;\n        src`gensym0: DrawCommandImageHandle)		88
-nim	`=sink`	nebble/graphics/draw_command_image.html#=sink,DrawCommandImageHandle,DrawCommandImageHandle	proc `=sink`(dest`gensym0: var DrawCommandImageHandle;\n        src`gensym0: DrawCommandImageHandle)		90
-nim	toPtr	nebble/graphics/draw_command_image.html#toPtr.c,DrawCommandImageHandle	converter toPtr(h`gensym0: DrawCommandImageHandle): ptr GDrawCommandImage		100
-nim	toLayer	nebble/graphics/draw_command_image.html#toLayer.c,DrawCommandImageHandle	converter toLayer(h`gensym0: DrawCommandImageHandle): ptr Layer		102
-nim	toHandle	nebble/graphics/draw_command_image.html#toHandle,ptr.struct_GDrawCommandImage	proc toHandle(p`gensym0: ptr GDrawCommandImage): DrawCommandImageHandle		105
-nim	wrapOwned	nebble/graphics/draw_command_image.html#wrapOwned,ptr.struct_GDrawCommandImage	proc wrapOwned(p`gensym0: ptr GDrawCommandImage): DrawCommandImageHandle		109
-nim	isValid	nebble/graphics/draw_command_image.html#isValid,DrawCommandImageHandle	proc isValid(h`gensym0: DrawCommandImageHandle): bool		113
-nim	isNil	nebble/graphics/draw_command_image.html#isNil,DrawCommandImageHandle	proc isNil(h`gensym0: DrawCommandImageHandle): bool		114
-nim	setParent	nebble/graphics/draw_command_image.html#setParent,DrawCommandImageHandle,ptr.struct_Layer	proc setParent(h`gensym0: var DrawCommandImageHandle; p`gensym0: ptr Layer)		116
+nim	DrawCommandImageHandle	nebble/graphics/draw_command_image.html#DrawCommandImageHandle	object DrawCommandImageHandle		73
+nim	`=destroy`	nebble/graphics/draw_command_image.html#=destroy,DrawCommandImageHandle	proc `=destroy`(h`gensym0: var DrawCommandImageHandle)		79
+nim	`=wasMoved`	nebble/graphics/draw_command_image.html#=wasMoved,DrawCommandImageHandle	proc `=wasMoved`(h`gensym0: var DrawCommandImageHandle)		86
+nim	`=copy`	nebble/graphics/draw_command_image.html#=copy,DrawCommandImageHandle,DrawCommandImageHandle	proc `=copy`(dest`gensym0: var DrawCommandImageHandle;\n        src`gensym0: DrawCommandImageHandle)		91
+nim	`=sink`	nebble/graphics/draw_command_image.html#=sink,DrawCommandImageHandle,DrawCommandImageHandle	proc `=sink`(dest`gensym0: var DrawCommandImageHandle;\n        src`gensym0: DrawCommandImageHandle)		93
+nim	toPtr	nebble/graphics/draw_command_image.html#toPtr.c,DrawCommandImageHandle	converter toPtr(h`gensym0: DrawCommandImageHandle): ptr GDrawCommandImage		103
+nim	toLayer	nebble/graphics/draw_command_image.html#toLayer.c,DrawCommandImageHandle	converter toLayer(h`gensym0: DrawCommandImageHandle): ptr Layer		105
+nim	toHandle	nebble/graphics/draw_command_image.html#toHandle,ptr.struct_GDrawCommandImage	proc toHandle(p`gensym0: ptr GDrawCommandImage): DrawCommandImageHandle		108
+nim	wrapOwned	nebble/graphics/draw_command_image.html#wrapOwned,ptr.struct_GDrawCommandImage	proc wrapOwned(p`gensym0: ptr GDrawCommandImage): DrawCommandImageHandle		112
+nim	isValid	nebble/graphics/draw_command_image.html#isValid,DrawCommandImageHandle	proc isValid(h`gensym0: DrawCommandImageHandle): bool		116
+nim	isNil	nebble/graphics/draw_command_image.html#isNil,DrawCommandImageHandle	proc isNil(h`gensym0: DrawCommandImageHandle): bool		117
+nim	setParent	nebble/graphics/draw_command_image.html#setParent,DrawCommandImageHandle,ptr.struct_Layer	proc setParent(h`gensym0: var DrawCommandImageHandle; p`gensym0: ptr Layer)		119
 nim	reset	nebble/graphics/draw_command_image.html#reset,DrawCommandImageHandle	proc reset(h`gensym0: var DrawCommandImageHandle)		10
 nim	newDrawCommandImageHandle	nebble/graphics/draw_command_image.html#newDrawCommandImageHandle,uint32	proc newDrawCommandImageHandle(resourceId: uint32): DrawCommandImageHandle		14
 nim	clone	nebble/graphics/draw_command_image.html#clone,DrawCommandImageHandle	proc clone(h: DrawCommandImageHandle): DrawCommandImageHandle		18

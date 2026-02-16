@@ -47,7 +47,9 @@ Nebble uses **Managed Types** (handles) which leverage Nim's ARC memory manageme
 
 ## Declarative UI (DSL)
 
-The most idiomatic way to build Nebble apps is using the `nebbleWatchface` macro. It eliminates almost all boilerplate by generating the window, layers, and lifecycle automatically.
+The most idiomatic way to build Nebble apps is using the `nebbleApp` macro (or its alias `nebbleWatchface`). It eliminates almost all boilerplate by generating the window, layers, and lifecycle automatically.
+
+For a comprehensive guide on the DSL features and responsive layout, see [Declarative DSL](DECLARATIVE_DSL.md).
 
 **Nim (Modern DSL):**
 ```nim

@@ -15,10 +15,14 @@ Pebble apps operate in extremely resource-constrained environments (24KB to 256K
 - **No Manual Free**: You never need to call `window_destroy()`. Nim does it for you.
 
 ### Zero-Heap Architecture
-Nebble is designed to minimize or eliminate heap allocations during runtime:
-- **Stack-Allocated UI**: Using the `nebbleApp` DSL, UI components are stored in module-level variables (static storage) or on the stack.
-- **FixedString[N]**: Replaces dynamic strings with stack-allocated, fixed-capacity buffers.
-- **Heap-Free Formatting**: The `formatInto` macro allows formatting numbers into strings without using `malloc` or `sprintf`.
+Nebble is designed to minimize or eliminate heap allocations during runtime. This prevents RAM fragmentation and ensures your app stays within the strict 24KB limit of some Pebble models.
+
+**Key Components:**
+- **FixedString[N]**: Replaces dynamic strings with stack-allocated buffers.
+- **f Macro**: Heap-free string formatting.
+- **ARC/ORC**: Deterministic memory management without GC pauses.
+
+For more details on performance optimization, see [Zero-Heap Performance](HEAP_FREE.md).
 
 ### Type Safety
 Nim's strong type system prevents many common C errors:
@@ -28,34 +32,14 @@ Nim's strong type system prevents many common C errors:
 ## 2. Expressive Syntax and Modern Features
 
 ### Declarative UI (nebbleApp DSL)
-Nebble provides a powerful macro-based DSL that eliminates 90% of Pebble boilerplate:
+Nebble provides a powerful macro-based DSL that eliminates 90% of Pebble boilerplate. It allows you to define windows, layers, and event handlers in a single expressive block.
 
-```nim
-import nebble
+**Key Features:**
+- **Boilerplate Removal**: Automatically handles global variables, window creation, and destruction.
+- **Responsive Layout**: Support for `fullWidth`, `center`, and dynamic coordinate calculation.
+- **Safety**: Enforces correct initialization order to prevent null-pointer crashes.
 
-nebbleApp:
-  window:
-    backgroundColor = GColorBlack
-
-  textLayer:
-    id = timeLayer
-    fullWidth = true
-    y = center
-    h = 30
-    text = "12:00"
-    alignment = GTextAlignmentCenter
-    font = FONT_KEY_GOTHIC_28_BOLD
-
-  init:
-    # Custom startup code
-    consoleLog("App started!")
-```
-
-This macro automatically handles:
-- Global variable declarations for handles.
-- Window creation and destruction.
-- Layer initialization and `layer_add_child`.
-- Automatic cleanup of all resources on app exit.
+For a detailed guide, see [Declarative DSL](DECLARATIVE_DSL.md).
 
 ### Dot-Syntax and Properties
 While Pebble SDK is C-based, Nebble wraps it in Nim's dot-syntax and property-style accessors:

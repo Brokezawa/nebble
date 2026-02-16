@@ -43,11 +43,12 @@
 ### 2. Developer Experience
 - [ ] **Hot Reloading**: Experimental support for hot reloading code (via AppMessage injection or partial updates) on emulator.
 - [ ] **Emulator Integration**: Better integration with QEMU management from `nebble` CLI.
-- [ ] **VS Code Extension**: Syntax highlighting and snippets for Nebble.
+- [ ] **AppMessage Serialization**: Macro-driven object mapping to/from `DictionaryIterator` for type-safe communication.
+- [ ] **Adaptive DSL Layouts**: Built-in support in `nebbleApp` for automatically responding to `UnobstructedArea` (Quick View) events.
 
 ### 3. Ecosystem
 - [ ] **Package Registry**: Central repository for Nebble libraries (UI components, drivers).
-- [ ] **Rocky.js Replacement**: Pure Nim implementation of JS-side logic (compiled to JS).
+- [ ] **Unified Nim Full-Stack**: Support for writing phone-side JavaScript logic (`pebble-js-app.js`) in Nim, allowing type sharing between watch and phone.
 
 ### 4. Hardware
 - [ ] **Rebble Web**: Integration with Rebble Web services for timeline and configuration.

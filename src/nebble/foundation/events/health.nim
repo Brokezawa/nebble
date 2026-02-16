@@ -113,8 +113,10 @@ when declared(ffi.health_service_get_minute_history):
     ## Returns the number of minutes actually retrieved.
     ##
   ## Usage:
-  ##   var data: `array[60, HealthMinuteData]`
-  ##   let count = getMinuteHistory(addr data[0], 60, addr startTime, addr endTime)
+  ##
+  ## .. code-block:: nim
+  ##    var data: array[60, HealthMinuteData]
+  ##    let count = getMinuteHistory(addr data[0], 60, addr startTime, addr endTime)
 
     ##
     ## Equivalent to C function `health_service_get_minute_history(minute_data, max_records, time_start, time_end)`.

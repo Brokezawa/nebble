@@ -5,6 +5,9 @@
 ## destructor system (`=destroy`, `=copy`, `=sink`) to automatically manage
 ## object lifecycles, preventing memory leaks and double-frees.
 ##
+## For details on how Nebble achieves zero heap fragmentation, 
+## see the [Zero-Heap Performance guide](../../../docs/HEAP_FREE.md).
+##
 ## **Design Philosophy:**
 ## - Optional managed wrappers coexist with manual `ptr T` API
 ## - Zero runtime overhead when not used

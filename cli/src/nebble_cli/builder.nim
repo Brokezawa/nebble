@@ -118,12 +118,16 @@ proc copyNimCFiles*(cfg: NebbleConfig, platform: string): bool =
   # nimbase.h is not generated in nimcache, it's in the Nim lib directory
   # Try multiple locations
   var nimbaseCopied = false
-  let nimbasePaths = [
-    getHomeDir() / ".choosenim/toolchains" / ("nim-" & NimVersion) / "lib" / "nimbase.h",
-    findExe("nim").parentDir().parentDir() / "lib" / "nimbase.h",
-    "/usr/local/lib/nim/nimbase.h",
-    "/usr/lib/nim/nimbase.h"
+  var nimbasePaths: seq[string] = @[
+    getHomeDir() / ".choosenim" / "toolchains" / ("nim-" & NimVersion) / "lib" / "nimbase.h",
+    getHomeDir() / ".choosenim" / "toolchains" / ("nim-" & NimVersion.split("-")[0]) / "lib" / "nimbase.h",
+    findExe("nim").parentDir().parentDir() / "lib" / "nimbase.h"
   ]
+  
+  # Platform-specific paths
+  when defined(posix):
+    nimbasePaths.add("/usr/local/lib/nim/nimbase.h")
+    nimbasePaths.add("/usr/lib/nim/nimbase.h")
   
   for nimbasePath in nimbasePaths:
     if fileExists(nimbasePath):

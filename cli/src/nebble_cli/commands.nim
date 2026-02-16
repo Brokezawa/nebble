@@ -240,7 +240,7 @@ proc cmdSize*(platform: string) =
     quit(1)
   
   let cfg = loadConfig()
-  let elfPath = "build" / platform / cfg.name & ".elf"
+  let elfPath = "build" / platform / "pebble-app.elf"
   
   if not fileExists(elfPath):
     echo "Error: ", elfPath, " not found. Run 'nebble build' first."

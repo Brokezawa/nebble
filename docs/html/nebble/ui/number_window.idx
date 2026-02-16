@@ -1,16 +1,16 @@
 nimTitle	number_window	nebble/ui/number_window.html	module nebble/ui/number_window		0
-nim	NumberWindowHandle	nebble/ui/number_window.html#NumberWindowHandle	object NumberWindowHandle		70
-nim	`=destroy`	nebble/ui/number_window.html#=destroy,NumberWindowHandle	proc `=destroy`(h`gensym0: var NumberWindowHandle)		76
-nim	`=wasMoved`	nebble/ui/number_window.html#=wasMoved,NumberWindowHandle	proc `=wasMoved`(h`gensym0: var NumberWindowHandle)		83
-nim	`=copy`	nebble/ui/number_window.html#=copy,NumberWindowHandle,NumberWindowHandle	proc `=copy`(dest`gensym0: var NumberWindowHandle; src`gensym0: NumberWindowHandle)		88
-nim	`=sink`	nebble/ui/number_window.html#=sink,NumberWindowHandle,NumberWindowHandle	proc `=sink`(dest`gensym0: var NumberWindowHandle; src`gensym0: NumberWindowHandle)		90
-nim	toPtr	nebble/ui/number_window.html#toPtr.c,NumberWindowHandle	converter toPtr(h`gensym0: NumberWindowHandle): ptr NumberWindow		100
-nim	toLayer	nebble/ui/number_window.html#toLayer.c,NumberWindowHandle	converter toLayer(h`gensym0: NumberWindowHandle): ptr Layer		102
-nim	toHandle	nebble/ui/number_window.html#toHandle,ptr.struct_NumberWindow	proc toHandle(p`gensym0: ptr NumberWindow): NumberWindowHandle		105
-nim	wrapOwned	nebble/ui/number_window.html#wrapOwned,ptr.struct_NumberWindow	proc wrapOwned(p`gensym0: ptr NumberWindow): NumberWindowHandle		109
-nim	isValid	nebble/ui/number_window.html#isValid,NumberWindowHandle	proc isValid(h`gensym0: NumberWindowHandle): bool		113
-nim	isNil	nebble/ui/number_window.html#isNil,NumberWindowHandle	proc isNil(h`gensym0: NumberWindowHandle): bool		114
-nim	setParent	nebble/ui/number_window.html#setParent,NumberWindowHandle,ptr.struct_Layer	proc setParent(h`gensym0: var NumberWindowHandle; p`gensym0: ptr Layer)		116
+nim	NumberWindowHandle	nebble/ui/number_window.html#NumberWindowHandle	object NumberWindowHandle		73
+nim	`=destroy`	nebble/ui/number_window.html#=destroy,NumberWindowHandle	proc `=destroy`(h`gensym0: var NumberWindowHandle)		79
+nim	`=wasMoved`	nebble/ui/number_window.html#=wasMoved,NumberWindowHandle	proc `=wasMoved`(h`gensym0: var NumberWindowHandle)		86
+nim	`=copy`	nebble/ui/number_window.html#=copy,NumberWindowHandle,NumberWindowHandle	proc `=copy`(dest`gensym0: var NumberWindowHandle; src`gensym0: NumberWindowHandle)		91
+nim	`=sink`	nebble/ui/number_window.html#=sink,NumberWindowHandle,NumberWindowHandle	proc `=sink`(dest`gensym0: var NumberWindowHandle; src`gensym0: NumberWindowHandle)		93
+nim	toPtr	nebble/ui/number_window.html#toPtr.c,NumberWindowHandle	converter toPtr(h`gensym0: NumberWindowHandle): ptr NumberWindow		103
+nim	toLayer	nebble/ui/number_window.html#toLayer.c,NumberWindowHandle	converter toLayer(h`gensym0: NumberWindowHandle): ptr Layer		105
+nim	toHandle	nebble/ui/number_window.html#toHandle,ptr.struct_NumberWindow	proc toHandle(p`gensym0: ptr NumberWindow): NumberWindowHandle		108
+nim	wrapOwned	nebble/ui/number_window.html#wrapOwned,ptr.struct_NumberWindow	proc wrapOwned(p`gensym0: ptr NumberWindow): NumberWindowHandle		112
+nim	isValid	nebble/ui/number_window.html#isValid,NumberWindowHandle	proc isValid(h`gensym0: NumberWindowHandle): bool		116
+nim	isNil	nebble/ui/number_window.html#isNil,NumberWindowHandle	proc isNil(h`gensym0: NumberWindowHandle): bool		117
+nim	setParent	nebble/ui/number_window.html#setParent,NumberWindowHandle,ptr.struct_Layer	proc setParent(h`gensym0: var NumberWindowHandle; p`gensym0: ptr Layer)		119
 nim	reset	nebble/ui/number_window.html#reset,NumberWindowHandle	proc reset(h`gensym0: var NumberWindowHandle)		11
 nim	newNumberWindowHandle	nebble/ui/number_window.html#newNumberWindowHandle,cstring,NumberWindowCallbacks,pointer	proc newNumberWindowHandle(label: cstring; callbacks: NumberWindowCallbacks;\n                      context: pointer): NumberWindowHandle		15
 nim	newNumberWindow	nebble/ui/number_window.html#newNumberWindow,cstring,NumberWindowCallbacks,pointer	proc newNumberWindow(label: cstring; callbacks: NumberWindowCallbacks;\n                context: pointer): NumberWindowHandle		19

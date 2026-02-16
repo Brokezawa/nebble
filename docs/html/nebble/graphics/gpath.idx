@@ -1,16 +1,16 @@
 nimTitle	gpath	nebble/graphics/gpath.html	module nebble/graphics/gpath		0
-nim	GPathHandle	nebble/graphics/gpath.html#GPathHandle	object GPathHandle		70
-nim	`=destroy`	nebble/graphics/gpath.html#=destroy,GPathHandle	proc `=destroy`(h`gensym0: var GPathHandle)		76
-nim	`=wasMoved`	nebble/graphics/gpath.html#=wasMoved,GPathHandle	proc `=wasMoved`(h`gensym0: var GPathHandle)		83
-nim	`=copy`	nebble/graphics/gpath.html#=copy,GPathHandle,GPathHandle	proc `=copy`(dest`gensym0: var GPathHandle; src`gensym0: GPathHandle)		88
-nim	`=sink`	nebble/graphics/gpath.html#=sink,GPathHandle,GPathHandle	proc `=sink`(dest`gensym0: var GPathHandle; src`gensym0: GPathHandle)		90
-nim	toPtr	nebble/graphics/gpath.html#toPtr.c,GPathHandle	converter toPtr(h`gensym0: GPathHandle): ptr GPath		100
-nim	toLayer	nebble/graphics/gpath.html#toLayer.c,GPathHandle	converter toLayer(h`gensym0: GPathHandle): ptr Layer		102
-nim	toHandle	nebble/graphics/gpath.html#toHandle,ptr.GPath	proc toHandle(p`gensym0: ptr GPath): GPathHandle		105
-nim	wrapOwned	nebble/graphics/gpath.html#wrapOwned,ptr.GPath	proc wrapOwned(p`gensym0: ptr GPath): GPathHandle		109
-nim	isValid	nebble/graphics/gpath.html#isValid,GPathHandle	proc isValid(h`gensym0: GPathHandle): bool		113
-nim	isNil	nebble/graphics/gpath.html#isNil,GPathHandle	proc isNil(h`gensym0: GPathHandle): bool		114
-nim	setParent	nebble/graphics/gpath.html#setParent,GPathHandle,ptr.struct_Layer	proc setParent(h`gensym0: var GPathHandle; p`gensym0: ptr Layer)		116
+nim	GPathHandle	nebble/graphics/gpath.html#GPathHandle	object GPathHandle		73
+nim	`=destroy`	nebble/graphics/gpath.html#=destroy,GPathHandle	proc `=destroy`(h`gensym0: var GPathHandle)		79
+nim	`=wasMoved`	nebble/graphics/gpath.html#=wasMoved,GPathHandle	proc `=wasMoved`(h`gensym0: var GPathHandle)		86
+nim	`=copy`	nebble/graphics/gpath.html#=copy,GPathHandle,GPathHandle	proc `=copy`(dest`gensym0: var GPathHandle; src`gensym0: GPathHandle)		91
+nim	`=sink`	nebble/graphics/gpath.html#=sink,GPathHandle,GPathHandle	proc `=sink`(dest`gensym0: var GPathHandle; src`gensym0: GPathHandle)		93
+nim	toPtr	nebble/graphics/gpath.html#toPtr.c,GPathHandle	converter toPtr(h`gensym0: GPathHandle): ptr GPath		103
+nim	toLayer	nebble/graphics/gpath.html#toLayer.c,GPathHandle	converter toLayer(h`gensym0: GPathHandle): ptr Layer		105
+nim	toHandle	nebble/graphics/gpath.html#toHandle,ptr.GPath	proc toHandle(p`gensym0: ptr GPath): GPathHandle		108
+nim	wrapOwned	nebble/graphics/gpath.html#wrapOwned,ptr.GPath	proc wrapOwned(p`gensym0: ptr GPath): GPathHandle		112
+nim	isValid	nebble/graphics/gpath.html#isValid,GPathHandle	proc isValid(h`gensym0: GPathHandle): bool		116
+nim	isNil	nebble/graphics/gpath.html#isNil,GPathHandle	proc isNil(h`gensym0: GPathHandle): bool		117
+nim	setParent	nebble/graphics/gpath.html#setParent,GPathHandle,ptr.struct_Layer	proc setParent(h`gensym0: var GPathHandle; p`gensym0: ptr Layer)		119
 nim	reset	nebble/graphics/gpath.html#reset,GPathHandle	proc reset(h`gensym0: var GPathHandle)		41
 nim	newGPathHandle	nebble/graphics/gpath.html#newGPathHandle,ptr.GPathInfo	proc newGPathHandle(pathInfo: ptr GPathInfo): GPathHandle		47
 nim	newGPath	nebble/graphics/gpath.html#newGPath,ptr.GPathInfo	proc newGPath(pathInfo: ptr GPathInfo): GPathHandle		50
