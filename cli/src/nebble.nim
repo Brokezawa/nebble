@@ -7,8 +7,8 @@
 ##   nebble clean                     - Clean build artifacts
 ##   nebble size [--platform <p>]     - Show binary size breakdown
 
-import std/[os, strutils, tables, parseopt]
-import nebble_cli/[commands, config, templates, builder]
+import std/[os, strutils]
+import nebble_cli/commands
 
 const
   version = "0.2.0"

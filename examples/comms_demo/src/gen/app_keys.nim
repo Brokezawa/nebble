@@ -5,4 +5,5 @@ type
   AppMessageKey* {.pure.} = enum
     amkMsg = 0  ## Msg
     amkHeading = 1  ## Heading
-    amkConnected = 2  ## Connected
+    amkJsready = 2  ## JSReady
+    amkWatchready = 3  ## WatchReady

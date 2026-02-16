@@ -26,6 +26,7 @@ proc cmdNew*(name: string, isWatchface: bool) =
   # Create directory structure
   createDir(name)
   createDir(name / "src")
+  createDir(name / "src" / "js")
   createDir(name / "resources")
   
   # Generate project files
@@ -39,7 +40,10 @@ proc cmdNew*(name: string, isWatchface: bool) =
     "uuid": generateUuid(),
     "platforms": ["aplite", "basalt", "chalk", "diorite", "emery", "flint"],
     "capabilities": [],
-    "appKeys": {}
+    "appKeys": {
+      "JSReady": 0,
+      "WatchReady": 1
+    }
   }
   
   writeFile(name / "nebble.json", config.pretty)
@@ -54,6 +58,9 @@ proc cmdNew*(name: string, isWatchface: bool) =
   
   # Create nim.cfg for cross-compilation
   writeFile(name / "nim.cfg", getNimCfg())
+  
+  # Create js/pebble-js-app.js
+  writeFile(name / "src" / "js" / "pebble-js-app.js", getPkjsTemplate())
   
   # Create wscript for Pebble build system
   writeFile(name / "wscript", getWscript())
@@ -83,6 +90,14 @@ proc cmdBuild*(platform: string) =
   
   # Load config
   let cfg = loadConfig()
+  
+  # Step 0: Generate message keys
+  echo "Generating message keys..."
+  if not generateMessageKeys(cfg):
+    echo "✗ Message keys generation failed"
+    quit(1)
+  echo "✓ Generated src/gen/app_keys.nim"
+
   # Determine platforms to build
   let platforms = if platform != "":
     if not validatePlatform(platform):
@@ -106,11 +121,11 @@ proc cmdBuild*(platform: string) =
       quit(1)
     echo "✓ Nim → C compilation successful"
     
-    # Step 2: Generate appinfo.json
-    if not generateAppInfo(cfg, p):
-      echo "✗ appinfo.json generation failed"
+    # Step 2: Generate package.json (sole source of truth for SDK 3+)
+    if not generatePackageJson(cfg, p):
+      echo "✗ package.json generation failed"
       quit(1)
-    echo "✓ Generated appinfo.json"
+    echo "✓ Generated package.json"
     
     # Step 3: Copy Nim-generated C files to Pebble project
     if not copyNimCFiles(cfg, p):
@@ -251,6 +266,10 @@ proc cmdClean*() =
   # Find and remove .lock-waf* files
   for kind, path in walkDir("."):
     if kind == pcFile and path.startsWith(".lock-waf"):
+      removeFile(path)
+      inc cleaned
+      echo "✓ Removed ", path
+    elif kind == pcFile and (path == "appinfo.json" or path == "package.json"):
       removeFile(path)
       inc cleaned
       echo "✓ Removed ", path

@@ -2,7 +2,7 @@
   "name": "comms_demo",
   "type": "app",
   "version": "1.0.0",
-  "uuid": "f47ac10b-58cc-4372-a567-0e02b2c3d479",
+  "uuid": "7649d21b-1854-473d-9d48-319a2853243a",
   "platforms": [
     "aplite",
     "basalt",
@@ -15,6 +15,7 @@
   "appKeys": {
     "Msg": 0,
     "Heading": 1,
-    "Connected": 2
+    "JSReady": 2,
+    "WatchReady": 3
   }
 }

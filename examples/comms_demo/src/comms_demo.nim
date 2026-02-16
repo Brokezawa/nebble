@@ -8,14 +8,17 @@
 
 import nebble
 import nebble/comms/typed_message
+import nebble/comms/message
 import gen/app_keys
 
 var
   msgStr: FixedString[32]
   statusStr: FixedString[32]
   headingStr: FixedString[32]
+  jsReady: bool = false
 
 # Forward declarations of handlers
+proc handshakeHandler(data: pointer) {.cdecl.}
 proc selectClickHandler(recognizer: ClickRecognizerRef; context: pointer) {.cdecl.}
 proc connectionHandler(connected: bool) {.cdecl.}
 proc compassHandler(data: CompassHeadingData) {.cdecl.}
@@ -51,7 +54,7 @@ nebbleApp:
     y = 100
     h = 40
     alignment = GTextAlignmentCenter
-    text = "Press SELECT to Ping"
+    text = "Waiting for JS..."
 
   clicks:
     BUTTON_ID_SELECT = selectClickHandler
@@ -76,6 +79,8 @@ nebbleApp:
     let res = typed_message.open(256, 256)
     if res == APP_MSG_OK():
       logInfo("AppMessage opened successfully")
+      # Start robust handshake timer
+      timer.once(1000, handshakeHandler)
     else:
       logInfo("AppMessage failed to open")
 
@@ -87,6 +92,18 @@ nebbleApp:
 # ============================================================================
 # Handlers
 # ============================================================================
+
+proc handshakeHandler(data: pointer) {.cdecl.} =
+  if jsReady: return
+  
+  logInfo("Handshake: Sending WatchReady...")
+  var iter: ptr typed_message.DictionaryIterator
+  if outboxBegin(addr iter) == APP_MSG_OK():
+    discard dictWriteInt(iter, AppMessageKey.amkWatchReady.uint32, 1)
+    discard outboxSend()
+  
+  # Reschedule to try again in 1s
+  timer.once(1000, handshakeHandler)
 
 proc connectionHandler(connected: bool) {.cdecl.} =
   let state: cstring = if connected: "Connected" else: "Disconnected"
@@ -104,8 +121,18 @@ proc compassHandler(data: CompassHeadingData) {.cdecl.} =
     headingLayer.text = headingStr
 
 proc inboxReceived(iter: ptr typed_message.DictionaryIterator, context: pointer) {.cdecl.} =
-  # Handle "Pong" from phone
+  # Handle messages from phone
   logInfo("Inbox received")
+  
+  # 1. Check for JSReady signal
+  if message.find(iter, AppMessageKey.amkJSReady.uint32) != nil:
+    jsReady = true
+    msgStr.f("JS Ready! Press SELECT")
+    msgLayer.text = msgStr
+    vibes.shortPulse()
+    return
+
+  # 2. Handle "Pong" or other messages
   let msg = readCstring(iter, AppMessageKey.amkMsg)
   if msg != nil:
     # Use FixedString for logging to avoid heap
@@ -134,14 +161,27 @@ proc outboxFailed(iter: ptr typed_message.DictionaryIterator, result: typed_mess
 
 proc selectClickHandler(recognizer: ClickRecognizerRef; context: pointer) {.cdecl.} =
   # Send "Ping" to phone
+  if not jsReady:
+    msgLayer.text = "JS not ready yet"
+    return
+
   logInfo("Select clicked, building outbox")
   var iter: ptr typed_message.DictionaryIterator
   if outboxBegin(addr iter) == APP_MSG_OK():
-    send(iter, AppMessageKey.amkMsg, "Ping")
+    let dictRes = dictWriteCstring(iter, AppMessageKey.amkMsg.uint32, "Ping")
+    if dictRes != DICT_OK():
+      var err: FixedString[32]
+      err.f("dictWrite error: ", dictRes.int32)
+      logInfo(err.toCstring)
+    
     let res = outboxSend()
     if res == APP_MSG_OK():
+      logInfo("outboxSend queued")
       msgLayer.text = "Sending..."
     else:
-      logInfo("outboxSend failed")
+      var err: FixedString[32]
+      err.f("outboxSend error: ", res.int32)
+      logInfo(err.toCstring)
+      msgLayer.text = "Send Error!"
   else:
     logInfo("outboxBegin failed")

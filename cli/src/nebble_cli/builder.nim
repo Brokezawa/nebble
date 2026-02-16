@@ -95,6 +95,59 @@ proc generateAppInfo*(cfg: NebbleConfig, platform: string): bool =
   writeFile("appinfo.json", appinfo.pretty)
   return true
 
+proc generatePackageJson*(cfg: NebbleConfig, platform: string): bool =
+  ## Generate package.json from nebble.json config (Modern SDK requirement)
+  
+  # Determine watchface or app
+  let isWatchface = cfg.appType == "watchface"
+  
+  # Convert version to Major.Minor.Patch format
+  # Pebble package.json requires semantic versioning
+  let version = if cfg.version.split('.').len == 3: cfg.version
+                elif cfg.version.split('.').len == 2: cfg.version & ".0"
+                else: cfg.version & ".0.0"
+
+  # Build messageKeys (under pebble object) as a JObject for explicit mapping
+  let messageKeys = newJObject()
+  if not cfg.appKeys.isNil and cfg.appKeys.len > 0:
+    for key, val in cfg.appKeys:
+      messageKeys[key] = val
+
+  # Build package.json
+  let jsExists = fileExists("src" / "js" / "pebble-js-app.js") or fileExists("src" / "pkjs" / "index.js")
+  
+  var packageJson = %* {
+    "name": cfg.name,
+    "version": version,
+    "author": "Nebble",
+    "private": true,
+    "main": if jsExists: (if fileExists("src" / "js" / "pebble-js-app.js"): "src/js/pebble-js-app.js" else: "src/pkjs/index.js") else: "",
+    "dependencies": {},
+    "pebble": {
+      "uuid": cfg.uuid,
+      "displayName": cfg.name,
+      "sdkVersion": "3",
+      "targetPlatforms": [platform],
+      "watchapp": {
+        "watchface": isWatchface
+      },
+      "enableMultiJS": jsExists,
+      "messageKeys": messageKeys,
+      "resources": {
+        "media": []
+      }
+    }
+  }
+  
+  # Add capabilities if any
+  if cfg.capabilities.len > 0:
+    packageJson["pebble"]["capabilities"] = newJArray()
+    for cap in cfg.capabilities:
+      packageJson["pebble"]["capabilities"].add(%cap)
+  
+  writeFile("package.json", packageJson.pretty)
+  return true
+
 proc copyNimCFiles*(cfg: NebbleConfig, platform: string): bool =
   ## Copy Nim-generated C files to the Pebble project structure
   let

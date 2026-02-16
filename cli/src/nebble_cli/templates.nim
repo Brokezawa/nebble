@@ -139,6 +139,23 @@ proc getNimCfg*(): string =
 # --path:"path/to/nebble/src"
 """
 
+proc getPkjsTemplate*(): string =
+  ## Get the PebbleKit JS template with handshake
+  result = """Pebble.addEventListener('ready', function(e) {
+  console.log('JS component ready!');
+  // Signal to watch that JS is ready
+  Pebble.sendAppMessage({'JSReady': 1});
+});
+
+Pebble.addEventListener('appmessage', function(e) {
+  console.log('Received message: ' + JSON.stringify(e.payload));
+  if (e.payload.WatchReady) {
+    // If watch signals it's ready, respond with JSReady
+    Pebble.sendAppMessage({'JSReady': 1});
+  }
+});
+"""
+
 proc getWscript*(): string =
   ## Get wscript for Pebble build system integration
   result = """#
@@ -192,5 +209,5 @@ def build(ctx):
             binaries.append({'platform': p, 'app_elf': app_elf})
 
     ctx.set_group('bundle')
-    ctx.pbl_bundle(binaries=binaries, js=ctx.path.ant_glob('src/pkjs/**/*.js'), js_pebble=ctx.path.ant_glob('src/pkjs/**/*.json'))
+    ctx.pbl_bundle(binaries=binaries, js=ctx.path.ant_glob('src/js/**/*.js'), js_entry_file='src/js/pebble-js-app.js', js_pebble=ctx.path.ant_glob('src/js/**/*.json'))
 """

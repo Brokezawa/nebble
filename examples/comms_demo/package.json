@@ -1,0 +1,29 @@
+{
+  "name": "comms_demo",
+  "version": "1.0.0",
+  "author": "Nebble",
+  "private": true,
+  "main": "src/js/pebble-js-app.js",
+  "dependencies": {},
+  "pebble": {
+    "uuid": "7649d21b-1854-473d-9d48-319a2853243a",
+    "displayName": "comms_demo",
+    "sdkVersion": "3",
+    "targetPlatforms": [
+      "flint"
+    ],
+    "watchapp": {
+      "watchface": false
+    },
+    "enableMultiJS": true,
+    "messageKeys": {
+      "Msg": 0,
+      "Heading": 1,
+      "JSReady": 2,
+      "WatchReady": 3
+    },
+    "resources": {
+      "media": []
+    }
+  }
+}
