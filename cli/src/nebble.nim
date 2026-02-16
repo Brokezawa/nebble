@@ -19,7 +19,9 @@ Usage:
   nebble new <name> [--watchface]     Create a new Pebble project
   nebble build [--platform <p>]       Build the project (default: all platforms)
   nebble install --emulator <p>       Install to emulator
-  nebble install --phone [<IP>]       Install to connected phone (optionally specify IP)
+  nebble install --phone <IP> [<pbw>] Install to phone (optionally specify IP and PBW file)
+  nebble logs [--emulator <p>]        View logs from emulator
+  nebble logs --phone <IP>            View logs from phone
   nebble kill [--force]               Kill all Pebble emulators
   nebble gen-keys                     Generate type-safe message keys from nebble.json
   nebble regen-ffi                    Regenerate Futhark FFI bindings (requires Futhark)
@@ -80,6 +82,7 @@ proc main() =
       emulator = ""
       phoneIp = ""
       toPhone = false
+      pbwPath = ""
     
     var i = 1
     while i < args.len:
@@ -92,6 +95,10 @@ proc main() =
         if i + 1 < args.len and not args[i + 1].startsWith("--"):
           phoneIp = args[i + 1]
           inc i, 2
+          # Check if next arg is a PBW path
+          if i < args.len and not args[i].startsWith("--"):
+            pbwPath = args[i]
+            inc i
         else:
           inc i
       else:
@@ -100,10 +107,38 @@ proc main() =
     if emulator != "":
       cmdInstall(emulator, toPhone = false, phoneIp = "")
     elif toPhone:
-      cmdInstall("", toPhone = true, phoneIp = phoneIp)
+      cmdInstall("", toPhone = true, phoneIp = phoneIp, pbwPath = pbwPath)
     else:
-      echo "Error: Specify --emulator <platform> or --phone [<IP>]"
+      echo "Error: Specify --emulator <platform> or --phone <IP> [<pbw>]"
       quit(1)
+  
+  of "logs":
+    var
+      emulator = "basalt" # Default emulator
+      phoneIp = ""
+      toPhone = false
+    
+    var i = 1
+    while i < args.len:
+      if args[i] == "--emulator":
+        if i + 1 < args.len and not args[i+1].startsWith("--"):
+          emulator = args[i + 1]
+          inc i, 2
+        else:
+          # Use default if no platform specified
+          inc i
+      elif args[i] == "--phone":
+        toPhone = true
+        if i + 1 < args.len and not args[i + 1].startsWith("--"):
+          phoneIp = args[i + 1]
+          inc i, 2
+        else:
+          echo "Error: --phone requires an IP address"
+          quit(1)
+      else:
+        inc i
+    
+    cmdLogs(toPhone, phoneIp, emulator)
   
   of "kill":
     var force = false

@@ -11,7 +11,7 @@
     "emery",
     "flint"
   ],
-  "capabilities": [],
+  "capabilities": ["configurable"],
   "appKeys": {
     "Msg": 0,
     "Heading": 1,

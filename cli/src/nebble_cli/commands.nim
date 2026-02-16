@@ -134,7 +134,7 @@ proc cmdBuild*(platform: string) =
     if fileExists(pbwFile):
       echo "  ", pbwFile, " (", p, ")"
 
-proc cmdInstall*(platform: string, toPhone: bool, phoneIp: string) =
+proc cmdInstall*(platform: string, toPhone: bool, phoneIp: string, pbwPath: string = "") =
   ## Install to emulator or phone
   if not fileExists("nebble.json"):
     echo "Error: nebble.json not found"
@@ -144,12 +144,23 @@ proc cmdInstall*(platform: string, toPhone: bool, phoneIp: string) =
   
   if toPhone:
     # Install to phone
-    echo "Installing to phone", (if phoneIp != "": " " & phoneIp else: ""), "..."
-    # Build command with proper escaping to prevent injection
-    var args = @["install", "--phone"]
-    if phoneIp != "":
-      args.add(phoneIp)
-    let (output, exitCode) = execCmdEx("pebble " & args.join(" "))
+    if phoneIp == "":
+      echo "Error: Phone IP required for --phone"
+      quit(1)
+      
+    echo "Installing to phone ", phoneIp, "..."
+    
+    var cmd = "pebble install"
+    if pbwPath != "":
+      if not fileExists(pbwPath):
+        echo "Error: PBW file not found: ", pbwPath
+        quit(1)
+      cmd.add(" " & pbwPath)
+    
+    cmd.add(" --phone " & phoneIp)
+    
+    echo "  Running: ", cmd
+    let (output, exitCode) = execCmdEx(cmd)
     if exitCode != 0:
       echo "✗ Install failed"
       echo output
@@ -188,6 +199,27 @@ proc cmdInstall*(platform: string, toPhone: bool, phoneIp: string) =
       if targetPlatforms.len > 1:
         # Give some time for emulator to start/settle before next install
         sleep(2000)
+
+proc cmdLogs*(toPhone: bool, phoneIp: string, emulator: string) =
+  ## View logs from emulator or phone
+  var cmd = "pebble logs"
+  
+  if toPhone:
+    if phoneIp == "":
+      echo "Error: Phone IP required for --phone"
+      quit(1)
+    cmd.add(" --phone " & phoneIp)
+    echo "Viewing logs from phone ", phoneIp, "..."
+  else:
+    cmd.add(" --emulator " & emulator)
+    echo "Viewing logs from ", emulator, " emulator..."
+  
+  echo "  Running: ", cmd
+  echo "  (Press Ctrl+C to stop)"
+  echo ""
+  
+  # Use execCmd instead of execCmdEx for logs so it's interactive/streaming
+  discard execCmd(cmd)
 
 proc cmdKill*(force: bool) =
   ## Kill Pebble emulators
