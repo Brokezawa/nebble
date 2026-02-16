@@ -14,7 +14,7 @@ jobs:
       - name: Install dependencies
         run: |
           sudo apt-get update
-          sudo apt-get install -y libclang-dev
+          sudo apt-get install -y libclang-dev nodejs npm libsdl1.2debian libfdt1
       
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -40,16 +40,22 @@ jobs:
       
       - name: Install Pebble SDK
         run: |
-          pip install pebble-tool
-          pebble sdk install latest
+          python -m pip install --user pebble-tool
           echo "$HOME/.local/bin" >> $GITHUB_PATH
+          export PATH="$HOME/.local/bin:$PATH"
+          pebble sdk install latest
+          
+          # Find ARM toolchain and add to path
+          TOOL_PATH=$(find $HOME/.pebble-sdk -type f -name arm-none-eabi-size -exec dirname {} \; | head -n 1)
+          if [ -n "$TOOL_PATH" ]; then
+            echo "$TOOL_PATH" >> $GITHUB_PATH
+          fi
       
       - name: Verify Pebble SDK
         run: |
           pebble --version
           pebble sdk list
-          which arm-none-eabi-gcc || true
-          find ~/.pebble-sdk -name "arm-none-eabi-size" || true
+          arm-none-eabi-size --version
       
       - name: Install Nebble Library
         run: nimble install -y
@@ -71,11 +77,7 @@ jobs:
         timeout-minutes: 20
 
       - name: Run Size Checks
-        run: |
-          # Add ARM toolchain to path if found
-          ARM_PATH=$(find ~/.pebble-sdk -name "arm-none-eabi-size" -exec dirname {} \; | head -n 1)
-          if [ -n "$ARM_PATH" ]; then echo "$ARM_PATH" >> $GITHUB_PATH; fi
-          nimble testSize
+        run: nimble testSize
       
       - name: Upload Test Results
         if: always()
@@ -94,7 +96,7 @@ jobs:
       - name: Install dependencies
         run: |
           sudo apt-get update
-          sudo apt-get install -y libclang-dev
+          sudo apt-get install -y libclang-dev nodejs npm libsdl1.2debian libfdt1
       
       - name: Checkout repository
         uses: actions/checkout@v4
