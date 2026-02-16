@@ -40,13 +40,15 @@ proc selectClick(menuLayer: ptr MenuLayer, index: ptr MenuIndex, context: pointe
 # AppGlance Callback
 # ============================================================================
 
-proc appGlanceReload(session: ptr AppGlanceReloadSession, limit: csize_t, context: pointer) {.cdecl.} =
+when declared(AppGlanceReloadSession):
+  proc appGlanceReload(session: ptr AppGlanceReloadSession, limit: csize_t, context: pointer) {.cdecl.} =
   ## Called by the system to refresh the app menu slice.
   var msg: FixedString[32]
   msg.f("Last: ", lastSelected)
   
   # Add a slice that shows what we last selected in the app
-  discard session.addSlice(msg.toCstring)
+  when declared(session.addSlice):
+    discard session.addSlice(msg.toCstring)
 
 # ============================================================================
 # Declarative App
@@ -74,4 +76,5 @@ nebbleApp:
   deinit:
     logInfo("Demo Closing")
     # Trigger an AppGlance reload so the change is visible in the Pebble app menu
-    app_glance.reload(appGlanceReload)
+    when declared(app_glance.reload):
+      app_glance.reload(appGlanceReload)
