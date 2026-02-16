@@ -71,9 +71,20 @@ task testExample, "Build all examples for all platforms (Integration Tests)":
   if failCount > 0:
     quit("Some builds failed", 1)
 
-task test, "Run all tests (unit + examples)":
+task testSize, "Check binary size for all examples (Aplite limit)":
+  let platforms = ["aplite"]
+  for kind, path in walkDir("examples"):
+    if kind == pcDir:
+      let name = path.extractFilename
+      if fileExists(path & "/src/" & name & ".nim"):
+        echo "\n=== Size check: " & name & " ==="
+        withDir path:
+          exec "../../cli/bin/nebble size --platform aplite"
+
+task test, "Run all tests (unit + examples + size)":
   exec "nimble testUnit"
   exec "nimble testExample"
+  exec "nimble testSize"
 
 task regenFfi, "Regenerate FFI bindings using Futhark":
   echo "Regenerating FFI bindings..."

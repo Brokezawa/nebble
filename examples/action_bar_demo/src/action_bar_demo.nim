@@ -11,11 +11,19 @@ nebbleApp:
     id = myActionBar
     bgColor = pblIfColorElse(GColorBlue, GColorBlack)
 
+  # Container layer for text, sized to available width
+  layer:
+    id = mainLayer
+    x = 0
+    y = 0
+    w = PBLDisplayWidth - ActionBarWidth
+    fullHeight = true
+
   textLayer:
     id = titleLayer
-    x = center
+    parent = mainLayer
+    fullWidth = true
     y = 5
-    w = 100
     h = 24
     text = "Action Bar"
     font = FONT_KEY_GOTHIC_18_BOLD
@@ -23,19 +31,20 @@ nebbleApp:
     
   textLayer:
     id = infoLayer
+    parent = mainLayer
     x = center
-    y = 40
-    w = 100
-    h = 80
+    y = center
+    w = PBLDisplayWidth - ActionBarWidth - 10
+    h = 60
     text = "UP: Prev\nSELECT: Play\nDOWN: Next"
     font = FONT_KEY_GOTHIC_14
-    alignment = GTextAlignmentLeft
+    alignment = GTextAlignmentCenter
     
   textLayer:
     id = statusLayer
-    x = center
-    y = 130
-    w = 100
+    parent = mainLayer
+    fullWidth = true
+    y = PBLDisplayHeight - 30
     h = 24
     text = "Ready"
     font = FONT_KEY_GOTHIC_18

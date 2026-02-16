@@ -18,33 +18,38 @@ proc updateProc(layer: ptr Layer, ctx: ptr GContext) {.cdecl.} =
   # Layer is full screen
   let b = layer.bounds
   let cx = b.size.w div 2
+  let cy = b.size.h div 2
   
   # Draw triangle outline
   ctx.strokeColor = GColorWhite
   ctx.strokeWidth = 3
   
-  # Relative coordinates - Moved up significantly
-  let p1 = makeGPoint(cx, 15)
-  let p2 = makeGPoint(cx - 32, 65)
-  let p3 = makeGPoint(cx + 32, 65)
+  # Proportional coordinates
+  let triangleHalfWidth = b.size.w div 4
+  let triangleHeight = b.size.h div 4
+  let p1 = makeGPoint(cx, b.size.h div 10)
+  let p2 = makeGPoint(cx - triangleHalfWidth, b.size.h div 10 + triangleHeight)
+  let p3 = makeGPoint(cx + triangleHalfWidth, b.size.h div 10 + triangleHeight)
   
   drawLine(ctx, p1, p2)
   drawLine(ctx, p2, p3)
   drawLine(ctx, p3, p1)
   
-  # Draw filled circle - Moved up
+  # Draw filled circle - Proportional position
+  let circleRadius = (b.size.w div 8).uint16
+  let circleCenter = makeGPoint(cx, b.size.h div 2 + circleRadius.int16)
   ctx.fillColor = GColorWhite
-  fillCircle(ctx, makeGPoint(cx, 95), 20)
+  fillCircle(ctx, circleCenter, circleRadius)
   
   # Draw circle outline
   ctx.strokeColor = GColorWhite
-  drawCircle(ctx, makeGPoint(cx, 95), 20)
+  drawCircle(ctx, circleCenter, circleRadius)
   
-  # Draw some text - Moved up
+  # Draw some text - Anchored to bottom
   ctx.textColor = GColorWhite
   drawText(ctx, "Graphics!".cstring, 
            getSystemFont(FONT_KEY_GOTHIC_14),
-           makeGRect(0, 120, b.size.w, 20),
+           makeGRect(0, b.size.h - 30, b.size.w, 20),
            GTextOverflowModeWordWrap,
            GTextAlignmentCenter,
            nil)

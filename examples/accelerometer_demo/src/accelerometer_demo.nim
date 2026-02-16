@@ -26,6 +26,7 @@ nebbleApp:
     y = pblIfRoundElse(65, 50)
     w = 140
     h = 24
+    text = "X: 0"
     font = FONT_KEY_GOTHIC_18
     alignment = GTextAlignmentCenter
     
@@ -35,6 +36,7 @@ nebbleApp:
     y = pblIfRoundElse(90, 75)
     w = 140
     h = 24
+    text = "Y: 0"
     font = FONT_KEY_GOTHIC_18
     alignment = GTextAlignmentCenter
     
@@ -44,6 +46,7 @@ nebbleApp:
     y = pblIfRoundElse(115, 100)
     w = 140
     h = 24
+    text = "Z: 0"
     font = FONT_KEY_GOTHIC_18
     alignment = GTextAlignmentCenter
     

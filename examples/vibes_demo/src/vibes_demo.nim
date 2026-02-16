@@ -35,17 +35,9 @@ nebbleApp:
     BUTTON_ID_UP = upClickHandler
     BUTTON_ID_DOWN = downClickHandler
 
-var
-  # Use global to ensure memory persists for Aplite pattern
-  apliteDurations: array[2, uint32] = [100'u32, 100'u32]
-
 # Implementations
 proc selectClickHandler(recognizer: ClickRecognizerRef; context: pointer) {.cdecl.} =
-  when defined(pebbleAplite):
-    # Enqueue custom pattern for Aplite (workaround for emulator issues)
-    vibes.enqueueCustomPattern(addr apliteDurations[0], 2)
-  else:
-    vibes.shortPulse()
+  vibes.shortPulse()
   titleLayer.text = "Short Pulse"
 
 proc upClickHandler(recognizer: ClickRecognizerRef; context: pointer) {.cdecl.} =

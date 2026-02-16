@@ -17,34 +17,37 @@ var
 # Declarative Watchface
 nebbleApp:
   window:
-    backgroundColor = GColorBlack
+    backgroundColor = pblIfColorElse(GColorBlack, GColorWhite)
 
   textLayer:
     id = timeLayer
     fullWidth = true
-    frame = (0, 30, 0, 60)
+    y = pblIfRoundElse(45, PBLDisplayHeight div 2 - 40)
+    h = 45
     text = "00:00"
-    font = FONT_KEY_BITHAM_42_BOLD
-    color = GColorWhite
+    font = pblIfRoundElse("RESOURCE_ID_BITHAM_34_MEDIUM_NUMBERS", "RESOURCE_ID_BITHAM_42_BOLD")
+    color = pblIfColorElse(GColorWhite, GColorBlack)
     bgColor = GColorClear
     alignment = GTextAlignmentCenter
     
   textLayer:
     id = stepsLayer
     fullWidth = true
-    frame = (0, 90, 0, 30)
+    y = pblIfRoundElse(95, PBLDisplayHeight div 2 + 5)
+    h = 30
     text = "Steps: ---"
     font = FONT_KEY_GOTHIC_24
-    color = GColorWhite
+    color = pblIfColorElse(GColorWhite, GColorBlack)
     alignment = GTextAlignmentCenter
 
   textLayer:
     id = sleepLayer
     fullWidth = true
-    frame = (0, 120, 0, 30)
+    y = pblIfRoundElse(125, PBLDisplayHeight div 2 + 35)
+    h = 30
     text = "Sleep: ---"
     font = FONT_KEY_GOTHIC_18
-    color = GColorWhite
+    color = pblIfColorElse(GColorWhite, GColorBlack)
     alignment = GTextAlignmentCenter
 
   tickTimer:

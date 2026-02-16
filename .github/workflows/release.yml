@@ -10,7 +10,21 @@ permissions:
 
 jobs:
   create-release:
-    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        os: [ubuntu-latest, macos-latest, windows-latest]
+        include:
+          - os: ubuntu-latest
+            artifact_name: nebble-linux-x64
+            asset_name: nebble-linux-x64
+          - os: macos-latest
+            artifact_name: nebble-macos-x64
+            asset_name: nebble-macos-x64
+          - os: windows-latest
+            artifact_name: nebble-windows-x64.exe
+            asset_name: nebble-windows-x64.exe
+
+    runs-on: ${{ matrix.os }}
     
     steps:
       - name: Checkout repository
@@ -26,8 +40,31 @@ jobs:
         run: |
           cd cli
           nimble build -d:release
-          mv bin/nebble bin/nebble-linux-x64
+          if [ "${{ runner.os }}" = "Windows" ]; then
+            mv bin/nebble.exe bin/${{ matrix.artifact_name }}
+          else
+            mv bin/nebble bin/${{ matrix.artifact_name }}
+          fi
+        shell: bash
       
+      - name: Upload Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: ${{ matrix.asset_name }}
+          path: cli/bin/${{ matrix.artifact_name }}
+
+  github-release:
+    needs: create-release
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Download Artifacts
+        uses: actions/download-artifact@v4
+        with:
+          path: artifacts
+
       - name: Create Release Notes
         run: |
           VERSION=${GITHUB_REF#refs/tags/}
@@ -40,13 +77,15 @@ jobs:
           echo '```bash' >> RELEASE_NOTES.md
           echo 'nimble install nebble' >> RELEASE_NOTES.md
           echo '```' >> RELEASE_NOTES.md
-      
+
       - name: Create GitHub Release
         uses: softprops/action-gh-release@v1
         with:
           body_path: RELEASE_NOTES.md
           files: |
-            cli/bin/nebble-linux-x64
+            artifacts/nebble-linux-x64/nebble-linux-x64
+            artifacts/nebble-macos-x64/nebble-macos-x64
+            artifacts/nebble-windows-x64.exe/nebble-windows-x64.exe
           draft: false
           prerelease: ${{ contains(github.ref, 'alpha') || contains(github.ref, 'beta') || contains(github.ref, 'rc') }}
         env:
@@ -54,7 +93,7 @@ jobs:
 
   publish-nimble:
     runs-on: ubuntu-latest
-    needs: create-release
+    needs: github-release
     
     steps:
       - name: Checkout repository

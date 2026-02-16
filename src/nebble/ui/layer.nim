@@ -72,6 +72,10 @@ proc toHandle*(p: ptr Layer): LayerHandle {.inline.} =
   ## Wrap raw pointer in handle (unowned).
   LayerHandle(pRaw: p, ownership: hoUnowned, pParent: nil)
 
+proc getLayer*(h: LayerHandle): ptr Layer {.inline.} =
+  ## Get the underlying Layer pointer.
+  h.pRaw
+
 proc wrapOwned*(p: ptr Layer): LayerHandle {.inline.} =
   ## Wrap raw pointer in handle (owned).
   LayerHandle(pRaw: p, ownership: hoOwned, pParent: nil)

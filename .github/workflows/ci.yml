@@ -44,18 +44,23 @@ jobs:
           pebble --version
           pebble sdk list
       
+      - name: Build CLI
+        run: |
+          cd cli
+          nimble build
+          mkdir -p bin
+          mv bin/nebble ../cli/bin/nebble 2>/dev/null || true
+          # Ensure it's in path for testExample task
+          echo "$(pwd)/bin" >> $GITHUB_PATH
+
       - name: Run Unit Tests
         run: nimble testUnit
       
-      - name: Run Compile Tests (All Platforms)
-        run: nimble testCompile
-        timeout-minutes: 10
-      
-      - name: Build Examples (All Platforms)
-        run: nimble testExamples
-        timeout-minutes: 15
-      
-      - name: Size Gate Check
+      - name: Run Integration Tests (Examples)
+        run: nimble testExample
+        timeout-minutes: 20
+
+      - name: Run Size Checks
         run: nimble testSize
       
       - name: Upload Test Results

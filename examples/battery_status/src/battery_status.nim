@@ -24,14 +24,18 @@ nebbleApp:
 
   textLayer:
     id = batteryLayer
-    frame = (0, 60, 144, 30)
+    fullWidth = true
+    y = pblIfRoundElse(65, 60)
+    h = 30
     alignment = GTextAlignmentCenter
     font = FONT_KEY_GOTHIC_24_BOLD
     bgColor = GColorClear
     
   textLayer:
     id = chargingLayer
-    frame = (0, 95, 144, 30)
+    fullWidth = true
+    y = pblIfRoundElse(100, 95)
+    h = 30
     alignment = GTextAlignmentCenter
     font = FONT_KEY_GOTHIC_18
     bgColor = GColorClear

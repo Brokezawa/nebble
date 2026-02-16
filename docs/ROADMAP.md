@@ -33,7 +33,6 @@
 
 ### 2. Developer Experience
 - [ ] **Emulator Integration**: Improved QEMU process management from CLI.
-- [ ] **VS Code Extension**: Syntax highlighting and snippets.
 - [ ] **AppMessage Serialization**: Macro-driven object mapping.
 
 ### 3. Ecosystem
