@@ -10,17 +10,15 @@ var
   chargingText: FixedString[32]
 
 # Forward declarations
+proc batteryStateHandler(state: BatteryChargeState) {.cdecl.}
 proc updateBatteryDisplay(state: BatteryChargeState)
-
-proc batteryStateHandler(state: BatteryChargeState) {.cdecl.} =
-  updateBatteryDisplay(state)
 
 # Declarative App
 nebbleApp:
   statusBarLayer:
     id = sStatusBar
-    color = GColorWhite
-    bgColor = GColorBlack
+    color = pblIfColorElse(GColorWhite, GColorBlack)
+    bgColor = pblIfColorElse(GColorBlack, GColorWhite)
 
   textLayer:
     id = batteryLayer
@@ -29,6 +27,7 @@ nebbleApp:
     h = 30
     alignment = GTextAlignmentCenter
     font = FONT_KEY_GOTHIC_24_BOLD
+    color = pblIfColorElse(GColorWhite, GColorBlack)
     bgColor = GColorClear
     
   textLayer:
@@ -38,6 +37,7 @@ nebbleApp:
     h = 30
     alignment = GTextAlignmentCenter
     font = FONT_KEY_GOTHIC_18
+    color = pblIfColorElse(GColorWhite, GColorBlack)
     bgColor = GColorClear
 
   init:
@@ -46,6 +46,10 @@ nebbleApp:
 
   deinit:
     battery.unsubscribe()
+
+# Implementations
+proc batteryStateHandler(state: BatteryChargeState) {.cdecl.} =
+  updateBatteryDisplay(state)
 
 proc updateBatteryDisplay(state: BatteryChargeState) =
   batteryText.f("Batt: ", state.charge_percent, "%")

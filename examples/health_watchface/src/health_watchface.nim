@@ -5,27 +5,30 @@
 import nebble
 import nebble/foundation/events/health
 
-# Forward declarations
-proc updateTime(tickTime: ptr tm; unitsChanged: TimeUnits) {.cdecl.}
-
 # Module buffers
 var
   timeStr: FixedString[16]
   stepsStr: FixedString[32]
   sleepStr: FixedString[32]
 
+# Forward declarations
+proc updateTime(tickTime: ptr tm; unitsChanged: TimeUnits) {.cdecl.}
+
 # Declarative Watchface
 nebbleApp:
   window:
+    # Set background color explicitly based on platform capability
     backgroundColor = pblIfColorElse(GColorBlack, GColorWhite)
 
   textLayer:
     id = timeLayer
     fullWidth = true
-    y = pblIfRoundElse(45, PBLDisplayHeight div 2 - 40)
+    # Use center-relative positioning
+    y = pblIfRoundElse(45, PBLDisplayHeight div 2 - 45)
     h = 45
     text = "00:00"
-    font = pblIfRoundElse("RESOURCE_ID_BITHAM_34_MEDIUM_NUMBERS", "RESOURCE_ID_BITHAM_42_BOLD")
+    # Use Leco numbers which are more narrow and fit better than Bitham
+    font = FONT_KEY_LECO_32_BOLD_NUMBERS
     color = pblIfColorElse(GColorWhite, GColorBlack)
     bgColor = GColorClear
     alignment = GTextAlignmentCenter
@@ -38,6 +41,7 @@ nebbleApp:
     text = "Steps: ---"
     font = FONT_KEY_GOTHIC_24
     color = pblIfColorElse(GColorWhite, GColorBlack)
+    bgColor = GColorClear
     alignment = GTextAlignmentCenter
 
   textLayer:
@@ -48,12 +52,19 @@ nebbleApp:
     text = "Sleep: ---"
     font = FONT_KEY_GOTHIC_18
     color = pblIfColorElse(GColorWhite, GColorBlack)
+    bgColor = GColorClear
     alignment = GTextAlignmentCenter
 
   tickTimer:
     unit = MINUTE_UNIT
     handler = updateTime
 
+  init:
+    # Force an immediate update
+    var t: time_t = time(nil)
+    updateTime(localtime(addr t), MINUTE_UNIT)
+
+# Implementations
 proc updateTime(tickTime: ptr tm; unitsChanged: TimeUnits) {.cdecl.} =
   let timeFmt = if clockIs24hStyle(): "%H:%M" else: "%I:%M"
   

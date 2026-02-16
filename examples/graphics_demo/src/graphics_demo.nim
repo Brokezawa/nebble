@@ -5,31 +5,22 @@
 import nebble
 import nebble/graphics/graphics
 
-# Module-level data
-var 
-  trianglePoints: array[3, GPoint] = [
-    makeGPoint(72, 40),   # Top
-    makeGPoint(40, 100),  # Bottom left
-    makeGPoint(104, 100)  # Bottom right
-  ]
-
 # Custom drawing callback (Top level to avoid issues)
 proc updateProc(layer: ptr Layer, ctx: ptr GContext) {.cdecl.} =
   # Layer is full screen
   let b = layer.bounds
   let cx = b.size.w div 2
-  let cy = b.size.h div 2
   
   # Draw triangle outline
   ctx.strokeColor = GColorWhite
   ctx.strokeWidth = 3
   
-  # Proportional coordinates
-  let triangleHalfWidth = b.size.w div 4
-  let triangleHeight = b.size.h div 4
+  # Proportional equilateral triangle
+  let triangleHalfWidth = b.size.w div 5
+  let triangleHeight = (triangleHalfWidth.int32 * 173) div 100
   let p1 = makeGPoint(cx, b.size.h div 10)
-  let p2 = makeGPoint(cx - triangleHalfWidth, b.size.h div 10 + triangleHeight)
-  let p3 = makeGPoint(cx + triangleHalfWidth, b.size.h div 10 + triangleHeight)
+  let p2 = makeGPoint(cx - triangleHalfWidth, p1.y + triangleHeight.int16)
+  let p3 = makeGPoint(cx + triangleHalfWidth, p1.y + triangleHeight.int16)
   
   drawLine(ctx, p1, p2)
   drawLine(ctx, p2, p3)
