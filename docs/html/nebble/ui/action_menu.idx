@@ -1,30 +1,51 @@
 nimTitle	action_menu	nebble/ui/action_menu.html	module nebble/ui/action_menu		0
-nim	ActionMenuLevelHandle	nebble/ui/action_menu.html#ActionMenuLevelHandle	object ActionMenuLevelHandle		17
-nim	`=destroy`	nebble/ui/action_menu.html#=destroy,ActionMenuLevelHandle	proc `=destroy`(h: var ActionMenuLevelHandle)		26
-nim	`=wasMoved`	nebble/ui/action_menu.html#=wasMoved,ActionMenuLevelHandle	proc `=wasMoved`(h: var ActionMenuLevelHandle)		32
-nim	`=copy`	nebble/ui/action_menu.html#=copy,ActionMenuLevelHandle,ActionMenuLevelHandle	proc `=copy`(dest: var ActionMenuLevelHandle; src: ActionMenuLevelHandle)		36
-nim	`=sink`	nebble/ui/action_menu.html#=sink,ActionMenuLevelHandle,ActionMenuLevelHandle	proc `=sink`(dest: var ActionMenuLevelHandle; src: ActionMenuLevelHandle)		38
-nim	toPtr	nebble/ui/action_menu.html#toPtr.c,ActionMenuLevelHandle	converter toPtr(h: ActionMenuLevelHandle): ptr ActionMenuLevel		46
-nim	isValid	nebble/ui/action_menu.html#isValid,ActionMenuLevelHandle	proc isValid(h: ActionMenuLevelHandle): bool		48
-nim	newActionMenuLevelHandle	nebble/ui/action_menu.html#newActionMenuLevelHandle,uint16	proc newActionMenuLevelHandle(maxItems: uint16): ActionMenuLevelHandle		54
-nim	newActionMenuLevel	nebble/ui/action_menu.html#newActionMenuLevel,uint16	proc newActionMenuLevel(maxItems: uint16): ActionMenuLevelHandle		59
-nim	addAction	nebble/ui/action_menu.html#addAction,ActionMenuLevelHandle,cstring,ActionMenuPerformActionCb,pointer	proc addAction(h: ActionMenuLevelHandle; label: cstring;\n          action: ActionMenuPerformActionCb; actionData: pointer = nil): ptr ActionMenuItem		63
-nim	addAction	nebble/ui/action_menu.html#addAction,ptr.struct_ActionMenuLevel,cstring,ActionMenuPerformActionCb,pointer	proc addAction(level: ptr ActionMenuLevel; label: cstring;\n          action: ActionMenuPerformActionCb; actionData: pointer = nil): ptr ActionMenuItem		68
-nim	addChild	nebble/ui/action_menu.html#addChild,ActionMenuLevelHandle,ActionMenuLevelHandle,cstring	proc addChild(h: ActionMenuLevelHandle; childLevel: var ActionMenuLevelHandle;\n         label: cstring): ptr ActionMenuItem		73
-nim	addChild	nebble/ui/action_menu.html#addChild,ptr.struct_ActionMenuLevel,ptr.struct_ActionMenuLevel,cstring	proc addChild(level: ptr ActionMenuLevel; childLevel: ptr ActionMenuLevel;\n         label: cstring): ptr ActionMenuItem		81
-nim	setDisplayMode	nebble/ui/action_menu.html#setDisplayMode,ActionMenuLevelHandle,ActionMenuLevelDisplayMode	proc setDisplayMode(h: ActionMenuLevelHandle; displayMode: ActionMenuLevelDisplayMode)		86
-nim	setDisplayMode	nebble/ui/action_menu.html#setDisplayMode,ptr.struct_ActionMenuLevel,ActionMenuLevelDisplayMode	proc setDisplayMode(level: ptr ActionMenuLevel;\n               displayMode: ActionMenuLevelDisplayMode)		91
-nim	openActionMenu	nebble/ui/action_menu.html#openActionMenu,ptr.ActionMenuConfig	proc openActionMenu(config: ptr ActionMenuConfig): ptr ActionMenu		100
-nim	open	nebble/ui/action_menu.html#open,ActionMenuLevelHandle,ActionMenuConfig	proc open(h: var ActionMenuLevelHandle; config: var ActionMenuConfig): ptr ActionMenu		105
-nim	close	nebble/ui/action_menu.html#close,ptr.struct_ActionMenu,bool	proc close(menu: ptr ActionMenu; animated: bool = true)		112
-nim	freeze	nebble/ui/action_menu.html#freeze,ptr.struct_ActionMenu	proc freeze(menu: ptr ActionMenu)		116
-nim	unfreeze	nebble/ui/action_menu.html#unfreeze,ptr.struct_ActionMenu	proc unfreeze(menu: ptr ActionMenu)		120
-nim	destroyHierarchy	nebble/ui/action_menu.html#destroyHierarchy,ptr.struct_ActionMenuLevel,ActionMenuEachItemCb,pointer	proc destroyHierarchy(rootLevel: ptr ActionMenuLevel;\n                 eachCb: ActionMenuEachItemCb = nil; context: pointer = nil)		128
-nim	getContext	nebble/ui/action_menu.html#getContext,ptr.struct_ActionMenu	proc getContext(menu: ptr ActionMenu): pointer		134
-nim	getRootLevel	nebble/ui/action_menu.html#getRootLevel,ptr.struct_ActionMenu	proc getRootLevel(menu: ptr ActionMenu): ptr ActionMenuLevel		138
-nim	setResultWindow	nebble/ui/action_menu.html#setResultWindow,ptr.struct_ActionMenu,ptr.struct_Window	proc setResultWindow(menu: ptr ActionMenu; window: ptr Window)		142
-nim	getLabel	nebble/ui/action_menu.html#getLabel,ptr.struct_ActionMenuItem	proc getLabel(item: ptr ActionMenuItem): cstring		150
-nim	getActionData	nebble/ui/action_menu.html#getActionData,ptr.struct_ActionMenuItem	proc getActionData(item: ptr ActionMenuItem): pointer		154
-nimgrp	addchild	nebble/ui/action_menu.html#addChild-procs-all	proc		73
-nimgrp	setdisplaymode	nebble/ui/action_menu.html#setDisplayMode-procs-all	proc		86
-nimgrp	addaction	nebble/ui/action_menu.html#addAction-procs-all	proc		63
+nim	ActionMenuLevelHandle	nebble/ui/action_menu.html#ActionMenuLevelHandle	object ActionMenuLevelHandle		12
+nim	`=destroy`	nebble/ui/action_menu.html#=destroy,ActionMenuLevelHandle	proc `=destroy`(h: var ActionMenuLevelHandle)		21
+nim	`=wasMoved`	nebble/ui/action_menu.html#=wasMoved,ActionMenuLevelHandle	proc `=wasMoved`(h: var ActionMenuLevelHandle)		28
+nim	`=copy`	nebble/ui/action_menu.html#=copy,ActionMenuLevelHandle,ActionMenuLevelHandle	proc `=copy`(dest: var ActionMenuLevelHandle; src: ActionMenuLevelHandle)		32
+nim	`=sink`	nebble/ui/action_menu.html#=sink,ActionMenuLevelHandle,ActionMenuLevelHandle	proc `=sink`(dest: var ActionMenuLevelHandle; src: ActionMenuLevelHandle)		34
+nim	toPtr	nebble/ui/action_menu.html#toPtr.c,ActionMenuLevelHandle	converter toPtr(h: ActionMenuLevelHandle): ptr ActionMenuLevel		42
+nim	isValid	nebble/ui/action_menu.html#isValid,ActionMenuLevelHandle	proc isValid(h: ActionMenuLevelHandle): bool		44
+nim	wrapOwned	nebble/ui/action_menu.html#wrapOwned,ptr.struct_ActionMenuLevel	proc wrapOwned(p: ptr ActionMenuLevel): ActionMenuLevelHandle		46
+nim	toHandle	nebble/ui/action_menu.html#toHandle,ptr.struct_ActionMenuLevel	proc toHandle(p: ptr ActionMenuLevel): ActionMenuLevelHandle		50
+nim	ActionMenuHandle	nebble/ui/action_menu.html#ActionMenuHandle	object ActionMenuHandle		58
+nim	`=destroy`	nebble/ui/action_menu.html#=destroy,ActionMenuHandle	proc `=destroy`(h: var ActionMenuHandle)		64
+nim	`=wasMoved`	nebble/ui/action_menu.html#=wasMoved,ActionMenuHandle	proc `=wasMoved`(h: var ActionMenuHandle)		71
+nim	`=copy`	nebble/ui/action_menu.html#=copy,ActionMenuHandle,ActionMenuHandle	proc `=copy`(dest: var ActionMenuHandle; src: ActionMenuHandle)		75
+nim	`=sink`	nebble/ui/action_menu.html#=sink,ActionMenuHandle,ActionMenuHandle	proc `=sink`(dest: var ActionMenuHandle; src: ActionMenuHandle)		77
+nim	toPtr	nebble/ui/action_menu.html#toPtr.c,ActionMenuHandle	converter toPtr(h: ActionMenuHandle): ptr ActionMenu		85
+nim	isValid	nebble/ui/action_menu.html#isValid,ActionMenuHandle	proc isValid(h: ActionMenuHandle): bool		87
+nim	wrapOwned	nebble/ui/action_menu.html#wrapOwned,ptr.struct_ActionMenu	proc wrapOwned(p: ptr ActionMenu): ActionMenuHandle		89
+nim	toHandle	nebble/ui/action_menu.html#toHandle,ptr.struct_ActionMenu	proc toHandle(p: ptr ActionMenu): ActionMenuHandle		92
+nim	newActionMenuLevelHandle	nebble/ui/action_menu.html#newActionMenuLevelHandle,uint16	proc newActionMenuLevelHandle(maxItems: uint16): ActionMenuLevelHandle		99
+nim	newActionMenuLevel	nebble/ui/action_menu.html#newActionMenuLevel,uint16	proc newActionMenuLevel(maxItems: uint16): ActionMenuLevelHandle		103
+nim	addAction	nebble/ui/action_menu.html#addAction,ActionMenuLevelHandle,cstring,ActionMenuPerformActionCb,pointer	proc addAction(h: ActionMenuLevelHandle; label: cstring;\n          action: ActionMenuPerformActionCb; actionData: pointer = nil): ptr ActionMenuItem		107
+nim	addAction	nebble/ui/action_menu.html#addAction,ptr.struct_ActionMenuLevel,cstring,ActionMenuPerformActionCb,pointer	proc addAction(level: ptr ActionMenuLevel; label: cstring;\n          action: ActionMenuPerformActionCb; actionData: pointer = nil): ptr ActionMenuItem		113
+nim	addChild	nebble/ui/action_menu.html#addChild,ActionMenuLevelHandle,ActionMenuLevelHandle,cstring	proc addChild(h: var ActionMenuLevelHandle; childLevel: var ActionMenuLevelHandle;\n         label: cstring): ptr ActionMenuItem		119
+nim	addChild	nebble/ui/action_menu.html#addChild,ptr.struct_ActionMenuLevel,ptr.struct_ActionMenuLevel,cstring	proc addChild(level: ptr ActionMenuLevel; childLevel: ptr ActionMenuLevel;\n         label: cstring): ptr ActionMenuItem		129
+nim	setDisplayMode	nebble/ui/action_menu.html#setDisplayMode,ActionMenuLevelHandle,ActionMenuLevelDisplayMode	proc setDisplayMode(h: ActionMenuLevelHandle; displayMode: ActionMenuLevelDisplayMode)		135
+nim	setDisplayMode	nebble/ui/action_menu.html#setDisplayMode,ptr.struct_ActionMenuLevel,ActionMenuLevelDisplayMode	proc setDisplayMode(level: ptr ActionMenuLevel;\n               displayMode: ActionMenuLevelDisplayMode)		141
+nim	openActionMenu	nebble/ui/action_menu.html#openActionMenu,ptr.ActionMenuConfig	proc openActionMenu(config: ptr ActionMenuConfig): ActionMenuHandle		151
+nim	open	nebble/ui/action_menu.html#open,ActionMenuLevelHandle,ActionMenuConfig	proc open(h: var ActionMenuLevelHandle; config: var ActionMenuConfig): ActionMenuHandle		156
+nim	close	nebble/ui/action_menu.html#close,ActionMenuHandle,bool	proc close(h: var ActionMenuHandle; animated: bool = true)		164
+nim	close	nebble/ui/action_menu.html#close,ptr.struct_ActionMenu,bool	proc close(menu: ptr ActionMenu; animated: bool = true)		171
+nim	freeze	nebble/ui/action_menu.html#freeze,ActionMenuHandle	proc freeze(h: ActionMenuHandle)		176
+nim	unfreeze	nebble/ui/action_menu.html#unfreeze,ActionMenuHandle	proc unfreeze(h: ActionMenuHandle)		181
+nim	destroyHierarchy	nebble/ui/action_menu.html#destroyHierarchy,ptr.struct_ActionMenuLevel,ActionMenuEachItemCb,pointer	proc destroyHierarchy(rootLevel: ptr ActionMenuLevel;\n                 eachCb: ActionMenuEachItemCb = nil; context: pointer = nil)		190
+nim	getContext	nebble/ui/action_menu.html#getContext,ActionMenuHandle	proc getContext(h: ActionMenuHandle): pointer		197
+nim	getRootLevel	nebble/ui/action_menu.html#getRootLevel,ActionMenuHandle	proc getRootLevel(h: ActionMenuHandle): ptr ActionMenuLevel		202
+nim	setResultWindow	nebble/ui/action_menu.html#setResultWindow,ActionMenuHandle,ptr.struct_Window	proc setResultWindow(h: ActionMenuHandle; window: ptr Window)		207
+nim	getLabel	nebble/ui/action_menu.html#getLabel,ptr.struct_ActionMenuItem	proc getLabel(item: ptr ActionMenuItem): cstring		216
+nim	getActionData	nebble/ui/action_menu.html#getActionData,ptr.struct_ActionMenuItem	proc getActionData(item: ptr ActionMenuItem): pointer		221
+nimgrp	addchild	nebble/ui/action_menu.html#addChild-procs-all	proc		119
+nimgrp	=wasmoved	nebble/ui/action_menu.html#=wasMoved-procs-all	proc		28
+nimgrp	close	nebble/ui/action_menu.html#close-procs-all	proc		164
+nimgrp	wrapowned	nebble/ui/action_menu.html#wrapOwned-procs-all	proc		46
+nimgrp	isvalid	nebble/ui/action_menu.html#isValid-procs-all	proc		44
+nimgrp	=destroy	nebble/ui/action_menu.html#=destroy-procs-all	proc		21
+nimgrp	=copy	nebble/ui/action_menu.html#=copy-procs-all	proc		32
+nimgrp	setdisplaymode	nebble/ui/action_menu.html#setDisplayMode-procs-all	proc		135
+nimgrp	addaction	nebble/ui/action_menu.html#addAction-procs-all	proc		107
+nimgrp	=sink	nebble/ui/action_menu.html#=sink-procs-all	proc		34
+nimgrp	tohandle	nebble/ui/action_menu.html#toHandle-procs-all	proc		50
+nimgrp	toptr	nebble/ui/action_menu.html#toPtr-converters-all	converter		42

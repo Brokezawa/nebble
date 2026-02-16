@@ -83,6 +83,12 @@
   <li><a class="reference" href="#%3DwasMoved%2CMenuLayerHandle" title="`=wasMoved`(h`gensym0: var MenuLayerHandle)">`=wasMoved`(h`gensym0: var MenuLayerHandle)</a></li>
 
 </ul>
+<ul class="simple nested-toc-section">basicDraw
+  <li><a class="reference" href="#basicDraw%2Cptr.struct_GContext%2Cptr.struct_Layer%2Ccstring%2Ccstring%2Cptr.struct_GBitmap" title="basicDraw(ctx: ptr GContext; cellLayer: ptr Layer; title, subtitle: cstring;
+          icon: ptr GBitmap = nil)">basicDraw(ctx: ptr GContext; cellLayer: ptr Layer; title, subtitle: cstring;
+          icon: ptr GBitmap = nil)</a></li>
+
+</ul>
 <ul class="simple nested-toc-section">getLayer
   <li><a class="reference" href="#getLayer%2CMenuLayerHandle" title="getLayer(h: MenuLayerHandle): ptr Layer">getLayer(h: MenuLayerHandle): ptr Layer</a></li>
 
@@ -121,8 +127,20 @@
              callbacks: MenuLayerCallbacks)</a></li>
 
 </ul>
+<ul class="simple nested-toc-section">setCenterFocused
+  <li><a class="reference" href="#setCenterFocused%2CMenuLayerHandle%2Cbool" title="setCenterFocused(h: var MenuLayerHandle; enabled: bool)">setCenterFocused(h: var MenuLayerHandle; enabled: bool)</a></li>
+
+</ul>
 <ul class="simple nested-toc-section">setClickConfigOntoWindow
   <li><a class="reference" href="#setClickConfigOntoWindow%2CMenuLayerHandle%2Cptr.struct_Window" title="setClickConfigOntoWindow(h: var MenuLayerHandle; window: ptr Window)">setClickConfigOntoWindow(h: var MenuLayerHandle; window: ptr Window)</a></li>
+
+</ul>
+<ul class="simple nested-toc-section">setHighlightColors
+  <li><a class="reference" href="#setHighlightColors%2CMenuLayerHandle%2CGColor%2CGColor" title="setHighlightColors(h: var MenuLayerHandle; background, foreground: GColor)">setHighlightColors(h: var MenuLayerHandle; background, foreground: GColor)</a></li>
+
+</ul>
+<ul class="simple nested-toc-section">setNormalColors
+  <li><a class="reference" href="#setNormalColors%2CMenuLayerHandle%2CGColor%2CGColor" title="setNormalColors(h: var MenuLayerHandle; background, foreground: GColor)">setNormalColors(h: var MenuLayerHandle; background, foreground: GColor)</a></li>
 
 </ul>
 <ul class="simple nested-toc-section">setParent
@@ -133,6 +151,12 @@
   <li><a class="reference" href="#setSelectedIndex%2CMenuLayerHandle%2CMenuIndex%2CMenuRowAlign%2Cbool" title="setSelectedIndex(h: var MenuLayerHandle; index: MenuIndex; align: MenuRowAlign;
                  animated: bool)">setSelectedIndex(h: var MenuLayerHandle; index: MenuIndex; align: MenuRowAlign;
                  animated: bool)</a></li>
+
+</ul>
+<ul class="simple nested-toc-section">setSelectedNext
+  <li><a class="reference" href="#setSelectedNext%2CMenuLayerHandle%2Cbool%2CMenuRowAlign%2Cbool" title="setSelectedNext(h: var MenuLayerHandle; up: bool; align: MenuRowAlign;
+                animated: bool)">setSelectedNext(h: var MenuLayerHandle; up: bool; align: MenuRowAlign;
+                animated: bool)</a></li>
 
 </ul>
 <ul class="simple nested-toc-section">toHandle
@@ -241,6 +265,19 @@
   <dd>
     
     
+    
+  </dd>
+</div>
+
+</div>
+<div id="basicDraw-procs-all">
+  <div id="basicDraw,ptr.struct_GContext,ptr.struct_Layer,cstring,cstring,ptr.struct_GBitmap">
+  <dt><pre><span class="Keyword">proc</span> <a href="#basicDraw%2Cptr.struct_GContext%2Cptr.struct_Layer%2Ccstring%2Ccstring%2Cptr.struct_GBitmap"><span class="Identifier">basicDraw</span></a><span class="Other">(</span><span class="Identifier">ctx</span><span class="Other">:</span> <span class="Keyword">ptr</span> <a href="../ffi.html#GContext"><span class="Identifier">GContext</span></a><span class="Other">;</span> <span class="Identifier">cellLayer</span><span class="Other">:</span> <span class="Keyword">ptr</span> <a href="../ffi.html#Layer"><span class="Identifier">Layer</span></a><span class="Other">;</span>
+               <span class="Identifier">title</span><span class="Other">,</span> <span class="Identifier">subtitle</span><span class="Other">:</span> <span class="Identifier">cstring</span><span class="Other">;</span> <span class="Identifier">icon</span><span class="Other">:</span> <span class="Keyword">ptr</span> <a href="../ffi.html#GBitmap"><span class="Identifier">GBitmap</span></a> <span class="Other">=</span> <span class="Keyword">nil</span><span class="Other">)</span> {.<span class="Identifier">inline</span><span class="Other">,</span>
+    <span><span class="Other pragmadots">...</span></span><span class="pragmawrap"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">forbids</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span>.}</pre></dt>
+  <dd>
+    
+    Helper to draw a standard menu cell with title, subtitle and icon.
     
   </dd>
 </div>
@@ -359,6 +396,18 @@
 </div>
 
 </div>
+<div id="setCenterFocused-procs-all">
+  <div id="setCenterFocused,MenuLayerHandle,bool">
+  <dt><pre><span class="Keyword">proc</span> <a href="#setCenterFocused%2CMenuLayerHandle%2Cbool"><span class="Identifier">setCenterFocused</span></a><span class="Other">(</span><span class="Identifier">h</span><span class="Other">:</span> <span class="Keyword">var</span> <a href="menu_layer.html#MenuLayerHandle"><span class="Identifier">MenuLayerHandle</span></a><span class="Other">;</span> <span class="Identifier">enabled</span><span class="Other">:</span> <span class="Identifier">bool</span><span class="Other">)</span> {.<span class="Identifier">inline</span><span class="Other">,</span>
+    <span><span class="Other pragmadots">...</span></span><span class="pragmawrap"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">forbids</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span>.}</pre></dt>
+  <dd>
+    
+    Set whether the focused row should be centered (useful for round screens).
+    
+  </dd>
+</div>
+
+</div>
 <div id="setClickConfigOntoWindow-procs-all">
   <div id="setClickConfigOntoWindow,MenuLayerHandle,ptr.struct_Window">
   <dt><pre><span class="Keyword">proc</span> <a href="#setClickConfigOntoWindow%2CMenuLayerHandle%2Cptr.struct_Window"><span class="Identifier">setClickConfigOntoWindow</span></a><span class="Other">(</span><span class="Identifier">h</span><span class="Other">:</span> <span class="Keyword">var</span> <a href="menu_layer.html#MenuLayerHandle"><span class="Identifier">MenuLayerHandle</span></a><span class="Other">;</span> <span class="Identifier">window</span><span class="Other">:</span> <span class="Keyword">ptr</span> <a href="../ffi.html#Window"><span class="Identifier">Window</span></a><span class="Other">)</span> {.
@@ -366,6 +415,30 @@
   <dd>
     
     
+    
+  </dd>
+</div>
+
+</div>
+<div id="setHighlightColors-procs-all">
+  <div id="setHighlightColors,MenuLayerHandle,GColor,GColor">
+  <dt><pre><span class="Keyword">proc</span> <a href="#setHighlightColors%2CMenuLayerHandle%2CGColor%2CGColor"><span class="Identifier">setHighlightColors</span></a><span class="Other">(</span><span class="Identifier">h</span><span class="Other">:</span> <span class="Keyword">var</span> <a href="menu_layer.html#MenuLayerHandle"><span class="Identifier">MenuLayerHandle</span></a><span class="Other">;</span> <span class="Identifier">background</span><span class="Other">,</span> <span class="Identifier">foreground</span><span class="Other">:</span> <a href="../ffi.html#GColor"><span class="Identifier">GColor</span></a><span class="Other">)</span> {.
+    <span class="Identifier">inline</span><span class="Other">,</span> <span><span class="Other pragmadots">...</span></span><span class="pragmawrap"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">forbids</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span>.}</pre></dt>
+  <dd>
+    
+    Set the colors used for the selected row.
+    
+  </dd>
+</div>
+
+</div>
+<div id="setNormalColors-procs-all">
+  <div id="setNormalColors,MenuLayerHandle,GColor,GColor">
+  <dt><pre><span class="Keyword">proc</span> <a href="#setNormalColors%2CMenuLayerHandle%2CGColor%2CGColor"><span class="Identifier">setNormalColors</span></a><span class="Other">(</span><span class="Identifier">h</span><span class="Other">:</span> <span class="Keyword">var</span> <a href="menu_layer.html#MenuLayerHandle"><span class="Identifier">MenuLayerHandle</span></a><span class="Other">;</span> <span class="Identifier">background</span><span class="Other">,</span> <span class="Identifier">foreground</span><span class="Other">:</span> <a href="../ffi.html#GColor"><span class="Identifier">GColor</span></a><span class="Other">)</span> {.
+    <span class="Identifier">inline</span><span class="Other">,</span> <span><span class="Other pragmadots">...</span></span><span class="pragmawrap"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">forbids</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span>.}</pre></dt>
+  <dd>
+    
+    Set the colors used for unselected rows.
     
   </dd>
 </div>
@@ -391,6 +464,18 @@
   <dd>
     
     Set the currently selected menu index.
+    
+  </dd>
+</div>
+
+</div>
+<div id="setSelectedNext-procs-all">
+  <div id="setSelectedNext,MenuLayerHandle,bool,MenuRowAlign,bool">
+  <dt><pre><span class="Keyword">proc</span> <a href="#setSelectedNext%2CMenuLayerHandle%2Cbool%2CMenuRowAlign%2Cbool"><span class="Identifier">setSelectedNext</span></a><span class="Other">(</span><span class="Identifier">h</span><span class="Other">:</span> <span class="Keyword">var</span> <a href="menu_layer.html#MenuLayerHandle"><span class="Identifier">MenuLayerHandle</span></a><span class="Other">;</span> <span class="Identifier">up</span><span class="Other">:</span> <span class="Identifier">bool</span><span class="Other">;</span> <span class="Identifier">align</span><span class="Other">:</span> <a href="../ffi.html#MenuRowAlign"><span class="Identifier">MenuRowAlign</span></a><span class="Other">;</span>
+                     <span class="Identifier">animated</span><span class="Other">:</span> <span class="Identifier">bool</span><span class="Other">)</span> {.<span class="Identifier">inline</span><span class="Other">,</span> <span><span class="Other pragmadots">...</span></span><span class="pragmawrap"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">forbids</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span>.}</pre></dt>
+  <dd>
+    
+    Select the next or previous row.
     
   </dd>
 </div>
@@ -466,7 +551,7 @@
       <div class="twelve-columns footer">
         <span class="nim-sprite"></span>
         <br>
-        <small style="color: var(--hint);">Made with Nim. Generated: 2026-02-15 12:22:51 UTC</small>
+        <small style="color: var(--hint);">Made with Nim. Generated: 2026-02-16 08:51:50 UTC</small>
       </div>
     </div>
   </div>

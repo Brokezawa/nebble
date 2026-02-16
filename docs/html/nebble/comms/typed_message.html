@@ -76,16 +76,6 @@
 </li>
 <li>
   <details open>
-    <summary><a class="reference reference-toplevel" href="#10" id="60">Consts</a></summary>
-    <ul class="simple simple-toc-section">
-      <li><a class="reference" href="#inboxSizeMaximum" title="inboxSizeMaximum = inboxSizeMaximum">inboxSizeMaximum</a></li>
-<li><a class="reference" href="#outboxSizeMaximum" title="outboxSizeMaximum = outboxSizeMaximum">outboxSizeMaximum</a></li>
-
-    </ul>
-  </details>
-</li>
-<li>
-  <details open>
     <summary><a class="reference reference-toplevel" href="#12" id="62">Procs</a></summary>
     <ul class="simple simple-toc-section">
       <ul class="simple nested-toc-section">close
@@ -104,7 +94,11 @@
   <details open>
     <summary><a class="reference reference-toplevel" href="#18" id="68">Templates</a></summary>
     <ul class="simple simple-toc-section">
-      <ul class="simple nested-toc-section">key
+      <ul class="simple nested-toc-section">inboxSizeMaximum
+  <li><a class="reference" href="#inboxSizeMaximum.t" title="inboxSizeMaximum(): uint32">inboxSizeMaximum(): uint32</a></li>
+
+</ul>
+<ul class="simple nested-toc-section">key
   <li><a class="reference" href="#key.t%2Ctyped" title="key(k: typed): int">key(k: typed): int</a></li>
 
 </ul>
@@ -122,6 +116,10 @@
 </ul>
 <ul class="simple nested-toc-section">onOutboxSent
   <li><a class="reference" href="#onOutboxSent.t%2COutboxSentCallback" title="onOutboxSent(handler: OutboxSentCallback)">onOutboxSent(handler: OutboxSentCallback)</a></li>
+
+</ul>
+<ul class="simple nested-toc-section">outboxSizeMaximum
+  <li><a class="reference" href="#outboxSizeMaximum.t" title="outboxSizeMaximum(): uint32">outboxSizeMaximum(): uint32</a></li>
 
 </ul>
 <ul class="simple nested-toc-section">readCstring
@@ -269,28 +267,6 @@
 
   </dl>
 </div>
-<div class="section" id="10">
-  <h1><a class="toc-backref" href="#10">Consts</a></h1>
-  <dl class="item">
-    <div id="inboxSizeMaximum">
-  <dt><pre><a href="typed_message.html#inboxSizeMaximum"><span class="Identifier">inboxSizeMaximum</span></a> <span class="Other">=</span> <span class="Identifier">inboxSizeMaximum</span></pre></dt>
-  <dd>
-    
-    
-    
-  </dd>
-</div>
-<div id="outboxSizeMaximum">
-  <dt><pre><a href="typed_message.html#outboxSizeMaximum"><span class="Identifier">outboxSizeMaximum</span></a> <span class="Other">=</span> <span class="Identifier">outboxSizeMaximum</span></pre></dt>
-  <dd>
-    
-    
-    
-  </dd>
-</div>
-
-  </dl>
-</div>
 <div class="section" id="12">
   <h1><a class="toc-backref" href="#12">Procs</a></h1>
   <dl class="item">
@@ -323,7 +299,18 @@
 <div class="section" id="18">
   <h1><a class="toc-backref" href="#18">Templates</a></h1>
   <dl class="item">
-    <div id="key-templates-all">
+    <div id="inboxSizeMaximum-templates-all">
+  <div id="inboxSizeMaximum.t">
+  <dt><pre><span class="Keyword">template</span> <a href="#inboxSizeMaximum.t"><span class="Identifier">inboxSizeMaximum</span></a><span class="Other">(</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">uint32</span></pre></dt>
+  <dd>
+    
+    
+    
+  </dd>
+</div>
+
+</div>
+<div id="key-templates-all">
   <div id="key.t,typed">
   <dt><pre><span class="Keyword">template</span> <a href="#key.t%2Ctyped"><span class="Identifier">key</span></a><span class="Other">(</span><span class="Identifier">k</span><span class="Other">:</span> <span class="Identifier">typed</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">int</span></pre></dt>
   <dd>
@@ -373,6 +360,17 @@
   <dd>
     
     Register callback for sent messages
+    
+  </dd>
+</div>
+
+</div>
+<div id="outboxSizeMaximum-templates-all">
+  <div id="outboxSizeMaximum.t">
+  <dt><pre><span class="Keyword">template</span> <a href="#outboxSizeMaximum.t"><span class="Identifier">outboxSizeMaximum</span></a><span class="Other">(</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">uint32</span></pre></dt>
+  <dd>
+    
+    
     
   </dd>
 </div>
@@ -554,7 +552,7 @@
       <div class="twelve-columns footer">
         <span class="nim-sprite"></span>
         <br>
-        <small style="color: var(--hint);">Made with Nim. Generated: 2026-02-15 12:22:51 UTC</small>
+        <small style="color: var(--hint);">Made with Nim. Generated: 2026-02-16 08:51:50 UTC</small>
       </div>
     </div>
   </div>

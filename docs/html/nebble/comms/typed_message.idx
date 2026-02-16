@@ -31,8 +31,8 @@ nim	onInboxReceived	nebble/comms/typed_message.html#onInboxReceived.t,InboxRecei
 nim	onInboxDropped	nebble/comms/typed_message.html#onInboxDropped.t,InboxDroppedCallback	template onInboxDropped(handler: InboxDroppedCallback)		129
 nim	onOutboxSent	nebble/comms/typed_message.html#onOutboxSent.t,OutboxSentCallback	template onOutboxSent(handler: OutboxSentCallback)		133
 nim	onOutboxFailed	nebble/comms/typed_message.html#onOutboxFailed.t,OutboxFailedCallback	template onOutboxFailed(handler: OutboxFailedCallback)		137
-nim	inboxSizeMaximum	nebble/comms/typed_message.html#inboxSizeMaximum	const inboxSizeMaximum		143
-nim	outboxSizeMaximum	nebble/comms/typed_message.html#outboxSizeMaximum	const outboxSizeMaximum		144
+nim	inboxSizeMaximum	nebble/comms/typed_message.html#inboxSizeMaximum.t	template inboxSizeMaximum(): uint32		142
+nim	outboxSizeMaximum	nebble/comms/typed_message.html#outboxSizeMaximum.t	template outboxSizeMaximum(): uint32		143
 nimgrp	send	nebble/comms/typed_message.html#send-templates-all	template		41
 heading	With generated keys:	nebble/comms/typed_message.html#with-generated-keyscolon	 With generated keys:		0
 heading	type AppMessageKey = enum amkCommand = 0, amkData = 1	nebble/comms/typed_message.html#type-appmessagekey-eq-enum-amkcommand-eq-0-amkdata-eq-1	 type AppMessageKey = enum amkCommand = 0, amkData = 1		0

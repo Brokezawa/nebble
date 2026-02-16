@@ -19,19 +19,19 @@ nim	push	nebble/ui/window.html#push,WindowHandle,bool	proc push(h: var WindowHan
 nim	pop	nebble/ui/window.html#pop,WindowHandle	proc pop(h: var WindowHandle): bool		190
 nim	removeFromStack	nebble/ui/window.html#removeFromStack,WindowHandle,bool	proc removeFromStack(h: var WindowHandle; animated: bool = true): bool		211
 nim	popAll	nebble/ui/window.html#popAll,bool	proc popAll(animated: bool = true)		225
-nim	rootLayer	nebble/ui/window.html#rootLayer,ptr.struct_Window	proc rootLayer(win: ptr Window): ptr Layer		236
-nim	rootLayer	nebble/ui/window.html#rootLayer,WindowHandle	proc rootLayer(h: WindowHandle): ptr Layer		240
-nim	isLoaded	nebble/ui/window.html#isLoaded,WindowHandle	proc isLoaded(h: WindowHandle): bool		245
-nim	backgroundColor=	nebble/ui/window.html#backgroundColor=,WindowHandle,GColor8	proc backgroundColor=(h: var WindowHandle; color: GColor8)		250
-nim	userData=	nebble/ui/window.html#userData=,WindowHandle,pointer	proc userData=(h: var WindowHandle; data: pointer)		255
-nim	userData	nebble/ui/window.html#userData,WindowHandle	proc userData(h: WindowHandle): pointer		260
-nim	handlers=	nebble/ui/window.html#handlers=,WindowHandle,WindowHandlers	proc handlers=(h: var WindowHandle; hnd: WindowHandlers)		269
-nim	setHandlers	nebble/ui/window.html#setHandlers,WindowHandle,WindowHandler,WindowHandler,WindowHandler,WindowHandler	proc setHandlers(h: var WindowHandle; load: WindowHandler = nil;\n            unload: WindowHandler = nil; appear: WindowHandler = nil;\n            disappear: WindowHandler = nil)		274
-nim	clickConfig=	nebble/ui/window.html#clickConfig=,ptr.struct_Window,ClickConfigProvider	proc clickConfig=(win: ptr Window; provider: ClickConfigProvider)		292
-nim	clickConfig=	nebble/ui/window.html#clickConfig=,WindowHandle,ClickConfigProvider	proc clickConfig=(h: var WindowHandle; provider: ClickConfigProvider)		297
-nim	setClickConfigWithContext	nebble/ui/window.html#setClickConfigWithContext,WindowHandle,ClickConfigProvider,pointer	proc setClickConfigWithContext(h: var WindowHandle; provider: ClickConfigProvider;\n                          context: pointer)		302
-nim	clickContext	nebble/ui/window.html#clickContext,WindowHandle	proc clickContext(h: WindowHandle): pointer		309
+nim	rootLayer	nebble/ui/window.html#rootLayer,ptr.struct_Window	proc rootLayer(win: ptr Window): ptr Layer		238
+nim	rootLayer	nebble/ui/window.html#rootLayer,WindowHandle	proc rootLayer(h: WindowHandle): ptr Layer		242
+nim	isLoaded	nebble/ui/window.html#isLoaded,WindowHandle	proc isLoaded(h: WindowHandle): bool		247
+nim	backgroundColor=	nebble/ui/window.html#backgroundColor=,WindowHandle,GColor8	proc backgroundColor=(h: var WindowHandle; color: GColor8)		252
+nim	userData=	nebble/ui/window.html#userData=,WindowHandle,pointer	proc userData=(h: var WindowHandle; data: pointer)		257
+nim	userData	nebble/ui/window.html#userData,WindowHandle	proc userData(h: WindowHandle): pointer		262
+nim	handlers=	nebble/ui/window.html#handlers=,WindowHandle,WindowHandlers	proc handlers=(h: var WindowHandle; hnd: WindowHandlers)		271
+nim	setHandlers	nebble/ui/window.html#setHandlers,WindowHandle,WindowHandler,WindowHandler,WindowHandler,WindowHandler	proc setHandlers(h: var WindowHandle; load: WindowHandler = nil;\n            unload: WindowHandler = nil; appear: WindowHandler = nil;\n            disappear: WindowHandler = nil)		276
+nim	clickConfig=	nebble/ui/window.html#clickConfig=,ptr.struct_Window,ClickConfigProvider	proc clickConfig=(win: ptr Window; provider: ClickConfigProvider)		294
+nim	clickConfig=	nebble/ui/window.html#clickConfig=,WindowHandle,ClickConfigProvider	proc clickConfig=(h: var WindowHandle; provider: ClickConfigProvider)		299
+nim	setClickConfigWithContext	nebble/ui/window.html#setClickConfigWithContext,WindowHandle,ClickConfigProvider,pointer	proc setClickConfigWithContext(h: var WindowHandle; provider: ClickConfigProvider;\n                          context: pointer)		304
+nim	clickContext	nebble/ui/window.html#clickContext,WindowHandle	proc clickContext(h: WindowHandle): pointer		311
 nimgrp	newwindow	nebble/ui/window.html#newWindow-procs-all	proc		155
-nimgrp	rootlayer	nebble/ui/window.html#rootLayer-procs-all	proc		236
-nimgrp	clickconfig=	nebble/ui/window.html#clickConfig=-procs-all	proc		292
+nimgrp	rootlayer	nebble/ui/window.html#rootLayer-procs-all	proc		238
+nimgrp	clickconfig=	nebble/ui/window.html#clickConfig=-procs-all	proc		294
 nimgrp	newwindowhandle	nebble/ui/window.html#newWindowHandle-procs-all	proc		146

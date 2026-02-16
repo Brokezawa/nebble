@@ -20,3 +20,8 @@ nim	setCallbacks	nebble/ui/menu_layer.html#setCallbacks,MenuLayerHandle,pointer,
 nim	reloadData	nebble/ui/menu_layer.html#reloadData,MenuLayerHandle	proc reloadData(h: var MenuLayerHandle)		52
 nim	getSelectedIndex	nebble/ui/menu_layer.html#getSelectedIndex,MenuLayerHandle	proc getSelectedIndex(h: MenuLayerHandle): MenuIndex		57
 nim	setSelectedIndex	nebble/ui/menu_layer.html#setSelectedIndex,MenuLayerHandle,MenuIndex,MenuRowAlign,bool	proc setSelectedIndex(h: var MenuLayerHandle; index: MenuIndex; align: MenuRowAlign;\n                 animated: bool)		62
+nim	setSelectedNext	nebble/ui/menu_layer.html#setSelectedNext,MenuLayerHandle,bool,MenuRowAlign,bool	proc setSelectedNext(h: var MenuLayerHandle; up: bool; align: MenuRowAlign;\n                animated: bool)		68
+nim	basicDraw	nebble/ui/menu_layer.html#basicDraw,ptr.struct_GContext,ptr.struct_Layer,cstring,cstring,ptr.struct_GBitmap	proc basicDraw(ctx: ptr GContext; cellLayer: ptr Layer; title, subtitle: cstring;\n          icon: ptr GBitmap = nil)		74
+nim	setNormalColors	nebble/ui/menu_layer.html#setNormalColors,MenuLayerHandle,GColor,GColor	proc setNormalColors(h: var MenuLayerHandle; background, foreground: GColor)		79
+nim	setHighlightColors	nebble/ui/menu_layer.html#setHighlightColors,MenuLayerHandle,GColor,GColor	proc setHighlightColors(h: var MenuLayerHandle; background, foreground: GColor)		84
+nim	setCenterFocused	nebble/ui/menu_layer.html#setCenterFocused,MenuLayerHandle,bool	proc setCenterFocused(h: var MenuLayerHandle; enabled: bool)		89

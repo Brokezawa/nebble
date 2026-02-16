@@ -15,7 +15,7 @@ import nebble/ui/menu_layer
 import nebble/ui/simple_menu_layer
 import nebble/ui/clicks
 import nebble/ui/layer # for addChild
-import nebble/graphics/fonts # for fonts_get_system_font
+import nebble/graphics/fonts
 
 template nebbleWatchface*(body: untyped): untyped =
   ## Alias for `nebbleApp`.
@@ -248,7 +248,7 @@ macro nebbleApp*(body: untyped): untyped =
           else:
             layerInits.add quote do: `layerId`.backgroundColor = GColorClear
           if not font.isNil:
-            layerInits.add quote do: `layerId`.font = fonts_get_system_font(`font`)
+            layerInits.add quote do: `layerId`.font = fonts.getSystemFont(`font`)
           if not text.isNil:
             layerInits.add quote do: `layerId`.text = `text`
           if not color.isNil:

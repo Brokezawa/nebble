@@ -1,5 +1,9 @@
 nimTitle	compass	nebble/foundation/events/compass.html	module nebble/foundation/events/compass		0
-nim	subscribe	nebble/foundation/events/compass.html#subscribe,CompassHeadingHandler	proc subscribe(handler: CompassHeadingHandler)		14
-nim	unsubscribe	nebble/foundation/events/compass.html#unsubscribe	proc unsubscribe()		20
-nim	setHeadingFilter	nebble/foundation/events/compass.html#setHeadingFilter,CompassHeading	proc setHeadingFilter(filter: CompassHeading)		26
-nim	peek	nebble/foundation/events/compass.html#peek,ptr.CompassHeadingData	proc peek(data: ptr CompassHeadingData): bool		33
+nim	CompassStatusUnavailable	nebble/foundation/events/compass.html#CompassStatusUnavailable.t	template CompassStatusUnavailable(): CompassStatus		9
+nim	CompassStatusDataInvalid	nebble/foundation/events/compass.html#CompassStatusDataInvalid.t	template CompassStatusDataInvalid(): CompassStatus		10
+nim	CompassStatusCalibrating	nebble/foundation/events/compass.html#CompassStatusCalibrating.t	template CompassStatusCalibrating(): CompassStatus		11
+nim	CompassStatusCalibrated	nebble/foundation/events/compass.html#CompassStatusCalibrated.t	template CompassStatusCalibrated(): CompassStatus		12
+nim	subscribe	nebble/foundation/events/compass.html#subscribe,CompassHeadingHandler	proc subscribe(handler: CompassHeadingHandler)		19
+nim	unsubscribe	nebble/foundation/events/compass.html#unsubscribe	proc unsubscribe()		25
+nim	setHeadingFilter	nebble/foundation/events/compass.html#setHeadingFilter,CompassHeading	proc setHeadingFilter(filter: CompassHeading)		31
+nim	peek	nebble/foundation/events/compass.html#peek,ptr.CompassHeadingData	proc peek(data: ptr CompassHeadingData): bool		38

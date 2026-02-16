@@ -1,15 +1,28 @@
 nimTitle	content_indicator	nebble/ui/content_indicator.html	module nebble/ui/content_indicator		0
-nim	newContentIndicator	nebble/ui/content_indicator.html#newContentIndicator	proc newContentIndicator(): ptr ContentIndicator		15
-nim	destroy	nebble/ui/content_indicator.html#destroy,ptr.struct_ContentIndicator	proc destroy(indicator: ptr ContentIndicator)		21
-nim	configureDirection	nebble/ui/content_indicator.html#configureDirection,ptr.struct_ContentIndicator,ContentIndicatorDirection,ptr.ContentIndicatorConfig	proc configureDirection(indicator: ptr ContentIndicator;\n                   direction: ContentIndicatorDirection;\n                   config: ptr ContentIndicatorConfig): bool		30
-nim	contentAvailable	nebble/ui/content_indicator.html#contentAvailable,ptr.struct_ContentIndicator,ContentIndicatorDirection	proc contentAvailable(indicator: ptr ContentIndicator;\n                 direction: ContentIndicatorDirection): bool		50
-nim	setContentAvailable	nebble/ui/content_indicator.html#setContentAvailable,ptr.struct_ContentIndicator,ContentIndicatorDirection,bool	proc setContentAvailable(indicator: ptr ContentIndicator;\n                    direction: ContentIndicatorDirection; available: bool)		57
-nim	makeConfig	nebble/ui/content_indicator.html#makeConfig,ptr.struct_Layer,GColor,GColor,GAlign,bool	proc makeConfig(layer: ptr Layer; foreground: GColor = GColorBlack;\n           background: GColor = GColorWhite; alignment: GAlign = GAlignCenter;\n           timesOut: bool = true): ContentIndicatorConfig		72
-nim	configureUp	nebble/ui/content_indicator.html#configureUp,ptr.struct_ContentIndicator,ptr.struct_Layer,GColor,GColor	proc configureUp(indicator: ptr ContentIndicator; layer: ptr Layer;\n            foreground: GColor = GColorBlack; background: GColor = GColorWhite): bool		85
-nim	configureDown	nebble/ui/content_indicator.html#configureDown,ptr.struct_ContentIndicator,ptr.struct_Layer,GColor,GColor	proc configureDown(indicator: ptr ContentIndicator; layer: ptr Layer;\n              foreground: GColor = GColorBlack; background: GColor = GColorWhite): bool		94
-nim	showUp	nebble/ui/content_indicator.html#showUp,ptr.struct_ContentIndicator	proc showUp(indicator: ptr ContentIndicator)		105
-nim	hideUp	nebble/ui/content_indicator.html#hideUp,ptr.struct_ContentIndicator	proc hideUp(indicator: ptr ContentIndicator)		109
-nim	showDown	nebble/ui/content_indicator.html#showDown,ptr.struct_ContentIndicator	proc showDown(indicator: ptr ContentIndicator)		113
-nim	hideDown	nebble/ui/content_indicator.html#hideDown,ptr.struct_ContentIndicator	proc hideDown(indicator: ptr ContentIndicator)		117
-nim	isUpVisible	nebble/ui/content_indicator.html#isUpVisible,ptr.struct_ContentIndicator	proc isUpVisible(indicator: ptr ContentIndicator): bool		121
-nim	isDownVisible	nebble/ui/content_indicator.html#isDownVisible,ptr.struct_ContentIndicator	proc isDownVisible(indicator: ptr ContentIndicator): bool		125
+nim	ContentIndicatorHandle	nebble/ui/content_indicator.html#ContentIndicatorHandle	object ContentIndicatorHandle		70
+nim	`=destroy`	nebble/ui/content_indicator.html#=destroy,ContentIndicatorHandle	proc `=destroy`(h`gensym0: var ContentIndicatorHandle)		76
+nim	`=wasMoved`	nebble/ui/content_indicator.html#=wasMoved,ContentIndicatorHandle	proc `=wasMoved`(h`gensym0: var ContentIndicatorHandle)		83
+nim	`=copy`	nebble/ui/content_indicator.html#=copy,ContentIndicatorHandle,ContentIndicatorHandle	proc `=copy`(dest`gensym0: var ContentIndicatorHandle;\n        src`gensym0: ContentIndicatorHandle)		88
+nim	`=sink`	nebble/ui/content_indicator.html#=sink,ContentIndicatorHandle,ContentIndicatorHandle	proc `=sink`(dest`gensym0: var ContentIndicatorHandle;\n        src`gensym0: ContentIndicatorHandle)		90
+nim	toPtr	nebble/ui/content_indicator.html#toPtr.c,ContentIndicatorHandle	converter toPtr(h`gensym0: ContentIndicatorHandle): ptr ContentIndicator		100
+nim	toLayer	nebble/ui/content_indicator.html#toLayer.c,ContentIndicatorHandle	converter toLayer(h`gensym0: ContentIndicatorHandle): ptr Layer		102
+nim	toHandle	nebble/ui/content_indicator.html#toHandle,ptr.struct_ContentIndicator	proc toHandle(p`gensym0: ptr ContentIndicator): ContentIndicatorHandle		105
+nim	wrapOwned	nebble/ui/content_indicator.html#wrapOwned,ptr.struct_ContentIndicator	proc wrapOwned(p`gensym0: ptr ContentIndicator): ContentIndicatorHandle		109
+nim	isValid	nebble/ui/content_indicator.html#isValid,ContentIndicatorHandle	proc isValid(h`gensym0: ContentIndicatorHandle): bool		113
+nim	isNil	nebble/ui/content_indicator.html#isNil,ContentIndicatorHandle	proc isNil(h`gensym0: ContentIndicatorHandle): bool		114
+nim	setParent	nebble/ui/content_indicator.html#setParent,ContentIndicatorHandle,ptr.struct_Layer	proc setParent(h`gensym0: var ContentIndicatorHandle; p`gensym0: ptr Layer)		116
+nim	reset	nebble/ui/content_indicator.html#reset,ContentIndicatorHandle	proc reset(h`gensym0: var ContentIndicatorHandle)		16
+nim	newContentIndicatorHandle	nebble/ui/content_indicator.html#newContentIndicatorHandle	proc newContentIndicatorHandle(): ContentIndicatorHandle		23
+nim	newContentIndicator	nebble/ui/content_indicator.html#newContentIndicator	proc newContentIndicator(): ContentIndicatorHandle		27
+nim	configureDirection	nebble/ui/content_indicator.html#configureDirection,ContentIndicatorHandle,ContentIndicatorDirection,ptr.ContentIndicatorConfig	proc configureDirection(h: ContentIndicatorHandle;\n                   direction: ContentIndicatorDirection;\n                   config: ptr ContentIndicatorConfig): bool		35
+nim	contentAvailable	nebble/ui/content_indicator.html#contentAvailable,ContentIndicatorHandle,ContentIndicatorDirection	proc contentAvailable(h: ContentIndicatorHandle; direction: ContentIndicatorDirection): bool		46
+nim	setContentAvailable	nebble/ui/content_indicator.html#setContentAvailable,ContentIndicatorHandle,ContentIndicatorDirection,bool	proc setContentAvailable(h: ContentIndicatorHandle;\n                    direction: ContentIndicatorDirection; available: bool)		52
+nim	makeConfig	nebble/ui/content_indicator.html#makeConfig,ptr.struct_Layer,GColor,GColor,GAlign,bool	proc makeConfig(layer: ptr Layer; foreground: GColor = GColorBlack;\n           background: GColor = GColorWhite; alignment: GAlign = GAlignCenter;\n           timesOut: bool = true): ContentIndicatorConfig		63
+nim	configureUp	nebble/ui/content_indicator.html#configureUp,ContentIndicatorHandle,ptr.struct_Layer,GColor,GColor	proc configureUp(h: ContentIndicatorHandle; layer: ptr Layer;\n            foreground: GColor = GColorBlack; background: GColor = GColorWhite): bool		75
+nim	configureDown	nebble/ui/content_indicator.html#configureDown,ContentIndicatorHandle,ptr.struct_Layer,GColor,GColor	proc configureDown(h: ContentIndicatorHandle; layer: ptr Layer;\n              foreground: GColor = GColorBlack; background: GColor = GColorWhite): bool		83
+nim	showUp	nebble/ui/content_indicator.html#showUp,ContentIndicatorHandle	proc showUp(h: ContentIndicatorHandle)		91
+nim	hideUp	nebble/ui/content_indicator.html#hideUp,ContentIndicatorHandle	proc hideUp(h: ContentIndicatorHandle)		95
+nim	showDown	nebble/ui/content_indicator.html#showDown,ContentIndicatorHandle	proc showDown(h: ContentIndicatorHandle)		99
+nim	hideDown	nebble/ui/content_indicator.html#hideDown,ContentIndicatorHandle	proc hideDown(h: ContentIndicatorHandle)		103
+nim	isUpVisible	nebble/ui/content_indicator.html#isUpVisible,ContentIndicatorHandle	proc isUpVisible(h: ContentIndicatorHandle): bool		107
+nim	isDownVisible	nebble/ui/content_indicator.html#isDownVisible,ContentIndicatorHandle	proc isDownVisible(h: ContentIndicatorHandle): bool		111

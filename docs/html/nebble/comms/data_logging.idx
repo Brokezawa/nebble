@@ -1,4 +1,12 @@
 nimTitle	data_logging	nebble/comms/data_logging.html	module nebble/comms/data_logging		0
-nim	newDataLoggingSession	nebble/comms/data_logging.html#newDataLoggingSession,uint32,DataLoggingItemType,uint16,bool	proc newDataLoggingSession(tag: uint32; itemType: DataLoggingItemType;\n                      itemLength: uint16; resume: bool): DataLoggingSessionRef		15
-nim	finish	nebble/comms/data_logging.html#finish,DataLoggingSessionRef	proc finish(loggingSession: DataLoggingSessionRef)		23
-nim	log	nebble/comms/data_logging.html#log,DataLoggingSessionRef,pointer,cuint	proc log(loggingSession: DataLoggingSessionRef; data: pointer; numItems: cuint): DataLoggingResult		29
+nim	DataLoggingSessionHandle	nebble/comms/data_logging.html#DataLoggingSessionHandle	object DataLoggingSessionHandle		12
+nim	`=destroy`	nebble/comms/data_logging.html#=destroy,DataLoggingSessionHandle	proc `=destroy`(h: var DataLoggingSessionHandle)		17
+nim	`=wasMoved`	nebble/comms/data_logging.html#=wasMoved,DataLoggingSessionHandle	proc `=wasMoved`(h: var DataLoggingSessionHandle)		22
+nim	`=copy`	nebble/comms/data_logging.html#=copy,DataLoggingSessionHandle,DataLoggingSessionHandle	proc `=copy`(dest: var DataLoggingSessionHandle; src: DataLoggingSessionHandle)		25
+nim	`=sink`	nebble/comms/data_logging.html#=sink,DataLoggingSessionHandle,DataLoggingSessionHandle	proc `=sink`(dest: var DataLoggingSessionHandle; src: DataLoggingSessionHandle)		27
+nim	toPtr	nebble/comms/data_logging.html#toPtr.c,DataLoggingSessionHandle	converter toPtr(h: DataLoggingSessionHandle): DataLoggingSessionRef		33
+nim	isValid	nebble/comms/data_logging.html#isValid,DataLoggingSessionHandle	proc isValid(h: DataLoggingSessionHandle): bool		35
+nim	wrapOwned	nebble/comms/data_logging.html#wrapOwned,DataLoggingSessionRef	proc wrapOwned(p: DataLoggingSessionRef): DataLoggingSessionHandle		37
+nim	newDataLoggingSessionHandle	nebble/comms/data_logging.html#newDataLoggingSessionHandle,uint32,DataLoggingItemType,uint16,bool	proc newDataLoggingSessionHandle(tag: uint32; itemType: DataLoggingItemType;\n                            itemLength: uint16; resume: bool): DataLoggingSessionHandle		45
+nim	newDataLoggingSession	nebble/comms/data_logging.html#newDataLoggingSession,uint32,DataLoggingItemType,uint16,bool	proc newDataLoggingSession(tag: uint32; itemType: DataLoggingItemType;\n                      itemLength: uint16; resume: bool): DataLoggingSessionHandle		50
+nim	log	nebble/comms/data_logging.html#log,DataLoggingSessionHandle,pointer,cuint	proc log(h: DataLoggingSessionHandle; data: pointer; numItems: cuint): DataLoggingResult		56

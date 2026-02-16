@@ -56,20 +56,67 @@
 </li>
 <li>
   <details open>
+    <summary><a class="reference reference-toplevel" href="#7" id="57">Types</a></summary>
+    <ul class="simple simple-toc-section">
+      <li><a class="reference" href="#DataLoggingSessionHandle" title="DataLoggingSessionHandle = object">DataLoggingSessionHandle</a></li>
+
+    </ul>
+  </details>
+</li>
+<li>
+  <details open>
     <summary><a class="reference reference-toplevel" href="#12" id="62">Procs</a></summary>
     <ul class="simple simple-toc-section">
-      <ul class="simple nested-toc-section">finish
-  <li><a class="reference" href="#finish%2CDataLoggingSessionRef" title="finish(loggingSession: DataLoggingSessionRef)">finish(loggingSession: DataLoggingSessionRef)</a></li>
+      <ul class="simple nested-toc-section">=copy
+  <li><a class="reference" href="#%3Dcopy%2CDataLoggingSessionHandle%2CDataLoggingSessionHandle" title="`=copy`(dest: var DataLoggingSessionHandle; src: DataLoggingSessionHandle)">`=copy`(dest: var DataLoggingSessionHandle; src: DataLoggingSessionHandle)</a></li>
+
+</ul>
+<ul class="simple nested-toc-section">=destroy
+  <li><a class="reference" href="#%3Ddestroy%2CDataLoggingSessionHandle" title="`=destroy`(h: var DataLoggingSessionHandle)">`=destroy`(h: var DataLoggingSessionHandle)</a></li>
+
+</ul>
+<ul class="simple nested-toc-section">=sink
+  <li><a class="reference" href="#%3Dsink%2CDataLoggingSessionHandle%2CDataLoggingSessionHandle" title="`=sink`(dest: var DataLoggingSessionHandle; src: DataLoggingSessionHandle)">`=sink`(dest: var DataLoggingSessionHandle; src: DataLoggingSessionHandle)</a></li>
+
+</ul>
+<ul class="simple nested-toc-section">=wasMoved
+  <li><a class="reference" href="#%3DwasMoved%2CDataLoggingSessionHandle" title="`=wasMoved`(h: var DataLoggingSessionHandle)">`=wasMoved`(h: var DataLoggingSessionHandle)</a></li>
+
+</ul>
+<ul class="simple nested-toc-section">isValid
+  <li><a class="reference" href="#isValid%2CDataLoggingSessionHandle" title="isValid(h: DataLoggingSessionHandle): bool">isValid(h: DataLoggingSessionHandle): bool</a></li>
 
 </ul>
 <ul class="simple nested-toc-section">log
-  <li><a class="reference" href="#log%2CDataLoggingSessionRef%2Cpointer%2Ccuint" title="log(loggingSession: DataLoggingSessionRef; data: pointer; numItems: cuint): DataLoggingResult">log(loggingSession: DataLoggingSessionRef; data: pointer; numItems: cuint): DataLoggingResult</a></li>
+  <li><a class="reference" href="#log%2CDataLoggingSessionHandle%2Cpointer%2Ccuint" title="log(h: DataLoggingSessionHandle; data: pointer; numItems: cuint): DataLoggingResult">log(h: DataLoggingSessionHandle; data: pointer; numItems: cuint): DataLoggingResult</a></li>
 
 </ul>
 <ul class="simple nested-toc-section">newDataLoggingSession
   <li><a class="reference" href="#newDataLoggingSession%2Cuint32%2CDataLoggingItemType%2Cuint16%2Cbool" title="newDataLoggingSession(tag: uint32; itemType: DataLoggingItemType;
-                      itemLength: uint16; resume: bool): DataLoggingSessionRef">newDataLoggingSession(tag: uint32; itemType: DataLoggingItemType;
-                      itemLength: uint16; resume: bool): DataLoggingSessionRef</a></li>
+                      itemLength: uint16; resume: bool): DataLoggingSessionHandle">newDataLoggingSession(tag: uint32; itemType: DataLoggingItemType;
+                      itemLength: uint16; resume: bool): DataLoggingSessionHandle</a></li>
+
+</ul>
+<ul class="simple nested-toc-section">newDataLoggingSessionHandle
+  <li><a class="reference" href="#newDataLoggingSessionHandle%2Cuint32%2CDataLoggingItemType%2Cuint16%2Cbool" title="newDataLoggingSessionHandle(tag: uint32; itemType: DataLoggingItemType;
+                            itemLength: uint16; resume: bool): DataLoggingSessionHandle">newDataLoggingSessionHandle(tag: uint32; itemType: DataLoggingItemType;
+                            itemLength: uint16; resume: bool): DataLoggingSessionHandle</a></li>
+
+</ul>
+<ul class="simple nested-toc-section">wrapOwned
+  <li><a class="reference" href="#wrapOwned%2CDataLoggingSessionRef" title="wrapOwned(p: DataLoggingSessionRef): DataLoggingSessionHandle">wrapOwned(p: DataLoggingSessionRef): DataLoggingSessionHandle</a></li>
+
+</ul>
+
+    </ul>
+  </details>
+</li>
+<li>
+  <details open>
+    <summary><a class="reference reference-toplevel" href="#16" id="66">Converters</a></summary>
+    <ul class="simple simple-toc-section">
+      <ul class="simple nested-toc-section">toPtr
+  <li><a class="reference" href="#toPtr.c%2CDataLoggingSessionHandle" title="toPtr(h: DataLoggingSessionHandle): DataLoggingSessionRef">toPtr(h: DataLoggingSessionHandle): DataLoggingSessionRef</a></li>
 
 </ul>
 
@@ -93,31 +140,93 @@
     <div class="section" id="6">
   <h1><a class="toc-backref" href="#6">Imports</a></h1>
   <dl class="item">
-    <a class="reference external" href="../ffi.html">../ffi</a>
+    <a class="reference external" href="../ffi.html">../ffi</a>, <a class="reference external" href="../ffi/managed.html">../ffi/managed</a>
+  </dl>
+</div>
+<div class="section" id="7">
+  <h1><a class="toc-backref" href="#7">Types</a></h1>
+  <dl class="item">
+    <div id="DataLoggingSessionHandle">
+  <dt><pre><a href="data_logging.html#DataLoggingSessionHandle"><span class="Identifier">DataLoggingSessionHandle</span></a> <span class="Other">=</span> <span class="Keyword">object</span></pre></dt>
+  <dd>
+    
+    Managed handle for a data logging session. Automatically calls <tt class="docutils literal"><span class="pre"><span class="Identifier">data_logging_finish</span></span></tt> on destruction.
+    
+  </dd>
+</div>
+
   </dl>
 </div>
 <div class="section" id="12">
   <h1><a class="toc-backref" href="#12">Procs</a></h1>
   <dl class="item">
-    <div id="finish-procs-all">
-  <div id="finish,DataLoggingSessionRef">
-  <dt><pre><span class="Keyword">proc</span> <a href="#finish%2CDataLoggingSessionRef"><span class="Identifier">finish</span></a><span class="Other">(</span><span class="Identifier">loggingSession</span><span class="Other">:</span> <a href="../ffi.html#DataLoggingSessionRef"><span class="Identifier">DataLoggingSessionRef</span></a><span class="Other">)</span> {.<span class="Identifier">inline</span><span class="Other">,</span> <span><span class="Other pragmadots">...</span></span><span class="pragmawrap"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span>
-    <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">forbids</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span>.}</pre></dt>
+    <div id="=copy-procs-all">
+  <div id="=copy,DataLoggingSessionHandle,DataLoggingSessionHandle">
+  <dt><pre><span class="Keyword">proc</span> <a href="#%3Dcopy%2CDataLoggingSessionHandle%2CDataLoggingSessionHandle"><span class="Identifier">`=copy`</span></a><span class="Other">(</span><span class="Identifier">dest</span><span class="Other">:</span> <span class="Keyword">var</span> <a href="data_logging.html#DataLoggingSessionHandle"><span class="Identifier">DataLoggingSessionHandle</span></a><span class="Other">;</span> <span class="Identifier">src</span><span class="Other">:</span> <a href="data_logging.html#DataLoggingSessionHandle"><span class="Identifier">DataLoggingSessionHandle</span></a><span class="Other">)</span> {.
+    <span class="Identifier">error</span>.}</pre></dt>
   <dd>
     
-    Finish a data logging session and free resources. Equivalent to C function <tt class="docutils literal"><span class="pre"><span class="Identifier">data_logging_finish</span><span class="Punctuation">(</span><span class="Identifier">logging_session</span><span class="Punctuation">)</span></span></tt>.
+    
+    
+  </dd>
+</div>
+
+</div>
+<div id="=destroy-procs-all">
+  <div id="=destroy,DataLoggingSessionHandle">
+  <dt><pre><span class="Keyword">proc</span> <a href="#%3Ddestroy%2CDataLoggingSessionHandle"><span class="Identifier">`=destroy`</span></a><span class="Other">(</span><span class="Identifier">h</span><span class="Other">:</span> <span class="Keyword">var</span> <a href="data_logging.html#DataLoggingSessionHandle"><span class="Identifier">DataLoggingSessionHandle</span></a><span class="Other">)</span> {.<span><span class="Other pragmadots">...</span></span><span class="pragmawrap"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span>
+    <span class="Identifier">forbids</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span>.}</pre></dt>
+  <dd>
+    
+    
+    
+  </dd>
+</div>
+
+</div>
+<div id="=sink-procs-all">
+  <div id="=sink,DataLoggingSessionHandle,DataLoggingSessionHandle">
+  <dt><pre><span class="Keyword">proc</span> <a href="#%3Dsink%2CDataLoggingSessionHandle%2CDataLoggingSessionHandle"><span class="Identifier">`=sink`</span></a><span class="Other">(</span><span class="Identifier">dest</span><span class="Other">:</span> <span class="Keyword">var</span> <a href="data_logging.html#DataLoggingSessionHandle"><span class="Identifier">DataLoggingSessionHandle</span></a><span class="Other">;</span> <span class="Identifier">src</span><span class="Other">:</span> <a href="data_logging.html#DataLoggingSessionHandle"><span class="Identifier">DataLoggingSessionHandle</span></a><span class="Other">)</span> {.
+    <span><span class="Other pragmadots">...</span></span><span class="pragmawrap"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">forbids</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span>.}</pre></dt>
+  <dd>
+    
+    
+    
+  </dd>
+</div>
+
+</div>
+<div id="=wasMoved-procs-all">
+  <div id="=wasMoved,DataLoggingSessionHandle">
+  <dt><pre><span class="Keyword">proc</span> <a href="#%3DwasMoved%2CDataLoggingSessionHandle"><span class="Identifier">`=wasMoved`</span></a><span class="Other">(</span><span class="Identifier">h</span><span class="Other">:</span> <span class="Keyword">var</span> <a href="data_logging.html#DataLoggingSessionHandle"><span class="Identifier">DataLoggingSessionHandle</span></a><span class="Other">)</span> {.<span><span class="Other pragmadots">...</span></span><span class="pragmawrap"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span>
+    <span class="Identifier">forbids</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span>.}</pre></dt>
+  <dd>
+    
+    
+    
+  </dd>
+</div>
+
+</div>
+<div id="isValid-procs-all">
+  <div id="isValid,DataLoggingSessionHandle">
+  <dt><pre><span class="Keyword">proc</span> <a href="#isValid%2CDataLoggingSessionHandle"><span class="Identifier">isValid</span></a><span class="Other">(</span><span class="Identifier">h</span><span class="Other">:</span> <a href="data_logging.html#DataLoggingSessionHandle"><span class="Identifier">DataLoggingSessionHandle</span></a><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">bool</span> {.<span class="Identifier">inline</span><span class="Other">,</span> <span><span class="Other pragmadots">...</span></span><span class="pragmawrap"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span>
+    <span class="Identifier">forbids</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span>.}</pre></dt>
+  <dd>
+    
+    
     
   </dd>
 </div>
 
 </div>
 <div id="log-procs-all">
-  <div id="log,DataLoggingSessionRef,pointer,cuint">
-  <dt><pre><span class="Keyword">proc</span> <a href="#log%2CDataLoggingSessionRef%2Cpointer%2Ccuint"><span class="Identifier">log</span></a><span class="Other">(</span><span class="Identifier">loggingSession</span><span class="Other">:</span> <a href="../ffi.html#DataLoggingSessionRef"><span class="Identifier">DataLoggingSessionRef</span></a><span class="Other">;</span> <span class="Identifier">data</span><span class="Other">:</span> <span class="Identifier">pointer</span><span class="Other">;</span> <span class="Identifier">numItems</span><span class="Other">:</span> <span class="Identifier">cuint</span><span class="Other">)</span><span class="Other">:</span> <a href="../ffi.html#DataLoggingResult"><span class="Identifier">DataLoggingResult</span></a> {.
+  <div id="log,DataLoggingSessionHandle,pointer,cuint">
+  <dt><pre><span class="Keyword">proc</span> <a href="#log%2CDataLoggingSessionHandle%2Cpointer%2Ccuint"><span class="Identifier">log</span></a><span class="Other">(</span><span class="Identifier">h</span><span class="Other">:</span> <a href="data_logging.html#DataLoggingSessionHandle"><span class="Identifier">DataLoggingSessionHandle</span></a><span class="Other">;</span> <span class="Identifier">data</span><span class="Other">:</span> <span class="Identifier">pointer</span><span class="Other">;</span> <span class="Identifier">numItems</span><span class="Other">:</span> <span class="Identifier">cuint</span><span class="Other">)</span><span class="Other">:</span> <a href="../ffi.html#DataLoggingResult"><span class="Identifier">DataLoggingResult</span></a> {.
     <span class="Identifier">inline</span><span class="Other">,</span> <span><span class="Other pragmadots">...</span></span><span class="pragmawrap"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">forbids</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span>.}</pre></dt>
   <dd>
     
-    Log data items to the logging session. Equivalent to C function <tt class="docutils literal"><span class="pre"><span class="Identifier">data_logging_log</span><span class="Punctuation">(</span><span class="Identifier">logging_session</span><span class="Punctuation">,</span> <span class="Identifier">data</span><span class="Punctuation">,</span> <span class="Identifier">num_items</span><span class="Punctuation">)</span></span></tt>.
+    Log data items to the logging session.
     
   </dd>
 </div>
@@ -126,11 +235,54 @@
 <div id="newDataLoggingSession-procs-all">
   <div id="newDataLoggingSession,uint32,DataLoggingItemType,uint16,bool">
   <dt><pre><span class="Keyword">proc</span> <a href="#newDataLoggingSession%2Cuint32%2CDataLoggingItemType%2Cuint16%2Cbool"><span class="Identifier">newDataLoggingSession</span></a><span class="Other">(</span><span class="Identifier">tag</span><span class="Other">:</span> <span class="Identifier">uint32</span><span class="Other">;</span> <span class="Identifier">itemType</span><span class="Other">:</span> <a href="../ffi.html#DataLoggingItemType"><span class="Identifier">DataLoggingItemType</span></a><span class="Other">;</span>
-                           <span class="Identifier">itemLength</span><span class="Other">:</span> <span class="Identifier">uint16</span><span class="Other">;</span> <span class="Identifier">resume</span><span class="Other">:</span> <span class="Identifier">bool</span><span class="Other">)</span><span class="Other">:</span> <a href="../ffi.html#DataLoggingSessionRef"><span class="Identifier">DataLoggingSessionRef</span></a> {.
+                           <span class="Identifier">itemLength</span><span class="Other">:</span> <span class="Identifier">uint16</span><span class="Other">;</span> <span class="Identifier">resume</span><span class="Other">:</span> <span class="Identifier">bool</span><span class="Other">)</span><span class="Other">:</span> <a href="data_logging.html#DataLoggingSessionHandle"><span class="Identifier">DataLoggingSessionHandle</span></a> {.
     <span class="Identifier">inline</span><span class="Other">,</span> <span><span class="Other pragmadots">...</span></span><span class="pragmawrap"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">forbids</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span>.}</pre></dt>
   <dd>
     
-    Create a new data logging session. Equivalent to C function <tt class="docutils literal"><span class="pre"><span class="Identifier">data_logging_create</span><span class="Punctuation">(</span><span class="Identifier">tag</span><span class="Punctuation">,</span> <span class="Identifier">item_type</span><span class="Punctuation">,</span> <span class="Identifier">item_length</span><span class="Punctuation">,</span> <span class="Identifier">resume</span><span class="Punctuation">)</span></span></tt>. Returns a session reference, or NULL on failure.
+    Alias for <tt class="docutils literal"><span class="pre"><span class="Identifier">newDataLoggingSessionHandle</span></span></tt>.
+    
+  </dd>
+</div>
+
+</div>
+<div id="newDataLoggingSessionHandle-procs-all">
+  <div id="newDataLoggingSessionHandle,uint32,DataLoggingItemType,uint16,bool">
+  <dt><pre><span class="Keyword">proc</span> <a href="#newDataLoggingSessionHandle%2Cuint32%2CDataLoggingItemType%2Cuint16%2Cbool"><span class="Identifier">newDataLoggingSessionHandle</span></a><span class="Other">(</span><span class="Identifier">tag</span><span class="Other">:</span> <span class="Identifier">uint32</span><span class="Other">;</span> <span class="Identifier">itemType</span><span class="Other">:</span> <a href="../ffi.html#DataLoggingItemType"><span class="Identifier">DataLoggingItemType</span></a><span class="Other">;</span>
+                                 <span class="Identifier">itemLength</span><span class="Other">:</span> <span class="Identifier">uint16</span><span class="Other">;</span> <span class="Identifier">resume</span><span class="Other">:</span> <span class="Identifier">bool</span><span class="Other">)</span><span class="Other">:</span> <a href="data_logging.html#DataLoggingSessionHandle"><span class="Identifier">DataLoggingSessionHandle</span></a> {.
+    <span class="Identifier">inline</span><span class="Other">,</span> <span><span class="Other pragmadots">...</span></span><span class="pragmawrap"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">forbids</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span>.}</pre></dt>
+  <dd>
+    
+    Create a new managed data logging session.
+    
+  </dd>
+</div>
+
+</div>
+<div id="wrapOwned-procs-all">
+  <div id="wrapOwned,DataLoggingSessionRef">
+  <dt><pre><span class="Keyword">proc</span> <a href="#wrapOwned%2CDataLoggingSessionRef"><span class="Identifier">wrapOwned</span></a><span class="Other">(</span><span class="Identifier">p</span><span class="Other">:</span> <a href="../ffi.html#DataLoggingSessionRef"><span class="Identifier">DataLoggingSessionRef</span></a><span class="Other">)</span><span class="Other">:</span> <a href="data_logging.html#DataLoggingSessionHandle"><span class="Identifier">DataLoggingSessionHandle</span></a> {.<span class="Identifier">inline</span><span class="Other">,</span>
+    <span><span class="Other pragmadots">...</span></span><span class="pragmawrap"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">forbids</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span>.}</pre></dt>
+  <dd>
+    
+    
+    
+  </dd>
+</div>
+
+</div>
+
+  </dl>
+</div>
+<div class="section" id="16">
+  <h1><a class="toc-backref" href="#16">Converters</a></h1>
+  <dl class="item">
+    <div id="toPtr-converters-all">
+  <div id="toPtr.c,DataLoggingSessionHandle">
+  <dt><pre><span class="Keyword">converter</span> <a href="#toPtr.c%2CDataLoggingSessionHandle"><span class="Identifier">toPtr</span></a><span class="Other">(</span><span class="Identifier">h</span><span class="Other">:</span> <a href="data_logging.html#DataLoggingSessionHandle"><span class="Identifier">DataLoggingSessionHandle</span></a><span class="Other">)</span><span class="Other">:</span> <a href="../ffi.html#DataLoggingSessionRef"><span class="Identifier">DataLoggingSessionRef</span></a> {.
+    <span><span class="Other pragmadots">...</span></span><span class="pragmawrap"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">forbids</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span>.}</pre></dt>
+  <dd>
+    
+    
     
   </dd>
 </div>
@@ -152,7 +304,7 @@
       <div class="twelve-columns footer">
         <span class="nim-sprite"></span>
         <br>
-        <small style="color: var(--hint);">Made with Nim. Generated: 2026-02-15 12:22:51 UTC</small>
+        <small style="color: var(--hint);">Made with Nim. Generated: 2026-02-16 08:51:50 UTC</small>
       </div>
     </div>
   </div>

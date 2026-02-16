@@ -27,17 +27,18 @@
 ### Phase 4: Polish & Release (v1.0)
 - [x] **API Consolidation**: Merged managed and unmanaged APIs into a single idiomatic interface.
 - [x] **Documentation**: Comprehensive guides, migration docs, and API reference.
-- [x] **Examples**: 15+ working examples covering all major features.
-- [x] **Tooling**: `nebble doctor`, `nebble resources` commands.
+- [x] **Examples**: 11 working examples covering all major features (AppMessage, Glance, Menu, Sensors).
+- [x] **Hardening**: Evaluated and implemented OOM checks, null guards, and stack-allocated group procs.
+- [x] **Release**: v1.0 complete and stable.
 
 ---
 
 ## 🚀 Future Roadmap (v1.1+)
 
-### 1. Advanced Graphics
-- [ ] **Framebuffer Access**: High-level iterator for direct framebuffer manipulation (safe wrapper around `captureFrameBuffer`).
-- [ ] **Animation Helpers**: More preset animation curves and transition effects.
-- [ ] **Sprite Sheet**: Dedicated sprite sheet manager.
+### 1. Advanced Graphics (Evaluated)
+- [ ] **Framebuffer Access**: Safe wrapper around `captureFrameBuffer` with bit-packing logic for 1/2/4-bit formats (Complexity: Medium).
+- [ ] **Animation Helpers**: Fluent DSL builders for complex sequences (Complexity: Medium).
+- [ ] **Sprite Sheet**: Zero-copy sprite management using `createAsSubBitmap` (Complexity: Low).
 
 ### 2. Developer Experience
 - [ ] **Hot Reloading**: Experimental support for hot reloading code (via AppMessage injection or partial updates) on emulator.

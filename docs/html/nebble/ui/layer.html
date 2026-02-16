@@ -192,6 +192,10 @@
   <li><a class="reference" href="#reset%2CLayerHandle" title="reset(h: var LayerHandle)">reset(h: var LayerHandle)</a></li>
 
 </ul>
+<ul class="simple nested-toc-section">setParent
+  <li><a class="reference" href="#setParent%2CLayerHandle%2Cptr.struct_Layer" title="setParent(h: var LayerHandle; p: ptr Layer)">setParent(h: var LayerHandle; p: ptr Layer)</a></li>
+
+</ul>
 <ul class="simple nested-toc-section">toHandle
   <li><a class="reference" href="#toHandle%2Cptr.struct_Layer" title="toHandle(p: ptr Layer): LayerHandle">toHandle(p: ptr Layer): LayerHandle</a></li>
 
@@ -673,6 +677,18 @@
 </div>
 
 </div>
+<div id="setParent-procs-all">
+  <div id="setParent,LayerHandle,ptr.struct_Layer">
+  <dt><pre><span class="Keyword">proc</span> <a href="#setParent%2CLayerHandle%2Cptr.struct_Layer"><span class="Identifier">setParent</span></a><span class="Other">(</span><span class="Identifier">h</span><span class="Other">:</span> <span class="Keyword">var</span> <a href="layer.html#LayerHandle"><span class="Identifier">LayerHandle</span></a><span class="Other">;</span> <span class="Identifier">p</span><span class="Other">:</span> <span class="Keyword">ptr</span> <a href="../ffi.html#Layer"><span class="Identifier">Layer</span></a><span class="Other">)</span> {.<span class="Identifier">inline</span><span class="Other">,</span> <span><span class="Other pragmadots">...</span></span><span class="pragmawrap"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span>
+    <span class="Identifier">forbids</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span>.}</pre></dt>
+  <dd>
+    
+    Internal helper to set the parent pointer on a child handle.
+    
+  </dd>
+</div>
+
+</div>
 <div id="toHandle-procs-all">
   <div id="toHandle,ptr.struct_Layer">
   <dt><pre><span class="Keyword">proc</span> <a href="#toHandle%2Cptr.struct_Layer"><span class="Identifier">toHandle</span></a><span class="Other">(</span><span class="Identifier">p</span><span class="Other">:</span> <span class="Keyword">ptr</span> <a href="../ffi.html#Layer"><span class="Identifier">Layer</span></a><span class="Other">)</span><span class="Other">:</span> <a href="layer.html#LayerHandle"><span class="Identifier">LayerHandle</span></a> {.<span class="Identifier">inline</span><span class="Other">,</span> <span><span class="Other pragmadots">...</span></span><span class="pragmawrap"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span>
@@ -754,7 +770,7 @@
       <div class="twelve-columns footer">
         <span class="nim-sprite"></span>
         <br>
-        <small style="color: var(--hint);">Made with Nim. Generated: 2026-02-15 12:22:51 UTC</small>
+        <small style="color: var(--hint);">Made with Nim. Generated: 2026-02-16 08:51:50 UTC</small>
       </div>
     </div>
   </div>

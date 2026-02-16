@@ -30,6 +30,6 @@ nim	unschedule	nebble/ui/animation.html#unschedule,AnimationHandle	proc unschedu
 nim	newAnimationHandle	nebble/ui/animation.html#newAnimationHandle,ptr.struct_Layer,GRect,GRect,uint32,AnimationCurve	proc newAnimationHandle(layer: ptr Layer; startFrame, endFrame: GRect;\n                   duration: uint32 = 250;\n                   curve: AnimationCurve = AnimationCurveEaseInOut): AnimationHandle		119
 nim	setLayerFrame	nebble/ui/animation.html#setLayerFrame,AnimationHandle,ptr.struct_Layer,GRect,GRect	proc setLayerFrame(h: var AnimationHandle; layer: ptr Layer;\n              startFrame, endFrame: GRect)		127
 nim	createSequence	nebble/ui/animation.html#createSequence,varargs[AnimationHandle]	proc createSequence(animations: varargs[AnimationHandle]): AnimationHandle		135
-nim	createSpawn	nebble/ui/animation.html#createSpawn,varargs[AnimationHandle]	proc createSpawn(animations: varargs[AnimationHandle]): AnimationHandle		161
-nim	shouldAutoReverse=	nebble/ui/animation.html#shouldAutoReverse=,AnimationHandle,bool	proc shouldAutoReverse=(h: var AnimationHandle; reverse: bool)		183
+nim	createSpawn	nebble/ui/animation.html#createSpawn,varargs[AnimationHandle]	proc createSpawn(animations: varargs[AnimationHandle]): AnimationHandle		162
+nim	shouldAutoReverse=	nebble/ui/animation.html#shouldAutoReverse=,AnimationHandle,bool	proc shouldAutoReverse=(h: var AnimationHandle; reverse: bool)		186
 nimgrp	newanimationhandle	nebble/ui/animation.html#newAnimationHandle-procs-all	proc		65

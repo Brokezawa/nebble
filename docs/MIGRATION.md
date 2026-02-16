@@ -33,6 +33,8 @@ Nebble uses **Managed Types** (handles) which leverage Nim's ARC memory manageme
 | `GPath*` | `GPathHandle` | `newGPath()` | Automatic |
 | `DataLoggingSessionRef` | `DataLoggingSessionHandle` | `newDataLoggingSession()` | Automatic |
 | `AppSync` | `AppSyncHandle` | `newAppSync()` | Automatic |
+| `ActionMenu*` | `ActionMenuHandle` | `openActionMenu()` | Automatic |
+| `AppTimer*` | `TimerHandle` | `after()` | Automatic (RAII Cancel) |
 | `GBitmap*` | `GBitmapRef` | `newBitmapRef()` | Automatic (Ref-Counted) |
 
 ### Benefits of Managed Types
@@ -54,13 +56,15 @@ import nebble
 proc selectHandler(recognizer: ClickRecognizerRef; context: pointer) {.cdecl.} =
   vibes.shortPulse()
 
-nebbleWatchface:
+nebbleApp:
   window:
     backgroundColor = GColorBlack
 
   textLayer:
     id = myLabel
-    frame = (0, 60, 144, 40)
+    fullWidth = true
+    y = center
+    h = 40
     text = "Hello Nim!"
     alignment = GTextAlignmentCenter
     

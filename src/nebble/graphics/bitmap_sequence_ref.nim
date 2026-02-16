@@ -11,16 +11,15 @@ import nebble/foundation/timer
 type BitmapSequenceRefObj = object
   seq: ptr GBitmapSequence
   owned: bool
-  timer: ptr AppTimer
+  timer: TimerHandle
   bmp: ptr GBitmap
   handler: AnimationHandler
   userContext: pointer
 
 proc `=destroy`(obj: var BitmapSequenceRefObj) =
   ## Cancel any scheduled timer and destroy owned sequence.
-  if obj.timer != nil:
-    cancel(obj.timer)
-    obj.timer = nil
+  # TimerHandle will automatically cancel on destruction if it's the owner
+  reset(obj.timer)
   if obj.seq != nil and obj.owned:
     destroy(obj.seq)
   obj.seq = nil
@@ -35,7 +34,7 @@ proc newBitmapSequenceRef*(resourceId: uint32): BitmapSequenceRef =
   new(result)
   result.seq = newBitmapSequence(resourceId)
   result.owned = true
-  result.timer = nil
+  result.timer = default(TimerHandle)
   result.bmp = nil
   result.handler = nil
   result.userContext = nil
@@ -44,7 +43,7 @@ proc wrapBitmapSequence*(seq: ptr GBitmapSequence; owned: bool = true): BitmapSe
   new(result)
   result.seq = seq
   result.owned = owned
-  result.timer = nil
+  result.timer = default(TimerHandle)
   result.bmp = nil
   result.handler = nil
   result.userContext = nil
@@ -110,7 +109,7 @@ proc internalBitmapSeqTimer(ctx: pointer) {.cdecl.} =
     return
   if not updateNextFrame(h, h.bmp, delay):
     # sequence finished
-    h.timer = nil
+    reset(h.timer)
     return
 
   # Call user handler if provided
@@ -121,7 +120,7 @@ proc internalBitmapSeqTimer(ctx: pointer) {.cdecl.} =
   if delay > 0:
     h.timer = after(delay, internalBitmapSeqTimer, cast[pointer](h))
   else:
-    h.timer = nil
+    reset(h.timer)
 
 ## Automatic scheduling helper
 proc scheduleNextFrame*(h: BitmapSequenceRef; bitmap: ptr GBitmap; handler: AnimationHandler; context: pointer = nil): bool =
@@ -131,10 +130,8 @@ proc scheduleNextFrame*(h: BitmapSequenceRef; bitmap: ptr GBitmap; handler: Anim
   if not isValid(h) or bitmap == nil:
     return false
 
-  # Cancel any existing timer
-  if h.timer != nil:
-    cancel(h.timer)
-    h.timer = nil
+  # Cancel any existing timer by resetting the handle
+  reset(h.timer)
 
   h.bmp = bitmap
   h.handler = handler
@@ -147,7 +144,7 @@ proc scheduleNextFrame*(h: BitmapSequenceRef; bitmap: ptr GBitmap; handler: Anim
   if delay > 0:
     h.timer = after(delay, internalBitmapSeqTimer, cast[pointer](h))
   else:
-    h.timer = nil
+    reset(h.timer)
 
   return true
 

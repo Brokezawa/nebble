@@ -467,7 +467,7 @@
   <dd>
     
     <p>Pop all windows from stack.</p>
-<p><strong>Warning:</strong> This affects ALL windows, not just managed ones. Managed windows still need their handles updated.</p>
+<p><strong>⚠️ Warning:</strong> This affects ALL windows, not just managed ones. Managed windows still on the stack will have their state desynchronized. You MUST manually call <tt class="docutils literal"><span class="pre"><span class="Identifier">reset</span><span class="Punctuation">(</span><span class="Punctuation">)</span></span></tt> on all managed <tt class="docutils literal"><span class="pre"><span class="Identifier">WindowHandle</span></span></tt> objects after calling <tt class="docutils literal"><span class="pre"><span class="Identifier">popAll</span></span></tt> to ensure they are properly destroyed.</p>
 
     
   </dd>
@@ -642,7 +642,7 @@
       <div class="twelve-columns footer">
         <span class="nim-sprite"></span>
         <br>
-        <small style="color: var(--hint);">Made with Nim. Generated: 2026-02-15 12:22:51 UTC</small>
+        <small style="color: var(--hint);">Made with Nim. Generated: 2026-02-16 08:51:50 UTC</small>
       </div>
     </div>
   </div>
