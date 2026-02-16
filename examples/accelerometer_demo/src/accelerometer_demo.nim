@@ -73,15 +73,10 @@ nebbleApp:
 proc updateAccelDisplay(x, y, z: int16) =
   xStr.f("X: ", x)
   xLayer.text = xStr
-  xLayer.getLayer().markDirty()
-  
   yStr.f("Y: ", y)
   yLayer.text = yStr
-  yLayer.getLayer().markDirty()
-  
   zStr.f("Z: ", z)
   zLayer.text = zStr
-  zLayer.getLayer().markDirty()
 
 proc accelDataHandler(data: ptr AccelData; numSamples: uint32) {.cdecl.} =
   if numSamples > 0:
@@ -97,4 +92,3 @@ proc accelTapHandler(axis: AccelAxisType; direction: int32) {.cdecl.} =
   let dirName: cstring = if direction > 0: "+" else: "-"
   tapStr.f("Tap #", tapCount, " ", dirName, axisName)
   tapLayer.text = tapStr
-  tapLayer.getLayer().markDirty()

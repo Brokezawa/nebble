@@ -17,39 +17,41 @@ proc updateTime(tickTime: ptr tm; unitsChanged: TimeUnits) {.cdecl.}
 # Declarative Watchface
 nebbleApp:
   window:
-    # Always force Black background for consistent high contrast
-    backgroundColor = GColorBlack
+    # Set background color explicitly based on platform capability
+    backgroundColor = pblIfColorElse(GColorBlack, GColorWhite)
 
   textLayer:
-    id = lblTime
+    id = timeLayer
     fullWidth = true
-    y = pblIfRoundElse(45, PBLDisplayHeight div 2 - 50)
-    h = 50
+    # Use center-relative positioning
+    y = pblIfRoundElse(45, PBLDisplayHeight div 2 - 45)
+    h = 45
     text = "00:00"
+    # Use Leco numbers which are more narrow and fit better than Bitham
     font = FONT_KEY_LECO_32_BOLD_NUMBERS
-    color = GColorWhite
+    color = pblIfColorElse(GColorWhite, GColorBlack)
     bgColor = GColorClear
     alignment = GTextAlignmentCenter
     
   textLayer:
-    id = lblSteps
+    id = stepsLayer
     fullWidth = true
-    y = pblIfRoundElse(95, PBLDisplayHeight div 2 + 10)
+    y = pblIfRoundElse(95, PBLDisplayHeight div 2 + 5)
     h = 30
     text = "Steps: ---"
     font = FONT_KEY_GOTHIC_24
-    color = GColorWhite
+    color = pblIfColorElse(GColorWhite, GColorBlack)
     bgColor = GColorClear
     alignment = GTextAlignmentCenter
 
   textLayer:
-    id = lblSleep
+    id = sleepLayer
     fullWidth = true
-    y = pblIfRoundElse(125, PBLDisplayHeight div 2 + 45)
+    y = pblIfRoundElse(125, PBLDisplayHeight div 2 + 35)
     h = 30
     text = "Sleep: ---"
     font = FONT_KEY_GOTHIC_18
-    color = GColorWhite
+    color = pblIfColorElse(GColorWhite, GColorBlack)
     bgColor = GColorClear
     alignment = GTextAlignmentCenter
 
@@ -68,16 +70,16 @@ proc updateTime(tickTime: ptr tm; unitsChanged: TimeUnits) {.cdecl.} =
   
   # Heap-free formatting
   discard strftime(addr timeStr.data[0], 16, timeFmt, tickTime)
-  lblTime.text = timeStr
+  timeLayer.text = timeStr
   
   # Update health stats
   when declared(health.sumToday):
     let steps = health.sumToday(HealthMetricStepCount)
     stepsStr.f("Steps: ", steps)
-    lblSteps.text = stepsStr
+    stepsLayer.text = stepsStr
     
     let sleepSeconds = health.sumToday(HealthMetricSleepSeconds)
     let sleepHours = sleepSeconds div 3600
     let sleepMins = (sleepSeconds mod 3600) div 60
     sleepStr.f("Sleep: ", sleepHours, "h ", sleepMins, "m")
-    lblSleep.text = sleepStr
+    sleepLayer.text = sleepStr

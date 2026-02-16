@@ -70,24 +70,15 @@ proc makeGColor8*(argb: uint8): GColor8 {.inline.} =
 
 template GColorClear*: GColor8 =
   ## Transparent color. Equivalent to C macro `GColorClear`.
-  when defined(pebbleAplite) or defined(pebbleDiorite) or defined(pebbleFlint):
-    cast[GColor8](0'u8) # Not really clear on B&W, but used as sentinel
-  else:
-    makeGColor8(0b00000000'u8)
+  makeGColor8(0b00000000'u8)
 
 template GColorBlack*: GColor8 =
   ## Black color. Equivalent to C macro `GColorBlack`.
-  when defined(pebbleAplite) or defined(pebbleDiorite) or defined(pebbleFlint):
-    cast[GColor8](0'u8)
-  else:
-    makeGColor8(0b11000000'u8)
+  makeGColor8(0b11000000'u8)
 
 template GColorWhite*: GColor8 =
   ## White color. Equivalent to C macro `GColorWhite`.
-  when defined(pebbleAplite) or defined(pebbleDiorite) or defined(pebbleFlint):
-    cast[GColor8](1'u8)
-  else:
-    makeGColor8(0b11111111'u8)
+  makeGColor8(0b11111111'u8)
 
 # Additional named colors (available on color platforms)
 template GColorOxfordBlue*: GColor8 = makeGColor8(0b11000001'u8)
