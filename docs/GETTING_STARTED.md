@@ -8,7 +8,7 @@ Nebble is a Nim wrapper library for Pebble smartwatch development. This guide wi
 
 We strongly recommend installing Nim using **choosenim** to ensure you have the latest version and consistent environment for documentation generation.
 
-- **Windows**: [Download choosenim-x86_64-pc-windows-gnu.zip](https://nim-lang.org/install_windows.html)
+- **Windows**: [Install Nim on Windows](https://nim-lang.org/install_windows.html)
 - **macOS / Linux**:
   ```bash
   curl https://nim-lang.org/choosenim/init.sh -sSf | sh
