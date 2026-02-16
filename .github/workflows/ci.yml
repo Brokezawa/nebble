@@ -48,6 +48,8 @@ jobs:
         run: |
           pebble --version
           pebble sdk list
+          which arm-none-eabi-gcc || true
+          find ~/.pebble-sdk -name "arm-none-eabi-size" || true
       
       - name: Install Nebble Library
         run: nimble install -y
@@ -69,7 +71,11 @@ jobs:
         timeout-minutes: 20
 
       - name: Run Size Checks
-        run: nimble testSize
+        run: |
+          # Add ARM toolchain to path if found
+          ARM_PATH=$(find ~/.pebble-sdk -name "arm-none-eabi-size" -exec dirname {} \; | head -n 1)
+          if [ -n "$ARM_PATH" ]; then echo "$ARM_PATH" >> $GITHUB_PATH; fi
+          nimble testSize
       
       - name: Upload Test Results
         if: always()
