@@ -98,9 +98,9 @@ task docs, "Generate documentation":
     mkDir("docs/html")
   
   # Standard documentation generation for high-level API
-  let docCmd = "nim doc --project --outdir:docs/html --path:src src/nebble.nim"
+  let docCmd = "nim doc --project --git.url:https://github.com/Brokezawa/nebble --git.commit:main --outdir:docs/html --path:src src/nebble.nim"
   exec docCmd
   
   # Documentation for JS component
-  let pkjsDocCmd = "nim doc --backend:js --outdir:docs/html --path:src src/nebble/pkjs.nim"
+  let pkjsDocCmd = "nim doc --backend:js --git.url:https://github.com/Brokezawa/nebble --git.commit:main --outdir:docs/html --path:src src/nebble/pkjs.nim"
   exec pkjsDocCmd

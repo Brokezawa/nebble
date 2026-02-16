@@ -82,10 +82,17 @@ Managed types (Handles) are the recommended way to use Nebble. They automaticall
 ## Documentation
 
 - **[Architecture](docs/ARCHITECTURE.md)** - Details on managed types and the build pipeline.
+- **[Contributing](docs/CONTRIBUTING.md)** - Guide for contributing to Nebble.
 - **[Declarative DSL](docs/DECLARATIVE_DSL.md)** - Guide to building UIs with `nebbleApp`.
+- **[Examples](docs/EXAMPLES.md)** - Overview of included example projects.
+- **[Getting Started](docs/GETTING_STARTED.md)** - Comprehensive setup and first app guide.
 - **[Zero-Heap Performance](docs/HEAP_FREE.md)** - How Nebble avoids RAM fragmentation.
-- **[Pebble C to Nim Migration Guide](docs/MIGRATION.md)** - Translation reference for C developers.
+- **[Migration Guide](docs/MIGRATION.md)** - Translation reference for C developers.
+- **[Nim Features](docs/NIM_FEATURES.md)** - Overview of Nim features used in Nebble.
+- **[Full-Stack Guide](docs/NIM_PKJS.md)** - Writing phone-side logic in Nim.
 - **[Quick Reference](docs/QUICK_REFERENCE.md)** - Fast look at common APIs.
+- **[Roadmap](docs/ROADMAP.md)** - Project status and future plans.
+- **[Testing](docs/TESTING.md)** - Guide to running Nebble's test suite.
 - **[CLI Reference](cli/README.md)** - Build tool commands and usage.
 
 ## Examples
