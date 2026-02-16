@@ -42,6 +42,9 @@ jobs:
           nim-version: '2.2.6'
           repo-token: ${{ secrets.GITHUB_TOKEN }}
       
+      - name: Install Nebble Library
+        run: nimble install -y
+      
       - name: Build CLI Binary
         run: |
           cd cli

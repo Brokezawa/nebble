@@ -49,6 +49,9 @@ jobs:
           pebble --version
           pebble sdk list
       
+      - name: Install Nebble Library
+        run: nimble install -y
+      
       - name: Build CLI
         run: |
           cd cli
@@ -98,6 +101,9 @@ jobs:
       
       - name: Check nimble file syntax
         run: nimble check
+      
+      - name: Install Nebble Library
+        run: nimble install -y
       
       - name: Check CLI compiles
         run: |
