@@ -15,29 +15,34 @@ proc updateBatteryDisplay(state: BatteryChargeState)
 
 # Declarative App
 nebbleApp:
+  window:
+    backgroundColor = GColorBlack
+
   statusBarLayer:
     id = sStatusBar
-    color = pblIfColorElse(GColorWhite, GColorBlack)
-    bgColor = pblIfColorElse(GColorBlack, GColorWhite)
+    color = GColorWhite
+    bgColor = GColorBlack
 
   textLayer:
     id = batteryLayer
-    fullWidth = true
+    x = 0
+    w = PBLDisplayWidth
     y = pblIfRoundElse(65, 60)
     h = 30
     alignment = GTextAlignmentCenter
     font = FONT_KEY_GOTHIC_24_BOLD
-    color = pblIfColorElse(GColorWhite, GColorBlack)
+    color = GColorWhite
     bgColor = GColorClear
     
   textLayer:
     id = chargingLayer
-    fullWidth = true
+    x = 0
+    w = PBLDisplayWidth
     y = pblIfRoundElse(100, 95)
     h = 30
     alignment = GTextAlignmentCenter
     font = FONT_KEY_GOTHIC_18
-    color = pblIfColorElse(GColorWhite, GColorBlack)
+    color = GColorWhite
     bgColor = GColorClear
 
   init:
