@@ -42,13 +42,13 @@ proc selectClick(menuLayer: ptr MenuLayer, index: ptr MenuIndex, context: pointe
 
 when declared(AppGlanceReloadSession):
   proc appGlanceReload(session: ptr AppGlanceReloadSession, limit: csize_t, context: pointer) {.cdecl.} =
-  ## Called by the system to refresh the app menu slice.
-  var msg: FixedString[32]
-  msg.f("Last: ", lastSelected)
-  
-  # Add a slice that shows what we last selected in the app
-  when declared(session.addSlice):
-    discard session.addSlice(msg.toCstring)
+    ## Called by the system to refresh the app menu slice.
+    var msg: FixedString[32]
+    msg.f("Last: ", lastSelected)
+    
+    # Add a slice that shows what we last selected in the app
+    when declared(session.addSlice):
+      discard session.addSlice(msg.toCstring)
 
 # ============================================================================
 # Declarative App
