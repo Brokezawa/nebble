@@ -103,6 +103,11 @@ Check the `examples/` directory for complete working apps:
 - `persist_demo`: Using the idiomatic storage API.
 - `animation_demo`: Property animations and sequences.
 
+## Special Thanks
+
+*   **[PMunch](https://github.com/PMunch)** and the **[Futhark](https://github.com/PMunch/futhark)** contributors for the fantastic tool that powers our FFI binding generation.
+*   The **[Rebble Alliance](https://rebble.io/)** and the original **Pebble** team for their enduring hardware, SDK, and documentation that made this project possible.
+
 ---
 
 **Built for the Pebble community**
