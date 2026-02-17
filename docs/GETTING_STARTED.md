@@ -115,19 +115,22 @@ nebble build
 This command triggers the entire pipeline:
 1. Nim compilation to C (for the watch).
 2. Nim compilation to JS (for the phone component).
-3. Generating the correct `package.json` metadata on the fly.
-4. Invoking the Pebble build system.
+3. Generating the unified `package.json` metadata on the fly.
+4. Invoking the Pebble build system to generate a single `.pbw` bundle for all platforms.
 
 ### Step 4: Run in Emulator
 
 Nebble provides aliases for common Pebble commands for consistency:
 
 ```bash
-# Start emulator and install
+# Start emulator and install the unified bundle
 nebble install --emulator basalt
+
+# Or install to all platforms at once
+nebble install --emulator all
 ```
 
-*Note: `nebble install` is a wrapper around `pebble install`.*
+*Note: `nebble install` is a wrapper around `pebble install` that defaults to using the unified `.pbw` from the `build/` directory.*
 
 ## Cross-Platform Usage
 

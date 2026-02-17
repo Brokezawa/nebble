@@ -295,7 +295,7 @@ macro nebbleApp*(body: untyped): untyped =
             `layerId` = newActionBarLayer()
           if not bgColor.isNil:
             layerInits.add quote do: `layerId`.backgroundColor = `bgColor`
-          windowInits.add quote do:
+          layerAdds.add quote do:
             `layerId`.addToWindow(`win`)
 
         of "rotBitmapLayer":

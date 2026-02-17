@@ -88,7 +88,7 @@ proc compileNimToJs*(cfg: NebbleConfig): bool =
   
   return true
 
-proc generateAppInfo*(cfg: NebbleConfig, platform: string): bool =
+proc generateAppInfo*(cfg: NebbleConfig, platforms: seq[string]): bool =
   ## Generate appinfo.json from nebble.json config
   # Pebble SDK expects appinfo.json in project root, not in build/
   
@@ -112,7 +112,7 @@ proc generateAppInfo*(cfg: NebbleConfig, platform: string): bool =
     "versionLabel": versionLabel,
     "versionCode": 1,
     "sdkVersion": "3",
-    "targetPlatforms": [platform],
+    "targetPlatforms": platforms,
     "watchapp": {
       "watchface": isWatchface
     },
@@ -134,7 +134,7 @@ proc generateAppInfo*(cfg: NebbleConfig, platform: string): bool =
   writeFile("appinfo.json", appinfo.pretty)
   return true
 
-proc generatePackageJson*(cfg: NebbleConfig, platform: string): bool =
+proc generatePackageJson*(cfg: NebbleConfig, platforms: seq[string]): bool =
   ## Generate package.json from nebble.json config (Modern SDK requirement)
   
   # Determine watchface or app
@@ -166,7 +166,7 @@ proc generatePackageJson*(cfg: NebbleConfig, platform: string): bool =
       "uuid": cfg.uuid,
       "displayName": cfg.name,
       "sdkVersion": "3",
-      "targetPlatforms": [platform],
+      "targetPlatforms": platforms,
       "watchapp": {
         "watchface": isWatchface
       },
@@ -191,14 +191,14 @@ proc copyNimCFiles*(cfg: NebbleConfig, platform: string): bool =
   ## Copy Nim-generated C files to the Pebble project structure
   let
     nimcacheDir = "nimcache"
-    srcCDir = "src" / "c"
+    srcCDir = "src" / "c" / platform
   
-  # Create src/c directory and clean it
+  # Create src/c/<platform> directory and clean it
   if dirExists(srcCDir):
     removeDir(srcCDir)
   createDir(srcCDir)
   
-  # Copy all .c files from nimcache to src/c
+  # Copy all .c files from nimcache to src/c/<platform>
   var filesCopied = 0
   for kind, path in walkDir(nimcacheDir):
     if kind == pcFile and path.endsWith(".c"):
@@ -234,10 +234,10 @@ proc copyNimCFiles*(cfg: NebbleConfig, platform: string): bool =
       echo "    - ", path
     return false
   
-  echo "  Copied ", filesCopied, " files to src/c/"
+  echo "  Copied ", filesCopied, " files to src/c/", platform, "/"
   return true
 
-proc runPebbleBuild*(cfg: NebbleConfig, platform: string): bool =
+proc runPebbleBuild*(cfg: NebbleConfig): bool =
   ## Run pebble build command
   let cmd = "pebble build"
   
@@ -248,12 +248,6 @@ proc runPebbleBuild*(cfg: NebbleConfig, platform: string): bool =
     echo "  Pebble build failed:"
     echo output
     return false
-  
-  # Rename the output .pbw to include the platform name
-  let pbwFile = "build" / (cfg.name & ".pbw")
-  let platformPbwFile = "build" / (cfg.name & "_" & platform & ".pbw")
-  if fileExists(pbwFile):
-    moveFile(pbwFile, platformPbwFile)
   
   # Show relevant output (success messages)
   for line in output.splitLines():

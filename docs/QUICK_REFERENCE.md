@@ -47,9 +47,10 @@ nebbleApp:
 ```
 
 ### Layout Properties
-- `fullWidth = true` / `fullHeight = true`
-- `x = center` / `y = center`
-- `fullScreen = true`
+- `fullWidth = true` / `fullHeight = true`: Relative to parent or screen.
+- `x = center` / `y = center`: Centers the layer within its parent at runtime.
+- `fullScreen = true`: Matches parent layer bounds (or root window).
+- `parent = otherLayer`: Manages hierarchy and memory ownership.
 
 ## 3. String Formatting (Heap-Free)
 

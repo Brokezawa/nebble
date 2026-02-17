@@ -111,48 +111,53 @@ proc cmdBuild*(platform: string) =
   echo "Building for platforms: ", platforms.join(", ")
   echo ""
   
-  # Build for each platform
+  # Step 1: Compile Nim to C for each platform
   for p in platforms:
-    echo "═══ Building for ", p, " ═══"
+    echo "═══ Preparing ", p, " ═══"
     
-    # Step 1: Compile Nim to C
+    # Compile Nim to C
     if not compileNimToC(cfg, p):
       echo "✗ Nim compilation failed for ", p
       quit(1)
     echo "✓ Nim → C compilation successful"
-
-    # Step 1b: Compile Nim to JS (if src/pkjs.nim exists)
-    if not compileNimToJs(cfg):
-      echo "✗ Nim JS compilation failed"
-      quit(1)
     
-    # Step 2: Generate package.json (sole source of truth for SDK 3+)
-    if not generatePackageJson(cfg, p):
-      echo "✗ package.json generation failed"
-      quit(1)
-    echo "✓ Generated package.json"
-    
-    # Step 3: Copy Nim-generated C files to Pebble project
+    # Copy Nim-generated C files to Pebble project
     if not copyNimCFiles(cfg, p):
-      echo "✗ Failed to copy C files"
+      echo "✗ Failed to copy C files for ", p
       quit(1)
     echo "✓ Copied Nim-generated C files"
-    
-    # Step 4: Run Pebble build
-    if not runPebbleBuild(cfg, p):
-      echo "✗ Pebble build failed for ", p
-      quit(1)
-    echo "✓ Pebble build successful"
     echo ""
+
+  # Step 2: Compile Nim to JS (if src/pkjs.nim exists)
+  if not compileNimToJs(cfg):
+    echo "✗ Nim JS compilation failed"
+    quit(1)
+  
+  # Step 3: Generate package.json (sole source of truth for SDK 3+)
+  if not generatePackageJson(cfg, platforms):
+    echo "✗ package.json generation failed"
+    quit(1)
+  echo "✓ Generated package.json"
+  
+  # Step 4: Run Pebble build
+  echo "═══ Running Pebble Build ═══"
+  if not runPebbleBuild(cfg):
+    echo "✗ Pebble build failed"
+    quit(1)
+  echo "✓ Pebble build successful"
   
   echo "═══════════════════════════════"
   echo "✓ Build complete!"
   echo ""
-  echo "Generated files:"
-  for p in platforms:
-    let pbwFile = "build" / (cfg.name & "_" & p & ".pbw")
-    if fileExists(pbwFile):
-      echo "  ", pbwFile, " (", p, ")"
+  echo "Generated bundle:"
+  let pbwFile = "build" / (cfg.name & ".pbw")
+  if fileExists(pbwFile):
+    echo "  ", pbwFile
+  else:
+    # Fallback to check if it's in the current dir (some SDK versions)
+    let localPbw = cfg.name & ".pbw"
+    if fileExists(localPbw):
+      echo "  ", localPbw
 
 proc cmdInstall*(platform: string, toPhone: bool, phoneIp: string, pbwPath: string = "") =
   ## Install to emulator or phone
@@ -161,6 +166,7 @@ proc cmdInstall*(platform: string, toPhone: bool, phoneIp: string, pbwPath: stri
     quit(1)
   
   let cfg = loadConfig()
+  let defaultPbw = "build" / (cfg.name & ".pbw")
   
   if toPhone:
     # Install to phone
@@ -176,6 +182,8 @@ proc cmdInstall*(platform: string, toPhone: bool, phoneIp: string, pbwPath: stri
         echo "Error: PBW file not found: ", pbwPath
         quit(1)
       cmd.add(" " & pbwPath)
+    elif fileExists(defaultPbw):
+      cmd.add(" " & defaultPbw)
     
     cmd.add(" --phone " & phoneIp)
     
@@ -191,26 +199,30 @@ proc cmdInstall*(platform: string, toPhone: bool, phoneIp: string, pbwPath: stri
     let targetPlatforms = if platform.toLowerAscii == "all":
       @validPlatforms
     else:
-      if not validatePlatform(platform):
-        echo "Error: Invalid platform '", platform, "'"
+      let targetPlatform = if platform == "": "basalt" else: platform
+      if not validatePlatform(targetPlatform):
+        echo "Error: Invalid platform '", targetPlatform, "'"
         quit(1)
-      @[platform]
+      @[targetPlatform]
     
     for p in targetPlatforms:
       echo "Installing to ", p, " emulator..."
-      let pbwFile = "build" / (cfg.name & "_" & p & ".pbw")
-      if not fileExists(pbwFile):
-        echo "✗ Error: ", pbwFile, " not found. Run 'nebble build --platform ", p, "' first."
-        if targetPlatforms.len == 1:
+      
+      var cmd = "pebble install"
+      if pbwPath != "":
+        if not fileExists(pbwPath):
+          echo "Error: PBW file not found: ", pbwPath
           quit(1)
-        continue
-
-      let cmd = "pebble install " & pbwFile & " --emulator " & p
+        cmd.add(" " & pbwPath)
+      elif fileExists(defaultPbw):
+        cmd.add(" " & defaultPbw)
+      
+      cmd.add(" --emulator " & p)
+      
       let (output, exitCode) = execCmdEx(cmd)
       if exitCode != 0:
         echo "✗ Install failed for ", p
         echo output
-        # Continue with others if 'all'
         if targetPlatforms.len == 1:
           quit(1)
       else:

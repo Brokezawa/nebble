@@ -17,7 +17,7 @@ This layer provides a 1:1 mapping of the Pebble C API.
 This layer wraps the FFI in Nim-friendly abstractions.
 - **Naming:** Uses Nim `camelCase`.
 - **Patterns:** Replaces manual function calls with object methods and property-style accessors (e.g., `layer.frame = rect`).
-- **Safety:** Employs distinct types and managed handles to prevent common C errors like type-mismatch or null pointer dereferences.
+- **Safety:** Employs managed handles (via ARC) to prevent common C errors like type-mismatch or null pointer dereferences.
 
 ---
 
@@ -28,10 +28,9 @@ The most significant technical challenge in wrapping the Pebble SDK is its manua
 ### ARC-Based Handles
 Nebble uses Nim's **ARC (Automatic Reference Counting)** memory management. We implement "Managed Handles" using an ownership-aware object model:
 
-1. **Internal Structure:** Handles (e.g., `TextLayerHandle`) are defined as `object` types containing:
+1. **Internal Structure:** Handles (e.g., `TextLayerHandle`) are defined as `DefineUniqueHandle` types containing:
    - `pRaw`: The underlying C pointer to the SDK resource.
    - `ownership`: A `HandleOwnership` enum (`hoOwned`, `hoParented`, `hoUnowned`).
-   - `pParent`: An optional pointer to a parent layer for hierarchy tracking.
 2. **Destructors:** We implement the `=destroy` hook. Nim calls this automatically when a handle goes out of scope or is reassigned. The destructor only calls the C `_destroy` function if `ownership == hoOwned`.
 3. **Move Semantics:** Copying is disabled via `{.error.}` on `=copy`, ensuring unique ownership of UI resources. Reassignment performs a `=sink` which transfers ownership and invalidates the source.
 
@@ -53,10 +52,13 @@ Nebble doesn't just provide a library; it provides an intelligent compilation pi
    - **Watch:** `nim c --os:any --cpu:arm --mm:arc --compileOnly ...` compiles Nim to C source files.
    - **Phone:** `nim js -d:release ...` compiles `src/pkjs.nim` to JavaScript.
    - Cross-compilation flags are used to target the ARM Cortex-M architecture without a standard OS.
-2. **Bridge Phase:** The CLI generates a platform-specific `package.json` (replacing the legacy `appinfo.json`) and copies the generated C files into the `src/c/` directory.
+2. **Bridge Phase:** 
+   - The CLI generates a unified `package.json` (replacing the legacy `appinfo.json`) that lists all target platforms.
+   - Nim-generated C files are segregated into platform-specific subdirectories (e.g., `src/c/aplite/`, `src/c/basalt/`) to allow for distinct platform-specific optimizations and defines.
 3. **Pebble Phase:** `pebble build`
-   - The Pebble SDK's `waf` build system takes over, using Webpack for JS bundling if `enableMultiJS` is set (handled by Nebble CLI).
-   - The CLI intelligently renames resulting `.pbw` files to include the platform name (e.g., `my_app_basalt.pbw`) to prevent overwriting during multi-platform builds.
+   - The Pebble SDK's `waf` build system takes over.
+   - Because all target platforms are defined in one manifest and sources are segregated, a single `pebble build` command produces a unified `.pbw` bundle.
+   - This bundle contains the binaries and resources for all requested hardware platforms.
 
 ---
 
@@ -64,7 +66,7 @@ Nebble doesn't just provide a library; it provides an intelligent compilation pi
 
 ### The `nebbleApp` Macro
 To remove C boilerplate (entry point, window creation, event loop), Nebble uses a powerful macro that generates the entire app skeleton. Key features include:
-- **Responsive Layout:** Supports `fullWidth`, `fullHeight`, `x=center`, and `y=center` which calculate coordinates at runtime relative to the parent layer.
+- **Responsive Layout:** Supports `fullWidth`, `fullHeight`, `x=center`, and `y=center` which calculate coordinates at runtime relative to the parent layer's bounds.
 - **Initialization Order:** Ensures the window is pushed to the stack *before* the user's `init:` block runs, making all UI components available for manipulation immediately.
 - **Runtime Init:** Explicitly handles `NimMain()` and provides the necessary `_exit` stubs for the ARM toolchain.
 

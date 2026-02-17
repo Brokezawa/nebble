@@ -34,12 +34,15 @@ Create a new Pebble project with scaffolding and templates.
 
 ### `nebble build [--platform <p>]`
 Build the project using the Nim to C to Pebble pipeline.
-- `--platform <p>`: Build for specific platform (aplite, basalt, chalk, diorite, emery, flint). Default: all platforms.
+- `--platform <p>`: Build for specific platform (aplite, basalt, chalk, diorite, emery, flint). Default: all platforms listed in `nebble.json`.
+- Multiple `--platform` flags can be used to build for a subset of platforms.
+- The build process generates a single unified `.pbw` bundle containing all specified platform binaries.
 
 ### `nebble install --emulator <platform> | --phone`
 Install the built app to a Pebble emulator or a physical phone.
-- `--emulator <p>`: Target emulator platform. Use "all" to install to all supported platforms.
-- `--phone [<IP>]`: Install to phone (optionally specify IP).
+- `--emulator <p>`: Target emulator platform. Use "all" to install to all valid platforms.
+- `--phone <IP> [<pbw>]`: Install to phone at specified IP. Optionally specify path to a custom `.pbw`.
+- By default, it uses the unified `.pbw` bundle from the `build/` directory.
 
 ### `nebble kill [--force]`
 Kill all running Pebble emulators.

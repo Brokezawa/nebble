@@ -26,7 +26,7 @@ nebbleApp:
   textLayer:
     id = batteryLayer
     fullWidth = true
-    y = pblIfRoundElse(65, 60)
+    y = (PBLDisplayHeight.int div 2) - 25
     h = 30
     alignment = GTextAlignmentCenter
     font = FONT_KEY_GOTHIC_24_BOLD
@@ -36,7 +36,7 @@ nebbleApp:
   textLayer:
     id = chargingLayer
     fullWidth = true
-    y = pblIfRoundElse(100, 95)
+    y = (PBLDisplayHeight.int div 2) + 10
     h = 30
     alignment = GTextAlignmentCenter
     font = FONT_KEY_GOTHIC_18
