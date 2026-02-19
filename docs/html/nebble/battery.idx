@@ -1,4 +1,0 @@
-nimTitle	battery	nebble/battery.html	module src/nebble/battery		0
-nim	batteryStateServiceSubscribe	nebble/battery.html#batteryStateServiceSubscribe,BatteryStateHandler	proc batteryStateServiceSubscribe(handler: BatteryStateHandler)		11
-nim	batteryStateServiceUnsubscribe	nebble/battery.html#batteryStateServiceUnsubscribe	proc batteryStateServiceUnsubscribe()		16
-nim	batteryStateServicePeek	nebble/battery.html#batteryStateServicePeek	proc batteryStateServicePeek(): BatteryChargeState		21

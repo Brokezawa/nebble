@@ -1,6 +1,0 @@
-nimTitle	vibes	nebble/vibes.html	module src/nebble/vibes		0
-nim	vibesCancel	nebble/vibes.html#vibesCancel	proc vibesCancel()		11
-nim	vibesShortPulse	nebble/vibes.html#vibesShortPulse	proc vibesShortPulse()		16
-nim	vibesLongPulse	nebble/vibes.html#vibesLongPulse	proc vibesLongPulse()		21
-nim	vibesDoublePulse	nebble/vibes.html#vibesDoublePulse	proc vibesDoublePulse()		26
-nim	vibesEnqueueCustomPattern	nebble/vibes.html#vibesEnqueueCustomPattern,VibePattern	proc vibesEnqueueCustomPattern(pattern: VibePattern)		31

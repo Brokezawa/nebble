@@ -55,7 +55,7 @@ proc writeString*(key: uint32, value: cstring): PersistStatus {.inline.} =
 proc read*[N](key: uint32, s: var FixedString[N]): PersistStatus {.inline.} =
   ## Read a string from persistent storage into a FixedString.
   ## Returns the length of the string, or negative on error.
-  let res = ffi.persist_read_string(key, s.toCstring, N.csize_t)
+  let res = ffi.persist_read_string(key, s.cstr, N.csize_t)
   if res > 0:
     # persist_read_string returns length including NULL terminator
     s.len = min(res.int - 1, N - 1)
@@ -67,7 +67,7 @@ proc read*[N](key: uint32, s: var FixedString[N]): PersistStatus {.inline.} =
 proc write*[N](key: uint32, s: FixedString[N]): PersistStatus {.inline.} =
   ## Write a FixedString to persistent storage.
   ## Returns the length written, or negative on error.
-  result = ffi.persist_write_string(key, s.toCstring)
+  result = ffi.persist_write_string(key, s.cstr)
 
 # ============================================================================
 # Data Operations

@@ -1,4 +1,0 @@
-nimTitle	data_logging	nebble/data_logging.html	module src/nebble/data_logging		0
-nim	dataLoggingCreate	nebble/data_logging.html#dataLoggingCreate,uint32,DataLoggingItemType,uint16,bool	proc dataLoggingCreate(tag: uint32; itemType: DataLoggingItemType;\n                  itemLength: uint16; resume: bool): DataLoggingSessionRef		15
-nim	dataLoggingFinish	nebble/data_logging.html#dataLoggingFinish,DataLoggingSessionRef	proc dataLoggingFinish(loggingSession: DataLoggingSessionRef)		23
-nim	dataLoggingLog	nebble/data_logging.html#dataLoggingLog,DataLoggingSessionRef,pointer,cuint	proc dataLoggingLog(loggingSession: DataLoggingSessionRef; data: pointer;\n               numItems: cuint): DataLoggingResult		29

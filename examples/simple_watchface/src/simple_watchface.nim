@@ -4,6 +4,7 @@
 
 import nebble
 import nebble/foundation/logging
+import nebble/util/fixed_strings
 
 # Forward declaration
 proc updateTime(tickTime: ptr tm; unitsChanged: TimeUnits) {.cdecl.}
@@ -31,10 +32,10 @@ nebbleApp:
     logInfo("Watchface Init")
 
 var
-  timeBuffer: array[16, char]
+  timeBuffer: FixedString[16]
 
 proc updateTime(tickTime: ptr tm; unitsChanged: TimeUnits) {.cdecl.} =
   logInfo("updateTime called")
-  let timeFmt = if clockIs24hStyle(): "%H:%M" else: "%I:%M"
-  discard strftime(addr timeBuffer[0], 16, timeFmt, tickTime)
-  timeLayer.text = cast[cstring](addr timeBuffer[0])
+  # Use high-level formatTime - no addr or cast needed
+  discard timeBuffer.formatTime(tickTime)
+  timeLayer.text = timeBuffer.cstr  # Use .cstr template for safety

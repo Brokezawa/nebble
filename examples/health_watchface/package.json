@@ -1,0 +1,24 @@
+{
+  "name": "health_watchface",
+  "version": "1.0.0",
+  "author": "Nebble",
+  "private": true,
+  "main": "",
+  "dependencies": {},
+  "pebble": {
+    "uuid": "deadeade-dead-4ead-bead-deaddeaddec1",
+    "displayName": "health_watchface",
+    "sdkVersion": "3",
+    "targetPlatforms": [
+      "basalt"
+    ],
+    "watchapp": {
+      "watchface": false
+    },
+    "enableMultiJS": false,
+    "messageKeys": {},
+    "resources": {
+      "media": []
+    }
+  }
+}

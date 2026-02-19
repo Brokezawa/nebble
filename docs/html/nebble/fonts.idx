@@ -1,4 +1,0 @@
-nimTitle	fonts	nebble/fonts.html	module src/nebble/fonts		0
-nim	getSystemFont	nebble/fonts.html#getSystemFont,cstring	proc getSystemFont(fontKey: cstring): GFont		12
-nim	loadCustomFont	nebble/fonts.html#loadCustomFont,ResHandle	proc loadCustomFont(handle: ResHandle): GFont		36
-nim	unloadCustomFont	nebble/fonts.html#unloadCustomFont,GFont	proc unloadCustomFont(font: GFont)		41

@@ -95,7 +95,7 @@ template DefineUniqueHandle*(Name: untyped, RawType: typedesc,
     dest.pRaw = src.pRaw
     dest.ownership = src.ownership
     dest.pParent = src.pParent
-    var srcPtr = cast[ptr `Name Handle`](unsafeAddr src)
+    var srcPtr = cast[ptr `Name Handle`](addr src)
     srcPtr.pRaw = nil
     srcPtr.ownership = hoNone
     srcPtr.pParent = nil

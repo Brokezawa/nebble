@@ -44,18 +44,18 @@ cd nebble
 nimble install
 ```
 
-### Build the CLI tool
+### Verify CLI Installation
 
-Nebble includes a CLI tool to simplify the build process. To build and install it locally:
+The Nebble CLI is automatically installed when you run `nimble install nebble`. Verify the installation:
 
-```bash
-cd cli
-nimble install_local
-```
-
-Verify the installation:
 ```bash
 nebble version
+```
+
+If the command is not found, ensure your Nimble bin directory is in your PATH:
+```bash
+# Add to your shell profile (~/.bashrc, ~/.zshrc, etc.)
+export PATH="$HOME/.nimble/bin:$PATH"
 ```
 
 ## Your First App: Hello World

@@ -84,8 +84,8 @@ proc `=sink`*(dest: var WindowHandle, src: WindowHandle) =
   `=destroy`(dest)
   dest.raw = src.raw
   dest.state = src.state
-  # Zero out src via unsafeAddr since src is immutable
-  var srcPtr = cast[ptr WindowHandle](unsafeAddr src)
+  # Zero out src via addr since src is immutable
+  var srcPtr = cast[ptr WindowHandle](addr src)
   srcPtr.raw = nil
   srcPtr.state = rsDestroyed
 

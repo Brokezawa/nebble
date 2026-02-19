@@ -4,6 +4,7 @@
 
 import nebble
 import nebble/foundation/events/health
+import nebble/util/fixed_strings
 
 # Module buffers
 var
@@ -59,26 +60,23 @@ nebbleApp:
     handler = updateTime
 
   init:
-    # Force an immediate update
-    var t: time_t = time(nil)
-    updateTime(localtime(addr t), MINUTE_UNIT)
+    # Force an immediate update using getLocalTime()
+    updateTime(getLocalTime(), MINUTE_UNIT)
 
 # Implementations
 proc updateTime(tickTime: ptr tm; unitsChanged: TimeUnits) {.cdecl.} =
-  let timeFmt = if clockIs24hStyle(): "%H:%M" else: "%I:%M"
-  
-  # Heap-free formatting
-  discard strftime(addr timeStr.data[0], 16, timeFmt, tickTime)
-  timeLayer.text = timeStr
+  # Heap-free formatting using high-level API
+  discard timeStr.formatTime(tickTime)
+  timeLayer.text = timeStr.cstr
   
   # Update health stats
   when declared(health.sumToday):
     let steps = health.sumToday(HealthMetricStepCount)
     stepsStr.f("Steps: ", steps)
-    stepsLayer.text = stepsStr
+    stepsLayer.text = stepsStr.cstr
     
     let sleepSeconds = health.sumToday(HealthMetricSleepSeconds)
     let sleepHours = sleepSeconds div 3600
     let sleepMins = (sleepSeconds mod 3600) div 60
     sleepStr.f("Sleep: ", sleepHours, "h ", sleepMins, "m")
-    sleepLayer.text = sleepStr
+    sleepLayer.text = sleepStr.cstr

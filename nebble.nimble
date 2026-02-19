@@ -4,6 +4,8 @@ author        = "Brokezawa"
 description   = "Nim wrapper for the Pebble smartwatch SDK"
 license       = "MIT"
 srcDir        = "src"
+binDir        = "bin"
+bin           = @["tools/nebble"]
 
 # Dependencies
 requires "nim >= 2.2.0"
@@ -52,7 +54,7 @@ task testExample, "Build all examples for all platforms (Integration Tests)":
     echo "\n=== Testing: " & ex & " ==="
     withDir "examples/" & ex:
       for p in platforms:
-        let cmd = "../../cli/bin/nebble build --platform " & p
+        let cmd = "../../bin/nebble build --platform " & p
         echo "  Building for " & p & "..."
         try:
           exec cmd
@@ -78,7 +80,7 @@ task testSize, "Check binary size for all examples (Aplite limit)":
       if fileExists(path & "/src/" & name & ".nim"):
         echo "\n=== Size check: " & name & " ==="
         withDir path:
-          exec "../../cli/bin/nebble size --platform aplite"
+          exec "../../bin/nebble size --platform aplite"
 
 task test, "Run all tests (unit + examples + size)":
   exec "nimble testUnit"

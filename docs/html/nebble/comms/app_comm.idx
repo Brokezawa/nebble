@@ -1,3 +1,0 @@
-nimTitle	app_comm	nebble/comms/app_comm.html	module nebble/comms/app_comm		0
-nim	setSniffInterval	nebble/comms/app_comm.html#setSniffInterval,SniffInterval	proc setSniffInterval(interval: SniffInterval)		13
-nim	getSniffInterval	nebble/comms/app_comm.html#getSniffInterval	proc getSniffInterval(): SniffInterval		18

@@ -1,4 +1,0 @@
-nimTitle	timer	nebble/timer.html	module src/nebble/timer		0
-nim	newAppTimer	nebble/timer.html#newAppTimer,uint32,AppTimerCallback,pointer	proc newAppTimer(timeoutMs: uint32; callback: AppTimerCallback; callbackData: pointer): ptr AppTimer		12
-nim	cancel	nebble/timer.html#cancel,ptr.struct_AppTimer	proc cancel(timer: ptr AppTimer)		20
-nim	reschedule	nebble/timer.html#reschedule,ptr.struct_AppTimer,uint32	proc reschedule(timer: ptr AppTimer; newTimeoutMs: uint32): bool		25

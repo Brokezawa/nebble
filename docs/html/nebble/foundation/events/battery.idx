@@ -1,7 +1,0 @@
-nimTitle	battery	nebble/foundation/events/battery.html	module nebble/foundation/events/battery		0
-nim	state	nebble/foundation/events/battery.html#state	proc state(): BatteryChargeState		13
-nim	chargePercent	nebble/foundation/events/battery.html#chargePercent	proc chargePercent(): uint8		18
-nim	isCharging	nebble/foundation/events/battery.html#isCharging	proc isCharging(): bool		23
-nim	isPlugged	nebble/foundation/events/battery.html#isPlugged	proc isPlugged(): bool		28
-nim	subscribe	nebble/foundation/events/battery.html#subscribe,BatteryStateHandler	proc subscribe(handler: BatteryStateHandler)		38
-nim	unsubscribe	nebble/foundation/events/battery.html#unsubscribe	proc unsubscribe()		44

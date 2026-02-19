@@ -54,12 +54,21 @@ nebbleApp:
 
 ## 3. String Formatting (Heap-Free)
 
-Use `FixedString` to avoid memory fragmentation.
+Use `FixedString` to avoid memory fragmentation. Use `.cstr` to safely convert to cstring for Pebble APIs.
 
 ```nim
 var s: FixedString[32]
 s.f("Steps: ", steps)
-label.text = s
+label.text = s.cstr  # Use .cstr template for safety
+```
+
+### Time Formatting
+```nim
+var timeStr: FixedString[16]
+timeStr.formatTime(tickTime)  # Uses default format
+# or
+timeStr.formatTime("%H:%M", tickTime)  # Custom format
+timeLayer.text = timeStr.cstr
 ```
 
 ## 4. Graphics & Drawing
@@ -82,7 +91,21 @@ Inside a `LayerUpdateProc`:
 
 ## 6. Communication
 
-- **AppMessage**: `open(inbox, outbox)`, `onInboxReceived(handler)`
+### AppMessage (Result-based API)
+```nim
+# Send a message
+let outbox = beginOutbox()
+if outbox.success:
+  discard dictWriteInt(outbox.iter, key, value)
+  discard outboxSend()
+
+# Receive
+onInboxReceived(proc(iter: ptr DictionaryIterator, ctx: pointer) {.cdecl.} =
+  let value = readInt32(iter, amkMyKey)
+)
+```
+
+- **Legacy**: `open(inbox, outbox)`, `onInboxReceived(handler)`
 - **AppSync**: `h.set(tuplets)`, `h.get(key)`
 
 ## 7. Phone Component (PKJS in Nim)

@@ -1,3 +1,0 @@
-nimTitle	focus	nebble/foundation/events/focus.html	module nebble/foundation/events/focus		0
-nim	subscribe	nebble/foundation/events/focus.html#subscribe,AppFocusHandler	proc subscribe(handler: AppFocusHandler)		13
-nim	unsubscribe	nebble/foundation/events/focus.html#unsubscribe	proc unsubscribe()		18

@@ -35,7 +35,7 @@ proc `=sink`*(dest: var ActionMenuLevelHandle, src: ActionMenuLevelHandle) =
   `=destroy`(dest)
   dest.pRaw = src.pRaw
   dest.ownership = src.ownership
-  var srcPtr = cast[ptr ActionMenuLevelHandle](unsafeAddr src)
+  var srcPtr = cast[ptr ActionMenuLevelHandle](addr src)
   srcPtr.pRaw = nil
   srcPtr.ownership = hoNone
 
@@ -78,7 +78,7 @@ proc `=sink`*(dest: var ActionMenuHandle, src: ActionMenuHandle) =
   `=destroy`(dest)
   dest.pRaw = src.pRaw
   dest.ownership = src.ownership
-  var srcPtr = cast[ptr ActionMenuHandle](unsafeAddr src)
+  var srcPtr = cast[ptr ActionMenuHandle](addr src)
   srcPtr.pRaw = nil
   srcPtr.ownership = hoNone
 

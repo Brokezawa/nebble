@@ -42,12 +42,11 @@ jobs:
       
       - name: Build CLI Binary
         run: |
-          cd cli
           nimble build -d:release
           if [ "${{ runner.os }}" = "Windows" ]; then
-            mv bin/nebble.exe bin/${{ matrix.artifact_name }}
+            mv bin/tools/nebble.exe bin/tools/${{ matrix.artifact_name }}
           else
-            mv bin/nebble bin/${{ matrix.artifact_name }}
+            mv bin/tools/nebble bin/tools/${{ matrix.artifact_name }}
           fi
         shell: bash
       
@@ -55,7 +54,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: ${{ matrix.asset_name }}
-          path: cli/bin/${{ matrix.artifact_name }}
+          path: bin/tools/${{ matrix.artifact_name }}
 
   github-release:
     needs: create-release

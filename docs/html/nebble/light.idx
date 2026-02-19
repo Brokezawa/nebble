@@ -1,3 +1,0 @@
-nimTitle	light	nebble/light.html	module src/nebble/light		0
-nim	lightEnableInteraction	nebble/light.html#lightEnableInteraction	proc lightEnableInteraction()		11
-nim	lightEnable	nebble/light.html#lightEnable,bool	proc lightEnable(enable: bool)		16

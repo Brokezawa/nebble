@@ -29,6 +29,10 @@ type
   InboxDroppedCallback* = message.AppMessageInboxDropped
   OutboxSentCallback* = message.AppMessageOutboxSent
   OutboxFailedCallback* = message.AppMessageOutboxFailed
+  OutboxResult* = message.OutboxResult
+
+# Re-export high-level API
+export beginOutbox
 
 # Type-safe send operations
 # Note: These require calling outboxBegin first to get the iterator
@@ -68,7 +72,7 @@ template send*(iter: ptr DictionaryIterator, key: typed, value: cstring) =
 
 template send*[N](iter: ptr DictionaryIterator, key: typed, value: FixedString[N]) =
   ## Send a FixedString value with the specified key
-  discard message.dictWriteCstring(iter, key.uint32, value.toCstring)
+  discard message.dictWriteCstring(iter, key.uint32, value.cstr)
 
 # Type-safe read operations
 template readInt8*(iter: ptr DictionaryIterator, key: typed): int8 =
@@ -106,7 +110,7 @@ template key*(k: typed): int =
 
 template size*(iter: ptr DictionaryIterator): uint32 =
   ## Get the serialized size of the dictionary
-  message.dictSize(iter)
+  message.size(iter)
 
 template rewind*(iter: ptr DictionaryIterator) =
   ## Rewind the dictionary iterator

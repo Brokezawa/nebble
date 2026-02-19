@@ -35,8 +35,10 @@
 ### 2. Developer Experience
 - [ ] **Emulator Integration**: Improved QEMU process management from CLI.
 - [ ] **AppMessage Serialization**: Macro-driven object mapping.
+- [ ] **Menu DSL**: Declarative macro-based menu definition that hides pointer arithmetic (Complexity: Medium). Currently requires `addr menuSections[0]` which breaks high-level API abstraction.
 
 ### 3. Ecosystem
+- [ ] **Examples Repository**: Separate repository for example projects to reduce package size and improve organization.
 - [ ] **Package Registry**: Central repository for community components.
 - [ ] **Cloud Build**: Web-based build service integration.
 

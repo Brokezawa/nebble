@@ -1,10 +1,11 @@
 ## Statically allocated, heap-free strings for Pebble.
 ##
-## This module provides a `FixedString[N]` type that stores text in a 
-## fixed-size array, and a `fmt` macro that performs zero-allocation 
+## This module provides a `FixedString[N]` type that stores text in a
+## fixed-size array, and a `fmt` macro that performs zero-allocation
 ## string formatting at runtime.
 
 import std/macros
+import ../foundation/time
 
 type
   FixedString*[N: static int] = object
@@ -46,7 +47,7 @@ proc add*[N](s: var FixedString[N], str: cstring) {.inline.} =
 proc addInt*[N](s: var FixedString[N], val: int32) {.inline.} =
   ## Add an integer to the string without heap allocation.
   if s.len >= N - 1: return
-  
+
   if val == 0:
     s.add '0'
     return
@@ -67,18 +68,29 @@ proc addInt*[N](s: var FixedString[N], val: int32) {.inline.} =
     digits[count] = char(ord('0') + (v mod 10))
     v = v div 10
     count.inc
-  
+
   # Add digits in reverse order
   for i in countdown(count - 1, 0):
     s.add digits[i]
 
 # ============================================================================
-# Converters
+# C-string Access (Template for Safety)
 # ============================================================================
 
-template toCstring*[N](s: FixedString[N]): cstring =
-  ## Automatically convert to cstring for Pebble API calls.
-  cast[cstring](unsafeAddr s.data[0])
+template cstr*[N](s: FixedString[N]): cstring =
+  ## Get cstring pointer to FixedString data.
+  ## 
+  ## IMPORTANT: Pebble stores this pointer (doesn't copy), so the FixedString
+  ## must remain alive as long as the text is displayed. Use global/static
+  ## FixedString variables for text that persists.
+  ##
+  ## Template ensures this operates at the call site without creating a copy.
+  ##
+  ## Example:
+  ##   var timeStr: FixedString[16]  # Global variable
+  ##   timeStr.f("12:00")
+  ##   timeLayer.text = timeStr.cstr  # Safe - points to global data
+  cast[cstring](addr s.data[0])
 
 # ============================================================================
 # Format Macro (The "fmt" experience)
@@ -87,7 +99,7 @@ template toCstring*[N](s: FixedString[N]): cstring =
 macro formatInto*(s: var FixedString, body: varargs[untyped]): untyped =
   ## Macro to format multiple values into a FixedString.
   ## Expands to a series of s.add and s.addInt calls.
-  ## 
+  ##
   ## Example:
   ##   var str: `FixedString[32]`
   ##   str.formatInto("Score: ", score, "/", total)
@@ -108,3 +120,27 @@ template f*[N](s: var FixedString[N], body: varargs[untyped]) =
   ## Alias for formatInto with auto-clear.
   s.clear()
   s.formatInto(body)
+
+# ============================================================================
+# Time Formatting Helpers
+# ============================================================================
+
+proc formatTime*[N](s: var FixedString[N], fmt: cstring, time: ptr tm): int {.inline.} =
+  ## Format time using strftime into the FixedString.
+  ## Returns the number of characters written (excluding null terminator).
+  ##
+  ## Example:
+  ##   var timeStr: FixedString[16]
+  ##   timeStr.formatTime("%H:%M", tickTime)
+  ##   timeLayer.text = timeStr
+  result = strftime(cast[cstring](addr s.data[0]), N.csize_t, fmt, time).int
+  if result > 0:
+    s.len = result
+  else:
+    s.len = 0
+    s.data[0] = '\0'
+
+proc formatTime*[N](s: var FixedString[N], time: ptr tm): int {.inline.} =
+  ## Format time using default format ("%H:%M" for 24h or "%I:%M" for 12h).
+  let fmt = if clockIs24hStyle(): "%H:%M" else: "%I:%M"
+  result = s.formatTime(fmt.cstring, time)

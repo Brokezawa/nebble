@@ -51,7 +51,7 @@ proc newGPath*(pathInfo: ptr GPathInfo): GPathHandle {.inline.} =
   result = newGPathHandle(pathInfo)
 
 proc newGPathHandle*(points: openArray[GPoint]): GPathHandle {.inline.} =
-  let info = GPathInfo(num_points: points.len.uint32, points: unsafeAddr points[0])
+  let info = GPathInfo(num_points: points.len.uint32, points: addr points[0])
   result = wrapOwned(ffi.gpath_create(addr info))
 
 proc newGPath*(points: openArray[GPoint]): GPathHandle {.inline.} =

@@ -97,9 +97,10 @@ proc handshakeHandler(data: pointer) {.cdecl.} =
   if jsReady: return
   
   logInfo("Handshake: Sending WatchReady...")
-  var iter: ptr typed_message.DictionaryIterator
-  if outboxBegin(addr iter) == APP_MSG_OK():
-    discard dictWriteInt(iter, AppMessageKey.amkWatchReady.uint32, 1)
+  # Use Result-based API - no addr needed
+  let outbox = beginOutbox()
+  if outbox.success:
+    discard dictWriteInt(outbox.iter, AppMessageKey.amkWatchReady.uint32, 1)
     discard outboxSend()
   
   # Reschedule to try again in 1s
@@ -108,7 +109,7 @@ proc handshakeHandler(data: pointer) {.cdecl.} =
 proc connectionHandler(connected: bool) {.cdecl.} =
   let state: cstring = if connected: "Connected" else: "Disconnected"
   statusStr.f("BT: ", state)
-  statusLayer.text = statusStr
+  statusLayer.text = statusStr.cstr
   if not connected:
     vibes.doublePulse()
 
@@ -118,7 +119,7 @@ proc compassHandler(data: CompassHeadingData) {.cdecl.} =
     # Convert angle units to degrees
     let heading = (data.magnetic_heading.int64 * 360 div math.TRIG_MAX_ANGLE.int64).int32
     headingStr.f("Heading: ", heading)
-    headingLayer.text = headingStr
+    headingLayer.text = headingStr.cstr
 
 proc inboxReceived(iter: ptr typed_message.DictionaryIterator, context: pointer) {.cdecl.} =
   # Handle messages from phone
@@ -128,7 +129,7 @@ proc inboxReceived(iter: ptr typed_message.DictionaryIterator, context: pointer)
   if message.find(iter, AppMessageKey.amkJSReady.uint32) != nil:
     jsReady = true
     msgStr.f("JS Ready! Press SELECT")
-    msgLayer.text = msgStr
+    msgLayer.text = msgStr.cstr
     vibes.shortPulse()
     return
 
@@ -138,10 +139,10 @@ proc inboxReceived(iter: ptr typed_message.DictionaryIterator, context: pointer)
     # Use FixedString for logging to avoid heap
     var logMsg: FixedString[64]
     logMsg.f("Message data: ", msg)
-    logInfo(logMsg.toCstring)
+    logInfo(logMsg.cstr)
     
     msgStr.f("Phone: ", msg)
-    msgLayer.text = msgStr
+    msgLayer.text = msgStr.cstr
     vibes.shortPulse()
   else:
     logInfo("Message field 'Msg' not found")
@@ -156,7 +157,7 @@ proc outboxSent(iter: ptr typed_message.DictionaryIterator, context: pointer) {.
 proc outboxFailed(iter: ptr typed_message.DictionaryIterator, result: typed_message.AppMessageResult, context: pointer) {.cdecl.} =
   var err: FixedString[32]
   err.f("Outbox failed: ", result.int32)
-  logInfo(err.toCstring)
+  logInfo(err.cstr)
   msgLayer.text = "Ping failed!"
 
 proc selectClickHandler(recognizer: ClickRecognizerRef; context: pointer) {.cdecl.} =
@@ -166,13 +167,14 @@ proc selectClickHandler(recognizer: ClickRecognizerRef; context: pointer) {.cdec
     return
 
   logInfo("Select clicked, building outbox")
-  var iter: ptr typed_message.DictionaryIterator
-  if outboxBegin(addr iter) == APP_MSG_OK():
-    let dictRes = dictWriteCstring(iter, AppMessageKey.amkMsg.uint32, "Ping")
+  # Use Result-based API - no addr needed
+  let outbox = beginOutbox()
+  if outbox.success:
+    let dictRes = dictWriteCstring(outbox.iter, AppMessageKey.amkMsg.uint32, "Ping")
     if dictRes != DICT_OK():
       var err: FixedString[32]
       err.f("dictWrite error: ", dictRes.int32)
-      logInfo(err.toCstring)
+      logInfo(err.cstr)
     
     let res = outboxSend()
     if res == APP_MSG_OK():
@@ -181,7 +183,7 @@ proc selectClickHandler(recognizer: ClickRecognizerRef; context: pointer) {.cdec
     else:
       var err: FixedString[32]
       err.f("outboxSend error: ", res.int32)
-      logInfo(err.toCstring)
+      logInfo(err.cstr)
       msgLayer.text = "Send Error!"
   else:
     logInfo("outboxBegin failed")

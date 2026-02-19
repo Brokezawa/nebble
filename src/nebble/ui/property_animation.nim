@@ -20,10 +20,10 @@ DefineUniqueHandle(PropertyAnimation, PropertyAnimation,
 
 # Constructors for common types
 proc newPropertyAnimationLayerFrame*(layer: ptr Layer; fromFrame: GRect; toFrame: GRect): PropertyAnimationHandle {.inline.} =
-  result = wrapOwned(ffi.property_animation_create_layer_frame(layer, unsafeAddr fromFrame, unsafeAddr toFrame))
+  result = wrapOwned(ffi.property_animation_create_layer_frame(layer, addr fromFrame, addr toFrame))
 
 proc newPropertyAnimationBoundsOrigin*(layer: ptr Layer; fromPoint: GPoint; toPoint: GPoint): PropertyAnimationHandle {.inline.} =
-  result = wrapOwned(ffi.property_animation_create_bounds_origin(layer, unsafeAddr fromPoint, unsafeAddr toPoint))
+  result = wrapOwned(ffi.property_animation_create_bounds_origin(layer, addr fromPoint, addr toPoint))
 
 # Access to underlying Animation
 proc animation*(h: PropertyAnimationHandle): ptr Animation {.inline.} =

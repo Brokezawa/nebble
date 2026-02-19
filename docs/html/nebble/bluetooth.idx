@@ -1,6 +1,0 @@
-nimTitle	bluetooth	nebble/bluetooth.html	module src/nebble/bluetooth		0
-nim	bluetoothConnectionServicePeek	nebble/bluetooth.html#bluetoothConnectionServicePeek	proc bluetoothConnectionServicePeek(): bool		11
-nim	connectionServicePeekPebbleAppConnection	nebble/bluetooth.html#connectionServicePeekPebbleAppConnection	proc connectionServicePeekPebbleAppConnection(): bool		21
-nim	connectionServicePeekPebbleKitConnection	nebble/bluetooth.html#connectionServicePeekPebbleKitConnection	proc connectionServicePeekPebbleKitConnection(): bool		27
-nim	connectionServiceSubscribe	nebble/bluetooth.html#connectionServiceSubscribe,ConnectionHandlers	proc connectionServiceSubscribe(connHandlers: ConnectionHandlers)		33
-nim	connectionServiceUnsubscribe	nebble/bluetooth.html#connectionServiceUnsubscribe	proc connectionServiceUnsubscribe()		38

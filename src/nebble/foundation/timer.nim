@@ -34,7 +34,7 @@ proc `=sink`*(dest: var TimerHandle, src: TimerHandle) =
   `=destroy`(dest)
   dest.pRaw = src.pRaw
   dest.ownership = src.ownership
-  var srcPtr = cast[ptr TimerHandle](unsafeAddr src)
+  var srcPtr = cast[ptr TimerHandle](addr src)
   srcPtr.pRaw = nil
   srcPtr.ownership = hoNone
 

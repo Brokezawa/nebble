@@ -1,9 +1,0 @@
-nimTitle	time	nebble/foundation/time.html	module nebble/foundation/time		0
-nim	time	nebble/foundation/time.html#time,ptr.compiler_darwin_time_t_570426439	proc time(tloc: ptr time_t = nil): time_t		14
-nim	timeStartOfToday	nebble/foundation/time.html#timeStartOfToday	proc timeStartOfToday(): time_t		19
-nim	clockIs24hStyle	nebble/foundation/time.html#clockIs24hStyle	proc clockIs24hStyle(): bool		28
-nim	clockIsTimezoneSet	nebble/foundation/time.html#clockIsTimezoneSet	proc clockIsTimezoneSet(): bool		33
-nim	clockToTimestamp	nebble/foundation/time.html#clockToTimestamp,,int32,int32	proc clockToTimestamp(day: ffi.WeekDay; hour: int32; minute: int32): time_t		38
-nim	strftime	nebble/foundation/time.html#strftime,cstring,csize_t,cstring,ptr.tm	proc strftime(s: cstring; max: csize_t; format: cstring; tm: ptr tm): csize_t		43
-nim	localtime	nebble/foundation/time.html#localtime,ptr.compiler_darwin_time_t_570426439	proc localtime(timer: ptr time_t): ptr tm		48
-nim	gmtime	nebble/foundation/time.html#gmtime,ptr.compiler_darwin_time_t_570426439	proc gmtime(timer: ptr time_t): ptr tm		53

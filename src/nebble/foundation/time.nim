@@ -21,6 +21,17 @@ proc timeStartOfToday*(): time_t {.inline.} =
   ## Equivalent to C function `time_start_of_today()`.
   ffi.time_start_of_today()
 
+proc getLocalTime*(): ptr tm {.inline.} =
+  ## Get the current local time.
+  ## Returns a pointer to a static buffer (C-style).
+  ##
+  ## Example:
+  ##   let currentTime = getLocalTime()
+  ##   var timeStr: FixedString[16]
+  ##   timeStr.formatTime("%H:%M", currentTime)
+  var t = time(nil)
+  result = localtime(addr t)
+
 # ============================================================================
 # Time Formatting
 # ============================================================================

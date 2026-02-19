@@ -87,9 +87,11 @@ proc outboxSizeMaximum*(): uint32 {.inline.} =
 # Outbox Operations
 # ============================================================================
 
-proc outboxBegin*(iter: ptr ptr DictionaryIterator): AppMessageResult {.inline.} =
+proc outboxBegin*(iter: ptr ptr DictionaryIterator): AppMessageResult
+  {.inline, deprecated: "Use beginOutbox() for a safer Result-based API".} =
   ## Begin building an outbox message.
-  ## Equivalent to C function `app_message_outbox_begin(iterator)`.
+  ## Deprecated: Use `beginOutbox()` which provides a Result-based API
+  ## that doesn't require manual pointer management.
   ffi.app_message_outbox_begin(iter)
 
 proc outboxSend*(): AppMessageResult {.inline.} =
@@ -236,3 +238,33 @@ proc find*(iter: ptr DictionaryIterator; key: uint32): ptr Tuple_f {.inline.} =
   ## Equivalent to C function `dict_find(iter, key)`.
   ffi.dict_find(iter, key)
 
+# ============================================================================
+# High-Level Result-Based API
+# ============================================================================
+
+type
+  OutboxResult* = object
+    ## Result type for outbox operations.
+    ## Contains the iterator and operation status.
+    success*: bool
+    iter*: ptr DictionaryIterator
+    error*: AppMessageResult
+
+proc beginOutbox*(): OutboxResult {.inline.} =
+  ## Begin building an outbox message using Result-based API.
+  ##
+  ## Example:
+  ##   let outbox = beginOutbox()
+  ##   if outbox.success:
+  ##     discard dictWriteInt(outbox.iter, key, value)
+  ##     discard outboxSend()
+  ##
+  ## This is the recommended high-level API. The old `outboxBegin` is
+  ## deprecated in favor of this Result-based approach.
+  var iter: ptr DictionaryIterator
+  let res = outboxBegin(addr iter)
+  result = OutboxResult(
+    success: res == APP_MSG_OK,
+    iter: iter,
+    error: res
+  )

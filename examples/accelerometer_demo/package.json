@@ -1,0 +1,29 @@
+{
+  "name": "accelerometer_demo",
+  "version": "1.0.0",
+  "author": "Nebble",
+  "private": true,
+  "main": "",
+  "dependencies": {},
+  "pebble": {
+    "uuid": "5a1c7e2c-2959-437e-9ff4-566efb2a842f",
+    "displayName": "accelerometer_demo",
+    "sdkVersion": "3",
+    "targetPlatforms": [
+      "aplite",
+      "basalt",
+      "chalk",
+      "diorite",
+      "emery",
+      "flint"
+    ],
+    "watchapp": {
+      "watchface": false
+    },
+    "enableMultiJS": false,
+    "messageKeys": {},
+    "resources": {
+      "media": []
+    }
+  }
+}

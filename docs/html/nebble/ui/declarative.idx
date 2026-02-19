@@ -1,3 +1,0 @@
-nimTitle	declarative	nebble/ui/declarative.html	module nebble/ui/declarative		0
-nim	nebbleWatchface	nebble/ui/declarative.html#nebbleWatchface.t,untyped	template nebbleWatchface(body: untyped): untyped		23
-nim	nebbleApp	nebble/ui/declarative.html#nebbleApp.m,untyped	macro nebbleApp(body: untyped): untyped		31

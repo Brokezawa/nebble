@@ -1,0 +1,29 @@
+{
+  "name": "menu_demo",
+  "version": "1.0.0",
+  "author": "Nebble",
+  "private": true,
+  "main": "",
+  "dependencies": {},
+  "pebble": {
+    "uuid": "c94298db-51f2-438c-99bf-b1a307425968",
+    "displayName": "menu_demo",
+    "sdkVersion": "3",
+    "targetPlatforms": [
+      "aplite",
+      "basalt",
+      "chalk",
+      "diorite",
+      "emery",
+      "flint"
+    ],
+    "watchapp": {
+      "watchface": false
+    },
+    "enableMultiJS": false,
+    "messageKeys": {},
+    "resources": {
+      "media": []
+    }
+  }
+}

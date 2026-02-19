@@ -31,5 +31,5 @@ nebbleApp:
     
     var logStr: FixedString[32]
     logStr.f("Items: ", menuSections[0].num_items)
-    logInfo(logStr.toCstring)
+    logInfo(logStr.cstr)
 

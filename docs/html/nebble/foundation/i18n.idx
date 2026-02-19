@@ -1,2 +1,0 @@
-nimTitle	i18n	nebble/foundation/i18n.html	module nebble/foundation/i18n		0
-nim	getSystemLocale	nebble/foundation/i18n.html#getSystemLocale	proc getSystemLocale(): cstring		12

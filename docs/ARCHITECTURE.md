@@ -74,7 +74,10 @@ To remove C boilerplate (entry point, window creation, event loop), Nebble uses 
 Since `TextLayer` doesn't copy the string it displays, and heap allocations are expensive/dangerous on Pebble, Nebble provides a `FixedString[N]` type and an `f` macro for safe, stack-based formatting:
 1. **Zero Allocation:** All string operations happen within a pre-allocated stack buffer.
 2. **Safety:** The `f` macro provides `fmt`-like convenience while ensuring bounds-checking and null-termination.
-3. **Storage Integration:** The persistent storage API (`storage.read`) natively supports `FixedString` for safe data loading.
+3. **C-string Access:** Use the `.cstr` template to safely convert FixedString to cstring. The template operates at the call site (no temporary copy), ensuring the pointer remains valid.
+4. **Storage Integration:** The persistent storage API (`storage.read`) natively supports `FixedString` for safe data loading.
+
+**Important:** Pebble's `text_layer_set_text` stores the pointer (doesn't copy the string), so the FixedString must remain alive as long as the text is displayed. Always use global or static FixedString variables for persistent text.
 
 ---
 

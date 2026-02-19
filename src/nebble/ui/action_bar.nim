@@ -42,7 +42,7 @@ proc `=sink`*(dest: var ActionBarLayerHandle, src: ActionBarLayerHandle) =
   dest.ownership = src.ownership
   dest.attachedWindow = src.attachedWindow
   dest.pParent = src.pParent
-  var srcPtr = cast[ptr ActionBarLayerHandle](unsafeAddr src)
+  var srcPtr = cast[ptr ActionBarLayerHandle](addr src)
   srcPtr.pRaw = nil
   srcPtr.ownership = hoNone
   srcPtr.attachedWindow = nil

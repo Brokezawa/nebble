@@ -27,7 +27,7 @@ proc `=copy`*(dest: var DataLoggingSessionHandle, src: DataLoggingSessionHandle)
 proc `=sink`*(dest: var DataLoggingSessionHandle, src: DataLoggingSessionHandle) =
   `=destroy`(dest)
   dest.pRaw = src.pRaw
-  var srcPtr = cast[ptr DataLoggingSessionHandle](unsafeAddr src)
+  var srcPtr = cast[ptr DataLoggingSessionHandle](addr src)
   srcPtr.pRaw = nil
 
 converter toPtr*(h: DataLoggingSessionHandle): DataLoggingSessionRef = h.pRaw

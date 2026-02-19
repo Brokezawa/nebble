@@ -1,7 +1,0 @@
-nimTitle	worker	nebble/worker.html	module src/nebble/worker		0
-nim	appWorkerIsRunning	nebble/worker.html#appWorkerIsRunning	proc appWorkerIsRunning(): bool		15
-nim	appWorkerLaunch	nebble/worker.html#appWorkerLaunch	proc appWorkerLaunch(): AppWorkerResult		21
-nim	appWorkerKill	nebble/worker.html#appWorkerKill	proc appWorkerKill(): AppWorkerResult		27
-nim	appWorkerMessageSubscribe	nebble/worker.html#appWorkerMessageSubscribe,AppWorkerMessageHandler	proc appWorkerMessageSubscribe(handler: AppWorkerMessageHandler): bool		37
-nim	appWorkerMessageUnsubscribe	nebble/worker.html#appWorkerMessageUnsubscribe	proc appWorkerMessageUnsubscribe(): bool		43
-nim	appWorkerSendMessage	nebble/worker.html#appWorkerSendMessage,uint8,ptr.AppWorkerMessage	proc appWorkerSendMessage(type_f: uint8; data: ptr AppWorkerMessage)		49

@@ -1,6 +1,0 @@
-nimTitle	window_stack	nebble/ui/window_stack.html	module nebble/ui/window_stack		0
-nim	pop	nebble/ui/window_stack.html#pop,bool	proc pop(animated: bool = true): ptr Window		11
-nim	popAll	nebble/ui/window_stack.html#popAll,bool	proc popAll(animated: bool = true)		16
-nim	getTopWindow	nebble/ui/window_stack.html#getTopWindow	proc getTopWindow(): ptr Window		21
-nim	contains	nebble/ui/window_stack.html#contains,ptr.struct_Window	proc contains(window: ptr Window): bool		26
-nim	remove	nebble/ui/window_stack.html#remove,ptr.struct_Window,bool	proc remove(window: ptr Window; animated: bool): bool		31

@@ -115,12 +115,12 @@ proc `text=`*(p: ptr TextLayer, value: cstring) {.inline.} =
 template `text=`*[N](h: var TextLayerHandle, value: FixedString[N]) =
   ## Set text using a heap-free FixedString.
   if h.pRaw != nil:
-    text_layer_set_text(h.pRaw, value.toCstring)
+    text_layer_set_text(h.pRaw, value.cstr)
 
 template `text=`*[N](p: ptr TextLayer, value: FixedString[N]) =
   ## Set text using a heap-free FixedString.
   if p != nil:
-    text_layer_set_text(p, value.toCstring)
+    text_layer_set_text(p, value.cstr)
 
 proc text*(h: TextLayerHandle): cstring {.inline.} =
   ## Get the current text content.

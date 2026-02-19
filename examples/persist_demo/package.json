@@ -1,0 +1,29 @@
+{
+  "name": "persist_demo",
+  "version": "1.0.0",
+  "author": "Nebble",
+  "private": true,
+  "main": "",
+  "dependencies": {},
+  "pebble": {
+    "uuid": "b38fd479-d783-4972-8fd9-c9ef9f5da771",
+    "displayName": "persist_demo",
+    "sdkVersion": "3",
+    "targetPlatforms": [
+      "aplite",
+      "basalt",
+      "chalk",
+      "diorite",
+      "emery",
+      "flint"
+    ],
+    "watchapp": {
+      "watchface": false
+    },
+    "enableMultiJS": false,
+    "messageKeys": {},
+    "resources": {
+      "media": []
+    }
+  }
+}

@@ -55,7 +55,7 @@ proc `=sink`*(dest: var LayerHandle, src: LayerHandle) =
   dest.pRaw = src.pRaw
   dest.ownership = src.ownership
   dest.pParent = src.pParent
-  var srcPtr = cast[ptr LayerHandle](unsafeAddr src)
+  var srcPtr = cast[ptr LayerHandle](addr src)
   srcPtr.pRaw = nil
   srcPtr.ownership = hoNone
   srcPtr.pParent = nil

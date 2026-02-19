@@ -48,7 +48,7 @@ proc `=sink`*(dest: var AnimationHandle, src: AnimationHandle) =
   dest.state = src.state
   dest.onStarted = src.onStarted
   dest.onStopped = src.onStopped
-  var srcPtr = cast[ptr AnimationHandle](unsafeAddr src)
+  var srcPtr = cast[ptr AnimationHandle](addr src)
   srcPtr.raw = nil
   srcPtr.state = asDestroyed
 
@@ -144,7 +144,7 @@ proc createSequence*(animations: varargs[AnimationHandle]): AnimationHandle =
     for i in 0..<animations.len:
       raws[i] = animations[i].raw
       # Transfer ownership: mark source as unowned
-      var srcPtr = cast[ptr AnimationHandle](unsafeAddr animations[i])
+      var srcPtr = cast[ptr AnimationHandle](addr animations[i])
       srcPtr.state = asUnowned
     let res = ffi.animation_sequence_create_from_array(addr raws[0], animations.len.uint32)
     result = wrapOwned(res)
@@ -154,7 +154,7 @@ proc createSequence*(animations: varargs[AnimationHandle]): AnimationHandle =
     var raws = newSeq[ptr Animation](animations.len)
     for i in 0..<animations.len:
       raws[i] = animations[i].raw
-      var srcPtr = cast[ptr AnimationHandle](unsafeAddr animations[i])
+      var srcPtr = cast[ptr AnimationHandle](addr animations[i])
       srcPtr.state = asUnowned
     let res = ffi.animation_sequence_create_from_array(addr raws[0], animations.len.uint32)
     result = wrapOwned(res)
@@ -168,7 +168,7 @@ proc createSpawn*(animations: varargs[AnimationHandle]): AnimationHandle =
     var raws: array[32, ptr Animation]
     for i in 0..<animations.len:
       raws[i] = animations[i].raw
-      var srcPtr = cast[ptr AnimationHandle](unsafeAddr animations[i])
+      var srcPtr = cast[ptr AnimationHandle](addr animations[i])
       srcPtr.state = asUnowned
     let res = ffi.animation_spawn_create_from_array(addr raws[0], animations.len.uint32)
     result = wrapOwned(res)
@@ -178,7 +178,7 @@ proc createSpawn*(animations: varargs[AnimationHandle]): AnimationHandle =
     var raws = newSeq[ptr Animation](animations.len)
     for i in 0..<animations.len:
       raws[i] = animations[i].raw
-      var srcPtr = cast[ptr AnimationHandle](unsafeAddr animations[i])
+      var srcPtr = cast[ptr AnimationHandle](addr animations[i])
       srcPtr.state = asUnowned
     let res = ffi.animation_spawn_create_from_array(addr raws[0], animations.len.uint32)
     result = wrapOwned(res)

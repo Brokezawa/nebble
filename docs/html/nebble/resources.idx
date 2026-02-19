@@ -1,5 +1,0 @@
-nimTitle	resources	nebble/resources.html	module nebble/resources		0
-nim	getResourceHandle	nebble/resources.html#getResourceHandle,uint32	proc getResourceHandle(resourceId: uint32): ResHandle		12
-nim	size	nebble/resources.html#size,ResHandle	proc size(handle: ResHandle): csize_t		20
-nim	load	nebble/resources.html#load,ResHandle,ptr.uint8,csize_t	proc load(handle: ResHandle; buffer: ptr uint8; maxLength: csize_t): csize_t		29
-nim	loadByteRange	nebble/resources.html#loadByteRange,ResHandle,uint32,ptr.uint8,csize_t	proc loadByteRange(handle: ResHandle; startOffset: uint32; buffer: ptr uint8;\n              numBytes: csize_t): csize_t		35

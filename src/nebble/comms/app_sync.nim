@@ -38,7 +38,7 @@ proc `=sink`*(dest: var AppSyncHandle, src: AppSyncHandle) =
   `=destroy`(dest)
   dest.pRaw = src.pRaw
   dest.pBuffer = src.pBuffer
-  var srcPtr = cast[ptr AppSyncHandle](unsafeAddr src)
+  var srcPtr = cast[ptr AppSyncHandle](addr src)
   srcPtr.pRaw = nil
   srcPtr.pBuffer = nil
 

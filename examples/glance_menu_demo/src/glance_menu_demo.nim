@@ -48,7 +48,7 @@ when declared(AppGlanceReloadSession):
     
     # Add a slice that shows what we last selected in the app
     when declared(session.addSlice):
-      discard session.addSlice(msg.toCstring)
+      discard session.addSlice(msg.cstr)
 
 # ============================================================================
 # Declarative App

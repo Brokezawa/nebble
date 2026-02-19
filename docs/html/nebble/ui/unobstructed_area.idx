@@ -1,4 +1,0 @@
-nimTitle	unobstructed_area	nebble/ui/unobstructed_area.html	module nebble/ui/unobstructed_area		0
-nim	subscribe	nebble/ui/unobstructed_area.html#subscribe,UnobstructedAreaHandlers,pointer	proc subscribe(handlers: UnobstructedAreaHandlers; context: pointer = nil)		15
-nim	unsubscribe	nebble/ui/unobstructed_area.html#unsubscribe	proc unsubscribe()		22
-nim	getUnobstructedBounds	nebble/ui/unobstructed_area.html#getUnobstructedBounds,ptr.struct_Layer	proc getUnobstructedBounds(layer: ptr Layer): GRect		33

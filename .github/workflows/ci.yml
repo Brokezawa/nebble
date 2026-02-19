@@ -73,12 +73,9 @@ jobs:
       
       - name: Build CLI
         run: |
-          cd cli
           nimble build
-          mkdir -p bin
-          mv bin/nebble ../cli/bin/nebble 2>/dev/null || true
           # Ensure it's in path for testExample task
-          echo "$(pwd)/bin" >> $GITHUB_PATH
+          echo "$(pwd)/bin/tools" >> $GITHUB_PATH
 
       - name: Run Unit Tests
         run: nimble testUnit
@@ -126,5 +123,4 @@ jobs:
       
       - name: Check CLI compiles
         run: |
-          cd cli
-          nimble check
+          nimble build

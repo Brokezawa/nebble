@@ -1,3 +1,0 @@
-nimTitle	tick	nebble/foundation/events/tick.html	module nebble/foundation/events/tick		0
-nim	subscribe	nebble/foundation/events/tick.html#subscribe,TimeUnits,TickHandler	proc subscribe(units: TimeUnits; handler: TickHandler)		13
-nim	unsubscribe	nebble/foundation/events/tick.html#unsubscribe	proc unsubscribe()		25

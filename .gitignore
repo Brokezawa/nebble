@@ -18,8 +18,9 @@ htmldocs/
 .lock-waf*
 .pebble-sdk/
 
-#Pebble SDK docs
+# Documentation (generated)
 sdk-docs/
+docs/html/
 
 # IDE
 .vscode/
@@ -36,3 +37,6 @@ Thumbs.db
 /tmp/
 *.pbw
 
+nimble.develop
+nimble.paths
+nimbledeps
