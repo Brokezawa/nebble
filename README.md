@@ -13,6 +13,7 @@ Nebble (Nim + Pebble) provides comprehensive, type-safe Nim bindings for the Peb
 - **Zero Overhead** - Compiles to efficient C code with zero runtime cost.
 - **Modern Syntax** - Clean, expressive code with property-style accessors and OOP patterns.
 - **Complete Coverage** - Full FFI bindings for all 6 Pebble platforms.
+- **Nim Everywhere** - Use Nim on watch and on phone.
 
 ## Quick Start
 
