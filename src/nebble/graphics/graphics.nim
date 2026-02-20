@@ -349,3 +349,10 @@ proc `compositingMode=`*(ctx: ptr GContext; mode: GCompOp) {.inline.} =
   ##        GCompOpClear, GCompOpSet, GCompOpAndNot, GCompOpOrNot
   ## Equivalent to C function `graphics_context_set_compositing_mode(ctx, mode)`.
   ffi.graphics_context_set_compositing_mode(ctx, mode)
+
+# ============================================================================
+# Sprite Sheets and Animation
+# ============================================================================
+
+import nebble/graphics/sprite
+export sprite

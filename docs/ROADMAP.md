@@ -1,22 +1,154 @@
 # Nebble Roadmap
 
-**Status:** v1.0.0 Release  
-**Last Updated:** February 19, 2026
+**Status:** v1.1.0 Release (Ready)  
+**Last Updated:** February 20, 2026
 
-## ✅ Completed Milestones (v1.0.0)
+---
 
-### Phase 1: Foundation
+## Current Release: v1.1.0
+
+**Release Date**: February 20, 2026  
+**Tag**: `v1.1.0`  
+**Key Commits**: `006460c`, `9e39532`, `7047c29`
+
+### ✅ Completed in v1.1.0
+
+#### 1. CLI Integration and FixedString Improvements
+**Commit**: `006460c`
+
+Merged the CLI tool into the main package and improved the FixedString API.
+
+**Changes**:
+- CLI source moved to `tools/nebble.nim`
+- Binary output: `bin/tools/nebble`
+- FixedString API enhancements for heap-free operations
+- Zero heap fragmentation guarantee
+
+---
+
+#### 2. Examples Repository Migration  
+**Commit**: `9e39532`
+
+Moved all examples to a separate repository to reduce package size.
+
+**Changes**:
+- Removed 13 examples from main package
+- Examples now in `nebble-examples` repository
+- Updated test infrastructure to use CLI templates
+- Reduced package size by ~60%
+
+**Migration**:
+```bash
+# Clone examples separately
+git clone https://github.com/Brokezawa/nebble-examples
+```
+
+---
+
+#### 3. Sprite Sheet Support with Managed Handles
+**Commit**: `7047c29`
+
+Zero-copy sprite management with **two API options** for different use cases.
+
+##### Managed API (Safe - Recommended)
+ARC-managed handles with automatic lifecycle management.
+
+**Types**:
+- `SpriteSheetHandle` - Owns GBitmap, auto-destroyed
+- `AnimatedSpriteHandle` - References sheet, manages animation state
+
+**Example**:
+```nim
+var sheet = newSpriteSheetHandle(RESOURCE_ID_SPRITES, 32, 32)
+var player = newAnimatedSpriteHandle(sheet, 8, 100)
+player.update(elapsedMs)
+player.draw(ctx, pos)
+# Auto-cleanup when out of scope
+```
+
+##### Raw API (Advanced - Zero Overhead)
+Stack-allocated types for maximum performance.
+
+**Types**:
+- `SpriteSheet` - Value type, user manages lifetime
+- `AnimatedSprite` - Value type, user manages lifetime
+- `SpriteFrame` - View into sheet
+
+**Example**:
+```nim
+var bitmap = newBitmap(RESOURCE_ID_SPRITES)
+var sheet = newSpriteSheet(bitmap, 32, 32)
+var player = newAnimatedSprite(sheet.addr, 8, 100)
+# Manual cleanup required
+destroy(bitmap)
+```
+
+**Features**:
+- `AnimationMode`: Loop, Once, Ping-Pong
+- Zero-copy drawing via sub-bitmaps
+- Elapsed-time based (no getTime() dependency)
+
+**Files**:
+- `src/nebble/graphics/sprite.nim` (new)
+- `tests/test_sprite.nim` (tests for both APIs)
+- Updated `src/nebble/graphics/graphics.nim`
+
+---
+
+#### 2. Examples Repository Migration
+**Commit**: `9e39532`
+
+Moved all examples to a separate repository to reduce package size.
+
+**Completed**:
+- Removed all 13 examples from main nebble package
+- Updated nimble test tasks to use CLI templates (`hello_world`, `simple_watchface`)
+- Fixed test path issues with cross-platform compatible paths
+- All 12 platform builds passing (6 platforms × 2 templates)
+
+**Migration**:
+```bash
+# Clone examples separately
+git clone https://github.com/Brokezawa/nebble-examples
+```
+
+---
+
+### ⚠️ v1.1.0 Breaking Changes
+
+1. **CLI Path Changed**
+   - Old: `bin/nebble`
+   - New: `bin/tools/nebble`
+   - Update any scripts referencing the old path
+
+2. **Examples Removed from Package**
+   - Examples no longer included in nimble package
+   - Clone `nebble-examples` repo separately
+   - Affects: Documentation links, tutorials
+
+3. **Test Infrastructure Updated**
+   - `nimble test` now uses CLI templates
+   - No longer builds example projects
+   - Faster but different validation approach
+
+---
+
+## Previous Releases
+
+### v1.0.0 (Foundation Release)
+
+#### Phase 1: Foundation
 - [x] **FFI Bindings**: Generated bindings for all 6 Pebble platforms.
 - [x] **Build System**: `nebble` CLI tool for project management.
 - [x] **Platform Support**: Verified compilation on all platforms.
 
-### Phase 2: High-Level API
+#### Phase 2: High-Level API
 - [x] **Core UI**: Managed handles for all Layer types.
 - [x] **Graphics**: Idiomatic wrappers for drawing and paths.
 - [x] **Events**: Coverage for all Pebble event services.
 - [x] **Managed Types**: Robust ownership model (`hoOwned`, `hoParented`).
 
-### Phase 3: Full-Stack & Hardening
+#### Phase 3: Full-Stack & Hardening
 - [x] **Declarative DSL**: Powerful `nebbleApp` macro for minimal boilerplate.
 - [x] **Unified Full-Stack**: Support for writing `pebble-js-app.js` in Nim.
 - [x] **Modern Tooling**: `package.json` support and improved CLI workflow.
@@ -25,89 +157,9 @@
 
 ---
 
-## 🚀 Implementation Plan (v1.1.0)
+## Future Releases
 
-### Sprint 1: Quick Wins
-
-#### 1.1 Examples Repository
-**Goal**: Move examples to separate repository to reduce package size
-
-**Implementation**:
-- Create `nebble-examples` repository on GitHub
-- Move all 13 examples (accelerometer_demo through vibes_demo)
-- Remove examples/ directory from main nebble package
-- Update nimble test tasks to build `hello_world` and `simple_watchface` from CLI templates
-- Update documentation to point to new repository
-
-**Files Affected**:
-- Delete: `examples/*` (13 directories)
-- Modify: `nebble.nimble` (update test tasks)
-- Modify: `docs/GETTING_STARTED.md`
-- Modify: `docs/ARCHITECTURE.md`
-
-**Dependencies**: GitHub repository creation
-**Complexity**: Low
-**Effort**: 1-2 days
-**Breaking Changes**: Users must clone nebble-examples for sample projects
-
----
-
-#### 1.2 Sprite Sheet Support
-**Goal**: Zero-copy sprite management with animation support
-
-**Implementation**:
-Create `nebble/graphics/sprite.nim` with:
-- `SpriteSheet` type referencing bitmap with sprite dimensions
-- `AnimatedSprite` type with frame cycling support
-- `SpriteFrame` view into specific sprite in sheet
-- Frame-based animation (timer-driven frame advancement)
-- Support for play once, loop, and ping-pong animations
-
-**API Design**:
-```nim
-type
-  SpriteSheet* = object
-    bitmap: GBitmapHandle
-    spriteWidth, spriteHeight: uint8
-    cols, rows: uint8
-  
-  AnimatedSprite* = object
-    sheet: SpriteSheet
-    currentFrame: uint8
-    totalFrames: uint8
-    frameDelay: uint16  # ms between frames
-    lastUpdate: uint32  # timestamp
-    mode: AnimationMode  # Loop, Once, PingPong
-
-type AnimationMode* = enum amLoop, amOnce, amPingPong
-
-proc update*(sprite: var AnimatedSprite): bool
-  ## Returns true if frame changed, updates currentFrame based on timing
-  
-proc draw*(sprite: AnimatedSprite, ctx: ptr GContext, pos: GPoint)
-  ## Draws current frame at position
-  
-proc play*(sprite: var AnimatedSprite, mode: AnimationMode = amLoop)
-proc pause*(sprite: var AnimatedSprite)
-proc reset*(sprite: var AnimatedSprite)
-```
-
-**Files to Create**:
-- `src/nebble/graphics/sprite.nim`
-- `examples/` (in nebble-examples repo): `sprite_demo/`
-
-**Dependencies**:
-- GBitmap FFI bindings
-- Timer foundation
-- Graphics context
-
-**Complexity**: Low
-**Effort**: 2-3 days
-**Breaking Changes**: None
-
----
-
-### Sprint 2: Developer Experience
+### v1.2.0 - Developer Experience (Planned)
 
 #### 2.1 Menu DSL
 **Goal**: Declarative macro-based menu definition hiding pointer arithmetic
@@ -147,14 +199,6 @@ nebbleApp:
 3. Generate static arrays with `const`
 4. Set up pointers automatically
 5. Generate initialization code in `init:` block
-
-**Files to Create**:
-- `src/nebble/ui/menu_dsl.nim`
-
-**Dependencies**:
-- macros module
-- simple_menu_layer FFI bindings
-- Consistent with nebbleApp macro style
 
 **Complexity**: Medium
 **Effort**: 3-4 days
@@ -204,21 +248,13 @@ proc inboxHandler(iter: ptr DictionaryIterator) =
 - Old code can read new messages (ignores unknown fields)
 - New code can read old messages (uses defaults for missing fields)
 
-**Files to Create**:
-- `src/nebble/comms/typed_serialization.nim`
-
-**Dependencies**:
-- macros module
-- typed_message module
-- May need reflection utilities
-
 **Complexity**: Medium-High
 **Effort**: 5-7 days
 **Breaking Changes**: None (new module)
 
 ---
 
-### Sprint 3: Advanced Features
+### v1.3.0 - Advanced Features (Planned)
 
 #### 3.1 Framebuffer Access
 **Goal**: Safe iterator for direct pixel manipulation
@@ -262,13 +298,6 @@ for x, y, color in fb.pixels():
   color = calculatePixel(x, y)
 window.unlock()
 ```
-
-**Files to Create**:
-- `src/nebble/graphics/framebuffer.nim`
-
-**Dependencies**:
-- FFI graphics context bindings
-- Platform-specific framebuffer constants
 
 **Complexity**: Medium
 **Effort**: 2-3 days
@@ -320,40 +349,9 @@ nebbleApp:
 4. Wire up callbacks
 5. Integrate with existing animation system
 
-**Files to Create**:
-- `src/nebble/ui/animation_dsl.nim`
-
-**Dependencies**:
-- property_animation module
-- Timer foundation
-- macros module
-
 **Complexity**: Medium
 **Effort**: 4-5 days
 **Breaking Changes**: None (adds new API)
-
----
-
-## Implementation Schedule
-
-### Week 1 (Sprint 1)
-- [ ] Create nebble-examples repository
-- [ ] Migrate all examples
-- [ ] Update test tasks in nebble.nimble
-- [ ] Implement Sprite Sheet module
-- [ ] Create sprite animation demo
-
-### Week 2-3 (Sprint 2)
-- [ ] Implement Menu DSL
-- [ ] Implement AppMessage Serialization
-- [ ] Create comprehensive examples for both
-- [ ] Update documentation
-
-### Week 4-5 (Sprint 3)
-- [ ] Implement Framebuffer Access
-- [ ] Implement Animation DSL
-- [ ] Create advanced graphics demos
-- [ ] Final testing and documentation
 
 ---
 

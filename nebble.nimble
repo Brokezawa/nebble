@@ -1,5 +1,5 @@
 # Package
-version       = "1.0.0"
+version       = "1.1.0"
 author        = "Brokezawa"
 description   = "Nim wrapper for the Pebble smartwatch SDK"
 license       = "MIT"
@@ -29,6 +29,8 @@ task testUnit, "Run host-side unit tests only":
   # Compile-only API tests (cross-compile check). tests/nim.cfg sets
   # --compileOnly and adds --path:"../src" so we must NOT use -r.
   exec "nim c -d:pebbleBasalt tests/test_highlevel.nim"
+  # Compile-only sprite tests (uses Pebble SDK symbols)
+  exec "nim c --skipProjCfg -d:pebbleBasalt --compileOnly tests/test_sprite.nim"
 
 task testExample, "Build CLI template projects for all platforms (Integration Tests)":
   echo "═══════════════════════════════════════════════════════"
@@ -36,7 +38,9 @@ task testExample, "Build CLI template projects for all platforms (Integration Te
   echo "═══════════════════════════════════════════════════════"
   
   let platforms = ["aplite", "basalt", "chalk", "diorite", "emery", "flint"]
-  let testDir = "/tmp/nebble_test_projects"
+  let testDir = getTempDir() / "nebble_test_projects"
+  let projectDir = getCurrentDir()
+  let nebbleBin = projectDir / "bin" / "tools" / "nebble"
   
   # Clean and create test directory using shell commands
   exec "rm -rf " & testDir
@@ -48,12 +52,12 @@ task testExample, "Build CLI template projects for all platforms (Integration Te
   # Test hello_world (app template)
   echo "\n=== Testing: hello_world (app template) ==="
   withDir testDir:
-    exec "../bin/nebble new hello_world"
+    exec nebbleBin & " new hello_world"
     withDir "hello_world":
       for p in platforms:
         echo "  Building hello_world for " & p & "..."
         try:
-          exec "../../bin/nebble build --platform " & p
+          exec nebbleBin & " build --platform " & p
           inc successCount
         except:
           echo "  FAILED: hello_world on " & p
@@ -62,12 +66,12 @@ task testExample, "Build CLI template projects for all platforms (Integration Te
   # Test simple_watchface (watchface template)
   echo "\n=== Testing: simple_watchface (watchface template) ==="
   withDir testDir:
-    exec "../bin/nebble new simple_watchface --watchface"
+    exec nebbleBin & " new simple_watchface --watchface"
     withDir "simple_watchface":
       for p in platforms:
         echo "  Building simple_watchface for " & p & "..."
         try:
-          exec "../../bin/nebble build --platform " & p
+          exec nebbleBin & " build --platform " & p
           inc successCount
         except:
           echo "  FAILED: simple_watchface on " & p
@@ -86,7 +90,9 @@ task testExample, "Build CLI template projects for all platforms (Integration Te
     quit("Some builds failed", 1)
 
 task testSize, "Check binary size for template projects (Aplite limit)":
-  let testDir = "/tmp/nebble_size_test"
+  let testDir = getTempDir() / "nebble_size_test"
+  let projectDir = getCurrentDir()
+  let nebbleBin = projectDir / "bin" / "tools" / "nebble"
   
   # Clean and create test directory using shell commands
   exec "rm -rf " & testDir
@@ -95,15 +101,17 @@ task testSize, "Check binary size for template projects (Aplite limit)":
   withDir testDir:
     # Test hello_world app size
     echo "\n=== Size check: hello_world (app template) ==="
-    exec "../bin/nebble new hello_world"
+    exec nebbleBin & " new hello_world"
     withDir "hello_world":
-      exec "../../bin/nebble size --platform aplite"
+      exec nebbleBin & " build --platform aplite"
+      exec nebbleBin & " size --platform aplite"
     
     # Test simple_watchface size
     echo "\n=== Size check: simple_watchface (watchface template) ==="
-    exec "../bin/nebble new simple_watchface --watchface"
+    exec nebbleBin & " new simple_watchface --watchface"
     withDir "simple_watchface":
-      exec "../../bin/nebble size --platform aplite"
+      exec nebbleBin & " build --platform aplite"
+      exec nebbleBin & " size --platform aplite"
   
   # Cleanup
   exec "rm -rf " & testDir
