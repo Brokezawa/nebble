@@ -30,38 +30,51 @@ task testUnit, "Run host-side unit tests only":
   # --compileOnly and adds --path:"../src" so we must NOT use -r.
   exec "nim c -d:pebbleBasalt tests/test_highlevel.nim"
 
-task testExample, "Build all examples for all platforms (Integration Tests)":
+task testExample, "Build CLI template projects for all platforms (Integration Tests)":
   echo "═══════════════════════════════════════════════════════"
   echo "Running Integration Tests (Build Matrix)"
   echo "═══════════════════════════════════════════════════════"
   
   let platforms = ["aplite", "basalt", "chalk", "diorite", "emery", "flint"]
-  var examples: seq[string] = @[]
+  let testDir = "/tmp/nebble_test_projects"
   
-  # Find examples
-  for kind, path in walkDir("examples"):
-    if kind == pcDir:
-      let name = path.extractFilename
-      if fileExists(path & "/src/" & name & ".nim"):
-        examples.add(name)
-  
-  examples.sort()
+  # Clean and create test directory using shell commands
+  exec "rm -rf " & testDir
+  exec "mkdir -p " & testDir
   
   var successCount = 0
   var failCount = 0
   
-  for ex in examples:
-    echo "\n=== Testing: " & ex & " ==="
-    withDir "examples/" & ex:
+  # Test hello_world (app template)
+  echo "\n=== Testing: hello_world (app template) ==="
+  withDir testDir:
+    exec "../bin/nebble new hello_world"
+    withDir "hello_world":
       for p in platforms:
-        let cmd = "../../bin/nebble build --platform " & p
-        echo "  Building for " & p & "..."
+        echo "  Building hello_world for " & p & "..."
         try:
-          exec cmd
+          exec "../../bin/nebble build --platform " & p
           inc successCount
         except:
-          echo "  FAILED: " & ex & " on " & p
+          echo "  FAILED: hello_world on " & p
           inc failCount
+  
+  # Test simple_watchface (watchface template)
+  echo "\n=== Testing: simple_watchface (watchface template) ==="
+  withDir testDir:
+    exec "../bin/nebble new simple_watchface --watchface"
+    withDir "simple_watchface":
+      for p in platforms:
+        echo "  Building simple_watchface for " & p & "..."
+        try:
+          exec "../../bin/nebble build --platform " & p
+          inc successCount
+        except:
+          echo "  FAILED: simple_watchface on " & p
+          inc failCount
+  
+  # Cleanup
+  exec "rm -rf " & testDir
   
   echo "\n═══════════════════════════════════════════════════════"
   echo "Matrix Results"
@@ -72,15 +85,28 @@ task testExample, "Build all examples for all platforms (Integration Tests)":
   if failCount > 0:
     quit("Some builds failed", 1)
 
-task testSize, "Check binary size for all examples (Aplite limit)":
-  let platforms = ["aplite"]
-  for kind, path in walkDir("examples"):
-    if kind == pcDir:
-      let name = path.extractFilename
-      if fileExists(path & "/src/" & name & ".nim"):
-        echo "\n=== Size check: " & name & " ==="
-        withDir path:
-          exec "../../bin/nebble size --platform aplite"
+task testSize, "Check binary size for template projects (Aplite limit)":
+  let testDir = "/tmp/nebble_size_test"
+  
+  # Clean and create test directory using shell commands
+  exec "rm -rf " & testDir
+  exec "mkdir -p " & testDir
+  
+  withDir testDir:
+    # Test hello_world app size
+    echo "\n=== Size check: hello_world (app template) ==="
+    exec "../bin/nebble new hello_world"
+    withDir "hello_world":
+      exec "../../bin/nebble size --platform aplite"
+    
+    # Test simple_watchface size
+    echo "\n=== Size check: simple_watchface (watchface template) ==="
+    exec "../bin/nebble new simple_watchface --watchface"
+    withDir "simple_watchface":
+      exec "../../bin/nebble size --platform aplite"
+  
+  # Cleanup
+  exec "rm -rf " & testDir
 
 task test, "Run all tests (unit + examples + size)":
   exec "nimble testUnit"

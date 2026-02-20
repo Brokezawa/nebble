@@ -5,7 +5,6 @@
 ## string formatting at runtime.
 
 import std/macros
-import ../foundation/time
 
 type
   FixedString*[N: static int] = object
@@ -79,7 +78,7 @@ proc addInt*[N](s: var FixedString[N], val: int32) {.inline.} =
 
 template cstr*[N](s: FixedString[N]): cstring =
   ## Get cstring pointer to FixedString data.
-  ## 
+  ##
   ## IMPORTANT: Pebble stores this pointer (doesn't copy), so the FixedString
   ## must remain alive as long as the text is displayed. Use global/static
   ## FixedString variables for text that persists.
@@ -90,6 +89,19 @@ template cstr*[N](s: FixedString[N]): cstring =
   ##   var timeStr: FixedString[16]  # Global variable
   ##   timeStr.f("12:00")
   ##   timeLayer.text = timeStr.cstr  # Safe - points to global data
+  ##
+  ## ## Manual FFI Usage
+  ## When calling raw FFI functions that write to the buffer, use high-level
+  ## wrappers or manually update len afterwards:
+  ##
+  ##   # Using high-level wrapper (recommended):
+  ##   timeStr.formatTime(tickTime)  # len updated automatically (O(1))
+  ##
+  ##   # Using raw FFI (must update len manually):
+  ##   discard ffi.strftime(timeStr.cstr, ...)
+  ##   timeStr.recalcLen()  # Recalculate len (O(n) bounded scan)
+  ##
+  ## See also: `recalcLen` for manual length recalculation.
   cast[cstring](addr s.data[0])
 
 # ============================================================================
@@ -122,25 +134,46 @@ template f*[N](s: var FixedString[N], body: varargs[untyped]) =
   s.formatInto(body)
 
 # ============================================================================
-# Time Formatting Helpers
+# Length Management
 # ============================================================================
 
-proc formatTime*[N](s: var FixedString[N], fmt: cstring, time: ptr tm): int {.inline.} =
-  ## Format time using strftime into the FixedString.
-  ## Returns the number of characters written (excluding null terminator).
+proc recalcLen*[N](s: var FixedString[N], maxScan: int = N) {.inline.} =
+  ## Recalculate len by scanning for null terminator (bounded).
+  ##
+  ## Use this after calling raw FFI functions directly that write to the buffer.
+  ## For high-level wrappers (formatTime, storage.read, etc.), len is updated
+  ## automatically.
+  ##
+  ## Complexity: O(min(maxScan, N)) - bounded scan
   ##
   ## Example:
-  ##   var timeStr: FixedString[16]
-  ##   timeStr.formatTime("%H:%M", tickTime)
-  ##   timeLayer.text = timeStr
-  result = strftime(cast[cstring](addr s.data[0]), N.csize_t, fmt, time).int
-  if result > 0:
-    s.len = result
-  else:
-    s.len = 0
-    s.data[0] = '\0'
+  ##   # Raw FFI call (not recommended):
+  ##   discard ffi.strftime(myStr.cstr, maxSize, "%H:%M", time)
+  ##   myStr.recalcLen()  # Update len after raw call
+  ##
+  ##   # Bounded scan (faster for known-max-length strings):
+  ##   myStr.recalcLen(maxScan = 32)  # Scan at most 32 chars
+  s.len = 0
+  let limit = min(N, maxScan)
+  while s.len < limit and s.data[s.len] != '\0':
+    inc s.len
 
-proc formatTime*[N](s: var FixedString[N], time: ptr tm): int {.inline.} =
-  ## Format time using default format ("%H:%M" for 24h or "%I:%M" for 12h).
-  let fmt = if clockIs24hStyle(): "%H:%M" else: "%I:%M"
-  result = s.formatTime(fmt.cstring, time)
+proc fromCstring*[N](s: cstring): FixedString[N] =
+  ## Creates FixedString from cstring, calculating len once at construction.
+  ##
+  ## This constructor scans the input once to determine length, then copies
+  ## the data. Use when you have a cstring and want O(1) len access afterwards.
+  ##
+  ## Example:
+  ##   var myStr = fromCstring[32](someCstring)
+  ##   # myStr.len is now correctly set (O(1) access)
+  ##
+  ## Complexity: O(min(strlen(s), N)) - one-time scan at construction
+  result.clear()
+  if s != nil:
+    var i = 0
+    while i < N - 1 and s[i] != '\0':
+      result.data[i] = s[i]
+      inc i
+    result.len = i
+    result.data[i] = '\0'

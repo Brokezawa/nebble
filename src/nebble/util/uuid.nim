@@ -3,6 +3,7 @@
 ## Provides UUID creation and manipulation functions.
 
 import nebble/ffi
+import fixed_strings
 
 export ffi.Uuid
 
@@ -43,3 +44,25 @@ proc makeUuidFromLEBytes*(bytes: array[16, uint8]): Uuid {.inline.} =
   for i in 0..15:
     beBytes[i] = bytes[15 - i]
   makeUuid(beBytes)
+
+# ============================================================================
+# UUID String Conversion
+# ============================================================================
+
+proc toString*[N](uuid: Uuid, s: var FixedString[N]) {.inline.} =
+  ## Convert UUID to string representation.
+  ##
+  ## Format: {12345678-1234-5678-1234-567812345678}
+  ##
+  ## Automatically updates len field. Output is constant 38 characters
+  ## (plus null terminator = 39 total), so len is set to 38 directly (O(1)).
+  ##
+  ## Requires buffer of at least 39 bytes (UUID_STRING_BUFFER_LENGTH).
+  ##
+  ## Example:
+  ##   var uuidBuf: FixedString[39]
+  ##   myUuid.toString(uuidBuf)
+  ##   textLayer.text = uuidBuf.cstr
+  ffi.uuid_to_string(addr uuid, cast[cstring](addr s.data[0]))
+  # Constant length: 38 chars (UUID_STRING_BUFFER_LENGTH - 1)
+  s.len = min(38, N - 1)

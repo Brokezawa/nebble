@@ -1,4 +1,0 @@
-build/
-nimcache/
-.lock-waf*
-*.pbw
