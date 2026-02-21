@@ -192,6 +192,8 @@ This release includes the following key commits:
 - `7047c29` - Release v1.1.0: Sprite Sheets with Managed Handles and Examples Migration
 - `9e39532` - feat: migrate examples to separate repository (v1.1.0)
 - `006460c` - refactor: merge CLI into main package and improve FixedString API
+- `2faf385` - feat: Add ContentIndicator API and fix DSL parent validation
+- `c813578` - docs: Update release notes with ContentIndicator API changes
 
 ---
 
