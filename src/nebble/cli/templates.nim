@@ -221,6 +221,9 @@ def build(ctx):
             ctx.env.CFLAGS.remove('-Werror')
         ctx.env.CFLAGS.append('-w')
         
+        # Add include path for generated resource IDs
+        ctx.env.CPPPATH.append('{}/src'.format(ctx.env.BUILD_DIR))
+        
         app_elf='{}/pebble-app.elf'.format(ctx.env.BUILD_DIR)
         ctx.pbl_program(source=ctx.path.ant_glob('src/c/{}/*.c'.format(p)),
         target=app_elf)

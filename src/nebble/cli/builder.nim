@@ -8,17 +8,27 @@ proc findNebblePath(): string =
   # Try using nimble path command first
   let (nimbleOutput, nimbleExit) = execCmdEx("nimble path nebble")
   if nimbleExit == 0:
-    let trimmedPath = nimbleOutput.strip()
-    # nimble path returns the package root, but the source is in src/ subdirectory
-    let srcPath = trimmedPath / "src"
-    if dirExists(srcPath / "nebble") or fileExists(srcPath / "nebble.nim"):
-      return srcPath
+    # Use the first line if multiple paths are returned
+    let lines = nimbleOutput.strip().splitLines()
+    if lines.len > 0:
+      let packageRoot = lines[0].strip()
+      
+      # Check if package has src/ subdirectory (development mode)
+      let srcPath = packageRoot / "src"
+      if dirExists(srcPath / "nebble") or fileExists(srcPath / "nebble.nim"):
+        return srcPath
+      
+      # Check if package is flattened (installed via nimble)
+      # nimble installs packages with files at root, not in src/
+      if dirExists(packageRoot / "nebble"):
+        return packageRoot
   
   # Fallback to common locations
   let possiblePaths = [
     "../../src",  # For examples/ directory
     "../src",      # For project one level up
     "src",         # For root nebble directory
+    "..",          # Parent directory (for development)
   ]
   
   for path in possiblePaths:
@@ -50,6 +60,9 @@ proc compileNimToC*(cfg: NebbleConfig, platform: string): bool =
   var cmd = "nim c --compileOnly " & platformDefine & " --nimcache:" & nimcacheDir
   if nebblePath != "":
     cmd &= " --path:\"" & nebblePath & "\""
+  
+  # Add current src directory to path so gen/ files can be imported
+  cmd &= " --path:\"src\""
   cmd &= " " & sourcePath
   
   echo "  Running: ", cmd
@@ -142,6 +155,29 @@ proc generateAppInfo*(cfg: NebbleConfig, platforms: seq[string]): bool =
   writeFile("appinfo.json", appinfo.pretty)
   return true
 
+proc generateResourceIds*(cfg: NebbleConfig): bool =
+  ## Discover resources and generate src/gen/resources.nim
+  var resourcesNim = "## Auto-generated resource IDs\n"
+  resourcesNim.add("## Do not edit manually - these symbols are linked from the Pebble SDK\n\n")
+  
+  let resourcesDir = "resources"
+  let imagesDir = resourcesDir / "images"
+  
+  if dirExists(imagesDir):
+    for kind, path in walkDir(imagesDir):
+      if kind == pcFile and (path.endsWith(".png") or path.endsWith(".PNG")):
+        let filename = extractFilename(path)
+        let name = "IMAGE_" & filename.splitFile().name.toUpperAscii()
+        let resourceName = "RESOURCE_ID_" & name
+        resourcesNim.add("var " & resourceName & "* {.importc, nodecl.}: uint32\n")
+
+  # Write resources.nim
+  let genDir = "src" / "gen"
+  if not dirExists(genDir): createDir(genDir)
+  writeFile(genDir / "resources.nim", resourcesNim)
+  return true
+
+
 proc generatePackageJson*(cfg: NebbleConfig, platforms: seq[string]): bool =
   ## Generate package.json from nebble.json config (Modern SDK requirement)
   
@@ -159,6 +195,22 @@ proc generatePackageJson*(cfg: NebbleConfig, platforms: seq[string]): bool =
   if not cfg.appKeys.isNil and cfg.appKeys.len > 0:
     for key, val in cfg.appKeys:
       messageKeys[key] = val
+
+  # Discover resources for JSON
+  var mediaResources = newJArray()
+  let resourcesDir = "resources"
+  let imagesDir = resourcesDir / "images"
+  
+  if dirExists(imagesDir):
+    for kind, path in walkDir(imagesDir):
+      if kind == pcFile and (path.endsWith(".png") or path.endsWith(".PNG")):
+        let filename = extractFilename(path)
+        let name = "IMAGE_" & filename.splitFile().name.toUpperAscii()
+        mediaResources.add(%* {
+          "type": "png",
+          "name": name,
+          "file": "images/" & filename
+        })
 
   # Build package.json
   let jsExists = fileExists("src" / "js" / "pebble-js-app.js") or fileExists("src" / "pkjs" / "index.js")
@@ -181,7 +233,7 @@ proc generatePackageJson*(cfg: NebbleConfig, platforms: seq[string]): bool =
       "enableMultiJS": jsExists,
       "messageKeys": messageKeys,
       "resources": {
-        "media": []
+        "media": mediaResources
       }
     }
   }
@@ -206,13 +258,33 @@ proc copyNimCFiles*(cfg: NebbleConfig, platform: string): bool =
     removeDir(srcCDir)
   createDir(srcCDir)
   
+  # Discover resources for extern declarations
+  var externs = ""
+  let resourcesDir = "resources"
+  let imagesDir = resourcesDir / "images"
+  if dirExists(imagesDir):
+    for kind, path in walkDir(imagesDir):
+      if kind == pcFile and (path.endsWith(".png") or path.endsWith(".PNG")):
+        let filename = extractFilename(path)
+        let name = "IMAGE_" & filename.splitFile().name.toUpperAscii()
+        let resourceName = "RESOURCE_ID_" & name
+        externs.add("extern uint32_t " & resourceName & ";\n")
+
   # Copy all .c files from nimcache to src/c/<platform>
   var filesCopied = 0
   for kind, path in walkDir(nimcacheDir):
     if kind == pcFile and path.endsWith(".c"):
-      let destPath = srcCDir / extractFilename(path)
-      copyFile(path, destPath)
+      let filename = extractFilename(path)
+      let destPath = srcCDir / filename
+      
+      # If it's the main module, inject externs and stdint
+      if filename.startsWith("@m" & cfg.name):
+        let content = readFile(path)
+        writeFile(destPath, "#include <stdint.h>\n" & externs & content)
+      else:
+        copyFile(path, destPath)
       inc filesCopied
+
   
   # Copy nimbase.h from Nim installation
   # nimbase.h is not generated in nimcache, it's in the Nim lib directory

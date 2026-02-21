@@ -186,3 +186,8 @@ proc createSpawn*(animations: varargs[AnimationHandle]): AnimationHandle =
 proc `shouldAutoReverse=`*(h: var AnimationHandle, reverse: bool) {.inline.} =
   if h.raw == nil: return
   discard ffi.animation_set_reverse(h.raw, reverse)
+
+proc forget*(h: var AnimationHandle) {.inline.} =
+  ## Transfer ownership to the Pebble system.
+  ## The handle will no longer destroy or unschedule the animation when destroyed.
+  h.state = asUnowned

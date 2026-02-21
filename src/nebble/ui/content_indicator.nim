@@ -3,6 +3,10 @@
 ## Provides visual indicators (arrows) showing that content is available
 ## in scrollable directions. Used with ScrollLayer to show users that
 ## more content is available above/below/left/right.
+##
+## **IMPORTANT**: The configuration structs passed to the SDK MUST persist
+## for the entire lifetime of the ContentIndicator. Use global variables
+## or heap-allocated memory for these structs.
 
 import nebble/ffi
 import nebble/ffi/managed
@@ -36,6 +40,7 @@ proc configureDirection*(h: ContentIndicatorHandle;
                          direction: ContentIndicatorDirection;
                          config: ptr ContentIndicatorConfig): bool {.inline.} =
   ## Configure a direction with the given configuration.
+  ## The 'config' struct must persist for the lifetime of the indicator.
   if h.pRaw == nil: return false
   result = ffi.content_indicator_configure_direction(h.pRaw, direction, config)
 
@@ -50,8 +55,8 @@ proc contentAvailable*(h: ContentIndicatorHandle;
   result = ffi.content_indicator_get_content_available(h.pRaw, direction)
 
 proc setContentAvailable*(h: ContentIndicatorHandle;
-                          direction: ContentIndicatorDirection;
-                          available: bool) {.inline.} =
+                           direction: ContentIndicatorDirection;
+                           available: bool) {.inline.} =
   ## Manually set whether content is available in a direction.
   if h.pRaw == nil: return
   ffi.content_indicator_set_content_available(h.pRaw, direction, available)
@@ -60,33 +65,30 @@ proc setContentAvailable*(h: ContentIndicatorHandle;
 # Nim-idiomatic Helpers
 # ============================================================================
 
-proc makeConfig*(layer: ptr Layer;
-                 foreground: GColor = GColorBlack;
-                 background: GColor = GColorWhite;
-                 alignment: GAlign = GAlignCenter;
-                 timesOut: bool = true): ContentIndicatorConfig {.inline.} =
-  ## Create a ContentIndicatorConfig with the specified settings.
-  result.layer = layer
-  result.colors.foreground = foreground
-  result.colors.background = background
-  result.alignment = alignment
-  result.times_out = timesOut
-
-proc configureUp*(h: ContentIndicatorHandle;
+proc setupConfig*(config: var ContentIndicatorConfig;
                   layer: ptr Layer;
                   foreground: GColor = GColorBlack;
-                  background: GColor = GColorWhite): bool {.inline.} =
-  ## Configure the "up" direction indicator.
-  var config = makeConfig(layer, foreground, background, GAlignTop, true)
-  result = h.configureDirection(ContentIndicatorDirectionUp, addr config)
+                  background: GColor = GColorWhite;
+                  alignment: GAlign = GAlignCenter;
+                  timesOut: bool = true) {.inline.} =
+  ## Helper to populate a persistent config struct.
+  config.layer = layer
+  config.colors.foreground = foreground
+  config.colors.background = background
+  config.alignment = alignment
+  config.times_out = timesOut
 
-proc configureDown*(h: ContentIndicatorHandle;
-                    layer: ptr Layer;
-                    foreground: GColor = GColorBlack;
-                    background: GColor = GColorWhite): bool {.inline.} =
-  ## Configure the "down" direction indicator.
-  var config = makeConfig(layer, foreground, background, GAlignBottom, true)
-  result = h.configureDirection(ContentIndicatorDirectionDown, addr config)
+proc configure*(h: ContentIndicatorHandle;
+                direction: ContentIndicatorDirection;
+                config: var ContentIndicatorConfig;
+                layer: ptr Layer;
+                foreground: GColor = GColorBlack;
+                background: GColor = GColorWhite;
+                alignment: GAlign = GAlignCenter;
+                timesOut: bool = true): bool {.inline.} =
+  ## Populate a persistent config and apply it to the indicator.
+  setupConfig(config, layer, foreground, background, alignment, timesOut)
+  result = h.configureDirection(direction, addr config)
 
 proc showUp*(h: ContentIndicatorHandle) {.inline.} =
   ## Manually show the up indicator.
@@ -111,4 +113,3 @@ proc isUpVisible*(h: ContentIndicatorHandle): bool {.inline.} =
 proc isDownVisible*(h: ContentIndicatorHandle): bool {.inline.} =
   ## Check if the down indicator is currently visible.
   result = h.contentAvailable(ContentIndicatorDirectionDown)
-

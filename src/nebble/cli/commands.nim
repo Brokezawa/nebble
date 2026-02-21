@@ -91,12 +91,17 @@ proc cmdBuild*(platform: string) =
   # Load config
   let cfg = loadConfig()
   
-  # Step 0: Generate message keys
-  echo "Generating message keys..."
+  # Step 0: Generate message keys and resource IDs
+  echo "Generating assets..."
   if not generateMessageKeys(cfg):
     echo "✗ Message keys generation failed"
     quit(1)
   echo "✓ Generated src/gen/app_keys.nim"
+  
+  if not generateResourceIds(cfg):
+    echo "✗ Resource IDs generation failed"
+    quit(1)
+  echo "✓ Generated src/gen/resources.nim"
 
   # Determine platforms to build
   let platforms = if platform != "":

@@ -103,6 +103,10 @@ macro nebbleApp*(body: untyped): untyped =
           bitmap: NimNode = nil
           sections: NimNode = nil
           numSections: NimNode = nil
+          onUpdate: NimNode = nil
+          upIcon: NimNode = nil
+          downIcon: NimNode = nil
+          selectIcon: NimNode = nil
         
         # Parse properties
         for prop in stmt[1]:
@@ -130,7 +134,18 @@ macro nebbleApp*(body: untyped): untyped =
             of "bitmap": bitmap = propVal
             of "sections": sections = propVal
             of "numSections": numSections = propVal
+            of "onUpdate": onUpdate = propVal
             else: discard 
+          elif prop.kind == nnkCall and $prop[0] == "icons":
+            for iconProp in prop[1]:
+              if iconProp.kind == nnkAsgn and iconProp[0].kind == nnkIdent:
+                let iconName = $iconProp[0]
+                let iconVal = iconProp[1]
+                case iconName
+                of "up": upIcon = iconVal
+                of "down": downIcon = iconVal
+                of "select": selectIcon = iconVal
+                else: discard
         
         if layerId.isNil:
           error "Layer must have an 'id' property", stmt
@@ -158,6 +173,15 @@ macro nebbleApp*(body: untyped): untyped =
         
         let parentVarVal = if parentVar.isNil: quote do: cast[ptr Layer](nil) else: parentVar
 
+        let isParentValid = if parentVar.isNil:
+                              quote do: false
+                            else:
+                              quote do: (block:
+                                          var v = false
+                                          when compiles(`parentVarVal`.isValid): v = `parentVarVal`.isValid
+                                          elif compiles(`parentVarVal` != nil): v = `parentVarVal` != nil
+                                          v)
+
         let parentLayerNode = if not parentVar.isNil:
                                 quote do: `parentVarVal`.getLayer()
                               else:
@@ -165,13 +189,13 @@ macro nebbleApp*(body: untyped): untyped =
 
         if not fullScreen.isNil:
           frameExpr = quote do: 
-            if `parentVarVal` != cast[ptr Layer](nil): `parentLayerNode`.bounds
+            if `isParentValid`: `parentLayerNode`.bounds
             else: `win`.rootLayer().bounds
         else:
           let wNode = if not fullWidth.isNil:
                         quote do: 
-                          (if `parentVarVal` != cast[ptr Layer](nil): `parentLayerNode`.bounds.size.w
-                           else: `win`.rootLayer().bounds.size.w).int16
+                          (if `isParentValid`: `parentLayerNode`.bounds.size.w.int16
+                           else: `win`.rootLayer().bounds.size.w.int16)
                       elif not widthVal.isNil:
                         quote do: `widthVal`.int16
                       elif not bounds.isNil:
@@ -183,8 +207,8 @@ macro nebbleApp*(body: untyped): untyped =
 
           let hNode = if not fullHeight.isNil:
                         quote do: 
-                          (if `parentVarVal` != cast[ptr Layer](nil): `parentLayerNode`.bounds.size.h
-                           else: `win`.rootLayer().bounds.size.h).int16
+                          (if `isParentValid`: `parentLayerNode`.bounds.size.h.int16
+                           else: `win`.rootLayer().bounds.size.h.int16)
                       elif not heightVal.isNil:
                         quote do: `heightVal`.int16
                       elif not bounds.isNil:
@@ -198,13 +222,13 @@ macro nebbleApp*(body: untyped): untyped =
                         quote do: 0.int16
                       elif not xPos.isNil:
                         if xPos.kind == nnkIdent and $xPos == "center":
-                          quote do: (((if `parentVarVal` != cast[ptr Layer](nil): `parentLayerNode`.bounds.size.w
-                                       else: `win`.rootLayer().bounds.size.w).int - `wNode`.int) div 2).int16
+                          quote do: (((if `isParentValid`: `parentLayerNode`.bounds.size.w.int
+                                       else: `win`.rootLayer().bounds.size.w.int) - `wNode`.int) div 2).int16
                         else:
                           quote do: `xPos`.int16
                       elif not bounds.isNil:
-                        quote do: (((if `parentVarVal` != cast[ptr Layer](nil): `parentLayerNode`.bounds.size.w
-                                     else: `win`.rootLayer().bounds.size.w).int - `wNode`.int) div 2).int16
+                        quote do: (((if `isParentValid`: `parentLayerNode`.bounds.size.w.int
+                                     else: `win`.rootLayer().bounds.size.w.int) - `wNode`.int) div 2).int16
                       elif not frame.isNil:
                         quote do: `frame`[0].int16
                       else:
@@ -214,13 +238,13 @@ macro nebbleApp*(body: untyped): untyped =
                         quote do: 0.int16
                       elif not yPos.isNil:
                         if yPos.kind == nnkIdent and $yPos == "center":
-                          quote do: (((if `parentVarVal` != cast[ptr Layer](nil): `parentLayerNode`.bounds.size.h
-                                       else: `win`.rootLayer().bounds.size.h).int - `hNode`.int) div 2).int16
+                          quote do: (((if `isParentValid`: `parentLayerNode`.bounds.size.h.int
+                                       else: `win`.rootLayer().bounds.size.h.int) - `hNode`.int) div 2).int16
                         else:
                           quote do: `yPos`.int16
                       elif not bounds.isNil:
-                        quote do: (((if `parentVarVal` != cast[ptr Layer](nil): `parentLayerNode`.bounds.size.h
-                                     else: `win`.rootLayer().bounds.size.h).int - `hNode`.int) div 2).int16
+                        quote do: (((if `isParentValid`: `parentLayerNode`.bounds.size.h.int
+                                     else: `win`.rootLayer().bounds.size.h.int) - `hNode`.int) div 2).int16
                       elif not frame.isNil:
                         quote do: `frame`[1].int16
                       else:
@@ -229,17 +253,10 @@ macro nebbleApp*(body: untyped): untyped =
           if frame.isNil and bounds.isNil and fullScreen.isNil and fullWidth.isNil and 
              fullHeight.isNil and xPos.isNil and yPos.isNil and widthVal.isNil and heightVal.isNil:
             frameExpr = quote do: 
-              (if `parentVarVal` != cast[ptr Layer](nil): `parentLayerNode`.bounds
+              (if `isParentValid`: `parentLayerNode`.bounds
                else: `win`.rootLayer().bounds)
           else:
             frameExpr = quote do: makeGRect(`xNode`, `yNode`, `wNode`, `hNode`)
-
-
-
-
-
-
-
 
         # Constructor and setup
         case keyword
@@ -260,7 +277,7 @@ macro nebbleApp*(body: untyped): untyped =
             layerInits.add quote do: `layerId`.textAlignment = `alignment`
           
           layerAdds.add quote do:
-            if `parentVarVal` != cast[ptr Layer](nil): `parentVarVal`.addChild(`layerId`)
+            if `isParentValid`: `parentVarVal`.addChild(`layerId`)
             else: `win`.rootLayer().addChild(`layerId`)
 
         of "bitmapLayer":
@@ -276,7 +293,7 @@ macro nebbleApp*(body: untyped): untyped =
             layerInits.add quote do: `layerId`.alignment = `alignment`
           
           layerAdds.add quote do:
-            if `parentVarVal` != cast[ptr Layer](nil): `parentVarVal`.addChild(`layerId`)
+            if `isParentValid`: `parentVarVal`.addChild(`layerId`)
             else: `win`.rootLayer().addChild(`layerId`)
 
         of "statusBarLayer":
@@ -286,7 +303,7 @@ macro nebbleApp*(body: untyped): untyped =
             layerInits.add quote do: `layerId`.setColors(`bgColor`, `color`)
           
           layerAdds.add quote do:
-            if `parentVarVal` != cast[ptr Layer](nil): `parentVarVal`.addChild(`layerId`)
+            if `isParentValid`: `parentVarVal`.addChild(`layerId`)
             else: `win`.rootLayer().addChild(`layerId`)
 
         of "actionBarLayer":
@@ -295,6 +312,14 @@ macro nebbleApp*(body: untyped): untyped =
             `layerId` = newActionBarLayer()
           if not bgColor.isNil:
             layerInits.add quote do: `layerId`.backgroundColor = `bgColor`
+          
+          if not upIcon.isNil:
+            layerInits.add quote do: `layerId`.setIcon(BUTTON_ID_UP, gbitmap_create_with_resource(`upIcon`))
+          if not downIcon.isNil:
+            layerInits.add quote do: `layerId`.setIcon(BUTTON_ID_DOWN, gbitmap_create_with_resource(`downIcon`))
+          if not selectIcon.isNil:
+            layerInits.add quote do: `layerId`.setIcon(BUTTON_ID_SELECT, gbitmap_create_with_resource(`selectIcon`))
+
           layerAdds.add quote do:
             `layerId`.addToWindow(`win`)
 
@@ -304,7 +329,7 @@ macro nebbleApp*(body: untyped): untyped =
             `layerId` = newRotBitmapLayer(`bitmap`)
           
           layerAdds.add quote do:
-            if `parentVarVal` != cast[ptr Layer](nil): `parentVarVal`.addChild(`layerId`)
+            if `isParentValid`: `parentVarVal`.addChild(`layerId`)
             else: `win`.rootLayer().addChild(`layerId`)
 
         of "scrollLayer":
@@ -312,7 +337,7 @@ macro nebbleApp*(body: untyped): untyped =
             `layerId` = newScrollLayer(`frameExpr`)
           
           layerAdds.add quote do:
-            if `parentVarVal` != cast[ptr Layer](nil): `parentVarVal`.addChild(`layerId`)
+            if `isParentValid`: `parentVarVal`.addChild(`layerId`)
             else: `win`.rootLayer().addChild(`layerId`)
 
         of "menuLayer":
@@ -320,7 +345,7 @@ macro nebbleApp*(body: untyped): untyped =
             `layerId` = newMenuLayer(`frameExpr`)
           
           layerAdds.add quote do:
-            if `parentVarVal` != cast[ptr Layer](nil): `parentVarVal`.addChild(`layerId`)
+            if `isParentValid`: `parentVarVal`.addChild(`layerId`)
             else: `win`.rootLayer().addChild(`layerId`)
 
         of "layer":
@@ -328,7 +353,7 @@ macro nebbleApp*(body: untyped): untyped =
             `layerId` = newLayer(`frameExpr`)
           
           layerAdds.add quote do:
-            if `parentVarVal` != cast[ptr Layer](nil): `parentVarVal`.addChild(`layerId`)
+            if `isParentValid`: `parentVarVal`.addChild(`layerId`)
             else: `win`.rootLayer().addChild(`layerId`)
 
         of "simpleMenuLayer":
@@ -338,8 +363,12 @@ macro nebbleApp*(body: untyped): untyped =
             `layerId` = newSimpleMenuLayer(`frameExpr`, `win`, `sections`, `nSec`, nil)
           
           layerAdds.add quote do:
-            if `parentVarVal` != cast[ptr Layer](nil): `parentVarVal`.addChild(`layerId`)
+            if `isParentValid`: `parentVarVal`.addChild(`layerId`)
             else: `win`.rootLayer().addChild(`layerId`)
+        
+        # Common layer properties (apply to all layer types)
+        if not onUpdate.isNil:
+          layerInits.add quote do: `layerId`.updateProc = `onUpdate`
 
       of "tickTimer":
         for prop in stmt[1]:

@@ -136,8 +136,9 @@ proc `font=`*(p: ptr TextLayer, value: GFont) {.inline.} =
   text_layer_set_font(p, value)
 
 proc `textAlignment=`*(h: var TextLayerHandle, value: GTextAlignment) {.inline.} =
-  if h.pRaw == nil: return
-  text_layer_set_text_alignment(h.pRaw, value)
+  ## Set the text alignment.
+  if h.pRaw != nil:
+    text_layer_set_text_alignment(h.pRaw, value)
 
 proc `textAlignment=`*(p: ptr TextLayer, value: GTextAlignment) {.inline.} =
   if p == nil: return
