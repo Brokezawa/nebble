@@ -139,6 +139,11 @@ nimble testSize    # Binary size checks
 - `src/nebble/graphics/sprite.nim` - Sprite sheet module with dual API (managed + raw)
 - `SpriteSheetHandle` - ARC-managed sprite sheet handle
 - `AnimatedSpriteHandle` - ARC-managed animation handle
+- `src/nebble/ui/content_indicator.nim` - Content Indicator API for scroll arrows
+- `ContentIndicatorHandle` - ARC-managed handle for scroll indicators
+- High-level helpers: `setupConfig()`, `configure()`, `showUp/Down()`, `hideUp/Down()`
+- `ScrollLayer.addChild()` - Properly add children to scroll content
+- `ScrollLayer.getContentIndicator()` - Get indicator for scroll layer
 - `tests/test_sprite.nim` - Comprehensive tests for sprite functionality
 - Cross-platform temp directory support using `getTempDir()`
 - Multi-OS CI testing matrix (Ubuntu, macOS, Windows)
@@ -156,6 +161,10 @@ nimble testSize    # Binary size checks
 - Hardcoded `/tmp/` paths (now uses `getTempDir()`)
 
 ### Fixed
+- **Declarative DSL Parent Validation**: Fixed `isParentValid` logic to properly handle parent layer validation
+- **textAlignment Property**: Fixed DSL support for text layer alignment property
+- **ScrollLayer.addChild()**: Fixed to properly set parent tracking to prevent double-free
+- **ContentIndicator.timesOut**: Fixed default from `false` to `true` to match Pebble SDK standard
 - Cross-platform compatibility for test temp directories
 - Windows support improvements
 - Path handling in nimble tasks
