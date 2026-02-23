@@ -99,7 +99,7 @@ proc newBitmapRef*(resourceId: uint32): GBitmapRef =
   new(result)
   result.bitmap = gbitmap_create_with_resource(resourceId)
   result.isSubBitmap = false
-  result.isSystemResource = true  # Resource-based, don't destroy
+  result.isSystemResource = false  # Resource-loaded bitmaps must be destroyed
   result.parent = nil
 
 proc newBitmapRef*(data: ptr uint8): GBitmapRef =

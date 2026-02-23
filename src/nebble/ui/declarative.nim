@@ -39,8 +39,9 @@ macro nebbleApp*(body: untyped): untyped =
     layerAdds = newStmtList()      # adding to parent
     layerCleanups = newStmtList()  # setting handles to nil in unload
     windowInits = newStmtList()    # window-specific setup
-    dslInit = newStmtList()        # custom init block
+    dslInit = newStmtList()        # custom init block (runs in init(), before windowLoad)
     dslDeinit = newStmtList()      # custom deinit block
+    dslOnLoad = newStmtList()      # onLoad block (runs in windowLoad, after layers created)
     
     tickHandler: NimNode = nil     # tick timer handler
     tickUnit: NimNode = nil        # tick timer unit
@@ -81,6 +82,9 @@ macro nebbleApp*(body: untyped): untyped =
       of "deinit":
         for s in stmt[1]:
           dslDeinit.add s
+      of "onLoad":
+        for s in stmt[1]:
+          dslOnLoad.add s
 
       of "textLayer", "bitmapLayer", "statusBarLayer", "actionBarLayer", "rotBitmapLayer", "scrollLayer", "menuLayer", "simpleMenuLayer", "layer":
         var 
@@ -397,6 +401,7 @@ macro nebbleApp*(body: untyped): untyped =
   windowLoadBody.add windowInits # Set window properties first (e.g. background color)
   windowLoadBody.add layerInits
   windowLoadBody.add layerAdds
+  windowLoadBody.add dslOnLoad   # onLoad block runs after layers are created
   
   if hasClicks:
     if not actionBarId.isNil:

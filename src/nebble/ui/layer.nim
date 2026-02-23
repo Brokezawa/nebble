@@ -171,7 +171,15 @@ proc insertAboveSibling*(layerToInsert, sibling: ptr Layer) {.inline.} =
 
 proc addChild*(parent: ptr Layer, child: var auto) {.inline.} =
   ## Add managed child layer to raw parent layer.
-  when compiles(child.pRaw):
+  when compiles(child.getLayer()):
+    # Handle has getLayer() method (e.g., ScrollLayerHandle, TextLayerHandle)
+    let cPtr = child.getLayer()
+    if parent != nil and cPtr != nil:
+      ffi.layer_add_child(parent, cPtr)
+      when compiles(child.setParent):
+        child.setParent(parent)
+  elif compiles(child.pRaw):
+    # Handle has pRaw field - cast to Layer pointer
     if parent != nil and child.pRaw != nil:
       ffi.layer_add_child(parent, cast[ptr Layer](child.pRaw))
       when compiles(child.setParent):

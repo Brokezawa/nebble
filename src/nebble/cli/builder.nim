@@ -162,12 +162,26 @@ proc generateResourceIds*(cfg: NebbleConfig): bool =
   
   let resourcesDir = "resources"
   let imagesDir = resourcesDir / "images"
+  let fontsDir = resourcesDir / "fonts"
   
+  # Scan images
   if dirExists(imagesDir):
     for kind, path in walkDir(imagesDir):
       if kind == pcFile and (path.endsWith(".png") or path.endsWith(".PNG")):
         let filename = extractFilename(path)
         let name = "IMAGE_" & filename.splitFile().name.toUpperAscii()
+        let resourceName = "RESOURCE_ID_" & name
+        resourcesNim.add("var " & resourceName & "* {.importc, nodecl.}: uint32\n")
+  
+  # Scan fonts (recursive to handle subdirectories like fonts/osp-din/)
+  if dirExists(fontsDir):
+    for path in walkDirRec(fontsDir):
+      if path.endsWith(".ttf") or path.endsWith(".otf") or 
+          path.endsWith(".TTF") or path.endsWith(".OTF"):
+        let filename = extractFilename(path)
+        # Replace hyphens with underscores for valid Nim identifier
+        let baseName = filename.splitFile().name.replace("-", "_")
+        let name = "FONT_" & baseName.toUpperAscii()
         let resourceName = "RESOURCE_ID_" & name
         resourcesNim.add("var " & resourceName & "* {.importc, nodecl.}: uint32\n")
 
@@ -200,7 +214,9 @@ proc generatePackageJson*(cfg: NebbleConfig, platforms: seq[string]): bool =
   var mediaResources = newJArray()
   let resourcesDir = "resources"
   let imagesDir = resourcesDir / "images"
+  let fontsDir = resourcesDir / "fonts"
   
+  # Scan images
   if dirExists(imagesDir):
     for kind, path in walkDir(imagesDir):
       if kind == pcFile and (path.endsWith(".png") or path.endsWith(".PNG")):
@@ -210,6 +226,23 @@ proc generatePackageJson*(cfg: NebbleConfig, platforms: seq[string]): bool =
           "type": "png",
           "name": name,
           "file": "images/" & filename
+        })
+  
+  # Scan fonts (recursive to handle subdirectories)
+  if dirExists(fontsDir):
+    for path in walkDirRec(fontsDir):
+      if path.endsWith(".ttf") or path.endsWith(".otf") or 
+           path.endsWith(".TTF") or path.endsWith(".OTF"):
+        let filename = extractFilename(path)
+        # Replace hyphens with underscores for valid resource name
+        let baseName = filename.splitFile().name.replace("-", "_")
+        let name = "FONT_" & baseName.toUpperAscii()
+        # Get relative path from resources/fonts/
+        let relPath = "fonts/" & path[(fontsDir.len + 1)..^1]
+        mediaResources.add(%* {
+          "type": "font",
+          "name": name,
+          "file": relPath
         })
 
   # Build package.json
@@ -262,11 +295,26 @@ proc copyNimCFiles*(cfg: NebbleConfig, platform: string): bool =
   var externs = ""
   let resourcesDir = "resources"
   let imagesDir = resourcesDir / "images"
+  let fontsDir = resourcesDir / "fonts"
+  
+  # Scan images
   if dirExists(imagesDir):
     for kind, path in walkDir(imagesDir):
       if kind == pcFile and (path.endsWith(".png") or path.endsWith(".PNG")):
         let filename = extractFilename(path)
         let name = "IMAGE_" & filename.splitFile().name.toUpperAscii()
+        let resourceName = "RESOURCE_ID_" & name
+        externs.add("extern uint32_t " & resourceName & ";\n")
+  
+  # Scan fonts
+  if dirExists(fontsDir):
+    for path in walkDirRec(fontsDir):
+      if path.endsWith(".ttf") or path.endsWith(".otf") or 
+           path.endsWith(".TTF") or path.endsWith(".OTF"):
+        let filename = extractFilename(path)
+        # Replace hyphens with underscores for valid resource name
+        let baseName = filename.splitFile().name.replace("-", "_")
+        let name = "FONT_" & baseName.toUpperAscii()
         let resourceName = "RESOURCE_ID_" & name
         externs.add("extern uint32_t " & resourceName & ";\n")
 

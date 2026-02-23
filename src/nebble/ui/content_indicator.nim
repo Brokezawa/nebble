@@ -13,6 +13,11 @@ import nebble/ffi/managed
 
 export ffi.ContentIndicator, ffi.ContentIndicatorDirection, ffi.ContentIndicatorConfig
 
+# Re-export direction values for convenience
+const
+  ContentIndicatorDirectionUp* = ffi.ContentIndicatorDirectionUp
+  ContentIndicatorDirectionDown* = ffi.ContentIndicatorDirectionDown
+
 # ============================================================================
 # Define the Managed Handle
 # ============================================================================
