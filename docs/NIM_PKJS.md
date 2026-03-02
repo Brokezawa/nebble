@@ -8,7 +8,7 @@ When you create a new project with `nebble new`, the following files are generat
 
 *   `src/<app_name>.nim`: Main watchapp source (compiled to C).
 *   `src/pkjs.nim`: Phone-side logic (compiled to JS via Nim's JavaScript backend).
-*   `src/gen/app_keys.nim`: Shared message keys generated from `nebble.json`.
+*   `src/gen/app_keys.nim`: Shared message keys generated from `package.json`.
 
 ## Sharing Code
 

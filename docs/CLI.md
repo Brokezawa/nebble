@@ -34,7 +34,7 @@ Create a new Pebble project with scaffolding and templates.
 
 ### `nebble build [--platform <p>]`
 Build the project using the Nim to C to Pebble pipeline.
-- `--platform <p>`: Build for specific platform (aplite, basalt, chalk, diorite, emery, flint). Default: all platforms listed in `nebble.json`.
+- `--platform <p>`: Build for specific platform (aplite, basalt, chalk, diorite, emery, flint, gabbro). Default: all platforms listed in `package.json`.
 - Multiple `--platform` flags can be used to build for a subset of platforms.
 - The build process generates a single unified `.pbw` bundle containing all specified platform binaries.
 
@@ -55,27 +55,33 @@ Remove all build artifacts (build/, nimcache/, etc.).
 Show binary size breakdown and RAM utilization (critical for Aplite's 24KB limit).
 
 ### `nebble gen-keys`
-Generate type-safe Nim message keys from the `appKeys` defined in `nebble.json`.
+Generate type-safe Nim message keys from the `messageKeys` defined in `package.json`.
 
 ### `nebble regen-ffi`
 Regenerate Futhark FFI bindings (requires Futhark and libclang).
 
 ## Project Configuration
 
-Nebble projects are configured via `nebble.json` in the project root. This file is automatically converted to `package.json` (modern SDK) and `appinfo.json` (legacy compatibility) during the build process.
+Nebble projects are configured via `package.json` in the project root (the standard Pebble SDK format).
 
 ```json
 {
   "name": "my_app",
-  "appType": "app",
   "version": "1.0.0",
-  "uuid": "...",
-  "platforms": ["aplite", "basalt", "chalk", "diorite", "emery", "flint"],
-  "appType": "app",
-  "capabilities": [],
-  "appKeys": {
-    "Data": 0,
-    "Command": 1
+  "author": "Your Name",
+  "private": true,
+  "pebble": {
+    "uuid": "...",
+    "displayName": "My App",
+    "sdkVersion": "3",
+    "targetPlatforms": ["aplite", "basalt", "chalk", "diorite", "emery", "flint", "gabbro"],
+    "watchapp": {
+      "watchface": false
+    },
+    "messageKeys": {
+      "Data": 0,
+      "Command": 1
+    }
   }
 }
 ```

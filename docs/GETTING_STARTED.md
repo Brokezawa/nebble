@@ -71,15 +71,13 @@ cd my_first_app
 This generates the project structure:
 ```
 my_first_app/
-├── nebble.json         # Nebble project metadata
+├── package.json        # Pebble SDK project metadata
 ├── nim.cfg             # Cross-compilation flags
 ├── wscript             # Waf build configuration
 └── src/
     ├── my_first_app.nim  # Your Nim watchapp source
     └── pkjs.nim          # Your Nim phone-side logic
 ```
-
-*Note: `package.json` and phone-side JavaScript are generated automatically by Nebble during the build process.*
 
 ### Step 2: Write Your App Code
 

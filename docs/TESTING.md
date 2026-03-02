@@ -13,7 +13,7 @@ Runs unit tests on the host machine (macOS/Linux) using minimal mocks for Pebble
 - **Speed:** Very fast. Run this frequently during development.
 
 ### 2. `nimble testExample` (Build Matrix)
-Builds all example applications for all 6 Pebble platforms.
+Builds all example applications for all 7 Pebble platforms.
 - This is an integration test for the entire pipeline: Nim → C → Pebble SDK (ARM GCC) → .pbw.
 - Verifies that the API compiles correctly against the real Pebble SDK headers.
 - Checks binary sizes (especially for Aplite's 24KB limit).
@@ -30,10 +30,10 @@ Add new test files to `tests/`.
 - Use `tests/mocks/pebble.h` for C type definitions if needed.
 - Add execution line to `nebble.nimble` under `testUnit`.
 
-### Integration Tests (Examples)
-Add a new example app in `examples/`.
-- Must have `nebble.json`, `nim.cfg`, `wscript`, and `src/<name>.nim`.
-- The `testExample` task automatically discovers all valid projects in `examples/` and adds them to the build matrix.
+### Integration Tests (Templates)
+The `testExample` task uses CLI templates (`hello_world`, `simple_watchface`) to verify compilation across all 7 platforms.
+- Each template must have `package.json`, `nim.cfg`, `wscript`, and `src/<name>.nim`.
+- Templates are located in `tools/templates/` and automatically discovered by the build matrix.
 
 ## Manual Testing
 
