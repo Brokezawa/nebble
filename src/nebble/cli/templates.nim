@@ -108,6 +108,10 @@ proc getNimCfg*(): string =
   ## Get nim.cfg for cross-compilation
   result = """# Nim cross-compilation configuration for Pebble
 # These flags enable bare-metal ARM compilation
+#
+# Prerequisites:
+#   nimble install nebble     # For released version
+#   nimble develop            # For local development (in nebble/ directory)
 
 # Target configuration
 --os:any
@@ -129,10 +133,6 @@ proc getNimCfg*(): string =
 
 # Nimcache directory
 --nimcache:nimcache
-
-# Path to nebble library (adjust based on your project location)
-# This assumes nebble is installed via nimble or available in parent directories
-# --path:"path/to/nebble/src"
 """
 
 proc getPkjsTemplate*(): string =

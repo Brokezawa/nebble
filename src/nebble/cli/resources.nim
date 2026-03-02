@@ -4,11 +4,11 @@ import std/[os, json]
 import config
 
 proc listResources*() =
-  if not fileExists("nebble.json"):
-    echo "Error: nebble.json not found"
+  if not fileExists("package.json"):
+    echo "Error: package.json not found"
     quit(1)
   let cfg = loadConfig()
-  # For now, list entries under resources/ and appKeys
+  # For now, list entries under resources/ and messageKeys
   echo "Resources in project '", cfg.name, "':"
   if dirExists("resources"):
     for kind, path in walkDir("resources"):
@@ -16,9 +16,9 @@ proc listResources*() =
         echo "  - ", path
   else:
     echo "  (no resources directory)"
-  if cfg.appKeys.len > 0:
-    echo "\nApp Keys:" 
-    for k, v in cfg.appKeys:
+  if cfg.messageKeys.len > 0:
+    echo "\nMessage Keys:" 
+    for k, v in cfg.messageKeys:
       echo "  ", k, ": ", v
 
 proc addResource*(srcPath: string, destName: string = ""): bool =
@@ -39,12 +39,12 @@ proc addResource*(srcPath: string, destName: string = ""): bool =
 
 proc validateResources*(): bool =
   var ok = true
-  if not fileExists("nebble.json"):
-    echo "Error: nebble.json not found"
+  if not fileExists("package.json"):
+    echo "Error: package.json not found"
     return false
   let cfg = loadConfig()
-  if cfg.appKeys.len > 0:
-    for k, v in cfg.appKeys:
+  if cfg.messageKeys.len > 0:
+    for k, v in cfg.messageKeys:
       # no-op: keys are logical, not physical
       discard
   if not dirExists("resources"):

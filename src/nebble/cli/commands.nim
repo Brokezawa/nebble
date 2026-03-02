@@ -4,7 +4,7 @@ import std/[os, strutils, osproc, json]
 import config, templates, builder
 import resources
 
-const validPlatforms* = ["aplite", "basalt", "chalk", "diorite", "emery", "flint"]
+const validPlatforms* = ["aplite", "basalt", "chalk", "diorite", "emery", "flint", "gabbro"]
 
 proc validatePlatform*(platform: string): bool =
   ## Validate platform name
@@ -26,27 +26,32 @@ proc cmdNew*(name: string, isWatchface: bool) =
   # Create directory structure
   createDir(name)
   createDir(name / "src")
-  createDir(name / "src" / "js")
   createDir(name / "resources")
   
   # Generate project files
   let appType = if isWatchface: "watchface" else: "app"
   
-  # Create nebble.json config
-  let config = %* {
+  # Create package.json config (standard Pebble SDK format)
+  let packageJson = %* {
     "name": name,
-    "appType": appType,
     "version": "1.0.0",
-    "uuid": generateUuid(),
-    "platforms": ["aplite", "basalt", "chalk", "diorite", "emery", "flint"],
-    "capabilities": [],
-    "appKeys": {
-      "JSReady": 0,
-      "WatchReady": 1
+    "author": "Nebble Developer",
+    "private": true,
+    "pebble": {
+      "uuid": generateUuid(),
+      "displayName": name,
+      "sdkVersion": "3",
+      "targetPlatforms": ["aplite", "basalt", "chalk", "diorite", "emery", "flint", "gabbro"],
+      "watchapp": {
+        "watchface": isWatchface
+      },
+      "resources": {
+        "media": []
+      }
     }
   }
   
-  writeFile(name / "nebble.json", config.pretty)
+  writeFile(name / "package.json", packageJson.pretty)
   
   # Create main source file
   let sourceCode = if isWatchface:
@@ -59,23 +64,23 @@ proc cmdNew*(name: string, isWatchface: bool) =
   # Create nim.cfg for cross-compilation
   writeFile(name / "nim.cfg", getNimCfg())
   
-  # Create pkjs.nim for phone-side logic
-  writeFile(name / "src" / "pkjs.nim", getPkjsNimTemplate(name))
-  
   # Create wscript for Pebble build system
   writeFile(name / "wscript", getWscript())
   
   # Create .gitignore
-  writeFile(name / ".gitignore", """
-build/
+  writeFile(name / ".gitignore", """build/
 nimcache/
 .lock-waf*
 *.pbw
+src/c/
+src/js/
+src/gen/
+appinfo.json
 """)
   
   echo "✓ Created project structure"
   echo "✓ Generated ", name, ".nim (", appType, ")"
-  echo "✓ Generated nebble.json"
+  echo "✓ Generated package.json"
   echo ""
   echo "Next steps:"
   echo "  cd ", name
@@ -84,11 +89,11 @@ nimcache/
 
 proc cmdBuild*(platform: string) =
   ## Build the Nebble project
-  if not fileExists("nebble.json"):
-    echo "Error: nebble.json not found. Run 'nebble new' to create a project."
+  if not fileExists("package.json"):
+    echo "Error: package.json not found. Run 'nebble new' to create a project."
     quit(1)
   
-  # Load config
+  # Load config from package.json
   let cfg = loadConfig()
   
   # Step 0: Generate message keys and resource IDs
@@ -138,17 +143,33 @@ proc cmdBuild*(platform: string) =
     echo "✗ Nim JS compilation failed"
     quit(1)
   
-  # Step 3: Generate package.json (sole source of truth for SDK 3+)
-  if not generatePackageJson(cfg, platforms):
-    echo "✗ package.json generation failed"
-    quit(1)
-  echo "✓ Generated package.json"
+  # Step 3: Filter package.json to only include requested platforms
+  # Pebble SDK builds all platforms in targetPlatforms, so we need to modify package.json
+  if platforms.len > 0 and platforms.len < cfg.platforms.len:
+    let packageJsonPath = "package.json"
+    var packageJson = parseFile(packageJsonPath)
+    var filteredPlatforms = newJArray()
+    for p in platforms:
+      filteredPlatforms.add(%p)
+    packageJson["pebble"]["targetPlatforms"] = filteredPlatforms
+    writeFile(packageJsonPath, packageJson.pretty)
+    echo "  Filtered package.json to platforms: ", platforms.join(", ")
   
   # Step 4: Run Pebble build
   echo "═══ Running Pebble Build ═══"
   if not runPebbleBuild(cfg):
     echo "✗ Pebble build failed"
     quit(1)
+  
+  # Restore original package.json if we modified it
+  if platforms.len > 0 and platforms.len < cfg.platforms.len:
+    let packageJsonPath = "package.json"
+    var packageJson = parseFile(packageJsonPath)
+    var allPlatforms = newJArray()
+    for p in cfg.platforms:
+      allPlatforms.add(%p)
+    packageJson["pebble"]["targetPlatforms"] = allPlatforms
+    writeFile(packageJsonPath, packageJson.pretty)
   echo "✓ Pebble build successful"
   
   echo "═══════════════════════════════"
@@ -166,8 +187,8 @@ proc cmdBuild*(platform: string) =
 
 proc cmdInstall*(platform: string, toPhone: bool, phoneIp: string, pbwPath: string = "") =
   ## Install to emulator or phone
-  if not fileExists("nebble.json"):
-    echo "Error: nebble.json not found"
+  if not fileExists("package.json"):
+    echo "Error: package.json not found"
     quit(1)
   
   let cfg = loadConfig()
@@ -292,10 +313,6 @@ proc cmdClean*() =
       removeFile(path)
       inc cleaned
       echo "✓ Removed ", path
-    elif kind == pcFile and (filename == "appinfo.json" or filename == "package.json"):
-      removeFile(path)
-      inc cleaned
-      echo "✓ Removed ", path
   
   # Remove generated JS
   let genJs = "src" / "js" / "pebble-js-app.js"
@@ -330,8 +347,8 @@ proc cmdSize*(platform: string) =
     echo "Error: Invalid platform '", platform, "'"
     quit(1)
   
-  if not fileExists("nebble.json"):
-    echo "Error: nebble.json not found"
+  if not fileExists("package.json"):
+    echo "Error: package.json not found"
     quit(1)
   
   let cfg = loadConfig()
@@ -384,14 +401,14 @@ proc cmdSize*(platform: string) =
           discard
 
 proc cmdGenKeys*() =
-  ## Generate type-safe message keys from nebble.json
-  if not fileExists("nebble.json"):
-    echo "Error: nebble.json not found. Run 'nebble new' to create a project."
+  ## Generate type-safe message keys from package.json
+  if not fileExists("package.json"):
+    echo "Error: package.json not found. Run 'nebble new' to create a project."
     quit(1)
   
   let cfg = loadConfig()
   
-  echo "Generating message keys from nebble.json..."
+  echo "Generating message keys from package.json..."
   
   if not generateMessageKeys(cfg):
     echo "✗ Failed to generate message keys"
@@ -457,10 +474,10 @@ proc cmdDoctor*() =
     inc issues
 
   # Project checks
-  if fileExists("nebble.json"):
-    echo "✓ nebble.json present"
+  if fileExists("package.json"):
+    echo "✓ package.json present"
   else:
-    echo "⚠ nebble.json missing in current directory"
+    echo "⚠ package.json missing in current directory"
     inc issues
 
   if issues == 0:

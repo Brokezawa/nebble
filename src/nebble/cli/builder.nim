@@ -39,10 +39,11 @@ proc findNebblePath(): string =
 
 proc compileNimToC*(cfg: NebbleConfig, platform: string): bool =
   ## Compile Nim code to C for the specified platform
-  let
-    sourcePath = "src" / (cfg.name & ".nim")
-    nimcacheDir = "nimcache"
-    platformDefine = "-d:pebble" & platform.capitalizeAscii()
+  # Use project name from directory if needed
+  let projectName = cfg.name
+  let sourcePath = "src" / (projectName & ".nim")
+  let nimcacheDir = "nimcache"
+  let platformDefine = "-d:pebble" & platform.capitalizeAscii()
   
   if not fileExists(sourcePath):
     echo "Error: Source file not found: ", sourcePath
@@ -77,12 +78,13 @@ proc compileNimToC*(cfg: NebbleConfig, platform: string): bool =
 
 proc compileNimToJs*(cfg: NebbleConfig): bool =
   ## Compile Nim code to JS for the phone-side component
+  ## Only runs if src/pkjs.nim exists
   let
     sourcePath = "src" / "pkjs.nim"
     destPath = "src" / "js" / "pebble-js-app.js"
   
   if not fileExists(sourcePath):
-    # Optional component
+    # No JS component needed
     return true
 
   echo "  Compiling Nim to JS..."
@@ -109,175 +111,28 @@ proc compileNimToJs*(cfg: NebbleConfig): bool =
   
   return true
 
-proc generateAppInfo*(cfg: NebbleConfig, platforms: seq[string]): bool =
-  ## Generate appinfo.json from nebble.json config
-  # Pebble SDK expects appinfo.json in project root, not in build/
-  
-  # Determine watchface or app
-  let isWatchface = cfg.appType == "watchface"
-  
-  # Convert version to Major.Minor format (Pebble requirement)
-  # "1.0.0" -> "1.0", "2.3.5" -> "2.3"
-  let versionParts = cfg.version.split('.')
-  let versionLabel = if versionParts.len >= 2:
-    versionParts[0] & "." & versionParts[1]
-  else:
-    cfg.version
-  
-  # Build appinfo.json
-  var appinfo = %* {
-    "uuid": cfg.uuid,
-    "shortName": cfg.name,
-    "longName": cfg.name,
-    "companyName": "Nebble",
-    "versionLabel": versionLabel,
-    "versionCode": 1,
-    "sdkVersion": "3",
-    "targetPlatforms": platforms,
-    "watchapp": {
-      "watchface": isWatchface
-    },
-    "resources": {
-      "media": []
-    }
-  }
-  
-  # Add capabilities if any
-  if cfg.capabilities.len > 0:
-    appinfo["capabilities"] = newJArray()
-    for cap in cfg.capabilities:
-      appinfo["capabilities"].add(%cap)
-  
-  # Add appKeys if any
-  if not cfg.appKeys.isNil and cfg.appKeys.len > 0:
-    appinfo["appKeys"] = cfg.appKeys
-  
-  writeFile("appinfo.json", appinfo.pretty)
-  return true
-
 proc generateResourceIds*(cfg: NebbleConfig): bool =
-  ## Discover resources and generate src/gen/resources.nim
+  ## Generate src/gen/resources.nim from package.json resource definitions
+  
   var resourcesNim = "## Auto-generated resource IDs\n"
-  resourcesNim.add("## Do not edit manually - these symbols are linked from the Pebble SDK\n\n")
+  resourcesNim.add("## Generated from package.json resources\n\n")
   
-  let resourcesDir = "resources"
-  let imagesDir = resourcesDir / "images"
-  let fontsDir = resourcesDir / "fonts"
+  # Read resources from package.json
+  if fileExists("package.json"):
+    let pkg = parseFile("package.json")
+    if pkg.hasKey("pebble") and pkg["pebble"].hasKey("resources") and 
+       pkg["pebble"]["resources"].hasKey("media"):
+      for media in pkg["pebble"]["resources"]["media"]:
+        let name = media{"name"}.getStr()
+        let resType = media{"type"}.getStr()
+        if name.len > 0 and (resType == "png" or resType == "font" or resType == "raw"):
+          let resourceName = "RESOURCE_ID_" & name.toUpperAscii()
+          resourcesNim.add("var " & resourceName & "* {.importc, nodecl.}: uint32\n")
   
-  # Scan images
-  if dirExists(imagesDir):
-    for kind, path in walkDir(imagesDir):
-      if kind == pcFile and (path.endsWith(".png") or path.endsWith(".PNG")):
-        let filename = extractFilename(path)
-        let name = "IMAGE_" & filename.splitFile().name.toUpperAscii()
-        let resourceName = "RESOURCE_ID_" & name
-        resourcesNim.add("var " & resourceName & "* {.importc, nodecl.}: uint32\n")
-  
-  # Scan fonts (recursive to handle subdirectories like fonts/osp-din/)
-  if dirExists(fontsDir):
-    for path in walkDirRec(fontsDir):
-      if path.endsWith(".ttf") or path.endsWith(".otf") or 
-          path.endsWith(".TTF") or path.endsWith(".OTF"):
-        let filename = extractFilename(path)
-        # Replace hyphens with underscores for valid Nim identifier
-        let baseName = filename.splitFile().name.replace("-", "_")
-        let name = "FONT_" & baseName.toUpperAscii()
-        let resourceName = "RESOURCE_ID_" & name
-        resourcesNim.add("var " & resourceName & "* {.importc, nodecl.}: uint32\n")
-
   # Write resources.nim
   let genDir = "src" / "gen"
   if not dirExists(genDir): createDir(genDir)
   writeFile(genDir / "resources.nim", resourcesNim)
-  return true
-
-
-proc generatePackageJson*(cfg: NebbleConfig, platforms: seq[string]): bool =
-  ## Generate package.json from nebble.json config (Modern SDK requirement)
-  
-  # Determine watchface or app
-  let isWatchface = cfg.appType == "watchface"
-  
-  # Convert version to Major.Minor.Patch format
-  # Pebble package.json requires semantic versioning
-  let version = if cfg.version.split('.').len == 3: cfg.version
-                elif cfg.version.split('.').len == 2: cfg.version & ".0"
-                else: cfg.version & ".0.0"
-
-  # Build messageKeys (under pebble object) as a JObject for explicit mapping
-  let messageKeys = newJObject()
-  if not cfg.appKeys.isNil and cfg.appKeys.len > 0:
-    for key, val in cfg.appKeys:
-      messageKeys[key] = val
-
-  # Discover resources for JSON
-  var mediaResources = newJArray()
-  let resourcesDir = "resources"
-  let imagesDir = resourcesDir / "images"
-  let fontsDir = resourcesDir / "fonts"
-  
-  # Scan images
-  if dirExists(imagesDir):
-    for kind, path in walkDir(imagesDir):
-      if kind == pcFile and (path.endsWith(".png") or path.endsWith(".PNG")):
-        let filename = extractFilename(path)
-        let name = "IMAGE_" & filename.splitFile().name.toUpperAscii()
-        mediaResources.add(%* {
-          "type": "png",
-          "name": name,
-          "file": "images/" & filename
-        })
-  
-  # Scan fonts (recursive to handle subdirectories)
-  if dirExists(fontsDir):
-    for path in walkDirRec(fontsDir):
-      if path.endsWith(".ttf") or path.endsWith(".otf") or 
-           path.endsWith(".TTF") or path.endsWith(".OTF"):
-        let filename = extractFilename(path)
-        # Replace hyphens with underscores for valid resource name
-        let baseName = filename.splitFile().name.replace("-", "_")
-        let name = "FONT_" & baseName.toUpperAscii()
-        # Get relative path from resources/fonts/
-        let relPath = "fonts/" & path[(fontsDir.len + 1)..^1]
-        mediaResources.add(%* {
-          "type": "font",
-          "name": name,
-          "file": relPath
-        })
-
-  # Build package.json
-  let jsExists = fileExists("src" / "js" / "pebble-js-app.js") or fileExists("src" / "pkjs" / "index.js")
-  
-  var packageJson = %* {
-    "name": cfg.name,
-    "version": version,
-    "author": "Nebble",
-    "private": true,
-    "main": if jsExists: (if fileExists("src" / "js" / "pebble-js-app.js"): "src/js/pebble-js-app.js" else: "src/pkjs/index.js") else: "",
-    "dependencies": {},
-    "pebble": {
-      "uuid": cfg.uuid,
-      "displayName": cfg.name,
-      "sdkVersion": "3",
-      "targetPlatforms": platforms,
-      "watchapp": {
-        "watchface": isWatchface
-      },
-      "enableMultiJS": jsExists,
-      "messageKeys": messageKeys,
-      "resources": {
-        "media": mediaResources
-      }
-    }
-  }
-  
-  # Add capabilities if any
-  if cfg.capabilities.len > 0:
-    packageJson["pebble"]["capabilities"] = newJArray()
-    for cap in cfg.capabilities:
-      packageJson["pebble"]["capabilities"].add(%cap)
-  
-  writeFile("package.json", packageJson.pretty)
   return true
 
 proc copyNimCFiles*(cfg: NebbleConfig, platform: string): bool =
@@ -291,32 +146,21 @@ proc copyNimCFiles*(cfg: NebbleConfig, platform: string): bool =
     removeDir(srcCDir)
   createDir(srcCDir)
   
-  # Discover resources for extern declarations
+  # Resources are now manually defined in package.json
+  # We just need to generate extern declarations for them
   var externs = ""
-  let resourcesDir = "resources"
-  let imagesDir = resourcesDir / "images"
-  let fontsDir = resourcesDir / "fonts"
   
-  # Scan images
-  if dirExists(imagesDir):
-    for kind, path in walkDir(imagesDir):
-      if kind == pcFile and (path.endsWith(".png") or path.endsWith(".PNG")):
-        let filename = extractFilename(path)
-        let name = "IMAGE_" & filename.splitFile().name.toUpperAscii()
-        let resourceName = "RESOURCE_ID_" & name
-        externs.add("extern uint32_t " & resourceName & ";\n")
-  
-  # Scan fonts
-  if dirExists(fontsDir):
-    for path in walkDirRec(fontsDir):
-      if path.endsWith(".ttf") or path.endsWith(".otf") or 
-           path.endsWith(".TTF") or path.endsWith(".OTF"):
-        let filename = extractFilename(path)
-        # Replace hyphens with underscores for valid resource name
-        let baseName = filename.splitFile().name.replace("-", "_")
-        let name = "FONT_" & baseName.toUpperAscii()
-        let resourceName = "RESOURCE_ID_" & name
-        externs.add("extern uint32_t " & resourceName & ";\n")
+  # Read resources from package.json
+  if fileExists("package.json"):
+    let pkg = parseFile("package.json")
+    if pkg.hasKey("pebble") and pkg["pebble"].hasKey("resources") and 
+       pkg["pebble"]["resources"].hasKey("media"):
+      for media in pkg["pebble"]["resources"]["media"]:
+        let name = media{"name"}.getStr()
+        let resType = media{"type"}.getStr()
+        if name.len > 0 and (resType == "png" or resType == "font" or resType == "raw"):
+          let resourceName = "RESOURCE_ID_" & name.toUpperAscii()
+          externs.add("extern uint32_t " & resourceName & ";\n")
 
   # Copy all .c files from nimcache to src/c/<platform>
   var filesCopied = 0
@@ -412,11 +256,11 @@ proc isValidAppKeyName(s: string): bool =
   return true
 
 proc generateMessageKeys*(cfg: NebbleConfig): bool =
-  ## Generate type-safe message keys from nebble.json appKeys
+  ## Generate type-safe message keys from package.json messageKeys
   ## Outputs src/gen/app_keys.nim
   
-  if cfg.appKeys.isNil or cfg.appKeys.len == 0:
-    echo "  No appKeys defined in nebble.json"
+  if cfg.messageKeys.isNil or cfg.messageKeys.len == 0:
+    echo "  No messageKeys defined in package.json"
     return true
   
   # Create gen directory if needed
@@ -425,18 +269,18 @@ proc generateMessageKeys*(cfg: NebbleConfig): bool =
     createDir(genDir)
   
   # Generate enum definition
-  var output = "## Auto-generated from nebble.json appKeys\n"
+  var output = "## Auto-generated from package.json messageKeys\n"
   output.add("## Do not edit manually - run `nebble gen-keys` to regenerate\n\n")
   output.add("type\n")
   output.add("  AppMessageKey* {.pure.} = enum\n")
   
   # Sort keys by value to maintain consistent order
   var keys: seq[tuple[name: string, value: int]]
-  for key, val in cfg.appKeys:
+  for key, val in cfg.messageKeys:
     let keyStr = key
     # Validate key name doesn't contain malicious characters
     if not isValidAppKeyName(keyStr):
-      echo "  Error: Invalid appKey name '", keyStr, "' - must be alphanumeric + underscore only"
+      echo "  Error: Invalid messageKey name '", keyStr, "' - must be alphanumeric + underscore only"
       return false
     keys.add((keyStr, val.getInt()))
   
