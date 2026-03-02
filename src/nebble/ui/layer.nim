@@ -350,6 +350,11 @@ proc markDirty*(h: LayerHandle) {.inline.} =
   if h.pRaw == nil: return
   ffi.layer_mark_dirty(h.pRaw)
 
+proc markDirty*(layer: ptr Layer) {.inline.} =
+  ## Mark layer as dirty to request redraw (raw pointer version).
+  if layer == nil: return
+  ffi.layer_mark_dirty(layer)
+
 proc getData*(h: LayerHandle): pointer {.inline.} =
   ## Get the custom data pointer.
   if h.pRaw == nil: return nil

@@ -3,6 +3,9 @@ import nebble/ffi
 
 export ffi.Animation, ffi.AnimationHandlers, ffi.AnimationCurve, ffi.AnimationProgress, ffi.AnimationStartedHandler, ffi.AnimationStoppedHandler
 
+const ANIMATION_NORMALIZED_MAX* = 65535
+## Maximum value for normalized animation progress (0 to ANIMATION_NORMALIZED_MAX).
+
 type 
   AnimationState* = enum
     asCreated = 0
@@ -131,6 +134,12 @@ proc setLayerFrame*(h: var AnimationHandle, layer: ptr Layer, startFrame, endFra
   discard ffi.animation_destroy(h.raw)
   h.raw = cast[ptr Animation](prop)
   h.state = asCreated
+
+proc setImplementation*(h: var AnimationHandle, implementation: ptr AnimationImplementation) {.inline.} =
+  ## Set the animation implementation.
+  ## Equivalent to C function `animation_set_implementation(animation, implementation)`.
+  if h.raw == nil: return
+  discard ffi.animation_set_implementation(h.raw, implementation)
 
 proc createSequence*(animations: varargs[AnimationHandle]): AnimationHandle =
   ## Create a sequence animation from a list of handles.

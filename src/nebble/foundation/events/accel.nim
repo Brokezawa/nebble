@@ -45,6 +45,13 @@ proc peek*(data: ptr AccelData): cint {.inline.} =
   ## Returns 0 on success, negative on error.
   ffi.accel_service_peek(data)
 
+proc peek*(): tuple[data: AccelData; ok: bool] {.inline.} =
+  ## Get current accelerometer data without a pointer.
+  ## Returns (data, ok) where ok is true on success.
+  var d: AccelData
+  let res = ffi.accel_service_peek(addr d)
+  (d, res == 0)
+
 proc setSamplingRate*(rate: AccelSamplingRate): cint {.inline.} =
   ## Set the accelerometer sampling rate.
   ## Equivalent to C function `accel_service_set_sampling_rate(rate)`.

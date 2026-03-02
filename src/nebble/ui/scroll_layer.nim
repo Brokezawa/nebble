@@ -2,6 +2,7 @@
 import nebble/ffi
 import nebble/ffi/managed
 import nebble/ui/layer
+import nebble/ui/window
 import nebble/ui/content_indicator
 
 export ffi.ScrollLayer, ffi.ScrollLayerCallbacks
@@ -42,6 +43,10 @@ proc `contentSize=`*(h: var ScrollLayerHandle, size: GSize) {.inline.} =
 proc setClickConfigOntoWindow*(h: var ScrollLayerHandle, window: ptr Window) {.inline.} =
   if h.pRaw == nil or window == nil: return
   ffi.scroll_layer_set_click_config_onto_window(h.pRaw, window)
+
+proc setClickConfigOntoWindow*(h: var ScrollLayerHandle, window: WindowHandle) {.inline.} =
+  if h.pRaw == nil or not window.isValid: return
+  ffi.scroll_layer_set_click_config_onto_window(h.pRaw, window.toPtr)
 
 proc addChild*(h: ScrollLayerHandle, child: var auto) {.inline.} =
   ## Add a child layer to the scroll layer's content area.
