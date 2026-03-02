@@ -6,9 +6,13 @@ import nebble/ffi
 
 # Platform Capability Detection
 const
-  isColor* = defined(pebbleBasalt) or defined(pebbleChalk) or defined(pebbleEmery) or defined(pebbleColor)
-  isRound* = defined(pebbleChalk) or defined(pebbleRound)
+  isColor* = defined(pebbleBasalt) or defined(pebbleChalk) or defined(pebbleEmery) or defined(pebbleGabbro) or defined(pebbleColor)
+  isRound* = defined(pebbleChalk) or defined(pebbleGabbro) or defined(pebbleRound)
   isEmery* = defined(pebbleEmery)
+  isGabbro* = defined(pebbleGabbro)
+  isHighResRect* = defined(pebbleEmery)
+  isHighResRound* = defined(pebbleGabbro)
+  isHighRes* = isEmery or isGabbro
 
 # ============================================================================
 # Platform Conditional Macros
@@ -56,16 +60,32 @@ template pblIfSmartstrapElse*[T](smartstrapExpr, elseExpr: T): T =
   else:
     smartstrapExpr
 
+template pblIfHighResRectElse*[T](highResExpr, normalExpr: T): T =
+  when isHighResRect:
+    highResExpr
+  else:
+    normalExpr
+
+template pblIfRoundOrHighResElse*[T](roundExpr, highResExpr, normalRectExpr: T): T =
+  when isHighRes:
+    highResExpr
+  elif isRound:
+    roundExpr
+  else:
+    normalRectExpr
+
 # ============================================================================
 # Display Constants
 # ============================================================================
 
 const
-  PBLDisplayWidth* = when isRound: 180
+  PBLDisplayWidth* = when isGabbro: 260
+                     elif isRound: 180
                      elif isEmery: 200
                      else: 144
 
-  PBLDisplayHeight* = when isRound: 180
+  PBLDisplayHeight* = when isGabbro: 260
+                      elif isRound: 180
                       elif isEmery: 228
                       else: 168
 
@@ -73,10 +93,12 @@ template colorFallback*(color, fallback: GColor): GColor =
   pblIfColorElse(color, fallback)
 
 const
-  ActionBarWidth* = when isRound: 40
+  ActionBarWidth* = when isGabbro: 50
+                    elif isRound: 40
                     elif isEmery: 34
                     else: 30
 
-  StatusBarLayerHeight* = when isRound: 24
+  StatusBarLayerHeight* = when isGabbro: 30
+                          elif isRound: 24
                           elif isEmery: 20
                           else: 16

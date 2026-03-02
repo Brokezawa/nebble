@@ -5,10 +5,10 @@
 
 const
   ## Current Pebble SDK version
-  PebbleSdkVersion* = "4.3.0"
+  PebbleSdkVersion* = "4.9.127"
   
   ## Date when bindings were last generated
-  FutharkGenerationDate* = "2026-02-10"
+  FutharkGenerationDate* = "2026-02-24"
   
   ## Futhark version used for generation
   FutharkVersion* = "0.1.0"
@@ -20,7 +20,8 @@ const
     "chalk",
     "diorite",
     "emery",
-    "flint"
+    "flint",
+    "gabbro"
   ]
 
 ## Check if current SDK version matches tracked version

@@ -6,10 +6,10 @@
 ## Usage (one platform at a time):
 ##   nim r -d:futharkRebuild -d:platform=basalt src/nebble/ffi/generate.nim
 ##   nim r -d:futharkRebuild -d:platform=aplite src/nebble/ffi/generate.nim
-##   ... etc for chalk, diorite, emery, flint
+##   ... etc for chalk, diorite, emery, flint, gabbro
 ##
 ## Or generate all platforms:
-##   for p in aplite basalt chalk diorite emery flint; do
+##   for p in aplite basalt chalk diorite emery flint gabbro; do
 ##     nim r -d:futharkRebuild -d:opirRebuild -d:platform=$p src/nebble/ffi/generate.nim
 ##   done
 ##
@@ -20,12 +20,12 @@ import std/[os, strutils]
 import futhark
 
 const
-  sdkBase = gorge("echo \"$HOME/Library/Application Support/Pebble SDK/SDKs/4.9.77/sdk-core/pebble\"").strip
+  sdkBase = gorge("echo \"$HOME/Library/Application Support/Pebble SDK/SDKs/4.9.127/sdk-core/pebble\"").strip
   stubsDir = currentSourcePath.parentDir / "stubs"
   platform {.strdefine.} = "basalt"
 
 static:
-  doAssert platform in ["aplite", "basalt", "chalk", "diorite", "emery", "flint"],
+  doAssert platform in ["aplite", "basalt", "chalk", "diorite", "emery", "flint", "gabbro"],
     "Unknown platform '" & platform & "'. Use -d:platform=<name>"
 
 const
@@ -168,5 +168,26 @@ elif platform == "flint":
     define PBL_SDK_3
     define PBL_DISPLAY_WIDTH, 144
     define PBL_DISPLAY_HEIGHT, 168
+    renameCallback pebbleRenameCallback
+    "pebble.h"
+
+elif platform == "gabbro":
+  importc:
+    outputPath outFile
+    path includeDir
+    path stubsDir
+    sysPath "/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include"
+    compilerArg "-std=c99"
+    define PBL_PLATFORM_GABBRO
+    define PBL_COLOR
+    define PBL_ROUND
+    define PBL_MICROPHONE
+    define PBL_SMARTSTRAP
+    define PBL_SMARTSTRAP_POWER
+    define PBL_HEALTH
+    define PBL_COMPASS
+    define PBL_SDK_3
+    define PBL_DISPLAY_WIDTH, 260
+    define PBL_DISPLAY_HEIGHT, 260
     renameCallback pebbleRenameCallback
     "pebble.h"

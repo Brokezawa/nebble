@@ -14,14 +14,15 @@
 ##   -d:pebbleDiorite
 ##   -d:pebbleEmery
 ##   -d:pebbleFlint
+##   -d:pebbleGabbro
 
 # Platform capabilities
-when defined(pebbleBasalt) or defined(pebbleChalk) or defined(pebbleEmery):
+when defined(pebbleBasalt) or defined(pebbleChalk) or defined(pebbleEmery) or defined(pebbleGabbro):
   {.define: pebbleColor.}
 else:
   discard
 
-when defined(pebbleChalk):
+when defined(pebbleChalk) or defined(pebbleGabbro):
   {.define: pebbleRound.}
 else:
   discard
@@ -38,6 +39,8 @@ elif defined(pebbleEmery):
   include nebble/ffi/generated/emery
 elif defined(pebbleFlint):
   include nebble/ffi/generated/flint
+elif defined(pebbleGabbro):
+  include nebble/ffi/generated/gabbro
 else:
   # Default to basalt if no platform specified
   {.warning: "No Pebble platform specified, defaulting to basalt. Use -d:pebbleBasalt to suppress this warning.".}
