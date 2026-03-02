@@ -104,7 +104,7 @@ Moved all examples to a separate repository to reduce package size.
 - Removed all 13 examples from main nebble package
 - Updated nimble test tasks to use CLI templates (`hello_world`, `simple_watchface`)
 - Fixed test path issues with cross-platform compatible paths
-- All 12 platform builds passing (6 platforms × 2 templates)
+- All 14 platform builds passing (7 platforms × 2 templates)
 
 **Migration**:
 ```bash
@@ -138,7 +138,7 @@ git clone https://github.com/Brokezawa/nebble-examples
 ### v1.0.0 (Foundation Release)
 
 #### Phase 1: Foundation
-- [x] **FFI Bindings**: Generated bindings for all 6 Pebble platforms.
+- [x] **FFI Bindings**: Generated bindings for all 7 Pebble platforms.
 - [x] **Build System**: `nebble` CLI tool for project management.
 - [x] **Platform Support**: Verified compilation on all platforms.
 
@@ -251,6 +251,68 @@ proc inboxHandler(iter: ptr DictionaryIterator) =
 **Complexity**: Medium-High
 **Effort**: 5-7 days
 **Breaking Changes**: None (new module)
+
+---
+
+#### 2.3 Worker Binary Support
+**Goal**: Enable background worker binaries for persistent background tasks
+
+**Implementation**:
+Create `nebble/worker/` module for worker binary support:
+
+**Features**:
+- Worker binary scaffolding (`worker_main` macro)
+- Worker-specific event loop (`worker_event_loop`)
+- App-to-worker and worker-to-app message passing
+- Tick timer service in worker context
+- Persistent storage access from worker
+- High-level API matching foreground app patterns
+
+**API Design**:
+```nim
+# worker.nim - Background worker entry point
+nebbleWorker:
+  init:
+    # Subscribe to tick timer in worker context
+    tickTimer.subscribe(TimeUnits.SECOND_UNIT, handleTick)
+    
+  proc handleTick(tickTime: ptr tm, unitsChanged: TimeUnits) {.cdecl.} =
+    # Increment counter in background
+    s_ticks.inc
+    
+    # Send data to foreground app
+    let msg = AppWorkerMessage(data0: s_ticks)
+    workerSendMessage(WORKER_TICKS, msg)
+
+# main.nim - Foreground app
+nebbleApp:
+  init:
+    # Subscribe to worker messages
+    workerMessage.subscribe(handleWorkerMessage)
+    
+  proc handleWorkerMessage(data: AppWorkerMessage) {.cdecl.} =
+    # Update UI with data from worker
+    counter = data.data0
+    updateText()
+```
+
+**CLI Support**:
+```bash
+nebble new my_worker --worker    # Create worker binary project
+nebble build --worker             # Build worker binary
+```
+
+**Implementation Strategy**:
+1. Create worker-specific FFI bindings (`pebble_worker.h`)
+2. Implement `worker_event_loop()` wrapper
+3. Add `nebbleWorker` macro for worker entry point
+4. Implement message passing APIs
+5. Update CLI to support worker builds
+6. Handle worker/foreground app communication
+
+**Complexity**: Medium-High
+**Effort**: 4-6 days
+**Breaking Changes**: None (adds new module)
 
 ---
 

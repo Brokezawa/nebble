@@ -2,7 +2,7 @@
 
 ## 🚀 Overview
 
-Nebble v1.1.0 brings significant architectural improvements and new features focused on developer experience and code safety. This release introduces **managed sprite handles** with automatic memory management, **migrates examples to a separate repository**, and includes **CLI integration** directly into the main package.
+Nebble v1.1.0 brings significant architectural improvements and new features focused on developer experience and code safety. This release introduces **managed sprite handles** with automatic memory management, **migrates examples to separate repositories**, includes **CLI integration** directly into the main package, and adds **full support for Pebble SDK 4.9.127** including the new **Pebble Round 2 (Gabbro)** platform. **High-level API improvements** make Pebble development in Nim more idiomatic and pointer-free.
 
 ---
 
@@ -70,6 +70,24 @@ Enhanced `FixedString` type for heap-free string operations:
 - Improved error handling
 - Zero heap fragmentation guarantee
 
+### 3.5. High-Level API Improvements
+
+Simplified pointer-free APIs for common operations:
+
+**Time API:**
+- `getLocalTime()` - Returns `ptr tm` without pointer handling. Replaces the pattern `var now = time(nil); let t = localtime(addr now)`.
+
+**Graphics API:**
+- `DrawCommandImageHandle` - ARC-managed handle for PDC vector images. Eliminates manual `destroy()` calls and pointer management.
+
+**Accelerometer API:**
+- `accel.peek()` - Value-returning overload returning `tuple[data: AccelData; ok: bool]`. Provides alternative to pointer-based API without breaking existing code.
+
+**Scroll Layer API:**
+- `setClickConfigOntoWindow(window: WindowHandle)` - Overload accepting managed `WindowHandle` directly instead of requiring `.toPtr` conversion.
+
+These improvements follow the design principle: **only remove `ptr` requirements if it doesn't add burden to the user or reduce safety**. All changes are backward-compatible; pointer-based APIs remain available.
+
 ---
 
 ### 4. Examples Repository Migration
@@ -91,6 +109,24 @@ cd nebble-examples/hello_world
 - Faster nimble installation
 - Examples can evolve independently
 - Better organization
+
+---
+
+### 5. Pebble SDK 4.9.127 Support
+
+Updated FFI bindings to support **Pebble SDK 4.9.127** with the following improvements:
+
+**New Platform Support:**
+- **Gabbro** - Pebble Round 2 (260x260 color round display)
+- Full platform parity: aplite, basalt, chalk, diorite, emery, flint, gabbro
+
+**SDK Improvements:**
+- Updated to GCC 14 toolchain
+- Python 3 support for SDK scripts
+- WAF build system 2.1.4
+- BDF and PBF font support
+- 1% battery reporting granularity on new platforms
+- Increased `MAX_FONT_GLYPH_SIZE` to 512 for Emery and Gabbro
 
 ---
 
@@ -120,8 +156,17 @@ This release includes comprehensive testing:
 
 - **Unit Tests**: 41 tests for macro utilities
 - **Sprite Tests**: Tests for both managed and raw APIs
-- **Integration Tests**: All 12 platform builds verified (6 platforms × 2 templates)
+- **Integration Tests**: All 14 platform builds verified (7 platforms × 2 templates)
 - **CI Matrix**: Ubuntu, macOS, and Windows
+
+**Supported Platforms:**
+- **aplite** - Pebble Classic (B&W, 144×168)
+- **basalt** - Pebble Time (color, 144×168)
+- **chalk** - Pebble Time Round (color, 180×180, round)
+- **diorite** - Pebble 2 (B&W, 144×168)
+- **emery** - Pebble Time 2 (color, 200×228)
+- **flint** - Pebble 2 Duo (B&W, 144×168)
+- **gabbro** - Pebble Round 2 (color, 260×260, round)
 
 Run tests locally:
 ```bash
@@ -147,6 +192,16 @@ nimble testSize    # Binary size checks
 - `tests/test_sprite.nim` - Comprehensive tests for sprite functionality
 - Cross-platform temp directory support using `getTempDir()`
 - Multi-OS CI testing matrix (Ubuntu, macOS, Windows)
+- **Pebble SDK 4.9.127 Support** - Updated FFI bindings for latest SDK
+- **Gabbro Platform Support** - Pebble Round 2 (260×260 round display)
+- **Flint Platform Support** - Pebble 2 Duo (completes all 7 platforms)
+- Platform detection templates: `isGabbro`, `isHighResRound`, `pblIfRoundOrHighResElse`
+- Updated `ActionBarWidth` and `StatusBarLayerHeight` constants for all platforms
+- **High-Level API Improvements:**
+  - `getLocalTime()` - Value-returning time function (pointer-free alternative)
+  - `DrawCommandImageHandle` - ARC-managed PDC image handle with automatic cleanup
+  - `accel.peek()` overload - Value-returning accelerometer data (returns `tuple[data: AccelData; ok: bool]`)
+  - `setClickConfigOntoWindow(window: WindowHandle)` - Overload accepting managed handles (alternative to `.toPtr` pattern)
 
 ### Changed
 - **CLI Integration**: Merged CLI into main package (`tools/nebble.nim`)

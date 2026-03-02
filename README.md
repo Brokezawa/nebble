@@ -12,7 +12,7 @@ Nebble (Nim + Pebble) provides comprehensive, type-safe Nim bindings for the Peb
 - **Type Safety** - Nim's type system catches errors at compile time that C would miss.
 - **Zero Overhead** - Compiles to efficient C code with zero runtime cost.
 - **Modern Syntax** - Clean, expressive code with property-style accessors and OOP patterns.
-- **Complete Coverage** - Full FFI bindings for all 6 Pebble platforms.
+- **Complete Coverage** - Full FFI bindings for all 7 Pebble platforms.
 - **Nim Everywhere** - Use Nim on watch and on phone.
 
 ## Quick Start
@@ -98,11 +98,46 @@ Managed types (Handles) are the recommended way to use Nebble. They automaticall
 
 ## Examples
 
-Check the `examples/` directory for complete working apps:
-- `hello_world`: Basic structure and responsive layout.
-- `accelerometer_demo`: Real-time data with heap-free formatting.
-- `persist_demo`: Using the idiomatic storage API.
-- `animation_demo`: Property animations and sequences.
+Nebble includes two sets of examples to help you get started:
+
+### Ported Examples (C SDK Parity)
+
+Official Pebble SDK examples ported to Nim. These demonstrate how Nebble's high-level API translates C Pebble code:
+
+```bash
+git clone https://github.com/Brokezawa/ported-examples
+cd ported-examples/simple_analog
+nebble build && nebble install --emulator basalt
+```
+
+**Features demonstrated:**
+- `simple_analog`: GPath, custom drawing, trigonometry (watchface)
+- `ks_clock_face`: Custom animations, unobstructed area, round display
+- `classio_battery_connection`: Battery/Bluetooth events, FixedString formatting
+- `feature_persist_counter`: Persistent storage, ActionBar, click handling
+- `feature_accel_discs`: Accelerometer physics, collision detection
+- And 5 more...
+
+See [ported-examples repository](https://github.com/Brokezawa/ported-examples) for the full list.
+
+### Nebble Native Examples
+
+Nebble-idiomatic examples demonstrating features unique to Nim development:
+
+```bash
+git clone https://github.com/Brokezawa/nebble-examples
+cd nebble-examples/hello_world
+nebble build && nebble install --emulator basalt
+```
+
+**Features demonstrated:**
+- `hello_world`: Minimal declarative app
+- `animation_demo`: Property animations, event-driven sequences
+- `comms_demo`: Full-stack Nim with phone-side logic (PKJS)
+- `health_watchface`: Health service integration
+- And 3 more...
+
+See [nebble-examples repository](https://github.com/Brokezawa/nebble-examples) for the full list.
 
 ## Special Thanks
 

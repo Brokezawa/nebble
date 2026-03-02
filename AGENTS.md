@@ -1,6 +1,15 @@
 # AGENTS.md — Nebble (Nim + Pebble SDK)
 
-Nebble is a Nim wrapper for the Pebble SDK, featuring a two-layer architecture: low-level FFI bindings and a high-level idiomatic Nim API.
+Nebble is a Nim wrapper for the Pebble SDK (4.9.127+), featuring a two-layer architecture: low-level FFI bindings and a high-level idiomatic Nim API.
+
+## Supported Platforms
+- **aplite** - Pebble Classic (B&W, 144x168)
+- **basalt** - Pebble Time (color, 144x168)
+- **chalk** - Pebble Time Round (color, 180x180, round)
+- **diorite** - Pebble 2 (B&W, 144x168)
+- **flint** - Pebble 2 Duo (B&W, 144x168)
+- **emery** - Pebble Time 2 (color, 200x228)
+- **gabbro** - Pebble Round 2 (color, 260x260, round)
 
 ## Build & Test Commands
 
