@@ -21,7 +21,7 @@
 # Import FFI and export commonly used types/constants (not functions to avoid ambiguity)
 import nebble/ffi
 export Window, WindowHandlers, ClickConfigProvider, ClickRecognizerRef
-export Layer, GRect, GPoint, GSize, GColor, GContext, GOvalScaleMode
+export Layer, GRect, GPoint, GSize, GEdgeInsets, GColor, GContext, GOvalScaleMode
 export TextLayer, GFont, GTextAlignment
 export BitmapLayer, GBitmap, GBitmapSequence, GBitmapFormat
 export RotBitmapLayer
@@ -89,7 +89,14 @@ export GColorMelon, GColorRichBrilliantLavender, GColorYellow, GColorIcterine
 export GColorPastelYellow
 export GDrawCommandImage, GDrawCommandSequence, GDrawCommandFrame
 export GDrawCommandType, GDrawCommand, GDrawCommandList
-export TimeUnits, ButtonId, AnimationCurve
+export GOvalScaleMode
+
+# Export GOvalScaleMode enum values (needed because they're C enum values)
+when declared(ffi.GOvalScaleModeFitCircle):
+  const GOvalScaleModeFitCircle* = ffi.GOvalScaleModeFitCircle
+when declared(ffi.GOvalScaleModeFillCircle):
+  const GOvalScaleModeFillCircle* = ffi.GOvalScaleModeFillCircle
+export TimeUnits, ButtonId, AnimationCurve, AnimationImplementation, AnimationProgress, AnimationHandlers
 
 # ============================================================================
 # Constants (Enum Values)

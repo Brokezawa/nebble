@@ -6,10 +6,14 @@ license       = "MIT"
 srcDir        = "src"
 binDir        = "bin"
 bin           = @["tools/nebble"]
+installExt    = @["nim"]
+installDirs   = @["nebble"]
+installFiles  = @["nebble.nim"]
 
 # Dependencies
 requires "nim >= 2.2.0"
 requires "unittest2 >= 0.2.5"
+requires "futhark >= 0.15.0"
 
 import os, strutils, algorithm
 
@@ -30,14 +34,15 @@ task testUnit, "Run host-side unit tests only":
   # --compileOnly and adds --path:"../src" so we must NOT use -r.
   exec "nim c -d:pebbleBasalt tests/test_highlevel.nim"
   # Compile-only sprite tests (uses Pebble SDK symbols)
-  exec "nim c --skipProjCfg -d:pebbleBasalt --compileOnly tests/test_sprite.nim"
+  # Note: --path:src is needed since --skipProjCfg disables tests/nim.cfg
+  exec "nim c --skipProjCfg --path:src -d:pebbleBasalt --compileOnly tests/test_sprite.nim"
 
 task testExample, "Build CLI template projects for all platforms (Integration Tests)":
   echo "═══════════════════════════════════════════════════════"
   echo "Running Integration Tests (Build Matrix)"
   echo "═══════════════════════════════════════════════════════"
   
-  let platforms = ["aplite", "basalt", "chalk", "diorite", "emery", "flint"]
+  let platforms = ["aplite", "basalt", "chalk", "diorite", "emery", "flint", "gabbro"]
   let testDir = getTempDir() / "nebble_test_projects"
   let projectDir = getCurrentDir()
   let nebbleBin = projectDir / "bin" / "tools" / "nebble"
@@ -123,7 +128,7 @@ task test, "Run all tests (unit + examples + size)":
 
 task regenFfi, "Regenerate FFI bindings using Futhark":
   echo "Regenerating FFI bindings..."
-  for platform in ["aplite", "basalt", "chalk", "diorite", "emery", "flint"]:
+  for platform in ["aplite", "basalt", "chalk", "diorite", "emery", "flint", "gabbro"]:
     echo "→ " & platform & ":"
     exec "nim r -d:futharkRebuild -d:opirRebuild -d:platform=" & platform & " src/nebble/ffi/generate.nim"
 

@@ -19,7 +19,6 @@ htmldocs/
 .pebble-sdk/
 
 # Documentation (generated)
-sdk-docs/
 docs/html/
 
 # IDE
