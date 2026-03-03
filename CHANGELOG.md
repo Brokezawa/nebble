@@ -79,6 +79,11 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 - Windows support improvements
 - Path handling in nimble tasks
 - Example documentation links (now reference separate repositories)
+- **package.json Restoration**: Restore `package.json` on build failure to prevent configuration loss (`13b35d0`)
+- **Action Bar Icon Bitmap Ownership**: Action bar DSL now manages icon bitmaps to prevent memory leaks (`e9a1c55`)
+- **Code Quality**: Fixed lifetime safety issues, removed unused imports, and corrected tests (`be09b2b`)
+- **Buffer Overflow & Platform Normalization**: Fixed UUID `toString` buffer overflow (assertion) and CLI platform `toLowerAscii` normalization (`dfe744e`)
+- **AUDIT.md Findings A-01–A-06**: Fixed PNG bitmap size parameter, AppSync zero-buffer guard, `sendChecked*` templates, test stub ownership tracking, and renamed `nebbleExit` (`e51da75`)
 
 ### Removed
 - `examples/` directory (moved to `ported-examples` and `nebble-examples` repositories)

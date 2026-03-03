@@ -223,6 +223,23 @@ nimble testSize    # Binary size checks
 - Cross-platform compatibility for test temp directories
 - Windows support improvements
 - Path handling in nimble tasks
+- **package.json Restoration**: Restore `package.json` on build failure to prevent configuration loss (`13b35d0`)
+- **Action Bar Icon Bitmap Ownership**: Action bar DSL now manages icon bitmaps to prevent memory leaks (`e9a1c55`)
+- **Code Quality**: Fixed lifetime safety issues, removed unused imports, and corrected tests (`be09b2b`)
+- **Buffer Overflow & Platform Normalization**: Fixed UUID `toString` buffer overflow (assertion) and CLI platform `toLowerAscii` normalization (`dfe744e`)
+- **AUDIT.md Findings A-01–A-06**: Fixed PNG bitmap size parameter, AppSync zero-buffer guard, `sendChecked*` templates, test stub ownership tracking, and renamed `nebbleExit` (`e51da75`)
+
+---
+
+## 🔒 Stability & Security Fixes
+
+The following post-release fixes have been applied to v1.1.0:
+
+- **package.json Restoration** (`13b35d0`): Restore `package.json` on build failure to prevent configuration loss when a build error occurs mid-run.
+- **Action Bar Icon Bitmap Ownership** (`e9a1c55`): The action bar DSL now manages the lifecycle of icon bitmaps, preventing memory leaks when icons are set declaratively.
+- **Code Quality** (`be09b2b`): Fixed lifetime safety issues, removed unused imports, and corrected test stubs for correct behaviour under ARC.
+- **Buffer Overflow & Platform Normalization** (`dfe744e`): Fixed a buffer overflow in UUID `toString` (now guarded by assertion) and corrected CLI platform name normalization to use `toLowerAscii`.
+- **AUDIT.md Findings A-01–A-06** (`e51da75`): Resolved all six outstanding audit findings — PNG bitmap size parameter, AppSync zero-buffer guard, `sendChecked*` template safety, test stub ownership tracking, and the `nebbleExit` rename.
 
 ---
 
