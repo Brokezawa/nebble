@@ -145,31 +145,30 @@ proc cmdBuild*(platform: string) =
   
   # Step 3: Filter package.json to only include requested platforms
   # Pebble SDK builds all platforms in targetPlatforms, so we need to modify package.json
+  var originalPackageJson = ""
+  var filtered = false
   if platforms.len > 0 and platforms.len < cfg.platforms.len:
     let packageJsonPath = "package.json"
-    var packageJson = parseFile(packageJsonPath)
+    originalPackageJson = readFile(packageJsonPath)
+    var packageJson = parseJson(originalPackageJson)
     var filteredPlatforms = newJArray()
     for p in platforms:
       filteredPlatforms.add(%p)
     packageJson["pebble"]["targetPlatforms"] = filteredPlatforms
     writeFile(packageJsonPath, packageJson.pretty)
+    filtered = true
     echo "  Filtered package.json to platforms: ", platforms.join(", ")
   
   # Step 4: Run Pebble build
   echo "═══ Running Pebble Build ═══"
-  if not runPebbleBuild(cfg):
-    echo "✗ Pebble build failed"
-    quit(1)
-  
-  # Restore original package.json if we modified it
-  if platforms.len > 0 and platforms.len < cfg.platforms.len:
-    let packageJsonPath = "package.json"
-    var packageJson = parseFile(packageJsonPath)
-    var allPlatforms = newJArray()
-    for p in cfg.platforms:
-      allPlatforms.add(%p)
-    packageJson["pebble"]["targetPlatforms"] = allPlatforms
-    writeFile(packageJsonPath, packageJson.pretty)
+  try:
+    if not runPebbleBuild(cfg):
+      echo "✗ Pebble build failed"
+      quit(1)
+  finally:
+    # Restore original package.json if we modified it
+    if filtered:
+      writeFile("package.json", originalPackageJson)
   echo "✓ Pebble build successful"
   
   echo "═══════════════════════════════"
