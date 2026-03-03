@@ -21,7 +21,7 @@ nim --version
 
 ### 2. Pebble SDK
 
-To develop for Pebble, you need the Pebble SDK. Follow the instructions at **[RePebble SDK Installation Guide](https://developer.repebble.com/sdk/)** for your platform (Windows, macOS, or Linux).
+To develop for Pebble, you need the Pebble SDK. Follow the instructions at the [RePebble SDK Installation Guide](https://developer.repebble.com/sdk/) for your platform (Windows, macOS, or Linux).
 
 Verify that the `pebble` command is in your PATH:
 ```bash

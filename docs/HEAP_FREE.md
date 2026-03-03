@@ -13,7 +13,7 @@ In a typical Nim or C application, dynamic strings and sequences are allocated o
 
 Nebble provides high-level abstractions that look and feel like modern Nim but operate entirely on the **stack** or in **static storage**.
 
-### 1. FixedString[N]
+### 1. `FixedString[N]`
 
 Instead of the dynamic `string` type, Nebble uses `FixedString[N]`. This is a stack-allocated buffer with a fixed maximum capacity.
 

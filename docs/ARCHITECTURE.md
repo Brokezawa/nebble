@@ -8,7 +8,7 @@ Nebble is built on a **two-layer design** that bridges the gap between the low-l
 
 ### Layer 1: Low-Level FFI (`nebble/ffi`)
 This layer provides a 1:1 mapping of the Pebble C API.
-- **Generation:** Uses [Futhark](https://github.com/arnetheduck/futhark) to parse Pebble SDK headers and generate Nim bindings.
+- **Generation:** Uses [Futhark](https://github.com/pmunch/futhark) to parse Pebble SDK headers and generate Nim bindings.
 - **Conventions:** Preserves C naming (`snake_case`) and semantics.
 - **Platform Specifics:** Contains six generated modules (`ffi/generated/basalt.nim`, etc.), one for each hardware platform.
 - **Multiplexing:** The top-level `ffi.nim` uses compile-time switches (`-d:pebbleBasalt`) to export the correct platform bindings.

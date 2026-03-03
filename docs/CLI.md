@@ -57,9 +57,6 @@ Show binary size breakdown and RAM utilization (critical for Aplite's 24KB limit
 ### `nebble gen-keys`
 Generate type-safe Nim message keys from the `messageKeys` defined in `package.json`.
 
-### `nebble regen-ffi`
-Regenerate Futhark FFI bindings (requires Futhark and libclang).
-
 ## Project Configuration
 
 Nebble projects are configured via `package.json` in the project root (the standard Pebble SDK format).
