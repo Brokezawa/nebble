@@ -144,10 +144,12 @@ proc newBitmap*(resourceId: uint32): ptr GBitmap {.inline.} =
   ## Equivalent to C function `gbitmap_create_with_resource(resource_id)`.
   ffi.gbitmap_create_with_resource(resourceId)
 
-proc newBitmapFromData*(data: ptr uint8): ptr GBitmap {.inline.} =
-  ## Create a GBitmap from raw bitmap data.
+proc newBitmapFromData*(data: ptr uint8, size: uint16): ptr GBitmap {.inline.} =
+  ## Create a GBitmap from raw PNG bitmap data.
+  ## `data` must point to valid PNG data of length `size`.
+  ## The caller is responsible for calling `destroy()` when done.
   ## Equivalent to C function `gbitmap_create_from_png_data(data, size)`.
-  ffi.gbitmap_create_from_png_data(data, 0) # Size is embedded in PNG data
+  ffi.gbitmap_create_from_png_data(data, size)
 
 proc destroy*(bitmap: ptr GBitmap) {.inline.} =
   ## Destroy a GBitmap and free its memory.

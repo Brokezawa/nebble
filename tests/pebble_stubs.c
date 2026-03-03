@@ -26,6 +26,7 @@ typedef struct {
   int format;
   GColor* palette;
   int free_palette_on_destroy;
+  int free_data_on_destroy;
 } FakeGBitmap;
 
 // Helper to compute bytesPerRow for a format
@@ -50,7 +51,7 @@ void graphics_text_attributes_destroy(void* ta) { (void)ta; }
 void gbitmap_destroy(void* bitmap) {
   if (bitmap == NULL) return;
   FakeGBitmap* b = (FakeGBitmap*)bitmap;
-  if (b->data) free(b->data);
+  if (b->data && b->free_data_on_destroy) free(b->data);
   if (b->palette && b->free_palette_on_destroy) free(b->palette);
   free(b);
 }
@@ -68,6 +69,7 @@ void* gbitmap_create_with_resource(uint32_t resource_id) {
   memset(b->data, 0, b->bytes_per_row * b->bounds.size.h);
   b->palette = NULL;
   b->free_palette_on_destroy = 0;
+  b->free_data_on_destroy = 1;
   (void)resource_id;
   return b;
 }
@@ -84,6 +86,7 @@ void* gbitmap_create_with_data(uint8_t* data) {
   b->data = data;
   b->palette = NULL;
   b->free_palette_on_destroy = 0;
+  b->free_data_on_destroy = 0;
   return b;
 }
 
@@ -105,6 +108,7 @@ void* gbitmap_create_as_sub_bitmap(void* base_bitmap, GRect sub_rect) {
   b->data = base->data; // shared
   b->palette = base->palette;
   b->free_palette_on_destroy = 0;
+  b->free_data_on_destroy = 0;
   return b;
 }
 
@@ -119,6 +123,7 @@ void* gbitmap_create_blank(GSize size, int format) {
   memset(b->data, 0, b->bytes_per_row * size.h);
   b->palette = NULL;
   b->free_palette_on_destroy = 0;
+  b->free_data_on_destroy = 1;
   return b;
 }
 
@@ -133,6 +138,7 @@ void* gbitmap_create_blank_with_palette(GSize size, int format, GColor* palette,
   memset(b->data, 0, b->bytes_per_row * size.h);
   b->palette = palette;
   b->free_palette_on_destroy = free_on_destroy;
+  b->free_data_on_destroy = 1;
   return b;
 }
 
@@ -177,12 +183,12 @@ uint8_t* gbitmap_get_data(void* bitmap) {
 void gbitmap_set_data(void* bitmap, uint8_t* data, int format, uint16_t row_size_bytes, int free_on_destroy) {
   if (bitmap == NULL) return;
   FakeGBitmap* b = (FakeGBitmap*)bitmap;
-  // If the previous data was allocated by the stub, free it.
-  if (b->data) free(b->data);
+  // If the previous data was owned by the bitmap, free it.
+  if (b->data && b->free_data_on_destroy) free(b->data);
   b->data = data;
   b->format = format;
   b->bytes_per_row = row_size_bytes;
-  (void)free_on_destroy; // not tracked for now
+  b->free_data_on_destroy = free_on_destroy;
 }
 
 // Minimal Health Service stubs for host-side smoke tests.

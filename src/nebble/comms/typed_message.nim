@@ -74,6 +74,40 @@ template send*[N](iter: ptr DictionaryIterator, key: typed, value: FixedString[N
   ## Send a FixedString value with the specified key
   discard message.dictWriteCstring(iter, key.uint32, value.cstr)
 
+# Type-safe send operations with error checking
+# These return the DictionaryResult code for error handling
+template sendChecked*(iter: ptr DictionaryIterator, key: typed, value: int8): DictionaryResult =
+  ## Send an int8 value with the specified key, returning the result code
+  message.dictWriteInt8(iter, key.uint32, value)
+
+template sendChecked*(iter: ptr DictionaryIterator, key: typed, value: int16): DictionaryResult =
+  ## Send an int16 value with the specified key, returning the result code
+  message.dictWriteInt16(iter, key.uint32, value)
+
+template sendChecked*(iter: ptr DictionaryIterator, key: typed, value: int32): DictionaryResult =
+  ## Send an int32 value with the specified key, returning the result code
+  message.dictWriteInt32(iter, key.uint32, value)
+
+template sendChecked*(iter: ptr DictionaryIterator, key: typed, value: uint8): DictionaryResult =
+  ## Send a uint8 value with the specified key, returning the result code
+  message.dictWriteUint8(iter, key.uint32, value)
+
+template sendChecked*(iter: ptr DictionaryIterator, key: typed, value: uint16): DictionaryResult =
+  ## Send a uint16 value with the specified key, returning the result code
+  message.dictWriteUint16(iter, key.uint32, value)
+
+template sendChecked*(iter: ptr DictionaryIterator, key: typed, value: uint32): DictionaryResult =
+  ## Send a uint32 value with the specified key, returning the result code
+  message.dictWriteUint32(iter, key.uint32, value)
+
+template sendChecked*(iter: ptr DictionaryIterator, key: typed, value: cstring): DictionaryResult =
+  ## Send a string value with the specified key, returning the result code
+  message.dictWriteCstring(iter, key.uint32, value)
+
+template sendChecked*[N](iter: ptr DictionaryIterator, key: typed, value: FixedString[N]): DictionaryResult =
+  ## Send a FixedString value with the specified key, returning the result code
+  message.dictWriteCstring(iter, key.uint32, value.cstr)
+
 # Type-safe read operations
 template readInt8*(iter: ptr DictionaryIterator, key: typed): int8 =
   ## Read an int8 value for the specified key

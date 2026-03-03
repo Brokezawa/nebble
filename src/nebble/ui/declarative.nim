@@ -498,4 +498,4 @@ macro nebbleApp*(body: untyped): untyped =
       return 0
 
     # Stub for exit required by some Nim runtime features
-    proc pebble_exit(code: cint) {.exportc: "_exit", cdecl.} = discard
+    proc nebbleExit(code: cint) {.exportc: "_exit", cdecl.} = discard

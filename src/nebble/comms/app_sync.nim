@@ -56,7 +56,10 @@ proc newAppSyncHandle*(bufferSize: uint16,
                       context: pointer): AppSyncHandle =
   ## Create a managed AppSync handle.
   ## Allocates both the AppSync struct and the message buffer.
-  ## Returns an invalid handle if allocation fails (Out of Memory).
+  ## Returns an invalid handle if allocation fails (Out of Memory) or bufferSize is 0.
+  if bufferSize == 0:
+    return AppSyncHandle(pRaw: nil, pBuffer: nil)
+  
   let pRaw = cast[ptr AppSync](alloc0(sizeof(AppSync)))
   let pBuffer = cast[ptr uint8](alloc0(bufferSize.int))
   
