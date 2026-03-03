@@ -39,3 +39,4 @@ Thumbs.db
 nimble.develop
 nimble.paths
 nimbledeps
+src/nebble.out
