@@ -21,7 +21,7 @@ suite "SpriteSheetHandle (Managed API)":
     # Test that moved handles are nil
     var h1: SpriteSheetHandle
     # After move, source should be nil
-    check true  # Compile-time test
+    check h1.isNil == true  # Compile-time test
 
 suite "AnimatedSpriteHandle (Managed API)":
   test "create animated sprite handle":

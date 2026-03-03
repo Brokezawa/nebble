@@ -23,7 +23,7 @@ Usage:
   nebble logs [--emulator <p>]        View logs from emulator
   nebble logs --phone <IP>            View logs from phone
   nebble kill [--force]               Kill all Pebble emulators
-  nebble gen-keys                     Generate type-safe message keys from nebble.json
+  nebble gen-keys                     Generate type-safe message keys from package.json
   nebble clean                        Remove build artifacts
   nebble size [--platform <p>]        Show binary size breakdown
   nebble help                         Show this help

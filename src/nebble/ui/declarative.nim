@@ -329,6 +329,8 @@ macro nebbleApp*(body: untyped): untyped =
               var `upIconVar`: GBitmapRef
             dslInit.add quote do:
               `upIconVar` = newBitmapRef(`upIcon`)
+            dslDeinit.add quote do:
+              `upIconVar` = nil
             layerInits.add quote do:
               `layerId`.setIcon(BUTTON_ID_UP, `upIconVar`.bitmap)
           
@@ -338,6 +340,8 @@ macro nebbleApp*(body: untyped): untyped =
               var `downIconVar`: GBitmapRef
             dslInit.add quote do:
               `downIconVar` = newBitmapRef(`downIcon`)
+            dslDeinit.add quote do:
+              `downIconVar` = nil
             layerInits.add quote do:
               `layerId`.setIcon(BUTTON_ID_DOWN, `downIconVar`.bitmap)
           
@@ -347,6 +351,8 @@ macro nebbleApp*(body: untyped): untyped =
               var `selectIconVar`: GBitmapRef
             dslInit.add quote do:
               `selectIconVar` = newBitmapRef(`selectIcon`)
+            dslDeinit.add quote do:
+              `selectIconVar` = nil
             layerInits.add quote do:
               `layerId`.setIcon(BUTTON_ID_SELECT, `selectIconVar`.bitmap)
 

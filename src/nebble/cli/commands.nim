@@ -117,6 +117,11 @@ proc cmdBuild*(platform: string) =
     @[platform]
   else:
     cfg.platforms
+
+  if platforms.len == 0:
+    echo "Error: No target platforms configured in package.json"
+    echo "Add pebble.targetPlatforms with at least one platform"
+    quit(1)
   
   echo "Building for platforms: ", platforms.join(", ")
   echo ""
@@ -350,7 +355,6 @@ proc cmdSize*(platform: string) =
     echo "Error: package.json not found"
     quit(1)
   
-  let cfg = loadConfig()
   let elfPath = "build" / platform / "pebble-app.elf"
   
   if not fileExists(elfPath):

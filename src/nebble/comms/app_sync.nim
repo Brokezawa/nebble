@@ -3,7 +3,6 @@
 ## Provides synchronization of dictionary data between phone and watch.
 
 import nebble/ffi
-import nebble/ffi/managed
 
 export ffi.AppSync, ffi.AppSyncTupleChangedCallback, ffi.AppSyncErrorCallback
 export ffi.Tuplet, ffi.Tuple_f

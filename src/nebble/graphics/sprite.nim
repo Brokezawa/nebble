@@ -100,6 +100,9 @@ type
     ## Managed handle for animated sprites.
     ## References a SpriteSheetHandle (does not own it).
     ## Manages animation state and frame updates.
+    ##
+    ## CRITICAL: The sheet handle MUST outlive this animated sprite.
+    ## If the sheet is destroyed while this sprite exists, behavior is undefined.
     pSheetHandle: ptr SpriteSheetHandle  ## Reference to sheet handle (not owned)
     state: AnimatedSpriteState           ## Animation state
     ownership: HandleOwnership
@@ -165,8 +168,13 @@ proc `=sink`*(dest: var AnimatedSpriteHandle, src: AnimatedSpriteHandle) =
   srcPtr.pSheetHandle = nil
   srcPtr.ownership = hoNone
 
-proc isValid*(h: AnimatedSpriteHandle): bool {.inline.} = h.pSheetHandle != nil
-proc isNil*(h: AnimatedSpriteHandle): bool {.inline.} = h.pSheetHandle == nil
+proc isValid*(h: AnimatedSpriteHandle): bool {.inline.} =
+  ## Check if handle is valid (sheet exists and is not nil).
+  h.pSheetHandle != nil
+
+proc isNil*(h: AnimatedSpriteHandle): bool {.inline.} =
+  ## Check if handle is nil.
+  h.pSheetHandle == nil
 
 # ============================================================================
 # Managed Handle Constructors
@@ -182,6 +190,8 @@ proc newSpriteSheetHandle*(resourceId: uint32, spriteWidth, spriteHeight: uint8)
   ##
   ## The bitmap should have sprites arranged in a grid (left-to-right, top-to-bottom).
   ## The handle owns the bitmap and will destroy it when done.
+  if spriteWidth == 0 or spriteHeight == 0:
+    return
   when declared(gbitmap_create_with_resource):
     result.pBitmap = gbitmap_create_with_resource(resourceId)
   if result.pBitmap == nil:
@@ -203,6 +213,8 @@ proc newSpriteSheetHandle*(bitmap: ptr GBitmap, spriteWidth, spriteHeight: uint8
   ##
   ## The handle does NOT take ownership of the bitmap.
   ## User must ensure bitmap outlives the handle.
+  if bitmap == nil or spriteWidth == 0 or spriteHeight == 0:
+    return
   result.pBitmap = bitmap
   result.ownership = hoUnowned
   result.data.spriteWidth = spriteWidth
@@ -224,6 +236,11 @@ proc newAnimatedSpriteHandle*(sheet: var SpriteSheetHandle, numFrames: uint8, fr
   ##
   ## The animation frames are assumed to be at indices 0 to numFrames-1 in the sheet.
   ## The handle references the sheet handle (does not own it).
+  ##
+  ## CRITICAL LIFETIME REQUIREMENT:
+  ## The sheet parameter MUST outlive the returned animated sprite handle.
+  ## If sheet goes out of scope first, the sprite becomes invalid and usage is undefined.
+  ## Ensure the sprite is destroyed before the sheet is destroyed.
   result.pSheetHandle = addr sheet
   result.state.totalFrames = min(numFrames, sheet.data.totalSprites)
   result.state.frameDelay = frameDelay
@@ -243,6 +260,8 @@ proc getBitmap*(h: SpriteSheetHandle): ptr GBitmap {.inline.} =
 
 proc getFrameSourceRect*(h: SpriteSheetHandle, index: uint8): GRect {.inline.} =
   ## Calculate the source rectangle for a frame.
+  if h.data.cols == 0 or h.data.rows == 0:
+    return makeGRect(0, 0, 0, 0)
   let col = index mod h.data.cols
   let row = index div h.data.cols
   
@@ -254,7 +273,7 @@ proc getFrameSourceRect*(h: SpriteSheetHandle, index: uint8): GRect {.inline.} =
 proc draw*(h: SpriteSheetHandle, index: uint8, ctx: ptr GContext, pos: GPoint) {.inline.} =
   ## Draw a specific sprite from the sheet by index.
   when declared(gbitmap_create_as_sub_bitmap) and declared(gbitmap_destroy):
-    if h.pBitmap == nil: return
+    if h.pBitmap == nil or h.data.totalSprites == 0: return
     
     let srcRect = h.getFrameSourceRect(index)
     let subBitmap = gbitmap_create_as_sub_bitmap(h.pBitmap, srcRect)
@@ -293,14 +312,15 @@ proc update*(h: var AnimatedSpriteHandle, elapsedMs: uint16): bool {.inline.} =
       h.state.isPlaying = false
       
   of amPingPong:
-    h.state.currentFrame = (h.state.currentFrame.int8 + h.state.direction).uint8
-    
-    if h.state.currentFrame >= h.state.totalFrames - 1:
-      h.state.currentFrame = h.state.totalFrames - 1
-      h.state.direction = -1
-    elif h.state.currentFrame == 0:
+    let next = h.state.currentFrame.int + h.state.direction.int
+    if next <= 0:
       h.state.currentFrame = 0
       h.state.direction = 1
+    elif next >= h.state.totalFrames.int - 1:
+      h.state.currentFrame = h.state.totalFrames - 1
+      h.state.direction = -1
+    else:
+      h.state.currentFrame = next.uint8
 
 proc draw*(h: AnimatedSpriteHandle, ctx: ptr GContext, pos: GPoint) {.inline.} =
   ## Draw the current animation frame.
@@ -343,6 +363,8 @@ proc newSpriteSheet*(bitmap: ptr GBitmap, spriteWidth, spriteHeight: uint8): Spr
   ## Create a sprite sheet from a bitmap (raw API).
   ##
   ## WARNING: User must ensure bitmap outlives this SpriteSheet.
+  if bitmap == nil or spriteWidth == 0 or spriteHeight == 0:
+    return
   result.bitmap = bitmap
   result.spriteWidth = spriteWidth
   result.spriteHeight = spriteHeight
@@ -357,12 +379,18 @@ proc getFrame*(sheet: ptr SpriteSheet, index: uint8): SpriteFrame {.inline.} =
   ## Get a specific frame from the sprite sheet (raw API).
   ##
   ## WARNING: User must ensure sheet outlives the returned SpriteFrame.
+  if sheet == nil or sheet[].totalSprites == 0:
+    result.sheet = sheet
+    result.index = 0
+    return
   result.sheet = sheet
   result.index = min(index, sheet[].totalSprites - 1)
 
 proc getFrameSourceRect*(frame: SpriteFrame): GRect {.inline.} =
   ## Calculate the source rectangle for a frame (raw API).
   let sheet = frame.sheet
+  if sheet == nil or sheet.cols == 0 or sheet.rows == 0:
+    return makeGRect(0, 0, 0, 0)
   let col = frame.index mod sheet.cols
   let row = frame.index div sheet.cols
   
@@ -374,7 +402,7 @@ proc getFrameSourceRect*(frame: SpriteFrame): GRect {.inline.} =
 proc draw*(frame: SpriteFrame, ctx: ptr GContext, pos: GPoint) {.inline.} =
   ## Draw a single sprite frame (raw API).
   when declared(gbitmap_create_as_sub_bitmap) and declared(gbitmap_destroy):
-    if frame.sheet == nil: return
+    if frame.sheet == nil or frame.sheet.totalSprites == 0: return
     
     let srcRect = frame.getFrameSourceRect()
     let subBitmap = gbitmap_create_as_sub_bitmap(frame.sheet.bitmap, srcRect)
@@ -392,6 +420,8 @@ proc newAnimatedSprite*(sheet: ptr SpriteSheet, numFrames: uint8, frameDelay: ui
   ## Create an animated sprite (raw API).
   ##
   ## WARNING: User must ensure sheet outlives this AnimatedSprite.
+  if sheet == nil or sheet[].totalSprites == 0:
+    return
   result.sheet = sheet
   result.totalFrames = min(numFrames, sheet[].totalSprites)
   result.frameDelay = frameDelay
@@ -421,14 +451,15 @@ proc update*(sprite: var AnimatedSprite, elapsedMs: uint16): bool {.inline.} =
       sprite.isPlaying = false
       
   of amPingPong:
-    sprite.currentFrame = (sprite.currentFrame.int8 + sprite.direction).uint8
-    
-    if sprite.currentFrame >= sprite.totalFrames - 1:
-      sprite.currentFrame = sprite.totalFrames - 1
-      sprite.direction = -1
-    elif sprite.currentFrame == 0:
+    let next = sprite.currentFrame.int + sprite.direction.int
+    if next <= 0:
       sprite.currentFrame = 0
       sprite.direction = 1
+    elif next >= sprite.totalFrames.int - 1:
+      sprite.currentFrame = sprite.totalFrames - 1
+      sprite.direction = -1
+    else:
+      sprite.currentFrame = next.uint8
 
 proc draw*(sprite: AnimatedSprite, ctx: ptr GContext, pos: GPoint) {.inline.} =
   ## Draw the current animation frame (raw API).

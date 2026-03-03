@@ -3,7 +3,6 @@
 ## Provides efficient logging of structured data for later retrieval by companion apps.
 
 import nebble/ffi
-import nebble/ffi/managed
 
 # Re-export commonly used types
 export ffi.DataLoggingSessionRef, ffi.DataLoggingItemType, ffi.DataLoggingResult
