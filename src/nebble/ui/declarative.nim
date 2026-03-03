@@ -4,6 +4,10 @@
 ##
 ## For a detailed guide on the DSL features and responsive layout, 
 ## see the [Declarative DSL guide](../../../docs/DECLARATIVE_DSL.md).
+##
+## **Action Bar Icons**: The DSL automatically manages action bar icons as
+## reference-counted bitmaps (GBitmapRef). Simply pass resource IDs to the
+## `icons:` block and the DSL handles creation and lifecycle management.
 
 import std/macros
 import nebble/ffi
@@ -19,6 +23,7 @@ import nebble/ui/simple_menu_layer
 import nebble/ui/clicks
 import nebble/ui/layer # for addChild
 import nebble/graphics/fonts
+import nebble/graphics/bitmap_ref
 
 template nebbleWatchface*(body: untyped): untyped =
   ## Alias for `nebbleApp`.
@@ -317,12 +322,33 @@ macro nebbleApp*(body: untyped): untyped =
           if not bgColor.isNil:
             layerInits.add quote do: `layerId`.backgroundColor = `bgColor`
           
+          # Icon setup: Create global variables for managed bitmaps and use them
           if not upIcon.isNil:
-            layerInits.add quote do: `layerId`.setIcon(BUTTON_ID_UP, gbitmap_create_with_resource(`upIcon`))
+            let upIconVar = ident("actionBarUpIcon")
+            globalVars.add quote do:
+              var `upIconVar`: GBitmapRef
+            dslInit.add quote do:
+              `upIconVar` = newBitmapRef(`upIcon`)
+            layerInits.add quote do:
+              `layerId`.setIcon(BUTTON_ID_UP, `upIconVar`.bitmap)
+          
           if not downIcon.isNil:
-            layerInits.add quote do: `layerId`.setIcon(BUTTON_ID_DOWN, gbitmap_create_with_resource(`downIcon`))
+            let downIconVar = ident("actionBarDownIcon")
+            globalVars.add quote do:
+              var `downIconVar`: GBitmapRef
+            dslInit.add quote do:
+              `downIconVar` = newBitmapRef(`downIcon`)
+            layerInits.add quote do:
+              `layerId`.setIcon(BUTTON_ID_DOWN, `downIconVar`.bitmap)
+          
           if not selectIcon.isNil:
-            layerInits.add quote do: `layerId`.setIcon(BUTTON_ID_SELECT, gbitmap_create_with_resource(`selectIcon`))
+            let selectIconVar = ident("actionBarSelectIcon")
+            globalVars.add quote do:
+              var `selectIconVar`: GBitmapRef
+            dslInit.add quote do:
+              `selectIconVar` = newBitmapRef(`selectIcon`)
+            layerInits.add quote do:
+              `layerId`.setIcon(BUTTON_ID_SELECT, `selectIconVar`.bitmap)
 
           layerAdds.add quote do:
             `layerId`.addToWindow(`win`)

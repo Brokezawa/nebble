@@ -44,6 +44,24 @@ The DSL supports all major Pebble layers:
 - `rotBitmapLayer`: Rotated images.
 - `layer`: Generic drawing layer.
 
+### Action Bar Icons
+
+The `actionBarLayer` DSL block automatically manages action bar icons as reference-counted bitmaps. Icons are created from resource IDs and their lifetime is automatically managed by the DSL.
+
+**Example:**
+```nim
+nebbleApp:
+  actionBarLayer:
+    id = actionBar
+    backgroundColor = GColorWhite
+    icons:
+      up = RESOURCE_ID_IMAGE_UP
+      down = RESOURCE_ID_IMAGE_DOWN
+      select = RESOURCE_ID_IMAGE_SELECT
+```
+
+The DSL creates internal `GBitmapRef` variables for each icon and manages their lifecycle, ensuring proper cleanup when the app exits. This eliminates memory leaks from unmanaged bitmap creation.
+
 ## Layout Properties
 
 The DSL introduces high-level layout properties that make cross-platform development (Chalk, Emery, Basalt) significantly easier:
