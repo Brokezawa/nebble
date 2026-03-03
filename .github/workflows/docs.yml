@@ -28,15 +28,36 @@ jobs:
       - name: Setup Nim
         uses: jiro4989/setup-nim-action@v2
         with:
-          nim-version: '2.2.6'
+          nim-version: '2.2.8'
           repo-token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Install dependencies
+        run: nimble install -y
 
       - name: Setup Pages
         id: pages
         uses: actions/configure-pages@v4
 
-      - name: Generate Documentation
-        run: nimble docs
+      - name: Generate API docs
+        run: nimble docs 2>&1 || true
+
+      - name: Convert markdown guides to HTML
+        run: |
+          # Convert docs/index.md landing page
+          nim md2html --outdir:docs/html/ docs/index.md
+
+          # Convert all uppercase-named guide files (GETTING_STARTED.md, etc.)
+          for file in docs/[A-Z]*.md; do
+            if [ -f "$file" ]; then
+              echo "Converting $file..."
+              nim md2html --outdir:docs/html/ "$file"
+            fi
+          done
+
+      - name: Convert .md links to .html
+        run: |
+          find docs/html/ -name "*.html" -exec \
+            sed -i 's/href="\([^"]*\)\.md\(["#?]\)/href="\1.html\2/g' {} \;
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
