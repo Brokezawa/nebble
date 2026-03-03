@@ -95,6 +95,11 @@ task testExample, "Build CLI template projects for all platforms (Integration Te
     quit("Some builds failed", 1)
 
 task testSize, "Check binary size for template projects (Aplite limit)":
+  # Skip on macOS as ARM toolchain may not be available
+  if defined(macosx):
+    echo "Skipping size checks on macOS (ARM toolchain not available)"
+    return
+  
   let testDir = getTempDir() / "nebble_size_test"
   let projectDir = getCurrentDir()
   let nebbleBin = projectDir / "bin" / "tools" / "nebble"
