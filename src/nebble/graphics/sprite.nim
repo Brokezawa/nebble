@@ -45,6 +45,7 @@ type
     ## Internal data for sprite sheet (stored in handle)
     spriteWidth*, spriteHeight*: uint8
     cols*, rows*, totalSprites*: uint8
+    pSubBitmap*: ptr GBitmap          ## Cached scratch sub-bitmap (reused across draw calls)
 
   AnimatedSpriteState* = object
     ## Animation state (no C allocation, pure Nim)
@@ -114,12 +115,16 @@ type
 proc `=destroy`*(h: var SpriteSheetHandle) =
   ## Destroy the sprite sheet and its bitmap.
   when declared(gbitmap_destroy):
+    if h.data.pSubBitmap != nil:
+      gbitmap_destroy(h.data.pSubBitmap)
     if h.pBitmap != nil and h.ownership == hoOwned:
       gbitmap_destroy(h.pBitmap)
+  h.data.pSubBitmap = nil
   h.pBitmap = nil
   h.ownership = hoNone
 
 proc `=wasMoved`*(h: var SpriteSheetHandle) =
+  h.data.pSubBitmap = nil
   h.pBitmap = nil
   h.ownership = hoNone
 
@@ -134,6 +139,7 @@ proc `=sink`*(dest: var SpriteSheetHandle, src: SpriteSheetHandle) =
   dest.data = src.data
   dest.ownership = src.ownership
   var srcPtr = cast[ptr SpriteSheetHandle](addr src)
+  srcPtr.data.pSubBitmap = nil
   srcPtr.pBitmap = nil
   srcPtr.ownership = hoNone
 
@@ -270,17 +276,22 @@ proc getFrameSourceRect*(h: SpriteSheetHandle, index: uint8): GRect {.inline.} =
   result.size.w = h.data.spriteWidth.int16
   result.size.h = h.data.spriteHeight.int16
 
-proc draw*(h: SpriteSheetHandle, index: uint8, ctx: ptr GContext, pos: GPoint) {.inline.} =
+proc draw*(h: var SpriteSheetHandle, index: uint8, ctx: ptr GContext, pos: GPoint) {.inline.} =
   ## Draw a specific sprite from the sheet by index.
   when declared(gbitmap_create_as_sub_bitmap) and declared(gbitmap_destroy):
     if h.pBitmap == nil or h.data.totalSprites == 0: return
     
     let srcRect = h.getFrameSourceRect(index)
-    let subBitmap = gbitmap_create_as_sub_bitmap(h.pBitmap, srcRect)
-    if subBitmap != nil:
+    # NOTE: The Pebble SDK's GBitmap type is opaque and provides no public API to
+    # update an existing sub-bitmap's bounds in-place. We must destroy and recreate
+    # whenever the source rect changes (i.e., on every frame change). pSubBitmap
+    # serves as a named scratch slot so the allocation is cleaned up with the handle.
+    if h.data.pSubBitmap != nil:
+      gbitmap_destroy(h.data.pSubBitmap)
+    h.data.pSubBitmap = gbitmap_create_as_sub_bitmap(h.pBitmap, srcRect)
+    if h.data.pSubBitmap != nil:
       let destRect = makeGRect(pos.x, pos.y, srcRect.size.w, srcRect.size.h)
-      graphics_draw_bitmap_in_rect(ctx, subBitmap, destRect)
-      gbitmap_destroy(subBitmap)
+      graphics_draw_bitmap_in_rect(ctx, h.data.pSubBitmap, destRect)
 
 # ============================================================================
 # AnimatedSpriteHandle Operations
