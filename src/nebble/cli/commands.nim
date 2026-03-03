@@ -114,7 +114,7 @@ proc cmdBuild*(platform: string) =
       echo "Error: Invalid platform '", platform, "'"
       echo "Valid platforms: ", validPlatforms.join(", ")
       quit(1)
-    @[platform]
+    @[platform.toLowerAscii]
   else:
     cfg.platforms
 

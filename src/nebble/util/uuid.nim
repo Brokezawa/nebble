@@ -63,6 +63,7 @@ proc toString*[N](uuid: Uuid, s: var FixedString[N]) {.inline.} =
   ##   var uuidBuf: FixedString[39]
   ##   myUuid.toString(uuidBuf)
   ##   textLayer.text = uuidBuf.cstr
+  doAssert N >= 39, "Buffer must be at least 39 bytes for UUID string"
   ffi.uuid_to_string(addr uuid, cast[cstring](addr s.data[0]))
   # Constant length: 38 chars (UUID_STRING_BUFFER_LENGTH - 1)
   s.len = min(38, N - 1)
