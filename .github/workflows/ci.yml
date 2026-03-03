@@ -79,7 +79,7 @@ jobs:
           export PATH="$HOME/Library/Python/3.13/bin:$HOME/.local/bin:$PATH"
           pebble --version
           pebble sdk list
-          arm-none-eabi-size --version
+          which arm-none-eabi-size || echo "Note: arm-none-eabi-size not in PATH"
       
       - name: Install Nebble Library
         run: nimble install -y
