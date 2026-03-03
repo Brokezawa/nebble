@@ -50,8 +50,7 @@ jobs:
           python -m pip install --user pebble-tool
           echo "$HOME/.local/bin" >> $GITHUB_PATH
           if [ "$(uname)" == "Darwin" ]; then
-            PYTHON_BIN=$(python -c "import site; print(site.USER_SITE.replace('site-packages', 'bin'))")
-            echo "$PYTHON_BIN" >> $GITHUB_PATH
+            echo "$HOME/Library/Python/3.13/bin" >> $GITHUB_PATH
           fi
       
       - name: Install Pebble SDK
