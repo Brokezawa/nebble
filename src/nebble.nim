@@ -90,6 +90,7 @@ export GColorPastelYellow
 export GDrawCommandImage, GDrawCommandSequence, GDrawCommandFrame
 export GDrawCommandType, GDrawCommand, GDrawCommandList
 export GOvalScaleMode
+export PBL_DISPLAY_WIDTH, PBL_DISPLAY_HEIGHT
 
 # Export GOvalScaleMode enum values (needed because they're C enum values)
 when declared(ffi.GOvalScaleModeFitCircle):

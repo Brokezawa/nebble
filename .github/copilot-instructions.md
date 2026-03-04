@@ -1,6 +1,6 @@
-# AGENTS.md — Nebble (Nim + Pebble SDK)
+# Copilot Instructions — Nebble
 
-Nebble is a Nim wrapper for the Pebble SDK (4.9.127+), featuring a two-layer architecture: low-level FFI bindings generated from C headers and a high-level idiomatic Nim API on top.
+Nebble is a Nim wrapper for the Pebble smartwatch SDK (4.9.127+). It has a two-layer architecture: low-level FFI bindings generated from C headers and a high-level idiomatic Nim API on top.
 
 ## Build & Test Commands
 
@@ -11,7 +11,8 @@ nimble testUnit          # Fast host-side unit tests only (run this most often)
 nimble testSize          # Check Aplite binary < 24KB (skipped on macOS)
 ```
 
-### Running Single Tests
+### Running a single test
+
 ```bash
 # Host-side test — compiles and executes on your local machine
 nim c --skipProjCfg -d:pebbleBasalt -r tests/test_macros.nim
@@ -21,14 +22,6 @@ nim c -d:pebbleBasalt --compileOnly tests/test_highlevel.nim
 ```
 
 `--skipProjCfg` bypasses `tests/nim.cfg` (cross-compilation config). Host tests use `tests/host.cfg` and mock headers from `tests/mocks/`.
-
-### CLI Workflow
-```bash
-nebble new my_app        # Scaffold new project
-nebble build --platform basalt
-nebble install --emulator basalt
-nebble logs --emulator basalt
-```
 
 ## Architecture
 
@@ -59,37 +52,23 @@ The `nebble` CLI (in `src/nebble/cli/`) drives a three-phase build:
 2. **Bridge**: CLI generates `package.json` with all target platforms
 3. **Pebble → .pbw**: `pebble build` via waf produces a unified bundle for all platforms
 
-## Code Style Guidelines
+## Key Conventions
 
-### 1. Imports & Core Constraints
-- **Prefix:** Always use `std/` for standard library modules (e.g., `import std/macros`).
-- **Device Code:** NEVER import modules that use syscalls (e.g., `os`, `times`, `asyncdispatch`).
-- **API Choice:** Prefer `import nebble` (high-level) over direct FFI.
+### Naming
+- High-level API: `camelCase` procs and variables (`newTextLayer`, `win.push`)
+- FFI layer: `snake_case` matching C SDK (`text_layer_create`)
+- Constants: `UPPER_SNAKE_CASE` (`GColorBlack`, `BUTTON_ID_SELECT`)
+- Platform defines: `pebble` + `CamelCase` (`-d:pebbleBasalt`, `-d:pebbleChalk`)
 
-### 2. Naming Conventions
-- **High-Level:** `camelCase` for procs, variables, and parameters (e.g., `newTextLayer`).
-- **FFI Layer:** `snake_case` to match C SDK (e.g., `text_layer_create`).
-- **Constants:** `UPPER_SNAKE_CASE` (e.g., `GColorBlack`).
-- **Platforms:** `pebble` + `CamelCase` (e.g., `-d:pebbleBasalt`).
+### Device Code Constraints
+- **Never** import `os`, `times`, `asyncdispatch`, or any stdlib module that uses syscalls
+- Use `cstring` instead of `string` (avoids heap allocation)
+- Use `std/` prefix for all stdlib imports (e.g., `import std/macros`)
+- Exceptions are disabled (`--os:any`); use `doAssert condition, "message"` for checks
+- All callbacks passed to the SDK must be `{.cdecl.}` and **cannot be closures**
+- App entry points use `{.exportc, cdecl.}`
 
-### 3. Types & Memory
-- **Handles:** Use Managed Handles (e.g., `WindowHandle`) for automatic cleanup via ARC.
-- **Pointers:** Raw pointers (`ptr T`) should only be used in `{.cdecl.}` callbacks.
-- **Strings:** Use `cstring` for device code. Avoid `string` to prevent heap allocations.
-- **ARC:** The project uses `--mm:arc -d:useMalloc` for deterministic memory management.
-
-### 4. Error Handling
-- **Exceptions:** Disabled via `--os:any`.
-- **Assertions:** Use `doAssert condition, "message"` for runtime checks.
-- **Results:** Check return codes from FFI calls (e.g., `AppMessageResult`).
-
-### 5. Formatting & Structure
-- **Indentation:** 2 spaces.
-- **Line Length:** 100 characters max.
-- **Banners:** Separate major sections with `# ===` banners.
-- **Pragmas:** Callbacks MUST use `{.cdecl.}`. Entry points use `{.exportc, cdecl.}`.
-
-### 6. Platform Feature Detection
+### Platform Feature Detection
 ```nim
 when declared(GColorRed):
   # Color platforms only (Basalt, Chalk, Emery, Gabbro)
@@ -97,10 +76,12 @@ when declared(GColorRed):
 ```
 `when declared(...)` compiles to zero code on unsupported platforms.
 
-## Implementation Details
-- **Managed Handles:** Defined using the `DefineUniqueHandle` macro in `src/nebble/ffi/managed.nim`.
-- **Declarative DSL:** Use `nebbleApp` or `nebbleWatchface` for minimal boilerplate.
-- **Heap-Free Strings:** Use `FixedString[N]` with the `f` macro for stack-allocated formatting. Use `.cstr` to get a `cstring`. **The `FixedString` must outlive its `cstring` pointer** — `text_layer_set_text` stores the pointer without copying, so always use global or field-level `FixedString` for persistent text.
+### Heap-Free Strings
+`FixedString[N]` provides stack-allocated string formatting via the `f` macro. Use `.cstr` to get a `cstring`. **The `FixedString` must outlive its `cstring` pointer** — `text_layer_set_text` stores the pointer without copying, so always use global or field-level `FixedString` for persistent text.
+
+### Formatting
+- 2-space indentation, 100 char line limit
+- Major sections separated with `# ===` banners
 
 ## Supported Platforms
 

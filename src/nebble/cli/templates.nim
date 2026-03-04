@@ -23,7 +23,9 @@ var
 nebbleWatchface:
   textLayer:
     id = myTextLayer
-    frame = (0, 60, 144, 40)
+    fullWidth = true
+    y = center
+    h = 40
     text = "Press SELECT"
     alignment = GTextAlignmentCenter
     
@@ -73,17 +75,21 @@ nebbleWatchface:
 
   textLayer:
     id = timeLayer
-    frame = (0, 50, 144, 60)
+    fullWidth = true
+    y = PBL_DISPLAY_HEIGHT div 2 - 50
+    h = 60
     text = "00:00"
-    font = FONT_KEY_BITHAM_42_BOLD
+    font = (when defined(pebbleEmery) or defined(pebbleGabbro): FONT_KEY_ROBOTO_BOLD_SUBSET_49 else: FONT_KEY_BITHAM_42_BOLD)
     color = GColorWhite
     alignment = GTextAlignmentCenter
     
   textLayer:
     id = dateLayer
-    frame = (0, 115, 144, 30)
+    fullWidth = true
+    y = PBL_DISPLAY_HEIGHT div 2 + 20
+    h = 30
     text = "Jan 1"
-    font = FONT_KEY_GOTHIC_24
+    font = (when defined(pebbleEmery) or defined(pebbleGabbro): FONT_KEY_GOTHIC_28 else: FONT_KEY_GOTHIC_24)
     color = GColorWhite
     alignment = GTextAlignmentCenter
 
