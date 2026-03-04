@@ -1,8 +1,12 @@
 # Nebble
 
-[![CI](https://github.com/Brokezawa/nebble/actions/workflows/ci.yml/badge.svg)](https://github.com/Brokezawa/nebble/actions/workflows/ci.yml)
-
 **Nim wrapper library for Pebble smartwatch development**
+
+[![CI](https://github.com/Brokezawa/nebble/actions/workflows/ci.yml/badge.svg)](https://github.com/Brokezawa/nebble/actions/workflows/ci.yml)
+[![Docs](https://github.com/Brokezawa/nebble/actions/workflows/docs.yml/badge.svg)](https://brokezawa.github.io/nebble/)
+[![Version](https://img.shields.io/badge/version-1.1.0-blue)](https://github.com/Brokezawa/nebble/releases/tag/v1.1.0) 
+[![Nim](https://img.shields.io/badge/nim-2.0%2B-orange)](https://nim-lang.org/) 
+[![License](https://img.shields.io/badge/license-MIT-green)](LICENSE) 
 
 Nebble (Nim + Pebble) provides comprehensive, type-safe Nim bindings for the Pebble SDK, enabling you to write Pebble apps in idiomatic Nim with automatic memory management and modern language features.
 
@@ -82,19 +86,21 @@ Managed types (Handles) are the recommended way to use Nebble. They automaticall
 
 ## Documentation
 
-- **[Architecture](docs/ARCHITECTURE.md)** - Details on managed types and the build pipeline.
-- **[Contributing](docs/CONTRIBUTING.md)** - Guide for contributing to Nebble.
-- **[Declarative DSL](docs/DECLARATIVE_DSL.md)** - Guide to building UIs with `nebbleApp`.
-- **[Examples](docs/EXAMPLES.md)** - Overview of included example projects.
+ Official docs (GitHub Pages): https://brokezawa.github.io/nebble
+
 - **[Getting Started](docs/GETTING_STARTED.md)** - Comprehensive setup and first app guide.
-- **[Zero-Heap Performance](docs/HEAP_FREE.md)** - How Nebble avoids RAM fragmentation.
-- **[Migration Guide](docs/MIGRATION.md)** - Translation reference for C developers.
-- **[Nim Features](docs/NIM_FEATURES.md)** - Overview of Nim features used in Nebble.
-- **[Full-Stack Guide](docs/NIM_PKJS.md)** - Writing phone-side logic in Nim.
+- **[Examples](docs/EXAMPLES.md)** - Overview of included example projects.
 - **[Quick Reference](docs/QUICK_REFERENCE.md)** - Fast look at common APIs.
-- **[Roadmap](docs/ROADMAP.md)** - Project status and future plans.
+- **[CLI Reference](docs/CLI.md)** - Build tool commands and usage.
+- **[Declarative DSL](docs/DECLARATIVE_DSL.md)** - Guide to building UIs with `nebbleApp`.
+- **[Full-Stack Guide](docs/NIM_PKJS.md)** - Writing phone-side logic in Nim.
+- **[Nim Features](docs/NIM_FEATURES.md)** - Overview of Nim features used in Nebble.
+- **[Migration Guide](docs/MIGRATION.md)** - Translation reference for C developers.
+- **[Zero-Heap Performance](docs/HEAP_FREE.md)** - How Nebble avoids RAM fragmentation.
+- **[Architecture](docs/ARCHITECTURE.md)** - Details on managed types and the build pipeline.
 - **[Testing](docs/TESTING.md)** - Guide to running Nebble's test suite.
-- **[CLI Reference](cli/README.md)** - Build tool commands and usage.
+- **[Roadmap](docs/ROADMAP.md)** - Project status and future plans.
+- **[Contributing](docs/CONTRIBUTING.md)** - Guide for contributing to Nebble.
 
 ## Examples
 
