@@ -12,8 +12,10 @@ installFiles  = @["nebble.nim"]
 
 # Dependencies
 requires "nim >= 2.2.0"
-requires "unittest2 >= 0.2.5"
-# futhark >= 0.15.0  (only needed when regenerating FFI bindings with regenFfi task)
+
+dev:
+  requires "unittest2 >= 0.2.5"
+  requires "futhark >= 0.15.0"  # only needed when regenerating FFI bindings with regenFfi task
 
 import os, strutils, algorithm
 
