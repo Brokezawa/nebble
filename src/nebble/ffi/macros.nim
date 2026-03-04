@@ -351,6 +351,10 @@ elif defined(pebbleFlint):
   const
     PBL_DISPLAY_WIDTH* = 144'i16
     PBL_DISPLAY_HEIGHT* = 168'i16
+elif defined(pebbleGabbro):
+  const
+    PBL_DISPLAY_WIDTH* = 260'i16
+    PBL_DISPLAY_HEIGHT* = 260'i16
 
 # =============================================================================
 # Action bar / status bar sizes (platform-specific)
