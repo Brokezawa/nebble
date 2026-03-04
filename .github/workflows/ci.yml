@@ -81,6 +81,9 @@ jobs:
           pebble sdk list
           which arm-none-eabi-size || echo "Note: arm-none-eabi-size not in PATH"
       
+      - name: Install unittest2
+        run: nimble install -y unittest2
+
       - name: Install Nebble Library
         run: nimble install -y
       
@@ -133,6 +136,9 @@ jobs:
       - name: Check nimble file syntax
         run: nimble check
       
+      - name: Install unittest2
+        run: nimble install -y unittest2
+
       - name: Install Nebble Library
         run: nimble install -y
       
